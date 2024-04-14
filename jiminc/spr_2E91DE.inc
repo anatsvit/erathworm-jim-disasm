@@ -1,0 +1,32 @@
+byte_2E91DE:    dc.b   0,  4,$66,$42,$71,$8E,$6E,$5F,$6C,$4F
+                                        ; DATA XREF: ROM:off_1E24   o
+                dc.w sprite_16_16
+                dc.w $6347
+                dc.w $9500 ! ((grp_7ED00 / 2) & $00FF)
+                dc.w $9600 ! (((grp_7ED00 / 2) >> 8) & $00FF)
+                dc.w $9700 ! ((grp_7ED00 / 2) >> 16)
+                dc.w 4
+                dc.w sprite_8_24
+                dc.w $736F
+                dc.w $9500 ! ((grp_197440 / 2) & $00FF)
+                dc.w $9600 ! (((grp_197440 / 2) >> 8) & $00FF)
+                dc.w $9700 ! ((grp_197440 / 2) >> 16)
+                dc.w 3
+                dc.w sprite_8_16
+                dc.w $6E5F
+                dc.w $9500 ! ((grp_B7A40 / 2) & $00FF)
+                dc.w $9600 ! (((grp_B7A40 / 2) >> 8) & $00FF)
+                dc.w $9700 ! ((grp_B7A40 / 2) >> 16)
+                dc.w 2
+                dc.w sprite_8_8
+                dc.w $633F
+                dc.w $9500 ! ((grp_E9D80 / 2) & $00FF)
+                dc.w $9600 ! (((grp_E9D80 / 2) >> 8) & $00FF)
+                dc.w $9700 ! ((grp_E9D80 / 2) >> 16)
+                dc.w 1
+                dc.w sprite_8_8
+                dc.w $6B57
+                dc.w $9500 ! ((grp_E9DA0 / 2) & $00FF)
+                dc.w $9600 ! (((grp_E9DA0 / 2) >> 8) & $00FF)
+                dc.w $9700 ! ((grp_E9DA0 / 2) >> 16)
+                dc.w 1

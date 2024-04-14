@@ -24294,7 +24294,7 @@ stru_1B6910:    dc.l dword_1B6A58       ; field_0
                 dc.l dword_1B6E9D       ; field_0 ; Normal (text in options)
                 dc.w $E6                ; field_4
                 dc.w $1AE               ; field_6
-                dc.l dword_1B6EBC       ; field_0 ; Difficult (text in options)
+                dc.l difficult_txt      ; field_0 ; Difficult (text in options)
                 dc.w $DC                ; field_4
                 dc.w $1AE               ; field_6
                 dc.l dword_1B6EEA       ; field_0 ; Joypad (text in options)
@@ -24792,7 +24792,7 @@ dword_1B6E9D:   dc.l $0C000000 + (byte_1A353E); Normal (text in options)
                 dc.l $0C000000 + (byte_1A35CE)
 				dc.B "L"
                 dc.b $00
-dword_1B6EBC:   dc.l $0C000000 + (byte_1A35CE); Difficult (text in options)
+difficult_txt:  dc.l $0C000000 + (byte_1A35CE); Difficult (text in options)
 				dc.B "D"
                 dc.l $0C000000 + (byte_1A348E)
 				dc.B "I"

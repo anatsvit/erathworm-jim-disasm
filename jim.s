@@ -24117,6 +24117,7 @@ cheat_menu_splash_text:dc.b $A          ; DATA XREF: sub_24D7EA+7A   o
                 dc.b   1,  6
 aHeyShinyCrewDLOnly:dc.B "HEY, SHINY CREW & D.L. ONLY!"
                 dc.b   1,$DE,  2,  1,  0
+				align 2,0
 CheatLevels:    dc.B "1-NEW JUNK CITY ",0
                                         ; DATA XREF: cheat_menu+190   o
                                         ; CheatMenu Level Select

@@ -116,7 +116,7 @@ Reserved:       dc.b $20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20
 CountryCode:    dc.b $55,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20
                                         ; DATA XREF: Reset+122   o
                                         ; Reset+1A4   o
-				
+								
 sub_200:                                ; DATA XREF: sub_200   o
                 lea     (sub_200).w,a0
                 move.l  #$17FF00,d1
@@ -56125,7 +56125,7 @@ level_config:   dc.w 0                  ; DATA XREF: sub_2476AC+38   o
                 dc.l sub_251EF0
                 dc.l 0
                 dc.b   0,$27,$27,  0
-;For pete's sake
+;For petes sake
                 dc.w $10
                 dc.w 0
                 dc.w $8C
@@ -56139,7 +56139,7 @@ level_config:   dc.w 0                  ; DATA XREF: sub_2476AC+38   o
                 dc.b 1
                 dc.l pete_backmap_rnc
                 dc.l pete_palette
-                dc.l pete_tilemap       ; For pete's sake
+                dc.l pete_tilemap       ; For petes sake
                 dc.l sub_2500A8
                 dc.l sub_24F5A2
                 dc.w $4C9

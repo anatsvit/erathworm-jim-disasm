@@ -24195,8 +24195,7 @@ a9pPsycrow:     dc.B "9P -PSYCROW!    ",0
 	include "jiminc/fun_texts.inc"
 	include "jiminc/end_titles.inc"
 byte_1B727F:    dc.b   3,$28,$20,  0,  8,  0,  9,  0, $A,  0, $B,  0,  0
-                                        ; DATA XREF: sub_24C44A+14   o
-                                        ; sub_25A4FE+9A   o
+	align 2,0
 byte_1B728C:    dc.b   0,  0,  0,  0,  2,  0,  2,  0,  4,  0,  6,  0,  6,  0,  8,  0, $C,  0, $A,  0,  8,  0,  6,  0,  4,  0,  2,  0,  2,  0,  0,  0
                                         ; DATA XREF: sub_24F99E+1AE   o
                                         ; sub_250288+90   o

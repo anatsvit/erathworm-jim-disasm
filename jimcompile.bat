@@ -4,4 +4,5 @@ set aspath=D:\DCDownloads\SEGA_REVERSE\ASSEMBLER\bin
 echo "Original ROM size: 3145728 bytes"
 DEL jim.p
 DEL jim.lst
+fixheadr.exe jim.bin
 pause

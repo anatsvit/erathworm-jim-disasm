@@ -24081,49 +24081,8 @@ off_1B62B4:     dc.w off_1254           ; DATA XREF: sub_257748:loc_2577C0   o
                 dc.w off_1260
                 dc.w $FB00
                 dc.l oksub_258254
-cheat_menu_texts:dc.w $A01              ; DATA XREF: cheat_menu+24   o
-                dc.b $D
-aEarthwormJim_0:dc.B "EARTHWORM JIM #"
-                dc.b   1,$E4,  2,  4,  8,  1,  3
-aC1994ShinyEntertainm:dc.B "(C)1994 SHINY ENTERTAINMENT, INC."
-                dc.b   1,$DC,  2,  1,  1, $A
-aAllRightsReserved:dc.B "ALL RIGHTS RESERVED"
-                dc.b   1,$E3,  2,  1,  9,  1,  4
-aDavidPerry_0:  dc.B "DAVID PERRY"
-                dc.b $27
-aSPrivateCheatMode:dc.B "S PRIVATE CHEAT MODE"
-                dc.b   1,$DC,  2,  1,  2,  1,  8
-aRamBytesUsed:  dc.B "         RAM BYTES USED : 00000         "
-                dc.b   1,$D8,  2,  1
-aRamBytesFree:  dc.B "         RAM BYTES FREE : 00000         "
-                dc.b   1,$D8,  2,  1
-aRomBytesUsed:  dc.B "         ROM BYTES USED : 0000000       "
-                dc.b   1,$D8,  2,  1
-aRomBytesFree:  dc.B "         ROM BYTES FREE : 0000000       "
-                dc.b   1,$D8,  2,  2
-aMusicSndFxUses:dc.B "  MUSIC & SOUND FX USES : 000000        "
-                dc.b   1,$D8,  2,  1
-aWordAddrLeft:  dc.B "    WORD ADDRESSES LEFT : 00000         "
-                dc.b   1,$D8,  2,  1
-aRoomForSprtlst:dc.B "  ROOM FOR SPRTLIST.68K : 00000         "
-                dc.b   1,$D8,  2,  1
-aMaxTToMakeMap: dc.B "  MAX TILES TO MAKE MAP : 0000          "
-                dc.b   1,$D8,  2,  2
-aCheatMode:     dc.B "         CHEAT MODE :                   "
-                dc.b   1,$D8,  2,  1
-aStartOnLevel:  dc.B "     START ON LEVEL :                   "
-                dc.b   1,$D8,  2,  1
-aFreezeability: dc.B "      FREEZEABILITY :                   "
-                dc.b   1,$D8,  2,  1
-aMapViewMode:   dc.B "      MAP VIEW MODE :                   "
-                dc.b   1,$D8,  2,  2
-aPressStartBtn: dc.B "        PRESS THE "
-                dc.w $270B
-aStart:         dc.B "START"
-                dc.w $827
-aButton:        dc.B " BUTTON        "
-                dc.b   1,$D8,  2,$EB, $B
-aTue2ndAug1994: dc.B "          TUE 2ND. AUGUST 1994",0
+				align 2,0
+				include "jiminc/cheat_menu_texts.inc"
 byte_1B65A9:    dc.b  $A,  1, $D        ; DATA XREF: sub_259DFE+130   o
 aEarthwormJim_1:dc.B "EARTHWORM JIM"
                 dc.b   1,$E6,  2,  1,  2,  2,  1,  7

@@ -116,7 +116,7 @@ Reserved:       dc.b $20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20
 CountryCode:    dc.b $55,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20
                                         ; DATA XREF: Reset+122   o
                                         ; Reset+1A4   o
-								
+                                
 sub_200:                                ; DATA XREF: sub_200   o
                 lea     (sub_200).w,a0
                 move.l  #$17FF00,d1
@@ -3621,7 +3621,7 @@ byte_C9FE:      dc.b   1,  2,  2,  2,  4,  4,  4,  6,  8,  8,  5,  5,  5,  7,  3
 byte_CA1C:
     binclude "binaries/ffbytes.bin"
     align 2,0
-	include "jiminc/sprinc.inc"
+    include "jiminc/sprinc.inc"
 num_font_start: dc.w  $FAE,$EAF0,$FAEA,$AEAF,$FEEF,$FEEF,$FEEF,$FEEF,$FEEF,$FEEF,$FEEF,$FEEF,$FAEE,$EEAF, $FAE,$EAF0,  $FE,$EF00, $FEE,$EF00, $FEE,$EF00,  $FE,$EF00,  $FE,$EF00,  $FE,$EF00,  $FE,$EF00, $FEE,$EEF0
                                         ; DATA XREF: sub_24D282   o
                 dc.w  $FEE,$EEF0,$FEEF,$FEEF,$FEEF,$FEEF, $FFF,$EEF0,  $FE,$EF00, $FEE,$F000,$FEEE,$FFF0,$FEEE,$EEEF, $FEE,$EEEF,  $FF,$FEEF,   $F,$EEF0,  $FE,$EFF0, $FFF,$EEAF,$FEEF,$FEEF,$FEEF,$FEEF, $FEE,$EEF0
@@ -24081,13 +24081,13 @@ off_1B62B4:     dc.w off_1254           ; DATA XREF: sub_257748:loc_2577C0   o
                 dc.w off_1260
                 dc.w $FB00
                 dc.l oksub_258254
-				align 2,0
-				include "jiminc/cheat_menu_texts.inc"
+                align 2,0
+                include "jiminc/cheat_menu_texts.inc"
 byte_1B65A9:    dc.b  $A,  1, $D        ; DATA XREF: sub_259DFE+130   o
 aEarthwormJim_1:dc.B "EARTHWORM JIM"
                 dc.b   1,$E6,  2,  1,  2,  2,  1,  7
 aAndAllRelatedCharact:dc.B "AND ALL RELATED CHARACTERS"
-                dc.b   1,$DF,  2,  1,  1,  6				
+                dc.b   1,$DF,  2,  1,  1,  6                
 aAreRegisteredTradema:dc.B "ARE REGISTERED TRADEMARKS OF"
                 dc.b   1,$DE,  2,  1,  1,  7
 aShinyEntertainmentIn:dc.B "SHINY ENTERTAINMENT, INC."
@@ -24097,7 +24097,7 @@ aC1994AllRightsReserv:dc.B "(C) 1994 - ALL RIGHTS RESERVED"
 aPlaymatesInteractive:dc.B "PLAYMATES INTERACTIVE ENTERTAINMENT, INC"
                 dc.b   1,$D8,  2,  1,  2,  2,  1,  3
 aLicensedBySegaEnterp:dc.B "LICENSED BY SEGA ENTERPRISES, LTD."
-                dc.b   1,$DB,  2,  1,  0			
+                dc.b   1,$DB,  2,  1,  0            
 aOnCheatState:  dc.B "ON ",0            ; DATA XREF: cheat_menu+124   o
                                         ; cheat_menu+144   o ...
 aOffCheatState: dc.B "OFF",0            ; DATA XREF: cheat_menu+116   o
@@ -24117,45 +24117,12 @@ cheat_menu_splash_text:dc.b $A          ; DATA XREF: sub_24D7EA+7A   o
                 dc.b   1,  6
 aHeyShinyCrewDLOnly:dc.B "HEY, SHINY CREW & D.L. ONLY!"
                 dc.b   1,$DE,  2,  1,  0
-				align 2,0
-CheatLevels:    dc.B "1-NEW JUNK CITY ",0
-                                        ; DATA XREF: cheat_menu+190   o
-                                        ; CheatMenu Level Select
-a2aHellOrHeck:  dc.B "2A-HELL OR HECK?",0
-a2bSnowmanBoss: dc.B "2B-SNOWMAN BOSS ",0
-a2cEvilBoss:    dc.B "2C-EVIL BOSS    ",0
-a3aBungee1:     dc.B "3A-BUNGEE 1     ",0
-a3bBungee2:     dc.B "3B-BUNGEE 2     ",0
-a3cBungee3:     dc.B "3C-BUNGEE 3     ",0
-a4PeterPuppy:   dc.B "4- PETER PUPPY  ",0
-a5SlugForButt:  dc.B "5- SLUG FOR BUTT",0
-a5bHelicopter:  dc.B "5B-HELICOPTER   ",0
-a6aProf:        dc.B "6A-PROF"
-                dc.b $27
-aSLab:          dc.B "S LAB   ",0
-a6cChickenFly:  dc.B "6C-CHICKEN FLY  ",0
-a6dNakedWorm:   dc.B "6D-NAKED WORM   ",0
-a7Intestines:   dc.B "7- INTESTINES   ",0
-a8aSeaTunnels:  dc.B "8A-SEA TUNNELS  ",0
-a8bPodRaces:    dc.B "8B-POD RACES    ",0
-a9aAsteroids1:  dc.B "9A-ASTEROIDS 1  ",0
-a9bAsteroids2:  dc.B "9B-ASTEROIDS 2  ",0
-a9cAsteroids3:  dc.B "9C-ASTEROIDS 3  ",0
-a9dAsteroids4:  dc.B "9D-ASTEROIDS 4  ",0
-a9eAsteroids5:  dc.B "9E-ASTEROIDS 5  ",0
-a9fAsteroids6:  dc.B "9F-ASTEROIDS 6  ",0
-a9gAsteroids7:  dc.B "9G-ASTEROIDS 7  ",0
-a10aDarkness1:  dc.B "10A-DARKNESS 1  ",0
-a10bDarkness2:  dc.B "10B-DARKNESS 2  ",0
-a10cDarkness3:  dc.B "10C-DARKNESS 3  ",0
-a10dDarkness4:  dc.B "10D-DARKNESS 4  ",0
-a10eDarkness5:  dc.B "10E-DARKNESS 5  ",0
-a9pPsycrow:     dc.B "9P -PSYCROW!    ",0
-                dc.b 0
-	include "jiminc/fun_texts.inc"
-	include "jiminc/end_titles.inc"
+                align 2,0
+                include "jiminc/cheat_levels.inc"
+                include "jiminc/fun_texts.inc"
+                include "jiminc/end_titles.inc"
 byte_1B727F:    dc.b   3,$28,$20,  0,  8,  0,  9,  0, $A,  0, $B,  0,  0
-	align 2,0
+    align 2,0
 byte_1B728C:    dc.b   0,  0,  0,  0,  2,  0,  2,  0,  4,  0,  6,  0,  6,  0,  8,  0, $C,  0, $A,  0,  8,  0,  6,  0,  4,  0,  2,  0,  2,  0,  0,  0
                                         ; DATA XREF: sub_24F99E+1AE   o
                                         ; sub_250288+90   o
@@ -26873,7 +26840,7 @@ loc_2475F6:                             ; CODE XREF: sub_247576+7A   j
                 clr.b   (byte_FFFDE7).l
                 cmpi.l  #$294C,(dword_FF9936).l
                 beq.s   locret_247650
-				move.l  #default_joy_cfg,(dword_FF9B4C).l
+                move.l  #default_joy_cfg,(dword_FF9B4C).l
                 lea     (default_joy_cfg).w,a0
                 jsr     (joypad_reconfig).l ; Вызывается в options (связана с joypad настройкой)
                 move.b  #1,(word_FFFF9C).l
@@ -26927,9 +26894,9 @@ sub_2476AC:                             ; CODE XREF: oksub_2456C8:loc_2457FC   p
                 mulu.w  #$40,d1 ; '@'
                 lea     (level_config).l,a6 ; Jim start X
                 adda.l  d1,a6
-				nop
+                nop
                 move.w  0(a6),(camera_x).l
-				nop
+                nop
                 move.w  0(a6),(word_FFA686).l
                 move.w  4(a6),(camera_view_x).l
                 move.w  #$B0,(word_FFA67E).l
@@ -34782,7 +34749,7 @@ loc_24D094:                             ; CODE XREF: cheat_menu+162   j
                 move.b  (selectedLevelOption).l,d2
                 mulu.w  #$11,d2
                 andi.l  #$FFF,d2
-                addi.l  #CheatLevels,d2 ; "1-NEW JUNK CITY "
+                addi.l  #cheat_levels,d2 ; "1-NEW JUNK CITY "
                 movea.l d2,a0
                 bsr.w   sub_24C6AE
                 bsr.w   sub_24D476
@@ -37156,9 +37123,9 @@ sub_24EBC6:                             ; CODE XREF: sub_24E8EC+1A8   p
                 adda.l  d1,a6
                 movea.l (dword_FFA668).l,a4
                 addq.w  #2,a4
-				nop
+                nop
                 move.w  0(a4),(camera_x).l
-				nop
+                nop
                 move.w  0(a4),(word_FFA686).l
                 move.w  4(a4),(camera_view_x).l
                 move.w  #$B0,(word_FFA67E).l
@@ -37241,9 +37208,9 @@ sub_24ED44:                             ; CODE XREF: sub_256518+38   p
                 mulu.w  #$40,d1 ; '@'
                 lea     (level_config).l,a6 ; Jim start X
                 adda.l  d1,a6
-				nop
+                nop
                 move.w  0(a6),(camera_x).l
-				nop
+                nop
                 move.w  0(a6),(word_FFA686).l
                 move.w  4(a6),(camera_view_x).l
                 move.w  #$B0,(word_FFA67E).l

@@ -24083,21 +24083,7 @@ off_1B62B4:     dc.w off_1254           ; DATA XREF: sub_257748:loc_2577C0   o
                 dc.l oksub_258254
                 align 2,0
                 include "jiminc/cheat_menu_texts.inc"
-byte_1B65A9:    dc.b  $A,  1, $D        ; DATA XREF: sub_259DFE+130   o
-aEarthwormJim_1:dc.B "EARTHWORM JIM"
-                dc.b   1,$E6,  2,  1,  2,  2,  1,  7
-aAndAllRelatedCharact:dc.B "AND ALL RELATED CHARACTERS"
-                dc.b   1,$DF,  2,  1,  1,  6                
-aAreRegisteredTradema:dc.B "ARE REGISTERED TRADEMARKS OF"
-                dc.b   1,$DE,  2,  1,  1,  7
-aShinyEntertainmentIn:dc.B "SHINY ENTERTAINMENT, INC."
-                dc.b   1,$E0,  2,  1,  2,  1,  1,  5
-aC1994AllRightsReserv:dc.B "(C) 1994 - ALL RIGHTS RESERVED"
-                dc.b   1,$DD,  2,  1,  1,  0
-aPlaymatesInteractive:dc.B "PLAYMATES INTERACTIVE ENTERTAINMENT, INC"
-                dc.b   1,$D8,  2,  1,  2,  2,  1,  3
-aLicensedBySegaEnterp:dc.B "LICENSED BY SEGA ENTERPRISES, LTD."
-                dc.b   1,$DB,  2,  1,  0            
+                include "jiminc/license_text.inc"
 aOnCheatState:  dc.B "ON ",0            ; DATA XREF: cheat_menu+124   o
                                         ; cheat_menu+144   o ...
 aOffCheatState: dc.B "OFF",0            ; DATA XREF: cheat_menu+116   o
@@ -24108,6 +24094,7 @@ cheatCursor:    dc.b 9                  ; DATA XREF: sub_24CF0E+10   o
                 dc.B "--("
                 dc.b   1,$FD,  2,  1
                 dc.B "   ",0
+                align 2,0
 cheat_menu_PAL: dc.b 8                  ; DATA XREF: cheat_menu+E4   o
 aPalStandard50hzSegaM:dc.B "PAL STANDARD 50HZ SEGA MEGADRIVE",0
 cheat_menu_ntsc:dc.b 8                  ; DATA XREF: cheat_menu+F6   o
@@ -51953,7 +51940,7 @@ loc_259EEA:                             ; CODE XREF: sub_259DFE+104   j
                 jsr     (sub_24CB8C).l
                 jsr     (sub_24CA00).l
                 jsr     (sub_24CA12).l
-                lea     (byte_1B65A9).l,a0
+                lea     (license_text).l,a0
                 move.w  #0,d0
                 move.w  #4,d1
                 jsr     (sub_24C6AE).l

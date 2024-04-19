@@ -16547,7 +16547,7 @@ off_1B1FBC:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
                 dc.w off_33F4
                 dc.w $EA00
                 dc.l off_1B1FBC
-off_1B1FD2:     dc.w off_2780           ; DATA XREF: ROM:001B21CC   o
+anim_monkey_head:     dc.w off_2780           ; DATA XREF: ROM:001B21CC   o
                                         ; ROM:001B2210   o ...
                 dc.w $ED11
                 dc.w 0
@@ -16582,7 +16582,7 @@ off_1B1FE2:     dc.w off_2780           ; DATA XREF: ROM:001B201A   o
                 dc.l off_1B2170
                 dc.w $EA00
                 dc.l off_1B1FE2
-off_1B201E:     dc.w off_27D8           ; DATA XREF: ROM:001B2086   o
+anim_monkey_head_2:     dc.w off_27D8           ; DATA XREF: ROM:001B2086   o
                                         ; ROM:stru_25B474   o
                 dc.w $ED11
                 dc.w $47
@@ -16635,7 +16635,7 @@ off_1B201E:     dc.w off_27D8           ; DATA XREF: ROM:001B2086   o
                 dc.w 2
                 dc.w off_27DC
                 dc.w $EA00
-                dc.l off_1B201E
+                dc.l anim_monkey_head_2
 off_1B208A:     dc.w off_27A8           ; DATA XREF: sub_2553E8+14   o
                 dc.w $ED11
                 dc.w $47
@@ -16788,7 +16788,7 @@ off_1B217A:     dc.w off_27B0           ; DATA XREF: ROM:001B21C6   o
                 dc.w $FD64
                 dc.l off_1B217A
                 dc.w $EA00
-                dc.l off_1B1FD2
+                dc.l anim_monkey_head
 off_1B21D0:     dc.w off_27A8           ; DATA XREF: sub_2553C2+14   o
                 dc.w off_27A8
                 dc.w off_27AC
@@ -16818,7 +16818,7 @@ off_1B21D0:     dc.w off_27A8           ; DATA XREF: sub_2553C2+14   o
                 dc.w off_2780
                 dc.w off_2780
                 dc.w $EA00
-                dc.l off_1B1FD2
+                dc.l anim_monkey_head
 off_1B2214:     dc.w off_2780           ; DATA XREF: ROM:001A3972   o
                                         ; ROM:001B222A   o
                 dc.w off_2784
@@ -20407,12 +20407,12 @@ off_1B3FEE:     dc.w off_24F4           ; DATA XREF: ROM:001B3FE8   o
                 dc.w off_2520
                 dc.w off_2520
                 dc.w $F600
-off_1B4020:     dc.w off_20C4           ; DATA XREF: ROM:001B4028   o
+anim_eyes_generator:     dc.w off_20C4           ; DATA XREF: ROM:001B4028   o
                                         ; ROM:001B40A4   o ...
                 dc.w $F411
                 dc.w $FD3E
                 dc.w 1
-                dc.l off_1B4020
+                dc.l anim_eyes_generator
 off_1B402C:     dc.w off_20C8           ; DATA XREF: ROM:001B4034   o
                 dc.w $F411
                 dc.w $FD3E
@@ -20463,8 +20463,8 @@ off_1B4096:     dc.w off_20C8           ; DATA XREF: ROM:001B409E   o
                 dc.w 2
                 dc.l off_1B4096
                 dc.w $EA00
-                dc.l off_1B4020
-off_1B40A8:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
+                dc.l anim_eyes_generator
+anim_eyes_generator_2:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
                                         ; ROM:stru_25B444   o
                 dc.w $EE85
                 dc.w off_20C4
@@ -20487,7 +20487,7 @@ off_1B40A8:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
                 dc.w off_20C8
                 dc.w off_20C8
                 dc.w $EA00
-                dc.l off_1B40A8
+                dc.l anim_eyes_generator_2
 off_1B40DA:     dc.w off_20C4           ; DATA XREF: sub_253FFA+4   o
                 dc.w off_20C4
                 dc.w off_20C8
@@ -20508,12 +20508,12 @@ off_1B40DA:     dc.w off_20C4           ; DATA XREF: sub_253FFA+4   o
                 dc.l 0
                 dc.l 0
                 dc.w $F600
-off_1B4108:     dc.w off_AD8            ; DATA XREF: ROM:001B4110   o
+anim_valve:     dc.w off_AD8            ; DATA XREF: ROM:001B4110   o
                                         ; ROM:001B4182   o ...
                 dc.w $F411
                 dc.w $FD3E
                 dc.w 1
-                dc.l off_1B4108
+                dc.l anim_valve
 off_1B4114:     dc.w off_ADC            ; DATA XREF: ROM:001B411C   o
                 dc.w $F411
                 dc.w $FD3E
@@ -20560,7 +20560,7 @@ off_1B4174:     dc.w off_ADC            ; DATA XREF: ROM:001B417C   o
                 dc.w 2
                 dc.l off_1B4174
                 dc.w $EA00
-                dc.l off_1B4108
+                dc.l anim_valve
 anim_anvil:     dc.w off_2454           ; DATA XREF: ROM:001B4198   o
                                         ; ROM:stru_25A934   o
                 dc.w off_2454
@@ -54651,7 +54651,7 @@ stru_25B42C:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B4020         ; anim_address
+                dc.l anim_eyes_generator         ; anim_address
                 dc.b 8                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54666,7 +54666,7 @@ stru_25B444:    dc.b $48                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B40A8         ; anim_address
+                dc.l anim_eyes_generator_2         ; anim_address
                 dc.b 8                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54682,7 +54682,7 @@ stru_25B45C:    dc.b 3                  ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B1FD2         ; anim_address
+                dc.l anim_monkey_head         ; anim_address
                 dc.b 9                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54697,7 +54697,7 @@ stru_25B474:    dc.b 4                  ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B201E         ; anim_address
+                dc.l anim_monkey_head_2         ; anim_address
                 dc.b 9                  ; field_10
                 dc.b $FF                ; field_11
                 dc.b 0                  ; field_12
@@ -54712,7 +54712,7 @@ stru_25B48C:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w 0                  ; vram_offset
-                dc.l off_1B4108         ; anim_address
+                dc.l anim_valve         ; anim_address
                 dc.b 1                  ; field_10
                 dc.b $FF                ; field_11
                 dc.b 0                  ; field_12

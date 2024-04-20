@@ -2347,7 +2347,7 @@ off_643A:       dc.l off_1B0530         ; DATA XREF: sub_252144+E   o
                 dc.l off_1B0534
                 dc.l off_1B0534
                 dc.l off_1B0538
-off_645A:       dc.l off_1AEF46         ; DATA XREF: sub_247022+1C8   o
+off_645A:       dc.l anim_jim_on_rocket         ; DATA XREF: sub_247022+1C8   o
                 dc.l off_1AEF4E
                 dc.l off_1AEF52
                 dc.l off_1AEF56
@@ -2407,11 +2407,11 @@ off_645A:       dc.l off_1AEF46         ; DATA XREF: sub_247022+1C8   o
                 dc.l off_1AEF5E
                 dc.l off_1AEF62
                 dc.l off_1AEF66
-                dc.l off_1AEF46
+                dc.l anim_jim_on_rocket
                 dc.l off_1AEF4E
                 dc.l off_1AEF52
                 dc.l off_1AEF56
-                dc.l off_1AEF46
+                dc.l anim_jim_on_rocket
                 dc.l off_1AEF4E
                 dc.l off_1AEF52
                 dc.l off_1AEF56
@@ -2471,7 +2471,7 @@ off_645A:       dc.l off_1AEF46         ; DATA XREF: sub_247022+1C8   o
                 dc.l off_1AEF5E
                 dc.l off_1AEF62
                 dc.l off_1AEF66
-                dc.l off_1AEF46
+                dc.l anim_jim_on_rocket
                 dc.l off_1AEF4E
                 dc.l off_1AEF52
                 dc.l off_1AEF56
@@ -2702,12 +2702,12 @@ off_6B2C:       dc.l off_1B2710         ; DATA XREF: sub_2585CA+19A   o
                 dc.l off_1B2674
                 dc.l off_1B2670
                 dc.l off_1B266C
-                dc.l off_1B2668
-                dc.l off_1B2668
-                dc.l off_1B2668
-                dc.l off_1B2668
-                dc.l off_1B2668
-                dc.l off_1B2668
+                dc.l anim_psyq
+                dc.l anim_psyq
+                dc.l anim_psyq
+                dc.l anim_psyq
+                dc.l anim_psyq
+                dc.l anim_psyq
 off_6BEC:       dc.l off_1B2710         ; DATA XREF: sub_2585CA+1B2   o
                 dc.l off_1B270C
                 dc.l off_1B2708
@@ -3606,7 +3606,7 @@ dword_C9BE:     dc.l $2FD96             ; DATA XREF: sub_2592EC+10C   o
                 dc.l $2A114
                 dc.l $2AF5C
                 dc.l $2036A
-off_C9D6:       dc.l off_1B46FC         ; DATA XREF: sub_2592EC+E6   o
+off_C9D6:       dc.l anim_psyq_boss         ; DATA XREF: sub_2592EC+E6   o
                 dc.l off_1B4706
                 dc.l off_1B4710
                 dc.l off_1B471A
@@ -4704,7 +4704,7 @@ byte_1A3F58:    dc.b   0,  0,$86,$9A    ; DATA XREF: ROM:001A3F66   o
 byte_1A3F62:    dc.b $88,$C4,  0,  7    ; DATA XREF: ROM:001A3F5C   o
                 dc.l byte_1A3F58
                 dc.b $83,$14,  0,$20
-                dc.l off_1B1F48
+                dc.l anim_larva
                 dc.b $80,  0
                 dc.l byte_1A3F3A
 byte_1A3F78:    dc.b   3,  0,$91,  0    ; DATA XREF: ROM:001B1F6A   o
@@ -4720,7 +4720,7 @@ byte_1A3F96:    dc.b   1,  0,$88,$C4,  0,  7
                                         ; DATA XREF: ROM:001A3F9C   o
                 dc.l byte_1A3F96
                 dc.b $83,$14,  0,$20
-                dc.l off_1B1F48
+                dc.l anim_larva
                 dc.b $80,  0
                 dc.l byte_1A3F80
                 dc.b   1,  0,  1,  0,  2,  0,  2,  0,  3,  0,  3,  0
@@ -8131,7 +8131,7 @@ off_1AD5D0:     dc.w off_1960           ; DATA XREF: ROM:001AE108   o
                 dc.w off_197C
                 dc.w off_1978
                 dc.w $F800
-off_1AD624:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
+anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                                         ; ROM:001AD69A   o ...
                 dc.w off_1F64
                 dc.w off_1F68
@@ -8164,7 +8164,7 @@ off_1AD624:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1F64
                 dc.w off_1F68
                 dc.w $EA00
-                dc.l off_1AD624
+                dc.l anim_fan_fish
                 dc.w off_1F64
                 dc.w off_1F64
                 dc.w off_1F9C
@@ -8187,8 +8187,8 @@ off_1AD624:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1FB0
                 dc.w off_1FB0
                 dc.w $EA00
-                dc.l off_1AD624
-off_1AD69E:     dc.w off_344C           ; DATA XREF: ROM:001AD6B0   o
+                dc.l anim_fan_fish
+anim_unknown_enemy:     dc.w off_344C           ; DATA XREF: ROM:001AD6B0   o
                                         ; ROM:stru_25B5F4   o
                 dc.w off_344C
 off_1AD6A2:     dc.w off_3450           ; DATA XREF: ROM:001AD82E   o
@@ -8198,7 +8198,7 @@ off_1AD6A6:     dc.w off_3454           ; DATA XREF: ROM:001AD81E   o
 off_1AD6AA:     dc.w off_3458           ; DATA XREF: ROM:001AD83E   o
                 dc.w off_3458
                 dc.w $EA00
-                dc.l off_1AD69E
+                dc.l anim_unknown_enemy
 off_1AD6B4:     dc.w off_345C           ; DATA XREF: ROM:001A4762   o
                 dc.w off_345C
                 dc.w off_3460
@@ -8211,7 +8211,7 @@ off_1AD6B4:     dc.w off_345C           ; DATA XREF: ROM:001A4762   o
                 dc.w off_346C
                 dc.w off_346C
                 dc.w $F600
-off_1AD6CC:     dc.w off_341C           ; DATA XREF: ROM:001AD6E2   o
+anim_chips:     dc.w off_341C           ; DATA XREF: ROM:001AD6E2   o
                                         ; ROM:001AD8AE   o ...
                 dc.w off_341C
 off_1AD6D0:     dc.w off_342C           ; DATA XREF: ROM:001AD7C2   o
@@ -8226,7 +8226,7 @@ off_1AD6D8:     dc.w off_3434           ; DATA XREF: ROM:001AD7B0   o
                 dc.w off_3428
                 dc.w off_3428
                 dc.w $EA00
-                dc.l off_1AD6CC
+                dc.l anim_chips
 off_1AD6E6:     dc.w off_3438           ; DATA XREF: ROM:001A4734   o
                 dc.w off_3438
                 dc.w off_343C
@@ -8239,7 +8239,7 @@ off_1AD6E6:     dc.w off_3438           ; DATA XREF: ROM:001A4734   o
                 dc.w off_3448
                 dc.w off_3448
                 dc.w $F600
-off_1AD6FE:     dc.w off_E48            ; DATA XREF: ROM:001AD7E4   o
+anim_intestinal_boss:     dc.w off_E48            ; DATA XREF: ROM:001AD7E4   o
                                         ; ROM:001AD852   o ...
                 dc.w $F700
                 dc.w off_E48
@@ -8304,7 +8304,7 @@ off_1AD788:     dc.w off_E84            ; DATA XREF: ROM:001AD794   o
                 dc.w off_E68
                 dc.w off_E68
                 dc.w $EA00
-                dc.l off_1AD6FE
+                dc.l anim_intestinal_boss
 off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                                         ; ROM:001AD870   o
                 dc.w off_E48
@@ -8345,7 +8345,7 @@ off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                 dc.w off_E64
                 dc.w $ED11
                 dc.b   0,  0,  0,$17,$EA,  0
-                dc.l off_1AD6FE
+                dc.l anim_intestinal_boss
 off_1AD856:     dc.w off_E48            ; DATA XREF: sub_255A96+20   o
                                         ; sub_255A96+68   o ...
                 dc.w $F700
@@ -8384,7 +8384,7 @@ off_1AD87A:     dc.w off_E88            ; DATA XREF: sub_255B10+26   o
                 dc.w $F500
                 dc.l stru_25B60C
                 dc.w $10F0
-                dc.l off_1AD6CC
+                dc.l anim_chips
                 dc.l byte_1A471E
                 dc.w off_E90
                 dc.w $F500
@@ -10832,10 +10832,10 @@ off_1AEEB2:     dc.w off_1D14           ; DATA XREF: oksub_2464C8+156   o
                 dc.l off_1AF290
                 dc.w $EA00
                 dc.l off_1AE610
-off_1AEF46:     dc.w off_1570           ; DATA XREF: ROM:off_645A   o
+anim_jim_on_rocket:     dc.w off_1570           ; DATA XREF: ROM:off_645A   o
                                         ; ROM:0000654A   o ...
                 dc.w $EA00
-                dc.l off_1AEF46
+                dc.l anim_jim_on_rocket
 off_1AEF4E:     dc.w off_1574           ; DATA XREF: ROM:0000645E   o
                                         ; ROM:0000654E   o ...
                 dc.w $EC01
@@ -11718,7 +11718,7 @@ word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
                 dc.w $B
                 dc.w $EA00
                 dc.l off_1AE610
-off_1AF674:     dc.w off_16F8           ; DATA XREF: ROM:stru_25BA2C   o
+jim_on_rocket_fail:     dc.w off_16F8           ; DATA XREF: ROM:stru_25BA2C   o
                 dc.w $EEB1
                 dc.w off_16F8
                 dc.w $F35D
@@ -13477,8 +13477,8 @@ anim_dust:      dc.w off_960            ; DATA XREF: ROM:stru_25A844   o
                 dc.w off_970
                 dc.w off_970
                 dc.w $F600
-anim_air_part:  dc.w off_3470           ; DATA XREF: ROM:stru_25A73C   o
-off_1B046C:     dc.w off_3470           ; DATA XREF: ROM:001B0474   o
+anim_air_part:  dc.w frame_none           ; DATA XREF: ROM:stru_25A73C   o
+off_1B046C:     dc.w frame_none           ; DATA XREF: ROM:001B0474   o
                 dc.w $F421
                 dc.w $FBEC
                 dc.w 0
@@ -14251,7 +14251,7 @@ anim_smoke:     dc.w off_2D40           ; DATA XREF: ROM:stru_25AD6C   o
                 dc.w off_2D6C
                 dc.w off_2D6C
                 dc.w $F600
-anim_air_part_3:dc.w off_3470           ; DATA XREF: ROM:001B0B94   o
+anim_air_part_3:dc.w frame_none           ; DATA XREF: ROM:001B0B94   o
                                         ; ROM:stru_25A76C   o
                 dc.w $F491
                 dc.w $50
@@ -14266,17 +14266,17 @@ anim_air_part_3:dc.w off_3470           ; DATA XREF: ROM:001B0B94   o
                 dc.w $FD9C
                 dc.w $C
                 dc.w $EE97
-                dc.w off_3470
+                dc.w frame_none
 word_1B0BB2:    dc.w $F501              ; DATA XREF: ROM:001B0BC8   o
                 dc.l stru_25AD84
                 dc.w 0
                 dc.l off_1B0B30
                 dc.l 0
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l word_1B0BB2
-off_1B0BCC:     dc.w off_3470           ; DATA XREF: sub_250860+C   o
+off_1B0BCC:     dc.w frame_none           ; DATA XREF: sub_250860+C   o
                                         ; sub_25087E+10   o
                 dc.w $F501
                 dc.l stru_25AD6C
@@ -14287,65 +14287,65 @@ off_1B0BCC:     dc.w off_3470           ; DATA XREF: sub_250860+C   o
                 dc.w $FD9C
                 dc.w $C
                 dc.w $EE97
-                dc.w off_3470
+                dc.w frame_none
 word_1B0BE8:    dc.w $F501              ; DATA XREF: ROM:001B0BFE   o
                 dc.l stru_25AD84
                 dc.w 0
                 dc.l off_1B0B30
                 dc.w 0
                 dc.w 0
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l word_1B0BE8
-anim_air_part_4:dc.w off_3470           ; DATA XREF: ROM:001B0C0A   o
+anim_air_part_4:dc.w frame_none           ; DATA XREF: ROM:001B0C0A   o
                                         ; ROM:stru_25A784   o
                 dc.w $F491
                 dc.w $50
                 dc.w 0
                 dc.l anim_air_part_4
                 dc.w $EE8B
-                dc.w off_3470
+                dc.w frame_none
 word_1B0C12:    dc.w $F501              ; DATA XREF: ROM:001B0C34   o
                 dc.l stru_25AD84
                 dc.l 0
                 dc.l 0
                 dc.w 0
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l word_1B0C12
-anim_fireburn:  dc.w off_3470           ; DATA XREF: ROM:stru_25A79C   o
+anim_fireburn:  dc.w frame_none           ; DATA XREF: ROM:stru_25A79C   o
 word_1B0C3A:    dc.w $F501              ; DATA XREF: ROM:001B0C5E   o
                 dc.l stru_25AD84
                 dc.l 0
                 dc.l 0
                 dc.w 0
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l word_1B0C3A
-anim_fireburn_2:dc.w off_3470           ; DATA XREF: ROM:stru_25A7B4   o
+anim_fireburn_2:dc.w frame_none           ; DATA XREF: ROM:stru_25A7B4   o
 word_1B0C64:    dc.w $F501              ; DATA XREF: ROM:001B0C7A   o
                 dc.l stru_25A79C
                 dc.l 0
                 dc.l 0
                 dc.w 0
                 dc.w $EECF
-                dc.w off_3470
+                dc.w frame_none
                 dc.w $EA00
                 dc.l word_1B0C64
 anim_rope_health_bar:dc.w off_7F8       ; DATA XREF: ROM:0025813A   o
@@ -15879,20 +15879,20 @@ off_1B1A32:     dc.w off_1FFC           ; DATA XREF: sub_2541A2+4A   o
                 dc.w 0
                 dc.w off_2000
                 dc.w $F600
-off_1B1A50:     dc.w off_3470           ; DATA XREF: ROM:001B1A5A   o
+anim_frog:     dc.w frame_none           ; DATA XREF: ROM:001B1A5A   o
                                         ; ROM:001B1A6C   o ...
                 dc.w $FD46
                 dc.l off_1B1A5E
                 dc.w $EA00
-                dc.l off_1B1A50
-off_1B1A5E:     dc.w off_3470           ; DATA XREF: ROM:001B1A54   o
+                dc.l anim_frog
+off_1B1A5E:     dc.w frame_none           ; DATA XREF: ROM:001B1A54   o
                 dc.w $FB00
                 dc.l sub_258D60
                 dc.w $EE93
-                dc.w off_3470
+                dc.w frame_none
                 dc.w $EA00
-                dc.l off_1B1A50
-off_1B1A70:     dc.w off_232C           ; DATA XREF: ROM:stru_25B51C   o
+                dc.l anim_frog
+anim_frog_2:     dc.w off_232C           ; DATA XREF: ROM:stru_25B51C   o
                 dc.w off_2330
                 dc.w off_2334
                 dc.w off_2338
@@ -16092,7 +16092,7 @@ off_1B1BDE:     dc.w off_2360           ; DATA XREF: ROM:0000C7A0   o
                 dc.w 9
                 dc.w $FF
                 dc.w $EC01
-off_1B1BE8:     dc.w off_2310           ; DATA XREF: sub_251112+14   o
+anim_metall_egg:     dc.w off_2310           ; DATA XREF: sub_251112+14   o
                                         ; ROM:stru_25B534   o
                 dc.w $EC01
 off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
@@ -16132,96 +16132,96 @@ off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
                 dc.w off_232C
                 dc.w off_232C
                 dc.w $F600
-off_1B1C36:     dc.w off_3470           ; DATA XREF: ROM:001B1C48   o
+off_1B1C36:     dc.w frame_none           ; DATA XREF: ROM:001B1C48   o
                                         ; sub_251218+C   o ...
                 dc.w $FB00
                 dc.l oksub_256D04
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1C36
-off_1B1C4C:     dc.w off_3470           ; DATA XREF: ROM:001B1C5E   o
+off_1B1C4C:     dc.w frame_none           ; DATA XREF: ROM:001B1C5E   o
                                         ; sub_25122E+C   o
                 dc.w $FB00
                 dc.l oksub_256CDA
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1C4C
-off_1B1C62:     dc.w off_3470           ; DATA XREF: ROM:001B1C76   o
+off_1B1C62:     dc.w frame_none           ; DATA XREF: ROM:001B1C76   o
                                         ; sub_251248+C   o
                 dc.w $FB00
                 dc.l oksub_256BCC
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1C62
-off_1B1C7A:     dc.w off_3470           ; DATA XREF: ROM:001B1C8E   o
+off_1B1C7A:     dc.w frame_none           ; DATA XREF: ROM:001B1C8E   o
                                         ; sub_25125E+C   o
                 dc.w $FB00
                 dc.l oksub_256C02
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1C7A
-off_1B1C92:     dc.w off_3470           ; DATA XREF: ROM:001B1CA4   o
+off_1B1C92:     dc.w frame_none           ; DATA XREF: ROM:001B1CA4   o
                                         ; sub_251274+C   o
                 dc.w $FB00
                 dc.l oksub_256C5C
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1C92
-off_1B1CA8:     dc.w off_3470           ; DATA XREF: ROM:001B1CBA   o
+off_1B1CA8:     dc.w frame_none           ; DATA XREF: ROM:001B1CBA   o
                                         ; sub_25128A+C   o
                 dc.w $FB00
                 dc.l oksub_256C32
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1CA8
-off_1B1CBE:     dc.w off_3470           ; DATA XREF: ROM:001B1CD0   o
+off_1B1CBE:     dc.w frame_none           ; DATA XREF: ROM:001B1CD0   o
                                         ; sub_2512A4+C   o
                 dc.w $FB00
                 dc.l oksub_256CB0
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1CBE
-off_1B1CD4:     dc.w off_3470           ; DATA XREF: ROM:001B1CE6   o
+off_1B1CD4:     dc.w frame_none           ; DATA XREF: ROM:001B1CE6   o
                                         ; sub_2512BA+C   o
                 dc.w $FB00
                 dc.l oksub_256C86
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l off_1B1CD4
-off_1B1CEA:     dc.w off_24E4           ; DATA XREF: ROM:001B1CF4   o
+anim_fan:     dc.w off_24E4           ; DATA XREF: ROM:001B1CF4   o
                                         ; ROM:stru_25B594   o
                 dc.w off_24E8
                 dc.w off_24EC
                 dc.w off_24F0
                 dc.w $EA00
-                dc.l off_1B1CEA
-off_1B1CF8:     dc.w off_774            ; DATA XREF: ROM:stru_25B57C   o
+                dc.l anim_fan
+anim_eye:     dc.w off_774            ; DATA XREF: ROM:stru_25B57C   o
                 dc.w off_774
 off_1B1CFC:     dc.w off_778            ; DATA XREF: ROM:001B1D12   o
                 dc.w off_778
@@ -16413,11 +16413,11 @@ off_1B1EA8:     dc.w off_21F8           ; DATA XREF: sub_25597E+1A   o
                 dc.w off_2204
                 dc.w off_2204
                 dc.w $F600
-off_1B1EB4:     dc.w off_2234           ; DATA XREF: ROM:001B1EBA   o
+anim_green_goose:     dc.w off_2234           ; DATA XREF: ROM:001B1EBA   o
                                         ; ROM:001B1F02   o ...
                 dc.w off_2234
                 dc.w $F0D6
-                dc.l off_1B1EB4
+                dc.l anim_green_goose
                 dc.w $EE89
                 dc.w off_2234
                 dc.w $F342
@@ -16450,7 +16450,7 @@ word_1B1EE2:    dc.w $FAC2              ; DATA XREF: ROM:001B1ED8   o
                 dc.w off_2238
                 dc.w off_2238
                 dc.w $EA00
-                dc.l off_1B1EB4
+                dc.l anim_green_goose
 off_1B1F06:     dc.w off_2210           ; DATA XREF: ROM:001A3F50   o
                                         ; ROM:001A3F8E   o
                 dc.w off_2210
@@ -16483,7 +16483,7 @@ off_1B1F10:     dc.w off_2218           ; DATA XREF: ROM:001B1F44   o
                 dc.l off_1B1F62
                 dc.w $EA00
                 dc.l off_1B1F10
-off_1B1F48:     dc.w off_2208           ; DATA XREF: ROM:001A3F6E   o
+anim_larva:     dc.w off_2208           ; DATA XREF: ROM:001A3F6E   o
                                         ; ROM:001A3FA4   o ...
 off_1B1F4A:     dc.w off_2208           ; DATA XREF: ROM:001B1F4E   o
                                         ; ROM:001B1F5E   o
@@ -16521,7 +16521,7 @@ off_1B1F92:     dc.w off_222C           ; DATA XREF: sub_25570E+30   o
                 dc.w off_2230
                 dc.w off_2230
                 dc.w $F600
-off_1B1F9A:     dc.w off_B1C            ; DATA XREF: ROM:001B1FAC   o
+anim_cage:     dc.w off_B1C            ; DATA XREF: ROM:001B1FAC   o
                                         ; ROM:001B1FB8   o ...
                 dc.w $F4A1
                 dc.w $1C
@@ -16530,13 +16530,13 @@ off_1B1F9A:     dc.w off_B1C            ; DATA XREF: ROM:001B1FAC   o
                 dc.w $F491
                 dc.w $1D
                 dc.w 0
-                dc.l off_1B1F9A
+                dc.l anim_cage
 word_1B1FB0:    dc.w $F32D              ; DATA XREF: ROM:001B1FA2   o
                 dc.w $EE87
                 dc.w off_B1C
                 dc.w $EA00
-                dc.l off_1B1F9A
-off_1B1FBC:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
+                dc.l anim_cage
+anim_chemical_flask:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
                                         ; ROM:stru_25B4A4   o
                 dc.w off_33E4
                 dc.w off_33E8
@@ -16546,7 +16546,7 @@ off_1B1FBC:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
                 dc.w off_33F4
                 dc.w off_33F4
                 dc.w $EA00
-                dc.l off_1B1FBC
+                dc.l anim_chemical_flask
 anim_monkey_head:     dc.w off_2780           ; DATA XREF: ROM:001B21CC   o
                                         ; ROM:001B2210   o ...
                 dc.w $ED11
@@ -16846,7 +16846,7 @@ off_1B222E:     dc.w off_2D24           ; DATA XREF: sub_25552E+A6   o
                 dc.w $44
                 dc.w $EA00
                 dc.l word_1B2284
-off_1B224C:     dc.w off_2D20           ; DATA XREF: ROM:001B227E   o
+anim_daemon:     dc.w off_2D20           ; DATA XREF: ROM:001B227E   o
                                         ; ROM:001B22BA   o ...
                 dc.w $ED14
                 dc.w $A
@@ -16870,7 +16870,7 @@ off_1B224C:     dc.w off_2D20           ; DATA XREF: ROM:001B227E   o
                 dc.w $FD50
                 dc.l off_1B2282
                 dc.w $EA00
-                dc.l off_1B224C
+                dc.l anim_daemon
 off_1B2282:     dc.w off_2D00           ; DATA XREF: ROM:001B2278   o
 word_1B2284:    dc.w $ED14              ; DATA XREF: ROM:001B2248   o
                 dc.w $A
@@ -16898,10 +16898,10 @@ off_1B228C:     dc.w off_2D00           ; DATA XREF: ROM:001B22C0   o
                 dc.w off_2D1C
                 dc.w off_2D1C
                 dc.w $FD0A
-                dc.l off_1B224C
+                dc.l anim_daemon
                 dc.w $EA00
                 dc.l off_1B228C
-off_1B22C4:     dc.w off_33B0           ; DATA XREF: ROM:001B22F6   o
+anim_sponge:     dc.w off_33B0           ; DATA XREF: ROM:001B22F6   o
                                         ; ROM:stru_25B684   o
                 dc.w off_33B0
                 dc.w off_33B4
@@ -16927,7 +16927,7 @@ off_1B22C4:     dc.w off_33B0           ; DATA XREF: ROM:001B22F6   o
                 dc.w off_33DC
                 dc.w off_33DC
                 dc.w $EA00
-                dc.l off_1B22C4
+                dc.l anim_sponge
 off_1B22FA:     dc.w off_33B0           ; DATA XREF: ROM:001B238C   o
                                         ; sub_253F64+1C   o
                 dc.w off_33B0
@@ -16985,7 +16985,7 @@ off_1B22FA:     dc.w off_33B0           ; DATA XREF: ROM:001B238C   o
                 dc.w off_33DC
                 dc.w $EA00
                 dc.l off_1B22FA
-off_1B2390:     dc.w off_3368           ; DATA XREF: ROM:stru_25B6E4   o
+anim_air_bubble:     dc.w off_3368           ; DATA XREF: ROM:stru_25B6E4   o
                 dc.w $EE8A
                 dc.w off_3368
                 dc.w $EE8B
@@ -17002,7 +17002,7 @@ off_1B2390:     dc.w off_3368           ; DATA XREF: ROM:stru_25B6E4   o
                 dc.w off_3380
                 dc.w off_3384
                 dc.w $EC01
-off_1B23B2:     dc.w off_33E0           ; DATA XREF: ROM:001B23CC   o
+anim_air_refiller:     dc.w off_33E0           ; DATA XREF: ROM:001B23CC   o
                                         ; ROM:stru_25B6CC   o
                 dc.w $F500
                 dc.l stru_25B6E4
@@ -17013,7 +17013,7 @@ off_1B23B2:     dc.w off_33E0           ; DATA XREF: ROM:001B23CC   o
                 dc.w off_33E0
                 dc.w $EF00
                 dc.w $EA00
-                dc.l off_1B23B2
+                dc.l anim_air_refiller
 anim_submarine: dc.w off_25F4           ; DATA XREF: ROM:off_C93A   o
                                         ; ROM:stru_25B1A4   o
 word_1B23D2:    dc.w $EE8F              ; DATA XREF: ROM:001B23DC   o
@@ -17224,7 +17224,7 @@ off_1B25BE:     dc.w off_DAC            ; DATA XREF: sub_255128+40   o
                 dc.w $2B
                 dc.w $EA00
                 dc.l anim_bob_cat
-off_1B25D4:     dc.w off_2FA8           ; DATA XREF: ROM:stru_25B714   o
+anim_planet:     dc.w off_2FA8           ; DATA XREF: ROM:stru_25B714   o
                 dc.w $EC01
 off_1B25D8:     dc.w off_A10            ; DATA XREF: ROM:off_665A   o
                                         ; ROM:0000674A   o ...
@@ -17289,7 +17289,7 @@ off_1B2624:     dc.w off_A5C            ; DATA XREF: ROM:000066BE   o
 off_1B2628:     dc.w off_A60            ; DATA XREF: ROM:000066C2   o
                                         ; ROM:000066D2   o ...
                 dc.w $EC01
-off_1B262C:     dc.w off_2FAC           ; DATA XREF: ROM:stru_25B7A4   o
+anim_sphere_energy_3:     dc.w off_2FAC           ; DATA XREF: ROM:stru_25B7A4   o
                 dc.w off_2FAC
 off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
                 dc.w off_2FB0
@@ -17317,7 +17317,7 @@ off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
                 dc.l off_1B2630
                 dc.w off_2FAC
 word_1B2666:    dc.w $F600              ; DATA XREF: ROM:001B2656   o
-off_1B2668:     dc.w off_28C0           ; DATA XREF: ROM:00006BD4   o
+anim_psyq:     dc.w off_28C0           ; DATA XREF: ROM:00006BD4   o
                                         ; ROM:00006BD8   o ...
                 dc.w $EC01
 off_1B266C:     dc.w off_28C4           ; DATA XREF: ROM:00006BD0   o
@@ -17994,7 +17994,7 @@ anim_air_fx:    dc.w off_998            ; DATA XREF: sub_2545A0+10   o
                 dc.w off_9AC
                 dc.w off_9AC
                 dc.w $F600
-off_1B2B06:     dc.w off_1494           ; DATA XREF: ROM:stru_25B834   o
+anim_jim_open_door:     dc.w off_1494           ; DATA XREF: ROM:stru_25B834   o
                 dc.w $EE9D
                 dc.w off_1494
                 dc.w $F32F
@@ -18015,7 +18015,7 @@ off_1B2B06:     dc.w off_1494           ; DATA XREF: ROM:stru_25B834   o
                 dc.w $FB00
                 dc.l sub_2564D4
                 dc.w $F600
-off_1B2B32:     dc.w off_1460           ; DATA XREF: ROM:stru_25B84C   o
+anim_jim_exit_door:     dc.w off_1460           ; DATA XREF: ROM:stru_25B84C   o
                 dc.w $EC01
 off_1B2B36:     dc.w off_1464           ; DATA XREF: sub_252FF4+10   o
                 dc.w $F32F
@@ -18048,14 +18048,14 @@ off_1B2B36:     dc.w off_1464           ; DATA XREF: sub_252FF4+10   o
                 dc.w $FDF2
                 dc.w 1
                 dc.w $F600
-off_1B2B74:     dc.w off_1E54           ; DATA XREF: ROM:001B2B82   o
+anim_dark_monster:     dc.w off_1E54           ; DATA XREF: ROM:001B2B82   o
                                         ; ROM:stru_25B864   o
                 dc.w $FB00
                 dc.l oksub_24951E
                 dc.w $F411
                 dc.w $FD9F
                 dc.w 0
-                dc.l off_1B2B74
+                dc.l anim_dark_monster
                 dc.w $F700
                 dc.w $FB00
                 dc.l oksub_249526
@@ -18118,7 +18118,7 @@ off_1B2BCA:     dc.w off_1E60           ; DATA XREF: ROM:001B2C0A   o
                 dc.w $F334
                 dc.w $EA00
                 dc.l off_1B2BCA
-off_1B2C0E:     dc.w off_1E2C           ; DATA XREF: ROM:stru_25B8AC   o
+anim_dark_enemy_2:     dc.w off_1E2C           ; DATA XREF: ROM:stru_25B8AC   o
                 dc.w $F700
 off_1B2C12:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C38   o
                                         ; sub_2571B4+18   o ...
@@ -18141,10 +18141,10 @@ off_1B2C12:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C38   o
                 dc.w $F700
                 dc.w $EA00
                 dc.l off_1B2C12
-off_1B2C3C:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C40   o
+anim_dark_enemy:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C40   o
                                         ; ROM:001B2C5A   o ...
                 dc.w $F0F4
-                dc.l off_1B2C3C
+                dc.l anim_dark_enemy
                 dc.w $EE93
                 dc.w off_1E2C
                 dc.w off_1E48
@@ -18156,7 +18156,7 @@ off_1B2C3C:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C40   o
                 dc.w 0
                 dc.w $1B
                 dc.w $EA00
-                dc.l off_1B2C3C
+                dc.l anim_dark_enemy
 anim_fireburn_3:dc.w off_8D8            ; DATA XREF: ROM:001B2C92   o
                                         ; ROM:stru_25AD3C   o
                 dc.w $FC00
@@ -19363,7 +19363,7 @@ anim_explosion_2:dc.w off_2524          ; DATA XREF: ROM:stru_25A904   o
                 dc.w off_2548
                 dc.w off_2548
                 dc.w $F600
-off_1B3778:     dc.w off_870            ; DATA XREF: ROM:stru_25B804   o
+anim_star:     dc.w off_870            ; DATA XREF: ROM:stru_25B804   o
                 dc.w off_870
                 dc.w off_874
                 dc.w off_874
@@ -19852,16 +19852,16 @@ anim_evilcat_gun:dc.w off_1024          ; DATA XREF: ROM:001B3B40   o
                 dc.w $EA00
                 dc.l anim_evilcat_gun
                 dc.w $EC01
-anim_fireburn_5:dc.w off_3470           ; DATA XREF: ROM:stru_25AE8C   o
+anim_fireburn_5:dc.w frame_none           ; DATA XREF: ROM:stru_25AE8C   o
                                         ; ROM:stru_25AEA4   o
 word_1B3B96:    dc.w $F501              ; DATA XREF: ROM:001B3BAE   o
                 dc.l stru_25AD84
                 dc.w 0
                 dc.l off_1B0B30
                 dc.l 0
-                dc.w off_3470
-                dc.w off_3470
-                dc.w off_3470
+                dc.w frame_none
+                dc.w frame_none
+                dc.w frame_none
                 dc.w $EA00
                 dc.l word_1B3B96
 anim_evilcat_pillar:dc.w off_2C88       ; DATA XREF: ROM:0000C936   o
@@ -21219,11 +21219,11 @@ off_1B46EE:     dc.w off_29F4           ; DATA XREF: ROM:001B46F8   o
                 dc.w off_2A00
                 dc.w $EA00
                 dc.l off_1B46EE
-off_1B46FC:     dc.w off_2A04           ; DATA XREF: ROM:off_C9D6   o
+anim_psyq_boss:     dc.w off_2A04           ; DATA XREF: ROM:off_C9D6   o
                                         ; ROM:001B4702   o ...
                 dc.w off_2A08
                 dc.w $EA00
-                dc.l off_1B46FC
+                dc.l anim_psyq_boss
 off_1B4706:     dc.w off_2A0C           ; DATA XREF: ROM:0000C9DA   o
                                         ; ROM:001B470C   o ...
                 dc.w off_2A10
@@ -21255,7 +21255,7 @@ off_1B4736:     dc.w off_2A10           ; DATA XREF: ROM:0000C9EE   o
                 dc.w $F500
                 dc.l stru_25BB1C
                 dc.w $1600
-                dc.l off_1B48CE
+                dc.l anim_psyq_hook
                 dc.l 0
                 dc.w off_2A30
                 dc.w off_2A30
@@ -21334,7 +21334,7 @@ off_1B47C6:     dc.w off_29EC           ; DATA XREF: sub_2594E4+16   o
                 dc.w $FD88
                 dc.w 0
                 dc.w $EA00
-                dc.l off_1B46FC
+                dc.l anim_psyq_boss
 off_1B47F8:     dc.w off_29EC           ; DATA XREF: sub_25951A:loc_259556   o
                 dc.w off_29F0
                 dc.w $EE0A
@@ -21354,7 +21354,7 @@ off_1B47F8:     dc.w off_29EC           ; DATA XREF: sub_25951A:loc_259556   o
                 dc.w $FD88
                 dc.w 0
                 dc.w $EA00
-                dc.l off_1B46FC
+                dc.l anim_psyq_boss
 word_1B4824:    dc.w $ED01              ; DATA XREF: ROM:001B480E   o
                 dc.w $FD88
                 dc.w 9
@@ -21437,7 +21437,7 @@ off_1B48B8:     dc.w off_34D0           ; DATA XREF: ROM:001B48AE   o
                 dc.w off_34DC
                 dc.w $EA00
                 dc.l off_1B48B8
-off_1B48CE:     dc.w off_34F0           ; DATA XREF: ROM:001B4744   o
+anim_psyq_hook:     dc.w off_34F0           ; DATA XREF: ROM:001B4744   o
                                         ; ROM:stru_25BB1C   o
                 dc.w $ED12
                 dc.w $1A
@@ -21479,7 +21479,7 @@ off_1B490A:     dc.w off_34E0           ; DATA XREF: ROM:001B4900   o
                 dc.l off_1B490A
 anim_run_here:  dc.w off_994            ; DATA XREF: ROM:stru_25A7FC   o
                 dc.w $EC01
-off_1B4924:     dc.w off_214C           ; DATA XREF: ROM:001B497A   o
+anim_brain:     dc.w off_214C           ; DATA XREF: ROM:001B497A   o
                                         ; ROM:stru_25B5AC   o
                 dc.w $EE8D
                 dc.w off_214C
@@ -21522,7 +21522,7 @@ off_1B495C:     dc.w off_216C           ; DATA XREF: ROM:001B4962   o
                 dc.w off_217C
                 dc.w $EB00
                 dc.w $EA00
-                dc.l off_1B4924
+                dc.l anim_brain
 off_1B497E:     dc.w off_2128           ; DATA XREF: ROM:0000C19C   o
                 dc.w $ED11
                 dc.w 9
@@ -22989,12 +22989,12 @@ off_1B59BA:     dc.w off_2D9C           ; DATA XREF: ROM:001B59B2   o
                 dc.w off_2D9C
 off_1B59C6:     dc.w off_2D9C           ; DATA XREF: ROM:001B59BE   o
                 dc.w $F600
-off_1B59CA:     dc.w off_E94            ; DATA XREF: ROM:001B59D2   o
+anim_sea_gate:     dc.w off_E94            ; DATA XREF: ROM:001B59D2   o
                                         ; ROM:stru_25B6B4   o
                 dc.w $F411
                 dc.w $FE03
                 dc.w 0
-                dc.l off_1B59CA
+                dc.l anim_sea_gate
                 dc.w $FB00
                 dc.l oksub_24950E
                 dc.w $EC01
@@ -23007,7 +23007,7 @@ off_1B59DE:     dc.w off_E94            ; DATA XREF: ROM:001B59E6   o
                 dc.w $FB00
                 dc.l oksub_24950E
                 dc.w $EC01
-off_1B59F2:     dc.w off_E98            ; DATA XREF: sub_2505CC+10   o
+anim_open_handler:     dc.w off_E98            ; DATA XREF: sub_2505CC+10   o
                                         ; ROM:stru_25B6FC   o
                 dc.w $EC01
 off_1B59F6:     dc.w off_E9C            ; DATA XREF: sub_2505AA+18   o
@@ -23018,7 +23018,7 @@ word_1B59F8:    dc.w $EE83              ; DATA XREF: ROM:001B5A02   o
                 dc.w off_EA0
                 dc.w $EA00
                 dc.l word_1B59F8
-off_1B5A06:     dc.w off_2CB4           ; DATA XREF: ROM:001B5A18   o
+anim_gears:     dc.w off_2CB4           ; DATA XREF: ROM:001B5A18   o
                                         ; ROM:stru_25B894   o
                 dc.w off_2CB4
                 dc.w off_2CB0
@@ -23028,7 +23028,7 @@ off_1B5A06:     dc.w off_2CB4           ; DATA XREF: ROM:001B5A18   o
                 dc.w off_2CA8
                 dc.w off_2CA8
                 dc.w $EA00
-                dc.l off_1B5A06
+                dc.l anim_gears
 off_1B5A1C:     dc.w off_3388           ; DATA XREF: ROM:funchars_0_9   o
                                         ; ROM:001B5A24   o ...
                 dc.w $F411
@@ -23129,7 +23129,7 @@ off_1B5AD0:     dc.w off_33AC           ; DATA XREF: ROM:0000C618   o
                 dc.w $FD4F
                 dc.w 0
                 dc.w $F600
-off_1B5AE4:     dc.w off_2B04           ; DATA XREF: ROM:stru_25B90C   o
+anim_princess:     dc.w off_2B04           ; DATA XREF: ROM:stru_25B90C   o
 word_1B5AE6:    dc.w $F35B              ; DATA XREF: ROM:001B5B14   o
                 dc.w $EE03
                 dc.w $EE88
@@ -23785,7 +23785,7 @@ off_1B6016:     dc.w off_864            ; DATA XREF: sub_254E88:loc_254EB6   o
                 dc.w $EC01
 off_1B604A:     dc.w off_864            ; DATA XREF: sub_254E48:loc_254E7A   o
                 dc.w $EC01
-off_1B604E:     dc.w off_34B8           ; DATA XREF: ROM:stru_25BA74   o
+anim_bomb_2:     dc.w off_34B8           ; DATA XREF: ROM:stru_25BA74   o
                 dc.w $EE86
                 dc.w off_34B8
                 dc.w $ED11
@@ -23809,7 +23809,7 @@ off_1B604E:     dc.w off_34B8           ; DATA XREF: ROM:stru_25BA74   o
 off_1B607A:     dc.w off_2CFC           ; DATA XREF: sub_24E764+80   o
                                         ; ROM:0025BABC   o
                 dc.w $EC01
-off_1B607E:     dc.w off_788            ; DATA XREF: ROM:stru_25B66C   o
+anim_aquarium_breaking:     dc.w off_788            ; DATA XREF: ROM:stru_25B66C   o
                 dc.w $F700
 word_1B6082:    dc.w $EE83              ; DATA XREF: ROM:001B6094   o
                 dc.w off_788
@@ -23821,7 +23821,7 @@ word_1B6082:    dc.w $EE83              ; DATA XREF: ROM:001B6094   o
                 dc.w off_78C
                 dc.w $EA00
                 dc.l word_1B6082
-off_1B6098:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
+anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                                         ; ROM:stru_25B63C   o
                 dc.w $EE01
                 dc.w off_794
@@ -23919,7 +23919,7 @@ off_1B6098:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                 dc.w off_7BC
                 dc.w off_7B0
                 dc.w $EA00
-                dc.l off_1B6098
+                dc.l anim_bob_goldfish
 off_1B615E:     dc.w off_7C0            ; DATA XREF: sub_25400C+4   o
                 dc.w off_7C0
                 dc.w off_7C4
@@ -23948,9 +23948,9 @@ off_1B617E:     dc.w off_7DC            ; DATA XREF: ROM:001ACE84   o
                 dc.w off_7EC
                 dc.w off_7F0
                 dc.w $F600
-off_1B619E:     dc.w off_7F4            ; DATA XREF: ROM:stru_25B654   o
+anim_aquarium_column:     dc.w off_7F4            ; DATA XREF: ROM:stru_25B654   o
                 dc.w $EC01
-off_1B61A2:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
+anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                                         ; ROM:stru_25BAEC   o
                 dc.w off_2C4C
                 dc.w off_2C4C
@@ -23964,7 +23964,7 @@ off_1B61A2:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                 dc.w off_2C60
                 dc.w off_2C60
                 dc.w $EA00
-                dc.l off_1B61A2
+                dc.l anim_moving_platform
 off_1B61C0:     dc.w off_2CF8           ; DATA XREF: ROM:stru_25BAD4   o
                 dc.w $EC01
 off_1B61C4:     dc.w off_2EA0           ; DATA XREF: ROM:stru_25B78C   o
@@ -23978,9 +23978,9 @@ off_1B61D6:     dc.w off_2F30           ; DATA XREF: ROM:001B61C8   o
                 dc.w $EC01
 off_1B61DA:     dc.w off_2F38           ; DATA XREF: ROM:001B61CE   o
                 dc.w $EC01
-off_1B61DE:     dc.w off_974            ; DATA XREF: ROM:stru_25BB34   o
+anim_advanced_home:     dc.w off_974            ; DATA XREF: ROM:stru_25BB34   o
                 dc.w $EC01
-off_1B61E2:     dc.w off_264C           ; DATA XREF: ROM:001B61F2   o
+anim_petes_home_door:     dc.w off_264C           ; DATA XREF: ROM:001B61F2   o
                                         ; ROM:stru_25BB4C   o
                 dc.w $ED11
                 dc.w 9
@@ -23988,7 +23988,7 @@ off_1B61E2:     dc.w off_264C           ; DATA XREF: ROM:001B61F2   o
                 dc.w $F424
                 dc.w $A76A
                 dc.l 0
-                dc.l off_1B61E2
+                dc.l anim_petes_home_door
                 dc.w off_2650
                 dc.w off_2650
                 dc.w $ED11
@@ -24006,11 +24006,11 @@ off_1B6206:     dc.w off_20C0           ; DATA XREF: ROM:001AD684   o
                 dc.w $18
                 dc.w $FC00
                 dc.w $EA00
-                dc.l off_1B6224
+                dc.l anim_intestinal_wheel
 word_1B621E:    dc.w $ED12              ; DATA XREF: ROM:001B620E   o
                 dc.w $18
                 dc.w $400
-off_1B6224:     dc.w off_20B4           ; DATA XREF: ROM:001B621A   o
+anim_intestinal_wheel:     dc.w off_20B4           ; DATA XREF: ROM:001B621A   o
                                         ; ROM:00259654   o ...
                 dc.w $EC01
 off_1B6228:     dc.w off_20B8           ; DATA XREF: ROM:0025964C   o
@@ -24018,7 +24018,7 @@ off_1B6228:     dc.w off_20B8           ; DATA XREF: ROM:0025964C   o
                 dc.w $EC01
 off_1B622C:     dc.w off_20BC           ; DATA XREF: ROM:off_259648   o
                 dc.w $EC01
-off_1B6230:     dc.w off_20AC           ; DATA XREF: ROM:stru_25BB7C   o
+anim_intestinal_ball:     dc.w off_20AC           ; DATA XREF: ROM:stru_25BB7C   o
                 dc.w $EA00
                 dc.l off_1B625C
 word_1B6238:    dc.w $FB00              ; DATA XREF: ROM:001B629A   o
@@ -33089,7 +33089,7 @@ loc_24BDF2:                             ; CODE XREF: sub_24BDA8+38   j
 loc_24BE14:                             ; CODE XREF: sub_24BDA8+5E   j
                 tst.b   (byte_FFFD15).l
                 beq.s   loc_24BE28
-                move.l  #off_1AEF46,(dword_FFA6F2).l
+                move.l  #anim_jim_on_rocket,(dword_FFA6F2).l
                 bra.s   locret_24BE3A
 ; ---------------------------------------------------------------------------
 loc_24BE28:                             ; CODE XREF: sub_24BDA8+72   j
@@ -33121,7 +33121,7 @@ sub_24BE54:                             ; CODE XREF: sub_247022+500   p
 loc_24BE6E:                             ; CODE XREF: sub_24BE54+C   j
                 tst.b   (byte_FFFD15).l
                 beq.s   loc_24BE82
-                move.l  #off_1AEF46,(dword_FFA6F2).l
+                move.l  #anim_jim_on_rocket,(dword_FFA6F2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24BE82:                             ; CODE XREF: sub_24BE54+20   j
@@ -38894,7 +38894,7 @@ sub_25035A:                             ; CODE XREF: sub_250288+4   p
                 st      (camera_disable_value).l
                 st      (byte_FFFD15).l
                 move.w  #$5C0,(word_FFA724).l
-                move.l  #off_1AEF46,(dword_FFA6F2).l
+                move.l  #anim_jim_on_rocket,(dword_FFA6F2).l
                 clr.b   (byte_FFA709).l
                 move.w  #$4000,(word_FFA722).l
                 clr.b   (word_FFFEAA).l
@@ -39111,7 +39111,7 @@ sub_2505CC:                             ; DATA XREF: ROM:00005524   o
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2505F8
                 move.b  #$3D,(a5) ; '='
-                move.l  #off_1B59F2,$20(a5)
+                move.l  #anim_open_handler,$20(a5)
                 tst.b   (byte_FFFE04).l
                 beq.s   locret_2505F8
                 move.b  #$86,(a5)
@@ -40309,7 +40309,7 @@ sub_251112:                             ; DATA XREF: ROM:000054B4   o
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251132
                 move.l  #sub_252456,$42(a5)
-                move.l  #off_1B1BE8,$20(a5)
+                move.l  #anim_metall_egg,$20(a5)
                 clr.b   $37(a5)
 locret_251132:                          ; CODE XREF: sub_251112+A   j
                 rts
@@ -51056,7 +51056,7 @@ loc_259624:                             ; CODE XREF: sub_2595F4+E   j
 off_259648:     dc.l off_1B622C         ; DATA XREF: sub_259658+8   o
                 dc.l off_1B6228
                 dc.l off_1B6228
-                dc.l off_1B6224
+                dc.l anim_intestinal_wheel
 
 
 sub_259658:                             ; DATA XREF: ROM:stru_25BB64   o
@@ -54728,7 +54728,7 @@ stru_25B4A4:    dc.b $4B                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1A39AA        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B1FBC         ; anim_address
+                dc.l anim_chemical_flask         ; anim_address
                 dc.b 1                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54743,7 +54743,7 @@ stru_25B4BC:    dc.b $60                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B1F9A         ; anim_address
+                dc.l anim_cage         ; anim_address
                 dc.b $18                ; field_10
                 dc.b 0                  ; field_11
                 dc.b $82                ; field_12
@@ -54759,7 +54759,7 @@ stru_25B4D4:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1A3F3A        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B1F48         ; anim_address
+                dc.l anim_larva         ; anim_address
                 dc.b 1                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54774,7 +54774,7 @@ stru_25B4EC:    dc.b $1A                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1A2E7E        ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B1EB4         ; anim_address
+                dc.l anim_green_goose         ; anim_address
                 dc.b 6                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54789,7 +54789,7 @@ stru_25B504:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B1A50         ; anim_address
+                dc.l anim_frog         ; anim_address
                 dc.b 0                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54804,7 +54804,7 @@ stru_25B51C:    dc.b $98                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B1A70         ; anim_address
+                dc.l anim_frog_2         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54820,7 +54820,7 @@ stru_25B534:    dc.b $42                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B1BE8         ; anim_address
+                dc.l anim_metall_egg         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54866,7 +54866,7 @@ stru_25B57C:    dc.b 9                  ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B1CF8         ; anim_address
+                dc.l anim_eye         ; anim_address
                 dc.b 1                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54881,7 +54881,7 @@ stru_25B594:    dc.b $68                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B1CEA         ; anim_address
+                dc.l anim_fan         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54896,7 +54896,7 @@ stru_25B5AC:    dc.b $20                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B4924         ; anim_address
+                dc.l anim_brain         ; anim_address
                 dc.b 2                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54911,7 +54911,7 @@ stru_25B5C4:    dc.b $45                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1AC6E8        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1AD624         ; anim_address
+                dc.l anim_fan_fish         ; anim_address
                 dc.b 6                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54926,7 +54926,7 @@ stru_25B5DC:    dc.b $17                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1AD6FE         ; anim_address
+                dc.l anim_intestinal_boss         ; anim_address
                 dc.b $B                 ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -54942,7 +54942,7 @@ stru_25B5F4:    dc.b $79                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1AD69E         ; anim_address
+                dc.l anim_unknown_enemy         ; anim_address
                 dc.b 1                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
@@ -54958,7 +54958,7 @@ stru_25B60C:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1AD6CC         ; anim_address
+                dc.l anim_chips         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
@@ -54974,7 +54974,7 @@ stru_25B624:    dc.b $44                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1ACCFA        ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B224C         ; anim_address
+                dc.l anim_daemon         ; anim_address
                 dc.b 7                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
@@ -54989,7 +54989,7 @@ stru_25B63C:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B6098         ; anim_address
+                dc.l anim_bob_goldfish         ; anim_address
                 dc.b 2                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55004,7 +55004,7 @@ stru_25B654:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B619E         ; anim_address
+                dc.l anim_aquarium_column         ; anim_address
                 dc.b 3                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55019,7 +55019,7 @@ stru_25B66C:    dc.b $46                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B607E         ; anim_address
+                dc.l anim_aquarium_breaking         ; anim_address
                 dc.b 9                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55034,7 +55034,7 @@ stru_25B684:    dc.b $43                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1ACD54        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B22C4         ; anim_address
+                dc.l anim_sponge         ; anim_address
                 dc.b 3                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
@@ -55066,7 +55066,7 @@ stru_25B6B4:    dc.b $3A                ; field_0
                 dc.b $FF                ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B59CA         ; anim_address
+                dc.l anim_sea_gate         ; anim_address
                 dc.b 5                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55081,7 +55081,7 @@ stru_25B6CC:    dc.b $82                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B23B2         ; anim_address
+                dc.l anim_air_refiller         ; anim_address
                 dc.b 6                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55097,7 +55097,7 @@ stru_25B6E4:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1AC9AA        ; rom_addr_1
                 dc.w 0                  ; vram_offset
-                dc.l off_1B2390         ; anim_address
+                dc.l anim_air_bubble         ; anim_address
                 dc.b 0                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55113,7 +55113,7 @@ stru_25B6FC:    dc.b $3C                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B59F2         ; anim_address
+                dc.l anim_open_handler         ; anim_address
                 dc.b 7                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55128,7 +55128,7 @@ stru_25B714:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1A45D0        ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B25D4         ; anim_address
+                dc.l anim_planet         ; anim_address
                 dc.b $24                ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55218,7 +55218,7 @@ stru_25B7A4:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B262C         ; anim_address
+                dc.l anim_sphere_energy_3         ; anim_address
                 dc.b 7                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $82                ; field_12
@@ -55233,7 +55233,7 @@ stru_25B7BC:    dc.b $F                 ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B2668         ; anim_address
+                dc.l anim_psyq         ; anim_address
                 dc.b $C                 ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55278,7 +55278,7 @@ stru_25B804:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B3778         ; anim_address
+                dc.l anim_star         ; anim_address
                 dc.b 6                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55292,7 +55292,7 @@ stru_25B804:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1AEF46         ; anim_address
+                dc.l anim_jim_on_rocket         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55307,7 +55307,7 @@ stru_25B834:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B2B06         ; anim_address
+                dc.l anim_jim_open_door         ; anim_address
                 dc.b 9                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55322,7 +55322,7 @@ stru_25B84C:    dc.b $62                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B2B32         ; anim_address
+                dc.l anim_jim_exit_door         ; anim_address
                 dc.b $B                 ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55337,7 +55337,7 @@ stru_25B864:    dc.b $66                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B2B74         ; anim_address
+                dc.l anim_dark_monster         ; anim_address
                 dc.b $C                 ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55352,7 +55352,7 @@ stru_25B87C:    dc.b $1B                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B2C3C         ; anim_address
+                dc.l anim_dark_enemy         ; anim_address
                 dc.b 0                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55368,7 +55368,7 @@ stru_25B894:    dc.b $73                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $2000              ; vram_offset
-                dc.l off_1B5A06         ; anim_address
+                dc.l anim_gears         ; anim_address
                 dc.b 6                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55383,7 +55383,7 @@ stru_25B8AC:    dc.b $1B                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1A335E        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B2C0E         ; anim_address
+                dc.l anim_dark_enemy_2         ; anim_address
                 dc.b 0                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55443,7 +55443,7 @@ stru_25B90C:    dc.b $86                ; field_0
                 dc.b $FF                ; field_5
                 dc.l byte_1ACBE4        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B5AE4         ; anim_address
+                dc.l anim_princess         ; anim_address
                 dc.b 9                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55625,7 +55625,7 @@ stru_25BA2C:    dc.b $86                ; field_0
                 dc.b $FF                ; field_5
                 dc.l byte_1AC342        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1AF674         ; anim_address
+                dc.l jim_on_rocket_fail         ; anim_address
                 dc.b 5                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $82                ; field_12
@@ -55670,7 +55670,7 @@ stru_25BA74:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1A4444        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B604E         ; anim_address
+                dc.l anim_bomb_2         ; anim_address
                 dc.b 2                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55746,7 +55746,7 @@ stru_25BAEC:    dc.b $61                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1ACFDA        ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B61A2         ; anim_address
+                dc.l anim_moving_platform         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $82                ; field_12
@@ -55761,7 +55761,7 @@ stru_25BB04:    dc.b $25                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1AC454        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B46FC         ; anim_address
+                dc.l anim_psyq_boss         ; anim_address
                 dc.b $B                 ; field_10
                 dc.b 0                  ; field_11
                 dc.b $82                ; field_12
@@ -55777,7 +55777,7 @@ stru_25BB1C:    dc.b $26                ; field_0
                 dc.b 0                  ; field_5
                 dc.l byte_1AC5C8        ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B48CE         ; anim_address
+                dc.l anim_psyq_hook         ; anim_address
                 dc.b 1                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
@@ -55792,7 +55792,7 @@ stru_25BB34:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w 0                  ; vram_offset
-                dc.l off_1B61DE         ; anim_address
+                dc.l anim_advanced_home         ; anim_address
                 dc.b $B                 ; field_10
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
@@ -55807,7 +55807,7 @@ stru_25BB4C:    dc.b $86                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $6000              ; vram_offset
-                dc.l off_1B61E2         ; anim_address
+                dc.l anim_petes_home_door         ; anim_address
                 dc.b 2                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55823,7 +55823,7 @@ stru_25BB64:    dc.b $78                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B6224         ; anim_address
+                dc.l anim_intestinal_wheel         ; anim_address
                 dc.b 5                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
@@ -55838,7 +55838,7 @@ stru_25BB7C:    dc.b $77                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l off_1B6230         ; anim_address
+                dc.l anim_intestinal_ball         ; anim_address
                 dc.b 3                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12

@@ -5012,7 +5012,7 @@ off_3468:       dc.l byte_2FEA18
 
 off_346C:       dc.l byte_2FEA46
 
-off_3470:       dc.l byte_2FEA74
+frame_none:     dc.l byte_2FEA74
 
 off_3474:       dc.l byte_2FEA8A
 off_3478:       dc.l byte_2FEAA0

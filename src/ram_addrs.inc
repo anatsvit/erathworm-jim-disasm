@@ -82,7 +82,7 @@ byte_FFA6D9 equ $FFFFA6D9
 byte_FFA6DA equ $FFFFA6DA
 byte_FFA6DB equ $FFFFA6DB
 dword_FFA6DC equ $FFFFA6DC
-dword_FFA6E6 equ $FFFFA6E6
+jim_current_sprite_offset equ $FFFFA6E6
 word_FFA6EA equ $FFFFA6EA
 jim_y_speed equ $FFFFA6EC
 byte_FFA6EF equ $FFFFA6EF
@@ -127,7 +127,7 @@ unk_FFB4C4 equ $FFFFB4C4
 dword_FFB544 equ $FFFFB544
 unk_FFB548 equ $FFFFB548
 unk_FFB54C equ $FFFFB54C
-unk_FFB868 equ $FFFFB868
+objects_map_memory equ $FFFFB868
 unk_FFB86A equ $FFFFB86A
 unk_FFB86B equ $FFFFB86B
 unk_FFFBD8 equ $FFFFFBD8
@@ -219,7 +219,7 @@ byte_FFFD08 equ $FFFFFD08
 byte_FFFD09 equ $FFFFFD09
 byte_FFFD0A equ $FFFFFD0A
 byte_FFFD0B equ $FFFFFD0B
-byte_FFFD0D equ $FFFFFD0D
+is_jim_hanging equ $FFFFFD0D
 byte_FFFD0E equ $FFFFFD0E
 byte_FFFD0F equ $FFFFFD0F
 byte_FFFD10 equ $FFFFFD10
@@ -227,7 +227,7 @@ byte_FFFD11 equ $FFFFFD11
 byte_FFFD12 equ $FFFFFD12
 byte_FFFD13 equ $FFFFFD13
 byte_FFFD14 equ $FFFFFD14
-byte_FFFD15 equ $FFFFFD15
+is_jim_on_rocket equ $FFFFFD15
 byte_FFFD16 equ $FFFFFD16
 byte_FFFD17 equ $FFFFFD17
 word_FFFD18 equ $FFFFFD18
@@ -363,7 +363,7 @@ word_FFFDDA equ $FFFFFDDA
 byte_FFFDDC equ $FFFFFDDC
 byte_FFFDDD equ $FFFFFDDD
 byte_FFFDDE equ $FFFFFDDE
-byte_FFFDDF equ $FFFFFDDF
+is_jim_ropejumper equ $FFFFFDDF
 byte_FFFDE0 equ $FFFFFDE0
 byte_FFFDE1 equ $FFFFFDE1
 byte_FFFDE2 equ $FFFFFDE2
@@ -469,7 +469,7 @@ byte_FFFF74 equ $FFFFFF74
 byte_FFFF75 equ $FFFFFF75
 byte_FFFF76 equ $FFFFFF76
 byte_FFFF77 equ $FFFFFF77
-byte_FFFF78 equ $FFFFFF78
+is_jim_off_gravity equ $FFFFFF78
 byte_FFFF7A equ $FFFFFF7A
 word_FFFF7C equ $FFFFFF7C
 byte_FFFF80 equ $FFFFFF80

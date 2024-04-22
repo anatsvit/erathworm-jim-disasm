@@ -207,7 +207,7 @@ byte_FFFCFB equ $FFFFFCFB
 byte_FFFCFC equ $FFFFFCFC
 byte_FFFCFD equ $FFFFFCFD
 byte_FFFCFE equ $FFFFFCFE
-byte_FFFCFF equ $FFFFFCFF
+platform_type_under_jim equ $FFFFFCFF
 byte_FFFD00 equ $FFFFFD00
 byte_FFFD01 equ $FFFFFD01
 byte_FFFD03 equ $FFFFFD03

@@ -30609,15 +30609,15 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 bne.s   sub_24A062
                 tst.b   (is_jim_on_rocket).l
                 bne.w   loc_24A484
-                cmpi.b  #$4F,(jim_state).l ; 'O'
+                cmpi.b  #$4F,(jim_state).l ; Если в зубах у щенка
                 beq.w   loc_24A466
-                cmpi.b  #$46,(jim_state).l ; 'F'
+                cmpi.b  #$46,(jim_state).l ; Если кнут на крючке
                 beq.w   loc_24A484
-                cmpi.b  #$48,(jim_state).l ; 'H'
+                cmpi.b  #$48,(jim_state).l ; Если в конце уровня садится на ракету
                 beq.w   loc_24A484
-                cmpi.b  #$47,(jim_state).l ; 'G'
+                cmpi.b  #$47,(jim_state).l ; Если голый червяк вертится на вентиляторе
                 beq.w   loc_24A484
-                cmpi.b  #$49,(jim_state).l ; 'I'
+                cmpi.b  #$49,(jim_state).l ; Если смерть в результате перекуса пополам
                 beq.w   loc_24A46E
                 tst.b   (is_jim_hanging).l
                 bne.w   locret_24A46C

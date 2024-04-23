@@ -80,14 +80,14 @@ word_FFA6D6 equ $FFFFA6D6
 byte_FFA6D8 equ $FFFFA6D8
 byte_FFA6D9 equ $FFFFA6D9
 byte_FFA6DA equ $FFFFA6DA
-byte_FFA6DB equ $FFFFA6DB
+is_jim_left_direction equ $FFFFA6DB
 dword_FFA6DC equ $FFFFA6DC
 jim_current_sprite_offset equ $FFFFA6E6
 word_FFA6EA equ $FFFFA6EA
 jim_y_speed equ $FFFFA6EC
 byte_FFA6EF equ $FFFFA6EF
 word_FFA6F0 equ $FFFFA6F0
-dword_FFA6F2 equ $FFFFA6F2
+jim_anim_offset equ $FFFFA6F2
 byte_FFA708 equ $FFFFA708
 byte_FFA709 equ $FFFFA709
 word_FFA722 equ $FFFFA722
@@ -152,8 +152,8 @@ jim_health equ $FFFFFBFC
 byte_FFFC01 equ $FFFFFC01
 unk_FFFC02 equ $FFFFFC02
 word_FFFC82 equ $FFFFFC82
-byte_FFFC84 equ $FFFFFC84
-byte_FFFC85 equ $FFFFFC85
+is_jim_upping equ $FFFFFC84 ; Когда нажата вверх - true
+is_jim_downing equ $FFFFFC85 ; Когда нажата вниз - true
 dword_FFFC86 equ $FFFFFC86
 dword_FFFC8A equ $FFFFFC8A
 dword_FFFC8E equ $FFFFFC8E
@@ -200,7 +200,7 @@ byte_FFFCF4 equ $FFFFFCF4
 byte_FFFCF5 equ $FFFFFCF5
 byte_FFFCF6 equ $FFFFFCF6
 byte_FFFCF7 equ $FFFFFCF7
-byte_FFFCF8 equ $FFFFFCF8
+is_jim_jumping equ $FFFFFCF8
 byte_FFFCF9 equ $FFFFFCF9
 byte_FFFCFA equ $FFFFFCFA
 byte_FFFCFB equ $FFFFFCFB
@@ -220,7 +220,7 @@ byte_FFFD09 equ $FFFFFD09
 byte_FFFD0A equ $FFFFFD0A
 byte_FFFD0B equ $FFFFFD0B
 is_jim_hanging equ $FFFFFD0D
-byte_FFFD0E equ $FFFFFD0E
+is_jim_sliding equ $FFFFFD0E ;Jim на крутой поверхности лезет вверх или скользит вниз
 byte_FFFD0F equ $FFFFFD0F
 byte_FFFD10 equ $FFFFFD10
 byte_FFFD11 equ $FFFFFD11
@@ -236,9 +236,9 @@ byte_FFFD1C equ $FFFFFD1C
 byte_FFFD1E equ $FFFFFD1E
 jim_dead_enable equ $FFFFFD21
 byte_FFFD22 equ $FFFFFD22
-byte_FFFD23 equ $FFFFFD23
+is_jim_blocked_by_enemy equ $FFFFFD23
 byte_FFFD24 equ $FFFFFD24
-byte_FFFD25 equ $FFFFFD25
+jim_timer_in_air equ $FFFFFD25
 byte_FFFD26 equ $FFFFFD26
 byte_FFFD27 equ $FFFFFD27
 invincibility_timer equ $FFFFFD28

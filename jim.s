@@ -24820,12 +24820,12 @@ loc_2458A4:                             ; CODE XREF: oksub_2456C8+1D2   j
                 clr.b   (is_jim_upping).l
                 jsr     (oksub_24D6EA).l
                 seq     (is_jim_upping).l
-                clr.b   (byte_FFFC83).l
+                clr.b   (is_jim_move_left).l
                 jsr     (oksub_24D6FE).l
-                seq     (byte_FFFC83).l
-                clr.b   (byte_FFFC82).l
+                seq     (is_jim_move_left).l
+                clr.b   (is_jim_move_right).l
                 jsr     (oksub_24D708).l
-                seq     (byte_FFFC82).l
+                seq     (is_jim_move_right).l
                 jsr     (sub_24BCE4).l
                 bsr.w   loc_247210
                 bsr.w   sub_24669E
@@ -25356,12 +25356,12 @@ loc_2460C8:                             ; CODE XREF: jim_fire+270   j
 loc_2460D4:                             ; CODE XREF: jim_fire+1DA   j
                 tst.b   (is_jim_left_direction).l
                 beq.s   loc_2460E6
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 bne.s   loc_246140
                 bra.s   loc_2460EE
 ; ---------------------------------------------------------------------------
 loc_2460E6:                             ; CODE XREF: jim_fire+28A   j
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 bne.s   loc_246140
 loc_2460EE:                             ; CODE XREF: jim_fire+294   j
                 cmpi.b  #$1B,(jim_state).l
@@ -25399,12 +25399,12 @@ loc_246168:                             ; CODE XREF: jim_fire+30C   j
 loc_246194:                             ; CODE XREF: jim_fire+1E4   j
                 tst.b   (is_jim_left_direction).l
                 beq.s   loc_2461A6
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 bne.s   loc_246202
                 bra.s   loc_2461AE
 ; ---------------------------------------------------------------------------
 loc_2461A6:                             ; CODE XREF: jim_fire+34A   j
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 bne.s   loc_246202
 loc_2461AE:                             ; CODE XREF: jim_fire+354   j
                 cmpi.b  #$1D,(jim_state).l
@@ -25461,7 +25461,7 @@ loc_246292:                             ; CODE XREF: jim_fire+436   j
                 bra.w   loc_246084
 ; ---------------------------------------------------------------------------
 loc_2462BE:                             ; CODE XREF: jim_fire+40C   j
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.w   loc_24637A
                 cmpi.b  #$1D,(jim_state).l
                 beq.w   loc_246084
@@ -25479,7 +25479,7 @@ loc_2462F0:                             ; CODE XREF: jim_fire+494   j
                 bra.w   loc_246084
 ; ---------------------------------------------------------------------------
 loc_24631C:                             ; CODE XREF: jim_fire+416   j
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.w   loc_2463CE
                 cmpi.b  #$1B,(jim_state).l
                 beq.w   loc_246084
@@ -25641,11 +25641,11 @@ locret_246550:                          ; CODE XREF: oksub_2464C8+80   j
 loc_246552:                             ; CODE XREF: oksub_2464C8+64   j
                 tst.b   (byte_FFFBEE).l
                 bne.s   loc_246540
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.s   loc_246568
                 st      (is_jim_left_direction).l
 loc_246568:                             ; CODE XREF: oksub_2464C8+98   j
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.s   loc_246576
                 clr.b   (is_jim_left_direction).l
 loc_246576:                             ; CODE XREF: oksub_2464C8+A6   j
@@ -25696,7 +25696,7 @@ loc_246618:                             ; CODE XREF: oksub_2464C8+C6   j
 loc_24662A:                             ; CODE XREF: oksub_2464C8+D8   j
                 clr.b   (byte_FFFD0B).l
                 clr.b   (byte_FFA709).l
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_246668
                 cmpi.b  #$35,(jim_state).l ; '5'
                 bne.s   loc_246654
@@ -25916,9 +25916,9 @@ loc_246966:                             ; CODE XREF: sub_24690C+1A   j
                 bsr.w   chain_move_right ; Когда Jim лезет по цепи вправо
                 clr.b   (jim_timer_in_air).l
 loc_246994:                             ; CODE XREF: sub_24690C+7C   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 bne.w   loc_246A2C
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 bne.w   loc_2469F0
                 tst.b   (is_jim_upping).l
                 beq.w   loc_246A64
@@ -26227,14 +26227,14 @@ locret_246D8E:                          ; CODE XREF: sub_246D12+34   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_246D90:                             ; CODE XREF: sub_246D12+10   j
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.w   loc_246DAE
                 cmpi.w  #$130,(camera_view_x).l
                 bcc.w   loc_246DAE
                 addi.w  #$10,(camera_view_x).l
 loc_246DAE:                             ; CODE XREF: sub_246D12+84   j
                                         ; sub_246D12+90   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.w   loc_246DCC
                 cmpi.w  #$10,(camera_view_x).l
                 bcs.w   loc_246DCC
@@ -26322,7 +26322,7 @@ locret_246EB2:                          ; CODE XREF: sub_246E0A+5A   j
 sub_246EB4:                             ; CODE XREF: sub_247022+220   j
                 cmpi.w  #$94,(jim_x).l
                 bcs.s   loc_246ED8
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.w   loc_246F16
                 st      (is_jim_left_direction).l
                 subq.w  #4,(camera_view_x).l
@@ -26343,7 +26343,7 @@ loc_246EFE:                             ; CODE XREF: sub_246EB4+2C   j
 loc_246F16:                             ; CODE XREF: sub_246EB4+10   j
                 cmpi.w  #$27B,(jim_x).l
                 bcc.s   loc_246F38
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.w   loc_246F76
                 clr.b   (is_jim_left_direction).l
                 addq.w  #4,(camera_view_x).l
@@ -26488,7 +26488,7 @@ loc_2470D8:                             ; CODE XREF: sub_247022+AC   j
                 subq.b  #1,(byte_FFFF60).l
 loc_2470DE:                             ; CODE XREF: sub_247022+86   j
                                         ; sub_247022+AA   j ...
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.s   loc_247104
                 move.w  (word_FFFE8E).l,d0
                 addi.w  #$46,d0 ; 'F'
@@ -26502,7 +26502,7 @@ loc_2470FC:                             ; CODE XREF: sub_247022+CE   j
                 bra.s   loc_247154
 ; ---------------------------------------------------------------------------
 loc_247104:                             ; CODE XREF: sub_247022+C2   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.s   loc_24712A
                 move.w  (word_FFFE8E).l,d0
                 subi.w  #$46,d0 ; 'F'
@@ -26614,7 +26614,7 @@ loc_24722E:                             ; CODE XREF: sub_247022+200   j
                 move.l  a2,(jim_anim_offset).l
 loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                                         ; sub_247022+268   j ...
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.w   loc_247352
                 clr.b   (is_jim_left_direction).l
                 cmpi.b  #$19,(jim_state).l
@@ -26656,7 +26656,7 @@ loc_24734A:                             ; CODE XREF: sub_247022+322   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_247352:                             ; CODE XREF: sub_247022+28C   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.w   loc_2473FE
                 st      (is_jim_left_direction).l
                 cmpi.b  #$19,(jim_state).l
@@ -30779,7 +30779,7 @@ loc_24A326:                             ; CODE XREF: jim_read_map+21C   j
 loc_24A330:                             ; CODE XREF: jim_read_map+238   j
                 clr.b   (is_jim_jumping).l
                 clr.w   (jim_y_speed).l
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_24A34A
                 clr.b   (byte_FFFD0B).l
 loc_24A34A:                             ; CODE XREF: jim_read_map+2BC   j
@@ -32559,15 +32559,15 @@ loc_24B720:                             ; CODE XREF: sub_24B638+124   j
                 move.l  a1,-(sp)
                 bsr.w   sub_24CD3A
                 movea.l (sp)+,a1
-                clr.b   (byte_FFFC83).l
+                clr.b   (is_jim_move_left).l
                 jsr     (oksub_24D6FE).l
-                seq     (byte_FFFC83).l
-                clr.b   (byte_FFFC82).l
+                seq     (is_jim_move_left).l
+                clr.b   (is_jim_move_right).l
                 jsr     (oksub_24D708).l
-                seq     (byte_FFFC82).l
-                tst.b   (byte_FFFC83).l
+                seq     (is_jim_move_right).l
+                tst.b   (is_jim_move_left).l
                 bne.s   loc_24B75E
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 bne.s   loc_24B7D4
                 bra.s   loc_24B720
 ; ---------------------------------------------------------------------------
@@ -37255,7 +37255,7 @@ loc_24EDE2:                             ; CODE XREF: sub_24ED44+8C   j
 sub_24EE94:                             ; DATA XREF: ROM:000055DC   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EEB0
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_24EECC
                 subi.w  #$32,(word_FFA6EA).l ; '2'
                 bra.s   loc_24EECC
@@ -37266,7 +37266,7 @@ locret_24EEB0:                          ; CODE XREF: sub_24EE94+8   j
 loc_24EEB2:                             ; DATA XREF: ROM:000055E0   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EF04
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_24EECC
                 addi.w  #$32,(word_FFA6EA).l ; '2'
 loc_24EECC:                             ; CODE XREF: sub_24EE94+10   j
@@ -37294,7 +37294,7 @@ sub_24EF06:                             ; DATA XREF: ROM:000055CC   o
                                         ; ROM:000055D4   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EF38
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_24EF34
                 tst.b   (is_jim_left_direction).l
                 bne.s   loc_24EF2C
@@ -37312,7 +37312,7 @@ loc_24EF3A:                             ; DATA XREF: ROM:000055D0   o
                                         ; ROM:000055D8   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EF6C
-                tst.w   (byte_FFFC82).l
+                tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_24EF68
                 tst.b   (is_jim_left_direction).l
                 beq.s   loc_24EF60
@@ -43024,14 +43024,14 @@ loc_253406:                             ; CODE XREF: sub_2532FA+DE   j
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_253434:                             ; CODE XREF: sub_2532FA+116   j
                                         ; sub_2532FA+11E   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.s   loc_25344C
                 addq.b  #1,(byte_FFFD0F).l
                 andi.b  #$3F,(byte_FFFD0F).l ; '?'
                 bra.s   loc_253462
 ; ---------------------------------------------------------------------------
 loc_25344C:                             ; CODE XREF: sub_2532FA+140   j
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.s   loc_253462
                 subq.b  #1,(byte_FFFD0F).l
                 andi.b  #$3F,(byte_FFFD0F).l ; '?'
@@ -46851,13 +46851,13 @@ sub_256276:                             ; DATA XREF: ROM:001A4750   o
 
 oksub_2562A6:                           ; DATA XREF: ROM:001A4380   o
                                         ; ROM:001A4394   o ...
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.s   loc_2562B6
                 addq.w  #1,(word_FFA6EA).l
                 bra.s   loc_2562C4
 ; ---------------------------------------------------------------------------
 loc_2562B6:                             ; CODE XREF: oksub_2562A6+6   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.s   loc_2562C4
                 subq.w  #1,(word_FFA6EA).l
 loc_2562C4:                             ; CODE XREF: oksub_2562A6+E   j
@@ -48329,7 +48329,7 @@ sub_2574A4:                             ; CODE XREF: ropejump_control+24   p
                 bra.w   locret_2574F6
 ; ---------------------------------------------------------------------------
 loc_2574B0:                             ; CODE XREF: sub_2574A4+6   j
-                tst.b   (byte_FFFC83).l
+                tst.b   (is_jim_move_left).l
                 beq.w   loc_2574D4
                 move.b  #$FF,9(a1)
                 move.w  $18(a1),d7
@@ -48341,7 +48341,7 @@ loc_2574CC:                             ; CODE XREF: sub_2574A4+20   j
                 move.w  d7,$18(a1)
 loc_2574D4:                             ; CODE XREF: sub_2574A4+12   j
                                         ; sub_2574A4+26   j
-                tst.b   (byte_FFFC82).l
+                tst.b   (is_jim_move_right).l
                 beq.w   locret_2574F6
                 clr.b   9(a1)
                 move.w  $18(a1),d7

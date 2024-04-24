@@ -89,7 +89,7 @@ byte_FFA6EF equ $FFFFA6EF
 word_FFA6F0 equ $FFFFA6F0
 jim_anim_offset equ $FFFFA6F2
 byte_FFA708 equ $FFFFA708
-byte_FFA709 equ $FFFFA709
+jim_idle_anim_delay equ $FFFFA709
 word_FFA722 equ $FFFFA722
 word_FFA724 equ $FFFFA724
 byte_FFA728 equ $FFFFA728
@@ -180,7 +180,7 @@ word_FFFCC4 equ $FFFFFCC4
 word_FFFCC6 equ $FFFFFCC6
 word_FFFCC8 equ $FFFFFCC8
 word_FFFCCA equ $FFFFFCCA
-word_FFFCCE equ $FFFFFCCE
+jim_walking_speed equ $FFFFFCCE
 word_FFFCD0 equ $FFFFFCD0
 word_FFFCD2 equ $FFFFFCD2
 word_FFFCD4 equ $FFFFFCD4
@@ -219,7 +219,7 @@ byte_FFFD07 equ $FFFFFD07
 byte_FFFD08 equ $FFFFFD08
 byte_FFFD09 equ $FFFFFD09
 byte_FFFD0A equ $FFFFFD0A
-byte_FFFD0B equ $FFFFFD0B
+jim_walking_direction equ $FFFFFD0B ;0 - никуда, -1 - движение влево, 1 - движение вправо
 is_jim_hanging equ $FFFFFD0D
 is_jim_sliding equ $FFFFFD0E ;Jim на крутой поверхности лезет вверх или скользит вниз
 byte_FFFD0F equ $FFFFFD0F

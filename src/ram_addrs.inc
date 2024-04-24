@@ -151,7 +151,8 @@ unk_FFFBFB equ $FFFFFBFB
 jim_health equ $FFFFFBFC
 byte_FFFC01 equ $FFFFFC01
 unk_FFFC02 equ $FFFFFC02
-word_FFFC82 equ $FFFFFC82
+byte_FFFC82 equ $FFFFFC82
+byte_FFFC83 equ $FFFFFC83
 is_jim_upping equ $FFFFFC84 ; Когда нажата вверх - true
 is_jim_downing equ $FFFFFC85 ; Когда нажата вниз - true
 dword_FFFC86 equ $FFFFFC86

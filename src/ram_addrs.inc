@@ -83,7 +83,7 @@ byte_FFA6DA equ $FFFFA6DA
 is_jim_left_direction equ $FFFFA6DB
 dword_FFA6DC equ $FFFFA6DC
 jim_current_sprite_offset equ $FFFFA6E6
-word_FFA6EA equ $FFFFA6EA
+jim_delta_x_speed equ $FFFFA6EA
 jim_y_speed equ $FFFFA6EC
 byte_FFA6EF equ $FFFFA6EF
 word_FFA6F0 equ $FFFFA6F0
@@ -138,13 +138,13 @@ word_FFFBE4 equ $FFFFFBE4
 word_FFFBE6 equ $FFFFFBE6
 byte_FFFBE8 equ $FFFFFBE8
 byte_FFFBEB equ $FFFFFBEB
-byte_FFFBEC equ $FFFFFBEC
+is_jim_fire equ $FFFFFBEC
 byte_FFFBED equ $FFFFFBED
-byte_FFFBEE equ $FFFFFBEE
+timer_whip_blocking equ $FFFFFBEE
 byte_FFFBEF equ $FFFFFBEF
 byte_FFFBF0 equ $FFFFFBF0
 byte_FFFBF1 equ $FFFFFBF1
-byte_FFFBF2 equ $FFFFFBF2
+is_current_gun_plasma equ $FFFFFBF2
 unk_FFFBF3 equ $FFFFFBF3
 bullets_count equ $FFFFFBF4
 unk_FFFBFB equ $FFFFFBFB

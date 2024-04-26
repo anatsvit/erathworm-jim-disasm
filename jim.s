@@ -9721,7 +9721,7 @@ off_1AE4D2:     dc.w off_1CB8           ; DATA XREF: ROM:001AE10E   o
                 dc.b   0,$34
                 dc.w $F800
 off_1AE556:     dc.w off_1A14           ; DATA XREF: sub_249772+A0   o
-                                        ; sub_24BEA0:loc_24BEC2   o
+                                        ; jim_walk:loc_24BEC2   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.b   0,  8
@@ -26102,7 +26102,7 @@ loc_246BD0:                             ; CODE XREF: sub_246B08+A6   j
                 bra.s   locret_246C3E
 ; ---------------------------------------------------------------------------
 loc_246BFA:                             ; CODE XREF: sub_246B08+D6   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_246C1C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (dword_1C).w
@@ -26635,7 +26635,7 @@ loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                 beq.w   loc_247332
                 cmpi.b  #1,(jim_walking_direction).l
                 beq.s   loc_247324
-                bsr.w   sub_24BEA0
+                bsr.w   jim_walk
                 move.b  #1,(jim_walking_direction).l
 loc_247324:                             ; CODE XREF: sub_247022+2F4   j
                 move.w  (jim_walking_speed).l,d0
@@ -26677,7 +26677,7 @@ loc_247352:                             ; CODE XREF: sub_247022+28C   j
                 beq.w   loc_2473DE
                 cmpi.b  #$FF,(jim_walking_direction).l
                 beq.s   loc_2473D0
-                bsr.w   sub_24BEA0
+                bsr.w   jim_walk
                 move.b  #$FF,(jim_walking_direction).l
 loc_2473D0:                             ; CODE XREF: sub_247022+3A0   j
                 move.w  (jim_walking_speed).l,d0
@@ -26830,7 +26830,7 @@ loc_2475F6:                             ; CODE XREF: sub_247576+7A   j
                 move.l  #default_joy_cfg,(dword_FF9B4C).l
                 lea     (default_joy_cfg).w,a0
                 jsr     (joypad_reconfig).l ; Вызывается в options (связана с joypad настройкой)
-                move.b  #1,(word_FFFF9C).l
+                move.b  #1,(sound_fx_enable).l
                 move.b  #1,(byte_FFFF9F).l
                 move.b  #1,(byte_FFA6AB).l
                 jsr     (oksub_1A27A0).l
@@ -26976,16 +26976,16 @@ loc_2477EA:                             ; CODE XREF: sub_2476AC+12C   j
                 move.b  d1,(byte_FFFF6C).l
                 move.b  $1B(a6),(byte_FFFDDE).l
                 move.w  $30(a6),d0
-                move.w  d0,(word_FFA66E).l
+                move.w  d0,(map_width).l
                 lsl.w   #1,d0
-                move.w  d0,(word_FFA66C).l
+                move.w  d0,(map_width_x2).l
                 lsl.w   #3,d0
                 move.w  d0,(word_FFA670).l
                 move.w  $32(a6),d0
                 move.w  d0,(word_FFA672).l
                 lsl.w   #4,d0
                 move.w  d0,(word_FFA674).l
-                move.w  (word_FFA66C).l,d0
+                move.w  (map_width_x2).l,d0
                 mulu.w  (word_FFA672).l,d0
                 move.w  d0,(word_FF9920).l
                 bsr.w   sub_2478EC
@@ -27014,7 +27014,7 @@ sub_2478EC:                             ; CODE XREF: sub_2476AC+20C   p
                 move.w  #$C7,d4
 loc_2478FC:                             ; CODE XREF: sub_2478EC+18   j
                 move.l  a1,(a0)+
-                adda.w  (word_FFA66C).l,a1
+                adda.w  (map_width_x2).l,a1
                 dbf     d4,loc_2478FC
                 rts
 ; End of function sub_2478EC
@@ -27063,8 +27063,8 @@ sub_247940:                             ; CODE XREF: oksub_2456C8+13C   p
                 beq.w   loc_247A56
                 tst.b   (byte_FFFDF9).l
                 bne.w   loc_247A56
-                move.b  (word_FFFF9C).l,(byte_FFFF9E).l
-                clr.b   (word_FFFF9C).l
+                move.b  (sound_fx_enable).l,(byte_FFFF9E).l
+                clr.b   (sound_fx_enable).l
                 st      (byte_FFFDE9).l
                 clr.b   (byte_FFFDE6).l
                 move.w  #$16,d4
@@ -27115,7 +27115,7 @@ loc_2479E8:                             ; CODE XREF: sub_247940+100   j
 loc_247A3E:                             ; CODE XREF: sub_247940+C2   j
                 move.w  (sp)+,d4
                 dbf     d4,loc_2479E8
-                move.b  (byte_FFFF9E).l,(word_FFFF9C).l
+                move.b  (byte_FFFF9E).l,(sound_fx_enable).l
                 clr.b   (byte_FFFDE9).l
                 rts
 ; ---------------------------------------------------------------------------
@@ -27183,7 +27183,7 @@ loc_247ABC:                             ; CODE XREF: sub_247940+1D6   j
                 dbf     d3,loc_247ABC
                 movem.w (sp)+,d1-d2/d5
                 movea.l (sp)+,a0
-                adda.w  (word_FFA66C).l,a0
+                adda.w  (map_width_x2).l,a0
                 dbf     d2,loc_247AAE
                 rts
 ; End of function sub_247940
@@ -27608,7 +27608,7 @@ loc_24805E:                             ; CODE XREF: sub_248024+20   j
                 adda.w  d0,a0
                 adda.w  d0,a0
                 move.l  a0,(dword_FFA694).l
-                move.w  (word_FFA66C).l,d0
+                move.w  (map_width_x2).l,d0
                 lea     (VDP_DATA).l,a1
                 movea.l (level_pointer).l,a2
                 move.w  #$F,d3
@@ -27681,14 +27681,14 @@ loc_248158:                             ; CODE XREF: sub_24811E+20   j
                 adda.w  #$2C,a0 ; ','
                 move.w  (word_FFA686).l,d0
                 lsr.w   #4,d0
-                move.w  (word_FFA66E).l,d7
+                move.w  (map_width).l,d7
                 subi.w  #$16,d7
                 cmp.w   d7,d0
                 bcc.w   locret_248226
                 adda.w  d0,a0
                 adda.w  d0,a0
                 move.l  a0,(dword_FFA694).l
-                move.w  (word_FFA66C).l,d0
+                move.w  (map_width_x2).l,d0
                 lea     (VDP_DATA).l,a1
                 movea.l (level_pointer).l,a2
                 move.w  #$F,d3
@@ -29303,7 +29303,7 @@ sub_2493A8:                             ; DATA XREF: ROM:0000599C   o
                 addq.l  #1,a2
                 clr.l   d0
                 move.b  (a2)+,d0
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2493D4
                 bclr    #7,d0
                 bne.s   loc_2493D6
@@ -30265,7 +30265,7 @@ sub_249C56:                             ; CODE XREF: oksub_2456C8+1EC   p
                 lsr.w   #1,d3
                 lea     (unk_FFB86A).l,a1
                 move.b  #$EF,d6
-                move.w  (word_FFA66C).l,d7
+                move.w  (map_width_x2).l,d7
                 move.l  a0,-(sp)
                 clr.b   (byte_FFFD03).l
                 clr.b   (byte_FFFD04).l
@@ -30488,7 +30488,7 @@ loc_249EEE:                             ; CODE XREF: sub_249C56+8   j
                 move.b  #$EF,d6
                 move.b  #$74,d4 ; 't'
                 move.b  #$75,d5 ; 'u'
-                move.w  (word_FFA66C).l,d7
+                move.w  (map_width_x2).l,d7
                 move.l  a0,-(sp)
                 clr.b   (byte_FFFD03).l
                 clr.b   (byte_FFFD04).l
@@ -30664,7 +30664,7 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 move.b  (a2,d5.w),d0
                 andi.b  #$3F,d0 ; '?'
                 bne.w   loc_24A20E
-                adda.w  (word_FFA66C).l,a0
+                adda.w  (map_width_x2).l,a0
                 addi.w  #$10,d7
                 move.w  a0,d3
                 cmp.w   (word_FF9920).l,d3
@@ -30681,7 +30681,7 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 move.b  (a2,d5.w),d0
                 andi.b  #$3F,d0 ; '?'
                 bne.s   loc_24A20E
-                adda.w  (word_FFA66C).l,a0
+                adda.w  (map_width_x2).l,a0
                 addi.w  #$10,d7
                 move.w  a0,d3
                 cmp.w   (word_FF9920).l,d3
@@ -31045,7 +31045,7 @@ loc_24A5CE:                             ; CODE XREF: enemy_read_map+32   j
                 move.b  (a2,d5.w),d0
                 andi.b  #$3F,d0 ; '?'
                 bne.w   loc_24A70A
-                adda.w  (word_FFA66C).l,a4
+                adda.w  (map_width_x2).l,a4
                 addi.w  #$10,d7
                 move.w  a4,d0
                 cmp.w   (word_FF9920).l,d0
@@ -31068,7 +31068,7 @@ loc_24A5CE:                             ; CODE XREF: enemy_read_map+32   j
                 move.b  (a2,d5.w),d0
                 andi.b  #$3F,d0 ; '?'
                 bne.s   loc_24A70A
-                adda.w  (word_FFA66C).l,a4
+                adda.w  (map_width_x2).l,a4
                 addi.w  #$10,d7
                 move.w  a4,d0
                 cmp.w   (word_FF9920).l,d0
@@ -31926,7 +31926,7 @@ loc_24AF16:                             ; CODE XREF: sub_24AF04+8   j
                 lea     (off_5178).w,a1
                 move.w  (word_FFA688).l,d6
                 andi.b  #$F0,d6
-                move.w  (word_FFA66C).l,d5
+                move.w  (map_width_x2).l,d5
                 lea     (unk_FFB86B).l,a2
                 move.w  #$F,d4
 loc_24AF52:                             ; CODE XREF: sub_24AF0E+72   j
@@ -32043,7 +32043,7 @@ loc_24B0B2:                             ; CODE XREF: damage_from_enemy+8A   j
 loc_24B0C4:                             ; CODE XREF: damage_from_enemy+44   j
                                         ; damage_from_enemy+4E   j ...
                 clr.b   (is_jim_fire).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24B104
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 bsr.w   sub_24D448
@@ -32474,7 +32474,7 @@ loc_24B5C8:                             ; CODE XREF: sub_24B4C8+E4   j
                 bsr.w   sub_24CAEE
                 lea     (jim_palette).l,a0
                 bsr.w   oksub_24CB2C
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24B5FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($5D).w
@@ -32698,7 +32698,7 @@ loc_24B8E8:                             ; CODE XREF: cheat_code+9C   j
                 bsr.w   sub_24BAD6
                 cmpi.b  #$FF,d3
                 beq.w   loc_24BABC
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24B916
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($25).w
@@ -32766,16 +32766,16 @@ loc_24B9D6:                             ; CODE XREF: cheat_code+108   j
                 bne.w   locret_24B85E
                 st      (byte_FFFF74).l
 loc_24B9E6:                             ; CODE XREF: cheat_code+100   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24BA08
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_64).w
+                pea     ($64).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24BA08:                             ; CODE XREF: cheat_code+1AC   j
-                move.l  #$31303030,(bullets_count).l
+                move.l  #'1000',(bullets_count).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24BA14:                             ; CODE XREF: cheat_code+118   j
@@ -32783,7 +32783,7 @@ loc_24BA14:                             ; CODE XREF: cheat_code+118   j
                 bne.w   locret_24B85E
                 st      (byte_FFFF75).l
 loc_24BA24:                             ; CODE XREF: cheat_code+110   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24BA46
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6E).w
@@ -33135,8 +33135,7 @@ locret_24BE9E:                          ; CODE XREF: sub_24BE54+3E   j
 ; End of function sub_24BE54
 
 
-sub_24BEA0:                             ; CODE XREF: sub_247022+2F6   p
-                                        ; sub_247022+3A2   p
+jim_walk:
                 tst.b   (naked_worm_enable).l
                 beq.s   loc_24BEC2
                 move.l  #off_1AF528,(jim_anim_offset).l
@@ -33144,12 +33143,12 @@ sub_24BEA0:                             ; CODE XREF: sub_247022+2F6   p
                 move.w  #1,(jim_walking_speed).l ; Скорость ходьбы голого червяка = 1
                 rts
 ; ---------------------------------------------------------------------------
-loc_24BEC2:                             ; CODE XREF: sub_24BEA0+6   j
+loc_24BEC2:
                 move.l  #off_1AE556,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.w  #3,(jim_walking_speed).l ; Скорость ходьбы Джима в костюме = 3 
                 rts
-; End of function sub_24BEA0
+; End of function jim_walk
 
 
 sub_24BEDC:                             ; CODE XREF: sub_248C3A+6   j
@@ -33247,7 +33246,7 @@ loc_24BFFE:                             ; CODE XREF: sub_24BEDC+82   j
                 addi.w  #$58,d0 ; 'X'
                 cmp.w   (word_FFFF5A).l,d0
                 bcs.w   locret_24C118
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24C070
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($16).w
@@ -33321,7 +33320,7 @@ sub_24C11A:                             ; CODE XREF: oksub_2459F0+A8   j
                 bsr.w   oksub_24CB68
                 lea     (jim_palette).l,a0
                 bsr.w   oksub_24CB2C
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24C1B6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($26).w
@@ -35366,7 +35365,7 @@ sub_24D744:                             ; CODE XREF: cheat_menu   p
 
 sub_24D752:                             ; CODE XREF: cheat_menu+24E   p
                                         ; cheat_menu+25C   p ...
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_24D774
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($47).w
@@ -35467,7 +35466,7 @@ sub_24D7EA:                             ; CODE XREF: cheat_code:loc_24BABC   p
                 move.w  #$18,d1
                 bsr.w   sub_24C6AE
                 clr.b   (byte_FFFBEB).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24D89E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($25).w
@@ -35858,7 +35857,7 @@ sub_24DBCC:                             ; DATA XREF: ROM:000057B8   o
                 st      (byte_FFFD94).l
 loc_24DBDA:                             ; CODE XREF: sub_24DC1E+E   j
                                         ; sub_24DC2E+E   j ...
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24DBFC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_3C).w
@@ -35979,7 +35978,7 @@ sub_24DD18:                             ; DATA XREF: ROM:0000575C   o
                 jsr     (sub_2CBD12).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24DD58
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($F).w
@@ -36212,7 +36211,7 @@ loc_24E040:                             ; DATA XREF: ROM:00005640   o
 loc_24E05A:                             ; CODE XREF: sub_24DFE8+2A   j
                                         ; sub_24DFE8+52   j ...
                 st      (is_jim_jumping).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24E082
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($31).w
@@ -36701,7 +36700,7 @@ sub_24E678:                             ; DATA XREF: ROM:000056DC   o
                 addq.w  #8,d7
                 sub.w   (camera_x).l,d7
                 move.w  d7,(camera_view_x).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_24E6C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_44).w
@@ -36996,7 +36995,7 @@ loc_24E9F0:                             ; CODE XREF: sub_24E8EC+A   j
                 clr.b   (jim_idle_anim_delay).l
                 clr.b   (byte_FFFDF1).l
                 st      (byte_FFFDF0).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24EA68
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($52).w
@@ -37017,7 +37016,7 @@ loc_24EA74:                             ; CODE XREF: sub_24E8EC+194   j
                 move.b  d0,(selectedLevelOption).l
                 jsr     (sub_24EBC6).l
                 clr.b   (byte_FFFDF1).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24EAC2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($51).w
@@ -37046,7 +37045,7 @@ loc_24EADC:                             ; CODE XREF: sub_24E8EC+AA   j
                 clr.b   (jim_idle_anim_delay).l
                 clr.b   (byte_FFFDF1).l
                 st      (byte_FFFDF0).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24EB42
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($52).w
@@ -37144,16 +37143,16 @@ loc_24EC7E:                             ; CODE XREF: sub_24EBC6+A6   j
                 move.l  $34(a6),(dword_FFA664).l
                 move.b  $1B(a6),(byte_FFFDDE).l
                 move.w  $30(a6),d0
-                move.w  d0,(word_FFA66E).l
+                move.w  d0,(map_width).l
                 lsl.w   #1,d0
-                move.w  d0,(word_FFA66C).l
+                move.w  d0,(map_width_x2).l
                 lsl.w   #3,d0
                 move.w  d0,(word_FFA670).l
                 move.w  $32(a6),d0
                 move.w  d0,(word_FFA672).l
                 lsl.w   #4,d0
                 move.w  d0,(word_FFA674).l
-                move.w  (word_FFA66C).l,d0
+                move.w  (map_width_x2).l,d0
                 mulu.w  (word_FFA672).l,d0
                 move.w  d0,(word_FF9920).l
                 jsr     sub_2478EC(pc)
@@ -37220,16 +37219,16 @@ loc_24EDE2:                             ; CODE XREF: sub_24ED44+8C   j
                 move.l  $34(a6),(dword_FFA664).l
                 move.b  $1B(a6),(byte_FFFDDE).l
                 move.w  $30(a6),d0
-                move.w  d0,(word_FFA66E).l
+                move.w  d0,(map_width).l
                 lsl.w   #1,d0
-                move.w  d0,(word_FFA66C).l
+                move.w  d0,(map_width_x2).l
                 lsl.w   #3,d0
                 move.w  d0,(word_FFA670).l
                 move.w  $32(a6),d0
                 move.w  d0,(word_FFA672).l
                 lsl.w   #4,d0
                 move.w  d0,(word_FFA674).l
-                move.w  (word_FFA66C).l,d0
+                move.w  (map_width_x2).l,d0
                 mulu.w  (word_FFA672).l,d0
                 move.w  d0,(word_FF9920).l
                 jsr     sub_2478EC(pc)
@@ -37445,7 +37444,7 @@ loc_24F062:                             ; CODE XREF: sub_24F04A+32   j
                 move.w  d0,4(a5)
 loc_24F0D8:                             ; CODE XREF: sub_24F04A+42   j
                                         ; sub_24F04A+6A   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24F0FA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
@@ -37606,7 +37605,7 @@ loc_24F2C6:                             ; CODE XREF: sub_24F23E+74   j
                 subi.w  #$F,d7
                 add.w   (word_FFFCD6).l,d7
                 move.w  d7,4(a5)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24F318
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_38).w
@@ -37894,7 +37893,7 @@ loc_24F6D6:                             ; CODE XREF: sub_24F644+3A   j
                 beq.s   loc_24F710
                 cmpi.b  #8,(byte_FFFD30).l
                 bne.s   loc_24F70A
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_24F70A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($53).w
@@ -39169,7 +39168,7 @@ loc_25065C:                             ; CODE XREF: sub_250652+4   j
                 move.w  d7,-(sp)
                 lea     (stru_25AA54).l,a6
                 jsr     loc_24DB10(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_250698
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($19).w
@@ -41783,7 +41782,7 @@ sub_2524DA:                             ; DATA XREF: ROM:00003630   o
                 addq.b  #1,(byte_FFFF64).l
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_252516
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     sub_24D448(pc)
@@ -41801,7 +41800,7 @@ locret_252516:                          ; CODE XREF: sub_2524DA+12   j
 
 oksub_252518:                           ; DATA XREF: ROM:001A4FEE   o
                                         ; ROM:001A500C   o ...
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_25254C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 bsr.w   sub_24D448
@@ -41824,7 +41823,7 @@ sub_25254E:                             ; DATA XREF: oksub_252518+16   o
                 subq.w  #1,a0
 loc_252556:                             ; DATA XREF: ROM:001B169C   o
                                         ; ROM:001B16B0   o ...
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_25258A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 bsr.w   sub_24D448
@@ -41957,7 +41956,7 @@ sub_2526B2:                             ; DATA XREF: ROM:00003788   o
                 bmi.w   locret_25275A
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2526FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_54).w
@@ -42023,7 +42022,7 @@ sub_25279A:                             ; DATA XREF: ROM:0000366C   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_25286C
                 move.b  #$86,(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2527CA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6F).w
@@ -42101,7 +42100,7 @@ sub_252880:                             ; DATA XREF: ROM:00003684   o
                 lea     (stru_25A8D4).l,a6
                 movea.l a1,a5
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2528C4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_48).w
@@ -42116,7 +42115,7 @@ loc_2528C4:                             ; CODE XREF: sub_252880+28   j
 ; ---------------------------------------------------------------------------
 loc_2528D0:                             ; CODE XREF: sub_252880+14   j
                 jsr     (oksub_2548E8).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2528F8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_48).w
@@ -42261,7 +42260,7 @@ sub_252A0C:                             ; DATA XREF: ROM:00003784   o
                 tst.b   (naked_worm_enable).l
                 bne.s   locret_252AD2
                 st      (naked_worm_enable).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_252AA4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_54).w
@@ -42307,11 +42306,11 @@ sub_252AEE:                             ; DATA XREF: ROM:00003638   o
 
 sub_252AF4:                             ; DATA XREF: ROM:00003634   o
                 jsr     (sub_252B3A).l
-                move.w  (word_FFFF9C).l,-(sp)
-                clr.b   (word_FFFF9C).l
+                move.w  (sound_fx_enable).l,-(sp)
+                clr.b   (sound_fx_enable).l
                 jsr     sub_24B000(pc)
-                st      (word_FFFF9C).l
-                tst.b   (word_FFFF9C).l
+                st      (sound_fx_enable).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_252B32
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2A).w
@@ -42320,7 +42319,7 @@ sub_252AF4:                             ; DATA XREF: ROM:00003634   o
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_252B32:                             ; CODE XREF: sub_252AF4+22   j
-                move.w  (sp)+,(word_FFFF9C).l
+                move.w  (sp)+,(sound_fx_enable).l
                 rts
 ; End of function sub_252AF4
 
@@ -42471,7 +42470,7 @@ sub_252CA4:                             ; DATA XREF: ROM:00003624   o
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
                 addq.b  #1,(byte_FFFF61).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_252CD2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_58).w
@@ -42489,7 +42488,7 @@ sub_252CD4:                             ; DATA XREF: ROM:0000362C   o
                 jsr     sub_24AE7A(pc)
                 move.b  #$C0,(invincibility_timer).l
                 move.b  #$22,(byte_FFFF60).l ; '"'
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_252D0C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($61).w
@@ -42655,7 +42654,7 @@ sub_252EE4:                             ; DATA XREF: ROM:00003720   o
                 clr.b   $36(a1)
                 jsr     sub_24B47A(pc)
                 st      (byte_FFFDE0).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_252F52
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6A).w
@@ -42676,7 +42675,7 @@ sub_252F5C:                             ; DATA XREF: ROM:00003730   o
                 move.b  #$86,(a1)
                 move.l  #off_1B031A,$20(a1)
                 clr.b   $37(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_252F96
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_64).w
@@ -42698,7 +42697,7 @@ sub_252F98:                             ; DATA XREF: ROM:00003734   o
                 bcc.s   loc_252FBE
                 addq.b  #1,(byte_FFFDED).l
 loc_252FBE:                             ; CODE XREF: sub_252F98+1E   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_252FE0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6E).w
@@ -43015,7 +43014,7 @@ loc_253406:                             ; CODE XREF: sub_2532FA+DE   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #$FF,d7
                 bne.s   loc_253434
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_253434
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (dword_20).w
@@ -43527,11 +43526,11 @@ loc_253A8E:                             ; DATA XREF: ROM:000036B4   o
                 bne.s   locret_253ACE
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_253ACE
-                move.w  (word_FFFF9C).l,-(sp)
-                clr.b   (word_FFFF9C).l
+                move.w  (sound_fx_enable).l,-(sp)
+                clr.b   (sound_fx_enable).l
                 jsr     (sub_24B000).l
-                st      (word_FFFF9C).l
-                move.w  (sp)+,(word_FFFF9C).l
+                st      (sound_fx_enable).l
+                move.w  (sp)+,(sound_fx_enable).l
                 move.b  #2,$47(a1)
                 move.l  #off_1B559E,$20(a1)
                 clr.b   $37(a1)
@@ -43541,7 +43540,7 @@ locret_253ACE:                          ; CODE XREF: sub_253706+38E   j
 ; ---------------------------------------------------------------------------
 loc_253AD0:                             ; DATA XREF: ROM:000036B8   o
                 jsr     (sub_24B000).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_253AF8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($72).w
@@ -43756,7 +43755,7 @@ sub_253DA0:                             ; CODE XREF: cheat_code:loc_24B9B8   p
                 move.b  #$39,d0 ; '9'
 loc_253DB4:                             ; CODE XREF: sub_253DA0+E   j
                 move.b  d0,(jim_lives_count).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_253DDC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($26).w
@@ -43777,7 +43776,7 @@ sub_253DE0:                             ; DATA XREF: ROM:00003728   o
                 clr.b   $37(a1)
                 clr.w   $18(a1)
                 clr.w   $1A(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_253E1A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($49).w
@@ -43805,7 +43804,7 @@ sub_253E42:                             ; DATA XREF: ROM:0000372C   o
                 clr.b   $37(a1)
                 clr.w   $18(a1)
                 clr.w   $1A(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_253E7C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($26).w
@@ -43925,7 +43924,7 @@ loc_253F7C:                             ; CODE XREF: sub_253F64+C   j
                 move.l  #byte_1ACCC0,$A(a2)
                 clr.b   $37(a2)
                 move.b  #1,6(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_253FC0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_38).w
@@ -43948,7 +43947,7 @@ sub_253FC4:                             ; DATA XREF: ROM:000038EC   o
                 andi.b  #7,d7
                 bne.s   locret_253FF8
                 jsr     (sub_25449C).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_253FF8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -44029,7 +44028,7 @@ loc_254092:                             ; CODE XREF: sub_254054+2E   j
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2540CA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($75).w
@@ -44091,7 +44090,7 @@ sub_25412A:                             ; DATA XREF: ROM:00003900   o
                 rts
 ; ---------------------------------------------------------------------------
 loc_254142:                             ; CODE XREF: sub_25412A+C   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254164
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -44300,7 +44299,7 @@ sub_2543CC:                             ; DATA XREF: ROM:00003998   o
                 tst.b   (byte_FFFD3A).l
                 bne.s   locret_25442E
                 move.b  #$20,(byte_FFFD3A).l ; ' '
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254408
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_74).w
@@ -44621,7 +44620,7 @@ locret_2547E0:                          ; CODE XREF: sub_2547B2+28   j
 loc_2547E2:                             ; CODE XREF: sub_2547B2+4   j
                 move.b  #$86,(a1)
                 move.l  #off_1B338C,$20(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254810
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
@@ -44671,7 +44670,7 @@ sub_25487A:                             ; DATA XREF: ROM:000037F4   o
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   loc_2548B4
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2548B0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -44789,7 +44788,7 @@ loc_2549D4:                             ; CODE XREF: sub_25490E+AA   j
                 move.b  #$25,(byte_FFFD47).l ; '%'
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254A06
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
@@ -44852,7 +44851,7 @@ loc_254A6A:                             ; DATA XREF: ROM:000039B0   o
 
 sub_254A8C:                             ; DATA XREF: ROM:00003888   o
                 jsr     sub_2545A0(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254AB2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -44889,7 +44888,7 @@ loc_254AEC:                             ; CODE XREF: sub_254AD6+6   j
                 andi.b  #7,d7
                 bne.s   locret_254B2A
                 jsr     sub_2545A0(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254B1E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -44930,7 +44929,7 @@ loc_254B5E:                             ; CODE XREF: sub_254B34+6   j
                 beq.s   loc_254BE0
                 subq.b  #1,1(a2)
                 move.w  d0,-(sp)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254B98
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($42).w
@@ -45023,7 +45022,7 @@ sub_254C7E:                             ; DATA XREF: ROM:000039C0   o
 
 sub_254C88:                             ; DATA XREF: ROM:0000369C   o
                 jsr     (sub_24B3CE).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_254CB0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (dword_24).w
@@ -45042,7 +45041,7 @@ sub_254CB2:                             ; DATA XREF: ROM:0000388C   o
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254CEA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3D).w
@@ -45179,7 +45178,7 @@ sub_254E48:                             ; DATA XREF: ROM:000038B0   o
                 andi.b  #7,d7
                 bne.s   locret_254E86
                 jsr     sub_2545A0(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254E7A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -45199,7 +45198,7 @@ sub_254E88:                             ; DATA XREF: ROM:000039EC   o
                 tst.b   (byte_FFFD50).l
                 bne.w   locret_254F3E
                 move.w  d0,-(sp)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_254EB6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
@@ -45333,7 +45332,7 @@ loc_254FD2:                             ; CODE XREF: sub_254F9C+C   j
 loc_254FE2:                             ; DATA XREF: ROM:000039D8   o
                 cmpi.b  #1,$47(a2)
                 bne.s   locret_25501E
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_25500C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_38).w
@@ -45411,7 +45410,7 @@ loc_2550A0:                             ; CODE XREF: sub_25506A+22   j
 
 sub_2550C6:                             ; DATA XREF: ROM:0000387C   o
                 jsr     sub_2545A0(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2550EC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -45453,7 +45452,7 @@ sub_255128:                             ; DATA XREF: ROM:00003878   o
 ; ---------------------------------------------------------------------------
 loc_25513E:                             ; CODE XREF: sub_255128+6   j
                 jsr     sub_2545A0(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_255164
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -45475,7 +45474,7 @@ sub_25517A:                             ; DATA XREF: ROM:000039B4   o
                 move.l  #off_1B25BE,$20(a2)
                 clr.b   $37(a2)
                 clr.l   $A(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2551B0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_34).w
@@ -45516,7 +45515,7 @@ loc_2551EA:                             ; CODE XREF: sub_2551BA+12C   j
                 andi.b  #7,d7
                 bne.s   locret_255224
                 jsr     sub_25449C(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_255224
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
@@ -45532,7 +45531,7 @@ loc_255226:                             ; CODE XREF: sub_2551BA+F4   j
                 st      (byte_FFFDF5).l
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_255256
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
@@ -45555,7 +45554,7 @@ loc_25526A:                             ; CODE XREF: sub_2551BA+EE   j
                 bne.s   locret_255224
                 tst.b   (byte_FFFDF8).l
                 bne.s   locret_255224
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2552A0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -45606,7 +45605,7 @@ loc_2552F2:                             ; CODE XREF: sub_2551BA+134   j
                 move.b  #3,(byte_FFFDF3).l
                 clr.b   $36(a2)
                 move.b  #$FA,1(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_25532E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
@@ -45627,7 +45626,7 @@ loc_25533C:                             ; CODE XREF: sub_2551BA+17A   j
                 move.b  #5,(byte_FFFDF3).l
                 clr.b   $36(a2)
                 move.b  #$FA,1(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_255378
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
@@ -45648,7 +45647,7 @@ loc_255384:                             ; CODE XREF: sub_2551BA+1C4   j
                 move.b  #2,(byte_FFFDF3).l
                 clr.b   $36(a2)
                 move.b  #$96,1(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2553C0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
@@ -45797,7 +45796,7 @@ sub_2554FA:                             ; DATA XREF: ROM:000037F8   o
                 andi.b  #7,d7
                 bne.s   locret_25552C
                 bsr.w   sub_25449C
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_25552C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -45833,7 +45832,7 @@ sub_25552E:                             ; DATA XREF: ROM:00003934   o
                 move.w  d7,4(a5)
                 move.l  #byte_1A3244,$A(a5)
                 move.b  #1,6(a5)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2555BA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_64).w
@@ -45859,7 +45858,7 @@ loc_2555BC:                             ; CODE XREF: sub_25552E+18   j
                 addi.w  #$30,d7 ; '0'
                 move.w  d7,4(a5)
                 move.b  #$A,(byte_FFFD9C).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_25561E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($5A).w
@@ -45985,7 +45984,7 @@ loc_2557B8:                             ; CODE XREF: sub_2557A2+A   j
                 move.b  #$86,(a2)
                 move.l  #off_1B150A,$20(a2)
                 clr.b   $37(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2557EA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_38).w
@@ -46055,7 +46054,7 @@ loc_255890:                             ; CODE XREF: sub_255814+74   j
                 andi.b  #7,d7
                 bne.s   locret_2558C2
                 jsr     sub_2545A0(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_2558C2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -46075,7 +46074,7 @@ loc_2558C4:                             ; CODE XREF: sub_255814+A   j
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_255906
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
@@ -46244,7 +46243,7 @@ sub_255A96:                             ; DATA XREF: ROM:00003828   o
                 rts
 ; ---------------------------------------------------------------------------
 loc_255AC8:                             ; CODE XREF: sub_255A96+6   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_255AEA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($37).w
@@ -46333,7 +46332,7 @@ loc_255BAE:                             ; CODE XREF: sub_255B4E+10   j
                 clr.b   9(a2)
                 clr.w   $18(a2)
                 clr.w   $1A(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_255C12
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($1B).w
@@ -46436,7 +46435,7 @@ loc_255D6E:                             ; CODE XREF: sub_255D52+C   j
                 andi.b  #7,d7
                 bne.s   locret_255D6C
                 jsr     sub_25449C(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_255DA0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2D).w
@@ -46542,7 +46541,7 @@ loc_255E8A:                             ; CODE XREF: sub_255DF8+16   j
                 movea.l a1,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_255EC2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($29).w
@@ -46577,7 +46576,7 @@ locret_255F14:                          ; CODE XREF: sub_255EF0+1C   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_255F16:                             ; CODE XREF: sub_255EF0+A   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_255F38
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -46666,7 +46665,7 @@ sub_25608A:                             ; DATA XREF: ROM:000037E4   o
 loc_25608E:                             ; DATA XREF: ROM:00003920   o
                 move.b  #$86,(a2)
                 move.b  #$FE,$34(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2560BA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
@@ -46687,7 +46686,7 @@ sub_2560D4:                             ; DATA XREF: ROM:000037E8   o
                 jsr     sub_25449C(pc)
 loc_2560D8:                             ; DATA XREF: ROM:00003924   o
                 move.b  #$86,(a2)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2560FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
@@ -46717,7 +46716,7 @@ sub_256114:                             ; CODE XREF: sub_255F7E+20   j
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a2),2(a5)
                 move.w  4(a2),4(a5)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_256156
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($16).w
@@ -47438,7 +47437,7 @@ loc_256A38:                             ; CODE XREF: sub_256856+1AE   j
                 move.w  d7,2(a5)
                 move.w  4(a1),4(a5)
                 jsr     sub_25475E(pc)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_256AA2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
@@ -47460,7 +47459,7 @@ loc_256AA4:                             ; CODE XREF: sub_256856+1E8   j
                 subi.w  #$1E,d7
                 move.w  d7,2(a5)
                 move.w  4(a1),4(a5)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_256AF6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
@@ -48261,7 +48260,7 @@ sub_257390:                             ; CODE XREF: sub_2573D4+5C   p
                 lea     (byte_C320).l,a0
                 move.b  (a0,d7.w),d7
                 andi.l  #$FF,d7
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2573CE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 move.l  d7,-(sp)
@@ -48513,7 +48512,7 @@ loc_2576B6:                             ; CODE XREF: sub_257616+5C   j
                 move.l  #off_1AD54A,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #$4A,(jim_state).l ; 'J'
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_257708
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($61).w
@@ -48553,7 +48552,7 @@ sub_257748:                             ; DATA XREF: ROM:000037A8   o
 ; ---------------------------------------------------------------------------
 loc_25777A:                             ; CODE XREF: sub_257748+28   j
                 move.w  #8,(word_FFFF54).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2577A4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_38).w
@@ -48679,7 +48678,7 @@ loc_257952:                             ; CODE XREF: sub_257748+202   j
                 move.w  d2,$1A(a1)
                 move.w  (sp)+,d2
 loc_257958:                             ; CODE XREF: sub_257748+19E   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_25797A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_38).w
@@ -48906,7 +48905,7 @@ sub_257C06:                             ; CODE XREF: sub_257B10+C6   p
                 bcs.s   loc_257C46
                 move.w  #$1F0,2(a1)
                 move.w  #$FC00,$18(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_257C3E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
@@ -48921,7 +48920,7 @@ loc_257C3E:                             ; CODE XREF: sub_257C06+1C   j
 loc_257C46:                             ; CODE XREF: sub_257C06+8   j
                 cmpi.w  #$B7,d7
                 bcc.w   locret_257CF4
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_257C70
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
@@ -48944,7 +48943,7 @@ loc_257C80:                             ; CODE XREF: sub_257C06+3C   j
                 bne.w   locret_257CF4
                 tst.b   (byte_FFFD6E).l
                 bne.s   locret_257CF4
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_257CCA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
@@ -48952,7 +48951,7 @@ loc_257C80:                             ; CODE XREF: sub_257C06+3C   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257CCA:                             ; CODE XREF: sub_257C06+AE   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_257CEC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (off_5C).w
@@ -49271,7 +49270,7 @@ sub_257FE8:                             ; DATA XREF: ROM:stru_25AF1C   o
                 move.w  #2,(word_FFFF46).l
                 move.l  #off_1AFBFA,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2580B8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3D).w
@@ -49364,7 +49363,7 @@ sub_25816A:                             ; DATA XREF: ROM:000037A4   o
                 bne.w   loc_25824E
                 tst.b   (byte_FFFD24).l
                 bne.w   loc_25824E
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2581BE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6F).w
@@ -49519,7 +49518,7 @@ sub_258340:                             ; CODE XREF: sub_2532FA+208   p
                 lea     (off_C93A).l,a0
                 move.l  (a0,d6.w),d6
                 bne.s   loc_258396
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_258394
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3B).w
@@ -49581,7 +49580,7 @@ sub_2583F4:                             ; DATA XREF: ROM:stru_25AB2C   o
                 jsr     (sub_24C6EE).l
                 movem.l (sp)+,d0-d7/a0-a6
                 move.b  #6,(byte_FFFBEF).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_25844A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($19).w
@@ -49604,7 +49603,7 @@ loc_258452:                             ; CODE XREF: sub_2583F4+8   j
 loc_258474:                             ; CODE XREF: sub_2583F4+70   j
                 cmpi.w  #$3CC,d7
                 bcs.s   locret_2584B0
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_25849C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($29).w
@@ -49631,7 +49630,7 @@ sub_2584B2:                             ; DATA XREF: ROM:stru_25AA3C   o
                 move.w  #$F000,$1A(a1)
                 clr.b   6(a1)
                 move.b  #$86,(a1)
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_258502
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($19).w
@@ -50028,7 +50027,7 @@ loc_258964:                             ; CODE XREF: sub_2588E6+7A   j
 loc_25896C:                             ; CODE XREF: sub_2588E6+3C   j
                 tst.w   (word_FFFE90).l
                 bne.s   loc_2589DE
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_258996
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2A).w
@@ -50053,7 +50052,7 @@ locret_2589DC:                          ; CODE XREF: sub_2588E6+6   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_2589DE:                             ; CODE XREF: sub_2588E6+8C   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   locret_258A00
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
@@ -50691,7 +50690,7 @@ loc_259192:                             ; DATA XREF: ROM:00003A24   o
                 addq.b  #1,(byte_FFFD7A).l
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2591D2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($21).w
@@ -50954,7 +50953,7 @@ locret_259518:                          ; CODE XREF: sub_2594E4+A   j
 sub_25951A:                             ; DATA XREF: ROM:0000399C   o
                 cmpi.b  #7,(byte_FFFD88).l
                 bne.s   locret_259574
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_259556
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (sub_24D448).l
@@ -50995,7 +50994,7 @@ sub_259586:                             ; DATA XREF: ROM:00003864   o
                 rts
 ; ---------------------------------------------------------------------------
 loc_25959C:                             ; CODE XREF: sub_259586+A   j
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_2595BE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
@@ -52018,7 +52017,7 @@ loc_25A04E:                             ; CODE XREF: sub_259DFE+58E   j
                 jsr     (sub_24CD32).l
                 lea     (word_1B8862).l,a0
                 jsr     (sub_24CCA0).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_25A0C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (dword_28).w
@@ -52134,7 +52133,7 @@ loc_25A26E:                             ; CODE XREF: sub_259DFE+506   j
                 bne.s   loc_25A308
                 st      (is_jim_fire).l
                 move.w  #$FE,(word_FFFDAC).l
-                tst.b   (word_FFFF9C).l
+                tst.b   (sound_fx_enable).l
                 beq.s   loc_25A2D6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2B).w

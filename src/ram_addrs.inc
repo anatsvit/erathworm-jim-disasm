@@ -30,8 +30,8 @@ dword_FFA65E equ $FFFFA65E
 byte_FFA662 equ $FFFFA662
 dword_FFA664 equ $FFFFA664
 dword_FFA668 equ $FFFFA668
-word_FFA66C equ $FFFFA66C
-word_FFA66E equ $FFFFA66E
+map_width_x2 equ $FFFFA66C
+map_width equ $FFFFA66E
 word_FFA670 equ $FFFFA670
 word_FFA672 equ $FFFFA672
 word_FFA674 equ $FFFFA674
@@ -486,7 +486,7 @@ word_FFFF96 equ $FFFFFF96
 byte_FFFF98 equ $FFFFFF98
 byte_FFFF99 equ $FFFFFF99
 byte_FFFF9A equ $FFFFFF9A
-word_FFFF9C equ $FFFFFF9C
+sound_fx_enable equ $FFFFFF9C
 byte_FFFF9E equ $FFFFFF9E
 byte_FFFF9F equ $FFFFFF9F
 Z80_RAM equ $A00000

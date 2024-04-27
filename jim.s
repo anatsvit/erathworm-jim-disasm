@@ -810,7 +810,7 @@ byte_3AF6:
     binclude "binaries/byte_3AF6.bin"
 byte_3C36:
     binclude "binaries/byte_3C36.bin"
-byte_3D4B:
+platforms:
     binclude "binaries/byte_3D4B.bin"
 joy_cfgs:       dc.l oksub_24D712       ; DATA XREF: sub_259DFE+522   o
                 dc.l oksub_24D71C
@@ -3388,7 +3388,7 @@ off_C220:       dc.l anim_submarine_air ; DATA XREF: sub_2535CC+1E   o
 byte_C320:
     binclude "binaries/byte_C320.bin"
     align 2,0
-byte_C372:
+cheat_codes_buttons:
     binclude "binaries/byte_C372.bin"
     align 2,0
 dword_C4EC:     dc.l 0                  ; DATA XREF: sub_258B50:loc_258B88   o
@@ -24973,7 +24973,7 @@ oksub_245ADC:                           ; CODE XREF: oksub_2456C8+280   p
 sub_245AE4:                             ; CODE XREF: oksub_2456C8+27C   p
                 tst.b   (camera_disable_value).l
                 bne.s   loc_245B00
-                move.w  (word_FFA674).l,d0
+                move.w  (map_height_x16).l,d0
                 addi.w  #$100,d0
                 cmp.w   (jim_y).l,d0
                 bcs.w   loc_245BA2
@@ -26980,14 +26980,14 @@ loc_2477EA:                             ; CODE XREF: sub_2476AC+12C   j
                 lsl.w   #1,d0
                 move.w  d0,(map_width_x2).l
                 lsl.w   #3,d0
-                move.w  d0,(word_FFA670).l
+                move.w  d0,(map_width_x16).l
                 move.w  $32(a6),d0
-                move.w  d0,(word_FFA672).l
+                move.w  d0,(map_height).l
                 lsl.w   #4,d0
-                move.w  d0,(word_FFA674).l
+                move.w  d0,(map_height_x16).l
                 move.w  (map_width_x2).l,d0
-                mulu.w  (word_FFA672).l,d0
-                move.w  d0,(word_FF9920).l
+                mulu.w  (map_height).l,d0
+                move.w  d0,(map_size_x2).l
                 bsr.w   sub_2478EC
                 st      (byte_FFFCF9).l
                 move.l  $28(a6),-(sp)
@@ -27074,7 +27074,7 @@ loc_24798A:                             ; CODE XREF: sub_247940+A0   j
                 move.w  (word_FFA686).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA670).l,d7
+                move.w  (map_width_x16).l,d7
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_2479DE
@@ -27261,7 +27261,7 @@ loc_247BFA:                             ; CODE XREF: sub_247B2C+92   j
                 move.w  (word_FFA686).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA670).l,d7
+                move.w  (map_width_x16).l,d7
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247C36
@@ -27317,7 +27317,7 @@ loc_247CB2:                             ; CODE XREF: sub_247B2C+14E   j
                 move.w  (word_FFA688).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247CEA
@@ -27362,7 +27362,7 @@ loc_247D50:                             ; CODE XREF: sub_247B2C+21E   j
                 move.w  (word_FFA686).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA670).l,d7
+                move.w  (map_width_x16).l,d7
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247D88
@@ -27397,7 +27397,7 @@ loc_247DCE:                             ; CODE XREF: sub_247B2C+26C   j
                 move.w  (word_FFA688).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247E04
@@ -27432,7 +27432,7 @@ loc_247E4C:                             ; CODE XREF: sub_247B2C+2EA   j
                 move.w  (word_FFA686).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA670).l,d7
+                move.w  (map_width_x16).l,d7
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247E84
@@ -27446,7 +27446,7 @@ loc_247E84:                             ; CODE XREF: sub_247B2C+2E6   j
                 move.w  (word_FFA688).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247EB6
@@ -27483,7 +27483,7 @@ loc_247F06:                             ; CODE XREF: sub_247EB8+12   j
                 move.w  (word_FFA686).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA670).l,d7
+                move.w  (map_width_x16).l,d7
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247F4C
@@ -27521,7 +27521,7 @@ loc_247F98:                             ; CODE XREF: sub_247EB8+A8   j
                 move.w  (word_FFA688).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247FD0
@@ -30247,7 +30247,7 @@ sub_249C56:                             ; CODE XREF: oksub_2456C8+1EC   p
                 add.w   (camera_y).l,d6
                 subi.w  #$110,d6
                 bmi.w   locret_249EEC
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 subi.w  #$30,d7 ; '0'
                 cmp.w   d7,d6
                 bcc.w   locret_249EEC
@@ -30433,7 +30433,7 @@ loc_249EA2:                             ; CODE XREF: sub_249C56:loc_249E9A   j
                 suba.w  d7,a0
                 addq.w  #2,a0
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   loc_249EC6
                 move.w  (a0),d0
                 lsr.w   #1,d0
@@ -30448,7 +30448,7 @@ loc_249EC6:                             ; CODE XREF: sub_249C56+25C   j
                 adda.w  d7,a0
                 addq.w  #2,a0
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   locret_249EEC
                 move.w  (a0),d0
                 lsr.w   #1,d0
@@ -30468,7 +30468,7 @@ loc_249EEE:                             ; CODE XREF: sub_249C56+8   j
                 add.w   (camera_y).l,d6
                 subi.w  #$110,d6
                 bmi.w   locret_24A03A
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 subi.w  #$30,d7 ; '0'
                 cmp.w   d7,d6
                 bcc.w   locret_24A03A
@@ -30539,7 +30539,7 @@ loc_249FE8:                             ; CODE XREF: sub_249C56+38A   j
                 move.l  a0,-(sp)
                 addq.w  #2,a0
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   loc_24A00A
                 move.w  (a0),d0
                 lsr.w   #1,d0
@@ -30554,7 +30554,7 @@ loc_24A00A:                             ; CODE XREF: sub_249C56+3A0   j
                 adda.w  d7,a0
                 addq.w  #2,a0
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   locret_24A03A
                 move.w  (a0),d0
                 lsr.w   #1,d0
@@ -30630,7 +30630,7 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 subi.w  #$10,d7
                 subi.w  #$100,d6
                 bmi.w   loc_24A3CE
-                move.w  (word_FFA674).l,d0
+                move.w  (map_height_x16).l,d0
                 subi.w  #$20,d0 ; ' '
                 cmp.w   d0,d6
                 bcc.w   loc_24A3CE
@@ -30648,9 +30648,9 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 adda.w  d0,a0
                 lea     (objects_map_memory).l,a1
                 adda.w  (word_FFFCC6).l,a1
-                lea     (byte_3D4B).w,a2
+                lea     (platforms).w,a2
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   loc_24A3CE
                 move.b  #0,d1
                 move.w  (a0),d3
@@ -30667,7 +30667,7 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 adda.w  (map_width_x2).l,a0
                 addi.w  #$10,d7
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   loc_24A3CE
                 move.b  #1,d1
                 move.w  (a0),d3
@@ -30684,7 +30684,7 @@ jim_read_map:                             ; CODE XREF: oksub_2456C8+1E4   p
                 adda.w  (map_width_x2).l,a0
                 addi.w  #$10,d7
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   loc_24A3CE
                 move.b  #2,d1
                 move.w  (a0),d3
@@ -30931,7 +30931,7 @@ loc_24A4D2:                             ; CODE XREF: sub_24A4C4+6   j
 enemy_read_map:                             ; CODE XREF: oksub_2456C8+1F4   p
                                         ; sub_24EB7A+16   p
                                         ; DATA XREF: ...
-                lea     (byte_3D4B).w,a2
+                lea     (platforms).w,a2
                 lea     (unk_FFB548).l,a3
                 lea     (byte_FFA728).l,a0
                 move.w  #$24,d4 ; '$'
@@ -30944,7 +30944,7 @@ loc_24A508:                             ; CODE XREF: enemy_read_map+26C   j
                 bclr    #4,7(a0)
                 btst    #3,$3C(a0)
                 beq.w   loc_24A5CE
-                move.w  (word_FFA674).l,d0
+                move.w  (map_height_x16).l,d0
                 subi.w  #$80,d0
                 cmp.w   4(a0),d0
                 beq.w   loc_24A75C
@@ -30965,7 +30965,7 @@ loc_24A508:                             ; CODE XREF: enemy_read_map+26C   j
                 adda.w  d0,a4
                 adda.w  d0,a4
                 move.w  a4,d0
-                cmp.w   (word_FF9920).l,d0
+                cmp.w   (map_size_x2).l,d0
                 bcc.w   loc_24A734
                 move.w  (a4),d3
                 lsr.w   #1,d3
@@ -31002,7 +31002,7 @@ loc_24A5CE:                             ; CODE XREF: enemy_read_map+32   j
                 beq.w   loc_24A75C
                 tst.l   $14(a0)
                 beq.w   loc_24A75C
-                move.w  (word_FFA674).l,d0
+                move.w  (map_height_x16).l,d0
                 addi.w  #$100,d0
                 cmp.w   4(a0),d0
                 bcs.w   loc_24A734
@@ -31024,7 +31024,7 @@ loc_24A5CE:                             ; CODE XREF: enemy_read_map+32   j
                 adda.w  d0,a4
                 adda.w  d0,a4
                 move.w  a4,d0
-                cmp.w   (word_FF9920).l,d0
+                cmp.w   (map_size_x2).l,d0
                 bcc.w   loc_24A734
                 move.w  (a4),d3
                 lsr.w   #1,d3
@@ -31048,7 +31048,7 @@ loc_24A5CE:                             ; CODE XREF: enemy_read_map+32   j
                 adda.w  (map_width_x2).l,a4
                 addi.w  #$10,d7
                 move.w  a4,d0
-                cmp.w   (word_FF9920).l,d0
+                cmp.w   (map_size_x2).l,d0
                 bcc.w   loc_24A734
                 move.w  (a4),d3
                 lsr.w   #1,d3
@@ -31071,7 +31071,7 @@ loc_24A5CE:                             ; CODE XREF: enemy_read_map+32   j
                 adda.w  (map_width_x2).l,a4
                 addi.w  #$10,d7
                 move.w  a4,d0
-                cmp.w   (word_FF9920).l,d0
+                cmp.w   (map_size_x2).l,d0
                 bcc.w   loc_24A734
                 move.w  (a4),d3
                 lsr.w   #1,d3
@@ -32676,7 +32676,7 @@ loc_24B89C:                             ; CODE XREF: cheat_code+36   j
 ; ---------------------------------------------------------------------------
 loc_24B8B6:                             ; CODE XREF: cheat_code+6A   j
                 move.w  #$2E,d0 ; '.'
-                movea.l #byte_C372,a1
+                movea.l #cheat_codes_buttons,a1
 loc_24B8C0:                             ; CODE XREF: cheat_code+9E   j
                 movea.l #unk_FF9942,a0
                 move.b  (a1)+,d3
@@ -33022,7 +33022,7 @@ sub_24BCE4:                             ; CODE XREF: oksub_2456C8+24E   p
                 add.w   (camera_y).l,d6
                 subi.w  #$F0,d6
                 bmi.w   locret_24BDA6
-                move.w  (word_FFA674).l,d7
+                move.w  (map_height_x16).l,d7
                 cmp.w   d7,d6
                 bcc.w   locret_24BDA6
                 andi.w  #$FFF0,d6
@@ -33036,7 +33036,7 @@ sub_24BCE4:                             ; CODE XREF: oksub_2456C8+24E   p
                 adda.w  d0,a0
                 adda.w  d0,a0
                 move.w  a0,d3
-                cmp.w   (word_FF9920).l,d3
+                cmp.w   (map_size_x2).l,d3
                 bcc.w   locret_24BDA6
                 lea     (unk_FFB86A).l,a1
                 move.w  (a0),d3
@@ -37147,14 +37147,14 @@ loc_24EC7E:                             ; CODE XREF: sub_24EBC6+A6   j
                 lsl.w   #1,d0
                 move.w  d0,(map_width_x2).l
                 lsl.w   #3,d0
-                move.w  d0,(word_FFA670).l
+                move.w  d0,(map_width_x16).l
                 move.w  $32(a6),d0
-                move.w  d0,(word_FFA672).l
+                move.w  d0,(map_height).l
                 lsl.w   #4,d0
-                move.w  d0,(word_FFA674).l
+                move.w  d0,(map_height_x16).l
                 move.w  (map_width_x2).l,d0
-                mulu.w  (word_FFA672).l,d0
-                move.w  d0,(word_FF9920).l
+                mulu.w  (map_height).l,d0
+                move.w  d0,(map_size_x2).l
                 jsr     sub_2478EC(pc)
                 st      (is_jim_fire).l
                 st      (byte_FFFCF9).l
@@ -37223,14 +37223,14 @@ loc_24EDE2:                             ; CODE XREF: sub_24ED44+8C   j
                 lsl.w   #1,d0
                 move.w  d0,(map_width_x2).l
                 lsl.w   #3,d0
-                move.w  d0,(word_FFA670).l
+                move.w  d0,(map_width_x16).l
                 move.w  $32(a6),d0
-                move.w  d0,(word_FFA672).l
+                move.w  d0,(map_height).l
                 lsl.w   #4,d0
-                move.w  d0,(word_FFA674).l
+                move.w  d0,(map_height_x16).l
                 move.w  (map_width_x2).l,d0
-                mulu.w  (word_FFA672).l,d0
-                move.w  d0,(word_FF9920).l
+                mulu.w  (map_height).l,d0
+                move.w  d0,(map_size_x2).l
                 jsr     sub_2478EC(pc)
                 st      (is_jim_fire).l
                 st      (byte_FFFCF9).l
@@ -41841,7 +41841,7 @@ locret_25258A:                          ; CODE XREF: sub_25254E+E   j
 
 
 sub_25258C:                             ; DATA XREF: sub_25254E+1E   o
-                chk.l   (byte_3D4B+$4F7).w,d1
+                chk.l   (platforms+$4F7).w,d1
                 move.l  $3033(a1),d2
 locret_252594:                          ; DATA XREF: ROM:0000363C   o
                 rts

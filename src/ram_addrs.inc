@@ -6,7 +6,7 @@ unk_FF0640 equ $FFFF0640
 unk_FF5770 equ $FFFF5770
 unk_FF70D8 equ $FFFF70D8
 unk_FF783A equ $FFFF783A
-word_FF9920 equ $FFFF9920
+map_size_x2 equ $FFFF9920
 dword_FF9922 equ $FFFF9922
 dword_FF9926 equ $FFFF9926
 dword_FF992A equ $FFFF992A
@@ -32,9 +32,9 @@ dword_FFA664 equ $FFFFA664
 dword_FFA668 equ $FFFFA668
 map_width_x2 equ $FFFFA66C
 map_width equ $FFFFA66E
-word_FFA670 equ $FFFFA670
-word_FFA672 equ $FFFFA672
-word_FFA674 equ $FFFFA674
+map_width_x16 equ $FFFFA670
+map_height equ $FFFFA672
+map_height_x16 equ $FFFFA674
 camera_x equ $FFFFA676
 camera_y equ $FFFFA678
 camera_view_x equ $FFFFA67A

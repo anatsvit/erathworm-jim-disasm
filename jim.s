@@ -24880,11 +24880,11 @@ locret_2459BC:                          ; CODE XREF: oksub_24598C+C   j
 oksub_2459BE:                           ; CODE XREF: oksub_2456C8+160   p
                                         ; oksub_2456C8+1E0   p ...
                 move.w  (camera_x).l,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 move.w  d0,(jim_x).l
                 move.w  d0,(word_FFA6D4).l
                 move.w  (camera_y).l,d0
-                add.w   (camera_view_y).l,d0
+                add.w   (jim_collider_y).l,d0
                 move.w  d0,(jim_y).l
                 move.w  d0,(word_FFA6D6).l
                 rts
@@ -25094,28 +25094,28 @@ locret_245CE4:                          ; CODE XREF: sub_245AE4+22   j
 oksub_245CE6:                           ; CODE XREF: sub_245AE4+6E   p
                 cmpi.b  #$D,(selectedLevelOption).l
                 beq.s   loc_245D3E
-                cmpi.w  #$30,(camera_view_x).l ; '0'
+                cmpi.w  #$30,(jim_collider_x).l ; '0'
                 bcc.s   loc_245D02
-                move.w  #$30,(camera_view_x).l ; '0'
+                move.w  #$30,(jim_collider_x).l ; '0'
 loc_245D02:                             ; CODE XREF: oksub_245CE6+12   j
-                cmpi.w  #$110,(camera_view_x).l
+                cmpi.w  #$110,(jim_collider_x).l
                 bcs.s   loc_245D14
-                move.w  #$110,(camera_view_x).l
+                move.w  #$110,(jim_collider_x).l
 loc_245D14:                             ; CODE XREF: oksub_245CE6+24   j
-                cmpi.w  #$140,(camera_view_y).l
+                cmpi.w  #$140,(jim_collider_y).l
                 bcc.s   loc_245D26
-                move.w  #$140,(camera_view_y).l
+                move.w  #$140,(jim_collider_y).l
 loc_245D26:                             ; CODE XREF: oksub_245CE6+36   j
-                cmpi.w  #$1C0,(camera_view_y).l
+                cmpi.w  #$1C0,(jim_collider_y).l
                 bcs.s   loc_245D38
-                move.w  #$1C0,(camera_view_y).l
+                move.w  #$1C0,(jim_collider_y).l
 loc_245D38:                             ; CODE XREF: oksub_245CE6+48   j
                 bsr.w   oksub_2459BE
                 rts
 ; ---------------------------------------------------------------------------
 loc_245D3E:                             ; CODE XREF: oksub_245CE6+8   j
-                move.w  #$B0,(camera_view_x).l
-                move.w  #$190,(camera_view_y).l
+                move.w  #$B0,(jim_collider_x).l
+                move.w  #$190,(jim_collider_y).l
                 bsr.w   oksub_2459BE
                 rts
 ; End of function oksub_245CE6
@@ -25823,7 +25823,7 @@ loc_24681A:                             ; CODE XREF: sub_24669E+16A   j
                 bne.s   locret_2467EE
                 cmpi.b  #$A,(jim_state).l
                 bne.s   locret_2467EE
-                subq.w  #7,(camera_view_y).l
+                subq.w  #7,(jim_collider_y).l
                 st      (byte_FFFCF9).l
                 rts
 ; ---------------------------------------------------------------------------
@@ -25988,10 +25988,10 @@ chain_move_left:                        ; CODE XREF: sub_24690C:loc_246A60   p
                 lea     (stru_1ADC0C).l,a0
                 move.l  (a0,d0.w),(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                cmpi.w  #$14,(camera_view_x).l
+                cmpi.w  #$14,(jim_collider_x).l
                 bcs.w   locret_246AB0
                 move.w  4(a0,d0.w),d7
-                sub.w   d7,(camera_view_x).l
+                sub.w   d7,(jim_collider_x).l
 locret_246AB0:                          ; CODE XREF: chain_move_left+6   j
                                         ; chain_move_left+2A   j
                 rts
@@ -26007,10 +26007,10 @@ chain_move_right:                       ; CODE XREF: sub_24690C+26   p
                 lea     (stru_1ADC0C).l,a0
                 move.l  (a0,d0.w),(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                cmpi.w  #$130,(camera_view_x).l
+                cmpi.w  #$130,(jim_collider_x).l
                 bcc.w   locret_246AEA
                 move.w  4(a0,d0.w),d7
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
 locret_246AEA:                          ; CODE XREF: chain_move_right+6   j
                                         ; chain_move_right+2A   j
                 rts
@@ -26023,7 +26023,7 @@ oksub_246AEC:                           ; CODE XREF: sub_24690C+54   p
                 andi.w  #$FFF0,d0
                 ori.b   #4,d0
                 sub.w   (camera_y).l,d0
-                move.w  d0,(camera_view_y).l
+                move.w  d0,(jim_collider_y).l
                 rts
 ; End of function oksub_246AEC
 
@@ -26043,12 +26043,12 @@ sub_246B08:                             ; CODE XREF: sub_247022+216   p
                 bne.s   loc_246B62
                 tst.w   (camera_disable_value).l
                 beq.s   loc_246B4A
-                cmpi.w  #$130,(camera_view_x).l
+                cmpi.w  #$130,(jim_collider_x).l
                 bcc.s   loc_246B58
 loc_246B4A:                             ; CODE XREF: sub_246B08+36   j
                 move.b  (jim_delta_x_speed).l,d0
                 ext.w   d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
 loc_246B58:                             ; CODE XREF: sub_246B08+40   j
                 subi.w  #$28,(jim_delta_x_speed).l ; '('
                 bra.s   loc_246BA4
@@ -26061,7 +26061,7 @@ loc_246B62:                             ; CODE XREF: sub_246B08+26   j
 loc_246B6A:                             ; CODE XREF: sub_246B08+20   j
                 tst.w   (camera_disable_value).l
                 beq.s   loc_246B7C
-                cmpi.w  #$14,(camera_view_x).l
+                cmpi.w  #$14,(jim_collider_x).l
                 bcs.s   loc_246B9C
 loc_246B7C:                             ; CODE XREF: sub_246B08+68   j
                 neg.w   d0
@@ -26072,7 +26072,7 @@ loc_246B7C:                             ; CODE XREF: sub_246B08+68   j
                 move.b  (jim_delta_x_speed).l,d0
                 addq.b  #1,d0
                 ext.w   d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
 loc_246B9C:                             ; CODE XREF: sub_246B08+72   j
                 addi.w  #$28,(jim_delta_x_speed).l ; '('
 loc_246BA4:                             ; CODE XREF: sub_246B08+1C   j
@@ -26084,7 +26084,7 @@ loc_246BA4:                             ; CODE XREF: sub_246B08+1C   j
                 bcs.w   loc_246C32
                 move.b  (jim_y_speed).l,d0
                 ext.w   d0
-                add.w   d0,(camera_view_y).l
+                add.w   d0,(jim_collider_y).l
                 subi.w  #$3C,(jim_y_speed).l ; '<'
                 bra.s   locret_246C3E
 ; ---------------------------------------------------------------------------
@@ -26097,7 +26097,7 @@ loc_246BD0:                             ; CODE XREF: sub_246B08+A6   j
                 move.b  (jim_y_speed).l,d0
                 addq.b  #1,d0
                 ext.w   d0
-                add.w   d0,(camera_view_y).l
+                add.w   d0,(jim_collider_y).l
                 addi.w  #$3C,(jim_y_speed).l ; '<'
                 bra.s   locret_246C3E
 ; ---------------------------------------------------------------------------
@@ -26134,7 +26134,7 @@ loc_246C40:                             ; CODE XREF: sub_246B08+10   j
                 bcc.s   loc_246C6C
                 move.b  (jim_delta_x_speed).l,d0
                 ext.w   d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
 loc_246C6C:                             ; CODE XREF: sub_246B08+154   j
                 subi.w  #$28,(jim_delta_x_speed).l ; '('
                 bra.s   loc_246CA8
@@ -26153,7 +26153,7 @@ loc_246C7E:                             ; CODE XREF: sub_246B08+144   j
                 move.b  (jim_delta_x_speed).l,d0
                 addq.b  #1,d0
                 ext.w   d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
 loc_246CA0:                             ; CODE XREF: sub_246B08+17E   j
                 addi.w  #$28,(jim_delta_x_speed).l ; '('
 loc_246CA8:                             ; CODE XREF: sub_246B08+140   j
@@ -26161,19 +26161,19 @@ loc_246CA8:                             ; CODE XREF: sub_246B08+140   j
                 move.w  (jim_y_speed).l,d0
                 beq.w   locret_246D10
                 bmi.s   loc_246CDE
-                cmpi.w  #$1C0,(camera_view_y).l
+                cmpi.w  #$1C0,(jim_collider_y).l
                 bcc.s   loc_246CD4
                 cmpi.w  #$3C,d0 ; '<'
                 bcs.w   loc_246D0A
                 move.b  (jim_y_speed).l,d0
                 ext.w   d0
-                add.w   d0,(camera_view_y).l
+                add.w   d0,(jim_collider_y).l
 loc_246CD4:                             ; CODE XREF: sub_246B08+1B4   j
                 subi.w  #$3C,(jim_y_speed).l ; '<'
                 bra.s   locret_246D10
 ; ---------------------------------------------------------------------------
 loc_246CDE:                             ; CODE XREF: sub_246B08+1AA   j
-                cmpi.w  #$120,(camera_view_y).l
+                cmpi.w  #$120,(jim_collider_y).l
                 bcs.s   loc_246D00
                 neg.w   d0
                 cmpi.w  #$3C,d0 ; '<'
@@ -26181,7 +26181,7 @@ loc_246CDE:                             ; CODE XREF: sub_246B08+1AA   j
                 move.b  (jim_y_speed).l,d0
                 addq.b  #1,d0
                 ext.w   d0
-                add.w   d0,(camera_view_y).l
+                add.w   d0,(jim_collider_y).l
 loc_246D00:                             ; CODE XREF: sub_246B08+1DE   j
                 addi.w  #$3C,(jim_y_speed).l ; '<'
                 bra.s   locret_246D10
@@ -26229,30 +26229,30 @@ locret_246D8E:                          ; CODE XREF: sub_246D12+34   j
 loc_246D90:                             ; CODE XREF: sub_246D12+10   j
                 tst.b   (is_jim_move_right).l
                 beq.w   loc_246DAE
-                cmpi.w  #$130,(camera_view_x).l
+                cmpi.w  #$130,(jim_collider_x).l
                 bcc.w   loc_246DAE
-                addi.w  #$10,(camera_view_x).l
+                addi.w  #$10,(jim_collider_x).l
 loc_246DAE:                             ; CODE XREF: sub_246D12+84   j
                                         ; sub_246D12+90   j
                 tst.b   (is_jim_move_left).l
                 beq.w   loc_246DCC
-                cmpi.w  #$10,(camera_view_x).l
+                cmpi.w  #$10,(jim_collider_x).l
                 bcs.w   loc_246DCC
-                subi.w  #$10,(camera_view_x).l
+                subi.w  #$10,(jim_collider_x).l
 loc_246DCC:                             ; CODE XREF: sub_246D12+A2   j
                                         ; sub_246D12+AE   j
                 tst.b   (is_jim_upping).l
                 beq.w   loc_246DEA
-                cmpi.w  #$10,(camera_view_y).l
+                cmpi.w  #$10,(jim_collider_y).l
                 bcs.w   loc_246DEA
-                subi.w  #$10,(camera_view_y).l
+                subi.w  #$10,(jim_collider_y).l
 loc_246DEA:                             ; CODE XREF: sub_246D12+C0   j
                                         ; sub_246D12+CC   j
                 tst.b   (is_jim_downing).l
                 beq.w   locret_246E08
-                cmpi.w  #$1E0,(camera_view_y).l
+                cmpi.w  #$1E0,(jim_collider_y).l
                 bcc.w   locret_246E08
-                addi.w  #$10,(camera_view_y).l
+                addi.w  #$10,(jim_collider_y).l
 locret_246E08:                          ; CODE XREF: sub_246D12+DE   j
                                         ; sub_246D12+EA   j
                 rts
@@ -26268,7 +26268,7 @@ sub_246E0A:                             ; CODE XREF: ropejump_control   p
                 bcs.s   loc_246E36
                 move.b  (jim_delta_x_speed).l,d0
                 ext.w   d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
                 subi.w  #$50,(jim_delta_x_speed).l ; 'P'
                 bra.s   loc_246E5E
 ; ---------------------------------------------------------------------------
@@ -26284,7 +26284,7 @@ loc_246E3E:                             ; CODE XREF: sub_246E0A+C   j
                 move.b  (jim_delta_x_speed).l,d0
                 addq.b  #1,d0
                 ext.w   d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
                 addi.w  #$50,(jim_delta_x_speed).l ; 'P'
 loc_246E5E:                             ; CODE XREF: sub_246E0A+8   j
                                         ; sub_246E0A+2A   j ...
@@ -26295,7 +26295,7 @@ loc_246E5E:                             ; CODE XREF: sub_246E0A+8   j
                 bcs.w   loc_246EAC
                 move.b  (jim_y_speed).l,d0
                 ext.w   d0
-                add.w   d0,(camera_view_y).l
+                add.w   d0,(jim_collider_y).l
                 subi.w  #$3C,(jim_y_speed).l ; '<'
                 bra.s   locret_246EB2
 ; ---------------------------------------------------------------------------
@@ -26306,7 +26306,7 @@ loc_246E8A:                             ; CODE XREF: sub_246E0A+5E   j
                 move.b  (jim_y_speed).l,d0
                 addq.b  #1,d0
                 ext.w   d0
-                add.w   d0,(camera_view_y).l
+                add.w   d0,(jim_collider_y).l
                 addi.w  #$3C,(jim_y_speed).l ; '<'
                 bra.s   locret_246EB2
 ; ---------------------------------------------------------------------------
@@ -26325,7 +26325,7 @@ sub_246EB4:                             ; CODE XREF: sub_247022+220   j
                 tst.b   (is_jim_move_left).l
                 beq.w   loc_246F16
                 st      (is_jim_left_direction).l
-                subq.w  #4,(camera_view_x).l
+                subq.w  #4,(jim_collider_x).l
                 bra.w   loc_246F76
 ; ---------------------------------------------------------------------------
 loc_246ED8:                             ; CODE XREF: sub_246EB4+8   j
@@ -26339,14 +26339,14 @@ loc_246EFE:                             ; CODE XREF: sub_246EB4+2C   j
                 move.w  #$600,(jim_delta_x_speed).l
                 move.w  #$94,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
 loc_246F16:                             ; CODE XREF: sub_246EB4+10   j
                 cmpi.w  #$27B,(jim_x).l
                 bcc.s   loc_246F38
                 tst.b   (is_jim_move_right).l
                 beq.w   loc_246F76
                 clr.b   (is_jim_left_direction).l
-                addq.w  #4,(camera_view_x).l
+                addq.w  #4,(jim_collider_x).l
                 bra.s   loc_246F76
 ; ---------------------------------------------------------------------------
 loc_246F38:                             ; CODE XREF: sub_246EB4+6A   j
@@ -26360,22 +26360,22 @@ loc_246F5E:                             ; CODE XREF: sub_246EB4+8C   j
                 move.w  #$FA00,(jim_delta_x_speed).l
                 move.w  #$27A,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
 loc_246F76:                             ; CODE XREF: sub_246EB4+20   j
                                         ; sub_246EB4+72   j ...
                 tst.b   (is_jim_upping).l
                 beq.w   loc_246F94
-                cmpi.w  #$120,(camera_view_y).l
+                cmpi.w  #$120,(jim_collider_y).l
                 bcs.s   loc_246FAE
-                subq.w  #4,(camera_view_y).l
+                subq.w  #4,(jim_collider_y).l
                 bra.w   loc_246FAE
 ; ---------------------------------------------------------------------------
 loc_246F94:                             ; CODE XREF: sub_246EB4+C8   j
                 tst.b   (is_jim_downing).l
                 beq.w   loc_246FAE
-                cmpi.w  #$1C0,(camera_view_y).l
+                cmpi.w  #$1C0,(jim_collider_y).l
                 bcc.s   loc_246FAE
-                addq.w  #4,(camera_view_y).l
+                addq.w  #4,(jim_collider_y).l
 loc_246FAE:                             ; CODE XREF: sub_246EB4+D4   j
                                         ; sub_246EB4+DC   j ...
                 bsr.w   oksub_2459BE
@@ -26553,10 +26553,10 @@ loc_247190:                             ; CODE XREF: sub_247022:loc_247042   j
                 jsr     (sub_258BA4).l
                 move.w  2(a1),d0
                 sub.w   (camera_x).l,d0
-                move.w  d0,(camera_view_x).l
+                move.w  d0,(jim_collider_x).l
                 move.w  4(a1),d0
                 sub.w   (camera_y).l,d0
-                move.w  d0,(camera_view_y).l
+                move.w  d0,(jim_collider_y).l
                 move.b  (byte_FFA6CF).l,d0
                 andi.w  #$F,d0
                 lea     (byte_6322).w,a0
@@ -26625,7 +26625,7 @@ loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                 beq.w   locret_24752E
                 tst.b   (byte_FFFD06).l
                 bne.w   locret_24752E
-                cmpi.w  #$130,(camera_view_x).l
+                cmpi.w  #$130,(jim_collider_x).l
                 bcc.w   locret_24752E
                 tst.b   (byte_FFFD27).l
                 bne.w   loc_24754A
@@ -26639,7 +26639,7 @@ loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                 move.b  #1,(jim_walking_direction).l
 loc_247324:                             ; CODE XREF: sub_247022+2F4   j
                 move.w  (jim_walking_speed).l,d0
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_247332:                             ; CODE XREF: sub_247022+2E0   j
@@ -26652,7 +26652,7 @@ loc_247332:                             ; CODE XREF: sub_247022+2E0   j
 loc_247346:                             ; CODE XREF: sub_247022+316   j
                 move.w  #2,d0
 loc_24734A:                             ; CODE XREF: sub_247022+322   j
-                add.w   d0,(camera_view_x).l
+                add.w   d0,(jim_collider_x).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_247352:                             ; CODE XREF: sub_247022+28C   j
@@ -26667,7 +26667,7 @@ loc_247352:                             ; CODE XREF: sub_247022+28C   j
                 beq.w   locret_24752E
                 tst.b   (byte_FFFD03).l
                 bne.w   locret_24752E
-                cmpi.w  #$14,(camera_view_x).l
+                cmpi.w  #$14,(jim_collider_x).l
                 bcs.w   locret_24752E
                 tst.b   (byte_FFFD26).l
                 bne.w   loc_247560
@@ -26681,7 +26681,7 @@ loc_247352:                             ; CODE XREF: sub_247022+28C   j
                 move.b  #$FF,(jim_walking_direction).l
 loc_2473D0:                             ; CODE XREF: sub_247022+3A0   j
                 move.w  (jim_walking_speed).l,d0
-                sub.w   d0,(camera_view_x).l
+                sub.w   d0,(jim_collider_x).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_2473DE:                             ; CODE XREF: sub_247022+38A   j
@@ -26694,7 +26694,7 @@ loc_2473DE:                             ; CODE XREF: sub_247022+38A   j
 loc_2473F2:                             ; CODE XREF: sub_247022+3C2   j
                 move.w  #2,d0
 loc_2473F6:                             ; CODE XREF: sub_247022+3CE   j
-                sub.w   d0,(camera_view_x).l
+                sub.w   d0,(jim_collider_x).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_2473FE:                             ; CODE XREF: sub_247022+29E   j
@@ -26885,7 +26885,7 @@ sub_2476AC:                             ; CODE XREF: oksub_2456C8:loc_2457FC   p
                 move.w  0(a6),(camera_x).l
                 nop
                 move.w  0(a6),(word_FFA686).l
-                move.w  4(a6),(camera_view_x).l
+                move.w  4(a6),(jim_collider_x).l
                 move.w  #$B0,(word_FFA67E).l
                 move.b  $3E(a6),d0
                 andi.w  #$FF,d0
@@ -26910,7 +26910,7 @@ loc_247752:                             ; CODE XREF: sub_2476AC+8A   j
                                         ; sub_2476AC+94   j ...
                 move.w  2(a6),(camera_y).l
                 move.w  2(a6),(word_FFA688).l
-                move.w  6(a6),(camera_view_y).l
+                move.w  6(a6),(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
                 movea.l 8(a6),a0        ; Zadampil
                 beq.s   loc_247784
@@ -27009,7 +27009,7 @@ sub_2478C8:                             ; CODE XREF: sub_245AE4+150   p
 
 sub_2478EC:                             ; CODE XREF: sub_2476AC+20C   p
                                         ; sub_24EBC6+11E   p ...
-                lea     (unk_FFB548).l,a0
+                lea     (level_map_pointers).l,a0
                 lea     (M68K_RAM).l,a1
                 move.w  #$C7,d4
 loc_2478FC:                             ; CODE XREF: sub_2478EC+18   j
@@ -27078,7 +27078,7 @@ loc_24798A:                             ; CODE XREF: sub_247940+A0   j
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_2479DE
-                sub.w   d1,(camera_view_x).l
+                sub.w   d1,(jim_collider_x).l
                 add.w   d1,(camera_x).l
                 add.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF4).l
@@ -27102,7 +27102,7 @@ loc_2479E8:                             ; CODE XREF: sub_247940+100   j
                 bcs.w   loc_247A3E
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_x).l
+                add.w   d1,(jim_collider_x).l
                 sub.w   d1,(camera_x).l
                 sub.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF3).l
@@ -27132,7 +27132,7 @@ loc_247A56:                             ; CODE XREF: sub_247940+6   j
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
-                lea     (unk_FFB548).l,a0
+                lea     (level_map_pointers).l,a0
                 move.w  (word_FFA688).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
@@ -27215,13 +27215,13 @@ loc_247B74:                             ; CODE XREF: sub_247B2C+3E   j
                 move.w  (word_FFFD56).l,d7
                 sub.w   (camera_x).l,d7
                 bcc.s   loc_247B92
-                cmpi.w  #$120,(camera_view_x).l
+                cmpi.w  #$120,(jim_collider_x).l
                 bcs.s   loc_247B9E
                 clr.w   d7
                 bra.s   loc_247B9E
 ; ---------------------------------------------------------------------------
 loc_247B92:                             ; CODE XREF: sub_247B2C+56   j
-                cmpi.w  #$20,(camera_view_x).l ; ' '
+                cmpi.w  #$20,(jim_collider_x).l ; ' '
                 bcc.s   loc_247B9E
                 clr.w   d7
 loc_247B9E:                             ; CODE XREF: sub_247B2C+60   j
@@ -27234,7 +27234,7 @@ loc_247B9E:                             ; CODE XREF: sub_247B2C+60   j
                 bra.s   loc_247BB8
 ; ---------------------------------------------------------------------------
 loc_247BAC:                             ; CODE XREF: sub_247B2C+46   j
-                move.w  (camera_view_x).l,d0
+                move.w  (jim_collider_x).l,d0
                 sub.w   (word_FFA67E).l,d0
 loc_247BB8:                             ; CODE XREF: sub_247B2C+78   j
                                         ; sub_247B2C+7E   j
@@ -27249,7 +27249,7 @@ loc_247BB8:                             ; CODE XREF: sub_247B2C+78   j
                 bcs.w   loc_247C36
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_x).l
+                add.w   d1,(jim_collider_x).l
                 sub.w   d1,(camera_x).l
                 sub.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF3).l
@@ -27265,7 +27265,7 @@ loc_247BFA:                             ; CODE XREF: sub_247B2C+92   j
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247C36
-                sub.w   d1,(camera_view_x).l
+                sub.w   d1,(jim_collider_x).l
                 add.w   d1,(camera_x).l
                 add.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF4).l
@@ -27289,7 +27289,7 @@ loc_247C4C:                             ; CODE XREF: sub_247B2C+116   j
                 bra.s   loc_247C74
 ; ---------------------------------------------------------------------------
 loc_247C68:                             ; CODE XREF: sub_247B2C+11E   j
-                move.w  (camera_view_y).l,d0
+                move.w  (jim_collider_y).l,d0
                 sub.w   (word_FFA680).l,d0
 loc_247C74:                             ; CODE XREF: sub_247B2C+134   j
                                         ; sub_247B2C+13A   j
@@ -27306,7 +27306,7 @@ loc_247C7C:                             ; CODE XREF: sub_247B2C+14A   j
                 bcs.w   locret_247CEA
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_y).l
+                add.w   d1,(jim_collider_y).l
                 sub.w   d1,(camera_y).l
                 sub.w   d1,(word_FFFCD2).l
                 st      (byte_FFFCF5).l
@@ -27321,7 +27321,7 @@ loc_247CB2:                             ; CODE XREF: sub_247B2C+14E   j
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247CEA
-                sub.w   d1,(camera_view_y).l
+                sub.w   d1,(jim_collider_y).l
                 add.w   d1,(camera_y).l
                 add.w   d1,(word_FFFCD2).l
                 st      (byte_FFFCF6).l
@@ -27332,7 +27332,7 @@ locret_247CEA:                          ; CODE XREF: sub_247B2C+14C   j
 loc_247CEC:                             ; CODE XREF: sub_247B2C+22   j
                 tst.b   (camera_disable_value).l
                 bne.w   locret_247E04
-                move.w  (camera_view_x).l,d0
+                move.w  (jim_collider_x).l,d0
                 sub.w   (word_FFA67E).l,d0
                 beq.w   loc_247D88
                 bcc.s   loc_247D46
@@ -27347,7 +27347,7 @@ loc_247D14:                             ; CODE XREF: sub_247B2C+1E2   j
                 bcs.w   loc_247D88
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_x).l
+                add.w   d1,(jim_collider_x).l
                 sub.w   d1,(camera_x).l
                 sub.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF3).l
@@ -27366,13 +27366,13 @@ loc_247D50:                             ; CODE XREF: sub_247B2C+21E   j
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247D88
-                sub.w   d1,(camera_view_x).l
+                sub.w   d1,(jim_collider_x).l
                 add.w   d1,(camera_x).l
                 add.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF4).l
 loc_247D88:                             ; CODE XREF: sub_247B2C+1D6   j
                                         ; sub_247B2C+1F4   j ...
-                move.w  (camera_view_y).l,d0
+                move.w  (jim_collider_y).l,d0
                 sub.w   (word_FFA680).l,d0
                 bmi.s   loc_247D9A
                 beq.s   locret_247E04
@@ -27386,7 +27386,7 @@ loc_247D9A:                             ; CODE XREF: sub_247B2C+268   j
                 bcs.w   locret_247E04
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_y).l
+                add.w   d1,(jim_collider_y).l
                 sub.w   d1,(camera_y).l
                 sub.w   d1,(word_FFFCD2).l
                 st      (byte_FFFCF5).l
@@ -27401,7 +27401,7 @@ loc_247DCE:                             ; CODE XREF: sub_247B2C+26C   j
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247E04
-                sub.w   d1,(camera_view_y).l
+                sub.w   d1,(jim_collider_y).l
                 add.w   d1,(camera_y).l
                 add.w   d1,(word_FFFCD2).l
                 st      (byte_FFFCF6).l
@@ -27410,7 +27410,7 @@ locret_247E04:                          ; CODE XREF: sub_247B2C+1C6   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_247E06:                             ; CODE XREF: sub_247B2C+2E   j
-                move.w  (camera_view_x).l,d0
+                move.w  (jim_collider_x).l,d0
                 sub.w   (word_FFA67E).l,d0
                 beq.w   loc_247E84
                 bcc.s   loc_247E4C
@@ -27421,7 +27421,7 @@ loc_247E06:                             ; CODE XREF: sub_247B2C+2E   j
                 bcs.w   loc_247E84
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_x).l
+                add.w   d1,(jim_collider_x).l
                 sub.w   d1,(camera_x).l
                 sub.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF3).l
@@ -27436,7 +27436,7 @@ loc_247E4C:                             ; CODE XREF: sub_247B2C+2EA   j
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247E84
-                sub.w   d1,(camera_view_x).l
+                sub.w   d1,(jim_collider_x).l
                 add.w   d1,(camera_x).l
                 add.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF4).l
@@ -27461,7 +27461,7 @@ locret_247EB6:                          ; CODE XREF: sub_247B2C+376   j
 sub_247EB8:
                 lea     (byte_3AF6).w,a0
                 clr.w   d1
-                move.w  (camera_view_x).l,d0
+                move.w  (jim_collider_x).l,d0
                 sub.w   (word_FFA67E).l,d0
                 bcc.s   loc_247F06
                 neg.w   d0
@@ -27472,7 +27472,7 @@ sub_247EB8:
                 bcs.w   loc_247F4C
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_x).l
+                add.w   d1,(jim_collider_x).l
                 sub.w   d1,(camera_x).l
                 sub.w   d1,(word_FFFCD0).l
                 st      (byte_FFFCF3).l
@@ -27487,7 +27487,7 @@ loc_247F06:                             ; CODE XREF: sub_247EB8+12   j
                 subi.w  #$161,d7
                 cmp.w   d7,d0
                 bcc.w   loc_247F4C
-                sub.w   d1,(camera_view_x).l
+                sub.w   d1,(jim_collider_x).l
                 add.w   d1,(camera_x).l
                 addq.w  #1,(camera_x).l
                 add.w   d1,(word_FFFCD0).l
@@ -27496,7 +27496,7 @@ loc_247F06:                             ; CODE XREF: sub_247EB8+12   j
 loc_247F4C:                             ; CODE XREF: sub_247EB8+1A   j
                                         ; sub_247EB8+28   j ...
                 lea     (byte_3C36).w,a0
-                move.w  (camera_view_y).l,d0
+                move.w  (jim_collider_y).l,d0
                 sub.w   (word_FFA680).l,d0
                 bmi.s   loc_247F62
                 beq.s   locret_247FD0
@@ -27510,7 +27510,7 @@ loc_247F62:                             ; CODE XREF: sub_247EB8+A4   j
                 bcs.w   locret_247FD0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
-                add.w   d1,(camera_view_y).l
+                add.w   d1,(jim_collider_y).l
                 sub.w   d1,(camera_y).l
                 sub.w   d1,(word_FFFCD2).l
                 st      (byte_FFFCF5).l
@@ -27525,7 +27525,7 @@ loc_247F98:                             ; CODE XREF: sub_247EB8+A8   j
                 subi.w  #$F1,d7
                 cmp.w   d7,d0
                 bcc.s   locret_247FD0
-                sub.w   d1,(camera_view_y).l
+                sub.w   d1,(jim_collider_y).l
                 add.w   d1,(camera_y).l
                 add.w   d1,(word_FFFCD2).l
                 st      (byte_FFFCF6).l
@@ -27596,7 +27596,7 @@ loc_24805E:                             ; CODE XREF: sub_248024+20   j
                 move.w  d1,d5
                 addq.w  #2,d5
                 andi.w  #$7E,d5 ; '~'
-                lea     (unk_FFB548).l,a0
+                lea     (level_map_pointers).l,a0
                 move.w  (word_FFA688).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
@@ -27673,7 +27673,7 @@ loc_248158:                             ; CODE XREF: sub_24811E+20   j
                 move.w  d1,d5
                 addq.w  #2,d5
                 andi.w  #$7E,d5 ; '~'
-                lea     (unk_FFB548).l,a0
+                lea     (level_map_pointers).l,a0
                 move.w  (word_FFA688).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
@@ -27750,7 +27750,7 @@ loc_248262:                             ; CODE XREF: sub_248228+20   j
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
-                lea     (unk_FFB548).l,a0
+                lea     (level_map_pointers).l,a0
                 move.w  (word_FFA688).l,d6
                 addi.w  #$F0,d6
                 andi.w  #$FFF0,d6
@@ -27830,7 +27830,7 @@ loc_24836A:                             ; CODE XREF: sub_248330+20   j
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
-                lea     (unk_FFB548).l,a0
+                lea     (level_map_pointers).l,a0
                 move.w  (word_FFA688).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
@@ -30243,7 +30243,7 @@ jim_wall_collision:                             ; CODE XREF: oksub_2456C8+1EC   
                 clr.b   (byte_FFFD0A).l
                 tst.l   (jim_current_sprite_offset).l
                 beq.w   locret_249EEC
-                move.w  (camera_view_y).l,d6
+                move.w  (jim_collider_y).l,d6
                 add.w   (camera_y).l,d6
                 subi.w  #$110,d6
                 bmi.w   locret_249EEC
@@ -30254,10 +30254,10 @@ jim_wall_collision:                             ; CODE XREF: oksub_2456C8+1EC   
                 addq.w  #6,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
-                lea     (unk_FFB548).l,a3
+                lea     (level_map_pointers).l,a3
                 movea.l (a3,d6.w),a0
                 move.w  (camera_x).l,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 lsr.w   #4,d0
                 adda.w  d0,a0
                 adda.w  d0,a0
@@ -30464,7 +30464,7 @@ loc_249EEE:                             ; CODE XREF: jim_wall_collision+8   j
                 clr.b   (byte_FFFD0A).l
                 tst.l   (jim_current_sprite_offset).l
                 beq.w   locret_24A03A
-                move.w  (camera_view_y).l,d6
+                move.w  (jim_collider_y).l,d6
                 add.w   (camera_y).l,d6
                 subi.w  #$110,d6
                 bmi.w   locret_24A03A
@@ -30475,10 +30475,10 @@ loc_249EEE:                             ; CODE XREF: jim_wall_collision+8   j
                 addq.w  #6,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
-                lea     (unk_FFB548).l,a3
+                lea     (level_map_pointers).l,a3
                 movea.l (a3,d6.w),a0
                 move.w  (camera_x).l,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 lsr.w   #4,d0
                 adda.w  d0,a0
                 adda.w  d0,a0
@@ -30624,7 +30624,7 @@ jim_platform_collision:                             ; CODE XREF: oksub_2456C8+1E
                 bne.w   locret_24A46C
                 tst.b   (is_jim_off_gravity).l
                 bne.w   loc_24A484
-                move.w  (camera_view_y).l,d6
+                move.w  (jim_collider_y).l,d6
                 add.w   (camera_y).l,d6
                 move.w  d6,d7
                 subi.w  #$10,d7
@@ -30639,7 +30639,7 @@ jim_platform_collision:                             ; CODE XREF: oksub_2456C8+1E
                 lea     (unk_FFB54C).l,a3
                 movea.l (a3,d6.w),a0
                 move.w  (camera_x).l,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 move.w  d0,d2
                 addi.w  #$10,d0
                 andi.w  #$F,d2
@@ -30716,7 +30716,7 @@ loc_24A20E:                             ; CODE XREF: jim_platform_collision+102 
                 andi.b  #$F0,d7
                 or.b    d0,d7
                 sub.w   (camera_y).l,d7
-                move.w  (camera_view_y).l,d4
+                move.w  (jim_collider_y).l,d4
                 cmp.w   d7,d4
                 beq.w   loc_24A292
                 bcc.w   loc_24A280
@@ -30731,7 +30731,7 @@ loc_24A20E:                             ; CODE XREF: jim_platform_collision+102 
                 tst.b   (is_jim_upping).l
                 bne.w   loc_24A466
 loc_24A278:                             ; CODE XREF: jim_platform_collision+1E4   j
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 bra.s   loc_24A292
 ; ---------------------------------------------------------------------------
 loc_24A280:                             ; CODE XREF: jim_platform_collision+1C6   j
@@ -30740,7 +30740,7 @@ loc_24A280:                             ; CODE XREF: jim_platform_collision+1C6 
                 beq.s   loc_24A28C
                 bcc.w   loc_24A204
 loc_24A28C:                             ; CODE XREF: jim_platform_collision+200   j
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
 loc_24A292:                             ; CODE XREF: jim_platform_collision+1C2   j
                                         ; jim_platform_collision+1F8   j
                 tst.b   (is_jim_sliding).l
@@ -30835,7 +30835,7 @@ loc_24A3F8:                             ; CODE XREF: jim_platform_collision+366 
                 cmpi.w  #$800,d0
                 bcc.s   loc_24A41E
                 move.w  d0,(jim_y_speed).l
-                addq.w  #1,(camera_view_y).l
+                addq.w  #1,(jim_collider_y).l
 loc_24A41E:                             ; CODE XREF: jim_platform_collision+38A   j
                 tst.b   (is_jim_sliding).l
                 bne.s   loc_24A484
@@ -30932,7 +30932,7 @@ enemy_read_map:                             ; CODE XREF: oksub_2456C8+1F4   p
                                         ; sub_24EB7A+16   p
                                         ; DATA XREF: ...
                 lea     (platforms).w,a2
-                lea     (unk_FFB548).l,a3
+                lea     (level_map_pointers).l,a3
                 lea     (byte_FFA728).l,a0
                 move.w  #$24,d4 ; '$'
 loc_24A508:                             ; CODE XREF: enemy_read_map+26C   j
@@ -31388,11 +31388,11 @@ loc_24AA4E:                             ; CODE XREF: sub_24A766+66   j
                 move.b  (a2)+,d3
                 ext.w   d3
                 add.w   d3,2(a1)
-                add.w   d3,(camera_view_x).l
+                add.w   d3,(jim_collider_x).l
                 move.b  (a2)+,d3
                 ext.w   d3
                 add.w   d3,4(a1)
-                add.w   d3,(camera_view_y).l
+                add.w   d3,(jim_collider_y).l
                 bra.s   loc_24AAC0
 ; ---------------------------------------------------------------------------
 loc_24AA8A:                             ; CODE XREF: sub_24A766+304   j
@@ -32405,11 +32405,11 @@ sub_24B47A:                             ; CODE XREF: oksub_2456C8+138   p
                                         ; sub_246D12+28   p ...
                 move.w  (camera_x).l,d0
                 andi.w  #$F,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 move.w  d0,(word_FFA68A).l
                 move.w  (camera_y).l,d0
                 andi.w  #$F,d0
-                add.w   (camera_view_y).l,d0
+                add.w   (jim_collider_y).l,d0
                 move.w  d0,(word_FFA68C).l
                 move.w  (camera_x).l,d0
                 andi.w  #$FFF0,d0
@@ -32422,16 +32422,16 @@ sub_24B47A:                             ; CODE XREF: oksub_2456C8+138   p
 
 
 sub_24B4C8:                             ; CODE XREF: sub_245AE4+16E   p
-                move.w  (word_FFA68A).l,(camera_view_x).l
-                move.w  (word_FFA68C).l,(camera_view_y).l
+                move.w  (word_FFA68A).l,(jim_collider_x).l
+                move.w  (word_FFA68C).l,(jim_collider_y).l
                 move.w  (word_FFA68E).l,(camera_x).l
                 move.w  (word_FFA690).l,(camera_y).l
                 move.w  (camera_x).l,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 move.w  d0,(jim_x).l
                 move.w  d0,(word_FFA6D4).l
                 move.w  (camera_y).l,d0
-                add.w   (camera_view_y).l,d0
+                add.w   (jim_collider_y).l,d0
                 move.w  d0,(jim_y).l
                 move.w  d0,(word_FFA6D6).l
                 clr.w   (word_FFFCD0).l
@@ -33018,7 +33018,7 @@ jim_activities_collision:                             ; CODE XREF: oksub_2456C8+
                 clr.b   (is_jim_sliding).l
                 cmpi.b  #$60,(byte_FFFD11).l ; '`'
                 beq.w   locret_24BDA6
-                move.w  (camera_view_y).l,d6
+                move.w  (jim_collider_y).l,d6
                 add.w   (camera_y).l,d6
                 subi.w  #$F0,d6
                 bmi.w   locret_24BDA6
@@ -33027,10 +33027,10 @@ jim_activities_collision:                             ; CODE XREF: oksub_2456C8+
                 bcc.w   locret_24BDA6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
-                lea     (unk_FFB548).l,a3
+                lea     (level_map_pointers).l,a3
                 movea.l (a3,d6.w),a0
                 move.w  (camera_x).l,d0
-                add.w   (camera_view_x).l,d0
+                add.w   (jim_collider_x).l,d0
                 addi.w  #$10,d0
                 lsr.w   #4,d0
                 adda.w  d0,a0
@@ -36499,7 +36499,7 @@ sub_24E3E2:                             ; DATA XREF: ROM:000055F8   o
 
 
 sub_24E3EA:
-                addq.w  #8,(camera_view_x).l
+                addq.w  #8,(jim_collider_x).l
                 clr.w   (jim_walking_speed).l
                 rts
 ; End of function sub_24E3EA
@@ -36544,11 +36544,11 @@ sub_24E426:                             ; DATA XREF: ROM:00005744   o
                 andi.w  #$FFF0,d7
                 ori.w   #$F,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  (jim_y).l,d7
                 andi.w  #$FFF0,d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 clr.l   (dword_FFA6DC).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_delta_x_speed).l
@@ -36589,11 +36589,11 @@ sub_24E4EE:                             ; DATA XREF: ROM:00005738   o
                 move.w  (jim_x).l,d7
                 andi.w  #$FFF0,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  (jim_y).l,d7
                 andi.w  #$FFF0,d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 clr.l   (dword_FFA6DC).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_delta_x_speed).l
@@ -36623,8 +36623,8 @@ sub_24E5B0:                             ; DATA XREF: ROM:00005730   o
 sub_24E5BA:                             ; DATA XREF: ROM:0000572C   o
                 btst    #0,(byte_FFA6CF).l
                 beq.s   locret_24E5D0
-                addq.w  #1,(camera_view_x).l
-                subq.w  #1,(camera_view_y).l
+                addq.w  #1,(jim_collider_x).l
+                subq.w  #1,(jim_collider_y).l
 locret_24E5D0:                          ; CODE XREF: sub_24E5BA+8   j
                 rts
 ; End of function sub_24E5BA
@@ -36633,8 +36633,8 @@ locret_24E5D0:                          ; CODE XREF: sub_24E5BA+8   j
 sub_24E5D2:                             ; DATA XREF: ROM:00005728   o
                 btst    #0,(byte_FFA6CF).l
                 beq.s   locret_24E5E8
-                subq.w  #1,(camera_view_x).l
-                subq.w  #1,(camera_view_y).l
+                subq.w  #1,(jim_collider_x).l
+                subq.w  #1,(jim_collider_y).l
 locret_24E5E8:                          ; CODE XREF: sub_24E5D2+8   j
                 rts
 ; End of function sub_24E5D2
@@ -36670,8 +36670,8 @@ sub_24E61C:                             ; DATA XREF: ROM:000056BC   o
                 andi.w  #$FFF0,d7
                 addq.w  #8,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
-                subq.w  #2,(camera_view_y).l
+                move.w  d7,(jim_collider_x).l
+                subq.w  #2,(jim_collider_y).l
                 move.w  #$FC00,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
                 rts
@@ -36679,27 +36679,27 @@ sub_24E61C:                             ; DATA XREF: ROM:000056BC   o
 
 
 sub_24E64A:                             ; DATA XREF: ROM:000056D8   o
-                subq.w  #2,(camera_view_y).l
+                subq.w  #2,(jim_collider_y).l
                 move.w  #$F800,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
                 move.w  (jim_x).l,d7
                 andi.w  #$FFF0,d7
                 addq.w  #8,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 rts
 ; End of function sub_24E64A
 
 
 sub_24E678:                             ; DATA XREF: ROM:000056DC   o
-                subq.w  #2,(camera_view_y).l
+                subq.w  #2,(jim_collider_y).l
                 move.w  #$F800,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
                 move.w  (jim_x).l,d7
                 andi.w  #$FFF0,d7
                 addq.w  #8,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_24E6C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -36762,7 +36762,7 @@ sub_24E764:                             ; DATA XREF: sub_24E764+8C   o
                 bcs.s   loc_24E774
                 st      (jim_dead_enable).l
 loc_24E774:                             ; CODE XREF: sub_24E764+8   j
-                cmpi.w  #$32,(camera_view_x).l ; '2'
+                cmpi.w  #$32,(jim_collider_x).l ; '2'
                 bcc.s   loc_24E792
                 move.w  #$3E8,(jim_delta_x_speed).l
                 move.w  #$FA24,(jim_y_speed).l
@@ -36820,7 +36820,7 @@ loc_24E810:                             ; CODE XREF: sub_24E764+A2   j
 
 
 sub_24E826:                             ; DATA XREF: ROM:00005834   o
-                subq.w  #2,(camera_view_y).l
+                subq.w  #2,(jim_collider_y).l
                 move.w  #$FC00,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
                 rts
@@ -36885,7 +36885,7 @@ sub_24E8A8:                             ; DATA XREF: ROM:00005720   o
                 bne.s   locret_24E8C8
                 tst.b   (platform_type_under_jim).l
                 beq.s   locret_24E8C8
-                subq.w  #1,(camera_view_x).l
+                subq.w  #1,(jim_collider_x).l
 locret_24E8C8:                          ; CODE XREF: sub_24E8A8+6   j
                                         ; sub_24E8A8+10   j ...
                 rts
@@ -36899,7 +36899,7 @@ sub_24E8CA:                             ; DATA XREF: ROM:00005724   o
                 bne.s   locret_24E8EA
                 tst.b   (platform_type_under_jim).l
                 beq.s   locret_24E8EA
-                addq.w  #1,(camera_view_x).l
+                addq.w  #1,(jim_collider_x).l
 locret_24E8EA:                          ; CODE XREF: sub_24E8CA+6   j
                                         ; sub_24E8CA+10   j ...
                 rts
@@ -37114,11 +37114,11 @@ sub_24EBC6:                             ; CODE XREF: sub_24E8EC+1A8   p
                 move.w  0(a4),(camera_x).l
                 nop
                 move.w  0(a4),(word_FFA686).l
-                move.w  4(a4),(camera_view_x).l
+                move.w  4(a4),(jim_collider_x).l
                 move.w  #$B0,(word_FFA67E).l
                 move.w  2(a4),(camera_y).l
                 move.w  2(a4),(word_FFA688).l
-                move.w  6(a4),(camera_view_y).l
+                move.w  6(a4),(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
                 move.b  $3C(a6),(byte_FFFDE5).l
                 tst.l   $1C(a6)
@@ -37199,11 +37199,11 @@ sub_24ED44:                             ; CODE XREF: sub_256518+38   p
                 move.w  0(a6),(camera_x).l
                 nop
                 move.w  0(a6),(word_FFA686).l
-                move.w  4(a6),(camera_view_x).l
+                move.w  4(a6),(jim_collider_x).l
                 move.w  #$B0,(word_FFA67E).l
                 move.w  2(a6),(camera_y).l
                 move.w  2(a6),(word_FFA688).l
-                move.w  6(a6),(camera_view_y).l
+                move.w  6(a6),(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
                 jsr     (oksub_2459BE).l
                 move.b  $3C(a6),(byte_FFFDE5).l
@@ -37357,7 +37357,7 @@ loc_24EFBC:                             ; CODE XREF: sub_24EF06+86   j
                 beq.s   locret_24F00A
                 cmpi.b  #$13,(byte_FFFD01).l
                 beq.s   locret_24F00A
-                subq.w  #2,(camera_view_y).l
+                subq.w  #2,(jim_collider_y).l
                 cmpi.b  #$A,(jim_state).l
                 beq.s   locret_24EFBA
                 move.l  #off_1AF0AC,(jim_anim_offset).l
@@ -41443,10 +41443,10 @@ sub_25217E:
                 move.w  d7,-(sp)
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 move.w  (sp)+,d7
                 rts
 ; End of function sub_25217E
@@ -41478,7 +41478,7 @@ sub_2521C2:                             ; DATA XREF: ROM:0025A6C4   o
 sub_2521D4:
                 move.w  d7,-(sp)
                 move.w  (camera_y).l,d7
-                add.w   (camera_view_y).l,d7
+                add.w   (jim_collider_y).l,d7
                 move.w  d7,4(a1)
                 move.w  (sp)+,d7
                 rts
@@ -41772,7 +41772,7 @@ loc_2524BC:                             ; CODE XREF: sub_2524A2+E   j
 
 sub_2524C6:                             ; DATA XREF: ROM:000037B0   o
                 jsr     sub_24B000(pc)
-                subq.w  #2,(camera_view_x).l
+                subq.w  #2,(jim_collider_x).l
                 move.w  #$FF00,(jim_delta_x_speed).l
                 rts
 ; End of function sub_2524C6
@@ -41975,10 +41975,10 @@ loc_2526FE:                             ; CODE XREF: sub_2526B2+30   j
                 clr.b   (jim_walking_direction).l
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
 locret_25275A:                          ; CODE XREF: sub_2526B2+8   j
                                         ; sub_2526B2+12   j ...
@@ -42249,10 +42249,10 @@ sub_252A0C:                             ; DATA XREF: ROM:00003784   o
                 clr.l   (dword_FFA6DC).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_delta_x_speed).l
                 clr.b   (jim_walking_direction).l
@@ -42642,10 +42642,10 @@ sub_252EE4:                             ; DATA XREF: ROM:00003720   o
                 tst.b   (platform_type_under_jim).l
                 beq.s   locret_252F5A
                 move.w  d7,-(sp)
-                move.w  (camera_view_x).l,-(sp)
+                move.w  (jim_collider_x).l,-(sp)
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.b  #$89,(a1)
                 move.b  #$FF,$34(a1)
                 move.l  #off_1B02BA,$20(a1)
@@ -42663,7 +42663,7 @@ sub_252EE4:                             ; DATA XREF: ROM:00003720   o
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_252F52:                             ; CODE XREF: sub_252EE4+52   j
-                move.w  (sp)+,(camera_view_x).l
+                move.w  (sp)+,(jim_collider_x).l
                 move.w  (sp)+,d7
 locret_252F5A:                          ; CODE XREF: sub_252EE4+6   j
                 rts
@@ -42713,7 +42713,7 @@ locret_252FE0:                          ; CODE XREF: sub_252F98+2C   j
 sub_252FE2:
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 rts
 ; End of function sub_252FE2
 
@@ -42810,7 +42810,7 @@ sub_2530EE:                             ; DATA XREF: ROM:0000375C   o
                 move.b  6(a1),d0
                 btst    #4,d0
                 beq.w   loc_253CF6
-                move.w  (camera_view_y).l,d7
+                move.w  (jim_collider_y).l,d7
                 move.w  4(a1),d5
                 sub.w   (camera_y).l,d5
                 addi.w  #$15,d5
@@ -42821,7 +42821,7 @@ sub_2530EE:                             ; DATA XREF: ROM:0000375C   o
                 sub.w   d7,d5
                 cmpi.w  #$18,d5
                 bcc.w   loc_253CF6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
 loc_253134:                             ; CODE XREF: sub_2530EE+2E   j
                 cmpi.b  #$5F,(a1) ; '_'
                 bne.s   loc_253170
@@ -42846,7 +42846,7 @@ loc_253170:                             ; CODE XREF: sub_2530EE+4A   j
                                         ; sub_2530EE+52   j ...
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 clr.w   (jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
                 move.b  #$37,(jim_timer_in_air).l ; '7'
@@ -42894,12 +42894,12 @@ loc_25321C:                             ; CODE XREF: sub_2531F4+12   j
                 beq.w   loc_253CF6
                 move.b  $1D(a1),d7
                 ext.w   d7
-                add.w   d7,(camera_view_y).l
+                add.w   d7,(jim_collider_y).l
                 move.b  $1C(a1),d7
                 ext.w   d7
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
 loc_25324A:                             ; CODE XREF: sub_2531F4+26   j
-                move.w  (camera_view_y).l,d7
+                move.w  (jim_collider_y).l,d7
                 move.w  4(a1),d5
                 sub.w   (camera_y).l,d5
                 subi.w  #$10,d5
@@ -42908,7 +42908,7 @@ loc_25324A:                             ; CODE XREF: sub_2531F4+26   j
                 addi.w  #$30,d5 ; '0'
                 cmpi.w  #$60,d5 ; '`'
                 bcc.w   loc_253CF6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 move.l  a1,(dword_FFFDA8).l
                 clr.b   (jim_timer_in_air).l
                 rts
@@ -42923,21 +42923,21 @@ sub_253282:                             ; DATA XREF: ROM:00003764   o
                 beq.w   loc_253CF6
                 move.b  $1D(a1),d7
                 ext.w   d7
-                add.w   d7,(camera_view_y).l
+                add.w   d7,(jim_collider_y).l
                 move.b  $1C(a1),d7
                 ext.w   d7
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
-                move.w  (camera_view_y).l,d7
+                move.w  d7,(jim_collider_x).l
+                move.w  (jim_collider_y).l,d7
                 move.w  4(a1),d5
                 sub.w   (camera_y).l,d5
                 addi.w  #$1E,d5
                 move.w  d5,d6
                 cmp.w   d7,d5
                 beq.s   locret_2532F8
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 tst.l   $A(a1)
                 bne.s   locret_2532F8
                 move.l  #byte_1A3AF4,$A(a1)
@@ -42955,14 +42955,14 @@ sub_2532FA:                             ; DATA XREF: ROM:000036E4   o
                 beq.w   loc_253CF6
                 move.b  $1D(a1),d7
                 ext.w   d7
-                add.w   d7,(camera_view_y).l
+                add.w   d7,(jim_collider_y).l
                 move.b  $1C(a1),d7
                 ext.w   d7
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
-                move.w  (camera_view_y).l,d7
+                move.w  d7,(jim_collider_x).l
+                move.w  (jim_collider_y).l,d7
                 move.w  4(a1),d5
                 sub.w   (camera_y).l,d5
                 addq.w  #8,d5
@@ -42971,7 +42971,7 @@ sub_2532FA:                             ; DATA XREF: ROM:000036E4   o
                 beq.s   loc_253352
                 sub.w   d7,d5
                 cmpi.w  #$20,d5 ; ' '
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
 loc_253352:                             ; CODE XREF: sub_2532FA+4A   j
                 cmpi.b  #4,(jim_state).l
                 beq.s   loc_253374
@@ -43257,7 +43257,7 @@ sub_253706:                             ; DATA XREF: ROM:0000373C   o
                 move.b  6(a1),d0
                 btst    #4,d0
                 beq.w   loc_253CF6
-                move.w  (camera_view_y).l,d7
+                move.w  (jim_collider_y).l,d7
                 move.b  $1D(a1),d6
                 ext.w   d6
                 add.w   d6,d7
@@ -43270,14 +43270,14 @@ sub_253706:                             ; DATA XREF: ROM:0000373C   o
                 sub.w   d7,d5
                 cmpi.w  #$20,d5 ; ' '
                 bcc.w   loc_253CF6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 clr.w   d7
                 move.b  $47(a1),d7
                 tst.b   9(a1)
                 beq.s   loc_25375E
                 neg.w   d7
 loc_25375E:                             ; CODE XREF: sub_253706+54   j
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
                 tst.w   (jim_y_speed).l
                 beq.s   locret_253778
                 move.l  #byte_1A2D94,$A(a1)
@@ -43292,7 +43292,7 @@ loc_25377A:                             ; DATA XREF: ROM:00003740   o
                 move.b  6(a1),d0
                 btst    #4,d0
                 beq.w   loc_253CF6
-                move.w  (camera_view_y).l,d7
+                move.w  (jim_collider_y).l,d7
                 move.w  4(a1),d5
                 sub.w   (camera_y).l,d5
                 clr.w   d6
@@ -43305,7 +43305,7 @@ loc_25377A:                             ; DATA XREF: ROM:00003740   o
                 addi.w  #$A,d5
                 cmpi.w  #$32,d5 ; '2'
                 bcc.w   loc_253CF6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 tst.w   (jim_y_speed).l
                 beq.s   locret_2537DE
                 move.l  #off_1B053C,$20(a1)
@@ -43318,7 +43318,7 @@ loc_2537E0:                             ; CODE XREF: sub_253706+AE   j
                 bpl.s   loc_2537F0
                 tst.l   $48(a1)
                 beq.s   loc_2537F0
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
 loc_2537F0:                             ; CODE XREF: sub_253706+DC   j
                                         ; sub_253706+E2   j
                 bra.w   loc_253CF6
@@ -43352,11 +43352,11 @@ loc_2537F4:                             ; DATA XREF: ROM:00003748   o
                 add.w   d6,d5
                 subi.w  #$80,d5
                 move.w  d5,d6
-                sub.w   (camera_view_y).l,d5
+                sub.w   (jim_collider_y).l,d5
                 addi.w  #$14,d5
                 cmpi.w  #$28,d5 ; '('
                 bcc.w   loc_2538B0
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 tst.l   $20(a1)
                 bne.s   loc_2538AE
                 move.w  (jim_x).l,d7
@@ -43391,7 +43391,7 @@ loc_2538BA:                             ; DATA XREF: ROM:0000374C   o
                 move.b  6(a1),d0
                 btst    #4,d0
                 beq.w   loc_253CF6
-                move.w  (camera_view_y).l,d7
+                move.w  (jim_collider_y).l,d7
                 move.b  $1D(a1),d6
                 ext.w   d6
                 add.w   d6,d7
@@ -43404,7 +43404,7 @@ loc_2538BA:                             ; DATA XREF: ROM:0000374C   o
                 sub.w   d7,d5
                 cmpi.w  #$20,d5 ; ' '
                 bcc.w   loc_253CF6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_253906:                             ; DATA XREF: ROM:00003750   o
@@ -43414,7 +43414,7 @@ loc_253906:                             ; DATA XREF: ROM:00003750   o
                 move.b  6(a1),d0
                 btst    #4,d0
                 beq.w   loc_253CF6
-                move.w  (camera_view_y).l,d7
+                move.w  (jim_collider_y).l,d7
                 move.b  $1D(a1),d6
                 ext.w   d6
                 add.w   d6,d7
@@ -43427,14 +43427,14 @@ loc_253906:                             ; DATA XREF: ROM:00003750   o
                 sub.w   d7,d5
                 cmpi.w  #$20,d5 ; ' '
                 bcc.w   loc_253CF6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 clr.w   d7
                 move.b  $47(a1),d7
                 tst.b   9(a1)
                 beq.s   loc_25395E
                 neg.w   d7
 loc_25395E:                             ; CODE XREF: sub_253706+254   j
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
                 tst.w   (jim_y_speed).l
                 beq.s   locret_253978
                 move.l  #byte_1A2D94,$A(a1)
@@ -43455,10 +43455,10 @@ loc_25397C:                             ; DATA XREF: ROM:00003690   o
                 move.b  #$4E,(jim_state).l ; 'N'
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 clr.l   (dword_FFA6DC).l
                 clr.w   (jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
@@ -43578,10 +43578,10 @@ loc_253B44:                             ; CODE XREF: sub_253706+432   j
                 move.b  #$4D,(jim_state).l ; 'M'
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 clr.l   (dword_FFA6DC).l
                 clr.w   (jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
@@ -45901,7 +45901,7 @@ sub_255640:                             ; DATA XREF: ROM:00003930   o
                 move.w  4(a2),d7
                 sub.w   (camera_y).l,d7
                 addi.w  #$3A,d7 ; ':'
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 tst.b   (is_jim_left_direction).l
                 bne.s   loc_2556E8
                 move.l  #byte_1A4312,(dword_FFA6DC).l
@@ -45909,7 +45909,7 @@ sub_255640:                             ; DATA XREF: ROM:00003930   o
                 move.w  2(a2),d7
                 sub.w   (camera_x).l,d7
                 subi.w  #$50,d7 ; 'P'
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
 locret_2556E6:                          ; CODE XREF: sub_255640+8   j
                                         ; sub_255640+14   j ...
                 rts
@@ -45920,7 +45920,7 @@ loc_2556E8:                             ; CODE XREF: sub_255640+80   j
                 move.w  2(a2),d7
                 sub.w   (camera_x).l,d7
                 addi.w  #$50,d7 ; 'P'
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 rts
 ; End of function sub_255640
 
@@ -46516,12 +46516,12 @@ sub_255DF8:                             ; DATA XREF: ROM:000038CC   o
                 addq.w  #4,d7
                 move.w  d7,2(a2)
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 addq.w  #4,d6
                 move.w  d6,4(a2)
                 sub.w   (camera_y).l,d6
                 addq.w  #8,d6
-                move.w  d6,(camera_view_y).l
+                move.w  d6,(jim_collider_y).l
                 st      (byte_FFFD4E).l
                 move.b  #$41,(byte_FFFCFE).l ; 'A'
                 move.b  (byte_FFA6CF).l,d7
@@ -47837,10 +47837,10 @@ loc_256EC6:                             ; CODE XREF: sub_256D82+130   j
                 bne.s   loc_256EF8
                 move.w  2(a1),d0
                 sub.w   (camera_x).l,d0
-                move.w  d0,(camera_view_x).l
+                move.w  d0,(jim_collider_x).l
                 move.w  4(a1),d0
                 sub.w   (camera_y).l,d0
-                move.w  d0,(camera_view_y).l
+                move.w  d0,(jim_collider_y).l
                 bra.s   loc_256EF8
 ; ---------------------------------------------------------------------------
 loc_256EF0:                             ; CODE XREF: sub_256D82+118   j
@@ -47865,20 +47865,20 @@ loc_256EFC:                             ; CODE XREF: sub_256D82+E0   j
                 movem.l d1-d5,-(sp)
                 move.w  (camera_x).l,d2
                 move.w  (camera_y).l,d3
-                move.w  (camera_view_x).l,d4
-                move.w  (camera_view_y).l,d5
+                move.w  (jim_collider_x).l,d4
+                move.w  (jim_collider_y).l,d5
                 move.w  2(a1),d1
                 subi.w  #$A0,d1
                 move.w  d1,(camera_x).l
-                move.w  #$A0,(camera_view_x).l
+                move.w  #$A0,(jim_collider_x).l
                 move.w  4(a1),d1
                 sub.w   (camera_y).l,d1
-                move.w  d1,(camera_view_y).l
+                move.w  d1,(jim_collider_y).l
                 jsr     (sub_24B47A).l
                 move.w  d2,(camera_x).l
                 move.w  d3,(camera_y).l
-                move.w  d4,(camera_view_x).l
-                move.w  d5,(camera_view_y).l
+                move.w  d4,(jim_collider_x).l
+                move.w  d5,(jim_collider_y).l
                 movem.l (sp)+,d1-d5
 loc_256FA0:                             ; CODE XREF: sub_256D82+1B0   j
                 move.l  a4,-(sp)
@@ -48101,7 +48101,7 @@ oksub_2571EE:                           ; DATA XREF: ROM:001B072A   o
                 beq.s   locret_25720A
                 cmpi.w  #$1DE,$52(a1)
                 bcc.s   locret_25720A
-                subq.w  #2,(camera_view_y).l
+                subq.w  #2,(jim_collider_y).l
                 subq.w  #2,4(a1)
                 addq.w  #2,$52(a1)
 locret_25720A:                          ; CODE XREF: oksub_2571EE+4   j
@@ -48191,7 +48191,7 @@ sub_2572C4:                             ; CODE XREF: ropejump_control+2A   p
                 cmpi.w  #$160,(word_FFA680).l
                 beq.w   loc_2572FC
                 subq.w  #1,(word_FFA680).l
-                subq.w  #1,(camera_view_y).l
+                subq.w  #1,(jim_collider_y).l
                 bra.w   locret_25731E
 ; ---------------------------------------------------------------------------
 loc_2572FC:                             ; CODE XREF: sub_2572C4+10   j
@@ -48201,7 +48201,7 @@ loc_2572FC:                             ; CODE XREF: sub_2572C4+10   j
                 cmpi.w  #$19C,(word_FFA680).l
                 beq.w   locret_25731E
                 addq.w  #1,(word_FFA680).l
-                addq.w  #1,(camera_view_y).l
+                addq.w  #1,(jim_collider_y).l
 locret_25731E:                          ; CODE XREF: sub_2572C4+6   j
                                         ; sub_2572C4+34   j ...
                 rts
@@ -48280,7 +48280,7 @@ sub_2573D4:                             ; CODE XREF: ropejump_control:loc_2572B0
                 bcc.s   loc_25743A
                 move.w  #$B7,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  #$800,$18(a1)
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_2574A2
@@ -48302,7 +48302,7 @@ loc_25743A:                             ; CODE XREF: sub_2573D4+A   j
                 bcs.w   locret_2574A2
                 move.w  #$1EF,d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  #$F800,$18(a1)
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_2574A2
@@ -48392,11 +48392,11 @@ loc_25754A:                             ; CODE XREF: sub_2574F8+16   j
                 move.w  d0,(word_FFFCDE).l
                 tst.b   9(a1)
                 bne.w   loc_25756C
-                add.w   d7,(camera_view_x).l
+                add.w   d7,(jim_collider_x).l
                 bra.w   locret_257572
 ; ---------------------------------------------------------------------------
 loc_25756C:                             ; CODE XREF: sub_2574F8+66   j
-                sub.w   d7,(camera_view_x).l
+                sub.w   d7,(jim_collider_x).l
 locret_257572:                          ; CODE XREF: sub_2574F8+6   j
                                         ; sub_2574F8+70   j
                 rts
@@ -48480,10 +48480,10 @@ loc_25763E:                             ; CODE XREF: sub_257616+8   j
                                         ; sub_257616+12   j
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
-                move.w  d7,(camera_view_x).l
+                move.w  d7,(jim_collider_x).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
-                move.w  d7,(camera_view_y).l
+                move.w  d7,(jim_collider_y).l
                 cmpi.b  #$4B,(jim_state).l ; 'K'
                 beq.w   locret_257746
                 cmpi.b  #$4A,(jim_state).l ; 'J'
@@ -49483,8 +49483,8 @@ locret_25830C:                          ; CODE XREF: sub_258300+6   j
 
 
 oksub_25830E:                           ; DATA XREF: ROM:001AC6CA   o
-                addi.w  #$28,(camera_view_x).l ; '('
-                subi.w  #$F,(camera_view_y).l
+                addi.w  #$28,(jim_collider_x).l ; '('
+                subi.w  #$F,(jim_collider_y).l
                 rts
 ; End of function oksub_25830E
 
@@ -49493,10 +49493,10 @@ sub_258320:
                 jsr     (sub_24D448).l
                 andi.b  #3,d7
                 bne.s   loc_258332
-                subq.w  #1,(camera_view_x).l
+                subq.w  #1,(jim_collider_x).l
 loc_258332:                             ; CODE XREF: sub_258320+A   j
-                subq.w  #4,(camera_view_x).l
-                subq.w  #2,(camera_view_y).l
+                subq.w  #4,(jim_collider_x).l
+                subq.w  #2,(jim_collider_y).l
                 rts
 ; End of function sub_258320
 

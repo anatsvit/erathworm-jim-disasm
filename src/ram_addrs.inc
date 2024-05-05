@@ -37,8 +37,8 @@ map_height equ $FFFFA672
 map_height_x16 equ $FFFFA674
 camera_x equ $FFFFA676
 camera_y equ $FFFFA678
-camera_view_x equ $FFFFA67A
-camera_view_y equ $FFFFA67C
+jim_collider_x equ $FFFFA67A
+jim_collider_y equ $FFFFA67C
 word_FFA67E equ $FFFFA67E
 word_FFA680 equ $FFFFA680
 jim_x equ $FFFFA682
@@ -125,7 +125,7 @@ unk_FFB498 equ $FFFFB498
 unk_FFB4A4 equ $FFFFB4A4
 unk_FFB4C4 equ $FFFFB4C4
 dword_FFB544 equ $FFFFB544
-unk_FFB548 equ $FFFFB548
+level_map_pointers equ $FFFFB548
 unk_FFB54C equ $FFFFB54C
 objects_map_memory equ $FFFFB868
 unk_FFB86A equ $FFFFB86A

@@ -43,8 +43,8 @@ word_FFA67E equ $FFFFA67E
 word_FFA680 equ $FFFFA680
 jim_x equ $FFFFA682
 jim_y equ $FFFFA684
-word_FFA686 equ $FFFFA686
-word_FFA688 equ $FFFFA688
+view_map_x equ $FFFFA686
+view_map_y equ $FFFFA688
 word_FFA68A equ $FFFFA68A
 word_FFA68C equ $FFFFA68C
 word_FFA68E equ $FFFFA68E

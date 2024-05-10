@@ -1202,33 +1202,33 @@ dword_50DE:     dc.l $7FC00081          ; DATA XREF: ROM:0025BF58   o
                 dc.w $9500 ! ((dma_20A6A4 / 2) & $00FF)
                 dc.w $9600 ! (((dma_20A6A4 / 2) >> 8) & $00FF)
                 dc.w $9700 ! ((dma_20A6A4 / 2) >> 16)
-off_5178:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
+object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                                         ; sub_24AF90+26   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_28
-                dc.l sub_2507EA
-                dc.l sub_25082A
+                dc.l spawn_hook
+                dc.l spawn_run_here
                 dc.l nullsub_11
-                dc.l sub_250816
-                dc.l loc_2507A8
-                dc.l sub_25079E
-                dc.l nullsub_11
-                dc.l nullsub_11
+                dc.l spawn_hook_2
+                dc.l spawn_hp_molecule
+                dc.l spawn_hp_molecule_conditionally
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l loc_250732
-                dc.l sub_250728
-                dc.l sub_250772
-                dc.l sub_250768
-                dc.l loc_250792
-                dc.l sub_250788
-                dc.l loc_2507BE
-                dc.l sub_2507B4
-                dc.l loc_2507D4
-                dc.l sub_2507CA
+                dc.l nullsub_11
+                dc.l nullsub_11
+                dc.l spawn_continue
+                dc.l spawn_continue_conditionally
+                dc.l spawn_live
+                dc.l spawn_live_conditionally
+                dc.l spawn_hp_atom
+                dc.l spawn_hp_atom_conditionally
+                dc.l spawn_gun
+                dc.l spawn_gun_conditionally
+                dc.l spawn_plasma_gun
+                dc.l spawn_plasma_gun_conditionally
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -26884,7 +26884,7 @@ sub_2476AC:                             ; CODE XREF: oksub_2456C8:loc_2457FC   p
                 nop
                 move.w  0(a6),(camera_x).l
                 nop
-                move.w  0(a6),(word_FFA686).l
+                move.w  0(a6),(view_map_x).l
                 move.w  4(a6),(jim_collider_x).l
                 move.w  #$B0,(word_FFA67E).l
                 move.b  $3E(a6),d0
@@ -26909,13 +26909,13 @@ sub_2476AC:                             ; CODE XREF: oksub_2456C8:loc_2457FC   p
 loc_247752:                             ; CODE XREF: sub_2476AC+8A   j
                                         ; sub_2476AC+94   j ...
                 move.w  2(a6),(camera_y).l
-                move.w  2(a6),(word_FFA688).l
+                move.w  2(a6),(view_map_y).l
                 move.w  6(a6),(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
                 movea.l 8(a6),a0        ; Zadampil
                 beq.s   loc_247784
                 lea     (objects_map_memory).l,a1
-                jsr     (sub_259C26).l
+                jsr     (unpack_rnc_v2).l
 loc_247784:                             ; CODE XREF: sub_2476AC+CA   j
                 lea     (0).w,a1
                 move.l  a1,d1
@@ -26943,7 +26943,7 @@ loc_2477D4:                             ; CODE XREF: sub_2476AC+10A   j
                 beq.s   loc_2477EA
                 movea.l $10(a6),a0
                 lea     (M68K_RAM).l,a1
-                jsr     (sub_259C26).l
+                jsr     (unpack_rnc_v2).l
 loc_2477EA:                             ; CODE XREF: sub_2476AC+12C   j
                 move.l  $14(a6),(dword_FFFDB8).l
                 move.w  $18(a6),(word_FFFDC0).l
@@ -27071,7 +27071,7 @@ sub_247940:                             ; CODE XREF: oksub_2456C8+13C   p
 loc_24798A:                             ; CODE XREF: sub_247940+A0   j
                 move.w  d4,-(sp)
                 move.w  #$10,d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
                 move.w  (map_width_x16).l,d7
@@ -27097,7 +27097,7 @@ loc_2479E8:                             ; CODE XREF: sub_247940+100   j
                 bsr.w   oksub_2459BE
                 addq.b  #1,(byte_FFA6CF).l
                 move.w  #$10,d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   loc_247A3E
                 add.w   (word_FFFCD0).l,d0
@@ -27121,23 +27121,23 @@ loc_247A3E:                             ; CODE XREF: sub_247940+C2   j
 ; ---------------------------------------------------------------------------
 loc_247A56:                             ; CODE XREF: sub_247940+6   j
                                         ; sub_247940+10   j ...
-                move.w  (word_FFA688).l,d1
+                move.w  (view_map_y).l,d1
                 lsr.w   #3,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
                 add.w   d1,d1
                 lea     (unk_FFB396).l,a3
                 adda.w  d1,a3
-                move.w  (word_FFA686).l,d1
+                move.w  (view_map_x).l,d1
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
                 lea     (level_map_pointers).l,a0
-                move.w  (word_FFA688).l,d6
+                move.w  (view_map_y).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
                 movea.l (a0,d6.w),a0
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 lsr.w   #4,d0
                 adda.w  d0,a0
                 adda.w  d0,a0
@@ -27244,7 +27244,7 @@ loc_247BB8:                             ; CODE XREF: sub_247B2C+78   j
                 neg.w   d0
                 move.b  (a0,d0.w),d1
                 beq.w   loc_247C36
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   loc_247C36
                 add.w   (word_FFFCD0).l,d0
@@ -27258,7 +27258,7 @@ loc_247BB8:                             ; CODE XREF: sub_247B2C+78   j
 loc_247BFA:                             ; CODE XREF: sub_247B2C+92   j
                 move.b  (a0,d0.w),d1
                 beq.s   loc_247C36
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
                 move.w  (map_width_x16).l,d7
@@ -27301,7 +27301,7 @@ loc_247C74:                             ; CODE XREF: sub_247B2C+134   j
 loc_247C7C:                             ; CODE XREF: sub_247B2C+14A   j
                 neg.w   d0
                 move.b  (a0,d0.w),d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   locret_247CEA
                 add.w   (word_FFFCD2).l,d0
@@ -27314,7 +27314,7 @@ loc_247C7C:                             ; CODE XREF: sub_247B2C+14A   j
 ; ---------------------------------------------------------------------------
 loc_247CB2:                             ; CODE XREF: sub_247B2C+14E   j
                 move.b  (a0,d0.w),d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
                 move.w  (map_height_x16).l,d7
@@ -27342,7 +27342,7 @@ loc_247CEC:                             ; CODE XREF: sub_247B2C+22   j
                 move.w  #$10,d0
 loc_247D14:                             ; CODE XREF: sub_247B2C+1E2   j
                 move.w  d0,d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   loc_247D88
                 add.w   (word_FFFCD0).l,d0
@@ -27359,7 +27359,7 @@ loc_247D46:                             ; CODE XREF: sub_247B2C+1DA   j
                 move.w  #$10,d0
 loc_247D50:                             ; CODE XREF: sub_247B2C+21E   j
                 move.w  d0,d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
                 move.w  (map_width_x16).l,d7
@@ -27381,7 +27381,7 @@ loc_247D88:                             ; CODE XREF: sub_247B2C+1D6   j
 loc_247D9A:                             ; CODE XREF: sub_247B2C+268   j
                 neg.w   d0
                 move.w  d0,d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   locret_247E04
                 add.w   (word_FFFCD2).l,d0
@@ -27394,7 +27394,7 @@ loc_247D9A:                             ; CODE XREF: sub_247B2C+268   j
 ; ---------------------------------------------------------------------------
 loc_247DCE:                             ; CODE XREF: sub_247B2C+26C   j
                 move.w  d0,d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
                 move.w  (map_height_x16).l,d7
@@ -27416,7 +27416,7 @@ loc_247E06:                             ; CODE XREF: sub_247B2C+2E   j
                 bcc.s   loc_247E4C
                 neg.w   d0
                 move.w  d0,d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   loc_247E84
                 add.w   (word_FFFCD0).l,d0
@@ -27429,7 +27429,7 @@ loc_247E06:                             ; CODE XREF: sub_247B2C+2E   j
 ; ---------------------------------------------------------------------------
 loc_247E4C:                             ; CODE XREF: sub_247B2C+2EA   j
                 move.w  d0,d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
                 move.w  (map_width_x16).l,d7
@@ -27443,7 +27443,7 @@ loc_247E4C:                             ; CODE XREF: sub_247B2C+2EA   j
 loc_247E84:                             ; CODE XREF: sub_247B2C+2E6   j
                                         ; sub_247B2C+2FA   j ...
                 move.w  #$E,d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
                 move.w  (map_height_x16).l,d7
@@ -27467,7 +27467,7 @@ sub_247EB8:
                 neg.w   d0
                 move.b  (a0,d0.w),d1
                 beq.w   loc_247F4C
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   loc_247F4C
                 add.w   (word_FFFCD0).l,d0
@@ -27480,7 +27480,7 @@ sub_247EB8:
 ; ---------------------------------------------------------------------------
 loc_247F06:                             ; CODE XREF: sub_247EB8+12   j
                 move.b  (a0,d0.w),d1
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 add.w   (word_FFFCD0).l,d0
                 add.w   d1,d0
                 move.w  (map_width_x16).l,d7
@@ -27505,7 +27505,7 @@ loc_247F4C:                             ; CODE XREF: sub_247EB8+1A   j
 loc_247F62:                             ; CODE XREF: sub_247EB8+A4   j
                 neg.w   d0
                 move.b  (a0,d0.w),d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 cmpi.w  #$11,d0
                 bcs.w   locret_247FD0
                 add.w   (word_FFFCD2).l,d0
@@ -27518,7 +27518,7 @@ loc_247F62:                             ; CODE XREF: sub_247EB8+A4   j
 ; ---------------------------------------------------------------------------
 loc_247F98:                             ; CODE XREF: sub_247EB8+A8   j
                 move.b  (a0,d0.w),d1
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 add.w   (word_FFFCD2).l,d0
                 add.w   d1,d0
                 move.w  (map_height_x16).l,d7
@@ -27574,34 +27574,34 @@ sub_248024:                             ; CODE XREF: oksub_247FD2+8   p
                 cmpi.w  #$110,d0
                 bcs.s   loc_248046
                 subi.w  #$10,(word_FFFCD0).l
-                addi.w  #$10,(word_FFA686).l
+                addi.w  #$10,(view_map_x).l
                 bra.s   loc_24805E
 ; ---------------------------------------------------------------------------
 loc_248046:                             ; CODE XREF: sub_248024+E   j
                 cmpi.w  #$F1,d0
                 bcc.w   locret_24811C
                 addi.w  #$10,(word_FFFCD0).l
-                subi.w  #$10,(word_FFA686).l
+                subi.w  #$10,(view_map_x).l
 loc_24805E:                             ; CODE XREF: sub_248024+20   j
-                move.w  (word_FFA688).l,d1
+                move.w  (view_map_y).l,d1
                 lsr.w   #3,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
                 add.w   d1,d1
                 lea     (unk_FFB396).l,a3
                 adda.w  d1,a3
-                move.w  (word_FFA686).l,d1
+                move.w  (view_map_x).l,d1
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
                 addq.w  #2,d5
                 andi.w  #$7E,d5 ; '~'
                 lea     (level_map_pointers).l,a0
-                move.w  (word_FFA688).l,d6
+                move.w  (view_map_y).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
                 movea.l (a0,d6.w),a0
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 lsr.w   #4,d0
                 cmpi.w  #1,d0
                 bcs.w   locret_24811C
@@ -27650,23 +27650,23 @@ sub_24811E:                             ; CODE XREF: oksub_2456C8+140   p
                 cmpi.w  #$110,d0
                 bcs.s   loc_248140
                 subi.w  #$10,(word_FFFCD0).l
-                addi.w  #$10,(word_FFA686).l
+                addi.w  #$10,(view_map_x).l
                 bra.s   loc_248158
 ; ---------------------------------------------------------------------------
 loc_248140:                             ; CODE XREF: sub_24811E+E   j
                 cmpi.w  #$F1,d0
                 bcc.w   locret_248226
                 addi.w  #$10,(word_FFFCD0).l
-                subi.w  #$10,(word_FFA686).l
+                subi.w  #$10,(view_map_x).l
 loc_248158:                             ; CODE XREF: sub_24811E+20   j
-                move.w  (word_FFA688).l,d1
+                move.w  (view_map_y).l,d1
                 lsr.w   #3,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
                 add.w   d1,d1
                 lea     (unk_FFB396).l,a3
                 adda.w  d1,a3
-                move.w  (word_FFA686).l,d1
+                move.w  (view_map_x).l,d1
                 lsr.w   #2,d1
                 addi.w  #$58,d1 ; 'X'
                 andi.w  #$7E,d1 ; '~'
@@ -27674,12 +27674,12 @@ loc_248158:                             ; CODE XREF: sub_24811E+20   j
                 addq.w  #2,d5
                 andi.w  #$7E,d5 ; '~'
                 lea     (level_map_pointers).l,a0
-                move.w  (word_FFA688).l,d6
+                move.w  (view_map_y).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
                 movea.l (a0,d6.w),a0
                 adda.w  #$2C,a0 ; ','
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 lsr.w   #4,d0
                 move.w  (map_width).l,d7
                 subi.w  #$16,d7
@@ -27729,16 +27729,16 @@ sub_248228:                             ; CODE XREF: oksub_247FD2+3E   p
                 cmpi.w  #$110,d0
                 bcs.s   loc_24824A
                 subi.w  #$10,(word_FFFCD2).l
-                addi.w  #$10,(word_FFA688).l
+                addi.w  #$10,(view_map_y).l
                 bra.s   loc_248262
 ; ---------------------------------------------------------------------------
 loc_24824A:                             ; CODE XREF: sub_248228+E   j
                 cmpi.w  #$F1,d0
                 bcc.w   locret_24832E
                 addi.w  #$10,(word_FFFCD2).l
-                subi.w  #$10,(word_FFA688).l
+                subi.w  #$10,(view_map_y).l
 loc_248262:                             ; CODE XREF: sub_248228+20   j
-                move.w  (word_FFA688).l,d1
+                move.w  (view_map_y).l,d1
                 lsr.w   #3,d1
                 addi.w  #$1E,d1
                 andi.w  #$1F,d1
@@ -27746,17 +27746,17 @@ loc_248262:                             ; CODE XREF: sub_248228+20   j
                 add.w   d1,d1
                 lea     (unk_FFB396).l,a3
                 adda.w  d1,a3
-                move.w  (word_FFA686).l,d1
+                move.w  (view_map_x).l,d1
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
                 lea     (level_map_pointers).l,a0
-                move.w  (word_FFA688).l,d6
+                move.w  (view_map_y).l,d6
                 addi.w  #$F0,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
                 movea.l (a0,d6.w),a0
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 lsr.w   #4,d0
                 adda.w  d0,a0
                 adda.w  d0,a0
@@ -27810,32 +27810,32 @@ sub_248330:                             ; CODE XREF: oksub_2456C8+144   p
                 cmpi.w  #$110,d0
                 bcs.s   loc_248352
                 subi.w  #$10,(word_FFFCD2).l
-                addi.w  #$10,(word_FFA688).l
+                addi.w  #$10,(view_map_y).l
                 bra.s   loc_24836A
 ; ---------------------------------------------------------------------------
 loc_248352:                             ; CODE XREF: sub_248330+E   j
                 cmpi.w  #$F1,d0
                 bcc.w   locret_24842E
                 addi.w  #$10,(word_FFFCD2).l
-                subi.w  #$10,(word_FFA688).l
+                subi.w  #$10,(view_map_y).l
 loc_24836A:                             ; CODE XREF: sub_248330+20   j
-                move.w  (word_FFA688).l,d1
+                move.w  (view_map_y).l,d1
                 lsr.w   #3,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
                 add.w   d1,d1
                 lea     (unk_FFB396).l,a3
                 adda.w  d1,a3
-                move.w  (word_FFA686).l,d1
+                move.w  (view_map_x).l,d1
                 lsr.w   #2,d1
                 andi.w  #$7E,d1 ; '~'
                 move.w  d1,d5
                 lea     (level_map_pointers).l,a0
-                move.w  (word_FFA688).l,d6
+                move.w  (view_map_y).l,d6
                 andi.w  #$FFF0,d6
                 lsr.w   #2,d6
                 movea.l (a0,d6.w),a0
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 lsr.w   #4,d0
                 adda.w  d0,a0
                 adda.w  d0,a0
@@ -31919,12 +31919,12 @@ sub_24AF0E:                             ; CODE XREF: sub_24811E+104   p
                 move.w  #$150,(word_FFFDCC).l
 loc_24AF16:                             ; CODE XREF: sub_24AF04+8   j
                 move.w  #$F0,(word_FFFDCE).l
-                move.w  (word_FFA686).l,d0
+                move.w  (view_map_x).l,d0
                 andi.b  #$F0,d0
                 move.w  d0,(word_FFA698).l
                 movea.l (dword_FFA694).l,a0
-                lea     (off_5178).w,a1
-                move.w  (word_FFA688).l,d6
+                lea     (object_spawners).w,a1
+                move.w  (view_map_y).l,d6
                 andi.b  #$F0,d6
                 move.w  (map_width_x2).l,d5
                 lea     (unk_FFB86B).l,a2
@@ -31961,12 +31961,12 @@ sub_24AF90:                             ; CODE XREF: sub_248228+102   p
                 move.w  #$1E0,(word_FFFDCE).l
 loc_24AF98:                             ; CODE XREF: sub_24AF86+8   j
                 move.w  #$FFF0,(word_FFFDCC).l
-                move.w  (word_FFA688).l,d0
+                move.w  (view_map_y).l,d0
                 andi.b  #$F0,d0
                 move.w  d0,(word_FFA69A).l
                 movea.l (dword_FFA694).l,a0
-                lea     (off_5178).w,a1
-                move.w  (word_FFA686).l,d6
+                lea     (object_spawners).w,a1
+                move.w  (view_map_x).l,d6
                 andi.b  #$F0,d6
                 lea     (unk_FFB86B).l,a2
                 move.w  #$16,d4
@@ -32436,8 +32436,8 @@ sub_24B4C8:                             ; CODE XREF: sub_245AE4+16E   p
                 move.w  d0,(word_FFA6D6).l
                 clr.w   (word_FFFCD0).l
                 clr.w   (word_FFFCD2).l
-                move.w  (camera_x).l,(word_FFA686).l
-                move.w  (camera_y).l,(word_FFA688).l
+                move.w  (camera_x).l,(view_map_x).l
+                move.w  (camera_y).l,(view_map_y).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24B542:                             ; CODE XREF: sub_245AE4+10C   j
@@ -35525,7 +35525,7 @@ sub_24D8FC:                             ; CODE XREF: sub_245AE4+188   p
                 lea     (level_config).l,a6 ; Jim start X
                 movea.l 8(a6,d1.w),a0
                 lea     (objects_map_memory).l,a1
-                jsr     (sub_259C26).l
+                jsr     (unpack_rnc_v2).l
                 rts
 ; End of function sub_24D8FC
 
@@ -35728,8 +35728,8 @@ byte_24DAF6:    dc.b $40, $C, $40, 3, 0, $C, 0, 3
                                         ; DATA XREF: sub_24DAD2   o
 
 
-nullsub_5:                              ; CODE XREF: sub_250728+6   j
-                                        ; sub_250768+6   j ...
+nullsub_5:                              ; CODE XREF: spawn_continue_conditionally+6   j
+                                        ; spawn_live_conditionally+6   j ...
                 rts
 ; End of function nullsub_5
 
@@ -37113,11 +37113,11 @@ sub_24EBC6:                             ; CODE XREF: sub_24E8EC+1A8   p
                 nop
                 move.w  0(a4),(camera_x).l
                 nop
-                move.w  0(a4),(word_FFA686).l
+                move.w  0(a4),(view_map_x).l
                 move.w  4(a4),(jim_collider_x).l
                 move.w  #$B0,(word_FFA67E).l
                 move.w  2(a4),(camera_y).l
-                move.w  2(a4),(word_FFA688).l
+                move.w  2(a4),(view_map_y).l
                 move.w  6(a4),(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
                 move.b  $3C(a6),(byte_FFFDE5).l
@@ -37135,7 +37135,7 @@ loc_24EC68:                             ; CODE XREF: sub_24EBC6+84   j
                 beq.s   loc_24EC7E
                 movea.l $10(a6),a0
                 lea     (M68K_RAM).l,a1
-                jsr     (sub_259C26).l
+                jsr     (unpack_rnc_v2).l
 loc_24EC7E:                             ; CODE XREF: sub_24EBC6+A6   j
                 move.l  $14(a6),(dword_FFFDB8).l
                 move.w  $18(a6),(word_FFFDC0).l
@@ -37198,11 +37198,11 @@ sub_24ED44:                             ; CODE XREF: sub_256518+38   p
                 nop
                 move.w  0(a6),(camera_x).l
                 nop
-                move.w  0(a6),(word_FFA686).l
+                move.w  0(a6),(view_map_x).l
                 move.w  4(a6),(jim_collider_x).l
                 move.w  #$B0,(word_FFA67E).l
                 move.w  2(a6),(camera_y).l
-                move.w  2(a6),(word_FFA688).l
+                move.w  2(a6),(view_map_y).l
                 move.w  6(a6),(jim_collider_y).l
                 move.w  #$190,(word_FFA680).l
                 jsr     (oksub_2459BE).l
@@ -37211,7 +37211,7 @@ sub_24ED44:                             ; CODE XREF: sub_256518+38   p
                 beq.s   loc_24EDE2
                 movea.l $10(a6),a0
                 lea     (M68K_RAM).l,a1
-                jsr     (sub_259C26).l
+                jsr     (unpack_rnc_v2).l
 loc_24EDE2:                             ; CODE XREF: sub_24ED44+8C   j
                 move.l  $14(a6),(dword_FFFDB8).l
                 move.w  $18(a6),(word_FFFDC0).l
@@ -38060,7 +38060,7 @@ loc_24F92A:                             ; CODE XREF: sub_24F86E+6C   j
                 sub.w   d6,(word_FFA6D6).l
                 sub.w   d6,(jim_y).l
                 sub.w   d6,(camera_y).l
-                sub.w   d6,(word_FFA688).l
+                sub.w   d6,(view_map_y).l
                 move.w  #$19,d4
                 lea     (byte_FFA728).l,a5
 loc_24F94C:                             ; CODE XREF: sub_24F86E+E8   j
@@ -39246,14 +39246,14 @@ locret_250726:                          ; CODE XREF: sub_250716+A   j
 ; End of function sub_250716
 
 
-sub_250728:                             ; DATA XREF: ROM:000051BC   o
+spawn_continue_conditionally:                             ; DATA XREF: ROM:000051BC   o
                 tst.b   (byte_FFFD94).l
                 beq.w   nullsub_5
-loc_250732:                             ; DATA XREF: ROM:000051B8   o
+spawn_continue:                             ; DATA XREF: ROM:000051B8   o
                 lea     (stru_25A9F4).l,a6
                 jsr     loc_24DB10(pc)
                 rts
-; End of function sub_250728
+; End of function spawn_continue_conditionally
 
 
 sub_25073E:                             ; DATA XREF: ROM:00005574   o
@@ -39270,70 +39270,67 @@ locret_250766:                          ; CODE XREF: sub_25073E+A   j
 ; End of function sub_25073E
 
 
-sub_250768:                             ; DATA XREF: ROM:000051C4   o
+spawn_live_conditionally:
                 tst.b   (byte_FFFD95).l
                 beq.w   nullsub_5
-; End of function sub_250768
-
-
-sub_250772:                             ; DATA XREF: ROM:000051C0   o
+spawn_live:
                 cmpi.b  #$39,(jim_lives_count).l ; '9'
                 beq.s   locret_250786
                 lea     (stru_25A9AC).l,a6
                 jsr     loc_24DB10(pc)
-locret_250786:                          ; CODE XREF: sub_250772+8   j
+locret_250786:
                 rts
-; End of function sub_250772
+; End of function spawn_live_conditionally
 
 
-sub_250788:                             ; DATA XREF: ROM:000051CC   o
+spawn_hp_atom_conditionally:
                 tst.b   (byte_FFFD96).l
                 beq.w   nullsub_5
-loc_250792:                             ; DATA XREF: ROM:000051C8   o
+spawn_hp_atom:
                 lea     (stru_25A964).l,a6
                 jsr     loc_24DB10(pc)
                 rts
-; End of function sub_250788
+; End of function spawn_hp_atom_conditionally
 
 
-sub_25079E:                             ; DATA XREF: ROM:0000519C   o
+spawn_hp_molecule_conditionally:
                 tst.b   (byte_FFFD97).l
                 beq.w   nullsub_5
-loc_2507A8:                             ; DATA XREF: ROM:00005198   o
+spawn_hp_molecule:
                 lea     (stru_25A97C).l,a6
                 jsr     loc_24DB10(pc)
                 rts
-; End of function sub_25079E
+; End of function spawn_hp_molecule_conditionally
 
 
-sub_2507B4:                             ; DATA XREF: ROM:000051D4   o
+spawn_gun_conditionally:
                 tst.b   (byte_FFFD98).l
                 beq.w   nullsub_5
-loc_2507BE:                             ; DATA XREF: ROM:000051D0   o
+spawn_gun:
                 lea     (stru_25A9C4).l,a6
                 jsr     loc_24DB10(pc)
                 rts
-; End of function sub_2507B4
+; End of function spawn_gun_conditionally
 
 
-sub_2507CA:                             ; DATA XREF: ROM:000051DC   o
+spawn_plasma_gun_conditionally:
                 tst.b   (byte_FFFD99).l
                 beq.w   nullsub_5
-loc_2507D4:                             ; DATA XREF: ROM:000051D8   o
+spawn_plasma_gun:
                 cmpi.b  #9,(byte_FFFDED).l
                 bcc.s   locret_2507E8
                 lea     (stru_25A9DC).l,a6
                 jsr     loc_24DB10(pc)
-locret_2507E8:                          ; CODE XREF: sub_2507CA+12   j
+locret_2507E8:
                 rts
-; End of function sub_2507CA
+; End of function spawn_plasma_gun_conditionally
 
 
-sub_2507EA:                             ; DATA XREF: ROM:00005188   o
+spawn_hook:                             ; DATA XREF: ROM:00005188   o
                 lea     (stru_25A7CC).l,a6
                 jsr     loc_24DB18(pc)
                 rts
-; End of function sub_2507EA
+; End of function spawn_hook
 
 
 sub_2507F6:                             ; DATA XREF: ROM:00005350   o
@@ -39363,21 +39360,21 @@ nullsub_28:                             ; DATA XREF: ROM:00005184   o
 ; End of function nullsub_28
 
 
-sub_250816:                             ; DATA XREF: ROM:00005194   o
+spawn_hook_2:                             ; DATA XREF: ROM:00005194   o
                 lea     (stru_25A7CC).l,a6
                 jsr     loc_24DB18(pc)
                 bne.s   locret_250828
                 move.b  #$20,7(a5) ; ' '
-locret_250828:                          ; CODE XREF: sub_250816+A   j
+locret_250828:                          ; CODE XREF: spawn_hook_2+A   j
                 rts
-; End of function sub_250816
+; End of function spawn_hook_2
 
 
-sub_25082A:                             ; DATA XREF: ROM:0000518C   o
+spawn_run_here:                             ; DATA XREF: ROM:0000518C   o
                 lea     (stru_25A7FC).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_25082A
+; End of function spawn_run_here
 
 
 sub_250836:                             ; DATA XREF: ROM:0000529C   o
@@ -51651,7 +51648,7 @@ locret_259C24:                          ; CODE XREF: sub_259B9E+8   j
 ; End of function sub_259B9E
 
 
-sub_259C26:                             ; CODE XREF: sub_2476AC+D2   p
+unpack_rnc_v2:                             ; CODE XREF: sub_2476AC+D2   p
                                         ; sub_2476AC+138   p ...
                 movem.l d0-d7/a0-a5,-(sp)
                 lea     -$180(sp),sp
@@ -51668,7 +51665,7 @@ sub_259C26:                             ; CODE XREF: sub_2476AC+D2   p
                 moveq   #2,d0
                 moveq   #2,d1
                 bsr.w   sub_259CFC
-loc_259C52:                             ; CODE XREF: sub_259C26+94   j
+loc_259C52:                             ; CODE XREF: unpack_rnc_v2+94   j
                 movea.l a2,a0
                 bsr.w   sub_259D2C
                 lea     $80(a2),a0
@@ -51682,7 +51679,7 @@ loc_259C52:                             ; CODE XREF: sub_259C26+94   j
                 subq.w  #1,d4
                 bra.s   loc_259C92
 ; ---------------------------------------------------------------------------
-loc_259C76:                             ; CODE XREF: sub_259C26:loc_259CB4   j
+loc_259C76:                             ; CODE XREF: unpack_rnc_v2:loc_259CB4   j
                 lea     $80(a2),a0
                 moveq   #0,d0
                 bsr.s   sub_259CC6
@@ -51691,15 +51688,15 @@ loc_259C76:                             ; CODE XREF: sub_259C26:loc_259CB4   j
                 lea     $100(a2),a0
                 bsr.s   sub_259CC6
                 move.b  (a1)+,(a4)+
-loc_259C8C:                             ; CODE XREF: sub_259C26+68   j
+loc_259C8C:                             ; CODE XREF: unpack_rnc_v2+68   j
                 move.b  (a1)+,(a4)+
                 dbf     d0,loc_259C8C
-loc_259C92:                             ; CODE XREF: sub_259C26+4E   j
+loc_259C92:                             ; CODE XREF: unpack_rnc_v2+4E   j
                 movea.l a2,a0
                 bsr.s   sub_259CC6
                 subq.w  #1,d0
                 bmi.s   loc_259CB4
-loc_259C9A:                             ; CODE XREF: sub_259C26+76   j
+loc_259C9A:                             ; CODE XREF: unpack_rnc_v2+76   j
                 move.b  (a3)+,(a4)+
                 dbf     d0,loc_259C9A
                 move.b  1(a3),d0
@@ -51711,18 +51708,18 @@ loc_259C9A:                             ; CODE XREF: sub_259C26+76   j
                 subq.w  #1,d1
                 and.l   d1,d6
                 or.l    d0,d6
-loc_259CB4:                             ; CODE XREF: sub_259C26+72   j
+loc_259CB4:                             ; CODE XREF: unpack_rnc_v2+72   j
                 dbf     d4,loc_259C76
                 cmpa.l  a5,a4
                 bcs.s   loc_259C52
                 lea     $180(sp),sp
                 movem.l (sp)+,d0-d7/a0-a5
                 rts
-; End of function sub_259C26
+; End of function unpack_rnc_v2
 
 
-sub_259CC6:                             ; CODE XREF: sub_259C26+56   p
-                                        ; sub_259C26+62   p ...
+sub_259CC6:                             ; CODE XREF: unpack_rnc_v2+56   p
+                                        ; unpack_rnc_v2+62   p ...
                 move.w  (a0)+,d0
                 and.w   d6,d0
                 sub.w   (a0)+,d0
@@ -51752,8 +51749,8 @@ locret_259CFA:                          ; CODE XREF: sub_259CC6+1C   j
 ; End of function sub_259CC6
 
 
-sub_259CFC:                             ; CODE XREF: sub_259C26+28   p
-                                        ; sub_259C26+46   p ...
+sub_259CFC:                             ; CODE XREF: unpack_rnc_v2+28   p
+                                        ; unpack_rnc_v2+46   p ...
                 and.w   d6,d0
                 sub.b   d1,d7
                 bge.s   loc_259D04
@@ -51781,7 +51778,7 @@ sub_259D08:                             ; CODE XREF: sub_259CC6+10   p
 ; End of function sub_259D08
 
 
-sub_259D20:                             ; CODE XREF: sub_259C26+C   p
+sub_259D20:                             ; CODE XREF: unpack_rnc_v2+C   p
                 moveq   #3,d1
 loc_259D22:                             ; CODE XREF: sub_259D20+6   j
                 lsl.l   #8,d0
@@ -51791,8 +51788,8 @@ loc_259D22:                             ; CODE XREF: sub_259D20+6   j
 ; End of function sub_259D20
 
 
-sub_259D2C:                             ; CODE XREF: sub_259C26+2E   p
-                                        ; sub_259C26+36   p ...
+sub_259D2C:                             ; CODE XREF: unpack_rnc_v2+2E   p
+                                        ; unpack_rnc_v2+36   p ...
                 moveq   #$1F,d0
                 moveq   #5,d1
                 bsr.s   sub_259CFC
@@ -52613,8 +52610,8 @@ stru_25A7B4:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A7CC:    dc.b $A                 ; field_0
-                                        ; DATA XREF: sub_2507EA   o
-                                        ; sub_250816   o
+                                        ; DATA XREF: spawn_hook   o
+                                        ; spawn_hook_2   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -52644,7 +52641,7 @@ stru_25A7E4:    dc.b $B                 ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A7FC:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_25082A   o
+                                        ; DATA XREF: spawn_run_here   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -52877,7 +52874,7 @@ stru_25A94C:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A964:    dc.b $51                ; field_0
-                                        ; DATA XREF: sub_250788:loc_250792   o
+                                        ; DATA XREF: spawn_hp_atom_conditionally:spawn_hp_atom   o
                                         ; ROM:off_255620   o ...
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -52893,7 +52890,7 @@ stru_25A964:    dc.b $51                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A97C:    dc.b $52                ; field_0
-                                        ; DATA XREF: sub_25079E:loc_2507A8   o
+                                        ; DATA XREF: spawn_hp_molecule_conditionally:spawn_hp_molecule   o
                                         ; ROM:0025562C   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -52924,7 +52921,7 @@ stru_25A994:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A9AC:    dc.b $50                ; field_0
-                                        ; DATA XREF: sub_250772+A   o
+                                        ; DATA XREF: spawn_live+A   o
                                         ; ROM:00255634   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -52940,7 +52937,7 @@ stru_25A9AC:    dc.b $50                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A9C4:    dc.b $53                ; field_0
-                                        ; DATA XREF: sub_2507B4:loc_2507BE   o
+                                        ; DATA XREF: spawn_gun_conditionally:spawn_gun   o
                                         ; sub_25490E+38   o ...
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -52956,7 +52953,7 @@ stru_25A9C4:    dc.b $53                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A9DC:    dc.b $54                ; field_0
-                                        ; DATA XREF: sub_2507CA+14   o
+                                        ; DATA XREF: spawn_plasma_gun_conditionally+14   o
                                         ; sub_254CB2+7C   o ...
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -52972,7 +52969,7 @@ stru_25A9DC:    dc.b $54                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A9F4:    dc.b $4F                ; field_0
-                                        ; DATA XREF: sub_250728:loc_250732   o
+                                        ; DATA XREF: spawn_continue_conditionally:spawn_continue   o
                                         ; sub_25073E   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2

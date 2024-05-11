@@ -1295,16 +1295,16 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_250960
+                dc.l spawn_eyes_generator_active
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_250EBE
-                dc.l sub_250ECA
-                dc.l sub_250E80
-                dc.l sub_250E8C
-                dc.l sub_250E98
-                dc.l sub_250EA4
+                dc.l spawn_dark_mini_monster
+                dc.l spawn_dark_monster
+                dc.l spawn_jim_entering_in_darkroom
+                dc.l spawn_dark_mini_monster_2
+                dc.l spawn_gears
+                dc.l spawn_gears_down
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -39505,15 +39505,15 @@ locret_25095E:                          ; CODE XREF: spawn_water_monster+A   j
 ; End of function spawn_water_monster
 
 
-sub_250960:                             ; DATA XREF: ROM:000052E8   o
+spawn_eyes_generator_active:                             ; DATA XREF: ROM:000052E8   o
                 lea     (stru_25B444).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_250974
                 addq.w  #4,2(a5)
                 addq.w  #1,4(a5)
-locret_250974:                          ; CODE XREF: sub_250960+A   j
+locret_250974:                          ; CODE XREF: spawn_eyes_generator_active+A   j
                 rts
-; End of function sub_250960
+; End of function spawn_eyes_generator_active
 
 
 spawn_eyes_generator_closed:                             ; DATA XREF: ROM:000052C4   o
@@ -40002,50 +40002,50 @@ locret_250E7E:                          ; CODE XREF: sub_250E28+20   j
 ; End of function sub_250E28
 
 
-sub_250E80:                             ; DATA XREF: ROM:00005300   o
+spawn_jim_entering_in_darkroom:                             ; DATA XREF: ROM:00005300   o
                 lea     (stru_25B834).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250E80
+; End of function spawn_jim_entering_in_darkroom
 
 
-sub_250E8C:                             ; DATA XREF: ROM:00005304   o
+spawn_dark_mini_monster_2:                             ; DATA XREF: ROM:00005304   o
                 lea     (stru_25B8AC).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250E8C
+; End of function spawn_dark_mini_monster_2
 
 
-sub_250E98:                             ; DATA XREF: ROM:00005308   o
+spawn_gears:                             ; DATA XREF: ROM:00005308   o
                 lea     (stru_25B894).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250E98
+; End of function spawn_gears
 
 
-sub_250EA4:                             ; DATA XREF: ROM:0000530C   o
+spawn_gears_down:                             ; DATA XREF: ROM:0000530C   o
                 lea     (stru_25B894).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_250EBC
                 move.b  #$FF,$35(a5)
                 subi.w  #$10,4(a5)
-locret_250EBC:                          ; CODE XREF: sub_250EA4+A   j
+locret_250EBC:                          ; CODE XREF: spawn_gears_down+A   j
                 rts
-; End of function sub_250EA4
+; End of function spawn_gears_down
 
 
-sub_250EBE:                             ; DATA XREF: ROM:000052F8   o
+spawn_dark_mini_monster:                             ; DATA XREF: ROM:000052F8   o
                 lea     (stru_25B87C).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250EBE
+; End of function spawn_dark_mini_monster
 
 
-sub_250ECA:                             ; DATA XREF: ROM:000052FC   o
+spawn_dark_monster:                             ; DATA XREF: ROM:000052FC   o
                 lea     (stru_25B864).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250ECA
+; End of function spawn_dark_monster
 
 
 spawn_run_emerald:                             ; DATA XREF: ROM:00005210   o
@@ -54655,7 +54655,7 @@ stru_25B42C:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B444:    dc.b $48                ; field_0
-                                        ; DATA XREF: sub_250960   o
+                                        ; DATA XREF: spawn_eyes_generator_active   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -55296,7 +55296,7 @@ stru_25B804:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B834:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_250E80   o
+                                        ; DATA XREF: spawn_jim_entering_in_darkroom   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -55326,7 +55326,7 @@ stru_25B84C:    dc.b $62                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B864:    dc.b $66                ; field_0
-                                        ; DATA XREF: sub_250ECA   o
+                                        ; DATA XREF: spawn_dark_monster   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
                 dc.b 0                  ; field_3
@@ -55341,7 +55341,7 @@ stru_25B864:    dc.b $66                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B87C:    dc.b $1B                ; field_0
-                                        ; DATA XREF: sub_250EBE   o
+                                        ; DATA XREF: spawn_dark_mini_monster   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -55356,8 +55356,8 @@ stru_25B87C:    dc.b $1B                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B894:    dc.b $73                ; field_0
-                                        ; DATA XREF: sub_250E98   o
-                                        ; sub_250EA4   o
+                                        ; DATA XREF: spawn_gears   o
+                                        ; spawn_gears_down   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
                 dc.b 0                  ; field_3
@@ -55372,7 +55372,7 @@ stru_25B894:    dc.b $73                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B8AC:    dc.b $1B                ; field_0
-                                        ; DATA XREF: sub_250E8C   o
+                                        ; DATA XREF: spawn_dark_mini_monster_2   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
                 dc.b 0                  ; field_3

@@ -1317,11 +1317,11 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_250BC4
-                dc.l sub_251028
-                dc.l sub_25106A
-                dc.l sub_2510AC
-                dc.l sub_2507F6
+                dc.l spawn_fan_fish
+                dc.l spawn_monkey_head
+                dc.l spawn_monkey_head_2
+                dc.l spawn_monkey_head_3
+                dc.l spawn_valve_gifter
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1331,48 +1331,48 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_251204
-                dc.l sub_2512D4
-                dc.l sub_25125E
-                dc.l sub_2512A4
-                dc.l sub_2512BA
-                dc.l sub_251218
-                dc.l sub_251274
-                dc.l sub_251248
-                dc.l sub_25128A
-                dc.l sub_25122E
+                dc.l spawn_cage
+                dc.l spawn_lever
+                dc.l spawn_incubator_up      ;Incubators using on level 5, when Jim in cage
+                dc.l spawn_incubator_left_up
+                dc.l spawn_incubator_right_up
+                dc.l spawn_incubator_left
+                dc.l spawn_incubator_left_down
+                dc.l spawn_incubator_down
+                dc.l spawn_incubator_right_down
+                dc.l spawn_incubator_right
                 dc.l nullsub_11
-                dc.l sub_250FC6
+                dc.l spawn_monkey_head_rotating_valve
                 dc.l nullsub_11
-                dc.l sub_2510EE
-                dc.l sub_251194
-                dc.l sub_2511AC
-                dc.l nullsub_11
-                dc.l nullsub_11
+                dc.l spawn_bee_home
+                dc.l spawn_sphere_electro
+                dc.l spawn_electro_up_down
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_250B48
-                dc.l sub_250B5C
-                dc.l sub_250B68
-                dc.l sub_250B48
-                dc.l sub_250B48
-                dc.l sub_250B48
-                dc.l sub_250B48
-                dc.l sub_251134
-                dc.l sub_25114A
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
-                dc.l sub_2509AA
+                dc.l nullsub_11
+                dc.l nullsub_11
+                dc.l spawn_fan
+                dc.l spawn_brain
+                dc.l spawn_spacesuit
+                dc.l spawn_fan
+                dc.l spawn_fan
+                dc.l spawn_fan
+                dc.l spawn_fan
+                dc.l spawn_daemon
+                dc.l spawn_fish_boss
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
+                dc.l spawn_jim_exit_door
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1418,7 +1418,7 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l sub_250A90
                 dc.l sub_250B32
                 dc.l nullsub_11
-                dc.l sub_2510EE
+                dc.l spawn_bee_home
                 dc.l sub_2510FA
                 dc.l sub_250AE2
                 dc.l sub_250B00
@@ -16133,7 +16133,7 @@ off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
                 dc.w off_232C
                 dc.w $F600
 off_1B1C36:     dc.w frame_none           ; DATA XREF: ROM:001B1C48   o
-                                        ; sub_251218+C   o ...
+                                        ; spawn_incubator_left+C   o ...
                 dc.w $FB00
                 dc.l oksub_256D04
                 dc.w frame_none
@@ -16143,7 +16143,7 @@ off_1B1C36:     dc.w frame_none           ; DATA XREF: ROM:001B1C48   o
                 dc.w $EA00
                 dc.l off_1B1C36
 off_1B1C4C:     dc.w frame_none           ; DATA XREF: ROM:001B1C5E   o
-                                        ; sub_25122E+C   o
+                                        ; spawn_incubator_right+C   o
                 dc.w $FB00
                 dc.l oksub_256CDA
                 dc.w frame_none
@@ -16153,7 +16153,7 @@ off_1B1C4C:     dc.w frame_none           ; DATA XREF: ROM:001B1C5E   o
                 dc.w $EA00
                 dc.l off_1B1C4C
 off_1B1C62:     dc.w frame_none           ; DATA XREF: ROM:001B1C76   o
-                                        ; sub_251248+C   o
+                                        ; spawn_incubator_down+C   o
                 dc.w $FB00
                 dc.l oksub_256BCC
                 dc.w frame_none
@@ -16164,7 +16164,7 @@ off_1B1C62:     dc.w frame_none           ; DATA XREF: ROM:001B1C76   o
                 dc.w $EA00
                 dc.l off_1B1C62
 off_1B1C7A:     dc.w frame_none           ; DATA XREF: ROM:001B1C8E   o
-                                        ; sub_25125E+C   o
+                                        ; spawn_incubator_up+C   o
                 dc.w $FB00
                 dc.l oksub_256C02
                 dc.w frame_none
@@ -16175,7 +16175,7 @@ off_1B1C7A:     dc.w frame_none           ; DATA XREF: ROM:001B1C8E   o
                 dc.w $EA00
                 dc.l off_1B1C7A
 off_1B1C92:     dc.w frame_none           ; DATA XREF: ROM:001B1CA4   o
-                                        ; sub_251274+C   o
+                                        ; spawn_incubator_left_down+C   o
                 dc.w $FB00
                 dc.l oksub_256C5C
                 dc.w frame_none
@@ -16185,7 +16185,7 @@ off_1B1C92:     dc.w frame_none           ; DATA XREF: ROM:001B1CA4   o
                 dc.w $EA00
                 dc.l off_1B1C92
 off_1B1CA8:     dc.w frame_none           ; DATA XREF: ROM:001B1CBA   o
-                                        ; sub_25128A+C   o
+                                        ; spawn_incubator_right_down+C   o
                 dc.w $FB00
                 dc.l oksub_256C32
                 dc.w frame_none
@@ -16195,7 +16195,7 @@ off_1B1CA8:     dc.w frame_none           ; DATA XREF: ROM:001B1CBA   o
                 dc.w $EA00
                 dc.l off_1B1CA8
 off_1B1CBE:     dc.w frame_none           ; DATA XREF: ROM:001B1CD0   o
-                                        ; sub_2512A4+C   o
+                                        ; spawn_incubator_left_up+C   o
                 dc.w $FB00
                 dc.l oksub_256CB0
                 dc.w frame_none
@@ -16205,7 +16205,7 @@ off_1B1CBE:     dc.w frame_none           ; DATA XREF: ROM:001B1CD0   o
                 dc.w $EA00
                 dc.l off_1B1CBE
 off_1B1CD4:     dc.w frame_none           ; DATA XREF: ROM:001B1CE6   o
-                                        ; sub_2512BA+C   o
+                                        ; spawn_incubator_right_up+C   o
                 dc.w $FB00
                 dc.l oksub_256C86
                 dc.w frame_none
@@ -39333,15 +39333,15 @@ spawn_hook:                             ; DATA XREF: ROM:00005188   o
 ; End of function spawn_hook
 
 
-sub_2507F6:                             ; DATA XREF: ROM:00005350   o
+spawn_valve_gifter:                             ; DATA XREF: ROM:00005350   o
                 lea     (stru_25A7E4).l,a6
                 jsr     loc_24DB18(pc)
                 bne.s   locret_25080E
                 addi.w  #$10,2(a5)
                 addi.w  #$10,4(a5)
-locret_25080E:                          ; CODE XREF: sub_2507F6+A   j
+locret_25080E:                          ; CODE XREF: spawn_valve_gifter+A   j
                 rts
-; End of function sub_2507F6
+; End of function spawn_valve_gifter
 
 
 nullsub_27:                             ; DATA XREF: ROM:000052D4   o
@@ -39538,12 +39538,12 @@ locret_2509A8:                          ; CODE XREF: spawn_green_goose+A   j
 ; End of function spawn_green_goose
 
 
-sub_2509AA:                             ; DATA XREF: ROM:000053F8   o
+spawn_jim_exit_door:                             ; DATA XREF: ROM:000053F8   o
                                         ; ROM:000053FC   o ...
                 lea     (stru_25B84C).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_2509AA
+; End of function spawn_jim_exit_door
 
 
 sub_2509B6:                             ; DATA XREF: ROM:000054C4   o
@@ -39706,29 +39706,29 @@ locret_250B46:                          ; CODE XREF: sub_250B32+A   j
 ; End of function sub_250B32
 
 
-sub_250B48:                             ; DATA XREF: ROM:000053D4   o
+spawn_fan:                             ; DATA XREF: ROM:000053D4   o
                                         ; ROM:000053E0   o ...
                 lea     (stru_25B594).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_250B5A
                 addi.w  #9,4(a5)
-locret_250B5A:                          ; CODE XREF: sub_250B48+A   j
+locret_250B5A:                          ; CODE XREF: spawn_fan+A   j
                 rts
-; End of function sub_250B48
+; End of function spawn_fan
 
 
-sub_250B5C:                             ; DATA XREF: ROM:000053D8   o
+spawn_brain:                             ; DATA XREF: ROM:000053D8   o
                 lea     (stru_25B5AC).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250B5C
+; End of function spawn_brain
 
 
-sub_250B68:                             ; DATA XREF: ROM:000053DC   o
+spawn_spacesuit:                             ; DATA XREF: ROM:000053DC   o
                 lea     (stru_25A694).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250B68
+; End of function spawn_spacesuit
 
 
 sub_250B74:                             ; DATA XREF: ROM:000054F8   o
@@ -39765,11 +39765,11 @@ locret_250BC2:                          ; CODE XREF: sub_250BA6+A   j
 ; End of function sub_250BA6
 
 
-sub_250BC4:                             ; DATA XREF: ROM:00005340   o
+spawn_fan_fish:                             ; DATA XREF: ROM:00005340   o
                 lea     (stru_25B5C4).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250BC4
+; End of function spawn_fan_fish
 
 
 sub_250BD0:                             ; DATA XREF: ROM:00005508   o
@@ -40170,7 +40170,7 @@ locret_250FC4:                          ; CODE XREF: spawn_jump_spring+E   j
 ; End of function spawn_jump_spring
 
 
-sub_250FC6:                             ; DATA XREF: ROM:000053A4   o
+spawn_monkey_head_rotating_valve:                             ; DATA XREF: ROM:000053A4   o
                 lea     (stru_25B474).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251008
@@ -40185,11 +40185,11 @@ sub_250FC6:                             ; DATA XREF: ROM:000053A4   o
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
                 move.w  4(a1),4(a5)
-loc_251006:                             ; CODE XREF: sub_250FC6+28   j
+loc_251006:                             ; CODE XREF: spawn_monkey_head_rotating_valve+28   j
                 movea.l (sp)+,a1
-locret_251008:                          ; CODE XREF: sub_250FC6+A   j
+locret_251008:                          ; CODE XREF: spawn_monkey_head_rotating_valve+A   j
                 rts
-; End of function sub_250FC6
+; End of function spawn_monkey_head_rotating_valve
 
 
 sub_25100A:                             ; DATA XREF: ROM:000056C4   o
@@ -40210,7 +40210,7 @@ sub_25101E:                             ; DATA XREF: ROM:000056CC   o
 ; End of function sub_25101E
 
 
-sub_251028:                             ; DATA XREF: ROM:00005344   o
+spawn_monkey_head:                             ; DATA XREF: ROM:00005344   o
                 cmpi.b  #0,(byte_FFFD52).l
                 bne.s   locret_251068
                 move.b  #3,d0
@@ -40220,20 +40220,20 @@ sub_251028:                             ; DATA XREF: ROM:00005344   o
                 jsr     (sub_253D20).l
                 clr.b   (a1)
                 bsr.w   sub_24AE7A
-loc_25104A:                             ; CODE XREF: sub_251028+12   j
+loc_25104A:                             ; CODE XREF: spawn_monkey_head+12   j
                 lea     (stru_25B45C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251068
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #4,$47(a5)
                 addq.w  #5,4(a5)
-locret_251068:                          ; CODE XREF: sub_251028+8   j
-                                        ; sub_251028+2C   j
+locret_251068:                          ; CODE XREF: spawn_monkey_head+8   j
+                                        ; spawn_monkey_head+2C   j
                 rts
-; End of function sub_251028
+; End of function spawn_monkey_head
 
 
-sub_25106A:                             ; DATA XREF: ROM:00005348   o
+spawn_monkey_head_2:                             ; DATA XREF: ROM:00005348   o
                 cmpi.b  #1,(byte_FFFD52).l
                 bne.s   locret_2510AA
                 move.b  #3,d0
@@ -40243,20 +40243,20 @@ sub_25106A:                             ; DATA XREF: ROM:00005348   o
                 jsr     (sub_253D20).l
                 clr.b   (a1)
                 bsr.w   sub_24AE7A
-loc_25108C:                             ; CODE XREF: sub_25106A+12   j
+loc_25108C:                             ; CODE XREF: spawn_monkey_head_2+12   j
                 lea     (stru_25B45C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2510AA
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #4,$47(a5)
                 addq.w  #5,4(a5)
-locret_2510AA:                          ; CODE XREF: sub_25106A+8   j
-                                        ; sub_25106A+2C   j
+locret_2510AA:                          ; CODE XREF: spawn_monkey_head_2+8   j
+                                        ; spawn_monkey_head_2+2C   j
                 rts
-; End of function sub_25106A
+; End of function spawn_monkey_head_2
 
 
-sub_2510AC:                             ; DATA XREF: ROM:0000534C   o
+spawn_monkey_head_3:                             ; DATA XREF: ROM:0000534C   o
                 cmpi.b  #2,(byte_FFFD52).l
                 bne.s   locret_2510EC
                 move.b  #3,d0
@@ -40266,25 +40266,25 @@ sub_2510AC:                             ; DATA XREF: ROM:0000534C   o
                 jsr     (sub_253D20).l
                 clr.b   (a1)
                 bsr.w   sub_24AE7A
-loc_2510CE:                             ; CODE XREF: sub_2510AC+12   j
+loc_2510CE:                             ; CODE XREF: spawn_monkey_head_3+12   j
                 lea     (stru_25B45C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2510EC
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #4,$47(a5)
                 addq.w  #5,4(a5)
-locret_2510EC:                          ; CODE XREF: sub_2510AC+8   j
-                                        ; sub_2510AC+2C   j
+locret_2510EC:                          ; CODE XREF: spawn_monkey_head_3+8   j
+                                        ; spawn_monkey_head_3+2C   j
                 rts
-; End of function sub_2510AC
+; End of function spawn_monkey_head_3
 
 
-sub_2510EE:                             ; DATA XREF: ROM:000053AC   o
+spawn_bee_home:                             ; DATA XREF: ROM:000053AC   o
                                         ; ROM:000054D4   o
                 lea     (stru_25B3E4).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_2510EE
+; End of function spawn_bee_home
 
 
 sub_2510FA:                             ; DATA XREF: ROM:000054D8   o
@@ -40313,17 +40313,17 @@ locret_251132:                          ; CODE XREF: sub_251112+A   j
 ; End of function sub_251112
 
 
-sub_251134:                             ; DATA XREF: ROM:000053F0   o
+spawn_daemon:                             ; DATA XREF: ROM:000053F0   o
                 lea     (stru_25B624).l,a6
                 bsr.w   loc_24DB18
                 bne.s   locret_251148
                 move.b  #$A,(byte_FFFD9C).l
-locret_251148:                          ; CODE XREF: sub_251134+A   j
+locret_251148:                          ; CODE XREF: spawn_daemon+A   j
                 rts
-; End of function sub_251134
+; End of function spawn_daemon
 
 
-sub_25114A:                             ; DATA XREF: ROM:000053F4   o
+spawn_fish_boss:                             ; DATA XREF: ROM:000053F4   o
                 move.l  a2,-(sp)
                 lea     (stru_25B66C).l,a6
                 bsr.w   loc_24DB18
@@ -40337,11 +40337,11 @@ sub_25114A:                             ; DATA XREF: ROM:000053F4   o
                 move.w  4(a2),4(a5)
                 addi.w  #$2C,4(a5) ; ','
                 move.b  #$D,(byte_FFFD9C).l
-loc_251184:                             ; CODE XREF: sub_25114A+C   j
-                                        ; sub_25114A+14   j
+loc_251184:                             ; CODE XREF: spawn_fish_boss+C   j
+                                        ; spawn_fish_boss+14   j
                 movea.l (sp)+,a2
                 rts
-; End of function sub_25114A
+; End of function spawn_fish_boss
 
 
 sub_251188:                             ; DATA XREF: ROM:000054AC   o
@@ -40351,18 +40351,18 @@ sub_251188:                             ; DATA XREF: ROM:000054AC   o
 ; End of function sub_251188
 
 
-sub_251194:                             ; DATA XREF: ROM:000053B0   o
+spawn_sphere_electro:                             ; DATA XREF: ROM:000053B0   o
                 lea     (stru_25B36C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2511AA
                 addq.w  #3,2(a5)
                 addi.w  #$23,4(a5) ; '#'
-locret_2511AA:                          ; CODE XREF: sub_251194+A   j
+locret_2511AA:                          ; CODE XREF: spawn_sphere_electro+A   j
                 rts
-; End of function sub_251194
+; End of function spawn_sphere_electro
 
 
-sub_2511AC:                             ; DATA XREF: ROM:000053B4   o
+spawn_electro_up_down:                             ; DATA XREF: ROM:000053B4   o
                 lea     (stru_25B3CC).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2511D0
@@ -40371,10 +40371,10 @@ sub_2511AC:                             ; DATA XREF: ROM:000053B4   o
                 cmpi.b  #$60,(byte_FFFD11).l ; '`'
                 bne.s   locret_2511D0
                 move.b  #$86,(a5)
-locret_2511D0:                          ; CODE XREF: sub_2511AC+A   j
-                                        ; sub_2511AC+1E   j
+locret_2511D0:                          ; CODE XREF: spawn_electro_up_down+A   j
+                                        ; spawn_electro_up_down+1E   j
                 rts
-; End of function sub_2511AC
+; End of function spawn_electro_up_down
 
 
 spawn_evil_cat_bomber:                             ; DATA XREF: ROM:00005288   o
@@ -40394,105 +40394,105 @@ locret_251202:                          ; CODE XREF: spawn_evil_cat_bomber+12   
 ; End of function spawn_evil_cat_bomber
 
 
-sub_251204:                             ; DATA XREF: ROM:00005378   o
+spawn_cage:                             ; DATA XREF: ROM:00005378   o
                 lea     (stru_25B4BC).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251216
                 subi.w  #$10,4(a5)
-locret_251216:                          ; CODE XREF: sub_251204+A   j
+locret_251216:                          ; CODE XREF: spawn_cage+A   j
                 rts
-; End of function sub_251204
+; End of function spawn_cage
 
 
-sub_251218:                             ; DATA XREF: ROM:0000538C   o
+spawn_incubator_left:                             ; DATA XREF: ROM:0000538C   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_25122C
                 move.l  #off_1B1C36,$20(a5)
-locret_25122C:                          ; CODE XREF: sub_251218+A   j
+locret_25122C:                          ; CODE XREF: spawn_incubator_left+A   j
                 rts
-; End of function sub_251218
+; End of function spawn_incubator_left
 
 
-sub_25122E:                             ; DATA XREF: ROM:0000539C   o
+spawn_incubator_right:                             ; DATA XREF: ROM:0000539C   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251246
                 move.l  #off_1B1C4C,$20(a5)
                 st      9(a5)
-locret_251246:                          ; CODE XREF: sub_25122E+A   j
+locret_251246:                          ; CODE XREF: spawn_incubator_right+A   j
                 rts
-; End of function sub_25122E
+; End of function spawn_incubator_right
 
 
-sub_251248:                             ; DATA XREF: ROM:00005394   o
+spawn_incubator_down:                             ; DATA XREF: ROM:00005394   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_25125C
                 move.l  #off_1B1C62,$20(a5)
-locret_25125C:                          ; CODE XREF: sub_251248+A   j
+locret_25125C:                          ; CODE XREF: spawn_incubator_down+A   j
                 rts
-; End of function sub_251248
+; End of function spawn_incubator_down
 
 
-sub_25125E:                             ; DATA XREF: ROM:00005380   o
+spawn_incubator_up:                             ; DATA XREF: ROM:00005380   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251272
                 move.l  #off_1B1C7A,$20(a5)
-locret_251272:                          ; CODE XREF: sub_25125E+A   j
+locret_251272:                          ; CODE XREF: spawn_incubator_up+A   j
                 rts
-; End of function sub_25125E
+; End of function spawn_incubator_up
 
 
-sub_251274:                             ; DATA XREF: ROM:00005390   o
+spawn_incubator_left_down:                             ; DATA XREF: ROM:00005390   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251288
                 move.l  #off_1B1C92,$20(a5)
-locret_251288:                          ; CODE XREF: sub_251274+A   j
+locret_251288:                          ; CODE XREF: spawn_incubator_left_down+A   j
                 rts
-; End of function sub_251274
+; End of function spawn_incubator_left_down
 
 
-sub_25128A:                             ; DATA XREF: ROM:00005398   o
+spawn_incubator_right_down:                             ; DATA XREF: ROM:00005398   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2512A2
                 move.l  #off_1B1CA8,$20(a5)
                 st      9(a5)
-locret_2512A2:                          ; CODE XREF: sub_25128A+A   j
+locret_2512A2:                          ; CODE XREF: spawn_incubator_right_down+A   j
                 rts
-; End of function sub_25128A
+; End of function spawn_incubator_right_down
 
 
-sub_2512A4:                             ; DATA XREF: ROM:00005384   o
+spawn_incubator_left_up:                             ; DATA XREF: ROM:00005384   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2512B8
                 move.l  #off_1B1CBE,$20(a5)
-locret_2512B8:                          ; CODE XREF: sub_2512A4+A   j
+locret_2512B8:                          ; CODE XREF: spawn_incubator_left_up+A   j
                 rts
-; End of function sub_2512A4
+; End of function spawn_incubator_left_up
 
 
-sub_2512BA:                             ; DATA XREF: ROM:00005388   o
+spawn_incubator_right_up:                             ; DATA XREF: ROM:00005388   o
                 lea     (stru_25B54C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_2512D2
                 move.l  #off_1B1CD4,$20(a5)
                 st      9(a5)
-locret_2512D2:                          ; CODE XREF: sub_2512BA+A   j
+locret_2512D2:                          ; CODE XREF: spawn_incubator_right_up+A   j
                 rts
-; End of function sub_2512BA
+; End of function spawn_incubator_right_up
 
 
-sub_2512D4:                             ; DATA XREF: ROM:0000537C   o
+spawn_lever:                             ; DATA XREF: ROM:0000537C   o
                 lea     (stru_25B414).l,a6
                 jsr     sub_24DB08(pc)
                 clr.b   (byte_FFFD34).l
                 rts
-; End of function sub_2512D4
+; End of function spawn_lever
 
 
 sub_2512E6:                             ; DATA XREF: ROM:00005570   o
@@ -43684,7 +43684,7 @@ locret_253D1E:                          ; CODE XREF: sub_253CFE+4   j
 
 
 sub_253D20:                             ; CODE XREF: sub_249A24+1E   p
-                                        ; sub_251028+16   p ...
+                                        ; spawn_monkey_head+16   p ...
                 tst.b   $34(a1)
                 beq.s   locret_253D40
                 move.l  a3,-(sp)
@@ -52410,7 +52410,7 @@ stru_25A67C:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A694:    dc.b $69                ; field_0
-                                        ; DATA XREF: sub_250B68   o
+                                        ; DATA XREF: spawn_spacesuit   o
                                         ; sub_252A0C+9E   o
                 dc.b 0                  ; field_1
                 dc.b 1                  ; field_2
@@ -52626,7 +52626,7 @@ stru_25A7CC:    dc.b $A                 ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25A7E4:    dc.b $B                 ; field_0
-                                        ; DATA XREF: sub_2507F6   o
+                                        ; DATA XREF: spawn_valve_gifter   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b $20                ; field_3
@@ -54518,7 +54518,7 @@ stru_25B354:    dc.b $1C                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l sub_256856         ; proc_address
 stru_25B36C:    dc.b $63                ; field_0
-                                        ; DATA XREF: sub_251194   o
+                                        ; DATA XREF: spawn_sphere_electro   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b $20                ; field_3
@@ -54578,7 +54578,7 @@ stru_25B3B4:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B3CC:    dc.b $65                ; field_0
-                                        ; DATA XREF: sub_2511AC   o
+                                        ; DATA XREF: spawn_electro_up_down   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54593,7 +54593,7 @@ stru_25B3CC:    dc.b $65                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B3E4:    dc.b $32                ; field_0
-                                        ; DATA XREF: sub_2510EE   o
+                                        ; DATA XREF: spawn_bee_home   o
                 dc.b 5                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54624,7 +54624,7 @@ stru_25B3FC:    dc.b $18                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l sub_256672         ; proc_address
 stru_25B414:    dc.b 6                  ; field_0
-                                        ; DATA XREF: sub_2512D4   o
+                                        ; DATA XREF: spawn_lever   o
                                         ; sub_2512E6   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -54670,8 +54670,8 @@ stru_25B444:    dc.b $48                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B45C:    dc.b 3                  ; field_0
-                                        ; DATA XREF: sub_251028:loc_25104A   o
-                                        ; sub_25106A:loc_25108C   o ...
+                                        ; DATA XREF: spawn_monkey_head:loc_25104A   o
+                                        ; spawn_monkey_head_2:loc_25108C   o ...
                 dc.b 0                  ; field_1
                 dc.b $A1                ; field_2
                 dc.b 0                  ; field_3
@@ -54686,7 +54686,7 @@ stru_25B45C:    dc.b 3                  ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B474:    dc.b 4                  ; field_0
-                                        ; DATA XREF: sub_250FC6   o
+                                        ; DATA XREF: spawn_monkey_head_rotating_valve   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54701,7 +54701,7 @@ stru_25B474:    dc.b 4                  ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B48C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_250FC6+2A   o
+                                        ; DATA XREF: spawn_monkey_head_rotating_valve+2A   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -54732,7 +54732,7 @@ stru_25B4A4:    dc.b $4B                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B4BC:    dc.b $60                ; field_0
-                                        ; DATA XREF: sub_251204   o
+                                        ; DATA XREF: spawn_cage   o
                 dc.b 0                  ; field_1
                 dc.b $30                ; field_2
                 dc.b 0                  ; field_3
@@ -54824,8 +54824,8 @@ stru_25B534:    dc.b $42                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l sub_252440         ; proc_address
 stru_25B54C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_251218   o
-                                        ; sub_25122E   o ...
+                                        ; DATA XREF: spawn_incubator_left   o
+                                        ; spawn_incubator_right   o ...
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b $20                ; field_3
@@ -54870,7 +54870,7 @@ stru_25B57C:    dc.b 9                  ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B594:    dc.b $68                ; field_0
-                                        ; DATA XREF: sub_250B48   o
+                                        ; DATA XREF: spawn_fan   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54885,7 +54885,7 @@ stru_25B594:    dc.b $68                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B5AC:    dc.b $20                ; field_0
-                                        ; DATA XREF: sub_250B5C   o
+                                        ; DATA XREF: spawn_brain   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
                 dc.b 0                  ; field_3
@@ -54900,7 +54900,7 @@ stru_25B5AC:    dc.b $20                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B5C4:    dc.b $45                ; field_0
-                                        ; DATA XREF: sub_250BC4   o
+                                        ; DATA XREF: spawn_fan_fish   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54962,7 +54962,7 @@ stru_25B60C:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B624:    dc.b $44                ; field_0
-                                        ; DATA XREF: sub_251134   o
+                                        ; DATA XREF: spawn_daemon   o
                                         ; sub_25552E+96   o
                 dc.b 3                  ; field_1
                 dc.b $20                ; field_2
@@ -54993,7 +54993,7 @@ stru_25B63C:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B654:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_25114A+16   o
+                                        ; DATA XREF: spawn_fish_boss+16   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -55008,7 +55008,7 @@ stru_25B654:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B66C:    dc.b $46                ; field_0
-                                        ; DATA XREF: sub_25114A+2   o
+                                        ; DATA XREF: spawn_fish_boss+2   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -55311,7 +55311,7 @@ stru_25B834:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B84C:    dc.b $62                ; field_0
-                                        ; DATA XREF: sub_2509AA   o
+                                        ; DATA XREF: spawn_jim_exit_door   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3

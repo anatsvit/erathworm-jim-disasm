@@ -1396,9 +1396,9 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_250A06
-                dc.l sub_250A12
-                dc.l sub_250A4A
+                dc.l spawn_fox
+                dc.l spawn_plant
+                dc.l spawn_plant_dead
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1408,10 +1408,10 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_251188
-                dc.l sub_251106
-                dc.l sub_251112
-                dc.l sub_250A68
+                dc.l spawn_sponge
+                dc.l spawn_frog
+                dc.l spawn_frog_2
+                dc.l spawn_queen_tail
                 dc.l sub_2509F2
                 dc.l sub_2509D8
                 dc.l sub_2509B6
@@ -16092,7 +16092,7 @@ off_1B1BDE:     dc.w off_2360           ; DATA XREF: ROM:0000C7A0   o
                 dc.w 9
                 dc.w $FF
                 dc.w $EC01
-anim_metall_egg:     dc.w off_2310           ; DATA XREF: sub_251112+14   o
+anim_frog_3:     dc.w off_2310           ; DATA XREF: spawn_frog_2+14   o
                                         ; ROM:stru_25B534   o
                 dc.w $EC01
 off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
@@ -22625,7 +22625,7 @@ off_1B55D4:     dc.w off_332C           ; DATA XREF: sub_255B4E+1AE   o
                 dc.l 0
                 dc.l 0
                 dc.w off_3288
-off_1B569A:     dc.w off_328C           ; DATA XREF: sub_250A4A+10   o
+off_1B569A:     dc.w off_328C           ; DATA XREF: spawn_plant_dead+10   o
                 dc.w $EC01
 off_1B569E:     dc.w off_32E0           ; DATA XREF: sub_254F9C:loc_25500C   o
                 dc.w $ED11
@@ -31679,7 +31679,7 @@ locret_24AD1C:                          ; CODE XREF: sub_24AD06+C   j
 
 
 sub_24AD1E:                             ; CODE XREF: sub_250550:loc_250576   p
-                                        ; sub_250A12+2   p ...
+                                        ; spawn_plant+2   p ...
                 lea     (unk_FFB23E).l,a5
                 move.w  #3,d0
 loc_24AD28:                             ; CODE XREF: sub_24AD1E+12   j
@@ -39583,14 +39583,14 @@ locret_250A04:                          ; CODE XREF: sub_2509F2+6   j
 ; End of function sub_2509F2
 
 
-sub_250A06:                             ; DATA XREF: ROM:0000547C   o
+spawn_fox:                             ; DATA XREF: ROM:0000547C   o
                 lea     (stru_25B0FC).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_250A06
+; End of function spawn_fox
 
 
-sub_250A12:                             ; DATA XREF: ROM:00005480   o
+spawn_plant:                             ; DATA XREF: ROM:00005480   o
                 move.l  a1,-(sp)
                 bsr.w   sub_24AD1E
                 bne.s   loc_250A46
@@ -39604,26 +39604,26 @@ sub_250A12:                             ; DATA XREF: ROM:00005480   o
                 move.w  4(a5),4(a1)
                 move.l  a5,$48(a1)
                 move.l  a1,$48(a5)
-loc_250A46:                             ; CODE XREF: sub_250A12+6   j
-                                        ; sub_250A12+1E   j
+loc_250A46:                             ; CODE XREF: spawn_plant+6   j
+                                        ; spawn_plant+1E   j
                 movea.l (sp)+,a1
                 rts
-; End of function sub_250A12
+; End of function spawn_plant
 
 
-sub_250A4A:                             ; DATA XREF: ROM:00005484   o
+spawn_plant_dead:                             ; DATA XREF: ROM:00005484   o
                 lea     (stru_25B00C).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_250A66
                 move.b  #$99,(a5)
                 move.l  #off_1B569A,$20(a5)
                 clr.b   $37(a5)
-locret_250A66:                          ; CODE XREF: sub_250A4A+A   j
+locret_250A66:                          ; CODE XREF: spawn_plant_dead+A   j
                 rts
-; End of function sub_250A4A
+; End of function spawn_plant_dead
 
 
-sub_250A68:                             ; DATA XREF: ROM:000054B8   o
+spawn_queen_tail:                             ; DATA XREF: ROM:000054B8   o
                 tst.b   (byte_FFFF6E).l
                 bne.s   locret_250A8E
                 lea     (stru_25B24C).l,a6
@@ -39632,10 +39632,10 @@ sub_250A68:                             ; DATA XREF: ROM:000054B8   o
                 addq.w  #5,2(a5)
                 addi.w  #$A,4(a5)
                 move.b  #6,(byte_FFFD9C).l
-locret_250A8E:                          ; CODE XREF: sub_250A68+6   j
-                                        ; sub_250A68+12   j
+locret_250A8E:                          ; CODE XREF: spawn_queen_tail+6   j
+                                        ; spawn_queen_tail+12   j
                 rts
-; End of function sub_250A68
+; End of function spawn_queen_tail
 
 
 sub_250A90:                             ; DATA XREF: ROM:000054C8   o
@@ -40294,23 +40294,23 @@ sub_2510FA:                             ; DATA XREF: ROM:000054D8   o
 ; End of function sub_2510FA
 
 
-sub_251106:                             ; DATA XREF: ROM:000054B0   o
+spawn_frog:                             ; DATA XREF: ROM:000054B0   o
                 lea     (stru_25B534).l,a6
                 jsr     sub_24DB08(pc)
                 rts
-; End of function sub_251106
+; End of function spawn_frog
 
 
-sub_251112:                             ; DATA XREF: ROM:000054B4   o
+spawn_frog_2:                             ; DATA XREF: ROM:000054B4   o
                 lea     (stru_25B534).l,a6
                 jsr     sub_24DB08(pc)
                 bne.s   locret_251132
                 move.l  #sub_252456,$42(a5)
-                move.l  #anim_metall_egg,$20(a5)
+                move.l  #anim_frog_3,$20(a5)
                 clr.b   $37(a5)
-locret_251132:                          ; CODE XREF: sub_251112+A   j
+locret_251132:                          ; CODE XREF: spawn_frog_2+A   j
                 rts
-; End of function sub_251112
+; End of function spawn_frog_2
 
 
 spawn_daemon:                             ; DATA XREF: ROM:000053F0   o
@@ -40344,11 +40344,11 @@ loc_251184:                             ; CODE XREF: spawn_fish_boss+C   j
 ; End of function spawn_fish_boss
 
 
-sub_251188:                             ; DATA XREF: ROM:000054AC   o
+spawn_sponge:                             ; DATA XREF: ROM:000054AC   o
                 lea     (stru_25B684).l,a6
                 bsr.w   loc_24DB18
                 rts
-; End of function sub_251188
+; End of function spawn_sponge
 
 
 spawn_sphere_electro:                             ; DATA XREF: ROM:000053B0   o
@@ -41713,7 +41713,7 @@ sub_252440:                             ; DATA XREF: ROM:stru_25B534   o
 ; End of function sub_252440
 
 
-sub_252456:                             ; DATA XREF: sub_251112+C   o
+sub_252456:                             ; DATA XREF: spawn_frog_2+C   o
                 move.w  (word_FFFCCA).l,d7
                 lea     (off_C724).l,a6
                 move.l  (a6,d7.w),d7
@@ -53948,7 +53948,7 @@ stru_25AFDC:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25AFF4:    dc.b $83                ; field_0
-                                        ; DATA XREF: sub_250A12+8   o
+                                        ; DATA XREF: spawn_plant+8   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b $20                ; field_3
@@ -53963,8 +53963,8 @@ stru_25AFF4:    dc.b $83                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B00C:    dc.b $34                ; field_0
-                                        ; DATA XREF: sub_250A12+14   o
-                                        ; sub_250A4A   o
+                                        ; DATA XREF: spawn_plant+14   o
+                                        ; spawn_plant_dead   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54118,7 +54118,7 @@ stru_25B0E4:    dc.b $38                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B0FC:    dc.b $33                ; field_0
-                                        ; DATA XREF: sub_250A06   o
+                                        ; DATA XREF: spawn_fox   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
                 dc.b 0                  ; field_3
@@ -54334,7 +54334,7 @@ stru_25B234:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B24C:    dc.b $24                ; field_0
-                                        ; DATA XREF: sub_250A68+8   o
+                                        ; DATA XREF: spawn_queen_tail+8   o
                 dc.b $32                ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54808,8 +54808,8 @@ stru_25B51C:    dc.b $98                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B534:    dc.b $42                ; field_0
-                                        ; DATA XREF: sub_251106   o
-                                        ; sub_251112   o
+                                        ; DATA XREF: spawn_frog   o
+                                        ; spawn_frog_2   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
                 dc.b 0                  ; field_3
@@ -54817,7 +54817,7 @@ stru_25B534:    dc.b $42                ; field_0
                 dc.b 0                  ; field_5
                 dc.l off_0              ; rom_addr_1
                 dc.w $4000              ; vram_offset
-                dc.l anim_metall_egg         ; anim_address
+                dc.l anim_frog_3         ; anim_address
                 dc.b 4                  ; field_10
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
@@ -55023,7 +55023,7 @@ stru_25B66C:    dc.b $46                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B684:    dc.b $43                ; field_0
-                                        ; DATA XREF: sub_251188   o
+                                        ; DATA XREF: spawn_sponge   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3

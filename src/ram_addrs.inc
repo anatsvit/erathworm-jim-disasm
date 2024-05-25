@@ -361,7 +361,7 @@ word_FFFDD4 equ $FFFFFDD4
 word_FFFDD6 equ $FFFFFDD6
 word_FFFDD8 equ $FFFFFDD8
 word_FFFDDA equ $FFFFFDDA
-byte_FFFDDC equ $FFFFFDDC
+air_refiller_seconds equ $FFFFFDDC
 byte_FFFDDD equ $FFFFFDDD
 byte_FFFDDE equ $FFFFFDDE
 is_jim_ropejumper equ $FFFFFDDF

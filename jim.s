@@ -1461,7 +1461,7 @@ object_spawners:       dc.l nullsub_11         ; DATA XREF: sub_24AF0E+26   o
                 dc.l spawn_continue_actived
 off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                                         ; jim_activities_collision+B4   o
-                dc.l sub_24E870
+                dc.l activity_level_finish
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1470,7 +1470,7 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_24E8EC
+                dc.l activity_teleport_toilet
                 dc.l loc_24E8FA
                 dc.l loc_24E908
                 dc.l loc_24E916
@@ -1495,7 +1495,7 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l sub_24E3E2
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_24E88E
+                dc.l activity_chain
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1509,13 +1509,13 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l loc_24E9D4
                 dc.l loc_24E9E2
                 dc.l loc_24DFF0
-                dc.l loc_24E018
+                dc.l activity_tire
                 dc.l loc_24E040
                 dc.l sub_24E11C
                 dc.l loc_24E146
                 dc.l loc_24E170
                 dc.l loc_24E192
-                dc.l sub_24E1B8
+                dc.l activity_thorn
                 dc.l loc_24E1E2
                 dc.l loc_24E20E
                 dc.l loc_24E238
@@ -1531,7 +1531,7 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l sub_24E5FA
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_24E1B8
+                dc.l activity_thorn
                 dc.l loc_24E1E2
                 dc.l loc_24E20E
                 dc.l loc_24E238
@@ -1713,7 +1713,7 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_24E1B8
+                dc.l activity_thorn
                 dc.l nullsub_11
                 dc.l nullsub_11
 off_5978:       dc.l sub_249232         ; DATA XREF: sub_249178+32   o
@@ -7207,7 +7207,7 @@ byte_1AC388:    dc.b $93,$64            ; DATA XREF: ROM:001AC37E   o
                 dc.l byte_1AC376
 byte_1AC396:    dc.b   0,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001AC39C   o
-                                        ; ROM:stru_25A694   o
+                                        ; ROM:object_spacesuit   o
                 dc.l byte_1AC396
 byte_1AC3A0:    dc.b   0,  0,$8A,$91,  0,$3D,  0,$51
                                         ; DATA XREF: ROM:001AC3B2   o
@@ -7349,7 +7349,7 @@ byte_1AC6C6:    dc.b   0,  0,$91,  0    ; DATA XREF: ROM:001AC6D4   o
                 dc.b $84,$3B,  0,  0,  0,  0,$85,  0,$83,  1,$FD,$24,  0,$FF,$82,  0
 byte_1AC6E8:    dc.b   0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  1,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1
                                         ; DATA XREF: ROM:001AC73E   o
-                                        ; ROM:stru_25B5C4   o
+                                        ; ROM:object_fan_fish   o
                 dc.b   0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF
                 dc.b   0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,  0,  0,  0,$80,  0
                 dc.l byte_1AC6E8
@@ -7589,13 +7589,13 @@ byte_1ACCE0:    dc.b $84, $F,  0,  0,  0,  0,  0,  0,$8F,  1,$D8,  0,$85,  0,$84
                 dc.l byte_1ACCE0
 byte_1ACCFA:    dc.b   0,  0,  0,  0,  0,$FF,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF
                                         ; DATA XREF: ROM:001ACD50   o
-                                        ; ROM:stru_25B624   o
+                                        ; ROM:object_daemon   o
                 dc.b   0,  0,  0,  0,  0,$FF,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  1
                 dc.b   0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,$80,  0
                 dc.l byte_1ACCFA
 byte_1ACD54:    dc.b   0,$FF,  0,$FF,  0,  0,$FF,$FF,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,$FF,$FF,  0,  0,$FF,  0,$FF,$FF,$FF,  0,  0,$FF,$FF,$FF,  0
                                         ; DATA XREF: ROM:001ACE4A   o
-                                        ; ROM:stru_25B684   o
+                                        ; ROM:object_sponge   o
                 dc.b   0,$FF,$FF,$FF,  0,  0,$FF,$FF,$FF,  0,$FF,  0,  0,$FF,$FF,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,$FF,  0,  0,$84,$83,$FF,  0
                 dc.b   0,  0,$FF,  1,$FF,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,  0,  1,$FF,  0,$FF,  0,$FF,  1,  0,  0,$FF,  1,  0,  1,$FF,  0,$FF,  1
                 dc.b   0,  0,$FF,  1,  0,  1,  0,  1,$FF,  0,  0,  1,  0,  1,  0,  0,  0,  1,  0,  1,$FF,  1,  0,  0,$84,$83,  0,  1,  0,  0,  1,  1
@@ -7953,7 +7953,7 @@ off_1AD468:     dc.w off_259C           ; DATA XREF: ROM:001AD458   o
                 dc.w off_2594
                 dc.b $EC,  1
 anim_hamster:   dc.w off_2064           ; DATA XREF: ROM:001AD49E   o
-                                        ; ROM:stru_25B12C   o
+                                        ; ROM:object_hamster   o
                 dc.b $ED,$14,  0, $A,  0,  0,  0,  0
                 dc.w off_2088
 off_1AD47E:     dc.w off_2064           ; DATA XREF: ROM:001AD484   o
@@ -8462,8 +8462,8 @@ anim_sphere_energy:dc.w off_EDC         ; DATA XREF: ROM:stru_25B384   o
                 dc.w off_F00
                 dc.w $ED11
                 dc.b   0,  0,  0,$86,$F6,  0
-off_1AD964:     dc.w off_19C4           ; DATA XREF: sub_24E8EC+13E   o
-                                        ; sub_24E8EC+218   o
+off_1AD964:     dc.w off_19C4           ; DATA XREF: activity_teleport_toilet+13E   o
+                                        ; activity_teleport_toilet+218   o
                 dc.b $ED,  1,$FD,$EA,  0,$44
                 dc.w off_19C8
                 dc.w off_19CC
@@ -10446,7 +10446,7 @@ word_1AEBE8:    dc.w $F501              ; DATA XREF: ROM:001AEC02   o
                 dc.w off_1360
                 dc.w $F800
 off_1AEC22:     dc.w off_1A54           ; DATA XREF: damage_from_enemy:loc_24B09A   o
-                                        ; sub_24E1B8+210   o
+                                        ; activity_thorn+210   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $3E
@@ -10473,7 +10473,7 @@ off_1AEC36:     dc.w off_1A60           ; DATA XREF: ROM:001AF6AE   o
                 dc.w off_1A54
                 dc.w off_1A54
                 dc.w $F800
-off_1AEC58:     dc.w off_1A54           ; DATA XREF: sub_24E1B8+1C0   o
+off_1AEC58:     dc.w off_1A54           ; DATA XREF: activity_thorn+1C0   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $3E
@@ -15063,12 +15063,12 @@ anim_water_after_fall:dc.w off_2414     ; DATA XREF: ROM:stru_25AF4C   o
                 dc.w off_2440
                 dc.w off_2440
                 dc.w $F600
-anim_pete_hook: dc.w off_6AC            ; DATA XREF: ROM:stru_25B0CC   o
+anim_pete_hook: dc.w off_6AC            ; DATA XREF: ROM:object_pete_hook   o
                 dc.w $EC01
                 dc.w off_6AC
                 dc.w $EC01
 anim_machine:   dc.w off_2C7C           ; DATA XREF: ROM:001B131E   o
-                                        ; ROM:stru_25B0E4   o
+                                        ; ROM:object_machine   o
                 dc.w off_2C7C
                 dc.w off_2C7C
                 dc.w off_2C80
@@ -16215,7 +16215,7 @@ off_1B1CD4:     dc.w frame_none           ; DATA XREF: ROM:001B1CE6   o
                 dc.w $EA00
                 dc.l off_1B1CD4
 anim_fan:     dc.w off_24E4           ; DATA XREF: ROM:001B1CF4   o
-                                        ; ROM:stru_25B594   o
+                                        ; ROM:object_fan   o
                 dc.w off_24E8
                 dc.w off_24EC
                 dc.w off_24F0
@@ -16902,7 +16902,7 @@ off_1B228C:     dc.w off_2D00           ; DATA XREF: ROM:001B22C0   o
                 dc.w $EA00
                 dc.l off_1B228C
 anim_sponge:     dc.w off_33B0           ; DATA XREF: ROM:001B22F6   o
-                                        ; ROM:stru_25B684   o
+                                        ; ROM:object_sponge   o
                 dc.w off_33B0
                 dc.w off_33B4
                 dc.w off_33B4
@@ -17180,7 +17180,7 @@ word_1B2544:    dc.w $EE87              ; DATA XREF: ROM:001B255E   o
                 dc.w $EA00
                 dc.l word_1B2544
 anim_bob_cat:   dc.w off_DF4            ; DATA XREF: ROM:001B25D0   o
-                                        ; ROM:stru_25B114   o
+                                        ; ROM:object_bob_cat   o
                 dc.w $ED11
                 dc.w 0
                 dc.w $2B
@@ -19520,7 +19520,7 @@ off_1B38A8:     dc.w off_868            ; DATA XREF: sub_25608A:loc_2560BA   o
 off_1B38C6:     dc.w off_868            ; DATA XREF: spawn_lever_actived+C   o
                 dc.w $EC01
 anim_hook_briliance:dc.w off_AB4        ; DATA XREF: ROM:001B3904   o
-                                        ; ROM:stru_25A7CC   o ...
+                                        ; ROM:object_hook   o ...
                 dc.w $FB00
                 dc.l oksub_249526
                 dc.w $EB00
@@ -21101,7 +21101,7 @@ off_1B45E0:     dc.w off_26C0           ; DATA XREF: ROM:001B45E6   o
                 dc.l anim_pete
                 dc.w $EA00
                 dc.l off_1B42A6
-anim_unknown_14:dc.w off_ED8            ; DATA XREF: ROM:stru_25B36C   o
+anim_unknown_14:dc.w off_ED8            ; DATA XREF: ROM:object_sphere_electro   o
                 dc.w $EC01
 off_1B4610:     dc.w off_ED8            ; DATA XREF: sub_253012+14   o
                 dc.w $EEBB
@@ -21111,7 +21111,7 @@ off_1B4610:     dc.w off_ED8            ; DATA XREF: sub_253012+14   o
                 dc.w $63
                 dc.w $EC01
 anim_electro_up_down:dc.w off_EA4       ; DATA XREF: ROM:001B46E6   o
-                                        ; ROM:stru_25B3CC   o
+                                        ; ROM:object_electro_up_down   o
                 dc.w $ED11
                 dc.w 9
                 dc.w 0
@@ -21477,10 +21477,10 @@ off_1B490A:     dc.w off_34E0           ; DATA XREF: ROM:001B4900   o
                 dc.w off_34EC
                 dc.w $EA00
                 dc.l off_1B490A
-anim_run_here:  dc.w off_994            ; DATA XREF: ROM:stru_25A7FC   o
+anim_run_here:  dc.w off_994            ; DATA XREF: ROM:object_run_here   o
                 dc.w $EC01
 anim_brain:     dc.w off_214C           ; DATA XREF: ROM:001B497A   o
-                                        ; ROM:stru_25B5AC   o
+                                        ; ROM:object_brain   o
                 dc.w $EE8D
                 dc.w off_214C
                 dc.w off_2150
@@ -22430,7 +22430,7 @@ off_1B5464:     dc.w off_D90            ; DATA XREF: sub_253706+448   o
                 dc.w $EE8F
                 dc.w off_DA4
 anim_fox:       dc.w off_DB0            ; DATA XREF: ROM:001B5460   o
-                                        ; ROM:stru_25B0FC   o
+                                        ; ROM:object_fox   o
                 dc.w $ED11
                 dc.w 0
                 dc.w $33
@@ -31707,7 +31707,7 @@ locret_24AD4C:                          ; CODE XREF: sub_24AD36+C   j
 ; End of function sub_24AD36
 
 
-sub_24AD4E:                             ; CODE XREF: sub_24DB08   p
+sub_24AD4E:                             ; CODE XREF: spawn_object   p
                                         ; sub_24DD18+BA   p ...
                 lea     (byte_FFAF8E).l,a5
                 move.w  #$19,d0
@@ -31722,7 +31722,7 @@ locret_24AD64:                          ; CODE XREF: sub_24AD4E+C   j
 
 
 sub_24AD66:                             ; CODE XREF: sub_249692:loc_2496E2   p
-                                        ; sub_24DB08:loc_24DB10   p ...
+                                        ; spawn_object:loc_24DB10   p ...
                 lea     (unk_FFAE36).l,a5
                 move.w  #$15,d0
 loc_24AD70:                             ; CODE XREF: sub_24AD66+12   j
@@ -32358,8 +32358,8 @@ sub_24B424:
 ; End of function sub_24B424
 
 
-oksub_24B42C:                           ; CODE XREF: sub_24E1B8+18E   p
-                                        ; sub_24E1B8+19C   p ...
+oksub_24B42C:                           ; CODE XREF: activity_thorn+18E   p
+                                        ; activity_thorn+19C   p ...
                 tst.b   (byte_FFFD24).l
                 bne.s   locret_24B454
                 tst.b   (jim_dead_enable).l
@@ -35741,7 +35741,7 @@ sub_24DB00:
 ; End of function sub_24DB00
 
 
-sub_24DB08:                             ; CODE XREF: spawn_sea_gate+E   p
+spawn_object:                             ; CODE XREF: spawn_sea_gate+E   p
                                         ; spawn_petes_home_door+6   p ...
                 jsr     sub_24AD4E(pc)
                 bne.s   locret_24DB50
@@ -35758,7 +35758,7 @@ loc_24DB18:                             ; CODE XREF: spawn_cow+10   p
                 jsr     sub_24AD06(pc)
                 bne.s   locret_24DB50
 loc_24DB1E:                             ; CODE XREF: sub_24DB00+6   j
-                                        ; sub_24DB08+6   j ...
+                                        ; spawn_object+6   j ...
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  d2,$32(a5)
                 move.b  d3,$34(a5)
@@ -35771,9 +35771,9 @@ loc_24DB1E:                             ; CODE XREF: sub_24DB00+6   j
                 clr.b   (a2,d2.w)
                 eor.b   d0,d0
 locret_24DB50:                          ; CODE XREF: sub_24DB00+4   j
-                                        ; sub_24DB08+4   j ...
+                                        ; spawn_object+4   j ...
                 rts
-; End of function sub_24DB08
+; End of function spawn_object
 
 
 sub_24DB52:
@@ -36190,7 +36190,7 @@ loc_24DFF0:                             ; DATA XREF: ROM:00005638   o
 locret_24E016:                          ; CODE XREF: sub_24DFE8+18   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E018:                             ; DATA XREF: ROM:0000563C   o
+activity_tire:                             ; DATA XREF: ROM:0000563C   o
                 cmpi.b  #$5E,(byte_FFFD11).l ; '^'
                 beq.s   sub_24DFE8
                 tst.w   (jim_y_speed).l
@@ -36315,18 +36315,19 @@ locret_24E1B6:                          ; CODE XREF: sub_24E11C+7C   j
 ; End of function sub_24E11C
 
 
-sub_24E1B8:                             ; DATA XREF: ROM:00005654   o
+;Калоить
+activity_thorn:                             ; DATA XREF: ROM:00005654   o
                                         ; ROM:00005694   o ...
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E1CA
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E1DC
-loc_24E1CA:                             ; CODE XREF: sub_24E1B8+8   j
+loc_24E1CA:                             ; CODE XREF: activity_thorn+8   j
                 clr.w   (jim_delta_x_speed).l
                 move.w  #$FA24,(jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E1DC:                          ; CODE XREF: sub_24E1B8+10   j
+locret_24E1DC:                          ; CODE XREF: activity_thorn+10   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36337,12 +36338,12 @@ loc_24E1E2:                             ; DATA XREF: ROM:00005658   o
                 beq.s   loc_24E1F4
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E208
-loc_24E1F4:                             ; CODE XREF: sub_24E1B8+32   j
+loc_24E1F4:                             ; CODE XREF: activity_thorn+32   j
                 move.w  #$3E8,(jim_delta_x_speed).l
                 move.w  #$FA24,(jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E208:                          ; CODE XREF: sub_24E1B8+3A   j
+locret_24E208:                          ; CODE XREF: activity_thorn+3A   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36353,12 +36354,12 @@ loc_24E20E:                             ; DATA XREF: ROM:0000565C   o
                 beq.s   loc_24E220
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E232
-loc_24E220:                             ; CODE XREF: sub_24E1B8+5E   j
+loc_24E220:                             ; CODE XREF: activity_thorn+5E   j
                 move.w  #$190,(jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E232:                          ; CODE XREF: sub_24E1B8+66   j
+locret_24E232:                          ; CODE XREF: activity_thorn+66   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36369,12 +36370,12 @@ loc_24E238:                             ; DATA XREF: ROM:00005660   o
                 beq.s   loc_24E24A
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E25E
-loc_24E24A:                             ; CODE XREF: sub_24E1B8+88   j
+loc_24E24A:                             ; CODE XREF: activity_thorn+88   j
                 move.w  #$3E8,(jim_delta_x_speed).l
                 move.w  #$5DC,(jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E25E:                          ; CODE XREF: sub_24E1B8+90   j
+locret_24E25E:                          ; CODE XREF: activity_thorn+90   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36385,12 +36386,12 @@ loc_24E264:                             ; DATA XREF: ROM:00005664   o
                 beq.s   loc_24E276
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E288
-loc_24E276:                             ; CODE XREF: sub_24E1B8+B4   j
+loc_24E276:                             ; CODE XREF: activity_thorn+B4   j
                 clr.w   (jim_delta_x_speed).l
                 move.w  #$5DC,(jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E288:                          ; CODE XREF: sub_24E1B8+BC   j
+locret_24E288:                          ; CODE XREF: activity_thorn+BC   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36401,12 +36402,12 @@ loc_24E28E:                             ; DATA XREF: ROM:00005668   o
                 beq.s   loc_24E2A0
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E2B4
-loc_24E2A0:                             ; CODE XREF: sub_24E1B8+DE   j
+loc_24E2A0:                             ; CODE XREF: activity_thorn+DE   j
                 move.w  #$FC18,(jim_delta_x_speed).l
                 move.w  #$5DC,(jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E2B4:                          ; CODE XREF: sub_24E1B8+E6   j
+locret_24E2B4:                          ; CODE XREF: activity_thorn+E6   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36417,12 +36418,12 @@ loc_24E2BA:                             ; DATA XREF: ROM:0000566C   o
                 beq.s   loc_24E2CC
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E2DE
-loc_24E2CC:                             ; CODE XREF: sub_24E1B8+10A   j
+loc_24E2CC:                             ; CODE XREF: activity_thorn+10A   j
                 move.w  #$FE70,(jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E2DE:                          ; CODE XREF: sub_24E1B8+112   j
+locret_24E2DE:                          ; CODE XREF: activity_thorn+112   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
@@ -36433,18 +36434,18 @@ loc_24E2E4:                             ; DATA XREF: ROM:00005670   o
                 beq.s   loc_24E2F6
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E30A
-loc_24E2F6:                             ; CODE XREF: sub_24E1B8+134   j
+loc_24E2F6:                             ; CODE XREF: activity_thorn+134   j
                 move.w  #$FC18,(jim_delta_x_speed).l
                 move.w  #$FA24,(jim_y_speed).l
                 bra.w   loc_24E310
 ; ---------------------------------------------------------------------------
-locret_24E30A:                          ; CODE XREF: sub_24E1B8+13C   j
+locret_24E30A:                          ; CODE XREF: activity_thorn+13C   j
                 rts
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E310:                             ; CODE XREF: sub_24E1B8+20   j
-                                        ; sub_24E1B8+4C   j ...
+loc_24E310:                             ; CODE XREF: activity_thorn+20   j
+                                        ; activity_thorn+4C   j ...
                 clr.b   (is_jim_jumping).l
                 clr.b   (byte_FFFCFA).l
                 clr.b   (jim_timer_in_air).l
@@ -36464,17 +36465,17 @@ loc_24E310:                             ; CODE XREF: sub_24E1B8+20   j
                 cmpi.b  #1,(byte_FFA6AB).l
                 beq.s   loc_24E374
                 jsr     oksub_24B42C(pc)
-loc_24E374:                             ; CODE XREF: sub_24E1B8+19A   j
-                                        ; sub_24E1B8+1A8   j ...
+loc_24E374:                             ; CODE XREF: activity_thorn+19A   j
+                                        ; activity_thorn+1A8   j ...
                 jsr     sub_24B3CE(pc)
                 move.l  #off_1AEC58,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #$3E,(jim_state).l ; '>'
-locret_24E390:                          ; CODE XREF: sub_24E1B8+18C   j
+locret_24E390:                          ; CODE XREF: activity_thorn+18C   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E392:                             ; CODE XREF: sub_24E1B8+26   j
-                                        ; sub_24E1B8+52   j ...
+loc_24E392:                             ; CODE XREF: activity_thorn+26   j
+                                        ; activity_thorn+52   j ...
                 clr.b   (is_jim_jumping).l
                 clr.b   (byte_FFFCFA).l
                 clr.b   (jim_timer_in_air).l
@@ -36487,9 +36488,9 @@ loc_24E392:                             ; CODE XREF: sub_24E1B8+26   j
                 move.l  #off_1AEC22,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #$3E,(jim_state).l ; '>'
-locret_24E3E0:                          ; CODE XREF: sub_24E1B8+20E   j
+locret_24E3E0:                          ; CODE XREF: activity_thorn+20E   j
                 rts
-; End of function sub_24E1B8
+; End of function activity_thorn
 
 
 sub_24E3E2:                             ; DATA XREF: ROM:000055F8   o
@@ -36851,31 +36852,31 @@ sub_24E866:                             ; DATA XREF: ROM:00005684   o
 ; End of function sub_24E866
 
 
-sub_24E870:                             ; DATA XREF: ROM:0000557C   o
+activity_level_finish:                             ; DATA XREF: ROM:0000557C   o
                 cmpi.b  #$F,(selectedLevelOption).l
                 beq.s   loc_24E882
-loc_24E87A:                             ; CODE XREF: sub_24E870+1A   j
+loc_24E87A:                             ; CODE XREF: activity_level_finish+1A   j
                 st      (level_finish_enable).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E882:                             ; CODE XREF: sub_24E870+8   j
+loc_24E882:                             ; CODE XREF: activity_level_finish+8   j
                 move.b  #$46,d0 ; 'F'
                 bsr.w   sub_24ADBA
                 bne.s   loc_24E87A
                 rts
-; End of function sub_24E870
+; End of function activity_level_finish
 
 
-sub_24E88E:                             ; DATA XREF: ROM:00005604   o
+activity_chain:                             ; DATA XREF: ROM:00005604   o
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E8A6
                 cmpi.b  #$E,(jim_state).l
                 beq.s   locret_24E8A6
                 st      (byte_FFFD13).l
-locret_24E8A6:                          ; CODE XREF: sub_24E88E+6   j
-                                        ; sub_24E88E+10   j
+locret_24E8A6:                          ; CODE XREF: activity_chain+6   j
+                                        ; activity_chain+10   j
                 rts
-; End of function sub_24E88E
+; End of function activity_chain
 
 
 sub_24E8A8:                             ; DATA XREF: ROM:00005720   o
@@ -36906,40 +36907,40 @@ locret_24E8EA:                          ; CODE XREF: sub_24E8CA+6   j
 ; End of function sub_24E8CA
 
 
-sub_24E8EC:                             ; DATA XREF: ROM:000055A0   o
-                move.l  #byte_25C304,(dword_FFA668).l
+activity_teleport_toilet:                             ; DATA XREF: ROM:000055A0   o
+                move.l  #teleport_toilet_data,(teleport_data_offset).l ; Унитазный телепорт
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E8FA:                             ; DATA XREF: ROM:000055A4   o
-                move.l  #byte_25C30E,(dword_FFA668).l
+                move.l  #byte_25C30E,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E908:                             ; DATA XREF: ROM:000055A8   o
-                move.l  #byte_25C318,(dword_FFA668).l
+                move.l  #byte_25C318,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E916:                             ; DATA XREF: ROM:000055AC   o
-                move.l  #byte_25C322,(dword_FFA668).l
+                move.l  #byte_25C322,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E924:                             ; DATA XREF: ROM:000055B0   o
-                move.l  #byte_25C32C,(dword_FFA668).l
+                move.l  #byte_25C32C,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E932:                             ; DATA XREF: ROM:000055B4   o
-                move.l  #byte_25C336,(dword_FFA668).l
+                move.l  #byte_25C336,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E940:                             ; DATA XREF: ROM:000055E4   o
-                move.l  #byte_25C340,(dword_FFA668).l
+                move.l  #byte_25C340,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E94E:                             ; DATA XREF: ROM:000055E8   o
-                move.l  #byte_25C34A,(dword_FFA668).l
+                move.l  #byte_25C34A,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E95C:                             ; DATA XREF: ROM:000055EC   o
-                move.l  #byte_25C354,(dword_FFA668).l
+                move.l  #byte_25C354,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E96A:                             ; DATA XREF: ROM:000055F0   o
@@ -36948,39 +36949,39 @@ loc_24E96A:                             ; DATA XREF: ROM:000055F0   o
                 clr.b   (byte_FFFD9D).l
                 clr.b   (byte_FFFD9C).l
                 st      (byte_FFFC01).l
-                move.l  #byte_25C35E,(dword_FFA668).l
+                move.l  #byte_25C35E,(teleport_data_offset).l
                 move.w  #0,(word_FFFCC6).l
                 bra.w   loc_24EADC
 ; ---------------------------------------------------------------------------
-locret_24E99A:                          ; CODE XREF: sub_24E8EC+84   j
+locret_24E99A:                          ; CODE XREF: activity_teleport_toilet+84   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_24E99C:                             ; DATA XREF: ROM:000055F4   o
-                move.l  #byte_25C368,(dword_FFA668).l
+                move.l  #byte_25C368,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E9AA:                             ; DATA XREF: ROM:00005624   o
-                move.l  #byte_25C372,(dword_FFA668).l
+                move.l  #byte_25C372,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E9B8:                             ; DATA XREF: ROM:00005628   o
-                move.l  #byte_25C37C,(dword_FFA668).l
+                move.l  #byte_25C37C,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E9C6:                             ; DATA XREF: ROM:0000562C   o
-                move.l  #byte_25C386,(dword_FFA668).l
+                move.l  #byte_25C386,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E9D4:                             ; DATA XREF: ROM:00005630   o
-                move.l  #byte_25C390,(dword_FFA668).l
+                move.l  #byte_25C390,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24E9E2:                             ; DATA XREF: ROM:00005634   o
-                move.l  #byte_25C39A,(dword_FFA668).l
+                move.l  #byte_25C39A,(teleport_data_offset).l
                 bra.w   *+4
 ; ---------------------------------------------------------------------------
-loc_24E9F0:                             ; CODE XREF: sub_24E8EC+A   j
-                                        ; sub_24E8EC+18   j ...
+loc_24E9F0:                             ; CODE XREF: activity_teleport_toilet+A   j
+                                        ; activity_teleport_toilet+18   j ...
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.b   (byte_FFFD9D).l
                 clr.b   (byte_FFFD9C).l
@@ -37003,15 +37004,15 @@ loc_24E9F0:                             ; CODE XREF: sub_24E8EC+A   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24EA68:                             ; CODE XREF: sub_24E8EC+160   j
+loc_24EA68:                             ; CODE XREF: activity_teleport_toilet+160   j
                 move.w  #$6000,(word_FFA6F0).l
                 jsr     sub_24ACC8(pc)
-loc_24EA74:                             ; CODE XREF: sub_24E8EC+194   j
+loc_24EA74:                             ; CODE XREF: activity_teleport_toilet+194   j
                 jsr     (sub_24EB7A).l
                 tst.b   (byte_FFFDF1).l
                 beq.s   loc_24EA74
                 jsr     sub_24CBA0(pc)
-                movea.l (dword_FFA668).l,a0
+                movea.l (teleport_data_offset).l,a0
                 move.w  (a0),d0
                 move.b  d0,(selectedLevelOption).l
                 jsr     (sub_24EBC6).l
@@ -37024,8 +37025,8 @@ loc_24EA74:                             ; CODE XREF: sub_24E8EC+194   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24EAC2:                             ; CODE XREF: sub_24E8EC+1BA   j
-                                        ; sub_24E8EC+1E2   j
+loc_24EAC2:                             ; CODE XREF: activity_teleport_toilet+1BA   j
+                                        ; activity_teleport_toilet+1E2   j
                 jsr     (sub_24EB7A).l
                 tst.b   (byte_FFFDF1).l
                 beq.s   loc_24EAC2
@@ -37033,7 +37034,7 @@ loc_24EAC2:                             ; CODE XREF: sub_24E8EC+1BA   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
 ; ---------------------------------------------------------------------------
-loc_24EADC:                             ; CODE XREF: sub_24E8EC+AA   j
+loc_24EADC:                             ; CODE XREF: activity_teleport_toilet+AA   j
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.b   (is_jim_fire).l
                 clr.w   (jim_delta_x_speed).l
@@ -37053,13 +37054,13 @@ loc_24EADC:                             ; CODE XREF: sub_24E8EC+AA   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24EB42:                             ; CODE XREF: sub_24E8EC+23A   j
-                                        ; sub_24E8EC+262   j
+loc_24EB42:                             ; CODE XREF: activity_teleport_toilet+23A   j
+                                        ; activity_teleport_toilet+262   j
                 jsr     (sub_24EB7A).l
                 tst.b   (byte_FFFDF1).l
                 beq.s   loc_24EB42
                 jsr     sub_24CBA0(pc)
-                movea.l (dword_FFA668).l,a0
+                movea.l (teleport_data_offset).l,a0
                 move.w  (a0),d0
                 move.b  d0,(selectedLevelOption).l
                 jsr     (sub_24EBC6).l
@@ -37067,11 +37068,11 @@ loc_24EB42:                             ; CODE XREF: sub_24E8EC+23A   j
                 clr.b   (byte_FFFDF0).l
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
-; End of function sub_24E8EC
+; End of function activity_teleport_toilet
 
 
-sub_24EB7A:                             ; CODE XREF: sub_24E8EC:loc_24EA74   p
-                                        ; sub_24E8EC:loc_24EAC2   p ...
+sub_24EB7A:                             ; CODE XREF: activity_teleport_toilet:loc_24EA74   p
+                                        ; activity_teleport_toilet:loc_24EAC2   p ...
                 addq.b  #1,(byte_FFA6CF).l
                 jsr     (oksub_245D54).l
                 jsr     (oksub_2459BE).l
@@ -37094,8 +37095,8 @@ sub_24EB7A:                             ; CODE XREF: sub_24E8EC:loc_24EA74   p
 ; End of function sub_24EB7A
 
 
-sub_24EBC6:                             ; CODE XREF: sub_24E8EC+1A8   p
-                                        ; sub_24E8EC+276   p
+sub_24EBC6:                             ; CODE XREF: activity_teleport_toilet+1A8   p
+                                        ; activity_teleport_toilet+276   p
                 move.w  #$8B00,(VDP_CTRL).l ; SET_HSCROLL_TYPE_AS_FULLSCREEN
                                         ; FULLSCREEN_VSCROLL_MODE
                                         ; DISABLE_EXT_INTERRUPT
@@ -37108,7 +37109,7 @@ sub_24EBC6:                             ; CODE XREF: sub_24E8EC+1A8   p
                 mulu.w  #$40,d1 ; '@'
                 lea     (level_config).l,a6 ; Jim start X
                 adda.l  d1,a6
-                movea.l (dword_FFA668).l,a4
+                movea.l (teleport_data_offset).l,a4
                 addq.w  #2,a4
                 nop
                 move.w  0(a4),(camera_x).l
@@ -37518,14 +37519,14 @@ sub_24F1D8:                             ; DATA XREF: ROM:0025BC30   o
                 tst.b   (byte_FFFD48).l
                 beq.s   loc_24F1F4
                 clr.b   (byte_FFFD48).l
-                move.l  #byte_25C3A4,(dword_FFA668).l
+                move.l  #byte_25C3A4,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 loc_24F1F4:                             ; CODE XREF: sub_24F1D8+6   j
                 tst.b   (byte_FFFD4A).l
                 beq.s   locret_24F210
                 clr.b   (byte_FFFD4A).l
-                move.l  #byte_25C3B8,(dword_FFA668).l
+                move.l  #byte_25C3B8,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 locret_24F210:                          ; CODE XREF: sub_24F1D8+22   j
@@ -37618,7 +37619,7 @@ loc_24F318:                             ; CODE XREF: sub_24F23E+6   j
                 tst.b   (byte_FFFD49).l
                 beq.s   locret_24F334
                 clr.b   (byte_FFFD49).l
-                move.l  #byte_25C3AE,(dword_FFA668).l
+                move.l  #byte_25C3AE,(teleport_data_offset).l
                 bra.w   loc_24E9F0
 ; ---------------------------------------------------------------------------
 locret_24F334:                          ; CODE XREF: sub_24F23E+E0   j
@@ -37978,7 +37979,7 @@ loc_24F816:                             ; CODE XREF: sub_24F808+6   j
                 tst.b   (byte_FFFDF6).l
                 beq.s   loc_24F838
                 clr.b   (byte_FFFDF6).l
-                move.l  #byte_25C3C2,(dword_FFA668).l
+                move.l  #byte_25C3C2,(teleport_data_offset).l
                 bsr.w   loc_24E9F0
                 bsr.w   sub_24BDA8
                 rts
@@ -39036,7 +39037,7 @@ spawn_sea_gate:                             ; DATA XREF: ROM:00005528   o
                 tst.b   (byte_FFFE03).l
                 bne.s   locret_250538
                 lea     (stru_25B6B4).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
 locret_250538:                          ; CODE XREF: spawn_sea_gate+6   j
                 rts
 ; End of function spawn_sea_gate
@@ -39044,7 +39045,7 @@ locret_250538:                          ; CODE XREF: spawn_sea_gate+6   j
 
 spawn_petes_home_door:                             ; DATA XREF: ROM:00005540   o
                 lea     (stru_25BB4C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_25054E
                 addq.w  #8,2(a5)
                 addq.w  #2,4(a5)
@@ -39082,7 +39083,7 @@ spawn_sea_gate_2:                             ; DATA XREF: ROM:0000552C   o
                 tst.b   (byte_FFFE04).l
                 bne.s   locret_2505A8
                 lea     (stru_25B6B4).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2505A8
                 move.b  #$3B,(a5) ; ';'
                 move.l  #off_1B59DE,$20(a5)
@@ -39094,7 +39095,7 @@ locret_2505A8:                          ; CODE XREF: spawn_sea_gate_2+6   j
 
 spawn_open_handler:                             ; DATA XREF: ROM:00005520   o
                 lea     (stru_25B6FC).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2505CA
                 tst.b   (byte_FFFE03).l
                 beq.s   locret_2505CA
@@ -39108,7 +39109,7 @@ locret_2505CA:                          ; CODE XREF: spawn_open_handler+A   j
 
 spawn_open_handler_2:                             ; DATA XREF: ROM:00005524   o
                 lea     (stru_25B6FC).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2505F8
                 move.b  #$3D,(a5) ; '='
                 move.l  #anim_open_handler,$20(a5)
@@ -39327,7 +39328,7 @@ locret_2507E8:
 
 
 spawn_hook:                             ; DATA XREF: ROM:00005188   o
-                lea     (stru_25A7CC).l,a6
+                lea     (object_hook).l,a6
                 jsr     loc_24DB18(pc)
                 rts
 ; End of function spawn_hook
@@ -39361,7 +39362,7 @@ nullsub_28:                             ; DATA XREF: ROM:00005184   o
 
 
 spawn_hook_2:                             ; DATA XREF: ROM:00005194   o
-                lea     (stru_25A7CC).l,a6
+                lea     (object_hook).l,a6
                 jsr     loc_24DB18(pc)
                 bne.s   locret_250828
                 move.b  #$20,7(a5) ; ' '
@@ -39371,8 +39372,8 @@ locret_250828:                          ; CODE XREF: spawn_hook_2+A   j
 
 
 spawn_run_here:                             ; DATA XREF: ROM:0000518C   o
-                lea     (stru_25A7FC).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_run_here).l,a6
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_run_here
 
@@ -39475,7 +39476,7 @@ locret_250910:                          ; CODE XREF: spawn_lawyer+A   j
 
 
 spawn_dog:                             ; DATA XREF: ROM:0000525C   o
-                lea     (stru_25AB5C).l,a6
+                lea     (object_dog).l,a6
                 jsr     loc_24DB18(pc)
                 move.b  #2,(byte_FFFD9C).l
                 rts
@@ -39507,7 +39508,7 @@ locret_25095E:                          ; CODE XREF: spawn_water_monster+A   j
 
 spawn_eyes_generator_active:                             ; DATA XREF: ROM:000052E8   o
                 lea     (stru_25B444).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250974
                 addq.w  #4,2(a5)
                 addq.w  #1,4(a5)
@@ -39519,7 +39520,7 @@ locret_250974:                          ; CODE XREF: spawn_eyes_generator_active
 spawn_eyes_generator_closed:                             ; DATA XREF: ROM:000052C4   o
                 move.b  #1,(byte_FFFD3E).l
                 lea     (stru_25B42C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250992
                 addq.w  #4,2(a5)
                 addq.w  #1,4(a5)
@@ -39541,7 +39542,7 @@ locret_2509A8:                          ; CODE XREF: spawn_green_goose+A   j
 spawn_jim_exit_door:                             ; DATA XREF: ROM:000053F8   o
                                         ; ROM:000053FC   o ...
                 lea     (stru_25B84C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_jim_exit_door
 
@@ -39550,7 +39551,7 @@ spawn_abscess_down:                             ; DATA XREF: ROM:000054C4   o
                 tst.b   (byte_FFFF6E).l
                 beq.s   locret_2509D6
                 lea     (stru_25B21C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2509D6
                 move.b  #$1F,(a5)
                 move.l  #off_1B150E,$20(a5)
@@ -39564,7 +39565,7 @@ spawn_abscess_left:                             ; DATA XREF: ROM:000054C0   o
                 tst.b   (byte_FFFF6E).l
                 beq.s   locret_2509F0
                 lea     (stru_25B21C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2509F0
                 st      9(a5)
 locret_2509F0:                          ; CODE XREF: spawn_abscess_left+6   j
@@ -39577,15 +39578,15 @@ spawn_abscess:                             ; DATA XREF: ROM:000054BC   o
                 tst.b   (byte_FFFF6E).l
                 beq.s   locret_250A04
                 lea     (stru_25B21C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
 locret_250A04:                          ; CODE XREF: spawn_abscess+6   j
                 rts
 ; End of function spawn_abscess
 
 
 spawn_fox:                             ; DATA XREF: ROM:0000547C   o
-                lea     (stru_25B0FC).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_fox).l,a6
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_fox
 
@@ -39598,7 +39599,7 @@ spawn_plant:                             ; DATA XREF: ROM:00005480   o
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 movea.l a5,a1
                 lea     (stru_25B00C).l,a6
-                bsr.w   sub_24DB08
+                bsr.w   spawn_object
                 bne.s   loc_250A46
                 move.w  2(a5),2(a1)
                 move.w  4(a5),4(a1)
@@ -39613,7 +39614,7 @@ loc_250A46:                             ; CODE XREF: spawn_plant+6   j
 
 spawn_plant_dead:                             ; DATA XREF: ROM:00005484   o
                 lea     (stru_25B00C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250A66
                 move.b  #$99,(a5)
                 move.l  #off_1B569A,$20(a5)
@@ -39627,7 +39628,7 @@ spawn_queen_tail:                             ; DATA XREF: ROM:000054B8   o
                 tst.b   (byte_FFFF6E).l
                 bne.s   locret_250A8E
                 lea     (stru_25B24C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250A8E
                 addq.w  #5,2(a5)
                 addi.w  #$A,4(a5)
@@ -39652,7 +39653,7 @@ spawn_queen_boss:                             ; DATA XREF: ROM:000054C8   o
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_250AC0:                             ; CODE XREF: spawn_queen_boss+14   j
                 lea     (stru_25B234).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250AE0
                 addi.w  #$F,2(a5)
                 addi.w  #$1D,4(a5)
@@ -39666,7 +39667,7 @@ spawn_moving_platform:                             ; DATA XREF: ROM:000054DC   o
                 tst.b   (byte_FFFF6E).l
                 beq.s   locret_250AFE
                 lea     (stru_25BAEC).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250AFE
                 move.b  #6,(byte_FFFD9C).l
 locret_250AFE:                          ; CODE XREF: spawn_moving_platform+6   j
@@ -39679,7 +39680,7 @@ spawn_moving_platform_right:                             ; DATA XREF: ROM:000054
                 tst.b   (byte_FFFF6E).l
                 beq.s   locret_250B24
                 lea     (stru_25BAEC).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250B24
                 move.b  #6,(byte_FFFD9C).l
                 move.l  #byte_1AD0B6,$A(a5)
@@ -39691,14 +39692,14 @@ locret_250B24:                          ; CODE XREF: spawn_moving_platform_right
 
 spawn_advanced_home:                             ; DATA XREF: ROM:000054F4   o
                 lea     (stru_25BB34).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_advanced_home
 
 
 spawn_butt_monster:                             ; DATA XREF: ROM:000054CC   o
                 lea     (stru_25B2C4).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250B46
                 move.b  #6,(byte_FFFD9C).l
 locret_250B46:                          ; CODE XREF: spawn_butt_monster+A   j
@@ -39708,8 +39709,8 @@ locret_250B46:                          ; CODE XREF: spawn_butt_monster+A   j
 
 spawn_fan:                             ; DATA XREF: ROM:000053D4   o
                                         ; ROM:000053E0   o ...
-                lea     (stru_25B594).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_fan).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_250B5A
                 addi.w  #9,4(a5)
 locret_250B5A:                          ; CODE XREF: spawn_fan+A   j
@@ -39718,15 +39719,15 @@ locret_250B5A:                          ; CODE XREF: spawn_fan+A   j
 
 
 spawn_brain:                             ; DATA XREF: ROM:000053D8   o
-                lea     (stru_25B5AC).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_brain).l,a6
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_brain
 
 
 spawn_spacesuit:                             ; DATA XREF: ROM:000053DC   o
-                lea     (stru_25A694).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_spacesuit).l,a6
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_spacesuit
 
@@ -39747,14 +39748,14 @@ loc_250B96:                             ; CODE XREF: spawn_ufo+10   j
 
 
 spawn_machine:                             ; DATA XREF: ROM:000054FC   o
-                lea     (stru_25B0E4).l,a6
+                lea     (object_machine).l,a6
                 jsr     loc_24DB18(pc)
                 rts
 ; End of function spawn_machine
 
 
 spawn_pete_hook:                             ; DATA XREF: ROM:00005500   o
-                lea     (stru_25B0CC).l,a6
+                lea     (object_pete_hook).l,a6
                 jsr     sub_24AD1E(pc)
                 bne.s   locret_250BC2
                 jsr     loc_24DB1E(pc)
@@ -39766,8 +39767,8 @@ locret_250BC2:                          ; CODE XREF: spawn_pete_hook+A   j
 
 
 spawn_fan_fish:                             ; DATA XREF: ROM:00005340   o
-                lea     (stru_25B5C4).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_fan_fish).l,a6
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_fan_fish
 
@@ -39792,7 +39793,7 @@ loc_250BDA:                             ; CODE XREF: spawn_counterpoise+4   j
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 movea.l a5,a1
                 lea     (stru_25B144).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 add.w   d4,2(a5)
                 move.w  2(a5),2(a1)
                 move.w  4(a5),4(a1)
@@ -39804,8 +39805,8 @@ locret_250C24:                          ; CODE XREF: spawn_counterpoise+22   j
 
 
 spawn_bob_cat:                             ; DATA XREF: ROM:00005518   o
-                lea     (stru_25B114).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_bob_cat).l,a6
+                jsr     spawn_object(pc)
                 move.b  #7,(byte_FFFD9C).l
                 rts
 ; End of function spawn_bob_cat
@@ -39825,8 +39826,8 @@ loc_250C44:                             ; CODE XREF: spawn_hamster+4   j
                 cmpi.b  #$9A,(a5)
                 beq.s   locret_250C76
 loc_250C58:                             ; CODE XREF: spawn_hamster+10   j
-                lea     (stru_25B12C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_hamster).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_250C76
                 add.w   d1,2(a5)
                 move.l  a5,(dword_FFFDA0).l
@@ -39847,7 +39848,7 @@ spawn_submarine:                             ; DATA XREF: ROM:00005514   o
                 move.w  #$1E,(word_FFFCA0).l
                 move.b  #$41,(byte_FFFCFE).l ; 'A'
                 lea     (stru_25B1A4).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.w   loc_250DA4
                 clr.b   $50(a5)
                 move.l  a5,(dword_FFFC86).l
@@ -39938,7 +39939,7 @@ loc_250DB6:                             ; CODE XREF: spawn_spring_platform+4   j
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 movea.l a5,a1
                 lea     (stru_25B174).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 add.w   d4,2(a5)
                 move.w  2(a5),2(a1)
                 move.w  4(a5),4(a1)
@@ -39990,7 +39991,7 @@ loc_250E32:                             ; CODE XREF: spawn_spring_platform_2+4  
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 movea.l a5,a1
                 lea     (stru_25B174).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 add.w   d4,2(a5)
                 move.b  #$58,(a5) ; 'X'
                 move.w  2(a5),2(a1)
@@ -40004,28 +40005,28 @@ locret_250E7E:                          ; CODE XREF: spawn_spring_platform_2+20 
 
 spawn_jim_entering_in_darkroom:                             ; DATA XREF: ROM:00005300   o
                 lea     (stru_25B834).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_jim_entering_in_darkroom
 
 
 spawn_dark_mini_monster_2:                             ; DATA XREF: ROM:00005304   o
                 lea     (stru_25B8AC).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_dark_mini_monster_2
 
 
 spawn_gears:                             ; DATA XREF: ROM:00005308   o
                 lea     (stru_25B894).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_gears
 
 
 spawn_gears_down:                             ; DATA XREF: ROM:0000530C   o
                 lea     (stru_25B894).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_250EBC
                 move.b  #$FF,$35(a5)
                 subi.w  #$10,4(a5)
@@ -40036,14 +40037,14 @@ locret_250EBC:                          ; CODE XREF: spawn_gears_down+A   j
 
 spawn_dark_mini_monster:                             ; DATA XREF: ROM:000052F8   o
                 lea     (stru_25B87C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_dark_mini_monster
 
 
 spawn_dark_monster:                             ; DATA XREF: ROM:000052FC   o
                 lea     (stru_25B864).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_dark_monster
 
@@ -40172,7 +40173,7 @@ locret_250FC4:                          ; CODE XREF: spawn_jump_spring+E   j
 
 spawn_monkey_head_rotating_valve:                             ; DATA XREF: ROM:000053A4   o
                 lea     (stru_25B474).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_251008
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #1,$47(a5)
@@ -40222,7 +40223,7 @@ spawn_monkey_head:                             ; DATA XREF: ROM:00005344   o
                 bsr.w   sub_24AE7A
 loc_25104A:                             ; CODE XREF: spawn_monkey_head+12   j
                 lea     (stru_25B45C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_251068
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #4,$47(a5)
@@ -40245,7 +40246,7 @@ spawn_monkey_head_2:                             ; DATA XREF: ROM:00005348   o
                 bsr.w   sub_24AE7A
 loc_25108C:                             ; CODE XREF: spawn_monkey_head_2+12   j
                 lea     (stru_25B45C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2510AA
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #4,$47(a5)
@@ -40268,7 +40269,7 @@ spawn_monkey_head_3:                             ; DATA XREF: ROM:0000534C   o
                 bsr.w   sub_24AE7A
 loc_2510CE:                             ; CODE XREF: spawn_monkey_head_3+12   j
                 lea     (stru_25B45C).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_2510EC
                 move.b  #$10,(byte_FFFD9C).l
                 move.b  #4,$47(a5)
@@ -40282,28 +40283,28 @@ locret_2510EC:                          ; CODE XREF: spawn_monkey_head_3+8   j
 spawn_bee_home:                             ; DATA XREF: ROM:000053AC   o
                                         ; ROM:000054D4   o
                 lea     (stru_25B3E4).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_bee_home
 
 
 spawn_frog_3:                             ; DATA XREF: ROM:000054D8   o
                 lea     (stru_25B504).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_frog_3
 
 
 spawn_frog:                             ; DATA XREF: ROM:000054B0   o
                 lea     (stru_25B534).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 rts
 ; End of function spawn_frog
 
 
 spawn_frog_2:                             ; DATA XREF: ROM:000054B4   o
                 lea     (stru_25B534).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_251132
                 move.l  #sub_252456,$42(a5)
                 move.l  #anim_frog_3,$20(a5)
@@ -40314,7 +40315,7 @@ locret_251132:                          ; CODE XREF: spawn_frog_2+A   j
 
 
 spawn_daemon:                             ; DATA XREF: ROM:000053F0   o
-                lea     (stru_25B624).l,a6
+                lea     (object_daemon).l,a6
                 bsr.w   loc_24DB18
                 bne.s   locret_251148
                 move.b  #$A,(byte_FFFD9C).l
@@ -40345,15 +40346,15 @@ loc_251184:                             ; CODE XREF: spawn_fish_boss+C   j
 
 
 spawn_sponge:                             ; DATA XREF: ROM:000054AC   o
-                lea     (stru_25B684).l,a6
+                lea     (object_sponge).l,a6
                 bsr.w   loc_24DB18
                 rts
 ; End of function spawn_sponge
 
 
 spawn_sphere_electro:                             ; DATA XREF: ROM:000053B0   o
-                lea     (stru_25B36C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_sphere_electro).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_2511AA
                 addq.w  #3,2(a5)
                 addi.w  #$23,4(a5) ; '#'
@@ -40363,8 +40364,8 @@ locret_2511AA:                          ; CODE XREF: spawn_sphere_electro+A   j
 
 
 spawn_electro_up_down:                             ; DATA XREF: ROM:000053B4   o
-                lea     (stru_25B3CC).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_electro_up_down).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_2511D0
                 addq.w  #3,2(a5)
                 subi.w  #$23,4(a5) ; '#'
@@ -40395,8 +40396,8 @@ locret_251202:                          ; CODE XREF: spawn_evil_cat_bomber+12   
 
 
 spawn_cage:                             ; DATA XREF: ROM:00005378   o
-                lea     (stru_25B4BC).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_cage).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_251216
                 subi.w  #$10,4(a5)
 locret_251216:                          ; CODE XREF: spawn_cage+A   j
@@ -40405,8 +40406,8 @@ locret_251216:                          ; CODE XREF: spawn_cage+A   j
 
 
 spawn_incubator_left:                             ; DATA XREF: ROM:0000538C   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_25122C
                 move.l  #off_1B1C36,$20(a5)
 locret_25122C:                          ; CODE XREF: spawn_incubator_left+A   j
@@ -40415,8 +40416,8 @@ locret_25122C:                          ; CODE XREF: spawn_incubator_left+A   j
 
 
 spawn_incubator_right:                             ; DATA XREF: ROM:0000539C   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_251246
                 move.l  #off_1B1C4C,$20(a5)
                 st      9(a5)
@@ -40426,8 +40427,8 @@ locret_251246:                          ; CODE XREF: spawn_incubator_right+A   j
 
 
 spawn_incubator_down:                             ; DATA XREF: ROM:00005394   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_25125C
                 move.l  #off_1B1C62,$20(a5)
 locret_25125C:                          ; CODE XREF: spawn_incubator_down+A   j
@@ -40436,8 +40437,8 @@ locret_25125C:                          ; CODE XREF: spawn_incubator_down+A   j
 
 
 spawn_incubator_up:                             ; DATA XREF: ROM:00005380   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_251272
                 move.l  #off_1B1C7A,$20(a5)
 locret_251272:                          ; CODE XREF: spawn_incubator_up+A   j
@@ -40446,8 +40447,8 @@ locret_251272:                          ; CODE XREF: spawn_incubator_up+A   j
 
 
 spawn_incubator_left_down:                             ; DATA XREF: ROM:00005390   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_251288
                 move.l  #off_1B1C92,$20(a5)
 locret_251288:                          ; CODE XREF: spawn_incubator_left_down+A   j
@@ -40456,8 +40457,8 @@ locret_251288:                          ; CODE XREF: spawn_incubator_left_down+A
 
 
 spawn_incubator_right_down:                             ; DATA XREF: ROM:00005398   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_2512A2
                 move.l  #off_1B1CA8,$20(a5)
                 st      9(a5)
@@ -40467,8 +40468,8 @@ locret_2512A2:                          ; CODE XREF: spawn_incubator_right_down+
 
 
 spawn_incubator_left_up:                             ; DATA XREF: ROM:00005384   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_2512B8
                 move.l  #off_1B1CBE,$20(a5)
 locret_2512B8:                          ; CODE XREF: spawn_incubator_left_up+A   j
@@ -40477,8 +40478,8 @@ locret_2512B8:                          ; CODE XREF: spawn_incubator_left_up+A  
 
 
 spawn_incubator_right_up:                             ; DATA XREF: ROM:00005388   o
-                lea     (stru_25B54C).l,a6
-                jsr     sub_24DB08(pc)
+                lea     (object_incubator).l,a6
+                jsr     spawn_object(pc)
                 bne.s   locret_2512D2
                 move.l  #off_1B1CD4,$20(a5)
                 st      9(a5)
@@ -40489,7 +40490,7 @@ locret_2512D2:                          ; CODE XREF: spawn_incubator_right_up+A 
 
 spawn_lever:                             ; DATA XREF: ROM:0000537C   o
                 lea     (stru_25B414).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 clr.b   (byte_FFFD34).l
                 rts
 ; End of function spawn_lever
@@ -40497,7 +40498,7 @@ spawn_lever:                             ; DATA XREF: ROM:0000537C   o
 
 spawn_lever_actived:                             ; DATA XREF: ROM:00005570   o
                 lea     (stru_25B414).l,a6
-                jsr     sub_24DB08(pc)
+                jsr     spawn_object(pc)
                 bne.s   locret_251304
                 move.l  #off_1B38C6,$20(a5)
                 move.b  #7,(a5)
@@ -41482,7 +41483,7 @@ sub_2521D4:
 ; End of function sub_2521D4
 
 
-sub_2521EA:                             ; DATA XREF: ROM:stru_25AB5C   o
+sub_2521EA:                             ; DATA XREF: ROM:object_dog   o
                 tst.l   $A(a1)
                 beq.s   locret_25221E
                 cmpi.b  #$80,$3D(a1)
@@ -42268,7 +42269,7 @@ sub_252A0C:                             ; DATA XREF: ROM:00003784   o
 loc_252AA4:                             ; CODE XREF: sub_252A0C+7C   j
                 jsr     sub_24AD4E(pc)
                 bne.s   locret_252AD2
-                lea     (stru_25A694).l,a6
+                lea     (object_spacesuit).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),d7
                 move.w  d7,2(a5)
@@ -45844,7 +45845,7 @@ locret_2555BA:                          ; CODE XREF: sub_25552E+3A   j
 loc_2555BC:                             ; CODE XREF: sub_25552E+18   j
                 jsr     (sub_24AD06).l
                 bne.s   locret_2555BA
-                lea     (stru_25B624).l,a6
+                lea     (object_daemon).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #$86,(a5)
                 move.l  #off_1B222E,$20(a5)
@@ -52409,7 +52410,7 @@ stru_25A67C:    dc.b $86                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25A694:    dc.b $69                ; field_0
+object_spacesuit:    dc.b $69                ; field_0
                                         ; DATA XREF: spawn_spacesuit   o
                                         ; sub_252A0C+9E   o
                 dc.b 0                  ; field_1
@@ -52609,7 +52610,7 @@ stru_25A7B4:    dc.b $86                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25A7CC:    dc.b $A                 ; field_0
+object_hook:    dc.b $A                 ; field_0
                                         ; DATA XREF: spawn_hook   o
                                         ; spawn_hook_2   o
                 dc.b 0                  ; field_1
@@ -52640,7 +52641,7 @@ stru_25A7E4:    dc.b $B                 ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25A7FC:    dc.b $86                ; field_0
+object_run_here:    dc.b $86                ; field_0
                                         ; DATA XREF: spawn_run_here   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -53194,7 +53195,7 @@ stru_25AB44:    dc.b $86                ; field_0
                 dc.b $80                ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25AB5C:    dc.b 2                  ; field_0
+object_dog:    dc.b 2                  ; field_0
                                         ; DATA XREF: spawn_dog   o
                 dc.b 3                  ; field_1
                 dc.b $21                ; field_2
@@ -54087,7 +54088,7 @@ stru_25B0B4:    dc.b $2A                ; field_0
                 dc.b $80                ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B0CC:    dc.b $81                ; field_0
+object_pete_hook:    dc.b $81                ; field_0
                                         ; DATA XREF: spawn_pete_hook   o
                 dc.b 0                  ; field_1
                 dc.b $A1                ; field_2
@@ -54102,7 +54103,7 @@ stru_25B0CC:    dc.b $81                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B0E4:    dc.b $38                ; field_0
+object_machine:    dc.b $38                ; field_0
                                         ; DATA XREF: spawn_machine   o
                 dc.b $C                 ; field_1
                 dc.b $21                ; field_2
@@ -54117,7 +54118,7 @@ stru_25B0E4:    dc.b $38                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B0FC:    dc.b $33                ; field_0
+object_fox:    dc.b $33                ; field_0
                                         ; DATA XREF: spawn_fox   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
@@ -54132,7 +54133,7 @@ stru_25B0FC:    dc.b $33                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B114:    dc.b $2B                ; field_0
+object_bob_cat:    dc.b $2B                ; field_0
                                         ; DATA XREF: spawn_bob_cat   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
@@ -54147,7 +54148,7 @@ stru_25B114:    dc.b $2B                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B12C:    dc.b $9A                ; field_0
+object_hamster:    dc.b $9A                ; field_0
                                         ; DATA XREF: spawn_hamster:loc_250C58   o
                 dc.b 0                  ; field_1
                 dc.b $31                ; field_2
@@ -54517,7 +54518,7 @@ stru_25B354:    dc.b $1C                ; field_0
                 dc.b 2                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l sub_256856         ; proc_address
-stru_25B36C:    dc.b $63                ; field_0
+object_sphere_electro:    dc.b $63                ; field_0
                                         ; DATA XREF: spawn_sphere_electro   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -54577,7 +54578,7 @@ stru_25B3B4:    dc.b $86                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B3CC:    dc.b $65                ; field_0
+object_electro_up_down:    dc.b $65                ; field_0
                                         ; DATA XREF: spawn_electro_up_down   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -54731,7 +54732,7 @@ stru_25B4A4:    dc.b $4B                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B4BC:    dc.b $60                ; field_0
+object_cage:    dc.b $60                ; field_0
                                         ; DATA XREF: spawn_cage   o
                 dc.b 0                  ; field_1
                 dc.b $30                ; field_2
@@ -54823,7 +54824,7 @@ stru_25B534:    dc.b $42                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l sub_252440         ; proc_address
-stru_25B54C:    dc.b $86                ; field_0
+object_incubator:    dc.b $86                ; field_0
                                         ; DATA XREF: spawn_incubator_left   o
                                         ; spawn_incubator_right   o ...
                 dc.b 0                  ; field_1
@@ -54869,7 +54870,7 @@ stru_25B57C:    dc.b 9                  ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B594:    dc.b $68                ; field_0
+object_fan:    dc.b $68                ; field_0
                                         ; DATA XREF: spawn_fan   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -54884,7 +54885,7 @@ stru_25B594:    dc.b $68                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B5AC:    dc.b $20                ; field_0
+object_brain:    dc.b $20                ; field_0
                                         ; DATA XREF: spawn_brain   o
                 dc.b 0                  ; field_1
                 dc.b $21                ; field_2
@@ -54899,7 +54900,7 @@ stru_25B5AC:    dc.b $20                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B5C4:    dc.b $45                ; field_0
+object_fan_fish:    dc.b $45                ; field_0
                                         ; DATA XREF: spawn_fan_fish   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -54961,7 +54962,7 @@ stru_25B60C:    dc.b $86                ; field_0
                 dc.b $80                ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B624:    dc.b $44                ; field_0
+object_daemon:    dc.b $44                ; field_0
                                         ; DATA XREF: spawn_daemon   o
                                         ; sub_25552E+96   o
                 dc.b 3                  ; field_1
@@ -55022,7 +55023,7 @@ stru_25B66C:    dc.b $46                ; field_0
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
-stru_25B684:    dc.b $43                ; field_0
+object_sponge:    dc.b $43                ; field_0
                                         ; DATA XREF: spawn_sponge   o
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
@@ -56576,38 +56577,38 @@ level_config:   dc.w 0                  ; DATA XREF: sub_2476AC+38   o
                 dc.b 0
                 dc.b $37
                 dc.b 0
-byte_25C304:    dc.b   0,  0,$13,$30,  2,$60,  0,$BB,  1,$92
-                                        ; DATA XREF: sub_24E8EC   o
+teleport_toilet_data:    dc.b   0,  0,$13,$30,  2,$60,  0,$BB,  1,$92
+                                        ; DATA XREF: activity_teleport_toilet   o
 byte_25C30E:    dc.b   0,  1,  3,$60,  6,  0,  0,$B0,  1,$A7
-                                        ; DATA XREF: sub_24E8EC:loc_24E8FA   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E8FA   o
 byte_25C318:    dc.b   0,  1,  3,$20,  7,  0,  0,$B5,  1,$A8
-                                        ; DATA XREF: sub_24E8EC:loc_24E908   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E908   o
 byte_25C322:    dc.b   0,  3,  0,$10,  2,$D0,  0,$75,  1,$9D
-                                        ; DATA XREF: sub_24E8EC:loc_24E916   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E916   o
 byte_25C32C:    dc.b   0,  1,  3,$10,  3,$60,  0,$BF,  1,$A8
-                                        ; DATA XREF: sub_24E8EC:loc_24E924   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E924   o
 byte_25C336:    dc.b   0,  1,  0,$10,  3,$90,  0,$5B,  1,$91
-                                        ; DATA XREF: sub_24E8EC:loc_24E932   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E932   o
 byte_25C340:    dc.b   0,  1,  4,$C0,  0,$30,  0,$E2,  1,$B7
-                                        ; DATA XREF: sub_24E8EC:loc_24E940   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E940   o
 byte_25C34A:    dc.b   0,  1,  0,$A0,  1,$80,  0,$B7,  1,$71
-                                        ; DATA XREF: sub_24E8EC:loc_24E94E   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E94E   o
 byte_25C354:    dc.b   0,  1,  0,$A0,  1,$80,  0,$B7,  1,$71
-                                        ; DATA XREF: sub_24E8EC:loc_24E95C   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E95C   o
 byte_25C35E:    dc.b   0,$17,  0,  0,  1,  0,  0,$4D,  1,$A0
-                                        ; DATA XREF: sub_24E8EC+98   o
+                                        ; DATA XREF: activity_teleport_toilet+98   o
 byte_25C368:    dc.b   0, $A,  8,  0,  0,$10,  0,$B8,  1,$8F
-                                        ; DATA XREF: sub_24E8EC:loc_24E99C   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E99C   o
 byte_25C372:    dc.b   0, $A, $C,$20,  2,$70,  0,$B6,  1,$9B
-                                        ; DATA XREF: sub_24E8EC:loc_24E9AA   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E9AA   o
 byte_25C37C:    dc.b   0, $A, $A,$E0,  2,$80,  0,$BA,  1,$9F
-                                        ; DATA XREF: sub_24E8EC:loc_24E9B8   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E9B8   o
 byte_25C386:    dc.b   0, $C,  0,$10,  0,  0,  0,$66,  1,$5F
-                                        ; DATA XREF: sub_24E8EC:loc_24E9C6   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E9C6   o
 byte_25C390:    dc.b   0, $A, $B,$B0,  0,  0,  0,$B4,  1,$4F
-                                        ; DATA XREF: sub_24E8EC:loc_24E9D4   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E9D4   o
 byte_25C39A:    dc.b   0,  8,  0,$10,  1,$B0,  0,$1A,  1,$93
-                                        ; DATA XREF: sub_24E8EC:loc_24E9E2   o
+                                        ; DATA XREF: activity_teleport_toilet:loc_24E9E2   o
 byte_25C3A4:    dc.b   0,  2,  0,  0,  0,$20,  0,$94,  1,$9B
                                         ; DATA XREF: sub_24F1D8+E   o
 byte_25C3AE:    dc.b   0,  1,  2,$C0,  3,$C0,  0,$B7,  1,$9C

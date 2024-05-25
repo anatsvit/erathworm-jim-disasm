@@ -29,7 +29,7 @@ dword_FFA65A equ $FFFFA65A
 dword_FFA65E equ $FFFFA65E
 byte_FFA662 equ $FFFFA662
 dword_FFA664 equ $FFFFA664
-dword_FFA668 equ $FFFFA668
+teleport_data_offset equ $FFFFA668
 map_width_x2 equ $FFFFA66C
 map_width equ $FFFFA66E
 map_width_x16 equ $FFFFA670

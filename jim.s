@@ -1491,7 +1491,7 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l loc_24E94E
                 dc.l loc_24E95C
                 dc.l loc_24E96A
-                dc.l loc_24E99C
+                dc.l activity_teleport_return_from_darkroom
                 dc.l sub_24E3E2
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1507,7 +1507,7 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l loc_24E9B8
                 dc.l loc_24E9C6
                 dc.l loc_24E9D4
-                dc.l loc_24E9E2
+                dc.l activity_teleport_to_slug_for_butt
                 dc.l loc_24DFF0
                 dc.l activity_tire
                 dc.l loc_24E040
@@ -36909,39 +36909,39 @@ locret_24E8EA:                          ; CODE XREF: sub_24E8CA+6   j
 
 activity_teleport_toilet:                             ; DATA XREF: ROM:000055A0   o
                 move.l  #teleport_toilet_data,(teleport_data_offset).l ; Унитазный телепорт
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E8FA:                             ; DATA XREF: ROM:000055A4   o
                 move.l  #byte_25C30E,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E908:                             ; DATA XREF: ROM:000055A8   o
                 move.l  #byte_25C318,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E916:                             ; DATA XREF: ROM:000055AC   o
                 move.l  #byte_25C322,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E924:                             ; DATA XREF: ROM:000055B0   o
                 move.l  #byte_25C32C,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E932:                             ; DATA XREF: ROM:000055B4   o
                 move.l  #byte_25C336,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E940:                             ; DATA XREF: ROM:000055E4   o
                 move.l  #byte_25C340,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E94E:                             ; DATA XREF: ROM:000055E8   o
                 move.l  #byte_25C34A,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E95C:                             ; DATA XREF: ROM:000055EC   o
                 move.l  #byte_25C354,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E96A:                             ; DATA XREF: ROM:000055F0   o
                 tst.b   (byte_FFFC01).l
@@ -36956,31 +36956,31 @@ loc_24E96A:                             ; DATA XREF: ROM:000055F0   o
 locret_24E99A:                          ; CODE XREF: activity_teleport_toilet+84   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E99C:                             ; DATA XREF: ROM:000055F4   o
-                move.l  #byte_25C368,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+activity_teleport_return_from_darkroom:                             ; DATA XREF: ROM:000055F4   o
+                move.l  #teleport_return_from_darkroom_data,(teleport_data_offset).l
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E9AA:                             ; DATA XREF: ROM:00005624   o
                 move.l  #byte_25C372,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E9B8:                             ; DATA XREF: ROM:00005628   o
                 move.l  #byte_25C37C,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E9C6:                             ; DATA XREF: ROM:0000562C   o
                 move.l  #byte_25C386,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24E9D4:                             ; DATA XREF: ROM:00005630   o
                 move.l  #byte_25C390,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
-loc_24E9E2:                             ; DATA XREF: ROM:00005634   o
-                move.l  #byte_25C39A,(teleport_data_offset).l
+activity_teleport_to_slug_for_butt:                             ; DATA XREF: ROM:00005634   o
+                move.l  #teleport_to_slug_for_butt_data,(teleport_data_offset).l
                 bra.w   *+4
 ; ---------------------------------------------------------------------------
-loc_24E9F0:                             ; CODE XREF: activity_teleport_toilet+A   j
+teleport:                             ; CODE XREF: activity_teleport_toilet+A   j
                                         ; activity_teleport_toilet+18   j ...
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.b   (byte_FFFD9D).l
@@ -37520,14 +37520,14 @@ sub_24F1D8:                             ; DATA XREF: ROM:0025BC30   o
                 beq.s   loc_24F1F4
                 clr.b   (byte_FFFD48).l
                 move.l  #byte_25C3A4,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 loc_24F1F4:                             ; CODE XREF: sub_24F1D8+6   j
                 tst.b   (byte_FFFD4A).l
                 beq.s   locret_24F210
                 clr.b   (byte_FFFD4A).l
                 move.l  #byte_25C3B8,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 locret_24F210:                          ; CODE XREF: sub_24F1D8+22   j
                 rts
@@ -37620,7 +37620,7 @@ loc_24F318:                             ; CODE XREF: sub_24F23E+6   j
                 beq.s   locret_24F334
                 clr.b   (byte_FFFD49).l
                 move.l  #byte_25C3AE,(teleport_data_offset).l
-                bra.w   loc_24E9F0
+                bra.w   teleport
 ; ---------------------------------------------------------------------------
 locret_24F334:                          ; CODE XREF: sub_24F23E+E0   j
                 rts
@@ -37980,7 +37980,7 @@ loc_24F816:                             ; CODE XREF: sub_24F808+6   j
                 beq.s   loc_24F838
                 clr.b   (byte_FFFDF6).l
                 move.l  #byte_25C3C2,(teleport_data_offset).l
-                bsr.w   loc_24E9F0
+                bsr.w   teleport
                 bsr.w   sub_24BDA8
                 rts
 ; ---------------------------------------------------------------------------
@@ -56597,8 +56597,8 @@ byte_25C354:    dc.b   0,  1,  0,$A0,  1,$80,  0,$B7,  1,$71
                                         ; DATA XREF: activity_teleport_toilet:loc_24E95C   o
 byte_25C35E:    dc.b   0,$17,  0,  0,  1,  0,  0,$4D,  1,$A0
                                         ; DATA XREF: activity_teleport_toilet+98   o
-byte_25C368:    dc.b   0, $A,  8,  0,  0,$10,  0,$B8,  1,$8F
-                                        ; DATA XREF: activity_teleport_toilet:loc_24E99C   o
+teleport_return_from_darkroom_data:    dc.b   0, $A,  8,  0,  0,$10,  0,$B8,  1,$8F
+                                        ; DATA XREF: activity_teleport_toilet:activity_teleport_return_from_darkroom   o
 byte_25C372:    dc.b   0, $A, $C,$20,  2,$70,  0,$B6,  1,$9B
                                         ; DATA XREF: activity_teleport_toilet:loc_24E9AA   o
 byte_25C37C:    dc.b   0, $A, $A,$E0,  2,$80,  0,$BA,  1,$9F
@@ -56607,8 +56607,8 @@ byte_25C386:    dc.b   0, $C,  0,$10,  0,  0,  0,$66,  1,$5F
                                         ; DATA XREF: activity_teleport_toilet:loc_24E9C6   o
 byte_25C390:    dc.b   0, $A, $B,$B0,  0,  0,  0,$B4,  1,$4F
                                         ; DATA XREF: activity_teleport_toilet:loc_24E9D4   o
-byte_25C39A:    dc.b   0,  8,  0,$10,  1,$B0,  0,$1A,  1,$93
-                                        ; DATA XREF: activity_teleport_toilet:loc_24E9E2   o
+teleport_to_slug_for_butt_data:    dc.b   0,  8,  0,$10,  1,$B0,  0,$1A,  1,$93
+                                        ; DATA XREF: activity_teleport_toilet:activity_teleport_to_slug_for_butt   o
 byte_25C3A4:    dc.b   0,  2,  0,  0,  0,$20,  0,$94,  1,$9B
                                         ; DATA XREF: sub_24F1D8+E   o
 byte_25C3AE:    dc.b   0,  1,  2,$C0,  3,$C0,  0,$B7,  1,$9C

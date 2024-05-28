@@ -46,7 +46,7 @@ off_38:         dc.l Trap15             ; DATA XREF: sub_24F23E+C4   o
                                         ; sub_253F64+46   o ...
 off_3C:         dc.l Trap15             ; DATA XREF: sub_24DBCC+1A   o
                 dc.l Trap15
-off_44:         dc.l Trap15             ; DATA XREF: sub_24E678+38   o
+off_44:         dc.l Trap15             ; DATA XREF: activity_tube_air_up+38   o
 off_48:         dc.l Trap15             ; DATA XREF: sub_252880+2E   o
                                         ; sub_252880+62   o
                 dc.l Trap15
@@ -1479,20 +1479,20 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l loc_24EF6E
-                dc.l loc_24EF6E
-                dc.l sub_24EF06
-                dc.l loc_24EF3A
-                dc.l sub_24EF06
-                dc.l loc_24EF3A
-                dc.l sub_24EE94
-                dc.l loc_24EEB2
+                dc.l activity_rising
+                dc.l activity_rising
+                dc.l activity_rising_main
+                dc.l activity_rising_2
+                dc.l activity_rising_main
+                dc.l activity_rising_2
+                dc.l activity_dust
+                dc.l activity_dust_2
                 dc.l loc_24E940
                 dc.l loc_24E94E
                 dc.l loc_24E95C
-                dc.l loc_24E96A
+                dc.l activity_teleport_return_to_darkroom
                 dc.l activity_teleport_return_from_darkroom
-                dc.l sub_24E3E2
+                dc.l activity_jim_dead
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l activity_chain
@@ -1508,22 +1508,22 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l loc_24E9C6
                 dc.l loc_24E9D4
                 dc.l activity_teleport_to_slug_for_butt
-                dc.l loc_24DFF0
+                dc.l activity_tire_2
                 dc.l activity_tire
-                dc.l loc_24E040
-                dc.l sub_24E11C
-                dc.l loc_24E146
-                dc.l loc_24E170
-                dc.l loc_24E192
+                dc.l activity_tire_3
+                dc.l activity_tire_4
+                dc.l activity_tire_5
+                dc.l activity_tire_6
+                dc.l activity_falling
                 dc.l activity_thorn
-                dc.l loc_24E1E2
-                dc.l loc_24E20E
-                dc.l loc_24E238
-                dc.l loc_24E264
-                dc.l loc_24E28E
-                dc.l loc_24E2BA
-                dc.l loc_24E2E4
-                dc.l loc_24E2BA
+                dc.l activity_thorn_2
+                dc.l activity_thorn_3
+                dc.l activity_thorn_4
+                dc.l activity_thorn_5
+                dc.l activity_thorn_6
+                dc.l activity_thorn_7
+                dc.l activity_thorn_8
+                dc.l activity_thorn_7
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l sub_24E85C
@@ -1532,24 +1532,24 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l activity_thorn
-                dc.l loc_24E1E2
-                dc.l loc_24E20E
-                dc.l loc_24E238
-                dc.l loc_24E264
-                dc.l loc_24E28E
-                dc.l loc_24E2BA
-                dc.l loc_24E2E4
-                dc.l loc_24E20E
+                dc.l activity_thorn_2
+                dc.l activity_thorn_3
+                dc.l activity_thorn_4
+                dc.l activity_thorn_5
+                dc.l activity_thorn_6
+                dc.l activity_thorn_7
+                dc.l activity_thorn_8
+                dc.l activity_thorn_3
                 dc.l nullsub_11
-                dc.l sub_24E61C
+                dc.l activity_air_jumping
                 dc.l sub_24E83C
                 dc.l sub_25100A
                 dc.l sub_251014
                 dc.l sub_25101E
                 dc.l nullsub_11
                 dc.l nullsub_11
-                dc.l sub_24E64A
-                dc.l sub_24E678
+                dc.l activity_air_up
+                dc.l activity_tube_air_up
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -1572,17 +1572,17 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l sub_24E5BA
                 dc.l sub_24E5B0
                 dc.l sub_24E5A6
-                dc.l sub_24E4EE
+                dc.l activity_climbing_from_left
                 dc.l sub_24E3F8
                 dc.l sub_24E3F8
-                dc.l sub_24E426
+                dc.l activity_climbing_from_right
                 dc.l nullsub_11
                 dc.l nullsub_11
                 dc.l sub_24DC8E
                 dc.l sub_24DEF2
                 dc.l sub_24DCB2
                 dc.l sub_24DD18
-                dc.l sub_24DE7C
+                dc.l activity_disable_camera_for_cow
                 dc.l nullsub_6
                 dc.l nullsub_11
                 dc.l nullsub_11
@@ -11109,8 +11109,8 @@ off_1AF14C:     dc.w off_12E0           ; DATA XREF: ROM:001AF138   o
                 dc.l off_1AF0AC
 word_1AF16E:    dc.w $F800              ; DATA XREF: ROM:001AF0BC   o
                                         ; ROM:001AF0CA   o ...
-off_1AF170:     dc.w off_16C0           ; DATA XREF: sub_24E426+4C   o
-                                        ; sub_24E4EE+48   o
+off_1AF170:     dc.w off_16C0           ; DATA XREF: activity_climbing_from_right+4C   o
+                                        ; activity_climbing_from_left+48   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $45
@@ -11444,7 +11444,7 @@ anim_jim_eyes_in_dark:     dc.w off_14CC           ; DATA XREF: ROM:stru_25B8C4 
                 dc.w $FB00
                 dc.l oksub_24951E
                 dc.w $EC01
-off_1AF42C:     dc.w off_14CC           ; DATA XREF: sub_24E11C+84   o
+off_1AF42C:     dc.w off_14CC           ; DATA XREF: activity_tire_4+84   o
                 dc.w $FB00
                 dc.l oksub_249526
                 dc.w $ED14
@@ -36068,16 +36068,16 @@ locret_24DE7A:                          ; CODE XREF: sub_24DD18+6   j
 ; End of function sub_24DD18
 
 
-sub_24DE7C:                             ; DATA XREF: ROM:00005760   o
+activity_disable_camera_for_cow:                             ; DATA XREF: ROM:00005760   o
                 cmpi.b  #0,(byte_FFFBEF).l
                 bne.s   locret_24DEA4
                 move.b  #1,(byte_FFFBEF).l
                 move.w  #$350,(word_FFFD56).l
                 move.w  #$215,(word_FFFD58).l
                 st      (camera_disable_value).l
-locret_24DEA4:                          ; CODE XREF: sub_24DE7C+8   j
+locret_24DEA4:                          ; CODE XREF: activity_disable_camera_for_cow+8   j
                 rts
-; End of function sub_24DE7C
+; End of function activity_disable_camera_for_cow
 
 
 sub_24DEA6:                             ; DATA XREF: ROM:00005824   o
@@ -36178,7 +36178,7 @@ sub_24DFE8:                             ; CODE XREF: sub_24DFE8+10   j
                 jsr     (sub_24E0C0).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24DFF0:                             ; DATA XREF: ROM:00005638   o
+activity_tire_2:                             ; DATA XREF: ROM:00005638   o
                 cmpi.b  #$5E,(byte_FFFD11).l ; '^'
                 beq.s   sub_24DFE8
                 tst.w   (jim_y_speed).l
@@ -36202,7 +36202,7 @@ activity_tire:                             ; DATA XREF: ROM:0000563C   o
 locret_24E03E:                          ; CODE XREF: sub_24DFE8+40   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E040:                             ; DATA XREF: ROM:00005640   o
+activity_tire_3:                             ; DATA XREF: ROM:00005640   o
                 cmpi.b  #$5E,(byte_FFFD11).l ; '^'
                 beq.s   sub_24DFE8
                 tst.w   (jim_y_speed).l
@@ -36268,7 +36268,7 @@ locret_24E11A:                          ; CODE XREF: sub_24E0C0+8   j
 ; End of function sub_24E0C0
 
 
-sub_24E11C:                             ; DATA XREF: ROM:00005644   o
+activity_tire_4:                             ; DATA XREF: ROM:00005644   o
                 cmpi.b  #$5E,(byte_FFFD11).l ; '^'
                 beq.w   sub_24DFE8
                 tst.w   (jim_y_speed).l
@@ -36277,10 +36277,10 @@ sub_24E11C:                             ; DATA XREF: ROM:00005644   o
                 move.w  #$400,(jim_delta_x_speed).l
                 bra.w   loc_24E05A
 ; ---------------------------------------------------------------------------
-locret_24E144:                          ; CODE XREF: sub_24E11C+12   j
+locret_24E144:                          ; CODE XREF: activity_tire_4+12   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E146:                             ; DATA XREF: ROM:00005648   o
+activity_tire_5:                             ; DATA XREF: ROM:00005648   o
                 cmpi.b  #$5E,(byte_FFFD11).l ; '^'
                 beq.w   sub_24DFE8
                 tst.w   (jim_y_speed).l
@@ -36289,10 +36289,10 @@ loc_24E146:                             ; DATA XREF: ROM:00005648   o
                 move.w  #$FF00,(jim_y_speed).l
                 bra.w   loc_24E05A
 ; ---------------------------------------------------------------------------
-locret_24E16E:                          ; CODE XREF: sub_24E11C+3C   j
+locret_24E16E:                          ; CODE XREF: activity_tire_4+3C   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E170:                             ; DATA XREF: ROM:0000564C   o
+activity_tire_6:                             ; DATA XREF: ROM:0000564C   o
                 cmpi.b  #$5E,(byte_FFFD11).l ; '^'
                 beq.w   sub_24DFE8
                 tst.w   (jim_y_speed).l
@@ -36300,19 +36300,19 @@ loc_24E170:                             ; DATA XREF: ROM:0000564C   o
                 move.w  #$500,(jim_y_speed).l
                 bra.w   loc_24E05A
 ; ---------------------------------------------------------------------------
-locret_24E190:                          ; CODE XREF: sub_24E11C+66   j
+locret_24E190:                          ; CODE XREF: activity_tire_4+66   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E192:                             ; DATA XREF: ROM:00005650   o
+activity_falling:                             ; DATA XREF: ROM:00005650   o
                 tst.b   (byte_FFFD9F).l
                 bne.s   locret_24E1B6
                 st      (is_jim_blocked_by_enemy).l
                 move.l  #off_1AF42C,(dword_FFA748).l
                 clr.b   (byte_FFA75F).l
                 st      (byte_FFFD9F).l
-locret_24E1B6:                          ; CODE XREF: sub_24E11C+7C   j
+locret_24E1B6:                          ; CODE XREF: activity_tire_4+7C   j
                 rts
-; End of function sub_24E11C
+; End of function activity_tire_4
 
 
 ;Калоить
@@ -36332,7 +36332,7 @@ locret_24E1DC:                          ; CODE XREF: activity_thorn+10   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E1E2:                             ; DATA XREF: ROM:00005658   o
+activity_thorn_2:                             ; DATA XREF: ROM:00005658   o
                                         ; ROM:00005698   o
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E1F4
@@ -36348,7 +36348,7 @@ locret_24E208:                          ; CODE XREF: activity_thorn+3A   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E20E:                             ; DATA XREF: ROM:0000565C   o
+activity_thorn_3:                             ; DATA XREF: ROM:0000565C   o
                                         ; ROM:0000569C   o ...
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E220
@@ -36364,7 +36364,7 @@ locret_24E232:                          ; CODE XREF: activity_thorn+66   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E238:                             ; DATA XREF: ROM:00005660   o
+activity_thorn_4:                             ; DATA XREF: ROM:00005660   o
                                         ; ROM:000056A0   o
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E24A
@@ -36380,7 +36380,7 @@ locret_24E25E:                          ; CODE XREF: activity_thorn+90   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E264:                             ; DATA XREF: ROM:00005664   o
+activity_thorn_5:                             ; DATA XREF: ROM:00005664   o
                                         ; ROM:000056A4   o
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E276
@@ -36396,7 +36396,7 @@ locret_24E288:                          ; CODE XREF: activity_thorn+BC   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E28E:                             ; DATA XREF: ROM:00005668   o
+activity_thorn_6:                             ; DATA XREF: ROM:00005668   o
                                         ; ROM:000056A8   o
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E2A0
@@ -36412,7 +36412,7 @@ locret_24E2B4:                          ; CODE XREF: activity_thorn+E6   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E2BA:                             ; DATA XREF: ROM:0000566C   o
+activity_thorn_7:                             ; DATA XREF: ROM:0000566C   o
                                         ; ROM:00005674   o ...
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E2CC
@@ -36428,7 +36428,7 @@ locret_24E2DE:                          ; CODE XREF: activity_thorn+112   j
 ; ---------------------------------------------------------------------------
                 bra.w   loc_24E392
 ; ---------------------------------------------------------------------------
-loc_24E2E4:                             ; DATA XREF: ROM:00005670   o
+activity_thorn_8:                             ; DATA XREF: ROM:00005670   o
                                         ; ROM:000056B0   o
                 cmpi.b  #$61,(byte_FFFD11).l ; 'a'
                 beq.s   loc_24E2F6
@@ -36493,10 +36493,10 @@ locret_24E3E0:                          ; CODE XREF: activity_thorn+20E   j
 ; End of function activity_thorn
 
 
-sub_24E3E2:                             ; DATA XREF: ROM:000055F8   o
+activity_jim_dead:                             ; DATA XREF: ROM:000055F8   o
                 st      (jim_dead_enable).l
                 rts
-; End of function sub_24E3E2
+; End of function activity_jim_dead
 
 
 sub_24E3EA:
@@ -36523,7 +36523,7 @@ locret_24E424:                          ; CODE XREF: sub_24E3F8+8   j
 ; End of function sub_24E3F8
 
 
-sub_24E426:                             ; DATA XREF: ROM:00005744   o
+activity_climbing_from_right:                             ; DATA XREF: ROM:00005744   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   loc_24E4E6
                 cmpi.b  #$42,(jim_state).l ; 'B'
@@ -36556,20 +36556,20 @@ sub_24E426:                             ; DATA XREF: ROM:00005744   o
                 clr.b   (jim_walking_direction).l
                 clr.w   (jim_walking_speed).l
                 clr.b   (is_jim_jumping).l
-loc_24E4DE:                             ; CODE XREF: sub_24E426+34   j
+loc_24E4DE:                             ; CODE XREF: activity_climbing_from_right+34   j
                 st      (is_jim_hanging).l
-locret_24E4E4:                          ; CODE XREF: sub_24E426+1E   j
-                                        ; sub_24E426+28   j ...
+locret_24E4E4:                          ; CODE XREF: activity_climbing_from_right+1E   j
+                                        ; activity_climbing_from_right+28   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_24E4E6:                             ; CODE XREF: sub_24E426+6   j
-                                        ; sub_24E426+12   j ...
+loc_24E4E6:                             ; CODE XREF: activity_climbing_from_right+6   j
+                                        ; activity_climbing_from_right+12   j ...
                 clr.l   (dword_FFA6DC).l
                 rts
-; End of function sub_24E426
+; End of function activity_climbing_from_right
 
 
-sub_24E4EE:                             ; DATA XREF: ROM:00005738   o
+activity_climbing_from_left:                             ; DATA XREF: ROM:00005738   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   loc_24E4E6
                 cmpi.b  #$42,(jim_state).l ; 'B'
@@ -36601,12 +36601,12 @@ sub_24E4EE:                             ; DATA XREF: ROM:00005738   o
                 clr.b   (jim_walking_direction).l
                 clr.w   (jim_walking_speed).l
                 clr.b   (is_jim_jumping).l
-loc_24E59E:                             ; CODE XREF: sub_24E4EE+30   j
+loc_24E59E:                             ; CODE XREF: activity_climbing_from_left+30   j
                 st      (is_jim_hanging).l
-locret_24E5A4:                          ; CODE XREF: sub_24E4EE+1A   j
-                                        ; sub_24E4EE+24   j ...
+locret_24E5A4:                          ; CODE XREF: activity_climbing_from_left+1A   j
+                                        ; activity_climbing_from_left+24   j ...
                 rts
-; End of function sub_24E4EE
+; End of function activity_climbing_from_left
 
 
 sub_24E5A6:                             ; DATA XREF: ROM:00005734   o
@@ -36666,7 +36666,7 @@ locret_24E61A:                          ; CODE XREF: sub_24E5FA+6   j
 ; End of function sub_24E5FA
 
 
-sub_24E61C:                             ; DATA XREF: ROM:000056BC   o
+activity_air_jumping:                             ; DATA XREF: ROM:000056BC   o
                 move.w  (jim_x).l,d7
                 andi.w  #$FFF0,d7
                 addq.w  #8,d7
@@ -36676,10 +36676,10 @@ sub_24E61C:                             ; DATA XREF: ROM:000056BC   o
                 move.w  #$FC00,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
                 rts
-; End of function sub_24E61C
+; End of function activity_air_jumping
 
 
-sub_24E64A:                             ; DATA XREF: ROM:000056D8   o
+activity_air_up:                             ; DATA XREF: ROM:000056D8   o
                 subq.w  #2,(jim_collider_y).l
                 move.w  #$F800,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
@@ -36689,10 +36689,10 @@ sub_24E64A:                             ; DATA XREF: ROM:000056D8   o
                 sub.w   (camera_x).l,d7
                 move.w  d7,(jim_collider_x).l
                 rts
-; End of function sub_24E64A
+; End of function activity_air_up
 
 
-sub_24E678:                             ; DATA XREF: ROM:000056DC   o
+activity_tube_air_up:                             ; DATA XREF: ROM:000056DC   o
                 subq.w  #2,(jim_collider_y).l
                 move.w  #$F800,(jim_y_speed).l
                 clr.b   (jim_walking_direction).l
@@ -36709,9 +36709,9 @@ sub_24E678:                             ; DATA XREF: ROM:000056DC   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_24E6C6:                          ; CODE XREF: sub_24E678+32   j
+locret_24E6C6:                          ; CODE XREF: activity_tube_air_up+32   j
                 rts
-; End of function sub_24E678
+; End of function activity_tube_air_up
 
 
 sub_24E6C8:                             ; DATA XREF: ROM:00005830   o
@@ -36943,7 +36943,7 @@ loc_24E95C:                             ; DATA XREF: ROM:000055EC   o
                 move.l  #byte_25C354,(teleport_data_offset).l
                 bra.w   teleport
 ; ---------------------------------------------------------------------------
-loc_24E96A:                             ; DATA XREF: ROM:000055F0   o
+activity_teleport_return_to_darkroom:                             ; DATA XREF: ROM:000055F0   o
                 tst.b   (byte_FFFC01).l
                 bne.s   locret_24E99A
                 clr.b   (byte_FFFD9D).l
@@ -37253,7 +37253,7 @@ loc_24EDE2:                             ; CODE XREF: sub_24ED44+8C   j
 ; End of function sub_24ED44
 
 
-sub_24EE94:                             ; DATA XREF: ROM:000055DC   o
+activity_dust:                             ; DATA XREF: ROM:000055DC   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EEB0
                 tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
@@ -37261,17 +37261,17 @@ sub_24EE94:                             ; DATA XREF: ROM:000055DC   o
                 subi.w  #$32,(jim_delta_x_speed).l ; '2'
                 bra.s   loc_24EECC
 ; ---------------------------------------------------------------------------
-locret_24EEB0:                          ; CODE XREF: sub_24EE94+8   j
+locret_24EEB0:                          ; CODE XREF: activity_dust+8   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24EEB2:                             ; DATA XREF: ROM:000055E0   o
+activity_dust_2:                             ; DATA XREF: ROM:000055E0   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EF04
                 tst.w   (is_jim_move_right).l ; В данном случае двигается ли вообще вправо/влево
                 bne.s   loc_24EECC
                 addi.w  #$32,(jim_delta_x_speed).l ; '2'
-loc_24EECC:                             ; CODE XREF: sub_24EE94+10   j
-                                        ; sub_24EE94+1A   j ...
+loc_24EECC:                             ; CODE XREF: activity_dust+10   j
+                                        ; activity_dust+1A   j ...
                 move.b  (byte_FFA6CF).l,d0
                 andi.b  #7,d0
                 bne.s   locret_24EF04
@@ -37285,13 +37285,13 @@ loc_24EECC:                             ; CODE XREF: sub_24EE94+10   j
                 move.w  (jim_y).l,d0
                 addi.w  #$10,d0
                 move.w  d0,4(a5)
-locret_24EF04:                          ; CODE XREF: sub_24EE94+26   j
-                                        ; sub_24EE94+42   j ...
+locret_24EF04:                          ; CODE XREF: activity_dust+26   j
+                                        ; activity_dust+42   j ...
                 rts
-; End of function sub_24EE94
+; End of function activity_dust
 
 
-sub_24EF06:                             ; DATA XREF: ROM:000055CC   o
+activity_rising_main:                             ; DATA XREF: ROM:000055CC   o
                                         ; ROM:000055D4   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EF38
@@ -37301,15 +37301,15 @@ sub_24EF06:                             ; DATA XREF: ROM:000055CC   o
                 bne.s   loc_24EF2C
                 st      (is_jim_left_direction).l
                 neg.b   (jim_walking_direction).l
-loc_24EF2C:                             ; CODE XREF: sub_24EF06+18   j
+loc_24EF2C:                             ; CODE XREF: activity_rising_main+18   j
                 subi.w  #$32,(jim_delta_x_speed).l ; '2'
-loc_24EF34:                             ; CODE XREF: sub_24EF06+10   j
-                bra.w   loc_24EF6E
+loc_24EF34:                             ; CODE XREF: activity_rising_main+10   j
+                bra.w   activity_rising
 ; ---------------------------------------------------------------------------
-locret_24EF38:                          ; CODE XREF: sub_24EF06+8   j
+locret_24EF38:                          ; CODE XREF: activity_rising_main+8   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24EF3A:                             ; DATA XREF: ROM:000055D0   o
+activity_rising_2:                             ; DATA XREF: ROM:000055D0   o
                                         ; ROM:000055D8   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EF6C
@@ -37319,16 +37319,16 @@ loc_24EF3A:                             ; DATA XREF: ROM:000055D0   o
                 beq.s   loc_24EF60
                 clr.b   (is_jim_left_direction).l
                 neg.b   (jim_walking_direction).l
-loc_24EF60:                             ; CODE XREF: sub_24EF06+4C   j
+loc_24EF60:                             ; CODE XREF: activity_rising_main+4C   j
                 addi.w  #$32,(jim_delta_x_speed).l ; '2'
-loc_24EF68:                             ; CODE XREF: sub_24EF06+44   j
-                bra.w   loc_24EF6E
+loc_24EF68:                             ; CODE XREF: activity_rising_main+44   j
+                bra.w   activity_rising
 ; ---------------------------------------------------------------------------
-locret_24EF6C:                          ; CODE XREF: sub_24EF06+3C   j
+locret_24EF6C:                          ; CODE XREF: activity_rising_main+3C   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24EF6E:                             ; CODE XREF: sub_24EF06:loc_24EF34   j
-                                        ; sub_24EF06:loc_24EF68   j
+activity_rising:                             ; CODE XREF: activity_rising_main:loc_24EF34   j
+                                        ; activity_rising_main:loc_24EF68   j
                                         ; DATA XREF: ...
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.s   locret_24EFBA
@@ -37345,11 +37345,11 @@ loc_24EF6E:                             ; CODE XREF: sub_24EF06:loc_24EF34   j
                 move.l  #off_1AF026,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #9,(jim_state).l
-locret_24EFBA:                          ; CODE XREF: sub_24EF06+70   j
-                                        ; sub_24EF06+7E   j ...
+locret_24EFBA:                          ; CODE XREF: activity_rising_main+70   j
+                                        ; activity_rising_main+7E   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_24EFBC:                             ; CODE XREF: sub_24EF06+86   j
+loc_24EFBC:                             ; CODE XREF: activity_rising_main+86   j
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_24EFBA
                 cmpi.b  #$16,(byte_FFFD01).l
@@ -37364,10 +37364,10 @@ loc_24EFBC:                             ; CODE XREF: sub_24EF06+86   j
                 move.l  #off_1AF0AC,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #$A,(jim_state).l
-locret_24F00A:                          ; CODE XREF: sub_24EF06+C6   j
-                                        ; sub_24EF06+D0   j ...
+locret_24F00A:                          ; CODE XREF: activity_rising_main+C6   j
+                                        ; activity_rising_main+D0   j ...
                 rts
-; End of function sub_24EF06
+; End of function activity_rising_main
 
 
 sub_24F00C:

@@ -40,7 +40,7 @@ camera_y equ $FFFFA678
 jim_collider_x equ $FFFFA67A
 jim_collider_y equ $FFFFA67C
 word_FFA67E equ $FFFFA67E
-word_FFA680 equ $FFFFA680
+view_y_shift equ $FFFFA680
 jim_x equ $FFFFA682
 jim_y equ $FFFFA684
 view_map_x equ $FFFFA686
@@ -58,7 +58,7 @@ dword_FFA6A0 equ $FFFFA6A0
 dword_FFA6A4 equ $FFFFA6A4
 freezeability equ $FFFFA6A8
 cheat_mode equ $FFFFA6AA
-byte_FFA6AB equ $FFFFA6AB
+difficulty_level equ $FFFFA6AB
 dword_FFA6AC equ $FFFFA6AC
 dword_FFA6B0 equ $FFFFA6B0
 dword_FFA6B4 equ $FFFFA6B4
@@ -369,7 +369,7 @@ byte_FFFDE0 equ $FFFFFDE0
 byte_FFFDE1 equ $FFFFFDE1
 byte_FFFDE2 equ $FFFFFDE2
 byte_FFFDE3 equ $FFFFFDE3
-byte_FFFDE4 equ $FFFFFDE4
+funchar_text_id equ $FFFFFDE4
 byte_FFFDE5 equ $FFFFFDE5
 byte_FFFDE6 equ $FFFFFDE6
 byte_FFFDE7 equ $FFFFFDE7

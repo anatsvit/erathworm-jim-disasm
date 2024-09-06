@@ -134,7 +134,7 @@ unk_FFFBD8 equ $FFFFFBD8
 dword_FFFBDC equ $FFFFFBDC
 word_FFFBE0 equ $FFFFFBE0
 vdp_ctrl_counter equ $FFFFFBE2
-word_FFFBE4 equ $FFFFFBE4
+font_params equ $FFFFFBE4
 word_FFFBE6 equ $FFFFFBE6
 byte_FFFBE8 equ $FFFFFBE8
 byte_FFFBEB equ $FFFFFBEB

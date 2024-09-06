@@ -33676,7 +33676,7 @@ sub_24C660:                             ; CODE XREF: sub_24B464:loc_24B472   p
                 or.w    d0,d1
                 swap    d1
                 move.l  d1,(VDP_CTRL).l
-                or.w    (word_FFFBE4).l,d2
+                or.w    (font_params).l,d2
                 addi.w  #-$7840,d2
                 move.w  d2,(VDP_DATA).l
                 movem.l (sp)+,d1/a0
@@ -33934,25 +33934,25 @@ sub_24C898:                             ; DATA XREF: ROM:000059E8   o
 
 
 sub_24C89E:                             ; DATA XREF: ROM:000059EC   o
-                move.w  #0,(word_FFFBE4).l
+                move.w  #0,(font_params).l
                 rts
 ; End of function sub_24C89E
 
 
 sub_24C8A8:                             ; DATA XREF: ROM:000059F0   o
-                move.w  #$2000,(word_FFFBE4).l
+                move.w  #$2000,(font_params).l
                 rts
 ; End of function sub_24C8A8
 
 
 sub_24C8B2:                             ; DATA XREF: ROM:000059F4   o
-                move.w  #$4000,(word_FFFBE4).l
+                move.w  #$4000,(font_params).l
                 rts
 ; End of function sub_24C8B2
 
 
 sub_24C8BC:                             ; DATA XREF: ROM:000059F8   o
-                move.w  #$6000,(word_FFFBE4).l
+                move.w  #$6000,(font_params).l
                 rts
 ; End of function sub_24C8BC
 
@@ -34658,39 +34658,39 @@ cheat_menu:                             ; CODE XREF: cheat_code+28C   p
                 bsr.w   sub_24C6AE
                 move.b  #1,(cheat_cursor_position).l
                 clr.b   (map_view_mode).l
-                move.w  #$4000,(word_FFFBE4).l
-                move.w  #$1A,d0
-                move.w  #$B,d1
-                move.l  #$FFA0,d3
-                bsr.w   sub_24D952
-                move.w  #$1A,d0
-                move.w  #$C,d1
-                move.l  #$5F,d3 ; '_'
-                bsr.w   sub_24D952
-                move.w  #$1A,d0
-                move.w  #$D,d1
-                move.l  #$2FFB30,d3
-                bsr.w   sub_24D93E
-                move.w  #$1A,d0
-                move.w  #$E,d1
-                move.l  #$4CF,d3
-                bsr.w   sub_24D93E
-                move.w  #$1A,d0
-                move.w  #$10,d1
-                move.l  #$6DAEA,d3
-                bsr.w   sub_24D948
-                move.w  #$1A,d0
-                move.w  #$11,d1
-                move.l  #$35E5,d3
-                bsr.w   sub_24D952
-                move.w  #$1A,d0
-                move.w  #$12,d1
-                move.l  #$B428,d3
-                bsr.w   sub_24D952
-                move.w  #$1A,d0
-                move.w  #$13,d1
-                move.l  #$400,d3
-                bsr.w   sub_24D95C
+                move.w  #$4000,(font_params).l ; Параметры отображения цифр по объему данных (используй белый цвет)
+                move.w  #$1A,d0                ; X значения для RAM BYTES USED
+                move.w  #$B,d1                 ; Y значения для RAM BYTES USED
+                move.l  #65440,d3              ; значение RAM BYTES USED
+                bsr.w   write_5x_value
+                move.w  #$1A,d0                ; X значения для RAM BYTES FREE
+                move.w  #$C,d1                 ; Y значения для RAM BYTES FREE
+                move.l  #95,d3                 ; значение RAM BYTES FREE
+                bsr.w   write_5x_value
+                move.w  #$1A,d0                ; X значения ROM BYTES USED
+                move.w  #$D,d1                 ; Y значения ROM BYTES USED
+                move.l  #3144496,d3            ; значение ROM BYTES USED
+                bsr.w   write_7x_value
+                move.w  #$1A,d0                ; X значения ROM BYTES FREE
+                move.w  #$E,d1                 ; Y значения ROM BYTES FREE
+                move.l  #1231,d3               ; значение ROM BYTES FREE
+                bsr.w   write_7x_value
+                move.w  #$1A,d0                ; X значения MUSIC & SOUND FX USES
+                move.w  #$10,d1                ; Y значения MUSIC & SOUND FX USES
+                move.l  #449258,d3             ; значение MUSIC & SOUND FX USES
+                bsr.w   write_6x_value
+                move.w  #$1A,d0                ; X значения WORD ADDRESSES LEFT
+                move.w  #$11,d1                ; Y значения WORD ADDRESSES LEFT
+                move.l  #13797,d3              ; значение WORD ADDRESSES LEFT
+                bsr.w   write_5x_value
+                move.w  #$1A,d0                ; X значения ROOM FOR SPRTLIST.68K
+                move.w  #$12,d1                ; Y значения ROOM FOR SPRTLIST.68K
+                move.l  #46120,d3              ; значение ROOM FOR SPRTLIST.68K
+                bsr.w   write_5x_value
+                move.w  #$1A,d0                ; X значения MAX TILES TO MAKE MAP
+                move.w  #$13,d1                ; Y значения MAX TILES TO MAKE MAP
+                move.l  #1024,d3               ; значение MAX TILES TO MAKE MAP
+                bsr.w   write_4x_value
                 move.w  #4,d0
                 move.w  #1,d1
                 lea     (cheat_menu_PAL).l,a0
@@ -34705,7 +34705,7 @@ loc_24D026:                             ; CODE XREF: cheat_menu+F4   j
 loc_24D034:                             ; CODE XREF: cheat_menu+1EE   j
                                         ; cheat_menu+208   j ...
                 bsr.w   sub_24CF0E
-                move.w  #$4000,(word_FFFBE4).l
+                move.w  #$4000,(font_params).l
                 lea     (aOffCheatState).l,a0 ; "OFF"
                 tst.b   (cheat_mode).l
                 beq.s   loc_24D054
@@ -35530,62 +35530,49 @@ sub_24D8FC:                             ; CODE XREF: sub_245AE4+188   p
 ; End of function sub_24D8FC
 
 
-sub_24D920:
-                move.l  #$3B9ACA00,d4
-                bsr.w   sub_24D974
-                move.l  #$5F5E100,d4
-                bsr.w   sub_24D974
-                move.l  #$989680,d4
-                bsr.w   sub_24D974
-; End of function sub_24D920
-
-
-sub_24D93E:                             ; CODE XREF: cheat_menu+7E   p
-                                        ; cheat_menu+90   p
-                move.l  #$F4240,d4
-                bsr.w   sub_24D974
-; End of function sub_24D93E
-
-
-sub_24D948:                             ; CODE XREF: cheat_menu+A2   p
-                move.l  #$186A0,d4
-                bsr.w   sub_24D974
-; End of function sub_24D948
-
-
-sub_24D952:                             ; CODE XREF: cheat_menu+5A   p
-                                        ; cheat_menu+6C   p ...
-                move.l  #$2710,d4
-                bsr.w   sub_24D974
-; End of function sub_24D952
-
-
-sub_24D95C:                             ; CODE XREF: cheat_menu+D8   p
-                move.l  #$3E8,d4
-                bsr.w   sub_24D974
-                moveq   #$64,d4 ; 'd'
-                bsr.w   sub_24D974
-                moveq   #$A,d4
-                bsr.w   sub_24D974
+write_10x_value:
+                move.l  #1000000000,d4
+                bsr.w   write_number_value
+write_9x_value:
+                move.l  #100000000,d4
+                bsr.w   write_number_value
+write_8x_value:
+                move.l  #10000000,d4
+                bsr.w   write_number_value
+write_7x_value:
+                move.l  #1000000,d4
+                bsr.w   write_number_value
+write_6x_value:
+                move.l  #100000,d4
+                bsr.w   write_number_value
+write_5x_value:
+                move.l  #10000,d4
+                bsr.w   write_number_value
+write_4x_value:
+                move.l  #1000,d4
+                bsr.w   write_number_value
+write_3x_value:
+                moveq   #100,d4
+                bsr.w   write_number_value
+write_2x_value:
+                moveq   #10,d4
+                bsr.w   write_number_value
+write_1x_value:                
                 moveq   #1,d4
-; End of function sub_24D95C
-
-
-sub_24D974:                             ; CODE XREF: sub_24D920+6   p
-                                        ; sub_24D920+10   p ...
+write_number_value:
                 move.w  #$10,d2
-loc_24D978:                             ; CODE XREF: sub_24D974+C   j
+loc_24D978:
                 cmp.l   d4,d3
                 bcs.s   loc_24D982
                 addq.b  #1,d2
                 sub.l   d4,d3
                 bra.s   loc_24D978
 ; ---------------------------------------------------------------------------
-loc_24D982:                             ; CODE XREF: sub_24D974+6   j
+loc_24D982:                             ; CODE XREF: write_number_value+6   j
                 bsr.w   sub_24C660
                 addq.b  #1,d0
                 rts
-; End of function sub_24D974
+; End of function write_number_value
 
 
 sub_24D98A:                             ; CODE XREF: oksub_2456C8:loc_245874   p
@@ -52255,15 +52242,15 @@ sub_25A496:                             ; CODE XREF: sub_259DFE+420   p
 
 sub_25A4BA:                             ; CODE XREF: sub_259DFE+3D0   p
                                         ; sub_259DFE+538   p
-                move.w  #$4000,(word_FFFBE4).l
+                move.w  #$4000,(font_params).l
                 move.w  #$1C,d0
                 move.w  #2,d1
                 jsr     (sub_24C6AE).l
-                move.w  #$4000,(word_FFFBE4).l
+                move.w  #$4000,(font_params).l
                 move.w  #$1D,d0
                 move.w  #4,d1
                 jsr     (sub_24C6AE).l
-                move.w  #$4000,(word_FFFBE4).l
+                move.w  #$4000,(font_params).l
                 move.w  #$1D,d0
                 move.w  #6,d1
                 jsr     (sub_24C6AE).l

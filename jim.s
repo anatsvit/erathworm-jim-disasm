@@ -1738,7 +1738,7 @@ off_5978:       dc.l sub_249232         ; DATA XREF: sub_249178+32   o
                 dc.l oksub_24999A
                 dc.l sub_2499D6
                 dc.l sub_249A02
-off_59CC:       dc.l sub_24C7F0         ; DATA XREF: sub_24C6AE+4   o
+off_59CC:       dc.l sub_24C7F0         ; DATA XREF: write_text+4   o
                                         ; sub_24C710+24   o
                 dc.l sub_24C7F4
                 dc.l sub_24C7FC
@@ -23665,7 +23665,7 @@ off_1B5F42:     dc.w off_2AD0           ; DATA XREF: ROM:001B5F6C   o
                 dc.w off_2ADC
                 dc.w off_2ADC
                 dc.w off_2ADC
-off_1B5F56:     dc.w off_2AE0           ; DATA XREF: sub_24C11A+1C0   o
+off_1B5F56:     dc.w off_2AE0           ; DATA XREF: ure_the_best_screen+1C0   o
                 dc.w off_2AE0
                 dc.w off_2AE0
                 dc.w off_2AE4
@@ -24088,7 +24088,7 @@ aOnCheatState:  dc.B "ON ",0            ; DATA XREF: cheat_menu+124   o
                                         ; cheat_menu+144   o ...
 aOffCheatState: dc.B "OFF",0            ; DATA XREF: cheat_menu+116   o
                                         ; cheat_menu+136   o ...
-cheatCursor:    dc.b 9                  ; DATA XREF: sub_24CF0E+10   o
+cheatCursor:    dc.b 9                  ; DATA XREF: write_cheat_menu_cursor+10   o
                 dc.B "   "
                 dc.b   1,$FD,  2,  1
                 dc.B "--("
@@ -24147,7 +24147,7 @@ yellow_palette: dc.w     0,  $EE,  $EE,  $EE,  $EE,  $EE,  $EE,  $EE,  $EE,  $EE
 green_palette:  dc.w     0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0,  $E0
                                         ; DATA XREF: sub_25A4FE+62   o
 white_palette:  dc.w     0, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE, $EEE
-                                        ; DATA XREF: sub_24C11A+25C   o
+                                        ; DATA XREF: ure_the_best_screen+25C   o
                                         ; sub_24D7EA+6A   o ...
 blue_palette:   dc.w     0, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66, $E66
                                         ; DATA XREF: oksub_24598C+1E   o
@@ -24262,9 +24262,9 @@ word_1B834C:    dc.w  $200, $400, $600, $800, $820, $A20, $A22, $A42, $C42, $C62
                                         ; DATA XREF: sub_259DB4+10   o
                 dc.w  $820, $A20, $A22, $A42, $C42, $C62, $C82, $E84, $E86, $EA6, $EA8
 word_1B83A2:    dc.w     0, $204, $208, $22A, $22C,  $2E,  $4E,  $AE,  $EE
-                                        ; DATA XREF: sub_24C11A+1D4   o
+                                        ; DATA XREF: ure_the_best_screen+1D4   o
 word_1B83B4:    dc.w  $208, $22A, $22C,  $2E,  $4E,  $AE,  $EE, $EA0, $202, $204, $208, $22A, $22C,  $2E,  $4E,  $AE,  $EE,    0, $200, $404, $6EA, $806, $C68
-                                        ; DATA XREF: sub_24C11A+210   o
+                                        ; DATA XREF: ure_the_best_screen+210   o
 byte_1B83E2:
     binclude "binaries/rnc_1B83E2.bin"
                 dc.b 0
@@ -24274,7 +24274,7 @@ word_1B87C2:    dc.w  $CCC,    0, $22C,    6,   $A, $66E, $A20, $C40, $C60, $6AE
 word_1B8822:    dc.w  $AAA,    0, $222, $444, $666, $888, $AAA, $CCC, $EEE,   $C,   $A,    6, $4AE, $6EE, $E0E, $E0E
                                         ; DATA XREF: sub_259DFE+42C   o
 word_1B8842:    dc.w  $CCC,    0, $400, $602, $A24, $A66, $EA6, $EEA,    6,   $C,  $2E, $46E,  $AE, $6CE, $200, $EEE
-                                        ; DATA XREF: sub_24C11A+66   o
+                                        ; DATA XREF: ure_the_best_screen+66   o
 word_1B8862:    dc.w  $CCC,    0, $400, $602, $A24, $A66, $EA6, $EEA,    6,   $C,  $2E, $46E,  $AE, $6CE, $200, $EEE
                                         ; DATA XREF: sub_259DFE+29A   o
 word_1B8882:    dc.w     0,   $E, $228, $28E,  $4E, $2CE,  $8C, $2C2,  $80, $A82, $C20, $A2C, $808, $8A6, $EEE,    0
@@ -24936,7 +24936,7 @@ loc_245A80:                             ; CODE XREF: oksub_2459F0+B0   j
                 beq.w   loc_245AA2
                 cmpi.w  #$FF,d0
                 bne.s   loc_245AA2
-                jmp     sub_24C11A
+                jmp     ure_the_best_screen
 ; ---------------------------------------------------------------------------
                 move.w  (a0)+,d0
                 bra.s   loc_245A80
@@ -26105,7 +26105,7 @@ loc_246BFA:                             ; CODE XREF: sub_246B08+D6   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_246C1C
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (dword_1C).w
+                pea     ($1C).w                 ; Удар головой об потолок
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -32464,7 +32464,7 @@ loc_24B542:                             ; CODE XREF: sub_245AE4+10C   j
                 tst.b   (byte_FFFF9F).l
                 beq.s   loc_24B5C8
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     ($11).w
+                pea     ($11).w                     ; Game over music (on Game over screen)
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -32826,7 +32826,7 @@ loc_24BAA4:                             ; CODE XREF: cheat_code+140   j
 ; ---------------------------------------------------------------------------
 loc_24BAB4:                             ; CODE XREF: cheat_code+148   j
                 move.l  (sp)+,d0
-                jmp     sub_24C11A
+                jmp     ure_the_best_screen
 ; ---------------------------------------------------------------------------
 loc_24BABC:                             ; CODE XREF: cheat_code+B0   j
                 bsr.w   sub_24D7EA
@@ -33293,7 +33293,7 @@ locret_24C118:                          ; CODE XREF: sub_24BEDC+136   j
 ; End of function sub_24BEDC
 
 
-sub_24C11A:                             ; CODE XREF: oksub_2459F0+A8   j
+ure_the_best_screen:                             ; CODE XREF: oksub_2459F0+A8   j
                                         ; cheat_code+276   j
                 bsr.w   sub_24CBA0
                 bsr.w   sub_24ACBC
@@ -33328,9 +33328,9 @@ sub_24C11A:                             ; CODE XREF: oksub_2459F0+A8   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24C1B6:                             ; CODE XREF: sub_24C11A+80   j
+loc_24C1B6:                             ; CODE XREF: ure_the_best_screen+80   j
                 move.w  #$EF,d4
-loc_24C1BA:                             ; CODE XREF: sub_24C11A+C8   j
+loc_24C1BA:                             ; CODE XREF: ure_the_best_screen+C8   j
                 move.w  d4,-(sp)
                 bsr.w   sub_24CD3A
                 move.w  (sp)+,d4
@@ -33343,8 +33343,8 @@ loc_24C1BA:                             ; CODE XREF: sub_24C11A+C8   j
                 bsr.w   oksub_24D6E0
                 beq.w   loc_24C1E6
                 dbf     d4,loc_24C1BA
-loc_24C1E6:                             ; CODE XREF: sub_24C11A+AC   j
-                                        ; sub_24C11A+B4   j ...
+loc_24C1E6:                             ; CODE XREF: ure_the_best_screen+AC   j
+                                        ; ure_the_best_screen+B4   j ...
                 bsr.w   sub_24CC9A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (oksub_2CBD3E).l
@@ -33406,16 +33406,16 @@ loc_24C1E6:                             ; CODE XREF: sub_24C11A+AC   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24C324:                             ; CODE XREF: sub_24C11A+1EE   j
+loc_24C324:                             ; CODE XREF: ure_the_best_screen+1EE   j
                 clr.b   (byte_FFFD3A).l
                 lea     (word_1B83B4).l,a0
                 lea     (unk_FFB496).l,a1
                 move.w  #6,d0
-loc_24C33A:                             ; CODE XREF: sub_24C11A+222   j
+loc_24C33A:                             ; CODE XREF: ure_the_best_screen+222   j
                 move.w  (a0)+,(a1)+
                 dbf     d0,loc_24C33A
                 move.b  #1,(byte_FFFD11).l
-loc_24C348:                             ; CODE XREF: sub_24C11A:loc_24C392   j
+loc_24C348:                             ; CODE XREF: ure_the_best_screen:loc_24C392   j
                 bsr.w   sub_24CD3A
                 bsr.w   sub_24C40A
                 bsr.w   sub_24C3AC
@@ -33431,21 +33431,21 @@ loc_24C348:                             ; CODE XREF: sub_24C11A:loc_24C392   j
                 bsr.w   sub_24C44A
                 bsr.w   sub_24CA00
                 move.b  #8,(byte_FFFD77).l
-loc_24C392:                             ; CODE XREF: sub_24C11A+254   j
+loc_24C392:                             ; CODE XREF: ure_the_best_screen+254   j
                 bra.s   loc_24C348
 ; ---------------------------------------------------------------------------
-loc_24C394:                             ; CODE XREF: sub_24C11A+242   j
-                                        ; sub_24C11A+24A   j
+loc_24C394:                             ; CODE XREF: ure_the_best_screen+242   j
+                                        ; ure_the_best_screen+24A   j
                 bsr.w   sub_24CC9A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (oksub_2CBD3E).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 move.l  (sp)+,d0
                 bra.w   loc_2456D6
-; End of function sub_24C11A
+; End of function ure_the_best_screen
 
 
-sub_24C3AC:                             ; CODE XREF: sub_24C11A+236   p
+sub_24C3AC:                             ; CODE XREF: ure_the_best_screen+236   p
                 move.l  #$40000010,(VDP_CTRL).l
                 clr.w   (word_FFFCA2).l
                 tst.b   (byte_FFFD3A).l
@@ -33477,7 +33477,7 @@ loc_24C402:                             ; CODE XREF: sub_24C3AC+16   j
 ; End of function sub_24C3AC
 
 
-sub_24C40A:                             ; CODE XREF: sub_24C11A+232   p
+sub_24C40A:                             ; CODE XREF: ure_the_best_screen+232   p
                                         ; sub_24C44A+52   p ...
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #3,d7
@@ -33499,7 +33499,7 @@ locret_24C448:                          ; CODE XREF: sub_24C40A+A   j
 ; End of function sub_24C40A
 
 
-sub_24C44A:                             ; CODE XREF: sub_24C11A+268   p
+sub_24C44A:                             ; CODE XREF: ure_the_best_screen+268   p
                 lea     (end_titles).l,a0
                 move.w  #0,d5
                 move.w  #$1C,d1
@@ -33507,7 +33507,7 @@ loc_24C458:                             ; CODE XREF: sub_24C44A+94   j
                 move.w  #0,d0
                 move.l  a0,-(sp)
                 lea     (byte_1B727F).l,a0
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
                 movea.l (sp)+,a0
                 move.w  #0,d0
                 cmpi.b  #7,(a0)
@@ -33518,7 +33518,7 @@ loc_24C458:                             ; CODE XREF: sub_24C44A+94   j
 loc_24C47A:                             ; CODE XREF: sub_24C44A+2A   j
                 cmpi.b  #$FD,(a0)
                 beq.w   locret_24C4E2
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
 loc_24C488:                             ; CODE XREF: sub_24C44A+2E   j
                 move.w  #$F,d4
 loc_24C48C:                             ; CODE XREF: sub_24C44A+82   j
@@ -33665,7 +33665,7 @@ loc_24C644:                             ; CODE XREF: sub_24C61C+3A   j
 
 
 sub_24C660:                             ; CODE XREF: sub_24B464:loc_24B472   p
-                                        ; sub_24C6AE:loc_24C6E6   p ...
+                                        ; write_text:loc_24C6E6   p ...
                 movem.w d0/d2,-(sp)
                 movem.l d1/a0,-(sp)
                 add.w   d1,d1
@@ -33687,18 +33687,18 @@ sub_24C660:                             ; CODE XREF: sub_24B464:loc_24B472   p
 
 sub_24C69C:
                 st      (byte_FFFBEB).l
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 clr.b   (byte_FFFBEB).l
                 rts
 ; End of function sub_24C69C
 
 
-sub_24C6AE:                             ; CODE XREF: sub_24C44A+1A   p
+write_text:                             ; CODE XREF: sub_24C44A+1A   p
                                         ; sub_24C44A+38   p ...
                 movem.l a1-a2,-(sp)
                 lea     (off_59CC).w,a2
-loc_24C6B6:                             ; CODE XREF: sub_24C6AE+26   j
-                                        ; sub_24C6AE+3E   j
+loc_24C6B6:                             ; CODE XREF: write_text+26   j
+                                        ; write_text+3E   j
                 tst.b   (byte_FFA6CD).l
                 bne.w   loc_24C7EA
                 clr.w   d2
@@ -33711,16 +33711,16 @@ loc_24C6B6:                             ; CODE XREF: sub_24C6AE+26   j
                 jsr     (a1)
                 bra.s   loc_24C6B6
 ; ---------------------------------------------------------------------------
-loc_24C6D6:                             ; CODE XREF: sub_24C6AE+1A   j
+loc_24C6D6:                             ; CODE XREF: write_text+1A   j
                 subi.b  #$20,d2 ; ' '
                 tst.b   (byte_FFFBEB).l
                 beq.s   loc_24C6E6
                 bsr.w   nullsub_3
-loc_24C6E6:                             ; CODE XREF: sub_24C6AE+32   j
+loc_24C6E6:                             ; CODE XREF: write_text+32   j
                 bsr.w   sub_24C660
                 addq.b  #1,d0
                 bra.s   loc_24C6B6
-; End of function sub_24C6AE
+; End of function write_text
 
 
 sub_24C6EE:                             ; CODE XREF: sub_24DC8E+1E   p
@@ -33820,7 +33820,7 @@ loc_24C7E2:                             ; CODE XREF: sub_24C710+3A   j
                 addi.w  #$10,d0
                 bra.w   loc_24C742
 ; ---------------------------------------------------------------------------
-loc_24C7EA:                             ; CODE XREF: sub_24C6AE+E   j
+loc_24C7EA:                             ; CODE XREF: write_text+E   j
                                         ; sub_24C710+8C   j ...
                 movem.l (sp)+,a1-a2
                 rts
@@ -34211,7 +34211,7 @@ load_palette:                           ; CODE XREF: sub_245AE4+78   p
 
 
 sub_24CAEE:                             ; CODE XREF: sub_24B4C8+106   p
-                                        ; sub_24C11A+1DA   p ...
+                                        ; ure_the_best_screen+1DA   p ...
                 move.w  d0,-(sp)
                 move.l  a0,d0
                 move.l  d0,(dword_FF9926).l
@@ -34629,15 +34629,15 @@ loc_24CF02:                             ; CODE XREF: sub_24CEB2+4A   j
 ; End of function sub_24CEB2
 
 
-sub_24CF0E:                             ; CODE XREF: cheat_menu:loc_24D034   p
-                move.w  #$15,d0
+write_cheat_menu_cursor:
+                move.w  #$15,d0                      ; cursor X
                 clr.w   d1
-                move.b  #$14,d1
+                move.b  #$14,d1                      ; cursor Y
                 add.b   (cheat_cursor_position).l,d1
                 lea     (cheatCursor).l,a0
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 rts
-; End of function sub_24CF0E
+; End of function write_cheat_menu_cursor
 
 
 cheat_menu:                             ; CODE XREF: cheat_code+28C   p
@@ -34655,7 +34655,7 @@ cheat_menu:                             ; CODE XREF: cheat_code+28C   p
                 lea     (cheat_menu_texts).l,a0
                 move.w  #0,d0
                 move.w  #3,d1
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 move.b  #1,(cheat_cursor_position).l
                 clr.b   (map_view_mode).l
                 move.w  #$4000,(font_params).l ; Параметры отображения цифр по объему данных (используй белый цвет)
@@ -34699,12 +34699,12 @@ cheat_menu:                             ; CODE XREF: cheat_code+28C   p
                 beq.s   loc_24D026
                 lea     (cheat_menu_ntsc).l,a0
 loc_24D026:                             ; CODE XREF: cheat_menu+F4   j
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 lea     (yellow_palette).l,a0
                 bsr.w   sub_24CCA0
 loc_24D034:                             ; CODE XREF: cheat_menu+1EE   j
                                         ; cheat_menu+208   j ...
-                bsr.w   sub_24CF0E
+                bsr.w   write_cheat_menu_cursor
                 move.w  #$4000,(font_params).l
                 lea     (aOffCheatState).l,a0 ; "OFF"
                 tst.b   (cheat_mode).l
@@ -34713,7 +34713,7 @@ loc_24D034:                             ; CODE XREF: cheat_menu+1EE   j
 loc_24D054:                             ; CODE XREF: cheat_menu+122   j
                 move.w  #$18,d0
                 move.w  #$15,d1
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 lea     (aOffCheatState).l,a0 ; "OFF"
                 tst.b   (freezeability).l
                 beq.s   loc_24D074
@@ -34721,7 +34721,7 @@ loc_24D054:                             ; CODE XREF: cheat_menu+122   j
 loc_24D074:                             ; CODE XREF: cheat_menu+142   j
                 move.w  #$18,d0
                 move.w  #$17,d1
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 lea     (aOffCheatState).l,a0 ; "OFF"
                 tst.b   (map_view_mode).l
                 beq.s   loc_24D094
@@ -34729,7 +34729,7 @@ loc_24D074:                             ; CODE XREF: cheat_menu+142   j
 loc_24D094:                             ; CODE XREF: cheat_menu+162   j
                 move.w  #$18,d0
                 move.w  #$18,d1
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 move.w  #$18,d0
                 move.w  #$16,d1
                 clr.w   d2
@@ -34738,7 +34738,7 @@ loc_24D094:                             ; CODE XREF: cheat_menu+162   j
                 andi.l  #$FFF,d2
                 addi.l  #cheat_levels,d2 ; "1-NEW JUNK CITY "
                 movea.l d2,a0
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 bsr.w   sub_24D476
 loc_24D0CA:                             ; CODE XREF: cheat_menu+236   j
                                         ; cheat_menu+244   j ...
@@ -34792,12 +34792,12 @@ loc_24D164:                             ; CODE XREF: cheat_menu+21E   j
                 bsr.w   oksub_24D71C
                 bne.w   loc_24D0CA
                 st      (cheat_mode).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D180:                             ; CODE XREF: cheat_menu+23E   j
                 clr.b   (cheat_mode).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D18E:                             ; CODE XREF: cheat_menu+224   j
@@ -34812,7 +34812,7 @@ loc_24D18E:                             ; CODE XREF: cheat_menu+224   j
                 clr.b   d0
 loc_24D1AC:                             ; CODE XREF: cheat_menu+27E   j
                 move.b  d0,(selectedLevelOption).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D1BA:                             ; CODE XREF: cheat_menu+268   j
@@ -34823,7 +34823,7 @@ loc_24D1BA:                             ; CODE XREF: cheat_menu+268   j
                 move.b  #$1C,d0
 loc_24D1CC:                             ; CODE XREF: cheat_menu+29C   j
                 move.b  d0,(selectedLevelOption).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D1DA:                             ; CODE XREF: cheat_menu+22A   j
@@ -34832,12 +34832,12 @@ loc_24D1DA:                             ; CODE XREF: cheat_menu+22A   j
                 bsr.w   oksub_24D71C
                 bne.w   loc_24D0CA
                 st      (freezeability).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D1F6:                             ; CODE XREF: cheat_menu+2B4   j
                 clr.b   (freezeability).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D204:                             ; CODE XREF: cheat_menu+232   j
@@ -34846,12 +34846,12 @@ loc_24D204:                             ; CODE XREF: cheat_menu+232   j
                 bsr.w   oksub_24D71C
                 bne.w   loc_24D0CA
                 st      (map_view_mode).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D220:                             ; CODE XREF: cheat_menu+2DE   j
                 clr.b   (map_view_mode).l
-                bsr.w   sub_24D752
+                bsr.w   play_switch_option_sound
                 bra.w   loc_24D034
 ; ---------------------------------------------------------------------------
 loc_24D22E:                             ; CODE XREF: cheat_menu+210   j
@@ -34876,7 +34876,7 @@ loc_24D24A:                             ; CODE XREF: cheat_menu+318   j
 
 
 sub_24D25A:                             ; CODE XREF: oksub_2456C8+A8   p
-                                        ; sub_24C11A+256   p ...
+                                        ; ure_the_best_screen+256   p ...
                 lea     (word_1B8A22).l,a0
                 lea     ($F800).l,a1
                 move.w  #1024,d0
@@ -34954,7 +34954,7 @@ locret_24D2FC:                          ; CODE XREF: sub_24D2E4+6   j
 ; End of function sub_24D2E4
 
 
-nullsub_3:                              ; CODE XREF: sub_24C6AE+34   p
+nullsub_3:                              ; CODE XREF: write_text+34   p
                 rts
 ; End of function nullsub_3
 
@@ -35363,7 +35363,7 @@ sub_24D744:                             ; CODE XREF: cheat_menu   p
 ; End of function sub_24D744
 
 
-sub_24D752:                             ; CODE XREF: cheat_menu+24E   p
+play_switch_option_sound:                             ; CODE XREF: cheat_menu+24E   p
                                         ; cheat_menu+25C   p ...
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_24D774
@@ -35373,9 +35373,9 @@ sub_24D752:                             ; CODE XREF: cheat_menu+24E   p
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_24D774:                          ; CODE XREF: sub_24D752+6   j
+locret_24D774:                          ; CODE XREF: play_switch_option_sound+6   j
                 rts
-; End of function sub_24D752
+; End of function play_switch_option_sound
 
 
 sub_24D776:                             ; CODE XREF: sub_259DFE+49A   p
@@ -35464,7 +35464,7 @@ sub_24D7EA:                             ; CODE XREF: cheat_code:loc_24BABC   p
                 lea     (cheat_menu_splash_text).l,a0
                 move.w  #0,d0
                 move.w  #$18,d1
-                bsr.w   sub_24C6AE
+                bsr.w   write_text
                 clr.b   (byte_FFFBEB).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_24D89E
@@ -35847,7 +35847,7 @@ loc_24DBDA:                             ; CODE XREF: sub_24DC1E+E   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_24DBFC
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_3C).w
+                pea     ($3C).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -37596,7 +37596,7 @@ loc_24F2C6:                             ; CODE XREF: sub_24F23E+74   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_24F318
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_38).w
+                pea     ($38).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -51928,7 +51928,7 @@ loc_259EEA:                             ; CODE XREF: sub_259DFE+104   j
                 lea     (license_text).l,a0
                 move.w  #0,d0
                 move.w  #4,d1
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
                 lea     (yellow_palette).l,a0
                 jsr     (sub_24CCA0).l
                 move.w  #$3B,d0 ; ';'
@@ -52045,7 +52045,7 @@ loc_25A13E:                             ; CODE XREF: sub_259DFE+336   j
                 tst.b   (is_jim_fire).l
                 bne.s   loc_25A0E8
                 eori.w  #1,(word_FFFDAC).l
-                jsr     (sub_24D752).l
+                jsr     (play_switch_option_sound).l
                 st      (is_jim_fire).l
                 bra.s   loc_25A0E0
 ; ---------------------------------------------------------------------------
@@ -52183,7 +52183,7 @@ loc_25A39E:                             ; CODE XREF: sub_259DFE+5C8   j
                 bne.w   loc_25A26E
                 st      (byte_FFFCF9).l
                 eori.w  #1,(word_FFFDAC).l
-                jsr     (sub_24D752).l
+                jsr     (play_switch_option_sound).l
                 bra.w   loc_25A26E
 ; ---------------------------------------------------------------------------
 loc_25A3C0:                             ; CODE XREF: sub_259DFE+59E   j
@@ -52245,15 +52245,15 @@ sub_25A4BA:                             ; CODE XREF: sub_259DFE+3D0   p
                 move.w  #$4000,(font_params).l
                 move.w  #$1C,d0
                 move.w  #2,d1
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
                 move.w  #$4000,(font_params).l
                 move.w  #$1D,d0
                 move.w  #4,d1
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
                 move.w  #$4000,(font_params).l
                 move.w  #$1D,d0
                 move.w  #6,d1
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
                 rts
 ; End of function sub_25A4BA
 
@@ -52293,7 +52293,7 @@ loc_25A592:                             ; CODE XREF: sub_25A4FE+10A   j
                 move.w  #0,d0
                 move.l  a0,-(sp)
                 lea     (byte_1B727F).l,a0
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
                 movea.l (sp)+,a0
                 move.w  #0,d0
                 cmpi.b  #7,(a0)
@@ -52304,7 +52304,7 @@ loc_25A592:                             ; CODE XREF: sub_25A4FE+10A   j
 loc_25A5B4:                             ; CODE XREF: sub_25A4FE+B0   j
                 cmpi.b  #$FD,(a0)
                 beq.w   loc_25A60A
-                jsr     (sub_24C6AE).l
+                jsr     (write_text).l
 loc_25A5C2:                             ; CODE XREF: sub_25A4FE+B4   j
                 move.w  #$F,d4
 loc_25A5C6:                             ; CODE XREF: sub_25A4FE+100   j
@@ -55405,7 +55405,7 @@ stru_25B8DC:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B8F4:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_24C11A+106   o
+                                        ; DATA XREF: ure_the_best_screen+106   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3
@@ -55420,7 +55420,7 @@ stru_25B8F4:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B90C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_24C11A+122   o
+                                        ; DATA XREF: ure_the_best_screen+122   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3
@@ -55480,7 +55480,7 @@ stru_25B954:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B96C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_24C11A+13E   o
+                                        ; DATA XREF: ure_the_best_screen+13E   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3
@@ -55495,7 +55495,7 @@ stru_25B96C:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B984:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_24C11A+15A   o
+                                        ; DATA XREF: ure_the_best_screen+15A   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3
@@ -55510,7 +55510,7 @@ stru_25B984:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B99C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_24C11A+176   o
+                                        ; DATA XREF: ure_the_best_screen+176   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3
@@ -55555,8 +55555,8 @@ stru_25B9CC:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B9E4:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_24C11A+190   o
-                                        ; sub_24C11A+1AA   o
+                                        ; DATA XREF: ure_the_best_screen+190   o
+                                        ; ure_the_best_screen+1AA   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3

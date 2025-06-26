@@ -24839,7 +24839,7 @@ loc_2458A4:                             ; CODE XREF: oksub_2456C8+1D2   j
                 bsr.w   sub_248F7E
                 bsr.w   sub_245AE4
                 bsr.w   oksub_245ADC
-                bsr.w   sub_24B23C
+                bsr.w   bullets_count_control
                 bsr.w   sub_24B2EC
                 bsr.w   oksub_2459BE
                 bsr.w   oksub_2459F0
@@ -25033,7 +25033,7 @@ loc_245BD6:                             ; CODE XREF: sub_245AE4+6A   j
                 cmpi.b  #$30,d0 ; '0'
                 beq.w   loc_24B542
                 clr.b   (byte_FFFDED).l
-                move.l  #$31303030,(bullets_count).l ; 1000 патронов
+                move.l  #'1000',(bullets_count).l ; 1000 патронов
                 move.l  (sp)+,d0
                 bra.w   loc_2457BC
 ; ---------------------------------------------------------------------------
@@ -25057,7 +25057,7 @@ loc_245C20:                             ; CODE XREF: sub_245AE4+12C   j
                 bsr.w   sub_24B4C8
                 clr.b   (byte_FFFDED).l
                 clr.b   (is_current_gun_plasma).l
-                move.l  #$31303030,(bullets_count).l
+                move.l  #'1000',(bullets_count).l
                 jsr     (sub_24D8FC).l
                 bsr.w   sub_247940
                 jsr     (sub_24BDA8).l
@@ -25240,7 +25240,7 @@ loc_245F12:                             ; CODE XREF: jim_fire+B2   j
                 bmi.w   locret_24608E
 loc_245F30:                             ; CODE XREF: jim_fire+90   j
                                         ; jim_fire+9C   j ...
-                cmpi.l  #$30303030,(bullets_count).l
+                cmpi.l  #'0000',(bullets_count).l
                 beq.s   loc_245F44
                 bsr.w   sub_24D6C4
                 beq.w   fire_start
@@ -32159,15 +32159,15 @@ loc_24B22C:                             ; CODE XREF: set_start_lives+C   j
 ; End of function set_start_lives
 
 
-sub_24B23C:                             ; CODE XREF: oksub_2456C8+284   p
+bullets_count_control:                             ; CODE XREF: oksub_2456C8+284   p
                 tst.w   (word_FFFDC6).l
                 bmi.s   loc_24B2A6
                 beq.s   loc_24B274
-                cmpi.l  #$35303030,(bullets_count).l
+                cmpi.l  #'5000',(bullets_count).l
                 beq.s   loc_24B29E
                 subq.w  #1,(word_FFFDC6).l
                 lea     ($FFFBF7).l,a0
-loc_24B25E:                             ; CODE XREF: sub_24B23C+34   j
+loc_24B25E:                             ; CODE XREF: bullets_count_control+34   j
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B274
                 cmpi.b  #$39,(a0) ; '9'
@@ -32176,18 +32176,18 @@ loc_24B25E:                             ; CODE XREF: sub_24B23C+34   j
                 subq.w  #1,a0
                 bra.s   loc_24B25E
 ; ---------------------------------------------------------------------------
-loc_24B272:                             ; CODE XREF: sub_24B23C+2C   j
+loc_24B272:                             ; CODE XREF: bullets_count_control+2C   j
                 addq.b  #1,(a0)
-loc_24B274:                             ; CODE XREF: sub_24B23C+8   j
-                                        ; sub_24B23C+26   j ...
+loc_24B274:                             ; CODE XREF: bullets_count_control+8   j
+                                        ; bullets_count_control+26   j ...
                 tst.w   (word_FFFDC6).l
                 beq.s   loc_24B27E
-locret_24B27C:                          ; CODE XREF: sub_24B23C+4C   j
-                                        ; sub_24B23C+58   j
+locret_24B27C:                          ; CODE XREF: bullets_count_control+4C   j
+                                        ; bullets_count_control+58   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B27E:                             ; CODE XREF: sub_24B23C+3E   j
-                cmpi.l  #$30313030,(bullets_count).l
+loc_24B27E:                             ; CODE XREF: bullets_count_control+3E   j
+                cmpi.l  #'0100',(bullets_count).l
                 bcc.s   locret_24B27C
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #$F,d7
@@ -32195,13 +32195,13 @@ loc_24B27E:                             ; CODE XREF: sub_24B23C+3E   j
                 addq.w  #1,(word_FFFDC6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B29E:                             ; CODE XREF: sub_24B23C+14   j
-                                        ; sub_24B23C+74   j
+loc_24B29E:                             ; CODE XREF: bullets_count_control+14   j
+                                        ; bullets_count_control+74   j
                 clr.w   (word_FFFDC6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B2A6:                             ; CODE XREF: sub_24B23C+6   j
-                cmpi.l  #$30303030,(bullets_count).l
+loc_24B2A6:                             ; CODE XREF: bullets_count_control+6   j
+                cmpi.l  #'0000',(bullets_count).l
                 beq.s   loc_24B29E
                 addq.w  #1,(word_FFFDC6).l
                 lea     ($FFFBF7).l,a0
@@ -32209,24 +32209,24 @@ loc_24B2A6:                             ; CODE XREF: sub_24B23C+6   j
                 beq.s   loc_24B274
                 cmpi.b  #$30,(a0) ; '0'
                 bne.s   loc_24B2E8
-loc_24B2CA:                             ; CODE XREF: sub_24B23C+9A   j
+loc_24B2CA:                             ; CODE XREF: bullets_count_control+9A   j
                 subq.w  #1,a0
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B274
                 cmpi.b  #$30,(a0) ; '0'
                 beq.s   loc_24B2CA
                 subq.b  #1,(a0)
-loc_24B2DA:                             ; CODE XREF: sub_24B23C+AA   j
+loc_24B2DA:                             ; CODE XREF: bullets_count_control+AA   j
                 addq.w  #1,a0
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B274
                 move.b  #$39,(a0) ; '9'
                 bra.s   loc_24B2DA
 ; ---------------------------------------------------------------------------
-loc_24B2E8:                             ; CODE XREF: sub_24B23C+8C   j
+loc_24B2E8:                             ; CODE XREF: bullets_count_control+8C   j
                 subq.b  #1,(a0)
                 rts
-; End of function sub_24B23C
+; End of function bullets_count_control
 
 
 sub_24B2EC:                             ; CODE XREF: oksub_2456C8+288   p
@@ -44724,7 +44724,7 @@ loc_254912:                             ; DATA XREF: ROM:000039A4   o
 loc_25491C:                             ; CODE XREF: sub_25490E+A   j
                 cmpi.w  #$A,(word_FFFDC6).l
                 bcc.s   loc_25495C
-                cmpi.l  #$30313030,(bullets_count).l
+                cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_25495C
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l
@@ -45197,7 +45197,7 @@ loc_254EB6:                             ; CODE XREF: sub_254E88+12   j
                 move.b  #$12,(byte_FFFD50).l
                 cmpi.w  #$A,(word_FFFDC6).l
                 bcc.s   loc_254F1C
-                cmpi.l  #$30313030,(bullets_count).l
+                cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_254F1C
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l
@@ -47088,7 +47088,7 @@ sub_25659A:                             ; CODE XREF: sub_2522D0   p
                 movem.w d0-d1,-(sp)
                 cmpi.w  #$A,(word_FFFDC6).l
                 bcc.s   loc_256608
-                cmpi.l  #$30313030,(bullets_count).l
+                cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_256608
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l
@@ -47120,7 +47120,7 @@ sub_25660E:                             ; CODE XREF: sub_2522C8   p
                 movem.w d0-d1,-(sp)
                 cmpi.w  #$A,(word_FFFDC6).l
                 bcc.s   loc_25666C
-                cmpi.l  #$30313030,(bullets_count).l
+                cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_25666C
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l

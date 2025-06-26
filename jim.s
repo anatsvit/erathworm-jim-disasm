@@ -11374,7 +11374,7 @@ off_1AF36A:     dc.w off_10EC           ; DATA XREF: sub_252D0E+50   o
                 dc.w off_1104
                 dc.w $EF00
                 dc.w $F800
-off_1AF39E:     dc.w off_139C           ; DATA XREF: sub_24690C+C8   o
+off_1AF39E:     dc.w off_139C           ; DATA XREF: chain_main+C8   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $20
@@ -24829,7 +24829,7 @@ loc_2458A4:                             ; CODE XREF: oksub_2456C8+1D2   j
                 jsr     (jim_activities_collision).l
                 bsr.w   loc_247210
                 bsr.w   sub_24669E
-                bsr.w   sub_24690C
+                bsr.w   chain_main
                 bsr.w   sub_246860
                 bsr.w   oksub_2459BE
                 bsr.w   sub_247B2C
@@ -25884,8 +25884,8 @@ locret_24690A:                          ; CODE XREF: sub_246860+6   j
                 rts
 ; End of function sub_246860
 
-
-sub_24690C:                             ; CODE XREF: oksub_2456C8+25C   p
+; Если отключить эту функцию Jim перестает реагировать на цепь
+chain_main:                             ; CODE XREF: oksub_2456C8+25C   p
                 tst.b   (byte_FFFD13).l
                 beq.w   loc_246A70
                 tst.w   (jim_y_speed).l
@@ -25905,7 +25905,7 @@ sub_24690C:                             ; CODE XREF: oksub_2456C8+25C   p
                 bsr.w   oksub_246AEC
                 rts
 ; ---------------------------------------------------------------------------
-loc_246966:                             ; CODE XREF: sub_24690C+1A   j
+loc_246966:                             ; CODE XREF: chain_main+1A   j
                 btst    #0,(byte_FFA6CF).l
                 beq.w   locret_246A76
                 clr.w   (jim_y_speed).l
@@ -25915,7 +25915,7 @@ loc_246966:                             ; CODE XREF: sub_24690C+1A   j
                 beq.s   loc_246994
                 bsr.w   chain_move_right ; Когда Jim лезет по цепи вправо
                 clr.b   (jim_timer_in_air).l
-loc_246994:                             ; CODE XREF: sub_24690C+7C   j
+loc_246994:                             ; CODE XREF: chain_main+7C   j
                 tst.b   (is_jim_move_left).l
                 bne.w   loc_246A2C
                 tst.b   (is_jim_move_right).l
@@ -25926,7 +25926,7 @@ loc_246994:                             ; CODE XREF: sub_24690C+7C   j
                 bcs.s   loc_2469C8
                 cmpi.b  #$1F,(jim_state).l
                 bcs.w   loc_246A64
-loc_2469C8:                             ; CODE XREF: sub_24690C+AE   j
+loc_2469C8:                             ; CODE XREF: chain_main+AE   j
                 cmpi.b  #$20,(jim_state).l ; ' '
                 beq.w   loc_246A64
                 move.l  #off_1AF39E,(jim_anim_offset).l
@@ -25934,54 +25934,54 @@ loc_2469C8:                             ; CODE XREF: sub_24690C+AE   j
                 move.b  #$20,(jim_state).l ; ' '
                 bra.w   loc_246A64
 ; ---------------------------------------------------------------------------
-loc_2469F0:                             ; CODE XREF: sub_24690C+98   j
+loc_2469F0:                             ; CODE XREF: chain_main+98   j
                 clr.b   (is_jim_left_direction).l
                 cmpi.b  #$1A,(jim_state).l
                 bcs.s   loc_246A0C
                 cmpi.b  #$1F,(jim_state).l
                 bcs.w   loc_246A64
-loc_246A0C:                             ; CODE XREF: sub_24690C+F2   j
+loc_246A0C:                             ; CODE XREF: chain_main+F2   j
                 move.w  (word_FFFDB6).l,d0
                 addq.w  #6,d0
                 move.w  d0,(word_FFFDB6).l
                 cmpi.w  #$90,d0
                 bcs.s   loc_246A26
                 clr.w   (word_FFFDB6).l
-loc_246A26:                             ; CODE XREF: sub_24690C+112   j
+loc_246A26:                             ; CODE XREF: chain_main+112   j
                 bsr.w   chain_move_right ; Когда Jim лезет по цепи вправо
                 bra.s   loc_246A64
 ; ---------------------------------------------------------------------------
-loc_246A2C:                             ; CODE XREF: sub_24690C+8E   j
+loc_246A2C:                             ; CODE XREF: chain_main+8E   j
                 st      (is_jim_left_direction).l
                 cmpi.b  #$1A,(jim_state).l
                 bcs.s   loc_246A46
                 cmpi.b  #$1F,(jim_state).l
                 bcs.s   loc_246A64
-loc_246A46:                             ; CODE XREF: sub_24690C+12E   j
+loc_246A46:                             ; CODE XREF: chain_main+12E   j
                 move.w  (word_FFFDB6).l,d0
                 addq.w  #6,d0
                 move.w  d0,(word_FFFDB6).l
                 cmpi.w  #$90,d0
                 bcs.s   loc_246A60
                 clr.w   (word_FFFDB6).l
-loc_246A60:                             ; CODE XREF: sub_24690C+14C   j
+loc_246A60:                             ; CODE XREF: chain_main+14C   j
                 bsr.w   chain_move_left ; Когда Jim лезет по цепи влево
-loc_246A64:                             ; CODE XREF: sub_24690C+72   j
-                                        ; sub_24690C+A2   j ...
+loc_246A64:                             ; CODE XREF: chain_main+72   j
+                                        ; chain_main+A2   j ...
                 bsr.w   oksub_246AEC
                 st      (byte_FFFD14).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_246A70:                             ; CODE XREF: sub_24690C+6   j
-                                        ; sub_24690C+10   j ...
+loc_246A70:                             ; CODE XREF: chain_main+6   j
+                                        ; chain_main+10   j ...
                 clr.b   (byte_FFFD14).l
-locret_246A76:                          ; CODE XREF: sub_24690C+62   j
+locret_246A76:                          ; CODE XREF: chain_main+62   j
                 rts
-; End of function sub_24690C
+; End of function chain_main
 
 
 ; Когда Jim лезет по цепи влево
-chain_move_left:                        ; CODE XREF: sub_24690C:loc_246A60   p
+chain_move_left:                        ; CODE XREF: chain_main:loc_246A60   p
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_246AB0
                 move.w  (word_FFFDB6).l,d0
@@ -25999,8 +25999,8 @@ locret_246AB0:                          ; CODE XREF: chain_move_left+6   j
 
 
 ; Когда Jim лезет по цепи вправо
-chain_move_right:                       ; CODE XREF: sub_24690C+26   p
-                                        ; sub_24690C+7E   p ...
+chain_move_right:                       ; CODE XREF: chain_main+26   p
+                                        ; chain_main+7E   p ...
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_246AEA
                 move.w  (word_FFFDB6).l,d0
@@ -26017,8 +26017,8 @@ locret_246AEA:                          ; CODE XREF: chain_move_right+6   j
 ; End of function chain_move_right
 
 
-oksub_246AEC:                           ; CODE XREF: sub_24690C+54   p
-                                        ; sub_24690C:loc_246A64   p
+oksub_246AEC:                           ; CODE XREF: chain_main+54   p
+                                        ; chain_main:loc_246A64   p
                 move.w  (jim_y).l,d0
                 andi.w  #$FFF0,d0
                 ori.b   #4,d0

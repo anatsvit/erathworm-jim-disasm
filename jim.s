@@ -57,7 +57,7 @@ off_58:         dc.l Trap15             ; DATA XREF: sub_252CA4+18   o
 off_5C:         dc.l Trap15             ; DATA XREF: sub_257C06+D0   o
                 dc.l IRQ7
 off_64:         dc.l IRQ7               ; DATA XREF: cheat_code+1B2   o
-                                        ; sub_252F5C+24   o ...
+                                        ; pickup_ammo+24   o ...
                 dc.l IRQ7
                 dc.l IRQ7
                 dc.l HBLANK
@@ -468,12 +468,12 @@ off_35E4:       dc.l nullsub_11         ; DATA XREF: sub_248C3A+154   o
                 dc.l sub_253D6C
                 dc.l sub_252D86
                 dc.l sub_252D86
-                dc.l sub_252EE4
-                dc.l sub_253D7C
-                dc.l sub_253DE0
-                dc.l sub_253E42
-                dc.l sub_252F5C
-                dc.l sub_252F98
+                dc.l pickup_continue
+                dc.l pickup_live
+                dc.l pickup_health_atom
+                dc.l pickup_health_molecule_full
+                dc.l pickup_ammo
+                dc.l pickup_plasma
                 dc.l sub_253D6C
                 dc.l sub_253706
                 dc.l loc_25377A
@@ -13306,7 +13306,7 @@ off_1B0300:     dc.w off_24C8           ; DATA XREF: ROM:001B0304   o
                 dc.w $EA00
                 dc.l anim_continue
 off_1B031A:     dc.w off_978            ; DATA XREF: ROM:001A325C   o
-                                        ; sub_252F5C+C   o ...
+                                        ; pickup_ammo+C   o ...
                 dc.w off_97C
                 dc.w off_980
                 dc.w off_984
@@ -24840,7 +24840,7 @@ loc_2458A4:                             ; CODE XREF: oksub_2456C8+1D2   j
                 bsr.w   sub_245AE4
                 bsr.w   oksub_245ADC
                 bsr.w   bullets_count_control
-                bsr.w   sub_24B2EC
+                bsr.w   health_control
                 bsr.w   oksub_2459BE
                 bsr.w   oksub_2459F0
                 bsr.w   sub_249168
@@ -25032,7 +25032,7 @@ loc_245BD6:                             ; CODE XREF: sub_245AE4+6A   j
                 move.b  (jim_lives_count).l,d0
                 cmpi.b  #$30,d0 ; '0'
                 beq.w   loc_24B542
-                clr.b   (byte_FFFDED).l
+                clr.b   (plasma_count_ammo).l
                 move.l  #'1000',(bullets_count).l ; 1000 патронов
                 move.l  (sp)+,d0
                 bra.w   loc_2457BC
@@ -25055,7 +25055,7 @@ loc_245C20:                             ; CODE XREF: sub_245AE4+12C   j
                 st      (byte_FFA6CF).l
                 st      (byte_FFFCF9).l
                 bsr.w   sub_24B4C8
-                clr.b   (byte_FFFDED).l
+                clr.b   (plasma_count_ammo).l
                 clr.b   (is_current_gun_plasma).l
                 move.l  #'1000',(bullets_count).l
                 jsr     (sub_24D8FC).l
@@ -25278,7 +25278,7 @@ loc_245F9C:                             ; CODE XREF: jim_fire+182   j
                 bsr.w   sub_24AE7A
 loc_245FA6:                             ; CODE XREF: jim_fire+14E   j
                 lea     (stru_25A73C).l,a6
-                tst.b   (byte_FFFDED).l
+                tst.b   (plasma_count_ammo).l
                 beq.s   loc_245FBA
                 lea     (stru_25A754).l,a6
 loc_245FBA:                             ; CODE XREF: jim_fire+162   j
@@ -25291,14 +25291,14 @@ loc_245FBA:                             ; CODE XREF: jim_fire+162   j
                 dbf     d4,loc_245F9C
                 st      (is_jim_fire).l
 loc_245FDC:                             ; CODE XREF: jim_fire+122   j
-                tst.b   (byte_FFFDED).l
+                tst.b   (plasma_count_ammo).l
                 beq.s   loc_245FEC
-                subq.b  #1,(byte_FFFDED).l
+                subq.b  #1,(plasma_count_ammo).l
                 bra.s   loc_245FF8
 ; ---------------------------------------------------------------------------
 loc_245FEC:                             ; CODE XREF: jim_fire+192   j
                 clr.b   (is_current_gun_plasma).l
-                subq.w  #1,(word_FFFDC6).l
+                subq.w  #1,(ammo_adding_buffer).l
 loc_245FF8:                             ; CODE XREF: jim_fire+19A   j
                 tst.b   (byte_FFFD14).l
                 bne.w   loc_246256
@@ -28089,7 +28089,7 @@ loc_248618:                             ; CODE XREF: sub_24847E+2A   j
                 move.w  #$A2,(a1)+
                 addq.b  #1,d1
                 clr.w   d3
-                move.b  (byte_FFFDED).l,d3
+                move.b  (plasma_count_ammo).l,d3
                 move.w  #$149,(a1)+
                 move.w  d1,(a1)+
                 addi.w  #-$1980,d3
@@ -32160,12 +32160,12 @@ loc_24B22C:                             ; CODE XREF: set_start_lives+C   j
 
 
 bullets_count_control:                             ; CODE XREF: oksub_2456C8+284   p
-                tst.w   (word_FFFDC6).l
+                tst.w   (ammo_adding_buffer).l
                 bmi.s   loc_24B2A6
                 beq.s   loc_24B274
                 cmpi.l  #'5000',(bullets_count).l
                 beq.s   loc_24B29E
-                subq.w  #1,(word_FFFDC6).l
+                subq.w  #1,(ammo_adding_buffer).l
                 lea     ($FFFBF7).l,a0
 loc_24B25E:                             ; CODE XREF: bullets_count_control+34   j
                 cmpi.b  #0,(a0)
@@ -32180,7 +32180,7 @@ loc_24B272:                             ; CODE XREF: bullets_count_control+2C   
                 addq.b  #1,(a0)
 loc_24B274:                             ; CODE XREF: bullets_count_control+8   j
                                         ; bullets_count_control+26   j ...
-                tst.w   (word_FFFDC6).l
+                tst.w   (ammo_adding_buffer).l
                 beq.s   loc_24B27E
 locret_24B27C:                          ; CODE XREF: bullets_count_control+4C   j
                                         ; bullets_count_control+58   j
@@ -32192,18 +32192,18 @@ loc_24B27E:                             ; CODE XREF: bullets_count_control+3E   
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #$F,d7
                 bne.s   locret_24B27C
-                addq.w  #1,(word_FFFDC6).l
+                addq.w  #1,(ammo_adding_buffer).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24B29E:                             ; CODE XREF: bullets_count_control+14   j
                                         ; bullets_count_control+74   j
-                clr.w   (word_FFFDC6).l
+                clr.w   (ammo_adding_buffer).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24B2A6:                             ; CODE XREF: bullets_count_control+6   j
                 cmpi.l  #'0000',(bullets_count).l
                 beq.s   loc_24B29E
-                addq.w  #1,(word_FFFDC6).l
+                addq.w  #1,(ammo_adding_buffer).l
                 lea     ($FFFBF7).l,a0
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B274
@@ -32229,15 +32229,15 @@ loc_24B2E8:                             ; CODE XREF: bullets_count_control+8C   
 ; End of function bullets_count_control
 
 
-sub_24B2EC:                             ; CODE XREF: oksub_2456C8+288   p
-                tst.w   (word_FFFDC8).l
+health_control:                             ; CODE XREF: oksub_2456C8+288   p
+                tst.w   (health_buffer).l
                 bmi.s   loc_24B364
                 beq.s   loc_24B324
                 lea     ($FFFBFF).l,a0
-                cmpi.l  #$30313030,(jim_health).l
+                cmpi.l  #'0100',(jim_health).l
                 beq.s   loc_24B34C
-                subq.w  #1,(word_FFFDC8).l
-loc_24B30E:                             ; CODE XREF: sub_24B2EC+34   j
+                subq.w  #1,(health_buffer).l
+loc_24B30E:                             ; CODE XREF: health_control+34   j
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B324
                 cmpi.b  #$39,(a0) ; '9'
@@ -32246,60 +32246,60 @@ loc_24B30E:                             ; CODE XREF: sub_24B2EC+34   j
                 subq.w  #1,a0
                 bra.s   loc_24B30E
 ; ---------------------------------------------------------------------------
-loc_24B322:                             ; CODE XREF: sub_24B2EC+2C   j
+loc_24B322:                             ; CODE XREF: health_control+2C   j
                 addq.b  #1,(a0)
-loc_24B324:                             ; CODE XREF: sub_24B2EC+8   j
-                                        ; sub_24B2EC+26   j ...
+loc_24B324:                             ; CODE XREF: health_control+8   j
+                                        ; health_control+26   j ...
                 tst.b   (is_jim_ropejumper).l
                 bne.s   locret_24B338
                 cmpi.l  #$30303030,(jim_health).l
                 beq.s   loc_24B33A
-locret_24B338:                          ; CODE XREF: sub_24B2EC+3E   j
-                                        ; sub_24B2EC+54   j
+locret_24B338:                          ; CODE XREF: health_control+3E   j
+                                        ; health_control+54   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B33A:                             ; CODE XREF: sub_24B2EC+4A   j
+loc_24B33A:                             ; CODE XREF: health_control+4A   j
                 tst.b   (jim_dead_enable).l
                 bne.s   locret_24B338
                 move.b  #$C,(jim_dead_enable).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B34C:                             ; CODE XREF: sub_24B2EC+1A   j
-                clr.w   (word_FFFDC8).l
+loc_24B34C:                             ; CODE XREF: health_control+1A   j
+                clr.w   (health_buffer).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B354:                             ; CODE XREF: sub_24B2EC+82   j
+loc_24B354:                             ; CODE XREF: health_control+82   j
                 move.b  #$A,(jim_dead_enable).l
-                clr.w   (word_FFFDC8).l
+                clr.w   (health_buffer).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24B364:                             ; CODE XREF: sub_24B2EC+6   j
+loc_24B364:                             ; CODE XREF: health_control+6   j
                 cmpi.l  #$30303030,(jim_health).l
                 beq.s   loc_24B354
-                addq.w  #1,(word_FFFDC8).l
+                addq.w  #1,(health_buffer).l
                 lea     ($FFFBFF).l,a0
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B324
                 cmpi.b  #$30,(a0) ; '0'
                 bne.s   loc_24B3A6
-loc_24B388:                             ; CODE XREF: sub_24B2EC+A8   j
+loc_24B388:                             ; CODE XREF: health_control+A8   j
                 subq.w  #1,a0
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B324
                 cmpi.b  #$30,(a0) ; '0'
                 beq.s   loc_24B388
                 subq.b  #1,(a0)
-loc_24B398:                             ; CODE XREF: sub_24B2EC+B8   j
+loc_24B398:                             ; CODE XREF: health_control+B8   j
                 addq.w  #1,a0
                 cmpi.b  #0,(a0)
                 beq.s   loc_24B324
                 move.b  #$39,(a0) ; '9'
                 bra.s   loc_24B398
 ; ---------------------------------------------------------------------------
-loc_24B3A6:                             ; CODE XREF: sub_24B2EC+9A   j
+loc_24B3A6:                             ; CODE XREF: health_control+9A   j
                 subq.b  #1,(a0)
                 rts
-; End of function sub_24B2EC
+; End of function health_control
 
 
 set_100_health:                         ; CODE XREF: oksub_2456C8+E8   p
@@ -32339,12 +32339,12 @@ sub_24B3DC:                             ; CODE XREF: damage_from_enemy:loc_24B11
                 bne.s   locret_24B422
                 tst.b   (is_jim_ropejumper).l
                 beq.s   loc_24B414
-                sub.w   d0,(word_FFFDC8).l
+                sub.w   d0,(health_buffer).l
                 move.b  #$78,(invincibility_timer).l ; 'x'
                 rts
 ; ---------------------------------------------------------------------------
 loc_24B414:                             ; CODE XREF: sub_24B3DC+26   j
-                sub.w   d0,(word_FFFDC8).l
+                sub.w   d0,(health_buffer).l
                 move.b  #$4B,(invincibility_timer).l ; 'K'
 locret_24B422:                          ; CODE XREF: sub_24B3DC+6   j
                                         ; sub_24B3DC+E   j ...
@@ -32353,7 +32353,7 @@ locret_24B422:                          ; CODE XREF: sub_24B3DC+6   j
 
 
 sub_24B424:
-                addq.w  #1,(word_FFFDC8).l
+                addq.w  #1,(health_buffer).l
                 rts
 ; End of function sub_24B424
 
@@ -32368,7 +32368,7 @@ oksub_24B42C:                           ; CODE XREF: activity_thorn+18E   p
                 bne.s   locret_24B454
                 tst.b   (invincibility_timer).l
                 bne.s   locret_24B454
-                subi.w  #$A,(word_FFFDC8).l
+                subi.w  #$A,(health_buffer).l
 locret_24B454:                          ; CODE XREF: oksub_24B42C+6   j
                                         ; oksub_24B42C+E   j ...
                 rts
@@ -32750,7 +32750,7 @@ loc_24B9A8:                             ; CODE XREF: cheat_code+EA   j
                 bne.w   locret_24B85E
                 st      (byte_FFFF72).l
 loc_24B9B8:                             ; CODE XREF: cheat_code+E2   j
-                jsr     (sub_253DA0).l
+                jsr     (add_live).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24B9C0:                             ; CODE XREF: cheat_code+F8   j
@@ -32792,7 +32792,7 @@ loc_24BA24:                             ; CODE XREF: cheat_code+110   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24BA46:                             ; CODE XREF: cheat_code+1EA   j
-                move.b  #9,(byte_FFFDED).l
+                move.b  #9,(plasma_count_ammo).l
                 st      (is_current_gun_plasma).l
                 rts
 ; ---------------------------------------------------------------------------
@@ -39305,7 +39305,7 @@ spawn_plasma_gun_conditionally:
                 tst.b   (byte_FFFD99).l
                 beq.w   nullsub_5
 spawn_plasma_gun:
-                cmpi.b  #9,(byte_FFFDED).l
+                cmpi.b  #9,(plasma_count_ammo).l
                 bcc.s   locret_2507E8
                 lea     (stru_25A9DC).l,a6
                 jsr     loc_24DB10(pc)
@@ -42623,7 +42623,7 @@ locret_252EE2:                          ; CODE XREF: sub_252DE4+8   j
 ; End of function sub_252DE4
 
 
-sub_252EE4:                             ; DATA XREF: ROM:00003720   o
+pickup_continue:                             ; DATA XREF: ROM:00003720   o
                 tst.b   (platform_type_under_jim).l
                 beq.s   locret_252F5A
                 move.w  d7,-(sp)
@@ -42647,41 +42647,41 @@ sub_252EE4:                             ; DATA XREF: ROM:00003720   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_252F52:                             ; CODE XREF: sub_252EE4+52   j
+loc_252F52:                             ; CODE XREF: pickup_continue+52   j
                 move.w  (sp)+,(jim_collider_x).l
                 move.w  (sp)+,d7
-locret_252F5A:                          ; CODE XREF: sub_252EE4+6   j
+locret_252F5A:                          ; CODE XREF: pickup_continue+6   j
                 rts
-; End of function sub_252EE4
+; End of function pickup_continue
 
 
-sub_252F5C:                             ; DATA XREF: ROM:00003730   o
-                addi.w  #$FA,(word_FFFDC6).l
+pickup_ammo:                             ; DATA XREF: ROM:00003730   o
+                addi.w  #$FA,(ammo_adding_buffer).l
                 move.b  #$86,(a1)
                 move.l  #off_1B031A,$20(a1)
                 clr.b   $37(a1)
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_252F96
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_64).w
+                pea     ($64).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_252F96:                          ; CODE XREF: sub_252F5C+1E   j
+locret_252F96:                          ; CODE XREF: pickup_ammo+1E   j
                 rts
-; End of function sub_252F5C
+; End of function pickup_ammo
 
 
-sub_252F98:                             ; DATA XREF: ROM:00003734   o
+pickup_plasma:                             ; DATA XREF: ROM:00003734   o
                 move.b  #$86,(a1)
                 move.l  #off_1B031A,$20(a1)
                 clr.b   $37(a1)
                 st      (is_current_gun_plasma).l
-                cmpi.b  #9,(byte_FFFDED).l
+                cmpi.b  #9,(plasma_count_ammo).l
                 bcc.s   loc_252FBE
-                addq.b  #1,(byte_FFFDED).l
-loc_252FBE:                             ; CODE XREF: sub_252F98+1E   j
+                addq.b  #1,(plasma_count_ammo).l
+loc_252FBE:                             ; CODE XREF: pickup_plasma+1E   j
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_252FE0
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -42690,9 +42690,9 @@ loc_252FBE:                             ; CODE XREF: sub_252F98+1E   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_252FE0:                          ; CODE XREF: sub_252F98+2C   j
+locret_252FE0:                          ; CODE XREF: pickup_plasma+2C   j
                 rts
-; End of function sub_252F98
+; End of function pickup_plasma
 
 
 sub_252FE2:
@@ -43719,26 +43719,26 @@ sub_253D6C:                             ; DATA XREF: ROM:00003708   o
 ; End of function sub_253D6C
 
 
-sub_253D7C:                             ; DATA XREF: ROM:00003724   o
+pickup_live:                             ; DATA XREF: ROM:00003724   o
                 cmpi.b  #$39,(jim_lives_count).l ; '9'
                 beq.w   locret_253DDE
-                jsr     (sub_253DA0).l
+                jsr     (add_live).l
                 move.b  #$86,(a1)
                 move.l  #off_1B031A,$20(a1)
                 clr.b   $37(a1)
                 rts
-; End of function sub_253D7C
+; End of function pickup_live
 
 
-sub_253DA0:                             ; CODE XREF: cheat_code:loc_24B9B8   p
-                                        ; sub_253D7C+C   p
+add_live:                             ; CODE XREF: cheat_code:loc_24B9B8   p
+                                        ; pickup_live+C   p
                 move.w  d0,-(sp)
                 move.b  (jim_lives_count).l,d0
                 addq.b  #1,d0
                 cmpi.b  #$3A,d0 ; ':'
                 bcs.s   loc_253DB4
                 move.b  #$39,d0 ; '9'
-loc_253DB4:                             ; CODE XREF: sub_253DA0+E   j
+loc_253DB4:                             ; CODE XREF: add_live+E   j
                 move.b  d0,(jim_lives_count).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_253DDC
@@ -43748,14 +43748,14 @@ loc_253DB4:                             ; CODE XREF: sub_253DA0+E   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_253DDC:                             ; CODE XREF: sub_253DA0+20   j
+loc_253DDC:                             ; CODE XREF: add_live+20   j
                 move.w  (sp)+,d0
-locret_253DDE:                          ; CODE XREF: sub_253D7C+8   j
+locret_253DDE:                          ; CODE XREF: pickup_live+8   j
                 rts
-; End of function sub_253DA0
+; End of function add_live
 
 
-sub_253DE0:                             ; DATA XREF: ROM:00003728   o
+pickup_health_atom:                             ; DATA XREF: ROM:00003728   o
                 move.b  #$86,(a1)
                 move.l  #off_1B031A,$20(a1)
                 clr.b   $37(a1)
@@ -43769,21 +43769,21 @@ sub_253DE0:                             ; DATA XREF: ROM:00003728   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_253E1A:                             ; CODE XREF: sub_253DE0+1E   j
-                addq.w  #5,(word_FFFDC8).l
+loc_253E1A:                             ; CODE XREF: pickup_health_atom+1E   j
+                addq.w  #5,(health_buffer).l
                 cmpi.b  #0,(difficulty_level).l
                 beq.s   locret_253E40
-                subq.w  #1,(word_FFFDC8).l
+                subq.w  #1,(health_buffer).l
                 cmpi.b  #1,(difficulty_level).l
                 beq.s   locret_253E40
-                subq.w  #1,(word_FFFDC8).l
-locret_253E40:                          ; CODE XREF: sub_253DE0+48   j
-                                        ; sub_253DE0+58   j
+                subq.w  #1,(health_buffer).l
+locret_253E40:                          ; CODE XREF: pickup_health_atom+48   j
+                                        ; pickup_health_atom+58   j
                 rts
-; End of function sub_253DE0
+; End of function pickup_health_atom
 
 
-sub_253E42:                             ; DATA XREF: ROM:0000372C   o
+pickup_health_molecule_full:                             ; DATA XREF: ROM:0000372C   o
                 move.b  #$86,(a1)
                 move.l  #off_1B031A,$20(a1)
                 clr.b   $37(a1)
@@ -43792,23 +43792,23 @@ sub_253E42:                             ; DATA XREF: ROM:0000372C   o
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_253E7C
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     ($26).w
+                pea     ($26).w              ; Wee doolgie(Live up) sound
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_253E7C:                             ; CODE XREF: sub_253E42+1E   j
-                addi.w  #$64,(word_FFFDC8).l ; 'd'
+loc_253E7C:                             ; CODE XREF: pickup_health_molecule_full+1E   j
+                addi.w  #$64,(health_buffer).l ; 'd'
                 cmpi.b  #0,(difficulty_level).l
                 beq.s   locret_253EA8
-                subi.w  #$19,(word_FFFDC8).l
+                subi.w  #$19,(health_buffer).l
                 cmpi.b  #1,(difficulty_level).l
                 beq.s   locret_253EA8
-                subi.w  #$32,(word_FFFDC8).l ; '2'
-locret_253EA8:                          ; CODE XREF: sub_253E42+4A   j
-                                        ; sub_253E42+5C   j
+                subi.w  #$32,(health_buffer).l ; '2'
+locret_253EA8:                          ; CODE XREF: pickup_health_molecule_full+4A   j
+                                        ; pickup_health_molecule_full+5C   j
                 rts
-; End of function sub_253E42
+; End of function pickup_health_molecule_full
 
 
 sub_253EAA:                             ; CODE XREF: enemy_read_map+D0   p
@@ -44722,7 +44722,7 @@ loc_254912:                             ; DATA XREF: ROM:000039A4   o
                 rts
 ; ---------------------------------------------------------------------------
 loc_25491C:                             ; CODE XREF: sub_25490E+A   j
-                cmpi.w  #$A,(word_FFFDC6).l
+                cmpi.w  #$A,(ammo_adding_buffer).l
                 bcc.s   loc_25495C
                 cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_25495C
@@ -45195,7 +45195,7 @@ loc_254EB6:                             ; CODE XREF: sub_254E88+12   j
                 move.l  #off_1B6016,$20(a2)
                 clr.b   $37(a2)
                 move.b  #$12,(byte_FFFD50).l
-                cmpi.w  #$A,(word_FFFDC6).l
+                cmpi.w  #$A,(ammo_adding_buffer).l
                 bcc.s   loc_254F1C
                 cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_254F1C
@@ -47086,7 +47086,7 @@ locret_256598:                          ; CODE XREF: oksub_25655C+6   j
 
 sub_25659A:                             ; CODE XREF: sub_2522D0   p
                 movem.w d0-d1,-(sp)
-                cmpi.w  #$A,(word_FFFDC6).l
+                cmpi.w  #$A,(ammo_adding_buffer).l
                 bcc.s   loc_256608
                 cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_256608
@@ -47118,7 +47118,7 @@ loc_256608:                             ; CODE XREF: sub_25659A+C   j
 
 sub_25660E:                             ; CODE XREF: sub_2522C8   p
                 movem.w d0-d1,-(sp)
-                cmpi.w  #$A,(word_FFFDC6).l
+                cmpi.w  #$A,(ammo_adding_buffer).l
                 bcc.s   loc_25666C
                 cmpi.l  #'0100',(bullets_count).l
                 bcc.s   loc_25666C

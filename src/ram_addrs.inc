@@ -352,8 +352,8 @@ word_FFFDB6 equ $FFFFFDB6
 dword_FFFDB8 equ $FFFFFDB8
 word_FFFDC0 equ $FFFFFDC0
 word_FFFDC4 equ $FFFFFDC4
-word_FFFDC6 equ $FFFFFDC6
-word_FFFDC8 equ $FFFFFDC8
+ammo_adding_buffer equ $FFFFFDC6
+health_buffer equ $FFFFFDC8
 word_FFFDCA equ $FFFFFDCA
 word_FFFDCC equ $FFFFFDCC
 word_FFFDCE equ $FFFFFDCE
@@ -377,7 +377,7 @@ byte_FFFDE9 equ $FFFFFDE9
 jim_state equ $FFFFFDEA
 byte_FFFDEB equ $FFFFFDEB
 byte_FFFDEC equ $FFFFFDEC
-byte_FFFDED equ $FFFFFDED
+plasma_count_ammo equ $FFFFFDED
 byte_FFFDEE equ $FFFFFDEE
 byte_FFFDF0 equ $FFFFFDF0
 byte_FFFDF1 equ $FFFFFDF1

@@ -409,8 +409,8 @@ off_35E4:       dc.l nullsub_11         ; DATA XREF: sub_248C3A+154   o
                 dc.l sub_2588E6
                 dc.l sub_252CD4
                 dc.l sub_2524DA
-                dc.l sub_252AF4
-                dc.l sub_252AEE
+                dc.l collision_with_bucket_boss
+                dc.l collision_with_saxophone
                 dc.l locret_252594
                 dc.l sub_252AE8
                 dc.l sub_25266C
@@ -452,7 +452,7 @@ off_35E4:       dc.l nullsub_11         ; DATA XREF: sub_248C3A+154   o
                 dc.l nullsub_21
                 dc.l nullsub_21
                 dc.l sub_252D90
-                dc.l sub_2530B6
+                dc.l collision_with_garbage
                 dc.l sub_2532FA
                 dc.l sub_2524A2
                 dc.l sub_2524A2
@@ -513,17 +513,17 @@ off_35E4:       dc.l nullsub_11         ; DATA XREF: sub_248C3A+154   o
                 dc.l sub_258E14
 off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l nullsub_36
-                dc.l sub_254648
+                dc.l fire_to_dog
                 dc.l sub_2553C2
                 dc.l sub_2553E8
-                dc.l sub_255F7E
+                dc.l fire_to_crow
                 dc.l sub_25608A
                 dc.l sub_2560D4
                 dc.l sub_25540E
                 dc.l sub_255442
                 dc.l sub_25487A
                 dc.l sub_2554FA
-                dc.l sub_2547B2
+                dc.l fire_to_chuck_boss
                 dc.l sub_25487A
                 dc.l sub_25487A
                 dc.l nullsub_37
@@ -531,8 +531,8 @@ off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l nullsub_11
                 dc.l nullsub_37
                 dc.l nullsub_37
-                dc.l sub_2551BA
-                dc.l sub_255EF0
+                dc.l fire_to_bucket_boss
+                dc.l fire_to_saxophone
                 dc.l sub_255B4E
                 dc.l sub_255A96
                 dc.l sub_25597E
@@ -573,7 +573,7 @@ off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l sub_254F5C
                 dc.l nullsub_22
                 dc.l nullsub_22
-                dc.l sub_255F7E
+                dc.l fire_to_crow
                 dc.l sub_255DE4
                 dc.l sub_255DF8
                 dc.l sub_252484
@@ -634,7 +634,7 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l nullsub_39
                 dc.l loc_254A6A
                 dc.l sub_25517A
-                dc.l sub_2550F0
+                dc.l whip_to_fridge
                 dc.l sub_254C1A
                 dc.l sub_254C7E
                 dc.l sub_254AC4
@@ -2339,7 +2339,7 @@ shot_hit_table_2:dc.l $FFFF0001         ; DATA XREF: shots_hit+4C   o
                 dc.l $FB13
                 dc.l $FEC3
                 dc.l $FFFE
-off_643A:       dc.l off_1B0530         ; DATA XREF: sub_252144+E   o
+off_643A:       dc.l off_1B0530         ; DATA XREF: funicular_end_falling+E   o
                 dc.l off_1B0534
                 dc.l off_1B0538
                 dc.l off_1B0538
@@ -3778,7 +3778,7 @@ byte_1A2834:    dc.b $83,  1,$FD,$D5,  0,  1,$84,$83,  0,  0,$83,  1,$FD,$D5,  0
                 dc.b $83,  1,$FD,$D5,  0,$23,$84,$83,  0,  0,$83,  1,$FD,$D5,  0,$24,$84,$83,  0,  0,$80,  0
                 dc.l byte_1A2834
 byte_1A29AE:    dc.b   0,  0,$8D,  0,$83,  1,$FD,$F3,  0,  2
-                                        ; DATA XREF: sub_2551BA:loc_255384   o
+                                        ; DATA XREF: fire_to_bucket_boss:loc_255384   o
 byte_1A29B8:    dc.b $83,  2,$FD,$D4,  0,$25,$84,$83,  0,  0,$83,  2,$FD,$D4,  0,$26,$84,$83,  0,  0,$83,  2,$FD,$D4,  0,$27,$84,$83,  0,  0,$83,  2
                                         ; DATA XREF: ROM:001A2A30   o
                 dc.b $FD,$D4,  0,$28,$84,$83,  0,  0,$83,  2,$FD,$D4,  0,$29,$84,$83,  0,  0,$83,  2,$FD,$D4,  0,$2A,$84,$83,  0,  0,$83,  2,$FD,$D4
@@ -3788,7 +3788,7 @@ byte_1A29B8:    dc.b $83,  2,$FD,$D4,  0,$25,$84,$83,  0,  0,$83,  2,$FD,$D4,  0
                 dc.b   0,  0,$80,  0
                 dc.l byte_1A29B8
 byte_1A2A34:    dc.b   0,  0,$8D,  0,$83,  1,$FD,$F3,  0,  3
-                                        ; DATA XREF: sub_2551BA:loc_2552F2   o
+                                        ; DATA XREF: fire_to_bucket_boss:loc_2552F2   o
 stru_1A2A3E:    dc.b $83                ; field_0
                                         ; DATA XREF: ROM:001A2A88   o
                 dc.b 2                  ; field_1
@@ -3875,7 +3875,7 @@ byte_1A2AC2:    dc.b $83,  2,$FD,$D4,  0,$35,$84,$83,  0,  0,$8D,  0,$83,  2,$FD
                 dc.b $FD,$D4,  0,$4C,$84,$83,  0,  0,$83,  2,$FD,$D4,  0,$4D,$84,$83,  0,  0,$80,  0
                 dc.l byte_1A2AC2
 byte_1A2BD6:    dc.b   0,  0,$8D,  0,$83,  1,$FD,$F3,  0,  5,$89,$22,$83,  2,$FD,$D4,  0,$4E,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$4F,$84,$81,  0,  0
-                                        ; DATA XREF: sub_2551BA:loc_25533C   o
+                                        ; DATA XREF: fire_to_bucket_boss:loc_25533C   o
                 dc.b $83,  2,$FD,$D4,  0,$50,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$51,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$52,$84,$81,  0,  0,$83,  2
                 dc.b $FD,$D4,  0,$53,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$54,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$55,$84,$81,  0,  0,$83,  2,$FD,$D4
                 dc.b   0,$56,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$57,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$58,$84,$81,  0,  0,$83,  2,$FD,$D4,  0,$59
@@ -4773,7 +4773,7 @@ byte_1A4054:    dc.b   0,  0,$88,$84,  0,  7
                 dc.b $82,  0
 byte_1A4092:    dc.b   0,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001A4098   o
-                                        ; sub_25645E+5E   o ...
+                                        ; saxophone_on_magnet+5E   o ...
                 dc.l byte_1A4092
                 dc.b $89,$1C,$8B,  0
                 dc.l stru_25A88C
@@ -4827,7 +4827,7 @@ byte_1A4104:    dc.b   0,  0,$91,  0    ; DATA XREF: ROM:001A4110   o
                 dc.b $82,  0
 byte_1A4158:    dc.b   0,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001A415E   o
-                                        ; sub_2563E4+5E   o
+                                        ; box_on_magnet+5E   o
                 dc.l byte_1A4158
                 dc.b $8B,  0
                 dc.l stru_25A88C
@@ -7155,7 +7155,7 @@ byte_1AC239:    dc.b $11,$94,$61,$44,  1,$57,$5F,$21,  0,$9C,$66,  3,  0,$77,$62
                                         ; DATA XREF: ROM:001A86A4   o
                 dc.b   0,$75,$5C,$47,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
                 dc.b   0,  0,  0,  0,  0
-byte_1AC27E:    dc.b   1,  0,$92,  0    ; DATA XREF: sub_2547B2+B2   o
+byte_1AC27E:    dc.b   1,  0,$92,  0    ; DATA XREF: fire_to_chuck_boss+B2   o
                 dc.l byte_1AC2D4
                 dc.b $92,  0
                 dc.l byte_1AC2D4
@@ -7288,7 +7288,7 @@ byte_1AC5C8:    dc.b   0,  0,$88,$84,  0,  7
                 dc.b $82,  0
 byte_1AC5E2:    dc.b   1,  0,  2,  0,$84,$24,  1,  0,  2,  0,$85,  0,$84,$E3,  0,  0,$84,$25,$FF,  0,$FE,  0,$85,  0,$80,  0
                                         ; DATA XREF: ROM:001AC5FC   o
-                                        ; sub_2547B2:loc_254846   o
+                                        ; fire_to_chuck_boss:loc_254846   o
                 dc.l byte_1AC5E2
 byte_1AC600:    dc.b   1,  0,$84,$DD,  1,  0,  0,  0,  1,  0,$82,  0
                                         ; DATA XREF: ROM:stru_25AACC   o
@@ -7909,7 +7909,7 @@ anim_fridge:    dc.w off_1F34           ; DATA XREF: ROM:001AD410   o
                 dc.w off_1F38
                 dc.w $EA00
                 dc.l anim_fridge
-off_1AD414:     dc.w off_1F34           ; DATA XREF: sub_2550F0   o
+off_1AD414:     dc.w off_1F34           ; DATA XREF: whip_to_fridge   o
                 dc.w off_1F34
                 dc.w off_1F34
                 dc.w off_1F38
@@ -12525,7 +12525,7 @@ anim_jim_legs:  dc.w off_19A4           ; DATA XREF: ROM:001AFCD8   o
                 dc.w off_19C0
                 dc.w $EA00
                 dc.l anim_jim_legs
-off_1AFCDC:     dc.w off_1828           ; DATA XREF: sub_258B04+26   o
+off_1AFCDC:     dc.w off_1828           ; DATA XREF: level_finish+26   o
                 dc.w $ED01
                 dc.w $A6DB
                 dc.w 0
@@ -13565,7 +13565,7 @@ off_1B051A:     dc.w off_25C0           ; DATA XREF: ROM:001B0522   o
                 dc.w off_25C8
                 dc.w $EA00
                 dc.l off_1B051A
-off_1B0526:     dc.w off_25CC           ; DATA XREF: sub_252144+2C   o
+off_1B0526:     dc.w off_25CC           ; DATA XREF: funicular_end_falling+2C   o
                 dc.w $EE83
                 dc.w off_25CC
                 dc.w off_25D0
@@ -13909,7 +13909,7 @@ off_1B087E:     dc.w off_D7C            ; DATA XREF: ROM:001B0892   o
                 dc.w off_D8C
                 dc.w $EA00
                 dc.l off_1B087E
-off_1B0896:     dc.w off_D34            ; DATA XREF: sub_255F7E+2C   o
+off_1B0896:     dc.w off_D34            ; DATA XREF: fire_to_crow+2C   o
                 dc.b $F3,$16,$EE,$8B
                 dc.w off_D34
 anim_crow:      dc.w off_D7C            ; DATA XREF: ROM:001B08D8   o
@@ -18905,7 +18905,7 @@ anim_car_tire_2:dc.w off_31E8           ; DATA XREF: ROM:001B3388   o
                 dc.w off_31EC
                 dc.w $EA00
                 dc.l anim_car_tire_2
-off_1B338C:     dc.w off_858            ; DATA XREF: sub_2547B2+34   o
+off_1B338C:     dc.w off_858            ; DATA XREF: fire_to_chuck_boss+34   o
                 dc.w off_858
                 dc.w off_85C
                 dc.w off_85C
@@ -19052,7 +19052,7 @@ word_1B34B0:    dc.w $EE83              ; DATA XREF: ROM:001B3492   o
                 dc.w $EA00
                 dc.l anim_boss_chuck
 off_1B34C4:     dc.w off_B58            ; DATA XREF: ROM:001B34E4   o
-                                        ; sub_2547B2+A6   o
+                                        ; fire_to_chuck_boss+A6   o
                 dc.w $FB00
                 dc.l oksub_252518
                 dc.w $F501
@@ -19065,7 +19065,7 @@ off_1B34C4:     dc.w off_B58            ; DATA XREF: ROM:001B34E4   o
                 dc.w off_B58
                 dc.w $EA00
                 dc.l off_1B34C4
-off_1B34E8:     dc.w off_B30            ; DATA XREF: sub_2547B2+12   o
+off_1B34E8:     dc.w off_B30            ; DATA XREF: fire_to_chuck_boss+12   o
                 dc.w $FB00
                 dc.l oksub_2495A0
                 dc.w $EE02
@@ -19084,7 +19084,7 @@ off_1B34E8:     dc.w off_B30            ; DATA XREF: sub_2547B2+12   o
                 dc.w $EF00
                 dc.w $EA00
                 dc.l off_1ADB3C
-off_1B3512:     dc.w off_B44            ; DATA XREF: sub_2547B2:loc_254834   o
+off_1B3512:     dc.w off_B44            ; DATA XREF: fire_to_chuck_boss:loc_254834   o
                                         ; sub_255466+8   o
                 dc.w off_B44
                 dc.w off_B44
@@ -19151,7 +19151,7 @@ off_1B3586:     dc.w off_AE4            ; DATA XREF: ROM:001B3596   o
                 dc.w off_AE8
                 dc.w $EA00
                 dc.l off_1B3586
-off_1B359A:     dc.w off_1ED4           ; DATA XREF: sub_254648+24   o
+off_1B359A:     dc.w off_1ED4           ; DATA XREF: fire_to_dog+24   o
                 dc.w $FB00
                 dc.l oksub_2495B0
                 dc.w $F340
@@ -19493,7 +19493,7 @@ word_1B3886:    dc.w $EE8D              ; DATA XREF: ROM:001B3880   o
                 dc.w off_E24
                 dc.w $EA00
                 dc.l anim_cow
-off_1B3898:     dc.w off_E40            ; DATA XREF: sub_2584B2+12   o
+off_1B3898:     dc.w off_E40            ; DATA XREF: cow_launch+12   o
                 dc.w $EC01
 anim_cow_mini:  dc.w off_E44            ; DATA XREF: ROM:001B38A0   o
                                         ; ROM:stru_25AA54   o
@@ -24775,7 +24775,7 @@ loc_2457FC:                             ; CODE XREF: oksub_2456C8+120   j
                                         ; Эскалатор на Level 5
                 bsr.w   sub_24AC2C
 loc_24584E:                             ; CODE XREF: oksub_2456C8+2C0   j
-                jsr     (sub_258B04).l
+                jsr     (level_finish).l
                 tst.b   (byte_FFFDEC).l
                 beq.s   loc_24588E
                 bra.s   loc_245870
@@ -29592,7 +29592,7 @@ oksub_2495A8:                           ; DATA XREF: ROM:001B347A   o
 
 
 oksub_2495B0:                           ; CODE XREF: sub_25400C+1C   p
-                                        ; sub_2563E4+72   p ...
+                                        ; box_on_magnet+72   p ...
                 bset    #0,6(a1)
                 rts
 ; End of function oksub_2495B0
@@ -41404,7 +41404,7 @@ loc_252116:                             ; CODE XREF: sub_251F66+1C6   j
 word_252142:    dc.w $80                ; DATA XREF: sub_2500A8+10   o
 
 
-sub_252144:                             ; DATA XREF: ROM:stru_25AA6C   o
+funicular_end_falling:                             ; DATA XREF: ROM:stru_25AA6C   o
                 cmpi.b  #$5F,(a1) ; '_'
                 bne.s   loc_25215E
                 move.w  2(a1),d7
@@ -41412,16 +41412,16 @@ sub_252144:                             ; DATA XREF: ROM:stru_25AA6C   o
                 lea     (off_643A).w,a0
                 move.l  (a0,d7.w),d7
                 move.l  d7,$20(a1)
-loc_25215E:                             ; CODE XREF: sub_252144+4   j
+loc_25215E:                             ; CODE XREF: funicular_end_falling+4   j
                 cmpi.b  #$25,$3D(a1) ; '%'
                 bne.s   locret_25217C
                 move.b  #$86,(a1)
                 move.b  #$60,6(a1) ; '`'
                 move.l  #off_1B0526,$20(a1)
                 clr.b   $37(a1)
-locret_25217C:                          ; CODE XREF: sub_252144+20   j
+locret_25217C:                          ; CODE XREF: funicular_end_falling+20   j
                 rts
-; End of function sub_252144
+; End of function funicular_end_falling
 
 
 sub_25217E:
@@ -41570,7 +41570,7 @@ sub_2522C8:                             ; DATA XREF: ROM:stru_25B5DC   o
 
 ; Что-то связанное с боссом ведром на NJC
 sub_2522D0:                             ; DATA XREF: ROM:stru_25AB14   o
-                jsr     (sub_25659A).l
+                jsr     (ammo_prize_fall).l
                 cmpi.b  #3,(byte_FFFDF3).l
                 bne.s   loc_2522FE
                 move.b  $3D(a1),d7
@@ -42283,13 +42283,13 @@ sub_252AE8:                             ; DATA XREF: ROM:00003640   o
 ; End of function sub_252AE8
 
 
-sub_252AEE:                             ; DATA XREF: ROM:00003638   o
+collision_with_saxophone:                             ; DATA XREF: ROM:00003638   o
                 jsr     sub_24B000(pc)
                 rts
-; End of function sub_252AEE
+; End of function collision_with_saxophone
 
 
-sub_252AF4:                             ; DATA XREF: ROM:00003634   o
+collision_with_bucket_boss:                             ; DATA XREF: ROM:00003634   o
                 jsr     (sub_252B3A).l
                 move.w  (sound_fx_enable).l,-(sp)
                 clr.b   (sound_fx_enable).l
@@ -42303,13 +42303,13 @@ sub_252AF4:                             ; DATA XREF: ROM:00003634   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_252B32:                             ; CODE XREF: sub_252AF4+22   j
+loc_252B32:                             ; CODE XREF: collision_with_bucket_boss+22   j
                 move.w  (sp)+,(sound_fx_enable).l
                 rts
-; End of function sub_252AF4
+; End of function collision_with_bucket_boss
 
 
-sub_252B3A:                             ; CODE XREF: sub_252AF4   p
+sub_252B3A:                             ; CODE XREF: collision_with_bucket_boss   p
                 cmpi.b  #6,(byte_FFFDF3).l
                 beq.s   locret_252B8E
                 move.b  #6,(byte_FFFDF3).l
@@ -42768,7 +42768,7 @@ loc_25308A:                             ; CODE XREF: sub_25306A+6   j
 ; End of function sub_25306A
 
 
-sub_2530B6:                             ; DATA XREF: ROM:000036E0   o
+collision_with_garbage:                             ; DATA XREF: ROM:000036E0   o
                 jsr     (sub_24B000).l
                 tst.b   (platform_type_under_jim).l
                 bne.s   locret_2530EC
@@ -42780,12 +42780,12 @@ sub_2530B6:                             ; DATA XREF: ROM:000036E0   o
                 move.w  #$FD00,(jim_y_speed).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_2530E4:                             ; CODE XREF: sub_2530B6+22   j
+loc_2530E4:                             ; CODE XREF: collision_with_garbage+22   j
                 move.w  #$900,(jim_y_speed).l
-locret_2530EC:                          ; CODE XREF: sub_2530B6+C   j
-                                        ; sub_2530B6+16   j
+locret_2530EC:                          ; CODE XREF: collision_with_garbage+C   j
+                                        ; collision_with_garbage+16   j
                 rts
-; End of function sub_2530B6
+; End of function collision_with_garbage
 
 
 sub_2530EE:                             ; DATA XREF: ROM:0000375C   o
@@ -44396,7 +44396,7 @@ loc_254526:                             ; CODE XREF: sub_25449C+6A   j
 
 
 sub_25454C:                             ; CODE XREF: sub_255020+22   p
-                                        ; sub_2551BA:loc_2552A0   j
+                                        ; fire_to_bucket_boss:loc_2552A0   j
                 movem.w d0-d1,-(sp)
                 move.b  #$90,d0
                 jsr     (sub_24ADBA).l
@@ -44474,7 +44474,7 @@ loc_254642:                             ; CODE XREF: sub_2545F4+34   j
 ; End of function sub_2545F4
 
 
-sub_254648:                             ; DATA XREF: ROM:000037D4   o
+fire_to_dog:                             ; DATA XREF: ROM:000037D4   o
                 jsr     sub_25449C(pc)
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_25465E
@@ -44482,7 +44482,7 @@ sub_254648:                             ; DATA XREF: ROM:000037D4   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_25465E:                             ; CODE XREF: sub_254648+A   j
+loc_25465E:                             ; CODE XREF: fire_to_dog+A   j
                                         ; DATA XREF: ROM:00003910   o
                 tst.b   1(a2)
                 beq.s   loc_254684
@@ -44494,7 +44494,7 @@ loc_25465E:                             ; CODE XREF: sub_254648+A   j
                 jsr     (sub_25475E).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_254684:                             ; CODE XREF: sub_254648+1A   j
+loc_254684:                             ; CODE XREF: fire_to_dog+1A   j
                 jsr     (sub_2546BE).l
                 jsr     (sub_2546BE).l
                 jsr     (sub_25470E).l
@@ -44506,11 +44506,11 @@ loc_254684:                             ; CODE XREF: sub_254648+1A   j
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
                 rts
-; End of function sub_254648
+; End of function fire_to_dog
 
 
-sub_2546BE:                             ; CODE XREF: sub_254648:loc_254684   p
-                                        ; sub_254648+42   p
+sub_2546BE:                             ; CODE XREF: fire_to_dog:loc_254684   p
+                                        ; fire_to_dog+42   p
                 move.l  d0,-(sp)
                 jsr     (sub_24AD06).l
                 bne.s   loc_25470A
@@ -44534,8 +44534,8 @@ loc_25470A:                             ; CODE XREF: sub_2546BE+8   j
 ; End of function sub_2546BE
 
 
-sub_25470E:                             ; CODE XREF: sub_254648+48   p
-                                        ; sub_254648+4E   p ...
+sub_25470E:                             ; CODE XREF: fire_to_dog+48   p
+                                        ; fire_to_dog+4E   p ...
                 move.l  d0,-(sp)
                 jsr     (sub_24AD06).l
                 bne.s   loc_25475A
@@ -44559,7 +44559,7 @@ loc_25475A:                             ; CODE XREF: sub_25470E+8   j
 ; End of function sub_25470E
 
 
-sub_25475E:                             ; CODE XREF: sub_254648+34   p
+sub_25475E:                             ; CODE XREF: fire_to_dog+34   p
                                         ; sub_254CB2+94   p ...
                 cmpi.l  #$30313030,(jim_health).l
                 bcc.s   locret_2547B0
@@ -44586,7 +44586,7 @@ locret_2547B0:                          ; CODE XREF: sub_25475E+A   j
 ; End of function sub_25475E
 
 
-sub_2547B2:                             ; DATA XREF: ROM:000037FC   o
+fire_to_chuck_boss:                             ; DATA XREF: ROM:000037FC   o
                 cmpi.b  #$7E,(a1) ; '~'
                 beq.s   loc_2547E2
                 btst    #5,$3C(a2)
@@ -44594,15 +44594,15 @@ sub_2547B2:                             ; DATA XREF: ROM:000037FC   o
                 move.b  #$86,(a2)
                 move.l  #off_1B34E8,$20(a2)
                 clr.b   $37(a2)
-loc_2547D0:                             ; CODE XREF: sub_2547B2+C   j
+loc_2547D0:                             ; CODE XREF: fire_to_chuck_boss+C   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_2547E0
                 jsr     sub_25449C(pc)
-locret_2547E0:                          ; CODE XREF: sub_2547B2+28   j
+locret_2547E0:                          ; CODE XREF: fire_to_chuck_boss+28   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2547E2:                             ; CODE XREF: sub_2547B2+4   j
+loc_2547E2:                             ; CODE XREF: fire_to_chuck_boss+4   j
                 move.b  #$86,(a1)
                 move.l  #off_1B338C,$20(a1)
                 tst.b   (sound_fx_enable).l
@@ -44613,30 +44613,30 @@ loc_2547E2:                             ; CODE XREF: sub_2547B2+4   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_254810:                             ; CODE XREF: sub_2547B2+42   j
+loc_254810:                             ; CODE XREF: fire_to_chuck_boss+42   j
                 clr.b   $37(a1)
                 clr.w   $1A(a1)
                 move.b  1(a2),d7
                 cmpi.b  #0,(difficulty_level).l
                 bne.s   loc_254828
                 addq.b  #1,d7
-loc_254828:                             ; CODE XREF: sub_2547B2+72   j
+loc_254828:                             ; CODE XREF: fire_to_chuck_boss+72   j
                 cmpi.b  #3,d7
                 beq.s   loc_254846
                 tst.b   1(a2)
                 beq.s   loc_254854
-loc_254834:                             ; CODE XREF: sub_2547B2+A0   j
+loc_254834:                             ; CODE XREF: fire_to_chuck_boss+A0   j
                 move.l  #off_1B3512,$20(a2)
                 clr.b   $37(a2)
                 subq.b  #1,1(a2)
                 rts
 ; ---------------------------------------------------------------------------
-loc_254846:                             ; CODE XREF: sub_2547B2+7A   j
+loc_254846:                             ; CODE XREF: fire_to_chuck_boss+7A   j
                 move.l  #byte_1AC5E2,$A(a2)
                 clr.b   $36(a2)
                 bra.s   loc_254834
 ; ---------------------------------------------------------------------------
-loc_254854:                             ; CODE XREF: sub_2547B2+80   j
+loc_254854:                             ; CODE XREF: fire_to_chuck_boss+80   j
                 move.b  #$86,(a2)
                 move.l  #off_1B34C4,$20(a2)
                 clr.b   $37(a2)
@@ -44644,7 +44644,7 @@ loc_254854:                             ; CODE XREF: sub_2547B2+80   j
                 clr.b   $36(a2)
                 move.b  #3,(byte_FFFD35).l
                 rts
-; End of function sub_2547B2
+; End of function fire_to_chuck_boss
 
 
 sub_25487A:                             ; DATA XREF: ROM:000037F4   o
@@ -45408,7 +45408,7 @@ loc_2550EC:                             ; CODE XREF: sub_2550C6+A   j
 ; End of function sub_2550C6
 
 
-sub_2550F0:                             ; DATA XREF: ROM:000039B8   o
+whip_to_fridge:                             ; DATA XREF: ROM:000039B8   o
                 move.l  #off_1AD414,$20(a2)
                 clr.b   $37(a2)
                 cmpi.b  #1,(byte_FFFBEF).l
@@ -45420,11 +45420,11 @@ sub_2550F0:                             ; DATA XREF: ROM:000039B8   o
                 move.b  #2,(byte_FFFBEF).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_255122:                             ; CODE XREF: sub_2550F0+1A   j
+loc_255122:                             ; CODE XREF: whip_to_fridge+1A   j
                 subq.b  #1,1(a2)
-locret_255126:                          ; CODE XREF: sub_2550F0+14   j
+locret_255126:                          ; CODE XREF: whip_to_fridge+14   j
                 rts
-; End of function sub_2550F0
+; End of function whip_to_fridge
 
 
 sub_255128:                             ; DATA XREF: ROM:00003878   o
@@ -45482,7 +45482,7 @@ sub_2551B4:                             ; DATA XREF: ROM:00003958   o
 ; End of function sub_2551B4
 
 
-sub_2551BA:                             ; DATA XREF: ROM:0000381C   o
+fire_to_bucket_boss:                             ; DATA XREF: ROM:0000381C   o
                 cmpi.b  #1,(byte_FFFDF3).l
                 beq.w   loc_25537A
                 cmpi.b  #2,(byte_FFFDF3).l
@@ -45493,7 +45493,7 @@ sub_2551BA:                             ; DATA XREF: ROM:0000381C   o
                 beq.s   loc_255258
                 rts
 ; ---------------------------------------------------------------------------
-loc_2551EA:                             ; CODE XREF: sub_2551BA+12C   j
+loc_2551EA:                             ; CODE XREF: fire_to_bucket_boss+12C   j
                 tst.b   (byte_FFFDF8).l
                 bne.s   locret_255224
                 move.b  (byte_FFA6CF).l,d7
@@ -45508,11 +45508,11 @@ loc_2551EA:                             ; CODE XREF: sub_2551BA+12C   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_255224:                          ; CODE XREF: sub_2551BA+36   j
-                                        ; sub_2551BA+42   j ...
+locret_255224:                          ; CODE XREF: fire_to_bucket_boss+36   j
+                                        ; fire_to_bucket_boss+42   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_255226:                             ; CODE XREF: sub_2551BA+F4   j
+loc_255226:                             ; CODE XREF: fire_to_bucket_boss+F4   j
                 st      (byte_FFFDF5).l
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
@@ -45524,16 +45524,16 @@ loc_255226:                             ; CODE XREF: sub_2551BA+F4   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_255256:                          ; CODE XREF: sub_2551BA+80   j
+locret_255256:                          ; CODE XREF: fire_to_bucket_boss+80   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_255258:                             ; CODE XREF: sub_2551BA+2C   j
+loc_255258:                             ; CODE XREF: fire_to_bucket_boss+2C   j
                 move.w  (jim_x).l,d7
                 tst.b   9(a2)
                 beq.s   loc_2552A4
                 cmp.w   2(a2),d7
                 bcs.s   loc_2552AA
-loc_25526A:                             ; CODE XREF: sub_2551BA+EE   j
+loc_25526A:                             ; CODE XREF: fire_to_bucket_boss+EE   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_255224
@@ -45547,17 +45547,17 @@ loc_25526A:                             ; CODE XREF: sub_2551BA+EE   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2552A0:                             ; CODE XREF: sub_2551BA+CA   j
+loc_2552A0:                             ; CODE XREF: fire_to_bucket_boss+CA   j
                 bra.w   sub_25454C
 ; ---------------------------------------------------------------------------
-loc_2552A4:                             ; CODE XREF: sub_2551BA+A8   j
+loc_2552A4:                             ; CODE XREF: fire_to_bucket_boss+A8   j
                 cmp.w   2(a2),d7
                 bcs.s   loc_25526A
-loc_2552AA:                             ; CODE XREF: sub_2551BA+AE   j
+loc_2552AA:                             ; CODE XREF: fire_to_bucket_boss+AE   j
                 tst.b   1(a2)
                 beq.w   loc_255226
-loc_2552B2:                             ; CODE XREF: sub_2551BA+136   j
-                                        ; sub_2551BA+17E   j ...
+loc_2552B2:                             ; CODE XREF: fire_to_bucket_boss+136   j
+                                        ; fire_to_bucket_boss+17E   j ...
                 move.l  d0,-(sp)
                 clr.w   d0
                 move.b  (difficulty_level).l,d0
@@ -45571,21 +45571,21 @@ loc_2552B2:                             ; CODE XREF: sub_2551BA+136   j
                 add.w   d0,d7
                 add.w   d0,d7
                 add.w   d0,d7
-loc_2552D8:                             ; CODE XREF: sub_2551BA+112   j
+loc_2552D8:                             ; CODE XREF: fire_to_bucket_boss+112   j
                 tst.w   d7
                 bgt.w   loc_2552E0
                 clr.w   d7
-loc_2552E0:                             ; CODE XREF: sub_2551BA+120   j
+loc_2552E0:                             ; CODE XREF: fire_to_bucket_boss+120   j
                 move.b  d7,1(a2)
                 move.l  (sp)+,d0
                 bra.w   loc_2551EA
 ; ---------------------------------------------------------------------------
-loc_2552EA:                             ; CODE XREF: sub_2551BA+20   j
+loc_2552EA:                             ; CODE XREF: fire_to_bucket_boss+20   j
                 tst.b   1(a2)
                 beq.s   loc_2552F2
                 bra.s   loc_2552B2
 ; ---------------------------------------------------------------------------
-loc_2552F2:                             ; CODE XREF: sub_2551BA+134   j
+loc_2552F2:                             ; CODE XREF: fire_to_bucket_boss+134   j
                 move.l  #byte_1A2A34,$A(a2)
                 move.b  #3,(byte_FFFDF3).l
                 clr.b   $36(a2)
@@ -45598,15 +45598,15 @@ loc_2552F2:                             ; CODE XREF: sub_2551BA+134   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_25532E:                          ; CODE XREF: sub_2551BA+158   j
+locret_25532E:                          ; CODE XREF: fire_to_bucket_boss+158   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_255330:                             ; CODE XREF: sub_2551BA+14   j
+loc_255330:                             ; CODE XREF: fire_to_bucket_boss+14   j
                 tst.b   1(a2)
                 beq.w   loc_25533C
                 bra.w   loc_2552B2
 ; ---------------------------------------------------------------------------
-loc_25533C:                             ; CODE XREF: sub_2551BA+17A   j
+loc_25533C:                             ; CODE XREF: fire_to_bucket_boss+17A   j
                 move.l  #byte_1A2BD6,$A(a2)
                 move.b  #5,(byte_FFFDF3).l
                 clr.b   $36(a2)
@@ -45619,15 +45619,15 @@ loc_25533C:                             ; CODE XREF: sub_2551BA+17A   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_255378:                          ; CODE XREF: sub_2551BA+1A2   j
+locret_255378:                          ; CODE XREF: fire_to_bucket_boss+1A2   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_25537A:                             ; CODE XREF: sub_2551BA+8   j
+loc_25537A:                             ; CODE XREF: fire_to_bucket_boss+8   j
                 tst.b   1(a2)
                 beq.s   loc_255384
                 bra.w   loc_2552B2
 ; ---------------------------------------------------------------------------
-loc_255384:                             ; CODE XREF: sub_2551BA+1C4   j
+loc_255384:                             ; CODE XREF: fire_to_bucket_boss+1C4   j
                 move.l  #byte_1A29AE,$A(a2)
                 move.b  #2,(byte_FFFDF3).l
                 clr.b   $36(a2)
@@ -45640,9 +45640,9 @@ loc_255384:                             ; CODE XREF: sub_2551BA+1C4   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_2553C0:                          ; CODE XREF: sub_2551BA+1EA   j
+locret_2553C0:                          ; CODE XREF: fire_to_bucket_boss+1EA   j
                 rts
-; End of function sub_2551BA
+; End of function fire_to_bucket_boss
 
 
 sub_2553C2:                             ; DATA XREF: ROM:000037D8   o
@@ -46464,7 +46464,7 @@ locret_255DE2:                          ; CODE XREF: sub_255DD0+4   j
 
 sub_255DE4:                             ; DATA XREF: ROM:000038C8   o
                 tst.b   $47(a2)
-                bne.w   sub_255EF0
+                bne.w   fire_to_saxophone
                 rts
 ; End of function sub_255DE4
 
@@ -46547,7 +46547,7 @@ loc_255EC2:                             ; CODE XREF: sub_255DF8+AE   j
 ; End of function sub_255DF8
 
 
-sub_255EF0:                             ; CODE XREF: sub_255DE4+4   j
+fire_to_saxophone:                             ; CODE XREF: sub_255DE4+4   j
                                         ; DATA XREF: ROM:00003820   o
                 jsr     sub_25449C(pc)
                 tst.b   (is_current_gun_plasma).l
@@ -46557,10 +46557,10 @@ sub_255EF0:                             ; CODE XREF: sub_255DE4+4   j
                 cmpi.b  #2,(byte_FFFD36).l
                 bne.s   locret_255F14
                 clr.b   (byte_FFFD36).l
-locret_255F14:                          ; CODE XREF: sub_255EF0+1C   j
+locret_255F14:                          ; CODE XREF: fire_to_saxophone+1C   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_255F16:                             ; CODE XREF: sub_255EF0+A   j
+loc_255F16:                             ; CODE XREF: fire_to_saxophone+A   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_255F38
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -46570,13 +46570,13 @@ loc_255F16:                             ; CODE XREF: sub_255EF0+A   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255F38:                             ; CODE XREF: sub_255DEE+4   j
-                                        ; sub_255EF0+2C   j
+                                        ; fire_to_saxophone+2C   j
                                         ; DATA XREF: ...
                 move.w  #$600,d7
                 tst.b   (is_jim_left_direction).l
                 beq.s   loc_255F46
                 neg.w   d7
-loc_255F46:                             ; CODE XREF: sub_255EF0+52   j
+loc_255F46:                             ; CODE XREF: fire_to_saxophone+52   j
                 move.w  d7,$18(a2)
                 move.w  #$F800,$1A(a2)
                 move.b  #$86,(a2)
@@ -46588,12 +46588,12 @@ loc_255F46:                             ; CODE XREF: sub_255EF0+52   j
                 cmpi.b  #2,(byte_FFFD36).l
                 bne.s   locret_255F7C
                 clr.b   (byte_FFFD36).l
-locret_255F7C:                          ; CODE XREF: sub_255EF0+84   j
+locret_255F7C:                          ; CODE XREF: fire_to_saxophone+84   j
                 rts
-; End of function sub_255EF0
+; End of function fire_to_saxophone
 
 
-sub_255F7E:                             ; DATA XREF: ROM:000037E0   o
+fire_to_crow:                             ; DATA XREF: ROM:000037E0   o
                                         ; ROM:000038C4   o
                 jsr     sub_25449C(pc)
                 tst.b   (is_current_gun_plasma).l
@@ -46602,7 +46602,7 @@ sub_255F7E:                             ; DATA XREF: ROM:000037E0   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_255F94:                             ; CODE XREF: sub_255F7E+A   j
+loc_255F94:                             ; CODE XREF: fire_to_crow+A   j
                 jsr     (sub_255FD6).l
                 tst.b   1(a2)
                 beq.w   sub_256114
@@ -46612,14 +46612,14 @@ loc_255F94:                             ; CODE XREF: sub_255F7E+A   j
                 clr.b   $37(a2)
                 move.l  #byte_1A41D0,$A(a2)
                 clr.b   $36(a2)
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
                 rts
-; End of function sub_255F7E
+; End of function fire_to_crow
 
 
-sub_255FD6:                             ; CODE XREF: sub_255F7E:loc_255F94   p
+sub_255FD6:                             ; CODE XREF: fire_to_crow:loc_255F94   p
                 move.l  a0,-(sp)
                 clr.l   d7
                 move.w  (word_FFFDDA).l,d7
@@ -46693,7 +46693,7 @@ sub_25610C:                             ; DATA XREF: ROM:0000391C   o
 ; End of function sub_25610C
 
 
-sub_256114:                             ; CODE XREF: sub_255F7E+20   j
+sub_256114:                             ; CODE XREF: fire_to_crow+20   j
                                         ; sub_25610C   p
                 jsr     (sub_24AED6).l
                 movea.l a2,a5
@@ -46710,20 +46710,20 @@ sub_256114:                             ; CODE XREF: sub_255F7E+20   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_256156:                             ; CODE XREF: sub_256114+26   j
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
-                jsr     (sub_256188).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
+                jsr     (crow_plumage_create).l
                 rts
 ; End of function sub_256114
 
 
-sub_256188:                             ; CODE XREF: sub_255F7E+44   p
-                                        ; sub_255F7E+4A   p ...
+crow_plumage_create:                             ; CODE XREF: fire_to_crow+44   p
+                                        ; fire_to_crow+4A   p ...
                 jsr     (sub_24AD06).l
                 bne.s   locret_2561CA
                 lea     (stru_25ABEC).l,a6
@@ -46738,9 +46738,9 @@ sub_256188:                             ; CODE XREF: sub_255F7E+44   p
                 andi.w  #$7FF,d7
                 neg.w   d7
                 move.w  d7,$1A(a5)
-locret_2561CA:                          ; CODE XREF: sub_256188+6   j
+locret_2561CA:                          ; CODE XREF: crow_plumage_create+6   j
                 rts
-; End of function sub_256188
+; End of function crow_plumage_create
 ; ---------------------------------------------------------------------------
                 rts
 
@@ -46855,7 +46855,7 @@ locret_2562D4:                          ; CODE XREF: oksub_2562A6+24   j
 ; End of function oksub_2562A6
 
 
-sub_2562D6:                             ; DATA XREF: ROM:stru_25AAB4   o
+chuck_boss_magnet:                             ; DATA XREF: ROM:stru_25AAB4   o
                 cmpi.b  #3,(byte_FFFD35).l
                 beq.w   locret_256366
                 move.w  2(a1),d7
@@ -46867,7 +46867,7 @@ sub_2562D6:                             ; DATA XREF: ROM:stru_25AAB4   o
                 move.b  #2,(byte_FFFD35).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_256302:                             ; CODE XREF: sub_2562D6+1C   j
+loc_256302:                             ; CODE XREF: chuck_boss_magnet+1C   j
                 jsr     (sub_24AD06).l
                 bne.s   locret_256366
                 tst.b   (byte_FFFD37).l
@@ -46881,7 +46881,7 @@ loc_256302:                             ; CODE XREF: sub_2562D6+1C   j
                 move.b  #2,(byte_FFFD36).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_25633A:                             ; CODE XREF: sub_2562D6+3A   j
+loc_25633A:                             ; CODE XREF: chuck_boss_magnet+3A   j
                 lea     (stru_25AA84).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
@@ -46890,11 +46890,11 @@ loc_25633A:                             ; CODE XREF: sub_2562D6+3A   j
                 move.w  d7,4(a5)
                 st      (byte_FFFD37).l
                 move.b  #1,(byte_FFFD36).l
-locret_256366:                          ; CODE XREF: sub_2562D6+8   j
-                                        ; sub_2562D6+32   j
+locret_256366:                          ; CODE XREF: chuck_boss_magnet+8   j
+                                        ; chuck_boss_magnet+32   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_256368:                             ; CODE XREF: sub_2562D6+16   j
+loc_256368:                             ; CODE XREF: chuck_boss_magnet+16   j
                 cmpi.b  #1,(byte_FFFD36).l
                 bne.s   loc_256386
                 cmpi.w  #$1496,d7
@@ -46903,7 +46903,7 @@ loc_256368:                             ; CODE XREF: sub_2562D6+16   j
                 move.b  #1,(byte_FFFD35).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_256386:                             ; CODE XREF: sub_2562D6+9A   j
+loc_256386:                             ; CODE XREF: chuck_boss_magnet+9A   j
                 move.w  (jim_x).l,d6
                 subq.w  #8,d6
                 cmp.w   d6,d7
@@ -46917,23 +46917,23 @@ loc_256386:                             ; CODE XREF: sub_2562D6+9A   j
                 move.b  #1,(byte_FFFD35).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_2563AE:                             ; CODE XREF: sub_2562D6+BA   j
+loc_2563AE:                             ; CODE XREF: chuck_boss_magnet+BA   j
                 cmpi.w  #$1640,d7
                 bcc.s   locret_2563CA
                 addq.w  #2,2(a1)
                 move.b  #2,(byte_FFFD35).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_2563C2:                             ; CODE XREF: sub_2562D6+A0   j
-                                        ; sub_2562D6+C2   j
+loc_2563C2:                             ; CODE XREF: chuck_boss_magnet+A0   j
+                                        ; chuck_boss_magnet+C2   j
                 move.b  #0,(byte_FFFD35).l
-locret_2563CA:                          ; CODE XREF: sub_2562D6+C8   j
-                                        ; sub_2562D6+DC   j
+locret_2563CA:                          ; CODE XREF: chuck_boss_magnet+C8   j
+                                        ; chuck_boss_magnet+DC   j
                 rts
-; End of function sub_2562D6
+; End of function chuck_boss_magnet
 
 
-sub_2563CC:                             ; DATA XREF: sub_2563E4+6A   o
+sub_2563CC:                             ; DATA XREF: box_on_magnet+6A   o
                 cmpi.w  #$36E,4(a1)
                 bcs.s   locret_2563E2
                 move.b  #$40,6(a1) ; '@'
@@ -46945,7 +46945,7 @@ locret_2563E2:                          ; CODE XREF: sub_2563CC+6   j
 ; End of function sub_2563CC
 
 
-sub_2563E4:                             ; DATA XREF: ROM:stru_25AA84   o
+box_on_magnet:                             ; DATA XREF: ROM:stru_25AA84   o
                 cmpi.b  #3,(byte_FFFD35).l
                 beq.s   locret_25645C
                 move.w  2(a1),d7
@@ -46957,7 +46957,7 @@ sub_2563E4:                             ; DATA XREF: ROM:stru_25AA84   o
                 move.b  #1,(byte_FFFD35).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_256410:                             ; CODE XREF: sub_2563E4+16   j
+loc_256410:                             ; CODE XREF: box_on_magnet+16   j
                 move.w  (jim_x).l,d6
                 subq.w  #8,d6
                 cmp.w   d6,d7
@@ -46970,26 +46970,26 @@ loc_256410:                             ; CODE XREF: sub_2563E4+16   j
                 subq.w  #2,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_256430:                             ; CODE XREF: sub_2563E4+36   j
+loc_256430:                             ; CODE XREF: box_on_magnet+36   j
                 cmpi.w  #$1640,d7
                 bcc.s   locret_25645C
                 addq.w  #2,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_25643C:                             ; CODE XREF: sub_2563E4+1C   j
-                                        ; sub_2563E4+3E   j
+loc_25643C:                             ; CODE XREF: box_on_magnet+1C   j
+                                        ; box_on_magnet+3E   j
                 clr.b   (byte_FFFD36).l
                 move.l  #byte_1A4158,$A(a1)
                 clr.b   $36(a1)
                 move.l  #sub_2563CC,$42(a1)
                 jsr     (oksub_2495B0).l
-locret_25645C:                          ; CODE XREF: sub_2563E4+8   j
-                                        ; sub_2563E4+44   j ...
+locret_25645C:                          ; CODE XREF: box_on_magnet+8   j
+                                        ; box_on_magnet+44   j ...
                 rts
-; End of function sub_2563E4
+; End of function box_on_magnet
 
 
-sub_25645E:                             ; DATA XREF: ROM:stru_25AA9C   o
+saxophone_on_magnet:                             ; DATA XREF: ROM:stru_25AA9C   o
                 cmpi.b  #3,(byte_FFFD35).l
                 beq.s   locret_2564D2
                 move.w  2(a1),d7
@@ -47001,7 +47001,7 @@ sub_25645E:                             ; DATA XREF: ROM:stru_25AA9C   o
                 move.b  #1,(byte_FFFD35).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_25648A:                             ; CODE XREF: sub_25645E+16   j
+loc_25648A:                             ; CODE XREF: saxophone_on_magnet+16   j
                 move.w  (jim_x).l,d6
                 subq.w  #8,d6
                 cmp.w   d6,d7
@@ -47014,23 +47014,23 @@ loc_25648A:                             ; CODE XREF: sub_25645E+16   j
                 subq.w  #2,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2564AA:                             ; CODE XREF: sub_25645E+36   j
+loc_2564AA:                             ; CODE XREF: saxophone_on_magnet+36   j
                 cmpi.w  #$1640,d7
                 bcc.s   locret_2564D2
                 addq.w  #2,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2564B6:                             ; CODE XREF: sub_25645E+1C   j
-                                        ; sub_25645E+3E   j
+loc_2564B6:                             ; CODE XREF: saxophone_on_magnet+1C   j
+                                        ; saxophone_on_magnet+3E   j
                 clr.b   (byte_FFFD36).l
                 move.l  #byte_1A4092,$A(a1)
                 clr.b   $36(a1)
                 clr.l   $42(a1)
                 jsr     (oksub_2495B0).l
-locret_2564D2:                          ; CODE XREF: sub_25645E+8   j
-                                        ; sub_25645E+44   j ...
+locret_2564D2:                          ; CODE XREF: saxophone_on_magnet+8   j
+                                        ; saxophone_on_magnet+44   j ...
                 rts
-; End of function sub_25645E
+; End of function saxophone_on_magnet
 
 
 sub_2564D4:                             ; DATA XREF: ROM:001B2B2C   o
@@ -47084,7 +47084,7 @@ locret_256598:                          ; CODE XREF: oksub_25655C+6   j
 ; End of function oksub_25655C
 
 
-sub_25659A:                             ; CODE XREF: sub_2522D0   p
+ammo_prize_fall:                             ; CODE XREF: sub_2522D0   p
                 movem.w d0-d1,-(sp)
                 cmpi.w  #$A,(ammo_adding_buffer).l
                 bcc.s   loc_256608
@@ -47104,16 +47104,16 @@ sub_25659A:                             ; CODE XREF: sub_2522D0   p
                 cmpi.b  #0,9(a1)
                 beq.s   loc_2565F6
                 subi.w  #$50,d7 ; 'P'
-loc_2565F6:                             ; CODE XREF: sub_25659A+56   j
+loc_2565F6:                             ; CODE XREF: ammo_prize_fall+56   j
                 move.w  d7,2(a5)
                 move.w  (camera_y).l,d7
                 addi.w  #$100,d7
                 move.w  d7,4(a5)
-loc_256608:                             ; CODE XREF: sub_25659A+C   j
-                                        ; sub_25659A+18   j ...
+loc_256608:                             ; CODE XREF: ammo_prize_fall+C   j
+                                        ; ammo_prize_fall+18   j ...
                 movem.w (sp)+,d0-d1
                 rts
-; End of function sub_25659A
+; End of function ammo_prize_fall
 
 
 sub_25660E:                             ; CODE XREF: sub_2522C8   p
@@ -49554,7 +49554,7 @@ oksub_2583D8:                           ; CODE XREF: sub_24FDB8+A   p
 ; End of function oksub_2583D8
 
 
-sub_2583F4:                             ; DATA XREF: ROM:stru_25AB2C   o
+fridge_fall:                             ; DATA XREF: ROM:stru_25AB2C   o
                 move.w  4(a1),d7
                 cmpi.w  #$41C,d7
                 bcs.s   loc_258452
@@ -49573,11 +49573,11 @@ sub_2583F4:                             ; DATA XREF: ROM:stru_25AB2C   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_25844A:                             ; CODE XREF: sub_2583F4+3A   j
+loc_25844A:                             ; CODE XREF: fridge_fall+3A   j
                 clr.b   (camera_disable_value).l
                 bra.s   locret_2584B0
 ; ---------------------------------------------------------------------------
-loc_258452:                             ; CODE XREF: sub_2583F4+8   j
+loc_258452:                             ; CODE XREF: fridge_fall+8   j
                 cmpi.b  #5,(byte_FFFBEF).l
                 beq.s   locret_2584B0
                 cmpi.b  #4,(byte_FFFBEF).l
@@ -49585,7 +49585,7 @@ loc_258452:                             ; CODE XREF: sub_2583F4+8   j
                 cmpi.w  #$3A6,d7
                 bcs.s   locret_2584B0
                 move.b  #3,(byte_FFFBEF).l
-loc_258474:                             ; CODE XREF: sub_2583F4+70   j
+loc_258474:                             ; CODE XREF: fridge_fall+70   j
                 cmpi.w  #$3CC,d7
                 bcs.s   locret_2584B0
                 tst.b   (sound_fx_enable).l
@@ -49596,17 +49596,17 @@ loc_258474:                             ; CODE XREF: sub_2583F4+70   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_25849C:                             ; CODE XREF: sub_2583F4+8C   j
+loc_25849C:                             ; CODE XREF: fridge_fall+8C   j
                 move.w  #$FD00,$18(a1)
                 move.w  #$FB00,$1A(a1)
                 move.b  #5,(byte_FFFBEF).l
-locret_2584B0:                          ; CODE XREF: sub_2583F4+12   j
-                                        ; sub_2583F4+5C   j ...
+locret_2584B0:                          ; CODE XREF: fridge_fall+12   j
+                                        ; fridge_fall+5C   j ...
                 rts
-; End of function sub_2583F4
+; End of function fridge_fall
 
 
-sub_2584B2:                             ; DATA XREF: ROM:stru_25AA3C   o
+cow_launch:                             ; DATA XREF: ROM:stru_25AA3C   o
                 cmpi.b  #3,(byte_FFFBEF).l
                 bne.s   locret_258502
                 move.b  #4,(byte_FFFBEF).l
@@ -49623,10 +49623,10 @@ sub_2584B2:                             ; DATA XREF: ROM:stru_25AA3C   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_258502:                          ; CODE XREF: sub_2584B2+8   j
-                                        ; sub_2584B2+34   j
+locret_258502:                          ; CODE XREF: cow_launch+8   j
+                                        ; cow_launch+34   j
                 rts
-; End of function sub_2584B2
+; End of function cow_launch
 
 
 oksub_258504:                           ; DATA XREF: ROM:001B58FC   o
@@ -50146,7 +50146,7 @@ loc_258AFA:                             ; CODE XREF: sub_258AD8+1C   j
 ; End of function sub_258AD8
 
 
-sub_258B04:                             ; CODE XREF: oksub_2456C8:loc_24584E   p
+level_finish:                             ; CODE XREF: oksub_2456C8:loc_24584E   p
                 tst.b   (naked_worm_enable).l
                 bne.s   locret_258B4E
                 tst.b   (level_finish_enable).l
@@ -50160,10 +50160,10 @@ sub_258B04:                             ; CODE XREF: oksub_2456C8:loc_24584E   p
                 clr.b   (level_finish_enable).l
                 st      (is_jim_blocked_by_enemy).l
                 move.b  #$48,(jim_state).l ; Садится на ракету в конце уровня
-locret_258B4E:                          ; CODE XREF: sub_258B04+6   j
-                                        ; sub_258B04+E   j ...
+locret_258B4E:                          ; CODE XREF: level_finish+6   j
+                                        ; level_finish+E   j ...
                 rts
-; End of function sub_258B04
+; End of function level_finish
 
 
 sub_258B50:                             ; DATA XREF: ROM:stru_25B324   o
@@ -53015,7 +53015,7 @@ stru_25AA3C:    dc.b $29                ; field_0
                 dc.b 0                  ; field_11
                 dc.b $80                ; field_12
                 dc.b 0                  ; skipped_2
-                dc.l sub_2584B2         ; proc_address
+                dc.l cow_launch         ; proc_address
 stru_25AA54:    dc.b $86                ; field_0
                                         ; DATA XREF: spawn_minicow_to_right+1A   o
                 dc.b 0                  ; field_1
@@ -53046,9 +53046,9 @@ stru_25AA6C:    dc.b $5E                ; field_0
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
-                dc.l sub_252144         ; proc_address
+                dc.l funicular_end_falling         ; proc_address
 stru_25AA84:    dc.b $19                ; field_0
-                                        ; DATA XREF: sub_2562D6:loc_25633A   o
+                                        ; DATA XREF: chuck_boss_magnet:loc_25633A   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -53061,9 +53061,9 @@ stru_25AA84:    dc.b $19                ; field_0
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
                 dc.b 0                  ; skipped_2
-                dc.l sub_2563E4         ; proc_address
+                dc.l box_on_magnet         ; proc_address
 stru_25AA9C:    dc.b $15                ; field_0
-                                        ; DATA XREF: sub_2562D6+3C   o
+                                        ; DATA XREF: chuck_boss_magnet+3C   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -53076,7 +53076,7 @@ stru_25AA9C:    dc.b $15                ; field_0
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
                 dc.b 0                  ; skipped_2
-                dc.l sub_25645E         ; proc_address
+                dc.l saxophone_on_magnet         ; proc_address
 stru_25AAB4:    dc.b $86                ; field_0
                                         ; DATA XREF: sub_24DCB2+4E   o
                 dc.b 0                  ; field_1
@@ -53091,7 +53091,7 @@ stru_25AAB4:    dc.b $86                ; field_0
                 dc.b 0                  ; field_11
                 dc.b 2                  ; field_12
                 dc.b 0                  ; skipped_2
-                dc.l sub_2562D6         ; proc_address
+                dc.l chuck_boss_magnet         ; proc_address
 stru_25AACC:    dc.b $86                ; field_0
                                         ; DATA XREF: sub_24DCB2+26   o
                 dc.b 5                  ; field_1
@@ -53166,7 +53166,7 @@ stru_25AB2C:    dc.b $2C                ; field_0
                 dc.b 0                  ; field_11
                 dc.b 0                  ; field_12
                 dc.b 0                  ; skipped_2
-                dc.l sub_2583F4         ; proc_address
+                dc.l fridge_fall         ; proc_address
 stru_25AB44:    dc.b $86                ; field_0
                                         ; DATA XREF: spawn_tree_trampoline   o
                 dc.b 0                  ; field_1
@@ -53274,7 +53274,7 @@ stru_25ABD4:    dc.b 5                  ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25ABEC:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_256188+8   o
+                                        ; DATA XREF: crow_plumage_create+8   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3

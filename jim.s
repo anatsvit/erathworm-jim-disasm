@@ -32,7 +32,7 @@ off_4:          dc.l Reset
                 dc.l $33F1388
                 dc.l $43F1388
                 dc.l $53F1388
-dword_18:       dc.l $63F1388           ; DATA XREF: sub_2594E4+28   w
+dword_18:       dc.l $63F1388           ; DATA XREF: fire_to_psycrow+28   w
                                         ; sub_259658+62   r ...
 dword_1C:       dc.l $73F1388           ; DATA XREF: sub_246B08+FE   o
 dword_20:       dc.l $83F1388           ; DATA XREF: sub_2532FA+124   o
@@ -511,7 +511,7 @@ off_35E4:       dc.l nullsub_11         ; DATA XREF: sub_248C3A+154   o
                 dc.l sub_258E14
                 dc.l sub_258E14
                 dc.l sub_258E14
-off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
+fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l nullsub_36
                 dc.l fire_to_dog
                 dc.l fire_to_monkey_head_on_chain
@@ -521,11 +521,11 @@ off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l sub_2560D4
                 dc.l fire_to_egg_with_needles
                 dc.l fire_to_eye
-                dc.l sub_25487A
+                dc.l fire_to_hook
                 dc.l sub_2554FA
                 dc.l fire_to_chuck_boss
-                dc.l sub_25487A
-                dc.l sub_25487A
+                dc.l fire_to_hook
+                dc.l fire_to_hook
                 dc.l nullsub_37
                 dc.l nullsub_37
                 dc.l nullsub_11
@@ -534,39 +534,39 @@ off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l fire_to_bucket_boss
                 dc.l fire_to_saxophone
                 dc.l fire_to_puppy
-                dc.l sub_255A96
-                dc.l sub_25597E
-                dc.l sub_2559B6
+                dc.l fire_to_intestinal_boss
+                dc.l fire_to_bee
+                dc.l fire_to_box
                 dc.l fire_to_green_goose
                 dc.l sub_25590A
                 dc.l sub_255814
                 dc.l fire_to_green_goose_caterpillar
-                dc.l sub_2557A2
+                dc.l fire_to_queen_abscess
                 dc.l sub_2557EC
                 dc.l fire_to_brain
-                dc.l sub_2541A2
-                dc.l sub_2541A2
-                dc.l sub_25427A
-                dc.l sub_25438A
-                dc.l sub_2594E4
+                dc.l fire_to_butt_crab
+                dc.l fire_to_butt_crab
+                dc.l fire_to_queen_boss
+                dc.l fire_to_butt_sub_boss
+                dc.l fire_to_psycrow
                 dc.l sub_259586
                 dc.l fire_to_chicken_fly_boss
-                dc.l sub_2548BA
+                dc.l fire_to_chicken_boss_egg
                 dc.l sub_254A44
                 dc.l fire_to_ufo
                 dc.l fire_to_bob_cat
-                dc.l sub_2550C6
+                dc.l fire_to_fridge
                 dc.l fire_to_snowman_boss
                 dc.l sub_254C66
                 dc.l fire_to_lawyer
                 dc.l sub_254CB2
                 dc.l sub_254AD6
-                dc.l sub_25506A
+                dc.l fire_to_bee_generator
                 dc.l fire_to_fox
                 dc.l fire_to_plant
                 dc.l sub_254D94
-                dc.l sub_255DD0
-                dc.l sub_255DD0
+                dc.l fire_to_meteor
+                dc.l fire_to_meteor
                 dc.l fire_to_machine
                 dc.l sub_254E48
                 dc.l sub_254F5C
@@ -574,14 +574,14 @@ off_37CC:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l nullsub_22
                 dc.l nullsub_22
                 dc.l fire_to_crow
-                dc.l sub_255DE4
+                dc.l fire_to_garbage
                 dc.l sub_255DF8
-                dc.l sub_252484
+                dc.l fire_to_frog
                 dc.l sub_25246C
                 dc.l fire_to_sponge
                 dc.l fire_to_daemon
                 dc.l fire_to_fan_fish
-                dc.l sub_254042
+                dc.l fire_to_fish_boss
                 dc.l fire_to_evil_cat_soul_boss
                 dc.l sub_253FC4
                 dc.l nullsub_11
@@ -620,7 +620,7 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l sub_25590A
                 dc.l nullsub_42
                 dc.l sub_25570E
-                dc.l sub_2557A2
+                dc.l fire_to_queen_abscess
                 dc.l sub_2557EC
                 dc.l loc_255974
                 dc.l loc_2541E8
@@ -630,7 +630,7 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l sub_25951A
                 dc.l loc_2595BE
                 dc.l loc_254912
-                dc.l sub_2548BA
+                dc.l fire_to_chicken_boss_egg
                 dc.l nullsub_39
                 dc.l loc_254A6A
                 dc.l sub_25517A
@@ -644,8 +644,8 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l sub_255058
                 dc.l loc_254FE2
                 dc.l sub_254DB6
-                dc.l sub_255DD0
-                dc.l sub_255DD0
+                dc.l fire_to_meteor
+                dc.l fire_to_meteor
                 dc.l loc_255DAC
                 dc.l sub_254E88
                 dc.l nullsub_20
@@ -660,7 +660,7 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l loc_253F7C
                 dc.l loc_254092
                 dc.l sub_254112
-                dc.l sub_254042
+                dc.l fire_to_fish_boss
                 dc.l loc_259192
                 dc.l sub_253FFA
                 dc.l nullsub_11
@@ -4665,7 +4665,7 @@ byte_1A3EBE:    dc.b   0,$FE,  0,$FF,  0,  0,  0,  1,  0,  1,  0,  1,$84,$9D,  0
                                         ; ROM:001A3B1E   o ...
 byte_1A3ED0:    dc.b   0,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001A3ED6   o
-                                        ; sub_25506A+48   o
+                                        ; fire_to_bee_generator+48   o
                 dc.l byte_1A3ED0
                 dc.b $8B,  0
                 dc.l stru_25A8A4
@@ -8346,8 +8346,8 @@ off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                 dc.w $ED11
                 dc.b   0,  0,  0,$17,$EA,  0
                 dc.l anim_intestinal_boss
-off_1AD856:     dc.w off_E48            ; DATA XREF: sub_255A96+20   o
-                                        ; sub_255A96+68   o ...
+off_1AD856:     dc.w off_E48            ; DATA XREF: fire_to_intestinal_boss+20   o
+                                        ; fire_to_intestinal_boss+68   o ...
                 dc.w $F700
                 dc.w off_E48
                 dc.w off_E88
@@ -15298,7 +15298,7 @@ off_1B14F8:     dc.w off_2BDC           ; DATA XREF: ROM:001B14E4   o
                 dc.w off_2BF0
                 dc.w $EA00
                 dc.l anim_bee_generator
-off_1B150A:     dc.w off_2BCC           ; DATA XREF: sub_2557A2+1A   o
+off_1B150A:     dc.w off_2BCC           ; DATA XREF: fire_to_queen_abscess+1A   o
                 dc.w $EC01
 off_1B150E:     dc.w off_2C04           ; DATA XREF: ROM:001B1528   o
                                         ; spawn_abscess_down+18   o
@@ -15451,8 +15451,8 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B14
                 dc.w $EA00
                 dc.l anim_queen_closed
-off_1B1666:     dc.w off_2B88           ; DATA XREF: sub_25427A+22   o
-                                        ; sub_25427A+46   o ...
+off_1B1666:     dc.w off_2B88           ; DATA XREF: fire_to_queen_boss+22   o
+                                        ; fire_to_queen_boss+46   o ...
                 dc.w $F374
                 dc.w off_2B88
                 dc.w off_2B88
@@ -15677,7 +15677,7 @@ off_1B1858:     dc.w off_2C14           ; DATA XREF: ROM:001B1864   o
                 dc.w $EA00
                 dc.l off_1B1858
 off_1B1868:     dc.w off_2004           ; DATA XREF: ROM:001A3350   o
-                                        ; sub_2541A2+38   o
+                                        ; fire_to_butt_crab+38   o
                 dc.w $ED11
                 dc.w 0
                 dc.w $86
@@ -15867,7 +15867,7 @@ off_1B1A0A:     dc.w off_1FE4           ; DATA XREF: sub_252780+C   o
                 dc.w off_1FF8
                 dc.w $EA00
                 dc.l word_1B18DE
-off_1B1A32:     dc.w off_1FFC           ; DATA XREF: sub_2541A2+4A   o
+off_1B1A32:     dc.w off_1FFC           ; DATA XREF: fire_to_butt_crab+4A   o
                 dc.w off_1FFC
                 dc.w off_1FFC
                 dc.w off_2000
@@ -16275,7 +16275,7 @@ anim_bee_home:  dc.w off_208C           ; DATA XREF: ROM:001B1D5A   o
                 dc.w off_208C
                 dc.w $EA00
                 dc.l anim_bee_home
-off_1B1D6E:     dc.w off_2090           ; DATA XREF: sub_25506A+28   o
+off_1B1D6E:     dc.w off_2090           ; DATA XREF: fire_to_bee_generator+28   o
                 dc.w off_2090
                 dc.w off_2094
                 dc.w off_2094
@@ -16292,7 +16292,7 @@ off_1B1D6E:     dc.w off_2090           ; DATA XREF: sub_25506A+28   o
                 dc.w $EA00
                 dc.l anim_bee_home
 off_1B1D94:     dc.w off_2094           ; DATA XREF: ROM:001B1E2C   o
-                                        ; sub_25506A+3C   o
+                                        ; fire_to_bee_generator+3C   o
                 dc.w $F500
                 dc.l stru_25A874
                 dc.w $4EC
@@ -16407,7 +16407,7 @@ off_1B1EA0:     dc.w off_21F0           ; DATA XREF: ROM:0025676C   o
                 dc.w $EC01
 off_1B1EA4:     dc.w off_21F4           ; DATA XREF: ROM:00256770   o
                 dc.w $EC01
-off_1B1EA8:     dc.w off_21F8           ; DATA XREF: sub_25597E+1A   o
+off_1B1EA8:     dc.w off_21F8           ; DATA XREF: fire_to_bee+1A   o
                 dc.w off_21FC
                 dc.w off_2200
                 dc.w off_2204
@@ -18936,7 +18936,7 @@ off_1B33C6:     dc.w off_854            ; DATA XREF: ROM:001A4186   o
                 dc.w off_854
                 dc.w off_844
                 dc.w $EC01
-off_1B33CE:     dc.w off_848            ; DATA XREF: sub_2559B6+7C   o
+off_1B33CE:     dc.w off_848            ; DATA XREF: fire_to_box+7C   o
                 dc.w off_848
                 dc.w off_84C
                 dc.w off_84C
@@ -18960,7 +18960,7 @@ off_1B33CE:     dc.w off_848            ; DATA XREF: sub_2559B6+7C   o
                 dc.w off_844
                 dc.w $EC01
 off_1B3404:     dc.w off_850            ; DATA XREF: ROM:001B3416   o
-                                        ; sub_2559B6+62   o ...
+                                        ; fire_to_box+62   o ...
                 dc.w off_850
                 dc.w off_84C
                 dc.w off_84C
@@ -18977,7 +18977,7 @@ anim_unknown_2: dc.w off_2264           ; DATA XREF: ROM:001B346C   o
                 dc.w $7C
                 dc.w $EC01
 off_1B3424:     dc.w off_2268           ; DATA XREF: sub_24F04A+180   o
-                                        ; sub_2559B6:loc_255A40   o
+                                        ; fire_to_box:loc_255A40   o
                 dc.w $F32B
                 dc.w off_2268
                 dc.w off_2268
@@ -21311,7 +21311,7 @@ off_1B4796:     dc.w off_2A28           ; DATA XREF: ROM:off_C9E6   o
                 dc.w 3
                 dc.w $EA00
                 dc.l off_1B471A
-off_1B47C6:     dc.w off_29EC           ; DATA XREF: sub_2594E4+16   o
+off_1B47C6:     dc.w off_29EC           ; DATA XREF: fire_to_psycrow+16   o
                 dc.w $F353
                 dc.w off_29EC
                 dc.w off_2A3C
@@ -28809,7 +28809,7 @@ loc_248F3C:                             ; CODE XREF: sub_248E58+DC   j
                 add.w   4(a2),d3
                 cmp.w   d3,d1
                 bcc.w   loc_248F6C
-                lea     (off_37CC).w,a5
+                lea     (fire_to_table).w,a5
                 clr.w   d1
                 move.b  (a2),d1
                 add.w   d1,d1
@@ -31888,7 +31888,7 @@ loc_24AED0:                             ; CODE XREF: sub_24AEA8+E   j
 
 
 sub_24AED6:                             ; CODE XREF: sub_25246C+10   p
-                                        ; sub_252484+10   p ...
+                                        ; fire_to_frog+10   p ...
                 move.l  a6,-(sp)
                 move.w  d0,-(sp)
                 movea.l $2A(a2),a6
@@ -39015,7 +39015,7 @@ sub_2504E6:                             ; DATA XREF: ROM:0025C1AC   o
 
 
 nullsub_11:                             ; DATA XREF: ROM:off_35E4   o
-                                        ; ROM:off_37CC   o ...
+                                        ; ROM:fire_to_table   o ...
                 rts
 ; End of function nullsub_11
 
@@ -41723,7 +41723,7 @@ locret_252482:                          ; CODE XREF: sub_25246C+6   j
 ; End of function sub_25246C
 
 
-sub_252484:                             ; DATA XREF: ROM:000038D0   o
+fire_to_frog:                             ; DATA XREF: ROM:000038D0   o
                 jsr     (sub_25449C).l
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_25249A
@@ -41731,13 +41731,13 @@ sub_252484:                             ; DATA XREF: ROM:000038D0   o
                 jsr     sub_24AED6(pc)
                 rts
 ; ---------------------------------------------------------------------------
-loc_25249A:                             ; CODE XREF: sub_252484+C   j
+loc_25249A:                             ; CODE XREF: fire_to_frog+C   j
                                         ; DATA XREF: ROM:00003A0C   o
                 clr.b   (a2)
                 bsr.w   sub_24AED6
 locret_2524A0:                          ; DATA XREF: ROM:00003A10   o
                 rts
-; End of function sub_252484
+; End of function fire_to_frog
 
 
 sub_2524A2:                             ; DATA XREF: ROM:000036E8   o
@@ -43954,7 +43954,7 @@ sub_253FFA:                             ; DATA XREF: ROM:00003A28   o
 ; End of function sub_253FFA
 
 
-sub_25400C:                             ; CODE XREF: sub_254042+4   p
+sub_25400C:                             ; CODE XREF: fire_to_fish_boss+4   p
                                         ; DATA XREF: ROM:000036FC   o
                 move.b  #$86,(a1)
                 move.l  #off_1B615E,$20(a1)
@@ -43969,14 +43969,14 @@ sub_25400C:                             ; CODE XREF: sub_254042+4   p
 ; End of function sub_25400C
 
 
-sub_254042:                             ; DATA XREF: ROM:000038E4   o
+fire_to_fish_boss:                             ; DATA XREF: ROM:000038E4   o
                                         ; ROM:00003A20   o
                 move.l  a1,-(sp)
                 movea.l a2,a1
                 bsr.s   sub_25400C
                 movea.l (sp)+,a1
                 rts
-; End of function sub_254042
+; End of function fire_to_fish_boss
 
 
 sub_25404C:                             ; DATA XREF: ROM:000036F4   o
@@ -44112,17 +44112,17 @@ sub_254196:                             ; DATA XREF: ROM:000038F4   o
 ; End of function sub_254196
 
 
-sub_2541A2:                             ; DATA XREF: ROM:00003850   o
+fire_to_butt_crab:                             ; DATA XREF: ROM:00003850   o
                                         ; ROM:00003854   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_2541BA
                 jsr     (sub_25449C).l
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
-locret_2541B8:                          ; CODE XREF: sub_2541A2+22   j
+locret_2541B8:                          ; CODE XREF: fire_to_butt_crab+22   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2541BA:                             ; CODE XREF: sub_2541A2+6   j
+loc_2541BA:                             ; CODE XREF: fire_to_butt_crab+6   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_2541B8
@@ -44135,7 +44135,7 @@ loc_2541BA:                             ; CODE XREF: sub_2541A2+6   j
                 clr.b   $37(a2)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2541E8:                             ; CODE XREF: sub_2541A2+2E   j
+loc_2541E8:                             ; CODE XREF: fire_to_butt_crab+2E   j
                                         ; DATA XREF: ROM:0000398C   o ...
                 move.b  #$86,(a2)
                 move.l  #off_1B1A32,$20(a2)
@@ -44150,11 +44150,11 @@ loc_2541E8:                             ; CODE XREF: sub_2541A2+2E   j
                 bsr.w   sub_25421E
                 bsr.w   sub_25421E
                 rts
-; End of function sub_2541A2
+; End of function fire_to_butt_crab
 
 
-sub_25421E:                             ; CODE XREF: sub_2541A2+34   p
-                                        ; sub_2541A2+5A   p ...
+sub_25421E:                             ; CODE XREF: fire_to_butt_crab+34   p
+                                        ; fire_to_butt_crab+5A   p ...
                 jsr     (sub_24AD66).l
                 bne.w   locret_254278
                 lea     (stru_25B294).l,a6
@@ -44181,7 +44181,7 @@ locret_254278:                          ; CODE XREF: sub_25421E+6   j
 ; End of function sub_25421E
 
 
-sub_25427A:                             ; DATA XREF: ROM:00003858   o
+fire_to_queen_boss:                             ; DATA XREF: ROM:00003858   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_2542AA
                 jsr     (sub_25449C).l
@@ -44191,10 +44191,10 @@ sub_25427A:                             ; DATA XREF: ROM:00003858   o
                 move.b  #$86,(a2)
                 move.l  #off_1B1666,$20(a2)
                 clr.b   $37(a2)
-locret_2542A8:                          ; CODE XREF: sub_25427A+3A   j
+locret_2542A8:                          ; CODE XREF: fire_to_queen_boss+3A   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2542AA:                             ; CODE XREF: sub_25427A+6   j
+loc_2542AA:                             ; CODE XREF: fire_to_queen_boss+6   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_2542A8
@@ -44206,7 +44206,7 @@ loc_2542AA:                             ; CODE XREF: sub_25427A+6   j
                 bcc.s   loc_254308
                 addq.b  #1,(byte_FFFD9B).l
                 rts
-; End of function sub_25427A
+; End of function fire_to_queen_boss
 
 
 jim_win_queen:                             ; DATA XREF: ROM:00003994   o
@@ -44220,8 +44220,8 @@ jim_win_queen:                             ; DATA XREF: ROM:00003994   o
                 addq.b  #3,(byte_FFFD9B).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_254308:                             ; CODE XREF: sub_25427A+16   j
-                                        ; sub_25427A+5A   j ...
+loc_254308:                             ; CODE XREF: fire_to_queen_boss+16   j
+                                        ; fire_to_queen_boss+5A   j ...
                 move.b  #$9C,(a2)
                 move.l  #off_1B1690,$20(a2)
                 clr.b   $37(a2)
@@ -44255,7 +44255,7 @@ loc_254378:                             ; CODE XREF: jim_win_queen+8C   j
 ; End of function jim_win_queen
 
 
-sub_25438A:                             ; DATA XREF: ROM:0000385C   o
+fire_to_butt_sub_boss:                             ; DATA XREF: ROM:0000385C   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_2543B0
                 jsr     (sub_25449C).l
@@ -44264,17 +44264,17 @@ sub_25438A:                             ; DATA XREF: ROM:0000385C   o
                 cmpi.b  #5,1(a2)
                 bcs.w   loc_254438
                 subq.b  #5,1(a2)
-locret_2543AE:                          ; CODE XREF: sub_25438A+30   j
+locret_2543AE:                          ; CODE XREF: fire_to_butt_sub_boss+30   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2543B0:                             ; CODE XREF: sub_25438A+6   j
+loc_2543B0:                             ; CODE XREF: fire_to_butt_sub_boss+6   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_2543AE
                 jsr     (sub_25449C).l
                 cmpi.w  #0,(word_FFFDDA).l
                 bne.s   loc_254430
-; End of function sub_25438A
+; End of function fire_to_butt_sub_boss
 
 
 sub_2543CC:                             ; DATA XREF: ROM:00003998   o
@@ -44304,12 +44304,12 @@ locret_25442E:                          ; CODE XREF: sub_2543CC+10   j
                                         ; sub_2543CC+42   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_254430:                             ; CODE XREF: sub_25438A+40   j
+loc_254430:                             ; CODE XREF: fire_to_butt_sub_boss+40   j
                 st      (byte_FFFD51).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_254438:                             ; CODE XREF: sub_25438A+12   j
-                                        ; sub_25438A+1C   j ...
+loc_254438:                             ; CODE XREF: fire_to_butt_sub_boss+12   j
+                                        ; fire_to_butt_sub_boss+1C   j ...
                 st      (byte_FFFF6E).l
                 st      (byte_FFFE00).l
                 clr.b   (a2)
@@ -44345,7 +44345,7 @@ nullsub_36:                             ; DATA XREF: ROM:000037D0   o
 
 
 sub_25449C:                             ; CODE XREF: sub_25246C+8   p
-                                        ; sub_252484   p ...
+                                        ; fire_to_frog   p ...
                 tst.b   (is_current_gun_plasma).l
                 bne.s   loc_2544F8
                 movem.w d0-d1,-(sp)
@@ -44647,7 +44647,7 @@ loc_254854:                             ; CODE XREF: fire_to_chuck_boss+80   j
 ; End of function fire_to_chuck_boss
 
 
-sub_25487A:                             ; DATA XREF: ROM:000037F4   o
+fire_to_hook:                             ; DATA XREF: ROM:000037F4   o
                                         ; ROM:00003800   o ...
                 cmpi.b  #$7B,(a1) ; '{'
                 bne.s   locret_2548B6
@@ -44663,13 +44663,13 @@ sub_25487A:                             ; DATA XREF: ROM:000037F4   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2548B0:                             ; CODE XREF: sub_25487A+1A   j
+loc_2548B0:                             ; CODE XREF: fire_to_hook+1A   j
                 jsr     sub_25449C(pc)
-loc_2548B4:                             ; CODE XREF: sub_25487A+12   j
+loc_2548B4:                             ; CODE XREF: fire_to_hook+12   j
                 move.w  (sp)+,d7
-locret_2548B6:                          ; CODE XREF: sub_25487A+4   j
+locret_2548B6:                          ; CODE XREF: fire_to_hook+4   j
                 rts
-; End of function sub_25487A
+; End of function fire_to_hook
 
 
 nullsub_37:                             ; DATA XREF: ROM:00003808   o
@@ -44678,7 +44678,7 @@ nullsub_37:                             ; DATA XREF: ROM:00003808   o
 ; End of function nullsub_37
 
 
-sub_2548BA:                             ; DATA XREF: ROM:0000386C   o
+fire_to_chicken_boss_egg:                             ; DATA XREF: ROM:0000386C   o
                                         ; ROM:000039A8   o
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
@@ -44689,17 +44689,17 @@ sub_2548BA:                             ; DATA XREF: ROM:0000386C   o
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 rts
 ; ---------------------------------------------------------------------------
-loc_2548DA:                             ; CODE XREF: sub_2548BA+E   j
+loc_2548DA:                             ; CODE XREF: fire_to_chicken_boss_egg+E   j
                 movea.l a1,a5
                 movea.l a2,a1
                 jsr     (oksub_2548E8).l
                 movea.l a5,a1
                 rts
-; End of function sub_2548BA
+; End of function fire_to_chicken_boss_egg
 
 
 oksub_2548E8:                           ; CODE XREF: sub_252880:loc_2528D0   p
-                                        ; sub_2548BA+24   p
+                                        ; fire_to_chicken_boss_egg+24   p
                                         ; DATA XREF: ...
                 jsr     (sub_24AD1E).l
                 bne.s   locret_25490C
@@ -45363,7 +45363,7 @@ sub_255058:                             ; DATA XREF: ROM:000039D4   o
 ; End of function sub_255058
 
 
-sub_25506A:                             ; DATA XREF: ROM:00003894   o
+fire_to_bee_generator:                             ; DATA XREF: ROM:00003894   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255080
                 jsr     sub_25449C(pc)
@@ -45371,7 +45371,7 @@ sub_25506A:                             ; DATA XREF: ROM:00003894   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_255080:                             ; CODE XREF: sub_25506A+6   j
+loc_255080:                             ; CODE XREF: fire_to_bee_generator+6   j
                 jsr     sub_25449C(pc)
 loc_255084:                             ; DATA XREF: ROM:000039D0   o
                 move.b  #$86,(a2)
@@ -45382,7 +45382,7 @@ loc_255084:                             ; DATA XREF: ROM:000039D0   o
                 clr.b   $37(a2)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2550A0:                             ; CODE XREF: sub_25506A+22   j
+loc_2550A0:                             ; CODE XREF: fire_to_bee_generator+22   j
                 move.w  #$FC00,$1A(a2)
                 move.l  #off_1B1D94,$20(a2)
                 clr.b   $37(a2)
@@ -45390,10 +45390,10 @@ loc_2550A0:                             ; CODE XREF: sub_25506A+22   j
                 clr.b   $36(a2)
                 move.b  #1,6(a2)
                 rts
-; End of function sub_25506A
+; End of function fire_to_bee_generator
 
 
-sub_2550C6:                             ; DATA XREF: ROM:0000387C   o
+fire_to_fridge:                             ; DATA XREF: ROM:0000387C   o
                 jsr     sub_2545A0(pc)
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2550EC
@@ -45403,9 +45403,9 @@ sub_2550C6:                             ; DATA XREF: ROM:0000387C   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2550EC:                             ; CODE XREF: sub_2550C6+A   j
+loc_2550EC:                             ; CODE XREF: fire_to_fridge+A   j
                 move.b  #$86,(a2)
-; End of function sub_2550C6
+; End of function fire_to_fridge
 
 
 whip_to_fridge:                             ; DATA XREF: ROM:000039B8   o
@@ -45956,7 +45956,7 @@ loc_255786:                             ; CODE XREF: fire_to_green_goose_caterpi
 ; End of function fire_to_green_goose_caterpillar
 
 
-sub_2557A2:                             ; DATA XREF: ROM:00003844   o
+fire_to_queen_abscess:                             ; DATA XREF: ROM:00003844   o
                                         ; ROM:00003980   o
                 jsr     sub_25449C(pc)
                 tst.b   (is_current_gun_plasma).l
@@ -45965,21 +45965,21 @@ sub_2557A2:                             ; DATA XREF: ROM:00003844   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_2557B8:                             ; CODE XREF: sub_2557A2+A   j
+loc_2557B8:                             ; CODE XREF: fire_to_queen_abscess+A   j
                 move.b  #$86,(a2)
                 move.l  #off_1B150A,$20(a2)
                 clr.b   $37(a2)
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_2557EA
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_38).w
+                pea     ($38).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_2557EA:                          ; CODE XREF: sub_2557A2+2C   j
+locret_2557EA:                          ; CODE XREF: fire_to_queen_abscess+2C   j
                 rts
-; End of function sub_2557A2
+; End of function fire_to_queen_abscess
 
 
 sub_2557EC:                             ; DATA XREF: ROM:00003848   o
@@ -46129,7 +46129,7 @@ loc_255974:                             ; DATA XREF: ROM:00003988   o
 ; End of function fire_to_brain
 
 
-sub_25597E:                             ; DATA XREF: ROM:0000382C   o
+fire_to_bee:                             ; DATA XREF: ROM:0000382C   o
                 jsr     sub_25449C(pc)
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255994
@@ -46137,7 +46137,7 @@ sub_25597E:                             ; DATA XREF: ROM:0000382C   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_255994:                             ; CODE XREF: sub_25597E+A   j
+loc_255994:                             ; CODE XREF: fire_to_bee+A   j
                 move.b  #$86,(a2)
                 move.l  #off_1B1EA8,$20(a2)
                 clr.b   $37(a2)
@@ -46146,10 +46146,10 @@ loc_255994:                             ; CODE XREF: sub_25597E+A   j
                 clr.l   $A(a2)
                 clr.l   $42(a2)
                 rts
-; End of function sub_25597E
+; End of function fire_to_bee
 
 
-sub_2559B6:                             ; DATA XREF: ROM:00003830   o
+fire_to_box:                             ; DATA XREF: ROM:00003830   o
                 cmpi.b  #$7C,(a1) ; '|'
                 beq.w   loc_255A40
                 tst.b   (is_current_gun_plasma).l
@@ -46161,10 +46161,10 @@ sub_2559B6:                             ; DATA XREF: ROM:00003830   o
                 btst    #4,7(a2)
                 bne.s   locret_2559E6
                 clr.b   (byte_FFFD36).l
-locret_2559E6:                          ; CODE XREF: sub_2559B6+28   j
+locret_2559E6:                          ; CODE XREF: fire_to_box+28   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2559E8:                             ; CODE XREF: sub_2559B6+E   j
+loc_2559E8:                             ; CODE XREF: fire_to_box+E   j
                                         ; DATA XREF: ROM:0000396C   o
                 btst    #4,7(a2)
                 beq.s   locret_255A2A
@@ -46180,16 +46180,16 @@ loc_2559E8:                             ; CODE XREF: sub_2559B6+E   j
                 move.l  #off_1B3404,$20(a2)
                 clr.b   $37(a2)
                 clr.b   (byte_FFFD37).l
-locret_255A2A:                          ; CODE XREF: sub_2559B6+38   j
+locret_255A2A:                          ; CODE XREF: fire_to_box+38   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_255A2C:                             ; CODE XREF: sub_2559B6+50   j
+loc_255A2C:                             ; CODE XREF: fire_to_box+50   j
                 addi.w  #$400,$18(a2)
                 move.l  #off_1B33CE,$20(a2)
                 clr.b   $37(a2)
                 rts
 ; ---------------------------------------------------------------------------
-loc_255A40:                             ; CODE XREF: sub_2559B6+4   j
+loc_255A40:                             ; CODE XREF: fire_to_box+4   j
                 move.l  #off_1B3424,$20(a1)
                 clr.b   $37(a1)
                 movem.l d4/a1-a2,-(sp)
@@ -46202,19 +46202,19 @@ loc_255A40:                             ; CODE XREF: sub_2559B6+4   j
                 tst.b   (a1)
                 beq.s   loc_255A7E
                 jsr     (sub_24AE7A).l
-loc_255A7E:                             ; CODE XREF: sub_2559B6+C0   j
+loc_255A7E:                             ; CODE XREF: fire_to_box+C0   j
                 move.w  #$2A,d4 ; '*'
-loc_255A82:                             ; CODE XREF: sub_2559B6+CE   j
+loc_255A82:                             ; CODE XREF: fire_to_box+CE   j
                 move.w  (a2)+,(a1)+
                 dbf     d4,loc_255A82
                 movem.l (sp)+,d4/a1-a2
                 clr.b   (a2)
                 clr.b   (byte_FFFD37).l
                 rts
-; End of function sub_2559B6
+; End of function fire_to_box
 
 
-sub_255A96:                             ; DATA XREF: ROM:00003828   o
+fire_to_intestinal_boss:                             ; DATA XREF: ROM:00003828   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255AC8
                 jsr     sub_25449C(pc)
@@ -46227,7 +46227,7 @@ sub_255A96:                             ; DATA XREF: ROM:00003828   o
                 clr.l   $A(a2)
                 rts
 ; ---------------------------------------------------------------------------
-loc_255AC8:                             ; CODE XREF: sub_255A96+6   j
+loc_255AC8:                             ; CODE XREF: fire_to_intestinal_boss+6   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_255AEA
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -46236,7 +46236,7 @@ loc_255AC8:                             ; CODE XREF: sub_255A96+6   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_255AEA:                             ; CODE XREF: sub_255A96+38   j
+loc_255AEA:                             ; CODE XREF: fire_to_intestinal_boss+38   j
                 jsr     sub_25449C(pc)
                 tst.b   1(a2)
                 beq.w   loc_255B32
@@ -46246,7 +46246,7 @@ loc_255AEA:                             ; CODE XREF: sub_255A96+38   j
                 clr.b   $37(a2)
                 clr.l   $A(a2)
                 rts
-; End of function sub_255A96
+; End of function fire_to_intestinal_boss
 
 
 sub_255B10:                             ; DATA XREF: ROM:00003964   o
@@ -46259,8 +46259,8 @@ sub_255B10:                             ; DATA XREF: ROM:00003964   o
                 clr.l   $A(a2)
                 rts
 ; ---------------------------------------------------------------------------
-loc_255B32:                             ; CODE XREF: sub_255A96+12   j
-                                        ; sub_255A96+5C   j ...
+loc_255B32:                             ; CODE XREF: fire_to_intestinal_boss+12   j
+                                        ; fire_to_intestinal_boss+5C   j ...
                 move.b  #$86,(a2)
                 move.l  #off_1AD87A,$20(a2)
                 clr.b   $37(a2)
@@ -46450,23 +46450,23 @@ loc_255DBA:                             ; CODE XREF: fire_to_machine+52   j
 ; End of function fire_to_machine
 
 
-sub_255DD0:                             ; DATA XREF: ROM:000038A4   o
+fire_to_meteor:                             ; DATA XREF: ROM:000038A4   o
                                         ; ROM:000038A8   o ...
                 cmpi.b  #$7B,(a1) ; '{'
                 bne.s   locret_255DE2
                 jsr     sub_25449C(pc)
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
-locret_255DE2:                          ; CODE XREF: sub_255DD0+4   j
+locret_255DE2:                          ; CODE XREF: fire_to_meteor+4   j
                 rts
-; End of function sub_255DD0
+; End of function fire_to_meteor
 
 
-sub_255DE4:                             ; DATA XREF: ROM:000038C8   o
+fire_to_garbage:                             ; DATA XREF: ROM:000038C8   o
                 tst.b   $47(a2)
                 bne.w   fire_to_saxophone
                 rts
-; End of function sub_255DE4
+; End of function fire_to_garbage
 
 
 sub_255DEE:                             ; DATA XREF: ROM:00003A04   o
@@ -46547,7 +46547,7 @@ loc_255EC2:                             ; CODE XREF: sub_255DF8+AE   j
 ; End of function sub_255DF8
 
 
-fire_to_saxophone:                             ; CODE XREF: sub_255DE4+4   j
+fire_to_saxophone:                             ; CODE XREF: fire_to_garbage+4   j
                                         ; DATA XREF: ROM:00003820   o
                 jsr     sub_25449C(pc)
                 tst.b   (is_current_gun_plasma).l
@@ -50918,7 +50918,7 @@ locret_2594E2:                          ; CODE XREF: sub_2594CE+8   j
 ; End of function sub_2594CE
 
 
-sub_2594E4:                             ; DATA XREF: ROM:00003860   o
+fire_to_psycrow:                             ; DATA XREF: ROM:00003860   o
                 jsr     sub_25449C(pc)
                 tst.b   (byte_FFFD8A).l
                 bne.s   locret_259518
@@ -50929,10 +50929,10 @@ sub_2594E4:                             ; DATA XREF: ROM:00003860   o
                 move.w  #$FF00,$1A(a2)
                 clr.w   (dword_18).w
                 move.b  #7,(byte_FFFD88).l
-locret_259518:                          ; CODE XREF: sub_2594E4+A   j
-                                        ; sub_2594E4+14   j
+locret_259518:                          ; CODE XREF: fire_to_psycrow+A   j
+                                        ; fire_to_psycrow+14   j
                 rts
-; End of function sub_2594E4
+; End of function fire_to_psycrow
 
 
 sub_25951A:                             ; DATA XREF: ROM:0000399C   o

@@ -518,7 +518,7 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l fire_to_monkey_head
                 dc.l fire_to_crow
                 dc.l fire_to_lever
-                dc.l sub_2560D4
+                dc.l fire_to_activated_lever
                 dc.l fire_to_egg_with_needles
                 dc.l fire_to_eye
                 dc.l fire_to_hook
@@ -19502,7 +19502,7 @@ anim_cow_mini:  dc.w off_E44            ; DATA XREF: ROM:001B38A0   o
 anim_lever_2:   dc.w off_864            ; DATA XREF: ROM:stru_25B414   o
                 dc.w $EC01
 off_1B38A8:     dc.w off_868            ; DATA XREF: fire_to_lever:loc_2560BA   o
-                                        ; sub_2560D4:loc_2560FE   o
+                                        ; fire_to_activated_lever:loc_2560FE   o
                 dc.w off_868
                 dc.w off_86C
                 dc.w off_86C
@@ -46667,7 +46667,7 @@ loc_2560BA:                             ; CODE XREF: fire_to_lever+14   j
 ; End of function fire_to_lever
 
 
-sub_2560D4:                             ; DATA XREF: ROM:000037E8   o
+fire_to_activated_lever:                             ; DATA XREF: ROM:000037E8   o
                 jsr     sub_25449C(pc)
 loc_2560D8:                             ; DATA XREF: ROM:00003924   o
                 move.b  #$86,(a2)
@@ -46679,11 +46679,11 @@ loc_2560D8:                             ; DATA XREF: ROM:00003924   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2560FE:                             ; CODE XREF: sub_2560D4+E   j
+loc_2560FE:                             ; CODE XREF: fire_to_activated_lever+E   j
                 move.l  #off_1B38A8,$20(a2)
                 clr.b   $37(a2)
                 rts
-; End of function sub_2560D4
+; End of function fire_to_activated_lever
 
 
 sub_25610C:                             ; DATA XREF: ROM:0000391C   o

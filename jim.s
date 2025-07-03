@@ -522,7 +522,7 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l fire_to_egg_with_needles
                 dc.l fire_to_eye
                 dc.l fire_to_hook
-                dc.l sub_2554FA
+                dc.l fire_to_monkey_head_flask
                 dc.l fire_to_chuck_boss
                 dc.l fire_to_hook
                 dc.l fire_to_hook
@@ -538,7 +538,7 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l fire_to_bee
                 dc.l fire_to_box
                 dc.l fire_to_green_goose
-                dc.l sub_25590A
+                dc.l fire_to_dark_mini_monster
                 dc.l sub_255814
                 dc.l fire_to_green_goose_caterpillar
                 dc.l fire_to_queen_abscess
@@ -552,7 +552,7 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l sub_259586
                 dc.l fire_to_chicken_fly_boss
                 dc.l fire_to_chicken_boss_egg
-                dc.l sub_254A44
+                dc.l fire_to_cow
                 dc.l fire_to_ufo
                 dc.l fire_to_bob_cat
                 dc.l fire_to_fridge
@@ -560,7 +560,7 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l sub_254C66
                 dc.l fire_to_lawyer
                 dc.l sub_254CB2
-                dc.l sub_254AD6
+                dc.l fire_to_lawyer_with_kill
                 dc.l fire_to_bee_generator
                 dc.l fire_to_fox
                 dc.l fire_to_plant
@@ -569,8 +569,8 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l fire_to_meteor
                 dc.l fire_to_machine
                 dc.l sub_254E48
-                dc.l sub_254F5C
-                dc.l sub_254F5C
+                dc.l fire_to_hamster_gate
+                dc.l fire_to_hamster_gate
                 dc.l nullsub_22
                 dc.l nullsub_22
                 dc.l fire_to_crow
@@ -583,7 +583,7 @@ fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l fire_to_fan_fish
                 dc.l fire_to_fish_boss
                 dc.l fire_to_evil_cat_soul_boss
-                dc.l sub_253FC4
+                dc.l fire_to_automatic_eyes_generator
                 dc.l nullsub_11
                 dc.l sub_254196
                 dc.l sub_253F2A
@@ -617,7 +617,7 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l sub_2554E8
                 dc.l loc_2559E8
                 dc.l loc_255944
-                dc.l sub_25590A
+                dc.l fire_to_dark_mini_monster
                 dc.l nullsub_42
                 dc.l sub_25570E
                 dc.l fire_to_queen_abscess
@@ -14031,7 +14031,7 @@ off_1B0994:     dc.w off_227C           ; DATA XREF: fire_to_lawyer+2A   o
                 dc.w off_228C
                 dc.w off_228C
                 dc.b $ED,$11,  0,  0,  0,$31
-off_1B09B2:     dc.w off_2290           ; DATA XREF: sub_254AD6:loc_254B1E   o
+off_1B09B2:     dc.w off_2290           ; DATA XREF: fire_to_lawyer_with_kill:loc_254B1E   o
                 dc.w $F700
                 dc.w off_2294
                 dc.w off_2298
@@ -43927,7 +43927,7 @@ nullsub_35:                             ; DATA XREF: ROM:00003704   o
 ; End of function nullsub_35
 
 
-sub_253FC4:                             ; DATA XREF: ROM:000038EC   o
+fire_to_automatic_eyes_generator:                             ; DATA XREF: ROM:000038EC   o
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_253FF8
@@ -43940,10 +43940,10 @@ sub_253FC4:                             ; DATA XREF: ROM:000038EC   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_253FF8:                          ; CODE XREF: sub_253FC4+A   j
-                                        ; sub_253FC4+18   j
+locret_253FF8:                          ; CODE XREF: fire_to_automatic_eyes_generator+A   j
+                                        ; fire_to_automatic_eyes_generator+18   j
                 rts
-; End of function sub_253FC4
+; End of function fire_to_automatic_eyes_generator
 
 
 sub_253FFA:                             ; DATA XREF: ROM:00003A28   o
@@ -44421,7 +44421,7 @@ loc_25459A:                             ; CODE XREF: sub_25454C+34   j
 ; End of function sub_25454C
 
 
-sub_2545A0:                             ; CODE XREF: sub_254A44   p
+sub_2545A0:                             ; CODE XREF: fire_to_cow   p
                                         ; fire_to_ufo:loc_254A66   p ...
                 movem.w d0-d1,-(sp)
                 move.b  #$91,d0
@@ -44448,7 +44448,7 @@ loc_2545EE:                             ; CODE XREF: sub_2545A0+34   j
 
 
 sub_2545F4:                             ; CODE XREF: sub_2554E8   p
-                                        ; sub_25590A:loc_255920   p
+                                        ; fire_to_dark_mini_monster:loc_255920   p
                                         ; DATA XREF: ...
                 movem.w d0-d1,-(sp)
                 move.b  #$8A,d0
@@ -44804,10 +44804,10 @@ loc_254A38:                             ; CODE XREF: fire_to_chicken_fly_boss+10
 ; End of function fire_to_chicken_fly_boss
 
 
-sub_254A44:                             ; DATA XREF: ROM:00003870   o
+fire_to_cow:                             ; DATA XREF: ROM:00003870   o
                 jsr     sub_2545A0(pc)
                 rts
-; End of function sub_254A44
+; End of function fire_to_cow
 
 
 fire_to_ufo:                             ; DATA XREF: ROM:00003874   o
@@ -44860,7 +44860,7 @@ sub_254AC4:                             ; DATA XREF: ROM:000039C4   o
 ; End of function sub_254AC4
 
 
-sub_254AD6:                             ; DATA XREF: ROM:00003890   o
+fire_to_lawyer_with_kill:                             ; DATA XREF: ROM:00003890   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_254AEC
                 jsr     sub_25449C(pc)
@@ -44868,7 +44868,7 @@ sub_254AD6:                             ; DATA XREF: ROM:00003890   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_254AEC:                             ; CODE XREF: sub_254AD6+6   j
+loc_254AEC:                             ; CODE XREF: fire_to_lawyer_with_kill+6   j
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_254B2A
@@ -44881,12 +44881,12 @@ loc_254AEC:                             ; CODE XREF: sub_254AD6+6   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_254B1E:                             ; CODE XREF: sub_254AD6+2C   j
+loc_254B1E:                             ; CODE XREF: fire_to_lawyer_with_kill+2C   j
                 move.l  #off_1B09B2,$20(a2)
                 clr.b   $37(a2)
-locret_254B2A:                          ; CODE XREF: sub_254AD6+20   j
+locret_254B2A:                          ; CODE XREF: fire_to_lawyer_with_kill+20   j
                 rts
-; End of function sub_254AD6
+; End of function fire_to_lawyer_with_kill
 
 
 sub_254B2C:                             ; DATA XREF: ROM:00003698   o
@@ -45242,15 +45242,15 @@ loc_254F54:                             ; CODE XREF: sub_254F40+A   j
 ; End of function sub_254F40
 
 
-sub_254F5C:                             ; DATA XREF: ROM:000038B4   o
+fire_to_hamster_gate:                             ; DATA XREF: ROM:000038B4   o
                                         ; ROM:000038B8   o
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_254F6C
                 jsr     sub_2545A0(pc)
-locret_254F6C:                          ; CODE XREF: sub_254F5C+A   j
+locret_254F6C:                          ; CODE XREF: fire_to_hamster_gate+A   j
                 rts
-; End of function sub_254F5C
+; End of function fire_to_hamster_gate
 
 
 nullsub_20:                             ; DATA XREF: ROM:000039F0   o
@@ -45776,7 +45776,7 @@ nullsub_41:                             ; DATA XREF: ROM:00003610   o
 ; End of function nullsub_41
 
 
-sub_2554FA:                             ; DATA XREF: ROM:000037F8   o
+fire_to_monkey_head_flask:                             ; DATA XREF: ROM:000037F8   o
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #7,d7
                 bne.s   locret_25552C
@@ -45789,10 +45789,10 @@ sub_2554FA:                             ; DATA XREF: ROM:000037F8   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_25552C:                          ; CODE XREF: sub_2554FA+A   j
-                                        ; sub_2554FA+16   j
+locret_25552C:                          ; CODE XREF: fire_to_monkey_head_flask+A   j
+                                        ; fire_to_monkey_head_flask+16   j
                 rts
-; End of function sub_2554FA
+; End of function fire_to_monkey_head_flask
 
 
 sub_25552E:                             ; DATA XREF: ROM:00003934   o
@@ -46077,7 +46077,7 @@ nullsub_42:                             ; DATA XREF: ROM:00003978   o
 ; End of function nullsub_42
 
 
-sub_25590A:                             ; DATA XREF: ROM:00003838   o
+fire_to_dark_mini_monster:                             ; DATA XREF: ROM:00003838   o
                                         ; ROM:00003974   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255920
@@ -46086,12 +46086,12 @@ sub_25590A:                             ; DATA XREF: ROM:00003838   o
                 jsr     (sub_24AED6).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_255920:                             ; CODE XREF: sub_25590A+6   j
+loc_255920:                             ; CODE XREF: fire_to_dark_mini_monster+6   j
                 jsr     sub_2545F4(pc)
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
                 rts
-; End of function sub_25590A
+; End of function fire_to_dark_mini_monster
 
 
 fire_to_green_goose:                             ; DATA XREF: ROM:00003834   o

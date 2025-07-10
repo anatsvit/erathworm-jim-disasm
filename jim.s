@@ -54,7 +54,7 @@ off_48:         dc.l Trap15             ; DATA XREF: sub_252880+2E   o
 off_54:         dc.l Trap15             ; DATA XREF: sub_2526B2+36   o
                                         ; sub_252A0C+82   o
 off_58:         dc.l Trap15             ; DATA XREF: sub_252CA4+18   o
-off_5C:         dc.l Trap15             ; DATA XREF: sub_257C06+D0   o
+off_5C:         dc.l Trap15             ; DATA XREF: snot_collided_with_walls+D0   o
                 dc.l IRQ7
 off_64:         dc.l IRQ7               ; DATA XREF: cheat_code+1B2   o
                                         ; pickup_ammo+24   o ...
@@ -14899,7 +14899,7 @@ off_1B1108:     dc.w off_2380           ; DATA XREF: sub_257748:loc_2579B0   o
                 dc.w off_2380
                 dc.w $EA00
                 dc.l anim_snot_boss
-off_1B1166:     dc.w off_23D8           ; DATA XREF: sub_257C06+84   o
+off_1B1166:     dc.w off_23D8           ; DATA XREF: snot_collided_with_walls+84   o
                 dc.w off_23D8
                 dc.w $F500
                 dc.l stru_25AFC4
@@ -48705,7 +48705,7 @@ locret_2579D0:                          ; CODE XREF: sub_2579BE+A   j
 
 
 sub_2579D2:                             ; CODE XREF: sub_257748:loc_257992   p
-                                        ; sub_257C06:loc_257C3E   p
+                                        ; snot_collided_with_walls:loc_257C3E   p
                                         ; DATA XREF: ...
                 move.w  #$94,d0
                 jsr     (sub_24ADD2).l
@@ -48725,7 +48725,7 @@ locret_257A04:                          ; CODE XREF: sub_2579D2+14   j
 
 
 sub_257A06:                             ; CODE XREF: sub_257748+240   p
-                                        ; sub_257C06+76   p
+                                        ; snot_collided_with_walls+76   p
                                         ; DATA XREF: ...
                 move.w  #$94,d0
                 jsr     (sub_24ADD2).l
@@ -48865,11 +48865,11 @@ loc_257BA6:                             ; CODE XREF: sub_257B10+7C   j
 ; ---------------------------------------------------------------------------
 loc_257BC4:                             ; CODE XREF: sub_257B10+20   j
                                         ; sub_257B10+38   j ...
-                jsr     (sub_257CF6).l
+                jsr     (snot_on_rope).l
                 move.w  #$C80,d7
                 cmp.w   4(a1),d7
                 bcs.w   loc_257BDE
-                jsr     (sub_257C06).l
+                jsr     (snot_collided_with_walls).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_257BDE:                             ; CODE XREF: sub_257B10+C2   j
@@ -48884,10 +48884,10 @@ loc_257BDE:                             ; CODE XREF: sub_257B10+C2   j
 ; End of function sub_257B10
 
 
-sub_257C06:                             ; CODE XREF: sub_257B10+C6   p
+snot_collided_with_walls:                             ; CODE XREF: sub_257B10+C6   p
                 move.w  2(a1),d7
                 cmpi.w  #$1F0,d7
-                bcs.s   loc_257C46
+                bcs.s   snot_collided_with_left_wall
                 move.w  #$1F0,2(a1)
                 move.w  #$FC00,$18(a1)
                 tst.b   (sound_fx_enable).l
@@ -48898,11 +48898,11 @@ sub_257C06:                             ; CODE XREF: sub_257B10+C6   p
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_257C3E:                             ; CODE XREF: sub_257C06+1C   j
+loc_257C3E:                             ; CODE XREF: snot_collided_with_walls+1C   j
                 jsr     sub_2579D2(pc)
                 bra.w   loc_257C80
 ; ---------------------------------------------------------------------------
-loc_257C46:                             ; CODE XREF: sub_257C06+8   j
+snot_collided_with_left_wall:                             ; CODE XREF: snot_collided_with_walls+8   j
                 cmpi.w  #$B7,d7
                 bcc.w   locret_257CF4
                 tst.b   (sound_fx_enable).l
@@ -48913,11 +48913,11 @@ loc_257C46:                             ; CODE XREF: sub_257C06+8   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_257C70:                             ; CODE XREF: sub_257C06+4E   j
+loc_257C70:                             ; CODE XREF: snot_collided_with_walls+4E   j
                 move.w  #$B7,2(a1)
                 move.w  #$400,$18(a1)
                 jsr     sub_257A06(pc)
-loc_257C80:                             ; CODE XREF: sub_257C06+3C   j
+loc_257C80:                             ; CODE XREF: snot_collided_with_walls+3C   j
                 tst.w   (word_FFFF4C).l
                 bne.w   locret_257CF4
                 move.l  #off_1B1166,$20(a1)
@@ -48935,24 +48935,24 @@ loc_257C80:                             ; CODE XREF: sub_257C06+3C   j
                 jsr     (sub_2CBD12).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_257CCA:                             ; CODE XREF: sub_257C06+AE   j
+loc_257CCA:                             ; CODE XREF: snot_collided_with_walls+AE   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_257CEC
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_5C).w
+                pea     ($5C).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_257CEC:                             ; CODE XREF: sub_257C06+CA   j
+loc_257CEC:                             ; CODE XREF: snot_collided_with_walls+CA   j
                 move.b  #1,(byte_FFFD6E).l
-locret_257CF4:                          ; CODE XREF: sub_257C06+44   j
-                                        ; sub_257C06+80   j ...
+locret_257CF4:                          ; CODE XREF: snot_collided_with_walls+44   j
+                                        ; snot_collided_with_walls+80   j ...
                 rts
-; End of function sub_257C06
+; End of function snot_collided_with_walls
 
 
-sub_257CF6:                             ; CODE XREF: sub_257B10:loc_257BC4   p
+snot_on_rope:                             ; CODE XREF: sub_257B10:loc_257BC4   p
                 tst.b   (byte_FFFD66).l
                 bne.w   locret_257D24
                 cmpi.b  #4,(selectedLevelOption).l
@@ -48961,10 +48961,10 @@ sub_257CF6:                             ; CODE XREF: sub_257B10:loc_257BC4   p
                 beq.w   loc_257D8E
                 cmpi.b  #6,(selectedLevelOption).l
                 beq.w   loc_257DCA
-locret_257D24:                          ; CODE XREF: sub_257CF6+6   j
+locret_257D24:                          ; CODE XREF: snot_on_rope+6   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_257D26:                             ; CODE XREF: sub_257CF6+12   j
+loc_257D26:                             ; CODE XREF: snot_on_rope+12   j
                 jsr     (sub_257E30).l
                 tst.b   1(a1)
                 beq.w   locret_257D52
@@ -48973,11 +48973,11 @@ loc_257D26:                             ; CODE XREF: sub_257CF6+12   j
                 move.w  #$180,(word_FFFF52).l
                 jsr     (sub_257E10).l
                 jsr     (sub_257E50).l
-locret_257D52:                          ; CODE XREF: sub_257CF6+3A   j
+locret_257D52:                          ; CODE XREF: snot_on_rope+3A   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_257D54:                             ; CODE XREF: sub_257CF6+44   j
-                                        ; sub_257CF6+AC   j ...
+loc_257D54:                             ; CODE XREF: snot_on_rope+44   j
+                                        ; snot_on_rope+AC   j ...
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #$1F,d7
                 bne.s   loc_257D74
@@ -48985,14 +48985,14 @@ loc_257D54:                             ; CODE XREF: sub_257CF6+44   j
                 jsr     (sub_24D416).l
                 addi.w  #$F2,d7
                 move.w  d7,(word_FFFF52).l
-loc_257D74:                             ; CODE XREF: sub_257CF6+68   j
+loc_257D74:                             ; CODE XREF: snot_on_rope+68   j
                 jsr     (sub_257E10).l
                 jsr     (sub_257E10).l
                 jsr     (sub_257E10).l
                 jsr     (sub_257E50).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_257D8E:                             ; CODE XREF: sub_257CF6+1E   j
+loc_257D8E:                             ; CODE XREF: snot_on_rope+1E   j
                 jsr     (sub_257E30).l
                 tst.b   1(a1)
                 beq.w   locret_257DC8
@@ -49003,13 +49003,13 @@ loc_257D8E:                             ; CODE XREF: sub_257CF6+1E   j
                 bne.s   loc_257DBC
                 move.w  (word_FFA6D4).l,d7
                 move.w  d7,(word_FFFF52).l
-loc_257DBC:                             ; CODE XREF: sub_257CF6+B8   j
+loc_257DBC:                             ; CODE XREF: snot_on_rope+B8   j
                 jsr     (sub_257E10).l
                 jsr     (sub_257E50).l
-locret_257DC8:                          ; CODE XREF: sub_257CF6+A2   j
+locret_257DC8:                          ; CODE XREF: snot_on_rope+A2   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_257DCA:                             ; CODE XREF: sub_257CF6+2A   j
+loc_257DCA:                             ; CODE XREF: snot_on_rope+2A   j
                 jsr     (sub_257E30).l
                 tst.b   1(a1)
                 beq.w   locret_257E0E
@@ -49020,17 +49020,17 @@ loc_257DCA:                             ; CODE XREF: sub_257CF6+2A   j
                 bne.w   loc_257DFC
                 move.w  (word_FFA6D4).l,d7
                 move.w  d7,(word_FFFF52).l
-loc_257DFC:                             ; CODE XREF: sub_257CF6+F6   j
+loc_257DFC:                             ; CODE XREF: snot_on_rope+F6   j
                 jsr     (sub_257E10).l
                 jsr     (sub_257E10).l
                 jsr     (sub_257E50).l
-locret_257E0E:                          ; CODE XREF: sub_257CF6+DE   j
+locret_257E0E:                          ; CODE XREF: snot_on_rope+DE   j
                 rts
-; End of function sub_257CF6
+; End of function snot_on_rope
 
 
-sub_257E10:                             ; CODE XREF: sub_257CF6+50   p
-                                        ; sub_257CF6:loc_257D74   p ...
+sub_257E10:                             ; CODE XREF: snot_on_rope+50   p
+                                        ; snot_on_rope:loc_257D74   p ...
                 move.w  2(a1),d7
                 cmp.w   (word_FFFF52).l,d7
                 beq.w   locret_257E2E
@@ -49046,8 +49046,8 @@ locret_257E2E:                          ; CODE XREF: sub_257E10+A   j
 ; End of function sub_257E10
 
 
-sub_257E30:                             ; CODE XREF: sub_257CF6:loc_257D26   p
-                                        ; sub_257CF6:loc_257D8E   p ...
+sub_257E30:                             ; CODE XREF: snot_on_rope:loc_257D26   p
+                                        ; snot_on_rope:loc_257D8E   p ...
                 tst.b   1(a1)
                 bne.w   locret_257E4E
                 move.w  $1A(a1),d7
@@ -49063,8 +49063,8 @@ locret_257E4E:                          ; CODE XREF: sub_257E30+4   j
 ; End of function sub_257E30
 
 
-sub_257E50:                             ; CODE XREF: sub_257CF6+56   p
-                                        ; sub_257CF6+90   p ...
+sub_257E50:                             ; CODE XREF: snot_on_rope+56   p
+                                        ; snot_on_rope+90   p ...
                 movem.w d0-d2,-(sp)
                 move.b  (byte_FFA6EF).l,d7
                 ext.w   d7

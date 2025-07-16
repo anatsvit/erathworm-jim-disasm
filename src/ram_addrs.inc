@@ -469,7 +469,7 @@ byte_FFFF73 equ $FFFFFF73
 byte_FFFF74 equ $FFFFFF74
 byte_FFFF75 equ $FFFFFF75
 byte_FFFF76 equ $FFFFFF76
-byte_FFFF77 equ $FFFFFF77
+prize_faucet_attempts equ $FFFFFF77
 is_jim_off_gravity equ $FFFFFF78
 byte_FFFF7A equ $FFFFFF7A
 word_FFFF7C equ $FFFFFF7C

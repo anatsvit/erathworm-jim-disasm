@@ -601,7 +601,7 @@ off_3908:       dc.l nullsub_11         ; DATA XREF: sub_248F7E:loc_24908C   o
                 dc.l loc_255424
                 dc.l loc_25545C
                 dc.l sub_255640
-                dc.l sub_25552E
+                dc.l whip_to_prize_faucet
                 dc.l sub_255466
                 dc.l sub_255478
                 dc.l nullsub_40
@@ -3989,7 +3989,7 @@ byte_1A323C:    dc.b   2,  0,$80,  0    ; DATA XREF: ROM:001A3240   o
                 dc.l byte_1A323C
 byte_1A3244:    dc.b   0,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001A324A   o
-                                        ; sub_25552E+5C   o
+                                        ; whip_to_prize_faucet+5C   o
                 dc.l byte_1A3244
                 dc.b $91,  0
                 dc.l oksub_2495DE
@@ -16832,7 +16832,7 @@ off_1B2214:     dc.w off_2780           ; DATA XREF: ROM:001A3972   o
                 dc.w off_27A4
                 dc.w $EA00
                 dc.l off_1B2214
-off_1B222E:     dc.w off_2D24           ; DATA XREF: sub_25552E+A6   o
+off_1B222E:     dc.w off_2D24           ; DATA XREF: whip_to_prize_faucet+A6   o
                 dc.w off_2D24
                 dc.w off_2D24
                 dc.w off_2D28
@@ -19547,7 +19547,7 @@ off_1B38F8:     dc.w off_AB4            ; DATA XREF: ROM:001B38FE   o
                 dc.l off_1B38F8
                 dc.w $EA00
                 dc.l anim_hook_briliance
-off_1B3908:     dc.w off_AB4            ; DATA XREF: sub_25552E+4   o
+off_1B3908:     dc.w off_AB4            ; DATA XREF: whip_to_prize_faucet+4   o
                 dc.w $EE89
                 dc.w off_AB4
                 dc.w $ED11
@@ -45795,16 +45795,16 @@ locret_25552C:                          ; CODE XREF: fire_to_monkey_head_flask+A
 ; End of function fire_to_monkey_head_flask
 
 
-sub_25552E:                             ; DATA XREF: ROM:00003934   o
+whip_to_prize_faucet:                             ; DATA XREF: ROM:00003934   o
                 move.b  #$86,(a2)
                 move.l  #off_1B3908,$20(a2)
                 clr.b   $37(a2)
-                cmpi.b  #5,(byte_FFFF77).l
-                bcc.s   loc_2555BC
-                addq.b  #1,(byte_FFFF77).l
+                cmpi.b  #5,(prize_faucet_attempts).l
+                bcc.s   prize_faucet_create_daemon
+                addq.b  #1,(prize_faucet_attempts).l
                 jsr     (sub_24D448).l
                 andi.w  #$1C,d7
-                lea     (off_255620).l,a5
+                lea     (prize_faucet_objects_table).l,a5
                 movea.l (a5,d7.w),a6
                 jsr     (sub_24AD06).l
                 bne.w   locret_2555BA
@@ -45820,16 +45820,16 @@ sub_25552E:                             ; DATA XREF: ROM:00003934   o
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_2555BA
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_64).w
+                pea     ($64).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_2555BA:                          ; CODE XREF: sub_25552E+3A   j
-                                        ; sub_25552E+70   j ...
+locret_2555BA:                          ; CODE XREF: whip_to_prize_faucet+3A   j
+                                        ; whip_to_prize_faucet+70   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_2555BC:                             ; CODE XREF: sub_25552E+18   j
+prize_faucet_create_daemon:                             ; CODE XREF: whip_to_prize_faucet+18   j
                 jsr     (sub_24AD06).l
                 bne.s   locret_2555BA
                 lea     (object_daemon).l,a6
@@ -45851,11 +45851,11 @@ loc_2555BC:                             ; CODE XREF: sub_25552E+18   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_25561E:                          ; CODE XREF: sub_25552E+D4   j
+locret_25561E:                          ; CODE XREF: whip_to_prize_faucet+D4   j
                 rts
-; End of function sub_25552E
+; End of function whip_to_prize_faucet
 ; ---------------------------------------------------------------------------
-off_255620:     dc.l stru_25A964        ; DATA XREF: sub_25552E+2A   o
+prize_faucet_objects_table:     dc.l stru_25A964        ; DATA XREF: whip_to_prize_faucet+2A   o
                 dc.l stru_25A9DC
                 dc.l stru_25A9C4
                 dc.l stru_25A97C
@@ -52863,7 +52863,7 @@ stru_25A94C:    dc.b $86                ; field_0
                 dc.l off_0              ; proc_address
 stru_25A964:    dc.b $51                ; field_0
                                         ; DATA XREF: spawn_hp_atom_conditionally:spawn_hp_atom   o
-                                        ; ROM:off_255620   o ...
+                                        ; ROM:prize_faucet_objects_table   o ...
                 dc.b 0                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3
@@ -54951,7 +54951,7 @@ stru_25B60C:    dc.b $86                ; field_0
                 dc.l off_0              ; proc_address
 object_daemon:    dc.b $44                ; field_0
                                         ; DATA XREF: spawn_daemon   o
-                                        ; sub_25552E+96   o
+                                        ; whip_to_prize_faucet+96   o
                 dc.b 3                  ; field_1
                 dc.b $20                ; field_2
                 dc.b 0                  ; field_3

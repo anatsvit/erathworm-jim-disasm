@@ -406,7 +406,7 @@ byte_FFFE09 equ $FFFFFE09
 dword_FFFE0A equ $FFFFFE0A
 unk_FFFE0E equ $FFFFFE0E
 word_FFFE8E equ $FFFFFE8E
-word_FFFE90 equ $FFFFFE90
+super_bubble_timer equ $FFFFFE90
 word_FFFE92 equ $FFFFFE92
 word_FFFE94 equ $FFFFFE94
 word_FFFE96 equ $FFFFFE96
@@ -449,10 +449,10 @@ word_FFFF5C equ $FFFFFF5C
 byte_FFFF5E equ $FFFFFF5E
 byte_FFFF5F equ $FFFFFF5F
 byte_FFFF60 equ $FFFFFF60
-byte_FFFF61 equ $FFFFFF61
+super_bubble_count equ $FFFFFF61
 byte_FFFF62 equ $FFFFFF62
 byte_FFFF63 equ $FFFFFF63
-byte_FFFF64 equ $FFFFFF64
+bubble_count equ $FFFFFF64
 byte_FFFF65 equ $FFFFFF65
 byte_FFFF66 equ $FFFFFF66
 byte_FFFF67 equ $FFFFFF67

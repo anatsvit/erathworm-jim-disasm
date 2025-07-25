@@ -35,25 +35,25 @@ off_4:          dc.l Reset
 dword_18:       dc.l $63F1388           ; DATA XREF: fire_to_psycrow+28   w
                                         ; sub_259658+62   r ...
 dword_1C:       dc.l $73F1388           ; DATA XREF: sub_246B08+FE   o
-dword_20:       dc.l $83F1388           ; DATA XREF: sub_2532FA+124   o
-dword_24:       dc.l $93F1388           ; DATA XREF: sub_254C88+12   o
+dword_20:       dc.l $83F1388           ; DATA XREF: collision_with_submarine+124   o
+dword_24:       dc.l $93F1388           ; DATA XREF: collision_with_snowman_burp+12   o
 dword_28:       dc.l $3F1456            ; DATA XREF: sub_259DFE+2B2   o
                 dc.l $1AD6C6
                 dc.l Trap15
 off_34:         dc.l Trap15             ; DATA XREF: whip_to_bobcat+20   o
-                                        ; sub_252780+14   w
+                                        ; collision_with_butt_crab+14   w
 off_38:         dc.l Trap15             ; DATA XREF: sub_24F23E+C4   o
                                         ; fire_to_sponge+46   o ...
 off_3C:         dc.l Trap15             ; DATA XREF: sub_24DBCC+1A   o
                 dc.l Trap15
 off_44:         dc.l Trap15             ; DATA XREF: activity_tube_air_up+38   o
-off_48:         dc.l Trap15             ; DATA XREF: sub_252880+2E   o
-                                        ; sub_252880+62   o
+off_48:         dc.l Trap15             ; DATA XREF: collision_with_flying_bomb+2E   o
+                                        ; collision_with_flying_bomb+62   o
                 dc.l Trap15
                 dc.l Trap15
-off_54:         dc.l Trap15             ; DATA XREF: sub_2526B2+36   o
-                                        ; sub_252A0C+82   o
-off_58:         dc.l Trap15             ; DATA XREF: sub_252CA4+18   o
+off_54:         dc.l Trap15             ; DATA XREF: collision_with_space_suit+36   o
+                                        ; collision_with_fan+82   o
+off_58:         dc.l Trap15             ; DATA XREF: collision_with_super_bubble+18   o
 off_5C:         dc.l Trap15             ; DATA XREF: snot_collided_with_walls+D0   o
                 dc.l IRQ7
 off_64:         dc.l IRQ7               ; DATA XREF: cheat_code+1B2   o
@@ -390,127 +390,127 @@ vdpregs_35D8:   dc.l $74000003          ; DATA XREF: sub_248430   r
                                         ; DO_OPERATION_WITHOUT_DMA
 off_35E4:       dc.l nullsub_11         ; DATA XREF: sub_248C3A+154   o
                                         ; sub_24BEDC+D2   o
-                dc.l sub_2588E6
-                dc.l sub_252D0E
+                dc.l collision_with_asteroid
+                dc.l collision_with_dog
                 dc.l nullsub_18
                 dc.l nullsub_18
                 dc.l sub_252DE4
                 dc.l nullsub_34
                 dc.l nullsub_34
-                dc.l sub_252C30
-                dc.l sub_252C30
+                dc.l collision_with_prickly_egg
+                dc.l collision_with_prickly_egg
                 dc.l nullsub_16
                 dc.l nullsub_41
-                dc.l sub_252C9C
+                dc.l collision_with_chuck_boss
                 dc.l nullsub_17
-                dc.l sub_252C38
+                dc.l collision_with_hell_gates
                 dc.l nullsub_33
-                dc.l sub_252CA4
-                dc.l sub_2588E6
-                dc.l sub_252CD4
-                dc.l sub_2524DA
+                dc.l collision_with_super_bubble
+                dc.l collision_with_asteroid
+                dc.l collision_with_speed_bubble
+                dc.l collision_with_bubble
                 dc.l collision_with_bucket_boss
                 dc.l collision_with_saxophone
                 dc.l locret_252594
-                dc.l sub_252AE8
-                dc.l sub_25266C
+                dc.l collision_with_intestinal_boss
+                dc.l collision_with_bee
                 dc.l nullsub_14
-                dc.l sub_2529DE
-                dc.l sub_2529D4
-                dc.l sub_252680
-                dc.l sub_2526A4
+                dc.l collision_with_green_goose
+                dc.l collision_with_dark_mini_monster
+                dc.l collision_with_chicken_boss
+                dc.l collision_with_green_goose_caterpillar
                 dc.l nullsub_32
                 dc.l nullsub_32
-                dc.l sub_252768
-                dc.l sub_252780
-                dc.l sub_25279A
+                dc.l collision_with_brain
+                dc.l collision_with_butt_crab
+                dc.l collision_with_butt_crab_32
                 dc.l nullsub_31
                 dc.l nullsub_15
-                dc.l sub_2594CE
-                dc.l sub_259576
-                dc.l sub_25290E
-                dc.l sub_252880
+                dc.l collision_with_psycrow
+                dc.l collision_with_psycrow_hook
+                dc.l collision_with_chicken_boss_flying
+                dc.l collision_with_flying_bomb
                 dc.l locret_25397A
-                dc.l loc_253BE0
-                dc.l loc_25397C
-                dc.l loc_253A02
-                dc.l sub_254B2C
-                dc.l sub_254C88
-                dc.l loc_253A86
-                dc.l loc_253A86
-                dc.l loc_253A86
+                dc.l collision_with_ufo
+                dc.l collision_with_bobcat
+                dc.l collision_with_fridge
+                dc.l collision_with_snowman
+                dc.l collision_with_snowman_burp
+                dc.l collision_with_lawyer
+                dc.l collision_with_lawyer
+                dc.l collision_with_lawyer
                 dc.l locret_253BDE
-                dc.l loc_253B26
-                dc.l loc_253A8E
-                dc.l loc_253AD0
-                dc.l loc_252658
-                dc.l sub_252652
-                dc.l sub_252596
+                dc.l collision_with_fox
+                dc.l collision_with_plant
+                dc.l collision_with_papers
+                dc.l collision_with_meteor_2
+                dc.l collision_with_meteor_3
+                dc.l collision_with_machine
                 dc.l nullsub_38
-                dc.l sub_254F40
-                dc.l sub_254F40
+                dc.l collision_with_sea_gate
+                dc.l collision_with_sea_gate
                 dc.l nullsub_21
                 dc.l nullsub_21
-                dc.l sub_252D90
+                dc.l collision_with_crow
                 dc.l collision_with_garbage
-                dc.l sub_2532FA
-                dc.l sub_2524A2
-                dc.l sub_2524A2
-                dc.l sub_253F5C
-                dc.l sub_25404C
-                dc.l sub_2540CC
-                dc.l sub_25400C
-                dc.l sub_259106
+                dc.l collision_with_submarine
+                dc.l collision_with_frog
+                dc.l collision_with_frog
+                dc.l collision_with_sponge
+                dc.l collision_with_daemon
+                dc.l collision_with_fan_fish
+                dc.l collision_with_fish_boss
+                dc.l collision_with_evil_cat_soul
                 dc.l nullsub_35
-                dc.l sub_253D6C
-                dc.l sub_253D6C
-                dc.l sub_253D6C
-                dc.l sub_253D6C
-                dc.l sub_252D86
-                dc.l sub_252D86
+                dc.l collision_with_monkey_head_flask
+                dc.l collision_with_monkey_head_flask
+                dc.l collision_with_monkey_head_flask
+                dc.l collision_with_monkey_head_flask
+                dc.l collision_with_anvil
+                dc.l collision_with_anvil
                 dc.l pickup_continue
                 dc.l pickup_live
                 dc.l pickup_health_atom
                 dc.l pickup_health_molecule_full
                 dc.l pickup_ammo
                 dc.l pickup_plasma
-                dc.l sub_253D6C
-                dc.l sub_253706
-                dc.l loc_25377A
-                dc.l loc_25377A
-                dc.l loc_2537F4
-                dc.l loc_2538BA
-                dc.l loc_253906
-                dc.l loc_253906
-                dc.l loc_253906
-                dc.l sub_2530EE
-                dc.l sub_2530EE
-                dc.l sub_253282
-                dc.l sub_2531F4
+                dc.l collision_with_monkey_head_flask
+                dc.l collision_with_diamond
+                dc.l collision_with_spring_platform
+                dc.l collision_with_spring_platform
+                dc.l collision_with_balance_platform
+                dc.l collision_with_diamond_static
+                dc.l collision_with_diamond_2
+                dc.l collision_with_diamond_2
+                dc.l collision_with_diamond_2
+                dc.l collision_with_funicular
+                dc.l collision_with_funicular
+                dc.l collision_with_cage
+                dc.l collision_with_butt_sub_boss_platform
                 dc.l sub_252FF4
-                dc.l sub_253012
-                dc.l sub_253054
-                dc.l sub_25306A
+                dc.l collision_with_sphere_electro
+                dc.l collision_with_sphere_electro_zap
+                dc.l collision_with_electrical_charge
                 dc.l sub_2529FA
-                dc.l sub_252A06
-                dc.l sub_252A0C
-                dc.l sub_2526B2
-                dc.l sub_2525DE
-                dc.l loc_252660
-                dc.l sub_25276E
-                dc.l sub_25286E
-                dc.l sub_252874
-                dc.l sub_252874
-                dc.l sub_25816A
-                dc.l sub_257748
-                dc.l sub_257616
-                dc.l sub_2524C6
-                dc.l sub_25418E
+                dc.l collision_with_fire
+                dc.l collision_with_fan
+                dc.l collision_with_space_suit
+                dc.l collision_with_puppy_evil
+                dc.l collision_with_meteor
+                dc.l collision_with_butt_crab_3
+                dc.l collision_with_fire_trigger
+                dc.l collision_with_fire_2
+                dc.l collision_with_fire_2
+                dc.l collision_with_water_monster
+                dc.l collision_with_snot
+                dc.l collision_with_hamster
+                dc.l collision_with_mechanism
+                dc.l collision_with_butt_crab_3part
                 dc.l sub_254170
-                dc.l sub_258E24
-                dc.l sub_258E14
-                dc.l sub_258E14
-                dc.l sub_258E14
+                dc.l collision_with_stalactite
+                dc.l collision_with_wheel_intestinal
+                dc.l collision_with_wheel_intestinal
+                dc.l collision_with_wheel_intestinal
 fire_to_table:       dc.l nullsub_11         ; DATA XREF: sub_248E58+EE   o
                 dc.l nullsub_36
                 dc.l fire_to_dog
@@ -3735,7 +3735,7 @@ loc_1A27AE:                             ; CODE XREF: oksub_1A27A0+14   j
                 rts
 ; End of function oksub_1A27A0
 ; ---------------------------------------------------------------------------
-byte_1A27BA:    dc.b   0,  0            ; DATA XREF: sub_2530EE+E2   o
+byte_1A27BA:    dc.b   0,  0            ; DATA XREF: collision_with_funicular+E2   o
 byte_1A27BC:    dc.b $84, $F,  2,  1,  2,  0,$8A,$21
                                         ; DATA XREF: ROM:001A2826   o
                 dc.w $FD11,  $5E
@@ -3896,8 +3896,8 @@ byte_1A2D74:    dc.b   0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  2,  0,  2
 byte_1A2D8C:    dc.b   5,  0,$80,  0    ; DATA XREF: ROM:001A2D90   o
                 dc.l byte_1A2D8C
 byte_1A2D94:    dc.b   0,  3,  0,  2,  0,  1,$84,$82,  0,  0,  0,$FF,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,$82,  0
-                                        ; DATA XREF: sub_253706+66   o
-                                        ; sub_253706+266   o
+                                        ; DATA XREF: collision_with_diamond+66   o
+                                        ; collision_with_diamond+266   o
 byte_1A2DB4:    dc.b   0,  0,$8B,  0    ; DATA XREF: ROM:001A2E7A   o
                                         ; fire_to_chicken_fly_boss+44   o ...
                 dc.l stru_25BAA4
@@ -4609,7 +4609,7 @@ byte_1A3AD0:    dc.b   1,  0,$88,$84,  0,  7
 byte_1A3AEC:    dc.b   1,  0,$80,  0    ; DATA XREF: ROM:001A3AF0   o
                 dc.l byte_1A3AEC
 byte_1A3AF4:    dc.b   0,  0,$84,$11,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,$FE,  1,$FF,  1,  0,  1,  1,  1,  1,  1,  1,$85,  0,$92,  0
-                                        ; DATA XREF: sub_253282+64   o
+                                        ; DATA XREF: collision_with_cage+64   o
                 dc.l byte_1A3EBE
                 dc.b $84,$CF,  0,  2,$92,  0
                 dc.l byte_1A3EBE
@@ -7610,7 +7610,7 @@ byte_1ACE68:    dc.b   0,$F8,$80,  0    ; DATA XREF: ROM:001ACE6C   o
                 dc.l byte_1ACE68
 byte_1ACE70:    dc.b   1,  0,$90,$42,  0,$1A,  0,$32,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001ACE7C   o
-                                        ; sub_25400C+28   o
+                                        ; collision_with_fish_boss+28   o
                 dc.l byte_1ACE70
                 dc.b $83,$14,  0,$20
                 dc.l off_1B617E
@@ -7793,7 +7793,7 @@ off_1AD2B2:     dc.w off_2234           ; DATA XREF: fire_to_green_goose+1A   o
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0
                 dc.w off_2250
                 dc.b $F6,  0
-off_1AD2FC:     dc.w off_DC4            ; DATA XREF: sub_253706+282   o
+off_1AD2FC:     dc.w off_DC4            ; DATA XREF: collision_with_diamond+282   o
                 dc.w off_DC4
                 dc.w off_DC8
                 dc.b $F3,$59
@@ -8013,7 +8013,7 @@ off_1AD4FE:     dc.w off_2060           ; DATA XREF: ROM:001AD520   o
                 dc.b $ED,$11,  0,$3C,  0,  0
 word_1AD51E:    dc.w $EA00              ; DATA XREF: ROM:001AD514   o
                 dc.l off_1AD4FE
-off_1AD524:     dc.w off_2054           ; DATA XREF: sub_257616:loc_257694   o
+off_1AD524:     dc.w off_2054           ; DATA XREF: collision_with_hamster:loc_257694   o
                 dc.w off_2058
                 dc.w off_2058
                 dc.w off_205C
@@ -8032,7 +8032,7 @@ off_1AD524:     dc.w off_2054           ; DATA XREF: sub_257616:loc_257694   o
                 dc.w $EA00
                 dc.l off_1AD4FE
 off_1AD54A:     dc.w off_15F8           ; DATA XREF: ROM:001AD5CA   o
-                                        ; sub_257616+B8   o
+                                        ; collision_with_hamster+B8   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.b   0,$4A
@@ -10533,7 +10533,7 @@ off_1AECC6:     dc.w off_1A54           ; DATA XREF: sub_24B124:loc_24B190   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $3E
-off_1AECCE:     dc.w off_1A54           ; DATA XREF: sub_25306A+3A   o
+off_1AECCE:     dc.w off_1A54           ; DATA XREF: collision_with_electrical_charge+3A   o
                 dc.w off_1A58
                 dc.w off_1A58
                 dc.w off_190C
@@ -10917,8 +10917,8 @@ off_1AEFB2:     dc.w off_15D8           ; DATA XREF: ROM:000064C2   o
 off_1AEFB6:     dc.w off_15DC           ; DATA XREF: ROM:000064C6   o
                                         ; ROM:000064D6   o ...
                 dc.w $EC01
-off_1AEFBA:     dc.w off_1354           ; DATA XREF: sub_2530EE+C8   o
-                                        ; sub_2530EE+D8   o
+off_1AEFBA:     dc.w off_1354           ; DATA XREF: collision_with_funicular+C8   o
+                                        ; collision_with_funicular+D8   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $21
@@ -11348,7 +11348,7 @@ off_1AF300:     dc.w off_14FC           ; DATA XREF: ROM:001ACC3C   o
                 dc.w off_1504
                 dc.w $EA00
                 dc.l off_1AF290
-off_1AF36A:     dc.w off_10EC           ; DATA XREF: sub_252D0E+50   o
+off_1AF36A:     dc.w off_10EC           ; DATA XREF: collision_with_dog+50   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $42
@@ -11393,7 +11393,7 @@ off_1AF3B0:     dc.w off_13A8           ; DATA XREF: ROM:001AF3BA   o
                 dc.w off_13A0
                 dc.w $F800
 off_1AF3C4:     dc.w off_13AC           ; DATA XREF: sub_252DE4+96   o
-                                        ; sub_253706+548   o
+                                        ; collision_with_diamond+548   o
                 dc.w $EE02
                 dc.w off_13AC
                 dc.w $ED01
@@ -11749,7 +11749,7 @@ off_1AF6A0:     dc.w off_1988           ; DATA XREF: sub_252B3A+1E   o
                 dc.w off_1988
                 dc.w $EA00
                 dc.l off_1AEC36
-off_1AF6B2:     dc.w off_1514           ; DATA XREF: sub_252A0C+12   o
+off_1AF6B2:     dc.w off_1514           ; DATA XREF: collision_with_fan+12   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $47
@@ -12003,7 +12003,7 @@ off_1AF88A:     dc.w off_13D0           ; DATA XREF: ROM:0000BEDE   o
                 dc.w $EA00
                 dc.l off_1AF88A
 off_1AF8B8:     dc.w off_13DC           ; DATA XREF: ROM:0000BED6   o
-                                        ; sub_257748+15A   o
+                                        ; collision_with_snot+15A   o
                 dc.w $ED01
                 dc.w $FD72
                 dc.w 1
@@ -12021,7 +12021,7 @@ off_1AF8B8:     dc.w off_13DC           ; DATA XREF: ROM:0000BED6   o
                 dc.w $FB00
                 dc.l oksub_258254
 off_1AF8DC:     dc.w off_13DC           ; DATA XREF: ROM:0000BEE2   o
-                                        ; sub_257748+16C   o
+                                        ; collision_with_snot+16C   o
                 dc.w $ED01
                 dc.w $FD72
                 dc.w 7
@@ -12441,8 +12441,8 @@ word_1AFC00:    dc.w $A                 ; DATA XREF: ROM:001A3274   o
                 dc.w off_1CB4
                 dc.w $EA00
                 dc.l off_1AFBFA
-off_1AFC34:     dc.w off_198C           ; DATA XREF: sub_25279A+6C   o
-                                        ; sub_25816A+5A   o
+off_1AFC34:     dc.w off_198C           ; DATA XREF: collision_with_butt_crab_32+6C   o
+                                        ; collision_with_water_monster+5A   o
                 dc.w $ED01
                 dc.w $FD72
                 dc.w $A
@@ -12656,7 +12656,7 @@ off_1AFD00:     dc.w off_1840           ; DATA XREF: ROM:001AD1C4   o
                 dc.w $A
                 dc.l byte_1AC6B8
                 dc.w $EC01
-off_1AFDE4:     dc.w off_1B44           ; DATA XREF: sub_2588E6+CC   o
+off_1AFDE4:     dc.w off_1B44           ; DATA XREF: collision_with_asteroid+CC   o
                 dc.w off_1B48
                 dc.w off_1B48
                 dc.w off_1B4C
@@ -12675,7 +12675,7 @@ off_1AFDE4:     dc.w off_1B44           ; DATA XREF: sub_2588E6+CC   o
                 dc.w $FC9E
                 dc.w 0
                 dc.w $EC01
-off_1AFE0A:     dc.w off_1B5C           ; DATA XREF: sub_2588E6+EC   o
+off_1AFE0A:     dc.w off_1B5C           ; DATA XREF: collision_with_asteroid+EC   o
                 dc.w off_1B60
                 dc.w off_1B60
                 dc.w off_1B64
@@ -12716,7 +12716,7 @@ off_1AFE30:     dc.w off_1CB4           ; DATA XREF: ROM:001AD340   o
                 dc.w off_1CA0
                 dc.w off_1C9C
                 dc.w $F800
-off_1AFE5A:     dc.w off_1108           ; DATA XREF: sub_253706+454   o
+off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $4D
@@ -12842,7 +12842,7 @@ off_1AFE5A:     dc.w off_1108           ; DATA XREF: sub_253706+454   o
                 dc.w $A00
                 dc.w $EA00
                 dc.l off_1AFE30
-off_1AFF76:     dc.w off_17A4           ; DATA XREF: sub_253706+28A   o
+off_1AFF76:     dc.w off_17A4           ; DATA XREF: collision_with_diamond+28A   o
                 dc.w off_17A4
                 dc.w $ED01
                 dc.w $FDEA
@@ -13560,7 +13560,7 @@ anim_funicular: dc.w off_25C0           ; DATA XREF: ROM:stru_25AA6C   o
 off_1B0516:     dc.w off_25D4           ; DATA XREF: spawn_funicular_straight+10   o
                 dc.w $EC01
 off_1B051A:     dc.w off_25C0           ; DATA XREF: ROM:001B0522   o
-                                        ; sub_2530EE+EE   o
+                                        ; collision_with_funicular+EE   o
                 dc.w off_25C4
                 dc.w off_25C8
                 dc.w $EA00
@@ -13579,7 +13579,7 @@ off_1B0534:     dc.w off_25D8           ; DATA XREF: ROM:0000643E   o
 off_1B0538:     dc.w off_25DC           ; DATA XREF: ROM:00006442   o
                                         ; ROM:00006446   o ...
                 dc.w $EC01
-off_1B053C:     dc.w off_25A0           ; DATA XREF: sub_253706+CC   o
+off_1B053C:     dc.w off_25A0           ; DATA XREF: collision_with_diamond+CC   o
                 dc.w $F345
                 dc.w $ED14
                 dc.b   0,$48,  0,  0,  0,  0,$ED,$11,  0,$47,  0,$2B
@@ -14831,7 +14831,7 @@ off_1B1082:     dc.w off_2374           ; DATA XREF: sub_257B10+A4   o
                 dc.w $FF48
                 dc.w 2
                 dc.w $EC01
-off_1B10AA:     dc.w off_2380           ; DATA XREF: sub_257748+25A   o
+off_1B10AA:     dc.w off_2380           ; DATA XREF: collision_with_snot+25A   o
                 dc.w $ED11
                 dc.w $35
                 dc.w 0
@@ -14865,7 +14865,7 @@ off_1B10AA:     dc.w off_2380           ; DATA XREF: sub_257748+25A   o
                 dc.w off_2380
                 dc.w $EA00
                 dc.l off_1B1014
-off_1B1108:     dc.w off_2380           ; DATA XREF: sub_257748:loc_2579B0   o
+off_1B1108:     dc.w off_2380           ; DATA XREF: collision_with_snot:loc_2579B0   o
                 dc.w $ED11
                 dc.w $35
                 dc.w $FF
@@ -14946,7 +14946,7 @@ off_1B1166:     dc.w off_23D8           ; DATA XREF: snot_collided_with_walls+84
                 dc.w $FF4A
                 dc.w $FF
                 dc.w $EC01
-off_1B11E8:     dc.w off_23E4           ; DATA XREF: sub_257748+B8   o
+off_1B11E8:     dc.w off_23E4           ; DATA XREF: collision_with_snot+B8   o
                 dc.w off_23E4
                 dc.w $F500
                 dc.l stru_25AFC4
@@ -15076,7 +15076,7 @@ anim_machine:   dc.w off_2C7C           ; DATA XREF: ROM:001B131E   o
                 dc.w off_2C84
                 dc.w $EA00
                 dc.l anim_machine
-off_1B1322:     dc.w off_312C           ; DATA XREF: sub_253706+19C   o
+off_1B1322:     dc.w off_312C           ; DATA XREF: collision_with_diamond+19C   o
                 dc.w $F32E
                 dc.w $ED12
                 dc.w $48
@@ -15123,7 +15123,7 @@ anim_counterpoise:dc.w off_3110         ; DATA XREF: ROM:stru_25B144   o
                 dc.w $47
                 dc.w 1
                 dc.w $EC01
-off_1B1384:     dc.w off_3114           ; DATA XREF: sub_253706+186   o
+off_1B1384:     dc.w off_3114           ; DATA XREF: collision_with_diamond+186   o
                 dc.w $F32E
                 dc.w $ED12
                 dc.w $48
@@ -15215,7 +15215,7 @@ anim_ufo:       dc.w off_2CC8           ; DATA XREF: ROM:001B1446   o
                 dc.w $EA00
                 dc.l anim_ufo
 off_1B144A:     dc.w off_2CC8           ; DATA XREF: ROM:001B1474   o
-                                        ; sub_253706+55C   o
+                                        ; collision_with_diamond+55C   o
                 dc.w $ED01
                 dc.w $FD4D
                 dc.w $14
@@ -15841,14 +15841,14 @@ word_1B19EE:    dc.w $EA00              ; DATA XREF: ROM:001B196C   o
 word_1B19F4:    dc.w $EA00              ; DATA XREF: ROM:001B1972   o
                 dc.l word_1B18EC
 off_1B19FA:     dc.w off_200C           ; DATA XREF: ROM:001B18DA   o
-                                        ; sub_25276E+4   o
+                                        ; collision_with_butt_crab_3+4   o
                 dc.w $FB00
                 dc.l oksub_249526
                 dc.w off_200C
                 dc.w off_2008
                 dc.w off_2008
                 dc.w off_2004
-off_1B1A0A:     dc.w off_1FE4           ; DATA XREF: sub_252780+C   o
+off_1B1A0A:     dc.w off_1FE4           ; DATA XREF: collision_with_butt_crab+C   o
                 dc.w off_1FE8
                 dc.w off_1FE8
                 dc.w off_1FEC
@@ -19161,7 +19161,7 @@ off_1B359A:     dc.w off_1ED4           ; DATA XREF: fire_to_dog+24   o
                 dc.w off_1ED8
                 dc.w $EA00
                 dc.l anim_dog
-anim_rotate_egg:dc.w off_1EA8           ; DATA XREF: sub_2546BE+22   o
+anim_rotate_egg:dc.w off_1EA8           ; DATA XREF: spawn_dog_eye+22   o
                                         ; ROM:stru_25AB74   o
                 dc.w $F500
                 dc.l stru_25AB74
@@ -19185,7 +19185,7 @@ off_1B35D2:     dc.w off_1E9C           ; DATA XREF: ROM:001B35BC   o
                 dc.w off_1EA8
                 dc.w $EA00
                 dc.l off_1B35D2
-off_1B35E8:     dc.w off_1EB8           ; DATA XREF: sub_25470E+22   o
+off_1B35E8:     dc.w off_1EB8           ; DATA XREF: spawn_dog_bone+22   o
                 dc.w $F500
                 dc.l stru_25AB74
                 dc.w 0
@@ -19301,7 +19301,7 @@ off_1B36DC:     dc.w off_1EF4           ; DATA XREF: ROM:001B36E2   o
                 dc.w off_1EDC
                 dc.w $EA00
                 dc.l off_1B3620
-off_1B36F6:     dc.w off_1EBC           ; DATA XREF: sub_252D0E+22   o
+off_1B36F6:     dc.w off_1EBC           ; DATA XREF: collision_with_dog+22   o
                 dc.w $F33E
                 dc.w $FB00
                 dc.l oksub_2495DE
@@ -20055,7 +20055,7 @@ off_1B3D28:     dc.w off_F04            ; DATA XREF: ROM:001ACF5C   o
                 dc.w off_F10
                 dc.w off_F14
                 dc.w $EC01
-off_1B3D52:     dc.w off_10D4           ; DATA XREF: sub_259106+14   o
+off_1B3D52:     dc.w off_10D4           ; DATA XREF: collision_with_evil_cat_soul+14   o
                 dc.w $EE03
                 dc.w off_10D4
                 dc.w $ED11
@@ -20082,7 +20082,7 @@ off_1B3D52:     dc.w off_10D4           ; DATA XREF: sub_259106+14   o
                 dc.w 0
                 dc.w $EA00
                 dc.l off_1B3D28
-off_1B3D8A:     dc.w off_193C           ; DATA XREF: sub_259106:loc_259162   o
+off_1B3D8A:     dc.w off_193C           ; DATA XREF: collision_with_evil_cat_soul:loc_259162   o
                 dc.w $F36F
                 dc.w off_1940
                 dc.w off_1944
@@ -20961,7 +20961,7 @@ word_1B44AA:    dc.w $F700              ; DATA XREF: ROM:001B44DE   o
                 dc.l byte_1A4670
                 dc.w $EA00
                 dc.l word_1B44AA
-off_1B44E2:     dc.w off_2634           ; DATA XREF: sub_2525DE+2C   o
+off_1B44E2:     dc.w off_2634           ; DATA XREF: collision_with_puppy_evil+2C   o
                 dc.w $ED01
                 dc.w $FDEA
                 dc.w $4F
@@ -21103,7 +21103,7 @@ off_1B45E0:     dc.w off_26C0           ; DATA XREF: ROM:001B45E6   o
                 dc.l off_1B42A6
 anim_unknown_14:dc.w off_ED8            ; DATA XREF: ROM:object_sphere_electro   o
                 dc.w $EC01
-off_1B4610:     dc.w off_ED8            ; DATA XREF: sub_253012+14   o
+off_1B4610:     dc.w off_ED8            ; DATA XREF: collision_with_sphere_electro+14   o
                 dc.w $EEBB
                 dc.w off_ED8
                 dc.w $ED11
@@ -22360,7 +22360,7 @@ off_1B5452:     dc.w off_D90            ; DATA XREF: fire_to_fox+2A   o
                 dc.w $F3CF
                 dc.w $EA00
                 dc.l anim_fox
-off_1B5464:     dc.w off_D90            ; DATA XREF: sub_253706+448   o
+off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448   o
                 dc.w off_D90
                 dc.w off_D94
                 dc.w off_D94
@@ -22515,7 +22515,7 @@ off_1B5574:     dc.w off_32FC           ; DATA XREF: ROM:001B559A   o
                 dc.w off_3308
                 dc.w $EA00
                 dc.l off_1B5574
-off_1B559E:     dc.w off_330C           ; DATA XREF: sub_253706+3BC   o
+off_1B559E:     dc.w off_330C           ; DATA XREF: collision_with_diamond+3BC   o
                 dc.w $ED11
                 dc.w $47
                 dc.w 2
@@ -23920,7 +23920,7 @@ anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                 dc.w off_7B0
                 dc.w $EA00
                 dc.l anim_bob_goldfish
-off_1B615E:     dc.w off_7C0            ; DATA XREF: sub_25400C+4   o
+off_1B615E:     dc.w off_7C0            ; DATA XREF: collision_with_fish_boss+4   o
                 dc.w off_7C0
                 dc.w off_7C4
                 dc.w off_7C4
@@ -24061,7 +24061,7 @@ off_1B625C:     dc.w off_20A8           ; DATA XREF: ROM:001B6234   o
                 dc.w off_20B0
                 dc.w $EA00
                 dc.l word_1B6238
-off_1B629E:     dc.w off_1244           ; DATA XREF: sub_257748+6C   o
+off_1B629E:     dc.w off_1244           ; DATA XREF: collision_with_snot+6C   o
                 dc.w off_1244
                 dc.w off_1248
                 dc.w off_1248
@@ -24071,7 +24071,7 @@ off_1B629E:     dc.w off_1244           ; DATA XREF: sub_257748+6C   o
                 dc.w off_1250
                 dc.w $FB00
                 dc.l oksub_258254
-off_1B62B4:     dc.w off_1254           ; DATA XREF: sub_257748:loc_2577C0   o
+off_1B62B4:     dc.w off_1254           ; DATA XREF: collision_with_snot:loc_2577C0   o
                 dc.w off_1254
                 dc.w off_1258
                 dc.w off_1258
@@ -26334,7 +26334,7 @@ loc_246ED8:                             ; CODE XREF: sub_246EB4+8   j
                 move.b  #$10,(jim_state).l
                 move.l  #off_1AF2E6,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                bsr.w   sub_24B000
+                bsr.w   do_damage_from_enemy
 loc_246EFE:                             ; CODE XREF: sub_246EB4+2C   j
                 move.w  #$600,(jim_delta_x_speed).l
                 move.w  #$94,d7
@@ -26355,7 +26355,7 @@ loc_246F38:                             ; CODE XREF: sub_246EB4+6A   j
                 move.b  #$10,(jim_state).l
                 move.l  #off_1AF2E6,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                bsr.w   sub_24B000
+                bsr.w   do_damage_from_enemy
 loc_246F5E:                             ; CODE XREF: sub_246EB4+8C   j
                 move.w  #$FA00,(jim_delta_x_speed).l
                 move.w  #$27A,d7
@@ -26446,26 +26446,26 @@ loc_247046:                             ; CODE XREF: sub_247022+10   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_247050:                             ; CODE XREF: sub_247022+2A   j
-                tst.w   (word_FFFE90).l
+                tst.w   (super_bubble_timer).l
                 bne.s   loc_247090
                 bsr.w   sub_24D6B6
                 bne.w   loc_247090
-                tst.b   (byte_FFFF61).l
+                tst.b   (super_bubble_count).l
                 beq.s   loc_247090
-                subq.b  #1,(byte_FFFF61).l
+                subq.b  #1,(super_bubble_count).l
                 bsr.w   sub_24AD06
                 bne.s   loc_247090
                 lea     (stru_25B7A4).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #3,$46(a5)
-                move.w  #$F0,(word_FFFE90).l
+                move.w  #$F0,(super_bubble_timer).l
                 bra.w   loc_24709E
 ; ---------------------------------------------------------------------------
 loc_247090:                             ; CODE XREF: sub_247022+34   j
                                         ; sub_247022+3A   j ...
-                tst.w   (word_FFFE90).l
+                tst.w   (super_bubble_timer).l
                 beq.s   loc_24709E
-                subq.w  #1,(word_FFFE90).l
+                subq.w  #1,(super_bubble_timer).l
 loc_24709E:                             ; CODE XREF: sub_247022+6A   j
                                         ; sub_247022+74   j
                 move.b  (byte_FFA6CF).l,d0
@@ -27976,7 +27976,7 @@ sub_24847E:                             ; CODE XREF: oksub_2456C8+16E   p
                 andi.w  #$F0FF,d1
                 ori.w   #$500,d1
                 clr.w   d3
-                move.b  (byte_FFFF61).l,d3
+                move.b  (super_bubble_count).l,d3
                 beq.s   loc_2485A6
                 move.w  #$94,(a1)+
                 move.w  d1,(a1)+
@@ -28000,7 +28000,7 @@ sub_24847E:                             ; CODE XREF: oksub_2456C8+16E   p
                 addq.b  #1,d1
 loc_2485A6:                             ; CODE XREF: sub_24847E+E4   j
                 clr.l   d3
-                move.b  (byte_FFFF64).l,d3
+                move.b  (bubble_count).l,d3
                 add.b   d3,d3
                 add.w   d3,d3
                 lea     (word_70DA).w,a2
@@ -29591,7 +29591,7 @@ oksub_2495A8:                           ; DATA XREF: ROM:001B347A   o
 ; End of function oksub_2495A8
 
 
-oksub_2495B0:                           ; CODE XREF: sub_25400C+1C   p
+oksub_2495B0:                           ; CODE XREF: collision_with_fish_boss+1C   p
                                         ; box_on_magnet+72   p ...
                 bset    #0,6(a1)
                 rts
@@ -31991,19 +31991,19 @@ loc_24AFF6:                             ; CODE XREF: sub_24AF90+46   j
 ; End of function sub_24AF90
 
 
-sub_24B000:                             ; CODE XREF: sub_246EB4+46   p
+do_damage_from_enemy:                             ; CODE XREF: sub_246EB4+46   p
                                         ; sub_246EB4+A6   p ...
                 move.l  d0,-(sp)
                 move.w  #$A,d0
                 bsr.w   damage_from_enemy ; Повреждения от врагов (но не все)
                 move.l  (sp)+,d0
                 rts
-; End of function sub_24B000
+; End of function do_damage_from_enemy
 
 
 ; Повреждения от врагов (но не все)
-damage_from_enemy:                      ; CODE XREF: sub_24B000+6   p
-                                        ; sub_2526A4+6   p ...
+damage_from_enemy:                      ; CODE XREF: do_damage_from_enemy+6   p
+                                        ; collision_with_green_goose_caterpillar+6   p ...
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_24B122
                 tst.b   (level_finish_enable).l
@@ -32075,8 +32075,8 @@ locret_24B122:                          ; CODE XREF: damage_from_enemy+6   j
 ; End of function damage_from_enemy
 
 
-sub_24B124:                             ; CODE XREF: sub_253054+10   p
-                                        ; sub_25306A+1A   p ...
+sub_24B124:                             ; CODE XREF: collision_with_sphere_electro_zap+10   p
+                                        ; collision_with_electrical_charge+1A   p ...
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_24B1E8
                 cmpi.b  #$3E,(jim_state).l ; '>'
@@ -33255,7 +33255,7 @@ loc_24BFFE:                             ; CODE XREF: sub_24BEDC+82   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24C070:                             ; CODE XREF: sub_24BEDC+178   j
-                tst.w   (word_FFFE90).l
+                tst.w   (super_bubble_timer).l
                 beq.w   loc_24C0A8
                 lea     (byte_FFA728).l,a1
                 move.b  #$86,(a1)
@@ -36691,7 +36691,7 @@ activity_tube_air_up:                             ; DATA XREF: ROM:000056DC   o
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_24E6C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_44).w
+                pea     ($44).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -38160,10 +38160,10 @@ loc_24FA40:                             ; CODE XREF: sub_24F99E+8C   j
                 cmpi.w  #$5C0,d0
                 bcs.s   loc_24FA8A
                 move.b  #1,(byte_FFFBF1).l
-                cmpi.b  #$32,(byte_FFFF64).l ; '2'
+                cmpi.b  #$32,(bubble_count).l ; '2'
                 bcs.s   loc_24FA8A
                 addq.b  #1,(byte_FFFBF1).l
-                cmpi.b  #$3C,(byte_FFFF64).l ; '<'
+                cmpi.b  #$3C,(bubble_count).l ; '<'
                 bcs.s   loc_24FA8A
                 addq.b  #1,(byte_FFFBF1).l
 loc_24FA8A:                             ; CODE XREF: sub_24F99E+BC   j
@@ -38854,7 +38854,7 @@ loc_2502E0:                             ; CODE XREF: sub_250288+A   j
                 move.w  (camera_x).l,(word_FFFD56).l
                 move.w  (camera_y).l,(word_FFFD58).l
                 st      (camera_disable_value).l
-                clr.b   (byte_FFFF64).l
+                clr.b   (bubble_count).l
                 move.w  #$8B06,(VDP_CTRL).l
                 lea     (byte_1B728C).l,a0
                 lea     (unk_FFFEFA).l,a1
@@ -38905,7 +38905,7 @@ loc_2503F0:                             ; CODE XREF: sub_25035A+98   j
                 dbf     d1,loc_2503F0
 loc_2503F6:                             ; CODE XREF: sub_25035A+56   j
                 clr.w   (word_FFFEF0).l
-                clr.b   (byte_FFFF61).l
+                clr.b   (super_bubble_count).l
                 jsr     (sub_250436).l
                 clr.w   (word_FFFE9C).l
                 jsr     sub_24AD06(pc)
@@ -41740,31 +41740,31 @@ locret_2524A0:                          ; DATA XREF: ROM:00003A10   o
 ; End of function fire_to_frog
 
 
-sub_2524A2:                             ; DATA XREF: ROM:000036E8   o
+collision_with_frog:                             ; DATA XREF: ROM:000036E8   o
                                         ; ROM:000036EC   o
-                bsr.w   sub_24B000
+                bsr.w   do_damage_from_enemy
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_2524BC
                 move.w  #$400,(jim_delta_x_speed).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_2524BC:                             ; CODE XREF: sub_2524A2+E   j
+loc_2524BC:                             ; CODE XREF: collision_with_frog+E   j
                 move.w  #$FC00,(jim_delta_x_speed).l
                 rts
-; End of function sub_2524A2
+; End of function collision_with_frog
 
 
-sub_2524C6:                             ; DATA XREF: ROM:000037B0   o
-                jsr     sub_24B000(pc)
+collision_with_mechanism:                             ; DATA XREF: ROM:000037B0   o
+                jsr     do_damage_from_enemy(pc)
                 subq.w  #2,(jim_collider_x).l
                 move.w  #$FF00,(jim_delta_x_speed).l
                 rts
-; End of function sub_2524C6
+; End of function collision_with_mechanism
 
 
-sub_2524DA:                             ; DATA XREF: ROM:00003630   o
-                addq.b  #1,(byte_FFFF64).l
+collision_with_bubble:                             ; DATA XREF: ROM:00003630   o
+                addq.b  #1,(bubble_count).l
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
                 tst.b   (sound_fx_enable).l
@@ -41778,9 +41778,9 @@ sub_2524DA:                             ; DATA XREF: ROM:00003630   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_252516:                          ; CODE XREF: sub_2524DA+12   j
+locret_252516:                          ; CODE XREF: collision_with_bubble+12   j
                 rts
-; End of function sub_2524DA
+; End of function collision_with_bubble
 
 
 oksub_252518:                           ; DATA XREF: ROM:001A4FEE   o
@@ -41833,7 +41833,7 @@ locret_252594:                          ; DATA XREF: ROM:0000363C   o
 ; End of function sub_25258C
 
 
-sub_252596:                             ; DATA XREF: ROM:000036C4   o
+collision_with_machine:                             ; DATA XREF: ROM:000036C4   o
                 cmpi.b  #$3E,(jim_state).l ; '>'
                 beq.w   locret_2525DC
                 tst.b   (invincibility_timer).l
@@ -41843,23 +41843,23 @@ sub_252596:                             ; DATA XREF: ROM:000036C4   o
                 cmp.w   2(a1),d0
                 bcs.s   loc_2525C6
                 neg.w   (jim_delta_x_speed).l
-loc_2525C6:                             ; CODE XREF: sub_252596+28   j
+loc_2525C6:                             ; CODE XREF: collision_with_machine+28   j
                 clr.w   (jim_walking_speed).l
                 clr.b   (jim_walking_direction).l
                 clr.b   (is_jim_jumping).l
-                jsr     sub_24B000(pc)
-locret_2525DC:                          ; CODE XREF: sub_252596+8   j
-                                        ; sub_252596+12   j
+                jsr     do_damage_from_enemy(pc)
+locret_2525DC:                          ; CODE XREF: collision_with_machine+8   j
+                                        ; collision_with_machine+12   j
                 rts
-; End of function sub_252596
+; End of function collision_with_machine
 
 
-sub_2525DE:                             ; DATA XREF: ROM:0000378C   o
+collision_with_puppy_evil:                             ; DATA XREF: ROM:0000378C   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_252650
                 cmpi.b  #$C,(byte_FFFE08).l
                 bne.s   locret_252650
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 clr.b   (invincibility_timer).l
                 move.w  (jim_x).l,2(a1)
                 move.w  (jim_y).l,4(a1)
@@ -41873,34 +41873,34 @@ sub_2525DE:                             ; DATA XREF: ROM:0000378C   o
                 clr.w   (jim_y_speed).l
                 move.b  #$4F,(jim_state).l ; 'O'
                 st      (is_jim_blocked_by_enemy).l ; Злой щенок тащит в зубах (For petes sake)
-locret_252650:                          ; CODE XREF: sub_2525DE+6   j
-                                        ; sub_2525DE+10   j
+locret_252650:                          ; CODE XREF: collision_with_puppy_evil+6   j
+                                        ; collision_with_puppy_evil+10   j
                 rts
-; End of function sub_2525DE
+; End of function collision_with_puppy_evil
 
 
-sub_252652:                             ; DATA XREF: ROM:000036C0   o
+collision_with_meteor_3:                             ; DATA XREF: ROM:000036C0   o
                 jsr     sub_24B3CE(pc)
-                bra.s   loc_252660
+                bra.s   collision_with_meteor
 ; ---------------------------------------------------------------------------
-loc_252658:                             ; DATA XREF: ROM:000036BC   o
+collision_with_meteor_2:                             ; DATA XREF: ROM:000036BC   o
                 move.w  #5,d0
                 jsr     sub_24B3DC(pc)
-loc_252660:                             ; CODE XREF: sub_252652+4   j
+collision_with_meteor:                             ; CODE XREF: collision_with_meteor_3+4   j
                                         ; DATA XREF: ROM:00003790   o
                 eori.b  #$FF,9(a1)
                 move.b  #$86,(a1)
                 rts
-; End of function sub_252652
+; End of function collision_with_meteor_3
 
 
-sub_25266C:                             ; DATA XREF: ROM:00003644   o
+collision_with_bee:                             ; DATA XREF: ROM:00003644   o
                 jsr     (sub_25449C).l
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_25266C
+; End of function collision_with_bee
 
 
 nullsub_14:                             ; DATA XREF: ROM:00003648   o
@@ -41908,30 +41908,30 @@ nullsub_14:                             ; DATA XREF: ROM:00003648   o
 ; End of function nullsub_14
 
 
-sub_252680:                             ; DATA XREF: ROM:00003654   o
-                jsr     sub_24B000(pc)
+collision_with_chicken_boss:                             ; DATA XREF: ROM:00003654   o
+                jsr     do_damage_from_enemy(pc)
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_25269A
                 move.w  #$400,(jim_delta_x_speed).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_25269A:                             ; CODE XREF: sub_252680+E   j
+loc_25269A:                             ; CODE XREF: collision_with_chicken_boss+E   j
                 move.w  #$FC00,(jim_delta_x_speed).l
                 rts
-; End of function sub_252680
+; End of function collision_with_chicken_boss
 
 
-sub_2526A4:                             ; DATA XREF: ROM:00003658   o
+collision_with_green_goose_caterpillar:                             ; DATA XREF: ROM:00003658   o
                 move.l  d0,-(sp)
                 move.w  #5,d0
                 bsr.w   damage_from_enemy ; Повреждения от врагов (но не все)
                 move.l  (sp)+,d0
                 rts
-; End of function sub_2526A4
+; End of function collision_with_green_goose_caterpillar
 
 
-sub_2526B2:                             ; DATA XREF: ROM:00003788   o
+collision_with_space_suit:                             ; DATA XREF: ROM:00003788   o
                 cmpi.b  #$47,(jim_state).l ; 'G'
                 beq.w   locret_25275A
                 tst.b   (naked_worm_enable).l
@@ -41944,12 +41944,12 @@ sub_2526B2:                             ; DATA XREF: ROM:00003788   o
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2526FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_54).w
+                pea     ($54).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2526FE:                             ; CODE XREF: sub_2526B2+30   j
+loc_2526FE:                             ; CODE XREF: collision_with_space_suit+30   j
                 clr.b   (naked_worm_enable).l
                 move.l  #anim_jim_idle,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
@@ -41965,10 +41965,10 @@ loc_2526FE:                             ; CODE XREF: sub_2526B2+30   j
                 sub.w   (camera_y).l,d7
                 move.w  d7,(jim_collider_y).l
                 move.w  #$190,(view_y_shift).l
-locret_25275A:                          ; CODE XREF: sub_2526B2+8   j
-                                        ; sub_2526B2+12   j ...
+locret_25275A:                          ; CODE XREF: collision_with_space_suit+8   j
+                                        ; collision_with_space_suit+12   j ...
                 rts
-; End of function sub_2526B2
+; End of function collision_with_space_suit
 
 
 sub_25275C:
@@ -41978,32 +41978,32 @@ sub_25275C:
 ; End of function sub_25275C
 
 
-sub_252768:                             ; DATA XREF: ROM:00003664   o
-                jsr     sub_24B000(pc)
+collision_with_brain:                             ; DATA XREF: ROM:00003664   o
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252768
+; End of function collision_with_brain
 
 
-sub_25276E:                             ; DATA XREF: ROM:00003794   o
+collision_with_butt_crab_3:                             ; DATA XREF: ROM:00003794   o
                 move.b  #$86,(a1)
                 move.l  #off_1B19FA,$20(a1)
                 clr.b   $37(a1)
                 rts
-; End of function sub_25276E
+; End of function collision_with_butt_crab_3
 
 
-sub_252780:                             ; DATA XREF: ROM:00003668   o
+collision_with_butt_crab:                             ; DATA XREF: ROM:00003668   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_252798
                 move.b  #$86,(a1)
                 move.l  #off_1B1A0A,$20(a1)
                 clr.b   ($37).w
-locret_252798:                          ; CODE XREF: sub_252780+6   j
+locret_252798:                          ; CODE XREF: collision_with_butt_crab+6   j
                 rts
-; End of function sub_252780
+; End of function collision_with_butt_crab
 
 
-sub_25279A:                             ; DATA XREF: ROM:0000366C   o
+collision_with_butt_crab_32:                             ; DATA XREF: ROM:0000366C   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_25286C
                 move.b  #$86,(a1)
@@ -42015,7 +42015,7 @@ sub_25279A:                             ; DATA XREF: ROM:0000366C   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2527CA:                             ; CODE XREF: sub_25279A+14   j
+loc_2527CA:                             ; CODE XREF: collision_with_butt_crab_32+14   j
                 st      (is_jim_blocked_by_enemy).l
                 move.w  (camera_x).l,(word_FFFD56).l
                 move.w  (camera_y).l,(word_FFFD58).l
@@ -42041,23 +42041,23 @@ loc_2527CA:                             ; CODE XREF: sub_25279A+14   j
                 move.w  d7,4(a5)
                 move.w  #$FC00,$1A(a5)
                 move.w  #$500,$18(a5)
-locret_25286C:                          ; CODE XREF: sub_25279A+6   j
-                                        ; sub_25279A+A4   j
+locret_25286C:                          ; CODE XREF: collision_with_butt_crab_32+6   j
+                                        ; collision_with_butt_crab_32+A4   j
                 rts
-; End of function sub_25279A
+; End of function collision_with_butt_crab_32
 
 
-sub_25286E:                             ; DATA XREF: ROM:00003798   o
+collision_with_fire_trigger:                             ; DATA XREF: ROM:00003798   o
                 st      $50(a1)
                 rts
-; End of function sub_25286E
+; End of function collision_with_fire_trigger
 
 
-sub_252874:                             ; DATA XREF: ROM:0000379C   o
+collision_with_fire_2:                             ; DATA XREF: ROM:0000379C   o
                                         ; ROM:000037A0   o
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252874
+; End of function collision_with_fire_2
 
 
 nullsub_31:                             ; DATA XREF: ROM:00003670   o
@@ -42076,7 +42076,7 @@ nullsub_32:                             ; DATA XREF: ROM:0000365C   o
 ; End of function nullsub_32
 
 
-sub_252880:                             ; DATA XREF: ROM:00003684   o
+collision_with_flying_bomb:                             ; DATA XREF: ROM:00003684   o
                 tst.b   (byte_FFFD47).l
                 bne.w   locret_25290C
                 jsr     sub_24AE7A(pc)
@@ -42088,37 +42088,37 @@ sub_252880:                             ; DATA XREF: ROM:00003684   o
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2528C4
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_48).w
+                pea     ($48).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2528C4:                             ; CODE XREF: sub_252880+28   j
+loc_2528C4:                             ; CODE XREF: collision_with_flying_bomb+28   j
                 addq.w  #6,2(a5)
                 addi.w  #$5A,4(a5) ; 'Z'
                 bra.s   loc_252908
 ; ---------------------------------------------------------------------------
-loc_2528D0:                             ; CODE XREF: sub_252880+14   j
+loc_2528D0:                             ; CODE XREF: collision_with_flying_bomb+14   j
                 jsr     (oksub_2548E8).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2528F8
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_48).w
+                pea     ($48).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2528F8:                             ; CODE XREF: sub_252880+5C   j
+loc_2528F8:                             ; CODE XREF: collision_with_flying_bomb+5C   j
                 move.l  #off_1AF2E6,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-loc_252908:                             ; CODE XREF: sub_252880+4E   j
-                jsr     sub_24B000(pc)
-locret_25290C:                          ; CODE XREF: sub_252880+6   j
+loc_252908:                             ; CODE XREF: collision_with_flying_bomb+4E   j
+                jsr     do_damage_from_enemy(pc)
+locret_25290C:                          ; CODE XREF: collision_with_flying_bomb+6   j
                 rts
-; End of function sub_252880
+; End of function collision_with_flying_bomb
 
 
-sub_25290E:                             ; DATA XREF: ROM:00003680   o
+collision_with_chicken_boss_flying:                             ; DATA XREF: ROM:00003680   o
                 movea.l $14(a1),a4
                 clr.l   d7
                 move.b  2(a4),d7
@@ -42143,14 +42143,14 @@ sub_25290E:                             ; DATA XREF: ROM:00003680   o
                 move.w  d7,(jim_delta_x_speed).l
                 bra.s   loc_252966
 ; ---------------------------------------------------------------------------
-loc_252954:                             ; CODE XREF: sub_25290E+32   j
+loc_252954:                             ; CODE XREF: collision_with_chicken_boss_flying+32   j
                 neg.w   d7
                 mulu.w  #$28,d7 ; '('
                 move.w  d7,(jim_delta_x_speed).l
                 neg.w   d7
                 move.w  d7,$18(a1)
-loc_252966:                             ; CODE XREF: sub_25290E+30   j
-                                        ; sub_25290E+44   j
+loc_252966:                             ; CODE XREF: collision_with_chicken_boss_flying+30   j
+                                        ; collision_with_chicken_boss_flying+44   j
                 clr.l   d7
                 move.b  5(a4),d7
                 clr.w   d5
@@ -42174,41 +42174,41 @@ loc_252966:                             ; CODE XREF: sub_25290E+30   j
                 move.w  d7,(jim_y_speed).l
                 bra.s   loc_2529BA
 ; ---------------------------------------------------------------------------
-loc_2529A8:                             ; CODE XREF: sub_25290E+86   j
+loc_2529A8:                             ; CODE XREF: collision_with_chicken_boss_flying+86   j
                 neg.w   d7
                 mulu.w  #$1E,d7
                 move.w  d7,(jim_y_speed).l
                 neg.w   d7
                 move.w  d7,$1A(a1)
-loc_2529BA:                             ; CODE XREF: sub_25290E+84   j
-                                        ; sub_25290E+98   j
+loc_2529BA:                             ; CODE XREF: collision_with_chicken_boss_flying+84   j
+                                        ; collision_with_chicken_boss_flying+98   j
                 move.w  #5,d0
                 jsr     damage_from_enemy(pc) ; Повреждения от врагов (но не все)
                 move.l  #off_1AF2E6,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 rts
-; End of function sub_25290E
+; End of function collision_with_chicken_boss_flying
 
 
-sub_2529D4:                             ; DATA XREF: ROM:00003650   o
-                jsr     sub_24B000(pc)
+collision_with_dark_mini_monster:                             ; DATA XREF: ROM:00003650   o
+                jsr     do_damage_from_enemy(pc)
                 move.b  #$86,(a1)
                 rts
-; End of function sub_2529D4
+; End of function collision_with_dark_mini_monster
 
 
-sub_2529DE:                             ; DATA XREF: ROM:0000364C   o
+collision_with_green_goose:                             ; DATA XREF: ROM:0000364C   o
                 tst.w   (jim_delta_x_speed).l
                 bne.s   loc_2529EC
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2529EC:                             ; CODE XREF: sub_2529DE+6   j
+loc_2529EC:                             ; CODE XREF: collision_with_green_goose+6   j
                 jsr     (sub_25449C).l
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
                 rts
-; End of function sub_2529DE
+; End of function collision_with_green_goose
 
 
 sub_2529FA:                             ; DATA XREF: ROM:0000377C   o
@@ -42218,13 +42218,13 @@ sub_2529FA:                             ; DATA XREF: ROM:0000377C   o
 ; End of function sub_2529FA
 
 
-sub_252A06:                             ; DATA XREF: ROM:00003780   o
-                jsr     sub_24B000(pc)
+collision_with_fire:                             ; DATA XREF: ROM:00003780   o
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252A06
+; End of function collision_with_fire
 
 
-sub_252A0C:                             ; DATA XREF: ROM:00003784   o
+collision_with_fan:                             ; DATA XREF: ROM:00003784   o
                 cmpi.b  #$47,(jim_state).l ; 'G'
                 beq.w   locret_252AD2
                 st      (is_jim_blocked_by_enemy).l
@@ -42248,12 +42248,12 @@ sub_252A0C:                             ; DATA XREF: ROM:00003784   o
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_252AA4
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_54).w
+                pea     ($54).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_252AA4:                             ; CODE XREF: sub_252A0C+7C   j
+loc_252AA4:                             ; CODE XREF: collision_with_fan+7C   j
                 jsr     sub_24AD4E(pc)
                 bne.s   locret_252AD2
                 lea     (object_spacesuit).l,a6
@@ -42263,10 +42263,10 @@ loc_252AA4:                             ; CODE XREF: sub_252A0C+7C   j
                 move.w  (jim_y).l,4(a5)
                 move.w  #$400,$18(a5)
                 move.w  #$170,(view_y_shift).l
-locret_252AD2:                          ; CODE XREF: sub_252A0C+8   j
-                                        ; sub_252A0C+6E   j ...
+locret_252AD2:                          ; CODE XREF: collision_with_fan+8   j
+                                        ; collision_with_fan+6E   j ...
                 rts
-; End of function sub_252A0C
+; End of function collision_with_fan
 
 
 sub_252AD4:
@@ -42277,14 +42277,14 @@ sub_252AD4:
 ; End of function sub_252AD4
 
 
-sub_252AE8:                             ; DATA XREF: ROM:00003640   o
-                jsr     sub_24B000(pc)
+collision_with_intestinal_boss:                             ; DATA XREF: ROM:00003640   o
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252AE8
+; End of function collision_with_intestinal_boss
 
 
 collision_with_saxophone:                             ; DATA XREF: ROM:00003638   o
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
 ; End of function collision_with_saxophone
 
@@ -42293,7 +42293,7 @@ collision_with_bucket_boss:                             ; DATA XREF: ROM:0000363
                 jsr     (sub_252B3A).l
                 move.w  (sound_fx_enable).l,-(sp)
                 clr.b   (sound_fx_enable).l
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 st      (sound_fx_enable).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_252B32
@@ -42391,11 +42391,11 @@ nullsub_16:                             ; DATA XREF: ROM:0000360C   o
 ; End of function nullsub_16
 
 
-sub_252C30:                             ; DATA XREF: ROM:00003604   o
+collision_with_prickly_egg:                             ; DATA XREF: ROM:00003604   o
                                         ; ROM:00003608   o
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252C30
+; End of function collision_with_prickly_egg
 
 
 nullsub_17:                             ; DATA XREF: ROM:00003618   o
@@ -42403,7 +42403,7 @@ nullsub_17:                             ; DATA XREF: ROM:00003618   o
 ; End of function nullsub_17
 
 
-sub_252C38:                             ; DATA XREF: ROM:0000361C   o
+collision_with_hell_gates:                             ; DATA XREF: ROM:0000361C   o
                 move.w  4(a1),d7
                 subi.w  #$32,d7 ; '2'
                 cmp.w   (jim_y).l,d7
@@ -42412,38 +42412,38 @@ sub_252C38:                             ; DATA XREF: ROM:0000361C   o
                 addi.w  #$20,d7 ; ' '
                 cmp.w   (jim_y).l,d7
                 bcs.s   loc_252C8C
-loc_252C58:                             ; CODE XREF: sub_252C38+42   j
-                                        ; sub_252C38+44   j ...
+loc_252C58:                             ; CODE XREF: collision_with_hell_gates+42   j
+                                        ; collision_with_hell_gates+44   j ...
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_252C6C
                 st      (byte_FFFD03).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_252C6C:                             ; CODE XREF: sub_252C38+2A   j
+loc_252C6C:                             ; CODE XREF: collision_with_hell_gates+2A   j
                 st      (byte_FFFD06).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_252C74:                             ; CODE XREF: sub_252C38+E   j
+loc_252C74:                             ; CODE XREF: collision_with_hell_gates+E   j
                 tst.w   (jim_y_speed).l
                 bmi.s   loc_252C58
                 beq.s   loc_252C58
                 move.w  #$FA00,(jim_y_speed).l
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
 ; ---------------------------------------------------------------------------
-loc_252C8C:                             ; CODE XREF: sub_252C38+1E   j
+loc_252C8C:                             ; CODE XREF: collision_with_hell_gates+1E   j
                 cmpi.b  #$FF,(byte_FFFD38).l
                 bne.s   loc_252C58
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252C38
+; End of function collision_with_hell_gates
 
 
-sub_252C9C:                             ; DATA XREF: ROM:00003614   o
-                jsr     sub_24B000(pc)
+collision_with_chuck_boss:                             ; DATA XREF: ROM:00003614   o
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252C9C
+; End of function collision_with_chuck_boss
 
 
 nullsub_33:                             ; DATA XREF: ROM:00003620   o
@@ -42451,24 +42451,24 @@ nullsub_33:                             ; DATA XREF: ROM:00003620   o
 ; End of function nullsub_33
 
 
-sub_252CA4:                             ; DATA XREF: ROM:00003624   o
+collision_with_super_bubble:                             ; DATA XREF: ROM:00003624   o
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
-                addq.b  #1,(byte_FFFF61).l
+                addq.b  #1,(super_bubble_count).l
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_252CD2
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_58).w
+                pea     ($58).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_252CD2:                          ; CODE XREF: sub_252CA4+12   j
+locret_252CD2:                          ; CODE XREF: collision_with_super_bubble+12   j
                 rts
-; End of function sub_252CA4
+; End of function collision_with_super_bubble
 
 
-sub_252CD4:                             ; DATA XREF: ROM:0000362C   o
+collision_with_speed_bubble:                             ; DATA XREF: ROM:0000362C   o
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
                 move.b  #$C0,(invincibility_timer).l
@@ -42481,12 +42481,12 @@ sub_252CD4:                             ; DATA XREF: ROM:0000362C   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_252D0C:                          ; CODE XREF: sub_252CD4+1C   j
+locret_252D0C:                          ; CODE XREF: collision_with_speed_bubble+1C   j
                 rts
-; End of function sub_252CD4
+; End of function collision_with_speed_bubble
 
 
-sub_252D0E:                             ; DATA XREF: ROM:000035EC   o
+collision_with_dog:                             ; DATA XREF: ROM:000035EC   o
                 cmpi.b  #$45,(jim_state).l ; 'E'
                 beq.s   locret_252D74
                 cmpi.b  #$3E,(jim_state).l ; '>'
@@ -42506,14 +42506,14 @@ sub_252D0E:                             ; DATA XREF: ROM:000035EC   o
                 move.l  #off_1AF36A,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 st      (is_jim_blocked_by_enemy).l ; При укусе собаки (new junk city)
-locret_252D74:                          ; CODE XREF: sub_252D0E+8   j
-                                        ; sub_252D0E+12   j
+locret_252D74:                          ; CODE XREF: collision_with_dog+8   j
+                                        ; collision_with_dog+12   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_252D76:                             ; CODE XREF: sub_252D0E+1C   j
-                jsr     sub_24B000(pc)
+loc_252D76:                             ; CODE XREF: collision_with_dog+1C   j
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252D0E
+; End of function collision_with_dog
 
 
 sub_252D7C:
@@ -42522,11 +42522,11 @@ sub_252D7C:
 ; End of function sub_252D7C
 
 
-sub_252D86:                             ; DATA XREF: ROM:00003718   o
+collision_with_anvil:                             ; DATA XREF: ROM:00003718   o
                                         ; ROM:0000371C   o
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
                 rts
-; End of function sub_252D86
+; End of function collision_with_anvil
 
 
 nullsub_18:                             ; DATA XREF: ROM:000035F0   o
@@ -42541,7 +42541,7 @@ nullsub_34:                             ; DATA XREF: ROM:000035FC   o
 ; End of function nullsub_34
 
 
-sub_252D90:                             ; DATA XREF: ROM:000036DC   o
+collision_with_crow:                             ; DATA XREF: ROM:000036DC   o
                 cmpi.b  #$3E,(jim_state).l ; '>'
                 beq.w   locret_252DE2
                 tst.l   (dword_FFA6DC).l
@@ -42558,10 +42558,10 @@ sub_252D90:                             ; DATA XREF: ROM:000036DC   o
                 bcc.w   locret_252DE2
                 move.w  #4,d0
                 jsr     damage_from_enemy(pc) ; Повреждения от врагов (но не все)
-locret_252DE2:                          ; CODE XREF: sub_252D90+8   j
-                                        ; sub_252D90+12   j ...
+locret_252DE2:                          ; CODE XREF: collision_with_crow+8   j
+                                        ; collision_with_crow+12   j ...
                 rts
-; End of function sub_252D90
+; End of function collision_with_crow
 
 
 sub_252DE4:                             ; DATA XREF: ROM:000035F8   o
@@ -42616,7 +42616,7 @@ loc_252E5A:                             ; CODE XREF: sub_252DE4+6E   j
                 clr.b   (timer_whip_blocking).l
 loc_252EDE:                             ; CODE XREF: sub_252DE4+12   j
                                         ; sub_252DE4+1C   j ...
-                jsr     sub_24B000(pc)
+                jsr     do_damage_from_enemy(pc)
 locret_252EE2:                          ; CODE XREF: sub_252DE4+8   j
                                         ; sub_252DE4+26   j
                 rts
@@ -42713,7 +42713,7 @@ sub_252FF4:                             ; DATA XREF: ROM:0000376C   o
 ; End of function sub_252FF4
 
 
-sub_253012:                             ; DATA XREF: ROM:00003770   o
+collision_with_sphere_electro:                             ; DATA XREF: ROM:00003770   o
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_253052
                 tst.b   (platform_type_under_jim).l
@@ -42727,25 +42727,25 @@ sub_253012:                             ; DATA XREF: ROM:00003770   o
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
                 move.w  4(a1),4(a5)
-locret_253052:                          ; CODE XREF: sub_253012+6   j
-                                        ; sub_253012+E   j ...
+locret_253052:                          ; CODE XREF: collision_with_sphere_electro+6   j
+                                        ; collision_with_sphere_electro+E   j ...
                 rts
-; End of function sub_253012
+; End of function collision_with_sphere_electro
 
 
-sub_253054:                             ; DATA XREF: ROM:00003774   o
+collision_with_sphere_electro_zap:                             ; DATA XREF: ROM:00003774   o
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_253068
                 tst.b   (platform_type_under_jim).l
                 beq.s   locret_253068
                 jsr     sub_24B124(pc)
-locret_253068:                          ; CODE XREF: sub_253054+6   j
-                                        ; sub_253054+E   j
+locret_253068:                          ; CODE XREF: collision_with_sphere_electro_zap+6   j
+                                        ; collision_with_sphere_electro_zap+E   j
                 rts
-; End of function sub_253054
+; End of function collision_with_sphere_electro_zap
 
 
-sub_25306A:                             ; DATA XREF: ROM:00003778   o
+collision_with_electrical_charge:                             ; DATA XREF: ROM:00003778   o
                 tst.b   (byte_FFFD13).l
                 bne.w   loc_25308A
                 tst.w   (jim_y_speed).l
@@ -42753,11 +42753,11 @@ sub_25306A:                             ; DATA XREF: ROM:00003778   o
                 tst.b   (platform_type_under_jim).l
                 beq.s   locret_253088
                 jsr     sub_24B124(pc)
-locret_253088:                          ; CODE XREF: sub_25306A+10   j
-                                        ; sub_25306A+18   j
+locret_253088:                          ; CODE XREF: collision_with_electrical_charge+10   j
+                                        ; collision_with_electrical_charge+18   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_25308A:                             ; CODE XREF: sub_25306A+6   j
+loc_25308A:                             ; CODE XREF: collision_with_electrical_charge+6   j
                 st      (is_jim_jumping).l
                 move.w  #1,(jim_y_speed).l
                 jsr     sub_24B124(pc)
@@ -42765,11 +42765,11 @@ loc_25308A:                             ; CODE XREF: sub_25306A+6   j
                 move.l  #off_1AECCE,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 rts
-; End of function sub_25306A
+; End of function collision_with_electrical_charge
 
 
 collision_with_garbage:                             ; DATA XREF: ROM:000036E0   o
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 tst.b   (platform_type_under_jim).l
                 bne.s   locret_2530EC
                 cmpi.b  #$45,(jim_state).l ; 'E'
@@ -42788,7 +42788,7 @@ locret_2530EC:                          ; CODE XREF: collision_with_garbage+C   
 ; End of function collision_with_garbage
 
 
-sub_2530EE:                             ; DATA XREF: ROM:0000375C   o
+collision_with_funicular:                             ; DATA XREF: ROM:0000375C   o
                                         ; ROM:00003760   o
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
@@ -42807,7 +42807,7 @@ sub_2530EE:                             ; DATA XREF: ROM:0000375C   o
                 cmpi.w  #$18,d5
                 bcc.w   loc_253CF6
                 move.w  d6,(jim_collider_y).l
-loc_253134:                             ; CODE XREF: sub_2530EE+2E   j
+loc_253134:                             ; CODE XREF: collision_with_funicular+2E   j
                 cmpi.b  #$5F,(a1) ; '_'
                 bne.s   loc_253170
                 tst.b   (is_jim_fire).l
@@ -42825,10 +42825,10 @@ loc_253134:                             ; CODE XREF: sub_2530EE+2E   j
                 tst.b   (is_jim_left_direction).l
                 bne.s   loc_25316C
                 neg.w   d7
-loc_25316C:                             ; CODE XREF: sub_2530EE+7A   j
+loc_25316C:                             ; CODE XREF: collision_with_funicular+7A   j
                 move.w  d7,$18(a1)
-loc_253170:                             ; CODE XREF: sub_2530EE+4A   j
-                                        ; sub_2530EE+52   j ...
+loc_253170:                             ; CODE XREF: collision_with_funicular+4A   j
+                                        ; collision_with_funicular+52   j ...
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
                 move.w  d7,(jim_collider_x).l
@@ -42840,7 +42840,7 @@ loc_253170:                             ; CODE XREF: sub_2530EE+4A   j
                 bcc.s   loc_2531AE
                 cmpi.b  #$19,(jim_state).l
                 bcc.s   locret_2531E8
-loc_2531AE:                             ; CODE XREF: sub_2530EE+B4   j
+loc_2531AE:                             ; CODE XREF: collision_with_funicular+B4   j
                 move.b  #$21,(jim_state).l ; '!'
                 move.l  #off_1AEFBA,(jim_anim_offset).l
                 cmpi.b  #$5F,(a1) ; '_'
@@ -42850,17 +42850,17 @@ loc_2531AE:                             ; CODE XREF: sub_2530EE+B4   j
                 clr.b   $36(a1)
                 move.l  #off_1B051A,$20(a1)
                 clr.b   $37(a1)
-locret_2531E8:                          ; CODE XREF: sub_2530EE+BE   j
-                                        ; sub_2530EE+D6   j
+locret_2531E8:                          ; CODE XREF: collision_with_funicular+BE   j
+                                        ; collision_with_funicular+D6   j
                 rts
-; End of function sub_2530EE
+; End of function collision_with_funicular
 ; ---------------------------------------------------------------------------
 byte_2531EA:    dc.b 0, 0, 2, 0, 4, 0, 2, 0
-                                        ; DATA XREF: sub_2530EE+64   o
+                                        ; DATA XREF: collision_with_funicular+64   o
                 dc.b 0, 0
 
 
-sub_2531F4:                             ; DATA XREF: ROM:00003768   o
+collision_with_butt_sub_boss_platform:                             ; DATA XREF: ROM:00003768   o
                 cmpi.b  #$45,(jim_state).l ; 'E'
                 beq.w   loc_253CF6
                 tst.l   (dword_FFFDA8).l
@@ -42871,7 +42871,7 @@ sub_2531F4:                             ; DATA XREF: ROM:00003768   o
                 bcs.w   loc_253CF6
                 bra.s   loc_25324A
 ; ---------------------------------------------------------------------------
-loc_25321C:                             ; CODE XREF: sub_2531F4+12   j
+loc_25321C:                             ; CODE XREF: collision_with_butt_sub_boss_platform+12   j
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
                 move.b  6(a1),d0
@@ -42883,7 +42883,7 @@ loc_25321C:                             ; CODE XREF: sub_2531F4+12   j
                 move.b  $1C(a1),d7
                 ext.w   d7
                 add.w   d7,(jim_collider_x).l
-loc_25324A:                             ; CODE XREF: sub_2531F4+26   j
+loc_25324A:                             ; CODE XREF: collision_with_butt_sub_boss_platform+26   j
                 move.w  (jim_collider_y).l,d7
                 move.w  4(a1),d5
                 sub.w   (camera_y).l,d5
@@ -42897,10 +42897,10 @@ loc_25324A:                             ; CODE XREF: sub_2531F4+26   j
                 move.l  a1,(dword_FFFDA8).l
                 clr.b   (jim_timer_in_air).l
                 rts
-; End of function sub_2531F4
+; End of function collision_with_butt_sub_boss_platform
 
 
-sub_253282:                             ; DATA XREF: ROM:00003764   o
+collision_with_cage:                             ; DATA XREF: ROM:00003764   o
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
                 move.b  6(a1),d0
@@ -42928,13 +42928,13 @@ sub_253282:                             ; DATA XREF: ROM:00003764   o
                 move.l  #byte_1A3AF4,$A(a1)
                 clr.b   $36(a1)
                 clr.w   (jim_walking_speed).l
-locret_2532F8:                          ; CODE XREF: sub_253282+56   j
-                                        ; sub_253282+62   j
+locret_2532F8:                          ; CODE XREF: collision_with_cage+56   j
+                                        ; collision_with_cage+62   j
                 rts
-; End of function sub_253282
+; End of function collision_with_cage
 
 
-sub_2532FA:                             ; DATA XREF: ROM:000036E4   o
+collision_with_submarine:                             ; DATA XREF: ROM:000036E4   o
                 move.b  6(a1),d0
                 btst    #4,d0
                 beq.w   loc_253CF6
@@ -42957,13 +42957,13 @@ sub_2532FA:                             ; DATA XREF: ROM:000036E4   o
                 sub.w   d7,d5
                 cmpi.w  #$20,d5 ; ' '
                 move.w  d6,(jim_collider_y).l
-loc_253352:                             ; CODE XREF: sub_2532FA+4A   j
+loc_253352:                             ; CODE XREF: collision_with_submarine+4A   j
                 cmpi.b  #4,(jim_state).l
                 beq.s   loc_253374
                 move.l  #anim_jim_idle,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #4,(jim_state).l
-loc_253374:                             ; CODE XREF: sub_2532FA+60   j
+loc_253374:                             ; CODE XREF: collision_with_submarine+60   j
                 tst.b   (byte_FFFD4F).l
                 bne.s   loc_2533D2
                 jsr     (sub_24AD06).l
@@ -42981,8 +42981,8 @@ loc_253374:                             ; CODE XREF: sub_2532FA+60   j
                 move.w  #$1FA,2(a5)
                 move.w  #$D3,4(a5)
                 st      (byte_FFFD4F).l
-loc_2533D2:                             ; CODE XREF: sub_2532FA+80   j
-                                        ; sub_2532FA+88   j ...
+loc_2533D2:                             ; CODE XREF: collision_with_submarine+80   j
+                                        ; collision_with_submarine+88   j ...
                 tst.w   (word_FFFCA0).l
                 beq.s   loc_253406
                 subq.b  #1,(byte_FFFCFE).l
@@ -42994,34 +42994,34 @@ loc_2533D2:                             ; CODE XREF: sub_2532FA+80   j
                 bne.s   loc_253406
                 move.l  #dword_1ADA32,$20(a1)
                 clr.b   $37(a1)
-loc_253406:                             ; CODE XREF: sub_2532FA+DE   j
-                                        ; sub_2532FA+E6   j ...
+loc_253406:                             ; CODE XREF: collision_with_submarine+DE   j
+                                        ; collision_with_submarine+E6   j ...
                 move.b  (byte_FFA6CF).l,d7
                 andi.b  #$FF,d7
                 bne.s   loc_253434
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_253434
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (dword_20).w
+                pea     ($20).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_253434:                             ; CODE XREF: sub_2532FA+116   j
-                                        ; sub_2532FA+11E   j
+loc_253434:                             ; CODE XREF: collision_with_submarine+116   j
+                                        ; collision_with_submarine+11E   j
                 tst.b   (is_jim_move_left).l
                 beq.s   loc_25344C
                 addq.b  #1,(byte_FFFD0F).l
                 andi.b  #$3F,(byte_FFFD0F).l ; '?'
                 bra.s   loc_253462
 ; ---------------------------------------------------------------------------
-loc_25344C:                             ; CODE XREF: sub_2532FA+140   j
+loc_25344C:                             ; CODE XREF: collision_with_submarine+140   j
                 tst.b   (is_jim_move_right).l
                 beq.s   loc_253462
                 subq.b  #1,(byte_FFFD0F).l
                 andi.b  #$3F,(byte_FFFD0F).l ; '?'
-loc_253462:                             ; CODE XREF: sub_2532FA+150   j
-                                        ; sub_2532FA+158   j
+loc_253462:                             ; CODE XREF: collision_with_submarine+150   j
+                                        ; collision_with_submarine+158   j
                 jsr     (sub_253638).l
                 jsr     sub_24D6B6(pc)
                 beq.s   loc_25347C
@@ -43029,8 +43029,8 @@ loc_253462:                             ; CODE XREF: sub_2532FA+150   j
                 beq.s   loc_25347C
                 jsr     sub_24D6D2(pc)
                 bne.w   loc_2534E6
-loc_25347C:                             ; CODE XREF: sub_2532FA+172   j
-                                        ; sub_2532FA+178   j
+loc_25347C:                             ; CODE XREF: collision_with_submarine+172   j
+                                        ; collision_with_submarine+178   j
                 jsr     (sub_2535CC).l
                 clr.w   d7
                 move.b  (byte_FFFD0F).l,d7
@@ -43049,12 +43049,12 @@ loc_25347C:                             ; CODE XREF: sub_2532FA+172   j
                 move.w  d6,$18(a1)
                 bra.s   loc_2534BE
 ; ---------------------------------------------------------------------------
-loc_2534B4:                             ; CODE XREF: sub_2532FA+1A8   j
+loc_2534B4:                             ; CODE XREF: collision_with_submarine+1A8   j
                 cmpi.w  #$300,d6
                 bcc.s   loc_2534BE
                 move.w  d6,$18(a1)
-loc_2534BE:                             ; CODE XREF: sub_2532FA+1B0   j
-                                        ; sub_2532FA+1B8   j ...
+loc_2534BE:                             ; CODE XREF: collision_with_submarine+1B0   j
+                                        ; collision_with_submarine+1B8   j ...
                 move.w  2(a0,d7.w),d6
                 add.w   $1A(a1),d6
                 bpl.s   loc_2534D8
@@ -43065,14 +43065,14 @@ loc_2534BE:                             ; CODE XREF: sub_2532FA+1B0   j
                 move.w  d6,$1A(a1)
                 bra.s   loc_2534E2
 ; ---------------------------------------------------------------------------
-loc_2534D8:                             ; CODE XREF: sub_2532FA+1CC   j
+loc_2534D8:                             ; CODE XREF: collision_with_submarine+1CC   j
                 cmpi.w  #$300,d6
                 bcc.s   loc_2534E2
                 move.w  d6,$1A(a1)
-loc_2534E2:                             ; CODE XREF: sub_2532FA+1D4   j
-                                        ; sub_2532FA+1DC   j ...
+loc_2534E2:                             ; CODE XREF: collision_with_submarine+1D4   j
+                                        ; collision_with_submarine+1DC   j ...
                 movem.l (sp)+,a0/a6
-loc_2534E6:                             ; CODE XREF: sub_2532FA+17E   j
+loc_2534E6:                             ; CODE XREF: collision_with_submarine+17E   j
                 tst.w   $18(a1)
                 beq.s   loc_253524
                 tst.b   (byte_FFFD03).l
@@ -43082,8 +43082,8 @@ loc_2534E6:                             ; CODE XREF: sub_2532FA+17E   j
                 neg.w   $18(a1)
                 move.b  $18(a1),d6
                 jsr     (sub_258340).l
-loc_253508:                             ; CODE XREF: sub_2532FA+1F8   j
-                                        ; sub_2532FA+1FE   j
+loc_253508:                             ; CODE XREF: collision_with_submarine+1F8   j
+                                        ; collision_with_submarine+1FE   j
                 tst.b   (byte_FFFD06).l
                 beq.s   loc_253524
                 tst.w   $18(a1)
@@ -43091,8 +43091,8 @@ loc_253508:                             ; CODE XREF: sub_2532FA+1F8   j
                 move.b  $18(a1),d6
                 neg.w   $18(a1)
                 jsr     (sub_258340).l
-loc_253524:                             ; CODE XREF: sub_2532FA+1F0   j
-                                        ; sub_2532FA+214   j ...
+loc_253524:                             ; CODE XREF: collision_with_submarine+1F0   j
+                                        ; collision_with_submarine+214   j ...
                 tst.w   $1A(a1)
                 beq.s   loc_253562
                 tst.b   (byte_FFFD09).l
@@ -43102,8 +43102,8 @@ loc_253524:                             ; CODE XREF: sub_2532FA+1F0   j
                 neg.w   $1A(a1)
                 move.b  $1A(a1),d6
                 jsr     (sub_258340).l
-loc_253546:                             ; CODE XREF: sub_2532FA+236   j
-                                        ; sub_2532FA+23C   j
+loc_253546:                             ; CODE XREF: collision_with_submarine+236   j
+                                        ; collision_with_submarine+23C   j
                 tst.b   (byte_FFFD0A).l
                 beq.s   loc_253562
                 tst.w   $1A(a1)
@@ -43111,15 +43111,15 @@ loc_253546:                             ; CODE XREF: sub_2532FA+236   j
                 move.b  $1A(a1),d6
                 neg.w   $1A(a1)
                 jsr     (sub_258340).l
-loc_253562:                             ; CODE XREF: sub_2532FA+22E   j
-                                        ; sub_2532FA+252   j ...
+loc_253562:                             ; CODE XREF: collision_with_submarine+22E   j
+                                        ; collision_with_submarine+252   j ...
                 bsr.w   sub_253568
                 rts
-; End of function sub_2532FA
+; End of function collision_with_submarine
 
 
 sub_253568:                             ; CODE XREF: spawn_submarine+11A   p
-                                        ; sub_2532FA:loc_253562   p
+                                        ; collision_with_submarine:loc_253562   p
                 clr.w   d7
                 move.b  (byte_FFFD0F).l,d7
                 add.w   d7,d7
@@ -43149,7 +43149,7 @@ sub_253568:                             ; CODE XREF: spawn_submarine+11A   p
 
 
 sub_2535CC:                             ; CODE XREF: spawn_submarine+11E   p
-                                        ; sub_2532FA:loc_25347C   p
+                                        ; collision_with_submarine:loc_25347C   p
                 clr.w   d7
                 move.b  (byte_FFFD0F).l,d7
                 cmp.b   (byte_FFFD10).l,d7
@@ -43180,7 +43180,7 @@ loc_25361A:                             ; CODE XREF: sub_2535CC+E   j
 ; End of function sub_2535CC
 
 
-sub_253638:                             ; CODE XREF: sub_2532FA:loc_253462   p
+sub_253638:                             ; CODE XREF: collision_with_submarine:loc_253462   p
                 move.l  a3,-(sp)
                 movea.l (dword_FFFC92).l,a3
                 bset    #5,7(a3)
@@ -43202,7 +43202,7 @@ sub_253638:                             ; CODE XREF: sub_2532FA:loc_253462   p
                 rts
 ; End of function sub_253638
 ; ---------------------------------------------------------------------------
-dword_253686:   dc.l $18FFF6            ; DATA XREF: sub_2532FA+19A   o
+dword_253686:   dc.l $18FFF6            ; DATA XREF: collision_with_submarine+19A   o
                 dc.l $16FFF4
                 dc.l $14FFF2
                 dc.l $12FFF0
@@ -43236,7 +43236,7 @@ dword_253686:   dc.l $18FFF6            ; DATA XREF: sub_2532FA+19A   o
                 dc.l $18000A
 
 
-sub_253706:                             ; DATA XREF: ROM:0000373C   o
+collision_with_diamond:                             ; DATA XREF: ROM:0000373C   o
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
                 move.b  6(a1),d0
@@ -43261,16 +43261,16 @@ sub_253706:                             ; DATA XREF: ROM:0000373C   o
                 tst.b   9(a1)
                 beq.s   loc_25375E
                 neg.w   d7
-loc_25375E:                             ; CODE XREF: sub_253706+54   j
+loc_25375E:                             ; CODE XREF: collision_with_diamond+54   j
                 add.w   d7,(jim_collider_x).l
                 tst.w   (jim_y_speed).l
                 beq.s   locret_253778
                 move.l  #byte_1A2D94,$A(a1)
                 clr.b   $36(a1)
-locret_253778:                          ; CODE XREF: sub_253706+64   j
+locret_253778:                          ; CODE XREF: collision_with_diamond+64   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_25377A:                             ; DATA XREF: ROM:00003740   o
+collision_with_spring_platform:                             ; DATA XREF: ROM:00003740   o
                                         ; ROM:00003744   o
                 cmpi.b  #$E,(byte_FFFE08).l
                 beq.w   loc_253CF6
@@ -43295,20 +43295,20 @@ loc_25377A:                             ; DATA XREF: ROM:00003740   o
                 beq.s   locret_2537DE
                 move.l  #off_1B053C,$20(a1)
                 clr.b   $36(a1)
-locret_2537DE:                          ; CODE XREF: sub_253706+CA   j
+locret_2537DE:                          ; CODE XREF: collision_with_diamond+CA   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2537E0:                             ; CODE XREF: sub_253706+AE   j
+loc_2537E0:                             ; CODE XREF: collision_with_diamond+AE   j
                 tst.w   d5
                 bpl.s   loc_2537F0
                 tst.l   $48(a1)
                 beq.s   loc_2537F0
                 move.w  d6,(jim_collider_y).l
-loc_2537F0:                             ; CODE XREF: sub_253706+DC   j
-                                        ; sub_253706+E2   j
+loc_2537F0:                             ; CODE XREF: collision_with_diamond+DC   j
+                                        ; collision_with_diamond+E2   j
                 bra.w   loc_253CF6
 ; ---------------------------------------------------------------------------
-loc_2537F4:                             ; DATA XREF: ROM:00003748   o
+collision_with_balance_platform:                             ; DATA XREF: ROM:00003748   o
                 cmpi.b  #$E,(byte_FFFE08).l
                 beq.w   loc_253CF6
                 move.l  a2,-(sp)
@@ -43353,24 +43353,24 @@ loc_2537F4:                             ; DATA XREF: ROM:00003748   o
                 clr.b   $36(a1)
                 bra.s   loc_2538B6
 ; ---------------------------------------------------------------------------
-loc_25389A:                             ; CODE XREF: sub_253706+17C   j
+loc_25389A:                             ; CODE XREF: collision_with_diamond+17C   j
                 cmpi.b  #1,$47(a1)
                 beq.s   loc_2538AE
                 move.l  #off_1B1322,$20(a1)
                 clr.b   $36(a1)
-loc_2538AE:                             ; CODE XREF: sub_253706+170   j
-                                        ; sub_253706+184   j ...
+loc_2538AE:                             ; CODE XREF: collision_with_diamond+170   j
+                                        ; collision_with_diamond+184   j ...
                 bra.s   loc_2538B6
 ; ---------------------------------------------------------------------------
-loc_2538B0:                             ; CODE XREF: sub_253706+102   j
-                                        ; sub_253706+10E   j ...
+loc_2538B0:                             ; CODE XREF: collision_with_diamond+102   j
+                                        ; collision_with_diamond+10E   j ...
                 st      (byte_FFFD29).l
-loc_2538B6:                             ; CODE XREF: sub_253706+192   j
-                                        ; sub_253706:loc_2538AE   j
+loc_2538B6:                             ; CODE XREF: collision_with_diamond+192   j
+                                        ; collision_with_diamond:loc_2538AE   j
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2538BA:                             ; DATA XREF: ROM:0000374C   o
+collision_with_diamond_static:                             ; DATA XREF: ROM:0000374C   o
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
                 move.b  6(a1),d0
@@ -43392,7 +43392,7 @@ loc_2538BA:                             ; DATA XREF: ROM:0000374C   o
                 move.w  d6,(jim_collider_y).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_253906:                             ; DATA XREF: ROM:00003750   o
+collision_with_diamond_2:                             ; DATA XREF: ROM:00003750   o
                                         ; ROM:00003754   o ...
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
@@ -43418,19 +43418,19 @@ loc_253906:                             ; DATA XREF: ROM:00003750   o
                 tst.b   9(a1)
                 beq.s   loc_25395E
                 neg.w   d7
-loc_25395E:                             ; CODE XREF: sub_253706+254   j
+loc_25395E:                             ; CODE XREF: collision_with_diamond+254   j
                 add.w   d7,(jim_collider_x).l
                 tst.w   (jim_y_speed).l
                 beq.s   locret_253978
                 move.l  #byte_1A2D94,$A(a1)
                 clr.b   $36(a1)
-locret_253978:                          ; CODE XREF: sub_253706+264   j
+locret_253978:                          ; CODE XREF: collision_with_diamond+264   j
                 rts
 ; ---------------------------------------------------------------------------
 locret_25397A:                          ; DATA XREF: ROM:00003688   o
                 rts
 ; ---------------------------------------------------------------------------
-loc_25397C:                             ; DATA XREF: ROM:00003690   o
+collision_with_bobcat:                             ; DATA XREF: ROM:00003690   o
                 move.b  #$86,(a1)
                 clr.b   $37(a1)
                 clr.l   $A(a1)
@@ -43455,7 +43455,7 @@ loc_25397C:                             ; DATA XREF: ROM:00003690   o
                 st      (is_jim_blocked_by_enemy).l ; Bob Cat держит за шею (Down the tubes)
                 rts
 ; ---------------------------------------------------------------------------
-loc_253A02:                             ; DATA XREF: ROM:00003694   o
+collision_with_fridge:                             ; DATA XREF: ROM:00003694   o
                 tst.w   (jim_y_speed).l
                 bpl.w   locret_253A84
                 move.w  4(a1),d7
@@ -43466,25 +43466,25 @@ loc_253A02:                             ; DATA XREF: ROM:00003694   o
                 addi.w  #$20,d7 ; ' '
                 cmp.w   (jim_y).l,d7
                 bcs.s   loc_253A54
-loc_253A2C:                             ; CODE XREF: sub_253706+348   j
-                                        ; sub_253706+34A   j
+loc_253A2C:                             ; CODE XREF: collision_with_diamond+348   j
+                                        ; collision_with_diamond+34A   j
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_253A40
                 st      (byte_FFFD03).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_253A40:                             ; CODE XREF: sub_253706+330   j
+loc_253A40:                             ; CODE XREF: collision_with_diamond+330   j
                 st      (byte_FFFD06).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_253A48:                             ; CODE XREF: sub_253706+314   j
+loc_253A48:                             ; CODE XREF: collision_with_diamond+314   j
                 tst.w   (jim_y_speed).l
                 bmi.s   loc_253A2C
                 beq.s   loc_253A2C
                 rts
 ; ---------------------------------------------------------------------------
-loc_253A54:                             ; CODE XREF: sub_253706+324   j
+loc_253A54:                             ; CODE XREF: collision_with_diamond+324   j
                 st      (byte_FFFD09).l
                 cmpi.b  #1,(byte_FFFBEF).l
                 bne.s   locret_253A84
@@ -43495,36 +43495,36 @@ loc_253A54:                             ; CODE XREF: sub_253706+324   j
                 move.b  #2,(byte_FFFBEF).l
                 bra.s   locret_253A84
 ; ---------------------------------------------------------------------------
-loc_253A80:                             ; CODE XREF: sub_253706+362   j
+loc_253A80:                             ; CODE XREF: collision_with_diamond+362   j
                 subq.b  #1,1(a1)
-locret_253A84:                          ; CODE XREF: sub_253706+302   j
-                                        ; sub_253706+35C   j ...
+locret_253A84:                          ; CODE XREF: collision_with_diamond+302   j
+                                        ; collision_with_diamond+35C   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_253A86:                             ; DATA XREF: ROM:000036A0   o
+collision_with_lawyer:                             ; DATA XREF: ROM:000036A0   o
                                         ; ROM:000036A4   o ...
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_253A8E:                             ; DATA XREF: ROM:000036B4   o
+collision_with_plant:                             ; DATA XREF: ROM:000036B4   o
                 cmpi.b  #1,$47(a1)
                 bne.s   locret_253ACE
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_253ACE
                 move.w  (sound_fx_enable).l,-(sp)
                 clr.b   (sound_fx_enable).l
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 st      (sound_fx_enable).l
                 move.w  (sp)+,(sound_fx_enable).l
                 move.b  #2,$47(a1)
                 move.l  #off_1B559E,$20(a1)
                 clr.b   $37(a1)
-locret_253ACE:                          ; CODE XREF: sub_253706+38E   j
-                                        ; sub_253706+396   j
+locret_253ACE:                          ; CODE XREF: collision_with_diamond+38E   j
+                                        ; collision_with_diamond+396   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_253AD0:                             ; DATA XREF: ROM:000036B8   o
-                jsr     (sub_24B000).l
+collision_with_papers:                             ; DATA XREF: ROM:000036B8   o
+                jsr     (do_damage_from_enemy).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_253AF8
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -43533,7 +43533,7 @@ loc_253AD0:                             ; DATA XREF: ROM:000036B8   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_253AF8:                             ; CODE XREF: sub_253706+3D6   j
+loc_253AF8:                             ; CODE XREF: collision_with_diamond+3D6   j
                 move.l  a2,-(sp)
                 movea.l a1,a2
                 jsr     (sub_254DE4).l
@@ -43546,14 +43546,14 @@ loc_253AF8:                             ; CODE XREF: sub_253706+3D6   j
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_253B26:                             ; DATA XREF: ROM:000036B0   o
+collision_with_fox:                             ; DATA XREF: ROM:000036B0   o
                 cmpi.b  #$4B,(jim_state).l ; 'K'
                 beq.w   loc_253BC6
                 tst.l   (dword_FFFDA0).l
                 beq.s   loc_253B44
                 movea.l (dword_FFFDA0).l,a6
                 move.b  #$86,(a6)
-loc_253B44:                             ; CODE XREF: sub_253706+432   j
+loc_253B44:                             ; CODE XREF: collision_with_diamond+432   j
                 st      (is_jim_blocked_by_enemy).l ; Fox мутузит Джима (Down the tubes)
                 move.b  #$86,(a1)
                 move.l  #off_1B5464,$20(a1)
@@ -43577,7 +43577,7 @@ loc_253B44:                             ; CODE XREF: sub_253706+432   j
                 move.b  #0,(is_jim_left_direction).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_253BC6:                             ; CODE XREF: sub_253706+428   j
+loc_253BC6:                             ; CODE XREF: collision_with_diamond+428   j
                 clr.b   (a1)
                 jsr     (sub_24AE7A).l
                 lea     (stru_25A8BC).l,a6
@@ -43588,7 +43588,7 @@ loc_253BC6:                             ; CODE XREF: sub_253706+428   j
 locret_253BDE:                          ; DATA XREF: ROM:000036AC   o
                 rts
 ; ---------------------------------------------------------------------------
-loc_253BE0:                             ; DATA XREF: ROM:0000368C   o
+collision_with_ufo:                             ; DATA XREF: ROM:0000368C   o
                 cmpi.b  #$3E,(jim_state).l ; '>'
                 beq.w   locret_253CF4
                 tst.b   (is_jim_blocked_by_enemy).l
@@ -43598,7 +43598,7 @@ loc_253BE0:                             ; DATA XREF: ROM:0000368C   o
                 subq.b  #1,(byte_FFFD4D).l
                 bra.w   locret_253CF4
 ; ---------------------------------------------------------------------------
-loc_253C08:                             ; CODE XREF: sub_253706+4F6   j
+loc_253C08:                             ; CODE XREF: collision_with_diamond+4F6   j
                 tst.b   (platform_type_under_jim).l
                 beq.w   locret_253CF4
                 tst.w   (jim_y_speed).l
@@ -43644,15 +43644,15 @@ loc_253C08:                             ; CODE XREF: sub_253706+4F6   j
                 clr.b   (is_jim_jumping).l
                 clr.b   (is_jim_fire).l
                 clr.b   (timer_whip_blocking).l
-locret_253CF4:                          ; CODE XREF: sub_253706+4E2   j
-                                        ; sub_253706+4EC   j ...
+locret_253CF4:                          ; CODE XREF: collision_with_diamond+4E2   j
+                                        ; collision_with_diamond+4EC   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_253CF6:                             ; CODE XREF: sub_2530EE+6   j
-                                        ; sub_2530EE+12   j ...
+loc_253CF6:                             ; CODE XREF: collision_with_funicular+6   j
+                                        ; collision_with_funicular+12   j ...
                 st      (byte_FFFD29).l
                 rts
-; End of function sub_253706
+; End of function collision_with_diamond
 
 
 sub_253CFE:
@@ -43705,18 +43705,18 @@ locret_253D62:                          ; CODE XREF: sub_253D42+4   j
 
 
 sub_253D64:
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 rts
 ; End of function sub_253D64
 
 
-sub_253D6C:                             ; DATA XREF: ROM:00003708   o
+collision_with_monkey_head_flask:                             ; DATA XREF: ROM:00003708   o
                                         ; ROM:0000370C   o ...
                 clr.b   (a1)
                 jsr     (sub_24AE7A).l
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 rts
-; End of function sub_253D6C
+; End of function collision_with_monkey_head_flask
 
 
 pickup_live:                             ; DATA XREF: ROM:00003724   o
@@ -43887,10 +43887,10 @@ loc_253F56:                             ; CODE XREF: sub_253F2A+28   j
 ; End of function sub_253F2A
 
 
-sub_253F5C:                             ; DATA XREF: ROM:000036F0   o
-                jsr     (sub_24B000).l
+collision_with_sponge:                             ; DATA XREF: ROM:000036F0   o
+                jsr     (do_damage_from_enemy).l
                 rts
-; End of function sub_253F5C
+; End of function collision_with_sponge
 
 
 fire_to_sponge:                             ; DATA XREF: ROM:000038D8   o
@@ -43912,7 +43912,7 @@ whip_to_sponge:                             ; CODE XREF: fire_to_sponge+C   j
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_253FC0
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_38).w
+                pea     ($38).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -43954,7 +43954,7 @@ whip_to_automatic_eyes_generator:                             ; DATA XREF: ROM:0
 ; End of function whip_to_automatic_eyes_generator
 
 
-sub_25400C:                             ; CODE XREF: fire_to_fish_boss+4   p
+collision_with_fish_boss:                             ; CODE XREF: fire_to_fish_boss+4   p
                                         ; DATA XREF: ROM:000036FC   o
                 move.b  #$86,(a1)
                 move.l  #off_1B615E,$20(a1)
@@ -43966,23 +43966,23 @@ sub_25400C:                             ; CODE XREF: fire_to_fish_boss+4   p
                 move.l  #byte_1ACE70,$A(a1)
                 clr.b   $36(a2)
                 rts
-; End of function sub_25400C
+; End of function collision_with_fish_boss
 
 
 fire_to_fish_boss:                             ; DATA XREF: ROM:000038E4   o
                                         ; ROM:00003A20   o
                 move.l  a1,-(sp)
                 movea.l a2,a1
-                bsr.s   sub_25400C
+                bsr.s   collision_with_fish_boss
                 movea.l (sp)+,a1
                 rts
 ; End of function fire_to_fish_boss
 
 
-sub_25404C:                             ; DATA XREF: ROM:000036F4   o
-                jsr     (sub_24B000).l
+collision_with_daemon:                             ; DATA XREF: ROM:000036F4   o
+                jsr     (do_damage_from_enemy).l
                 rts
-; End of function sub_25404C
+; End of function collision_with_daemon
 
 
 fire_to_daemon:                             ; DATA XREF: ROM:000038DC   o
@@ -44026,10 +44026,10 @@ locret_2540CA:                          ; CODE XREF: fire_to_daemon+5A   j
 ; End of function fire_to_daemon
 
 
-sub_2540CC:                             ; DATA XREF: ROM:000036F8   o
-                jsr     (sub_24B000).l
+collision_with_fan_fish:                             ; DATA XREF: ROM:000036F8   o
+                jsr     (do_damage_from_enemy).l
                 rts
-; End of function sub_2540CC
+; End of function collision_with_fan_fish
 
 
 fire_to_fan_fish:                             ; DATA XREF: ROM:000038E0   o
@@ -44091,7 +44091,7 @@ loc_254164:                             ; CODE XREF: sub_25412A+1E   j
 
 
 sub_254170:                             ; DATA XREF: ROM:000037B8   o
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 move.w  #$FC00,(jim_y_speed).l
                 st      (is_jim_jumping).l
                 move.b  #$C,(byte_FFFCF9).l
@@ -44099,10 +44099,10 @@ sub_254170:                             ; DATA XREF: ROM:000037B8   o
 ; End of function sub_254170
 
 
-sub_25418E:                             ; DATA XREF: ROM:000037B4   o
-                jsr     (sub_24B000).l
+collision_with_butt_crab_3part:                             ; DATA XREF: ROM:000037B4   o
+                jsr     (do_damage_from_enemy).l
                 rts
-; End of function sub_25418E
+; End of function collision_with_butt_crab_3part
 
 
 sub_254196:                             ; DATA XREF: ROM:000038F4   o
@@ -44287,7 +44287,7 @@ whip_to_butt_sub_boss:                             ; DATA XREF: ROM:00003998   o
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_254408
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_74).w
+                pea     ($74).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -44495,21 +44495,21 @@ whip_to_dog:                             ; CODE XREF: fire_to_dog+A   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_254684:                             ; CODE XREF: fire_to_dog+1A   j
-                jsr     (sub_2546BE).l
-                jsr     (sub_2546BE).l
-                jsr     (sub_25470E).l
-                jsr     (sub_25470E).l
-                jsr     (sub_25470E).l
-                jsr     (sub_25470E).l
-                jsr     (sub_25470E).l
-                jsr     (sub_25470E).l
+                jsr     (spawn_dog_eye).l
+                jsr     (spawn_dog_eye).l
+                jsr     (spawn_dog_bone).l
+                jsr     (spawn_dog_bone).l
+                jsr     (spawn_dog_bone).l
+                jsr     (spawn_dog_bone).l
+                jsr     (spawn_dog_bone).l
+                jsr     (spawn_dog_bone).l
                 clr.b   (a2)
                 jsr     (sub_24AED6).l
                 rts
 ; End of function fire_to_dog
 
 
-sub_2546BE:                             ; CODE XREF: fire_to_dog:loc_254684   p
+spawn_dog_eye:                             ; CODE XREF: fire_to_dog:loc_254684   p
                                         ; fire_to_dog+42   p
                 move.l  d0,-(sp)
                 jsr     (sub_24AD06).l
@@ -44528,13 +44528,13 @@ sub_2546BE:                             ; CODE XREF: fire_to_dog:loc_254684   p
                 andi.w  #$7FF,d7
                 subi.w  #$400,d7
                 move.w  d7,$18(a5)
-loc_25470A:                             ; CODE XREF: sub_2546BE+8   j
+loc_25470A:                             ; CODE XREF: spawn_dog_eye+8   j
                 move.l  (sp)+,d0
                 rts
-; End of function sub_2546BE
+; End of function spawn_dog_eye
 
 
-sub_25470E:                             ; CODE XREF: fire_to_dog+48   p
+spawn_dog_bone:                             ; CODE XREF: fire_to_dog+48   p
                                         ; fire_to_dog+4E   p ...
                 move.l  d0,-(sp)
                 jsr     (sub_24AD06).l
@@ -44553,15 +44553,15 @@ sub_25470E:                             ; CODE XREF: fire_to_dog+48   p
                 andi.w  #$FFF,d7
                 subi.w  #$800,d7
                 move.w  d7,$18(a5)
-loc_25475A:                             ; CODE XREF: sub_25470E+8   j
+loc_25475A:                             ; CODE XREF: spawn_dog_bone+8   j
                 move.l  (sp)+,d0
                 rts
-; End of function sub_25470E
+; End of function spawn_dog_bone
 
 
 sub_25475E:                             ; CODE XREF: fire_to_dog+34   p
                                         ; sub_254CB2+94   p ...
-                cmpi.l  #$30313030,(jim_health).l
+                cmpi.l  #'0100',(jim_health).l
                 bcc.s   locret_2547B0
                 move.l  d0,-(sp)
                 jsr     (sub_24AD06).l
@@ -44698,7 +44698,7 @@ loc_2548DA:                             ; CODE XREF: fire_to_chicken_boss_egg+E 
 ; End of function fire_to_chicken_boss_egg
 
 
-oksub_2548E8:                           ; CODE XREF: sub_252880:loc_2528D0   p
+oksub_2548E8:                           ; CODE XREF: collision_with_flying_bomb:loc_2528D0   p
                                         ; fire_to_chicken_boss_egg+24   p
                                         ; DATA XREF: ...
                 jsr     (sub_24AD1E).l
@@ -44889,10 +44889,10 @@ locret_254B2A:                          ; CODE XREF: fire_to_lawyer_with_kill+20
 ; End of function fire_to_lawyer_with_kill
 
 
-sub_254B2C:                             ; DATA XREF: ROM:00003698   o
-                jsr     (sub_24B000).l
+collision_with_snowman:                             ; DATA XREF: ROM:00003698   o
+                jsr     (do_damage_from_enemy).l
                 rts
-; End of function sub_254B2C
+; End of function collision_with_snowman
 
 
 fire_to_snowman_boss:                             ; DATA XREF: ROM:00003880   o
@@ -45005,19 +45005,19 @@ sub_254C7E:                             ; DATA XREF: ROM:000039C0   o
 ; End of function sub_254C7E
 
 
-sub_254C88:                             ; DATA XREF: ROM:0000369C   o
+collision_with_snowman_burp:                             ; DATA XREF: ROM:0000369C   o
                 jsr     (sub_24B3CE).l
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_254CB0
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (dword_24).w
+                pea     ($24).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_254CB0:                          ; CODE XREF: sub_254C88+C   j
+locret_254CB0:                          ; CODE XREF: collision_with_snowman_burp+C   j
                 rts
-; End of function sub_254C88
+; End of function collision_with_snowman_burp
 
 
 sub_254CB2:                             ; DATA XREF: ROM:0000388C   o
@@ -45114,8 +45114,8 @@ whip_to_lawyer_2:                             ; DATA XREF: ROM:000039DC   o
 ; End of function whip_to_lawyer_2
 
 
-sub_254DE4:                             ; CODE XREF: sub_253706+3F6   p
-                                        ; sub_253706+3FC   p ...
+sub_254DE4:                             ; CODE XREF: collision_with_diamond+3F6   p
+                                        ; collision_with_diamond+3FC   p ...
                 jsr     (sub_24AD06).l
                 bne.s   locret_254E04
                 lea     (stru_25AD0C).l,a6
@@ -45228,7 +45228,7 @@ locret_254F3E:                          ; CODE XREF: whip_to_chicken_boss_lever+
 ; End of function whip_to_chicken_boss_lever
 
 
-sub_254F40:                             ; DATA XREF: ROM:000036CC   o
+collision_with_sea_gate:                             ; DATA XREF: ROM:000036CC   o
                                         ; ROM:000036D0   o
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
@@ -45236,10 +45236,10 @@ sub_254F40:                             ; DATA XREF: ROM:000036CC   o
                 st      (byte_FFFD03).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_254F54:                             ; CODE XREF: sub_254F40+A   j
+loc_254F54:                             ; CODE XREF: collision_with_sea_gate+A   j
                 st      (byte_FFFD06).l
                 rts
-; End of function sub_254F40
+; End of function collision_with_sea_gate
 
 
 fire_to_hamster_gate:                             ; DATA XREF: ROM:000038B4   o
@@ -45320,7 +45320,7 @@ whip_to_plant:                             ; DATA XREF: ROM:000039D8   o
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_25500C
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_38).w
+                pea     ($38).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -48273,7 +48273,7 @@ sub_2573D4:                             ; CODE XREF: ropejump_control:loc_2572B0
                 bne.w   locret_2574A2
                 tst.b   (byte_FFFD6E).l
                 bne.w   locret_2574A2
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 jsr     (sub_257602).l
                 move.w  #$FFFF,(word_FFFCDE).l
                 tst.b   (is_jim_blocked_by_enemy).l
@@ -48295,7 +48295,7 @@ loc_25743A:                             ; CODE XREF: sub_2573D4+A   j
                 bne.w   locret_2574A2
                 tst.b   (byte_FFFD6E).l
                 bne.s   locret_2574A2
-                jsr     (sub_24B000).l
+                jsr     (do_damage_from_enemy).l
                 jsr     (sub_257602).l
                 move.w  #$FFFF,(word_FFFCDE).l
                 tst.b   (is_jim_blocked_by_enemy).l
@@ -48407,7 +48407,7 @@ loc_25758A:                             ; CODE XREF: sub_25757E+8   j
 
 
 sub_25759E:                             ; CODE XREF: sub_2573D4+60   p
-                                        ; sub_257748:loc_25784C   p
+                                        ; collision_with_snot:loc_25784C   p
                 move.b  (byte_FFA6EF).l,d7
                 bpl.w   loc_2575F0
                 bra.w   loc_2575BA
@@ -48415,7 +48415,7 @@ sub_25759E:                             ; CODE XREF: sub_2573D4+60   p
 
 
 sub_2575AC:                             ; CODE XREF: sub_2573D4+C8   p
-                                        ; sub_257748:loc_257882   p
+                                        ; collision_with_snot:loc_257882   p
                                         ; DATA XREF: ...
                 move.b  (byte_FFA6EF).l,d7
                 bpl.w   loc_2575F0
@@ -48452,7 +48452,7 @@ sub_257602:                             ; CODE XREF: sub_2573D4+46   p
 ; End of function sub_257602
 
 
-sub_257616:                             ; DATA XREF: ROM:000037AC   o
+collision_with_hamster:                             ; DATA XREF: ROM:000037AC   o
                 cmpi.b  #$4A,(jim_state).l ; 'J'
                 beq.s   loc_25763E
                 cmpi.b  #$4B,(jim_state).l ; 'K'
@@ -48461,8 +48461,8 @@ sub_257616:                             ; DATA XREF: ROM:000037AC   o
                 bne.w   loc_253CF6
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_253CF6
-loc_25763E:                             ; CODE XREF: sub_257616+8   j
-                                        ; sub_257616+12   j
+loc_25763E:                             ; CODE XREF: collision_with_hamster+8   j
+                                        ; collision_with_hamster+12   j
                 move.w  2(a1),d7
                 sub.w   (camera_x).l,d7
                 move.w  d7,(jim_collider_x).l
@@ -48479,17 +48479,17 @@ loc_25763E:                             ; CODE XREF: sub_257616+8   j
                 beq.w   loc_257694
                 jsr     (sub_24D6D2).l
                 bne.w   loc_2576AA
-loc_257694:                             ; CODE XREF: sub_257616+66   j
-                                        ; sub_257616+70   j
+loc_257694:                             ; CODE XREF: collision_with_hamster+66   j
+                                        ; collision_with_hamster+70   j
                 move.l  #off_1AD524,$20(a1)
                 clr.b   $37(a1)
                 move.b  #$4B,(jim_state).l ; 'K'
                 rts
 ; ---------------------------------------------------------------------------
-loc_2576AA:                             ; CODE XREF: sub_257616+7A   j
+loc_2576AA:                             ; CODE XREF: collision_with_hamster+7A   j
                 cmpi.b  #$4A,(jim_state).l ; 'J'
                 beq.w   locret_257746
-loc_2576B6:                             ; CODE XREF: sub_257616+5C   j
+loc_2576B6:                             ; CODE XREF: collision_with_hamster+5C   j
                 move.l  #off_1AD4FE,$20(a1)
                 clr.b   $37(a1)
                 move.l  #byte_1AC674,$A(a1)
@@ -48505,7 +48505,7 @@ loc_2576B6:                             ; CODE XREF: sub_257616+5C   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_257708:                             ; CODE XREF: sub_257616+D6   j
+loc_257708:                             ; CODE XREF: collision_with_hamster+D6   j
                 clr.l   (dword_FFA6DC).l
                 clr.w   (jim_walking_speed).l
                 clr.b   (jim_walking_direction).l
@@ -48516,13 +48516,13 @@ loc_257708:                             ; CODE XREF: sub_257616+D6   j
                 clr.b   (timer_whip_blocking).l
                 clr.b   (is_jim_jumping).l
                 move.b  #$FF,(is_jim_left_direction).l
-locret_257746:                          ; CODE XREF: sub_257616+50   j
-                                        ; sub_257616+9C   j
+locret_257746:                          ; CODE XREF: collision_with_hamster+50   j
+                                        ; collision_with_hamster+9C   j
                 rts
-; End of function sub_257616
+; End of function collision_with_hamster
 
 
-sub_257748:                             ; DATA XREF: ROM:000037A8   o
+collision_with_snot:                             ; DATA XREF: ROM:000037A8   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_257850
                 tst.b   (byte_FFFD24).l
@@ -48535,17 +48535,17 @@ sub_257748:                             ; DATA XREF: ROM:000037A8   o
                 subq.w  #1,(word_FFFF54).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_25777A:                             ; CODE XREF: sub_257748+28   j
+loc_25777A:                             ; CODE XREF: collision_with_snot+28   j
                 move.w  #8,(word_FFFF54).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2577A4
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_38).w
+                pea     ($38).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2577A4:                             ; CODE XREF: sub_257748+40   j
+loc_2577A4:                             ; CODE XREF: collision_with_snot+40   j
                 tst.b   (byte_FFFF5E).l
                 bne.s   loc_2577CA
                 tst.w   (word_FFFF44).l
@@ -48553,10 +48553,10 @@ loc_2577A4:                             ; CODE XREF: sub_257748+40   j
                 move.l  #off_1B629E,(jim_anim_offset).l
                 bra.s   loc_2577CA
 ; ---------------------------------------------------------------------------
-loc_2577C0:                             ; CODE XREF: sub_257748+6A   j
+loc_2577C0:                             ; CODE XREF: collision_with_snot+6A   j
                 move.l  #off_1B62B4,(jim_anim_offset).l
-loc_2577CA:                             ; CODE XREF: sub_257748+62   j
-                                        ; sub_257748+76   j
+loc_2577CA:                             ; CODE XREF: collision_with_snot+62   j
+                                        ; collision_with_snot+76   j
                 move.w  (word_FFFF4A).l,d7
                 cmpi.w  #4,d7
                 beq.s   loc_25780E
@@ -48570,7 +48570,7 @@ loc_2577CA:                             ; CODE XREF: sub_257748+62   j
                 move.l  #off_1B11E8,$20(a1)
                 clr.b   $37(a1)
                 subq.w  #1,d0
-loc_25780E:                             ; CODE XREF: sub_257748+8C   j
+loc_25780E:                             ; CODE XREF: collision_with_snot+8C   j
                 move.w  2(a1),d7
                 cmp.w   (word_FFA6D4).l,d7
                 bcc.s   loc_257852
@@ -48585,14 +48585,14 @@ loc_25780E:                             ; CODE XREF: sub_257748+8C   j
                 bne.s   locret_257850
                 cmpi.w  #$14A,(word_FFFF4C).l
                 bcc.s   loc_25784C
-                jsr     (sub_24B000).l
-loc_25784C:                             ; CODE XREF: sub_257748+FC   j
+                jsr     (do_damage_from_enemy).l
+loc_25784C:                             ; CODE XREF: collision_with_snot+FC   j
                 jsr     sub_25759E(pc)
-locret_257850:                          ; CODE XREF: sub_257748+6   j
-                                        ; sub_257748+10   j ...
+locret_257850:                          ; CODE XREF: collision_with_snot+6   j
+                                        ; collision_with_snot+10   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_257852:                             ; CODE XREF: sub_257748+D0   j
+loc_257852:                             ; CODE XREF: collision_with_snot+D0   j
                 move.w  #$F600,(jim_delta_x_speed).l
                 move.w  (word_FFFCE2).l,d7
                 lsr.w   #1,d7
@@ -48603,12 +48603,12 @@ loc_257852:                             ; CODE XREF: sub_257748+D0   j
                 bne.s   locret_257850
                 cmpi.w  #$14A,(word_FFFF4C).l
                 bcc.s   loc_257882
-                jsr     (sub_24B000).l
-loc_257882:                             ; CODE XREF: sub_257748+132   j
+                jsr     (do_damage_from_enemy).l
+loc_257882:                             ; CODE XREF: collision_with_snot+132   j
                 jsr     sub_2575AC(pc)
                 rts
 ; ---------------------------------------------------------------------------
-loc_257888:                             ; CODE XREF: sub_257748+9E   j
+loc_257888:                             ; CODE XREF: collision_with_snot+9E   j
                 tst.w   (word_FFFCDE).l
                 bmi.s   loc_2578EA
                 move.w  #$FFFF,(word_FFFCDE).l
@@ -48618,22 +48618,22 @@ loc_257888:                             ; CODE XREF: sub_257748+9E   j
                 tst.w   (word_FFFF44).l
                 beq.s   loc_2578BE
                 move.l  #off_1AF8DC,(jim_anim_offset).l
-loc_2578BE:                             ; CODE XREF: sub_257748+16A   j
+loc_2578BE:                             ; CODE XREF: collision_with_snot+16A   j
                 clr.b   (jim_idle_anim_delay).l
-loc_2578C4:                             ; CODE XREF: sub_257748+156   j
+loc_2578C4:                             ; CODE XREF: collision_with_snot+156   j
                 move.w  d2,-(sp)
                 move.w  (word_FFFCE2).l,d2
                 move.w  (word_FFA6D4).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_2578DA
                 neg.w   d2
-loc_2578DA:                             ; CODE XREF: sub_257748+18E   j
+loc_2578DA:                             ; CODE XREF: collision_with_snot+18E   j
                 move.w  d2,$18(a1)
                 clr.w   (jim_delta_x_speed).l
                 move.w  (sp)+,d2
                 bra.w   loc_257958
 ; ---------------------------------------------------------------------------
-loc_2578EA:                             ; CODE XREF: sub_257748+146   j
+loc_2578EA:                             ; CODE XREF: collision_with_snot+146   j
                 move.w  (word_FFA6D4).l,d7
                 cmp.w   2(a1),d7
                 bcc.s   loc_25790C
@@ -48642,12 +48642,12 @@ loc_2578EA:                             ; CODE XREF: sub_257748+146   j
                 move.w  #$F800,(jim_delta_x_speed).l
                 bra.w   loc_257920
 ; ---------------------------------------------------------------------------
-loc_25790C:                             ; CODE XREF: sub_257748+1AC   j
+loc_25790C:                             ; CODE XREF: collision_with_snot+1AC   j
                 move.w  (word_FFFCE2).l,d7
                 neg.w   d7
                 move.w  d7,$18(a1)
                 move.w  #$800,(jim_delta_x_speed).l
-loc_257920:                             ; CODE XREF: sub_257748+1C0   j
+loc_257920:                             ; CODE XREF: collision_with_snot+1C0   j
                 move.w  (word_FFA6D4).l,d7
                 add.w   2(a1),d7
                 lsr.w   #1,d7
@@ -48659,39 +48659,39 @@ loc_257920:                             ; CODE XREF: sub_257748+1C0   j
                 cmp.w   4(a1),d7
                 bcc.w   loc_257952
                 move.w  #$FB00,d2
-loc_257952:                             ; CODE XREF: sub_257748+202   j
+loc_257952:                             ; CODE XREF: collision_with_snot+202   j
                 move.w  d2,$1A(a1)
                 move.w  (sp)+,d2
-loc_257958:                             ; CODE XREF: sub_257748+19E   j
+loc_257958:                             ; CODE XREF: collision_with_snot+19E   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_25797A
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (off_38).w
+                pea     ($38).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_25797A:                             ; CODE XREF: sub_257748+216   j
+loc_25797A:                             ; CODE XREF: collision_with_snot+216   j
                 move.w  2(a1),d7
                 cmp.w   (word_FFA6D4).l,d7
                 bcc.w   loc_257992
                 jsr     (sub_257A06).l
                 bra.w   loc_257998
 ; ---------------------------------------------------------------------------
-loc_257992:                             ; CODE XREF: sub_257748+23C   j
+loc_257992:                             ; CODE XREF: collision_with_snot+23C   j
                 jsr     (sub_2579D2).l
-loc_257998:                             ; CODE XREF: sub_257748+246   j
+loc_257998:                             ; CODE XREF: collision_with_snot+246   j
                 tst.w   (word_FFFF44).l
                 beq.w   loc_2579B0
                 move.l  #off_1B10AA,$20(a1)
                 clr.b   $37(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2579B0:                             ; CODE XREF: sub_257748+256   j
+loc_2579B0:                             ; CODE XREF: collision_with_snot+256   j
                 move.l  #off_1B1108,$20(a1)
                 clr.b   $37(a1)
                 rts
-; End of function sub_257748
+; End of function collision_with_snot
 
 
 sub_2579BE:
@@ -48704,7 +48704,7 @@ locret_2579D0:                          ; CODE XREF: sub_2579BE+A   j
 ; End of function sub_2579BE
 
 
-sub_2579D2:                             ; CODE XREF: sub_257748:loc_257992   p
+sub_2579D2:                             ; CODE XREF: collision_with_snot:loc_257992   p
                                         ; snot_collided_with_walls:loc_257C3E   p
                                         ; DATA XREF: ...
                 move.w  #$94,d0
@@ -48724,7 +48724,7 @@ locret_257A04:                          ; CODE XREF: sub_2579D2+14   j
 ; End of function sub_2579D2
 
 
-sub_257A06:                             ; CODE XREF: sub_257748+240   p
+sub_257A06:                             ; CODE XREF: collision_with_snot+240   p
                                         ; snot_collided_with_walls+76   p
                                         ; DATA XREF: ...
                 move.w  #$94,d0
@@ -49337,7 +49337,7 @@ off_25813E:     dc.l off_1B0D04         ; DATA XREF: sub_2580D8+24   o
                 dc.l anim_rope_health_bar_2
 
 
-sub_25816A:                             ; DATA XREF: ROM:000037A4   o
+collision_with_water_monster:                             ; DATA XREF: ROM:000037A4   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   loc_25824E
                 tst.b   (byte_FFFD24).l
@@ -49356,7 +49356,7 @@ sub_25816A:                             ; DATA XREF: ROM:000037A4   o
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_2581BE:                             ; CODE XREF: sub_25816A+38   j
+loc_2581BE:                             ; CODE XREF: collision_with_water_monster+38   j
                 st      (is_jim_blocked_by_enemy).l
                 move.l  #off_1AFC34,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
@@ -49376,15 +49376,15 @@ loc_2581BE:                             ; CODE XREF: sub_25816A+38   j
                 move.w  d7,4(a5)
                 move.w  #$F400,$1A(a5)
                 move.w  #$600,$18(a5)
-loc_258234:                             ; CODE XREF: sub_25816A+9E   j
+loc_258234:                             ; CODE XREF: collision_with_water_monster+9E   j
                 move.w  (camera_x).l,(word_FFFD56).l
                 move.w  (camera_y).l,(word_FFFD58).l
                 st      (camera_disable_value).l
-loc_25824E:                             ; CODE XREF: sub_25816A+6   j
-                                        ; sub_25816A+10   j ...
+loc_25824E:                             ; CODE XREF: collision_with_water_monster+6   j
+                                        ; collision_with_water_monster+10   j ...
                 move.b  #$86,(a1)
                 rts
-; End of function sub_25816A
+; End of function collision_with_water_monster
 
 
 oksub_258254:                           ; DATA XREF: ROM:001AF8D8   o
@@ -49486,8 +49486,8 @@ loc_258332:                             ; CODE XREF: sub_258320+A   j
 ; End of function sub_258320
 
 
-sub_258340:                             ; CODE XREF: sub_2532FA+208   p
-                                        ; sub_2532FA+224   p ...
+sub_258340:                             ; CODE XREF: collision_with_submarine+208   p
+                                        ; collision_with_submarine+224   p ...
                 tst.b   (cheat_mode).l
                 bne.s   locret_25839C
                 btst    #5,(byte_FFA6D9).l
@@ -49973,7 +49973,7 @@ loc_2588E0:                             ; CODE XREF: sub_2588B0+26   j
 ; End of function sub_2588B0
 
 
-sub_2588E6:                             ; DATA XREF: ROM:000035E8   o
+collision_with_asteroid:                             ; DATA XREF: ROM:000035E8   o
                                         ; ROM:00003628   o
                 tst.b   (invincibility_timer).l
                 bne.w   locret_2589DC
@@ -49988,7 +49988,7 @@ sub_2588E6:                             ; DATA XREF: ROM:000035E8   o
                 move.w  (sp)+,$52(a5)
                 movea.l a5,a4
                 move.w  #2,d2
-loc_25891C:                             ; CODE XREF: sub_2588E6+82   j
+loc_25891C:                             ; CODE XREF: collision_with_asteroid+82   j
                 jsr     (sub_24AD66).l
                 bne.s   loc_25896C
                 lea     (stru_25B78C).l,a6
@@ -50006,11 +50006,11 @@ loc_25891C:                             ; CODE XREF: sub_2588E6+82   j
                 tst.w   d7
                 bpl.s   loc_258964
                 neg.w   d0
-loc_258964:                             ; CODE XREF: sub_2588E6+7A   j
+loc_258964:                             ; CODE XREF: collision_with_asteroid+7A   j
                 move.w  d0,$18(a5)
                 dbf     d2,loc_25891C
-loc_25896C:                             ; CODE XREF: sub_2588E6+3C   j
-                tst.w   (word_FFFE90).l
+loc_25896C:                             ; CODE XREF: collision_with_asteroid+3C   j
+                tst.w   (super_bubble_timer).l
                 bne.s   loc_2589DE
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_258996
@@ -50020,7 +50020,7 @@ loc_25896C:                             ; CODE XREF: sub_2588E6+3C   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_258996:                             ; CODE XREF: sub_2588E6+94   j
+loc_258996:                             ; CODE XREF: collision_with_asteroid+94   j
                 jsr     (sub_24B3CE).l
                 move.b  #1,(byte_FFFF60).l
                 move.w  #$FFFF,(word_FFFC9E).l
@@ -50032,11 +50032,11 @@ loc_258996:                             ; CODE XREF: sub_2588E6+94   j
                 cmpi.w  #$2000,d7
                 bcs.s   locret_2589DC
                 move.l  #off_1AFE0A,(jim_anim_offset).l
-locret_2589DC:                          ; CODE XREF: sub_2588E6+6   j
-                                        ; sub_2588E6+EA   j
+locret_2589DC:                          ; CODE XREF: collision_with_asteroid+6   j
+                                        ; collision_with_asteroid+EA   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2589DE:                             ; CODE XREF: sub_2588E6+8C   j
+loc_2589DE:                             ; CODE XREF: collision_with_asteroid+8C   j
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_258A00
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -50045,9 +50045,9 @@ loc_2589DE:                             ; CODE XREF: sub_2588E6+8C   j
                 jsr     (play_sound).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-locret_258A00:                          ; CODE XREF: sub_2588E6+FE   j
+locret_258A00:                          ; CODE XREF: collision_with_asteroid+FE   j
                 rts
-; End of function sub_2588E6
+; End of function collision_with_asteroid
 
 
 sub_258A02:                             ; DATA XREF: ROM:stru_25B804   o
@@ -50311,7 +50311,7 @@ loc_258CBC:                             ; CODE XREF: sub_258C50+26   j
 ; End of function sub_258C50
 
 
-sub_258CC2:                             ; DATA XREF: sub_2532FA+96   o
+sub_258CC2:                             ; DATA XREF: collision_with_submarine+96   o
                 move.w  d6,-(sp)
                 lea     (byte_C52C).l,a5
                 lea     (funchars_0_9).l,a6
@@ -50340,7 +50340,7 @@ loc_258D14:                             ; CODE XREF: sub_258CC2+3A   j
 ; End of function sub_258CC2
 
 
-sub_258D18:                             ; DATA XREF: sub_2532FA+BE   o
+sub_258D18:                             ; DATA XREF: collision_with_submarine+BE   o
                 move.w  d6,-(sp)
                 lea     (byte_C52D).l,a5
                 lea     (funchars_0_9).l,a6
@@ -50419,24 +50419,24 @@ locret_258E12:                          ; CODE XREF: oksub_258DC6+6   j
 ; End of function oksub_258DC6
 
 
-sub_258E14:                             ; DATA XREF: ROM:000037C0   o
+collision_with_wheel_intestinal:                             ; DATA XREF: ROM:000037C0   o
                                         ; ROM:000037C4   o ...
                 move.l  d0,-(sp)
                 move.w  #$D,d0
                 jsr     (damage_from_enemy).l ; Повреждения от врагов (но не все)
                 move.l  (sp)+,d0
                 rts
-; End of function sub_258E14
+; End of function collision_with_wheel_intestinal
 
 
-sub_258E24:                             ; DATA XREF: ROM:000037BC   o
+collision_with_stalactite:                             ; DATA XREF: ROM:000037BC   o
                 jsr     sub_25449C(pc)
                 clr.b   (a1)
                 jsr     (sub_24AE7A).l
                 move.w  #$14,d0
                 jsr     (damage_from_enemy).l ; Повреждения от врагов (но не все)
                 rts
-; End of function sub_258E24
+; End of function collision_with_stalactite
 
 
 sub_258E3C:                             ; DATA XREF: ROM:stru_25AE14   o
@@ -50597,7 +50597,7 @@ locret_25908E:                          ; CODE XREF: sub_259052+6   j
 ; End of function sub_259052
 
 
-sub_259090:                             ; DATA XREF: sub_259106+20   o
+sub_259090:                             ; DATA XREF: collision_with_evil_cat_soul+20   o
                 move.w  (jim_x).l,2(a1)
                 move.w  (jim_y).l,4(a1)
                 rts
@@ -50635,7 +50635,7 @@ locret_259104:                          ; CODE XREF: sub_2590A2+E   j
 ; End of function sub_2590A2
 
 
-sub_259106:                             ; DATA XREF: ROM:00003700   o
+collision_with_evil_cat_soul:                             ; DATA XREF: ROM:00003700   o
                 clr.b   6(a1)
                 clr.w   $18(a1)
                 clr.w   $1A(a1)
@@ -50653,16 +50653,16 @@ sub_259106:                             ; DATA XREF: ROM:00003700   o
                 move.l  #off_1AEC94,(jim_anim_offset).l
                 bra.w   loc_259172
 ; ---------------------------------------------------------------------------
-loc_259162:                             ; CODE XREF: sub_259106+4A   j
+loc_259162:                             ; CODE XREF: collision_with_evil_cat_soul+4A   j
                 move.l  #off_1B3D8A,(jim_anim_offset).l
                 st      (is_jim_blocked_by_enemy).l
-loc_259172:                             ; CODE XREF: sub_259106+58   j
+loc_259172:                             ; CODE XREF: collision_with_evil_cat_soul+58   j
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #$50,(jim_state).l ; 'P'
                 jsr     (sub_24B3CE).l
                 clr.b   (is_jim_fire).l
                 rts
-; End of function sub_259106
+; End of function collision_with_evil_cat_soul
 
 
 fire_to_evil_cat_soul_boss:                             ; DATA XREF: ROM:000038E8   o
@@ -50908,14 +50908,14 @@ loc_2594C8:                             ; CODE XREF: sub_2592EC+28   j
 ; End of function sub_2592EC
 
 
-sub_2594CE:                             ; DATA XREF: ROM:00003678   o
+collision_with_psycrow:                             ; DATA XREF: ROM:00003678   o
                 cmpi.b  #7,(byte_FFFD88).l
                 bcc.s   locret_2594E2
                 move.w  #5,d0
                 jsr     (damage_from_enemy).l ; Повреждения от врагов (но не все)
-locret_2594E2:                          ; CODE XREF: sub_2594CE+8   j
+locret_2594E2:                          ; CODE XREF: collision_with_psycrow+8   j
                 rts
-; End of function sub_2594CE
+; End of function collision_with_psycrow
 
 
 fire_to_psycrow:                             ; DATA XREF: ROM:00003860   o
@@ -50962,12 +50962,12 @@ locret_259574:                          ; CODE XREF: whip_to_psycrow+8   j
 ; End of function whip_to_psycrow
 
 
-sub_259576:                             ; DATA XREF: ROM:0000367C   o
-                jsr     (sub_24B000).l
+collision_with_psycrow_hook:                             ; DATA XREF: ROM:0000367C   o
+                jsr     (do_damage_from_enemy).l
                 clr.b   (a1)
                 jsr     (sub_24AE7A).l
                 rts
-; End of function sub_259576
+; End of function collision_with_psycrow_hook
 
 
 sub_259586:                             ; DATA XREF: ROM:00003864   o
@@ -52005,7 +52005,7 @@ loc_25A04E:                             ; CODE XREF: sub_259DFE+58E   j
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_25A0C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                pea     (dword_28).w
+                pea     ($28).w
                 jsr     (sub_2CBD12).l
                 jsr     (play_sound).l
                 addq.l  #4,sp
@@ -52399,7 +52399,7 @@ stru_25A67C:    dc.b $86                ; field_0
                 dc.l off_0              ; proc_address
 object_spacesuit:    dc.b $69                ; field_0
                                         ; DATA XREF: spawn_spacesuit   o
-                                        ; sub_252A0C+9E   o
+                                        ; collision_with_fan+9E   o
                 dc.b 0                  ; field_1
                 dc.b 1                  ; field_2
                 dc.b 0                  ; field_3
@@ -53843,8 +53843,8 @@ stru_25AF4C:    dc.b $93                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25AF64:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_25279A+A6   o
-                                        ; sub_25816A+A0   o
+                                        ; DATA XREF: collision_with_butt_crab_32+A6   o
+                                        ; collision_with_water_monster+A0   o
                 dc.b 0                  ; field_1
                 dc.b $40                ; field_2
                 dc.b 0                  ; field_3
@@ -54276,7 +54276,7 @@ stru_25B1EC:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B204:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_253706+590   o
+                                        ; DATA XREF: collision_with_diamond+590   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -54521,7 +54521,7 @@ object_sphere_electro:    dc.b $63                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B384:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_253012+28   o
+                                        ; DATA XREF: collision_with_sphere_electro+28   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b $20                ; field_3
@@ -55026,8 +55026,8 @@ object_sponge:    dc.b $43                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; proc_address
 stru_25B69C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_2532FA+8A   o
-                                        ; sub_2532FA+B2   o
+                                        ; DATA XREF: collision_with_submarine+8A   o
+                                        ; collision_with_submarine+B2   o
                 dc.b 0                  ; field_1
                 dc.b 8                  ; field_2
                 dc.b 0                  ; field_3
@@ -55180,7 +55180,7 @@ stru_25B774:    dc.b 1                  ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l sub_2588B0         ; proc_address
 stru_25B78C:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_2588E6+3E   o
+                                        ; DATA XREF: collision_with_asteroid+3E   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -55255,7 +55255,7 @@ stru_25B7EC:    dc.b $86                ; field_0
                 dc.b 0                  ; skipped_2
                 dc.l sub_258518         ; proc_address
 stru_25B804:    dc.b $86                ; field_0
-                                        ; DATA XREF: sub_2588E6+1A   o
+                                        ; DATA XREF: collision_with_asteroid+1A   o
                 dc.b 0                  ; field_1
                 dc.b 0                  ; field_2
                 dc.b 0                  ; field_3
@@ -56875,7 +56875,7 @@ byte_25D9CC:    dc.b   0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0
                 dc.b   2,$52,  2,$52,  2,$56,  2,$56,  2,$59,  2,$59,  2,$5D,  2,$5D,  2,$61,  2,$61,  2,$65,  2,$65,  2,$69,  2,$69,  2,$6D,  2,$6D
                 dc.b   2,$71,  2,$71,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58
 byte_25E1E0:    dc.b $64,$66,$68,$6A,$6B,$6D,$6F,$71,$73,$75,$76,$78,$7A,$7C,$7E,$80,$81,$83,$85,$87,$89,$8B,$8C,$8E,$90,$92,$94,$96,$97,$99,$9B,$9D
-                                        ; DATA XREF: sub_253706+11C   o
+                                        ; DATA XREF: collision_with_diamond+11C   o
                                         ; sub_2570E2+E   o
                 dc.b $69,$6B,$6C,$6E,$6F,$71,$72,$74,$75,$77,$78,$7A,$7B,$7D,$7E,$80,$81,$83,$84,$86,$87,$89,$8A,$8C,$8D,$8F,$90,$92,$93,$95,$96,$98
                 dc.b $6F,$70,$71,$72,$74,$75,$76,$77,$78,$79,$7A,$7B,$7D,$7E,$7F,$80,$81,$82,$83,$84,$86,$87,$88,$89,$8A,$8B,$8C,$8D,$8F,$90,$91,$92

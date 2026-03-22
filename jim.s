@@ -24266,7 +24266,7 @@ word_1B83A2:    dc.w     0, $204, $208, $22A, $22C,  $2E,  $4E,  $AE,  $EE
 word_1B83B4:    dc.w  $208, $22A, $22C,  $2E,  $4E,  $AE,  $EE, $EA0, $202, $204, $208, $22A, $22C,  $2E,  $4E,  $AE,  $EE,    0, $200, $404, $6EA, $806, $C68
                                         ; DATA XREF: ure_the_best_screen+210   o
 byte_1B83E2:
-    binclude "binaries/rnc_1B83E2.bin"
+    binclude "binaries/rnc_archives/rnc_1B83E2.bin"
                 dc.b 0
 word_1B87C2:    dc.w  $CCC,    0, $22C,    6,   $A, $66E, $A20, $C40, $C60, $6AE, $222, $444, $666, $888, $AAA, $EEE, $E0E,    0, $604,    8,   $C, $A8E, $A20, $A40, $A60, $EA8, $C84, $444, $666, $888, $AAA, $EEE
                                         ; DATA XREF: sub_259DFE+1D6   o
@@ -24331,251 +24331,251 @@ word_1B8A22:    dc.w     0,    0,    0,    0,    0,    0,    0,    0,    0,    0
                 dc.w     0,    0,    0,    0, $DD0, $DD0,  $DD,$DD00,   $D,$D000,  $DD,$DD00, $DD0, $DD0,    0,    0,    0,    0, $DD0, $DD0, $DD0, $DD0,  $DD,$DD00,   $D,$D000,   $D,$D000,   $D,$D000,    0,    0
                 dc.w     0,    0,    0,    0, $DDD,$DDD0,    0,$DD00,   $D,$D000,  $DD,    0, $DDD,$DDD0,    0,    0
 njc_backmap_rnc:
-    binclude "binaries/rnc_1B9182.bin"
+    binclude "binaries/rnc_archives/rnc_1B9182.bin"
     
                 dc.b 0
 wth_backmap_rnc:
-    binclude "binaries/rnc_1B9842.bin"
+    binclude "binaries/rnc_archives/rnc_1B9842.bin"
     
                 dc.b 0
 wth_snw_backmap_rnc:
-    binclude "binaries/rnc_1B9FAE.bin"
+    binclude "binaries/rnc_archives/rnc_1B9FAE.bin"
     
 wth_evl_backmap_rnc:
-    binclude "binaries/rnc_1BA52A.bin"
+    binclude "binaries/rnc_archives/rnc_1BA52A.bin"
     
 snt_backmap_rnc:
-    binclude "binaries/rnc_1BA660.bin"
+    binclude "binaries/rnc_archives/rnc_1BA660.bin"
     
 pete_backmap_rnc:
-    binclude "binaries/rnc_1BAB2C.bin"
+    binclude "binaries/rnc_archives/rnc_1BAB2C.bin"
     
                 dc.b 0
 btv_sfb_backmap_rnc:
-    binclude "binaries/rnc_1BB102.bin"
+    binclude "binaries/rnc_archives/rnc_1BB102.bin"
     
 btv_heli_backmap_rnc:
-    binclude "binaries/rnc_1BB7A8.bin"
+    binclude "binaries/rnc_archives/rnc_1BB7A8.bin"
     
 lvl5_backmap_rnc:
-    binclude "binaries/rnc_1BB9BC.bin"
+    binclude "binaries/rnc_archives/rnc_1BB9BC.bin"
     
                 dc.b 0
 lvl5_chi_backmap_rnc:
-    binclude "binaries/rnc_1BC022.bin"
+    binclude "binaries/rnc_archives/rnc_1BC022.bin"
     
 drk_backmap_rnc:
-    binclude "binaries/rnc_1BC3EE.bin"
+    binclude "binaries/rnc_archives/rnc_1BC3EE.bin"
     
 ints_backmap_rnc:
-    binclude "binaries/rnc_1BC620.bin"
+    binclude "binaries/rnc_archives/rnc_1BC620.bin"
     
 dwn_backmap_rnc:
-    binclude "binaries/rnc_1BC8D6.bin"
+    binclude "binaries/rnc_archives/rnc_1BC8D6.bin"
     
 andy_backmap_rnc:
-    binclude "binaries/rnc_1BCEEA.bin"
+    binclude "binaries/rnc_archives/rnc_1BCEEA.bin"
     
 byte_1BD828:
-    binclude "binaries/rnc_1BD828.bin"
+    binclude "binaries/rnc_archives/rnc_1BD828.bin"
     
                 dc.b 0
 byte_1BD8C0:
-    binclude "binaries/rnc_1BD8C0.bin"
+    binclude "binaries/rnc_archives/rnc_1BD8C0.bin"
     
                 dc.b 0
 byte_1BD952:
-    binclude "binaries/rnc_1BD952.bin"
+    binclude "binaries/rnc_archives/rnc_1BD952.bin"
     
 rnc_1BDC32:
-    binclude "binaries/rnc_1BDC32.bin"
+    binclude "binaries/rnc_archives/rnc_1BDC32.bin"
     
 byte_1BDECA:
-    binclude "binaries/rnc_1BDECA.bin"
+    binclude "binaries/rnc_archives/rnc_1BDECA.bin"
     
                 dc.b 0
 byte_1BE020:
-    binclude "binaries/rnc_1BE020.bin"
+    binclude "binaries/rnc_archives/rnc_1BE020.bin"
     
 byte_1BE3E4:
-    binclude "binaries/rnc_1BE3E4.bin"
+    binclude "binaries/rnc_archives/rnc_1BE3E4.bin"
     
 byte_1BE7A8:
-    binclude "binaries/rnc_1BE7A8.bin"
+    binclude "binaries/rnc_archives/rnc_1BE7A8.bin"
     
                 dc.b 0
 byte_1BEB22:
-    binclude "binaries/rnc_1BEB22.bin"
+    binclude "binaries/rnc_archives/rnc_1BEB22.bin"
     
 byte_1BEC9E:
-    binclude "binaries/rnc_1BEC9E.bin"
+    binclude "binaries/rnc_archives/rnc_1BEC9E.bin"
     
                 dc.b 0
 byte_1BEE9C:
-    binclude "binaries/rnc_1BEE9C.bin"
+    binclude "binaries/rnc_archives/rnc_1BEE9C.bin"
     
 byte_1BF482:
-    binclude "binaries/rnc_1BF482.bin"
+    binclude "binaries/rnc_archives/rnc_1BF482.bin"
     
 byte_1BF5AC:
-    binclude "binaries/rnc_1BF5AC.bin"
+    binclude "binaries/rnc_archives/rnc_1BF5AC.bin"
     
                 dc.b 0
 byte_1BF744:
-    binclude "binaries/rnc_1BF744.bin"
+    binclude "binaries/rnc_archives/rnc_1BF744.bin"
     
                 dc.b 0
 cheat_photo_rnc:
-    binclude "binaries/rnc_1BF934.bin"
+    binclude "binaries/rnc_archives/rnc_1BF934.bin"
     
 byte_1BFB76:
-    binclude "binaries/rnc_1BFB76.bin"
+    binclude "binaries/rnc_archives/rnc_1BFB76.bin"
     
                 dc.b 0
 byte_1C3550:
-    binclude "binaries/rnc_1C3550.bin"
+    binclude "binaries/rnc_archives/rnc_1C3550.bin"
     
                 dc.b 0
 byte_1C5BDC:
-    binclude "binaries/rnc_1C5BDC.bin"
+    binclude "binaries/rnc_archives/rnc_1C5BDC.bin"
     
 byte_1C944C:
-    binclude "binaries/rnc_1C944C.bin"
+    binclude "binaries/rnc_archives/rnc_1C944C.bin"
     
                 dc.b 0
 njc_objects_rnc:
-    binclude "binaries/rnc_1CC806.bin"
+    binclude "binaries/rnc_archives/rnc_1CC806.bin"
     
 wth_objects_rnc:
-    binclude "binaries/rnc_1CD184.bin"
+    binclude "binaries/rnc_archives/rnc_1CD184.bin"
     
 snt_objects_rnc:
-    binclude "binaries/rnc_1CDA30.bin"
+    binclude "binaries/rnc_archives/rnc_1CDA30.bin"
     
 pete_objects_rnc:
-    binclude "binaries/rnc_1CDA5E.bin"
+    binclude "binaries/rnc_archives/rnc_1CDA5E.bin"
     
                 dc.b 0
 btv_objects_rnc:
-    binclude "binaries/rnc_1CE08E.bin"
+    binclude "binaries/rnc_archives/rnc_1CE08E.bin"
     
 lvl5_objects_rnc:
-    binclude "binaries/rnc_1CE990.bin"
+    binclude "binaries/rnc_archives/rnc_1CE990.bin"
     
                 dc.b 0
 ints_objects_rnc:
-    binclude "binaries/rnc_1CF208.bin"
+    binclude "binaries/rnc_archives/rnc_1CF208.bin"
     
 dwn_objects_rnc:
-    binclude "binaries/rnc_1CF872.bin"
+    binclude "binaries/rnc_archives/rnc_1CF872.bin"
     
 andy_objects_rnc:
-    binclude "binaries/rnc_1CFE34.bin"
+    binclude "binaries/rnc_archives/rnc_1CFE34.bin"
     
 njc_tilemap:
-    binclude "binaries/njc_tilemap.bin"
+    binclude "binaries/tilemap/njc_tilemap.bin"
     
 wth_tilemap:
-    binclude "binaries/wth_tilemap.bin"
+    binclude "binaries/tilemap/wth_tilemap.bin"
     
 snt_tilemap:
-    binclude "binaries/snt_tilemap.bin"
+    binclude "binaries/tilemap/snt_tilemap.bin"
     
 pete_tilemap:
-    binclude "binaries/pete_tilemap.bin"
+    binclude "binaries/tilemap/pete_tilemap.bin"
     
 btv_tilemap:
-    binclude "binaries/btv_tilemap.bin"
+    binclude "binaries/tilemap/btv_tilemap.bin"
     
 lvl5_tilemap:
-    binclude "binaries/lvl5_tilemap.bin"
+    binclude "binaries/tilemap/lvl5_tilemap.bin"
     
 ints_tilemap:
-    binclude "binaries/ints_tilemap.bin"
+    binclude "binaries/tilemap/ints_tilemap.bin"
     
 dwn_tilemap:
-    binclude "binaries/dwn_tilemap.bin"
+    binclude "binaries/tilemap/dwn_tilemap.bin"
     
 andy_tilemap:
-    binclude "binaries/andy_tilemap.bin"
+    binclude "binaries/tilemap/andy_tilemap.bin"
     
 dma_208044:
-    binclude "binaries/dma_208044.bin"
+    binclude "binaries/dma/dma_208044.bin"
     
 dma_208244:
-    binclude "binaries/dma_208244.bin"
+    binclude "binaries/dma/dma_208244.bin"
     
 dma_208444:
-    binclude "binaries/dma_208444.bin"
+    binclude "binaries/dma/dma_208444.bin"
     
 dma_208644:
-    binclude "binaries/dma_208644.bin"
+    binclude "binaries/dma/dma_208644.bin"
     
 dma_208844:
-    binclude "binaries/dma_208844.bin"
+    binclude "binaries/dma/dma_208844.bin"
     
 dma_208A44:
-    binclude "binaries/dma_208A44.bin"
+    binclude "binaries/dma/dma_208A44.bin"
     
 dma_208C44:
-    binclude "binaries/dma_208C44.bin"
+    binclude "binaries/dma/dma_208C44.bin"
     
 dma_208E44:
-    binclude "binaries/dma_208E44.bin"
+    binclude "binaries/dma/dma_208E44.bin"
     
 dma_209044:
-    binclude "binaries/dma_209044.bin"
+    binclude "binaries/dma/dma_209044.bin"
     
 dma_2090E4:
-    binclude "binaries/dma_2090E4.bin"
+    binclude "binaries/dma/dma_2090E4.bin"
     
 dma_209184:
-    binclude "binaries/dma_209184.bin"
+    binclude "binaries/dma/dma_209184.bin"
     
 dma_209224:
-    binclude "binaries/dma_209224.bin"
+    binclude "binaries/dma/dma_209224.bin"
     
 dma_2092C4:
-    binclude "binaries/dma_2092C4.bin"
+    binclude "binaries/dma/dma_2092C4.bin"
     
 dma_209364:
-    binclude "binaries/dma_209364.bin"
+    binclude "binaries/dma/dma_209364.bin"
     
 dma_209404:
-    binclude "binaries/dma_209404.bin"
+    binclude "binaries/dma/dma_209404.bin"
     
 dma_2094A4:
-    binclude "binaries/dma_2094A4.bin"
+    binclude "binaries/dma/dma_2094A4.bin"
     
 dma_209544:
-    binclude "binaries/dma_209544.bin"
+    binclude "binaries/dma/dma_209544.bin"
     
 dma_2095E4:
-    binclude "binaries/dma_2095E4.bin"
+    binclude "binaries/dma/dma_2095E4.bin"
     
 dma_209684:
-    binclude "binaries/dma_209684.bin"
+    binclude "binaries/dma/dma_209684.bin"
     
 dma_209884:
-    binclude "binaries/dma_209884.bin"
+    binclude "binaries/dma/dma_209884.bin"
     
 dma_209A84:
-    binclude "binaries/dma_209A84.bin"
+    binclude "binaries/dma/dma_209A84.bin"
     
 dma_209C84:
-    binclude "binaries/dma_209C84.bin"
+    binclude "binaries/dma/dma_209C84.bin"
     
 dma_209E84:
-    binclude "binaries/dma_209E84.bin"
+    binclude "binaries/dma/dma_209E84.bin"
     
 dma_20A084:
-    binclude "binaries/dma_20A084.bin"
+    binclude "binaries/dma/dma_20A084.bin"
     
 dma_20A284:
-    binclude "binaries/dma_20A284.bin"
+    binclude "binaries/dma/dma_20A284.bin"
     
 dma_20A484:
-    binclude "binaries/dma_20A484.bin"
+    binclude "binaries/dma/dma_20A484.bin"
     
 dma_20A684:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,$55,$55,  0,  5,$43,$34,$50,$55,$31,$13,$55,$54,$11,$11,$45,$54,$31,$13,$45,$31,$11,$11,$13
                                         ; DATA XREF: ROM:000050E6   t
@@ -24590,105 +24590,105 @@ dma_20A6E4:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  5,  0
                                         ; DATA XREF: ROM:00005148   t
                                         ; ROM:0000514A   t ...
 njc_graphic_rnc:
-    binclude "binaries/rnc_20A704.bin"
+    binclude "binaries/rnc_archives/rnc_20A704.bin"
     
 wth_graphic_rnc:
-    binclude "binaries/rnc_20D654.bin"
+    binclude "binaries/rnc_archives/rnc_20D654.bin"
     
 snt_graphic_rnc:
-    binclude "binaries/rnc_21162E.bin"
+    binclude "binaries/rnc_archives/rnc_21162E.bin"
     
 pete_graphic_rnc:
-    binclude "binaries/rnc_21432C.bin"
+    binclude "binaries/rnc_archives/rnc_21432C.bin"
     
 btv_graphic_rnc:
-    binclude "binaries/rnc_2175F0.bin"
+    binclude "binaries/rnc_archives/rnc_2175F0.bin"
     
                 dc.b 0
 lvl5_graphic_rnc:
-    binclude "binaries/rnc_21A310.bin"
+    binclude "binaries/rnc_archives/rnc_21A310.bin"
     
 ints_graphic_rnc:
-    binclude "binaries/rnc_21DCEA.bin"
+    binclude "binaries/rnc_archives/rnc_21DCEA.bin"
     
 dwn_graphic_rnc:
-    binclude "binaries/rnc_221782.bin"
+    binclude "binaries/rnc_archives/rnc_221782.bin"
     
                 dc.b 0
 andy_graphic_rnc:
-    binclude "binaries/rnc_224FB2.bin"
+    binclude "binaries/rnc_archives/rnc_224FB2.bin"
     
                 dc.b 0
 njc_map_rnc:
-    binclude "binaries/rnc_22715E.bin"
+    binclude "binaries/rnc_archives/rnc_22715E.bin"
     
                 dc.b 0
 wth_map_rnc:
-    binclude "binaries/rnc_22B43A.bin"
+    binclude "binaries/rnc_archives/rnc_22B43A.bin"
     
 wth_snw_map_rnc:
-    binclude "binaries/rnc_22ED26.bin"
+    binclude "binaries/rnc_archives/rnc_22ED26.bin"
     
 wth_evl_map_rnc:
-    binclude "binaries/rnc_22F04E.bin"
+    binclude "binaries/rnc_archives/rnc_22F04E.bin"
     
 snt_map_rnc:
-    binclude "binaries/rnc_22F26A.bin"
+    binclude "binaries/rnc_archives/rnc_22F26A.bin"
     
                 dc.b 0
 pete_map_rnc:
-    binclude "binaries/rnc_2307B2.bin"
+    binclude "binaries/rnc_archives/rnc_2307B2.bin"
     
 btv_sfb_map_rnc:
-    binclude "binaries/rnc_232720.bin"
+    binclude "binaries/rnc_archives/rnc_232720.bin"
     
                 dc.b 0
 btv_heli_map_rnc:
-    binclude "binaries/rnc_2358EC.bin"
+    binclude "binaries/rnc_archives/rnc_2358EC.bin"
     
 lvl5_lab_map_rnc:
-    binclude "binaries/rnc_236E7E.bin"
+    binclude "binaries/rnc_archives/rnc_236E7E.bin"
     
                 dc.b 0
 lvl5_chi_map_rnc:
-    binclude "binaries/rnc_239AE8.bin"
+    binclude "binaries/rnc_archives/rnc_239AE8.bin"
     
 lvl5_nkd_map_rnc:
-    binclude "binaries/rnc_23A20A.bin"
+    binclude "binaries/rnc_archives/rnc_23A20A.bin"
     
                 dc.b 0
 ints_map_rnc:
-    binclude "binaries/rnc_23B346.bin"
+    binclude "binaries/rnc_archives/rnc_23B346.bin"
     
 dwn_sea_map_rnc:
-    binclude "binaries/rnc_23EBE4.bin"
+    binclude "binaries/rnc_archives/rnc_23EBE4.bin"
     
 dwn_pod_map_rnc:
-    binclude "binaries/rnc_241B38.bin"
+    binclude "binaries/rnc_archives/rnc_241B38.bin"
     
 andy_map_rnc:
-    binclude "binaries/rnc_2447D6.bin"
+    binclude "binaries/rnc_archives/rnc_2447D6.bin"
     
                 dc.b 0
 psy_map_rnc:
-    binclude "binaries/rnc_244A42.bin"
+    binclude "binaries/rnc_archives/rnc_244A42.bin"
     
                 dc.b 0
 drk1_map_rnc:
-    binclude "binaries/rnc_244C00.bin"
+    binclude "binaries/rnc_archives/rnc_244C00.bin"
     
 drk2_map_rnc:
-    binclude "binaries/rnc_244EBA.bin"
+    binclude "binaries/rnc_archives/rnc_244EBA.bin"
     
                 dc.b 0
 drk3_map_rnc:
-    binclude "binaries/rnc_2450CC.bin"
+    binclude "binaries/rnc_archives/rnc_2450CC.bin"
     
 drk4_map_rnc:
-    binclude "binaries/rnc_2452D4.bin"
+    binclude "binaries/rnc_archives/rnc_2452D4.bin"
     
 drk5_map_rnc:
-    binclude "binaries/rnc_24543E.bin"
+    binclude "binaries/rnc_archives/rnc_24543E.bin"
     
                 dc.b 0
 
@@ -51374,18 +51374,18 @@ unpack_rnc:                             ; CODE XREF: sub_2476AC+F8   p
                 move.b  (a3),d6
                 moveq   #2,d0
                 moveq   #2,d1
-                bsr.w   sub_259B7A
+                bsr.w   input_bits
 loc_259A08:                             ; CODE XREF: unpack_rnc+158   j
                 swap    d4
                 movea.l a2,a0
-                bsr.w   sub_259B9E
+                bsr.w   make_huftable
                 lea     $80(a2),a0
-                bsr.w   sub_259B9E
+                bsr.w   make_huftable
                 lea     $100(a2),a0
-                bsr.w   sub_259B9E
-                moveq   #$FFFFFFFF,d0
+                bsr.w   make_huftable
+                moveq   #-1,d0
                 moveq   #$10,d1
-                bsr.w   sub_259B7A
+                bsr.w   input_bits
                 move.w  d0,d4
                 subq.w  #1,d4
                 bra.w   loc_259ABC
@@ -51393,12 +51393,12 @@ loc_259A08:                             ; CODE XREF: unpack_rnc+158   j
 loc_259A30:                             ; CODE XREF: unpack_rnc:loc_259B30   j
                 lea     $80(a2),a0
                 moveq   #0,d0
-                bsr.w   sub_259B44
+                bsr.w   input_value
                 move.w  d5,d3
                 addq.w  #1,d0
                 sub.w   d0,d3
                 lea     $100(a2),a0
-                bsr.w   sub_259B44
+                bsr.w   input_value
                 addq.w  #2,d0
 loc_259A4A:                             ; CODE XREF: unpack_rnc+DC   j
                 andi.w  #$3FFF,d3
@@ -51450,7 +51450,7 @@ loc_259AB4:                             ; CODE XREF: unpack_rnc+D2   j
 loc_259ABC:                             ; CODE XREF: unpack_rnc+4E   j
                                         ; unpack_rnc+90   j
                 movea.l a2,a0
-                bsr.w   sub_259B44
+                bsr.w   input_value
                 tst.w   d0
                 beq.s   loc_259B30
 loc_259AC6:                             ; CODE XREF: unpack_rnc+13C   j
@@ -51509,17 +51509,17 @@ loc_259B30:                             ; CODE XREF: unpack_rnc+E6   j
 ; End of function unpack_rnc
 
 
-sub_259B44:                             ; CODE XREF: unpack_rnc+58   p
+input_value:                             ; CODE XREF: unpack_rnc+58   p
                                         ; unpack_rnc+66   p ...
                 move.w  (a0)+,d0
                 and.w   d6,d0
                 sub.w   (a0)+,d0
-                bne.s   sub_259B44
+                bne.s   input_value
                 move.b  $3C(a0),d1
                 sub.b   d1,d7
                 bge.s   loc_259B56
-                bsr.s   sub_259B86
-loc_259B56:                             ; CODE XREF: sub_259B44+E   j
+                bsr.s   do_input_bits
+loc_259B56:                             ; CODE XREF: input_value+E   j
                 lsr.l   d1,d6
                 move.b  $3D(a0),d0
                 cmpi.b  #2,d0
@@ -51531,29 +51531,29 @@ loc_259B56:                             ; CODE XREF: sub_259B44+E   j
                 and.w   d6,d0
                 sub.b   d1,d7
                 bge.s   loc_259B74
-                bsr.s   sub_259B86
-loc_259B74:                             ; CODE XREF: sub_259B44+2C   j
+                bsr.s   do_input_bits
+loc_259B74:                             ; CODE XREF: input_value+2C   j
                 lsr.l   d1,d6
                 bset    d2,d0
-locret_259B78:                          ; CODE XREF: sub_259B44+1C   j
+locret_259B78:                          ; CODE XREF: input_value+1C   j
                 rts
-; End of function sub_259B44
+; End of function input_value
 
 
-sub_259B7A:                             ; CODE XREF: unpack_rnc+26   p
+input_bits:                             ; CODE XREF: unpack_rnc+26   p
                                         ; unpack_rnc+46   p ...
                 and.w   d6,d0
                 sub.b   d1,d7
                 bge.s   loc_259B82
-                bsr.s   sub_259B86
-loc_259B82:                             ; CODE XREF: sub_259B7A+4   j
+                bsr.s   do_input_bits
+loc_259B82:                             ; CODE XREF: input_bits+4   j
                 lsr.l   d1,d6
                 rts
-; End of function sub_259B7A
+; End of function input_bits
 
 
-sub_259B86:                             ; CODE XREF: sub_259B44+10   p
-                                        ; sub_259B44+2E   p ...
+do_input_bits:                             ; CODE XREF: input_value+10   p
+                                        ; input_value+2E   p ...
                 add.b   d1,d7
                 lsr.l   d7,d6
                 swap    d6
@@ -51566,24 +51566,24 @@ sub_259B86:                             ; CODE XREF: sub_259B44+10   p
                 moveq   #$10,d7
                 sub.b   d1,d7
                 rts
-; End of function sub_259B86
+; End of function do_input_bits
 
 
-sub_259B9E:                             ; CODE XREF: unpack_rnc+2E   p
+make_huftable:                             ; CODE XREF: unpack_rnc+2E   p
                                         ; unpack_rnc+36   p ...
                 moveq   #$1F,d0
                 moveq   #5,d1
-                bsr.s   sub_259B7A
+                bsr.s   input_bits
                 subq.w  #1,d0
                 bmi.s   locret_259C24
                 move.w  d0,d2
                 move.w  d0,d3
                 lea     -$10(sp),sp
                 movea.l sp,a1
-loc_259BB2:                             ; CODE XREF: sub_259B9E+1C   j
+loc_259BB2:                             ; CODE XREF: make_huftable+1C   j
                 moveq   #$F,d0
                 moveq   #4,d1
-                bsr.s   sub_259B7A
+                bsr.s   input_bits
                 move.b  d0,(a1)+
                 dbf     d2,loc_259BB2
                 moveq   #1,d0
@@ -51591,10 +51591,10 @@ loc_259BB2:                             ; CODE XREF: sub_259B9E+1C   j
                 moveq   #1,d1
                 moveq   #0,d2
                 movem.l d5-d7,-(sp)
-loc_259BCA:                             ; CODE XREF: sub_259B9E+7C   j
+loc_259BCA:                             ; CODE XREF: make_huftable+7C   j
                 move.w  d3,d4
                 lea     $C(sp),a1
-loc_259BD0:                             ; CODE XREF: sub_259B9E:loc_259C0E   j
+loc_259BD0:                             ; CODE XREF: make_huftable:loc_259C0E   j
                 cmp.b   (a1)+,d1
                 bne.s   loc_259C0E
                 moveq   #1,d5
@@ -51605,7 +51605,7 @@ loc_259BD0:                             ; CODE XREF: sub_259B9E:loc_259C0E   j
                 swap    d5
                 move.w  d1,d7
                 subq.w  #1,d7
-loc_259BE4:                             ; CODE XREF: sub_259B9E+4A   j
+loc_259BE4:                             ; CODE XREF: make_huftable+4A   j
                 roxl.w  #1,d5
                 roxr.w  #1,d6
                 dbf     d7,loc_259BE4
@@ -51623,7 +51623,7 @@ loc_259BE4:                             ; CODE XREF: sub_259B9E+4A   j
                 subq.w  #1,d6
                 move.w  d6,$3E(a0)
                 add.l   d0,d2
-loc_259C0E:                             ; CODE XREF: sub_259B9E+34   j
+loc_259C0E:                             ; CODE XREF: make_huftable+34   j
                 dbf     d4,loc_259BD0
                 lsr.l   #1,d0
                 addq.b  #1,d1
@@ -51631,9 +51631,9 @@ loc_259C0E:                             ; CODE XREF: sub_259B9E+34   j
                 bne.s   loc_259BCA
                 movem.l (sp)+,d5-d7
                 lea     $10(sp),sp
-locret_259C24:                          ; CODE XREF: sub_259B9E+8   j
+locret_259C24:                          ; CODE XREF: make_huftable+8   j
                 rts
-; End of function sub_259B9E
+; End of function make_huftable
 
 
 unpack_rnc_v2:                             ; CODE XREF: sub_2476AC+D2   p
@@ -59295,235 +59295,235 @@ DIGITAL_TBL_Z80:dc.b 5                  ; SAMPFLAGS
                 dc.w 0                  ; SAMPLOOP
                 dc.w 0                  ; SAMPEND
 snd_for_26ad68:
-    binclude "binaries/snd_26B1AC.bin"
+    binclude "binaries/sounds/snd_26B1AC.bin"
     
 snd_for_26ad74:
-    binclude "binaries/snd_26BD2A.bin"
+    binclude "binaries/sounds/snd_26BD2A.bin"
     
 snd_for_26ad80:
-    binclude "binaries/snd_26C793.bin"
+    binclude "binaries/sounds/snd_26C793.bin"
     
 snd_for_26ad8c:
-    binclude "binaries/snd_26D2E5.bin"
+    binclude "binaries/sounds/snd_26D2E5.bin"
     
 snd_for_26ad98:
-    binclude "binaries/snd_26E5C0.bin"
+    binclude "binaries/sounds/snd_26E5C0.bin"
     
 snd_for_26ada4:
-    binclude "binaries/snd_26ED6B.bin"
+    binclude "binaries/sounds/snd_26ED6B.bin"
     
 snd_for_26adb0:
-    binclude "binaries/snd_26F5D4.bin"
+    binclude "binaries/sounds/snd_26F5D4.bin"
     
 snd_for_26adbc:
-    binclude "binaries/snd_26F848.bin"
+    binclude "binaries/sounds/snd_26F848.bin"
     
 snd_for_26adc8:
-    binclude "binaries/snd_27015C.bin"
+    binclude "binaries/sounds/snd_27015C.bin"
     
 snd_for_26add4:
-    binclude "binaries/snd_270EFB.bin"
+    binclude "binaries/sounds/snd_270EFB.bin"
     
 snd_for_26ade0:
-    binclude "binaries/snd_27194A.bin"
+    binclude "binaries/sounds/snd_27194A.bin"
     
 snd_for_26adec:
-    binclude "binaries/snd_2721CD.bin"
+    binclude "binaries/sounds/snd_2721CD.bin"
     
 snd_for_26adf8:
-    binclude "binaries/snd_2738C4.bin"
+    binclude "binaries/sounds/snd_2738C4.bin"
     
 snd_for_26ae04:
-    binclude "binaries/snd_274BB1.bin"
+    binclude "binaries/sounds/snd_274BB1.bin"
     
 snd_for_26ae10:
-    binclude "binaries/snd_27663B.bin"
+    binclude "binaries/sounds/snd_27663B.bin"
     
 snd_for_26ae1c:
-    binclude "binaries/snd_277B90.bin"
+    binclude "binaries/sounds/snd_277B90.bin"
     
 snd_for_26ae28:
-    binclude "binaries/snd_27927F.bin"
+    binclude "binaries/sounds/snd_27927F.bin"
     
 snd_for_26ae34:
-    binclude "binaries/snd_27B638.bin"
+    binclude "binaries/sounds/snd_27B638.bin"
     
 snd_for_26ae40:
-    binclude "binaries/snd_27C35F.bin"
+    binclude "binaries/sounds/snd_27C35F.bin"
     
 snd_for_26ae4c:
-    binclude "binaries/snd_27C9A6.bin"
+    binclude "binaries/sounds/snd_27C9A6.bin"
     
 snd_for_26ae58:
-    binclude "binaries/snd_27CE63.bin"
+    binclude "binaries/sounds/snd_27CE63.bin"
     
 snd_for_26ae64:
-    binclude "binaries/snd_27E16D.bin"
+    binclude "binaries/sounds/snd_27E16D.bin"
     
 snd_for_26ae70:
-    binclude "binaries/snd_27E83C.bin"
+    binclude "binaries/sounds/snd_27E83C.bin"
     
 snd_for_26ae7c:
-    binclude "binaries/snd_27EDA9.bin"
+    binclude "binaries/sounds/snd_27EDA9.bin"
     
 snd_for_26ae88:
-    binclude "binaries/snd_27F147.bin"
+    binclude "binaries/sounds/snd_27F147.bin"
     
 snd_for_26ae94:
-    binclude "binaries/snd_280AE0.bin"
+    binclude "binaries/sounds/snd_280AE0.bin"
     
 snd_for_26aea0:
-    binclude "binaries/snd_281432.bin"
+    binclude "binaries/sounds/snd_281432.bin"
     
 snd_for_26aeac:
-    binclude "binaries/snd_282D46.bin"
+    binclude "binaries/sounds/snd_282D46.bin"
     
 snd_for_26aeb8:
-    binclude "binaries/snd_28431A.bin"
+    binclude "binaries/sounds/snd_28431A.bin"
     
 snd_for_26aec4:
-    binclude "binaries/snd_284AC8.bin"
+    binclude "binaries/sounds/snd_284AC8.bin"
     
 snd_for_26aed0:
-    binclude "binaries/snd_285A70.bin"
+    binclude "binaries/sounds/snd_285A70.bin"
     
 snd_for_26aedc:
-    binclude "binaries/snd_28662E.bin"
+    binclude "binaries/sounds/snd_28662E.bin"
     
 snd_for_26aee8:
-    binclude "binaries/snd_286F1F.bin"
+    binclude "binaries/sounds/snd_286F1F.bin"
     
 snd_for_26aef4:
-    binclude "binaries/snd_287F5A.bin"
+    binclude "binaries/sounds/snd_287F5A.bin"
     
 snd_for_26af00:
-    binclude "binaries/snd_289341.bin"
+    binclude "binaries/sounds/snd_289341.bin"
     
 snd_for_26af0c:
-    binclude "binaries/snd_28A333.bin"
+    binclude "binaries/sounds/snd_28A333.bin"
     
 snd_for_26af18:
-    binclude "binaries/snd_28B4CD.bin"
+    binclude "binaries/sounds/snd_28B4CD.bin"
     
 snd_for_26af24:
-    binclude "binaries/snd_28C932.bin"
+    binclude "binaries/sounds/snd_28C932.bin"
     
 snd_for_26af30:
-    binclude "binaries/snd_28D48D.bin"
+    binclude "binaries/sounds/snd_28D48D.bin"
     
 snd_for_26af3c:
-    binclude "binaries/snd_28E243.bin"
+    binclude "binaries/sounds/snd_28E243.bin"
     
 snd_for_26af48:
-    binclude "binaries/snd_28F5A2.bin"
+    binclude "binaries/sounds/snd_28F5A2.bin"
     
 snd_for_26af54:
-    binclude "binaries/snd_28FD22.bin"
+    binclude "binaries/sounds/snd_28FD22.bin"
     
 snd_for_26af60:
-    binclude "binaries/snd_293071.bin"
+    binclude "binaries/sounds/snd_293071.bin"
     
 snd_for_26af78:
-    binclude "binaries/snd_293BBA.bin"
+    binclude "binaries/sounds/snd_293BBA.bin"
     
 snd_for_26af84:
-    binclude "binaries/snd_2956AB.bin"
+    binclude "binaries/sounds/snd_2956AB.bin"
     
 snd_for_26af9c:
-    binclude "binaries/snd_295A59.bin"
+    binclude "binaries/sounds/snd_295A59.bin"
     
 snd_for_26afa8:
-    binclude "binaries/snd_2961B5.bin"
+    binclude "binaries/sounds/snd_2961B5.bin"
     
 snd_for_26afb4:
-    binclude "binaries/snd_296D3B.bin"
+    binclude "binaries/sounds/snd_296D3B.bin"
     
 snd_for_26afcc:
-    binclude "binaries/snd_29B4DA.bin"
+    binclude "binaries/sounds/snd_29B4DA.bin"
     
 snd_for_26afd8:
-    binclude "binaries/snd_29C355.bin"
+    binclude "binaries/sounds/snd_29C355.bin"
     
 snd_for_26afe4:
-    binclude "binaries/snd_29CAA1.bin"
+    binclude "binaries/sounds/snd_29CAA1.bin"
     
 snd_for_26aff0:
-    binclude "binaries/snd_29F4B0.bin"
+    binclude "binaries/sounds/snd_29F4B0.bin"
     
 snd_for_26affc:
-    binclude "binaries/snd_2A04AB.bin"
+    binclude "binaries/sounds/snd_2A04AB.bin"
     
 snd_for_26b008:
-    binclude "binaries/snd_2A1501.bin"
+    binclude "binaries/sounds/snd_2A1501.bin"
     
 snd_for_26b020:
-    binclude "binaries/snd_2A2A36.bin"
+    binclude "binaries/sounds/snd_2A2A36.bin"
     
 snd_for_26b038:
-    binclude "binaries/snd_2A4774.bin"
+    binclude "binaries/sounds/snd_2A4774.bin"
     
 snd_for_26b044:
-    binclude "binaries/snd_2A6833.bin"
+    binclude "binaries/sounds/snd_2A6833.bin"
     
 snd_for_26b050:
-    binclude "binaries/snd_2A7954.bin"
+    binclude "binaries/sounds/snd_2A7954.bin"
     
 snd_for_26b05c:
-    binclude "binaries/snd_2A8349.bin"
+    binclude "binaries/sounds/snd_2A8349.bin"
     
 snd_for_26b068:
-    binclude "binaries/snd_2A9ADC.bin"
+    binclude "binaries/sounds/snd_2A9ADC.bin"
     
 snd_for_26b08c:
-    binclude "binaries/snd_2AAAC7.bin"
+    binclude "binaries/sounds/snd_2AAAC7.bin"
     
 snd_for_26b098:
-    binclude "binaries/snd_2AD592.bin"
+    binclude "binaries/sounds/snd_2AD592.bin"
     
 snd_for_26b0b0:
-    binclude "binaries/snd_2AF51E.bin"
+    binclude "binaries/sounds/snd_2AF51E.bin"
     
 snd_for_26b0c8:
-    binclude "binaries/snd_2AFF17.bin"
+    binclude "binaries/sounds/snd_2AFF17.bin"
     
 snd_for_26b0d4:
-    binclude "binaries/snd_2B3EC3.bin"
+    binclude "binaries/sounds/snd_2B3EC3.bin"
     
 snd_for_26b0e0:
-    binclude "binaries/snd_2B6E29.bin"
+    binclude "binaries/sounds/snd_2B6E29.bin"
     
 snd_for_26b0ec:
-    binclude "binaries/snd_2B7ABE.bin"
+    binclude "binaries/sounds/snd_2B7ABE.bin"
     
 snd_for_26b104:
-    binclude "binaries/snd_2B93A6.bin"
+    binclude "binaries/sounds/snd_2B93A6.bin"
     
 snd_for_26b11c:
-    binclude "binaries/snd_2BC2B2.bin"
+    binclude "binaries/sounds/snd_2BC2B2.bin"
     
 snd_for_26b134:
-    binclude "binaries/snd_2BD4DA.bin"
+    binclude "binaries/sounds/snd_2BD4DA.bin"
     
 snd_for_26b140:
-    binclude "binaries/snd_2BFFBE.bin"
+    binclude "binaries/sounds/snd_2BFFBE.bin"
     
 snd_for_26b14c:
-    binclude "binaries/snd_2C1680.bin"
+    binclude "binaries/sounds/snd_2C1680.bin"
     
 snd_for_26b158:
-    binclude "binaries/snd_2C2F9D.bin"
+    binclude "binaries/sounds/snd_2C2F9D.bin"
     
 snd_for_26b164:
-    binclude "binaries/snd_2C3B7C.bin"
+    binclude "binaries/sounds/snd_2C3B7C.bin"
     
 snd_for_26b170:
-    binclude "binaries/snd_2C563C.bin"
+    binclude "binaries/sounds/snd_2C563C.bin"
     
 snd_for_26b17c:
-    binclude "binaries/snd_2C61CC.bin"
+    binclude "binaries/sounds/snd_2C61CC.bin"
     
 snd_for_26b1a0:
-    binclude "binaries/snd_2C91BC.bin"
+    binclude "binaries/sounds/snd_2C91BC.bin"
     
                 dc.b 0
 

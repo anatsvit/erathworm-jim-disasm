@@ -1,1 +1,0 @@
-rnc u rnc_22715E.bin rncout_22715E.bin -d=4098

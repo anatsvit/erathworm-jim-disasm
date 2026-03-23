@@ -24299,8 +24299,6 @@ word_1B89E2:    dc.w  $CCC,    0, $400, $602, $A24, $A66, $EA6, $EEA,    6,   $C
 word_1B8A02:    dc.w     0, $200, $222, $422, $444, $644, $666, $866, $888, $A88, $AAA, $CAA, $CCC, $ECC, $EEC, $EEE
                                         ; DATA XREF: sub_24D7EA+60   o
 word_1B8A22:    dc.w     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, $DD0,    0, $DD0,    0, $DD0,    0, $DD0,    0, $DD0,    0,    0,    0, $DD0,    0, $DD0,    0
-                                        ; DATA XREF: sub_24D25A   o
-                                        ; sub_24D25A+14   o
                 dc.w  $DD0,$DD00, $DD0,$DD00,  $D0, $D00,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,$DDD0,    0, $D00,    0, $D0D,   $D, $D0D,$D0DD,   $D, $D0D,   $D,   $D,    0,    0
                 dc.w   $D0,$D000,  $DD,$DD00, $DD0,$D000, $DDD,$D000,  $D0,$DD00, $DDD,$DD00,  $D0,$D000,    0,    0,    0,    0, $DD0, $DD0, $DD0,$DD00,   $D,$D000,  $DD,    0, $DD0, $DD0, $D00, $DD0,    0,    0
                 dc.w   $DD,    0, $D00,$D000, $DD0,$D000, $DDD,    0,$DD0D,$D0D0,$DD00,$DD00, $DDD, $DD0,    0,    0,   $D,$D000,   $D,$D000,    0,$D000,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
@@ -24330,369 +24328,469 @@ word_1B8A22:    dc.w     0,    0,    0,    0,    0,    0,    0,    0,    0,    0
                 dc.w     0,    0, $DD0, $DD0, $DD0, $DD0, $DD0,$DD00, $DDD,$D000, $DDD,    0, $DD0,    0,    0,    0,    0,    0,$DD00,  $DD,$DD00,  $DD,$DD0D,$D0DD,$DDDD,$DDDD,$DDD0, $DDD,$DD00,  $DD,    0,    0
                 dc.w     0,    0,    0,    0, $DD0, $DD0,  $DD,$DD00,   $D,$D000,  $DD,$DD00, $DD0, $DD0,    0,    0,    0,    0, $DD0, $DD0, $DD0, $DD0,  $DD,$DD00,   $D,$D000,   $D,$D000,   $D,$D000,    0,    0
                 dc.w     0,    0,    0,    0, $DDD,$DDD0,    0,$DD00,   $D,$D000,  $DD,    0, $DDD,$DDD0,    0,    0
+    align 2,0
 njc_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1B9182.bin"
     
                 dc.b 0
+    align 2,0            
 wth_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1B9842.bin"
     
                 dc.b 0
+    align 2,0            
 wth_snw_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1B9FAE.bin"
     
+    align 2,0
 wth_evl_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BA52A.bin"
     
+    align 2,0
 snt_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BA660.bin"
     
+    align 2,0
 pete_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BAB2C.bin"
     
                 dc.b 0
+    align 2,0            
 btv_sfb_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BB102.bin"
     
+    align 2,0
 btv_heli_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BB7A8.bin"
     
+    align 2,0
 lvl5_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BB9BC.bin"
     
                 dc.b 0
+    align 2,0            
 lvl5_chi_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BC022.bin"
     
+    align 2,0
 drk_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BC3EE.bin"
     
+    align 2,0
 ints_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BC620.bin"
     
+    align 2,0
 dwn_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BC8D6.bin"
     
+    align 2,0
 andy_backmap_rnc:
     binclude "binaries/rnc_archives/rnc_1BCEEA.bin"
     
+    align 2,0
 byte_1BD828:
     binclude "binaries/rnc_archives/rnc_1BD828.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1BD8C0:
     binclude "binaries/rnc_archives/rnc_1BD8C0.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1BD952:
     binclude "binaries/rnc_archives/rnc_1BD952.bin"
     
+    align 2,0
 rnc_1BDC32:
     binclude "binaries/rnc_archives/rnc_1BDC32.bin"
     
+    align 2,0
 byte_1BDECA:
     binclude "binaries/rnc_archives/rnc_1BDECA.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1BE020:
     binclude "binaries/rnc_archives/rnc_1BE020.bin"
     
+    align 2,0
 byte_1BE3E4:
     binclude "binaries/rnc_archives/rnc_1BE3E4.bin"
     
+    align 2,0
 byte_1BE7A8:
     binclude "binaries/rnc_archives/rnc_1BE7A8.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1BEB22:
     binclude "binaries/rnc_archives/rnc_1BEB22.bin"
     
+    align 2,0
 byte_1BEC9E:
     binclude "binaries/rnc_archives/rnc_1BEC9E.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1BEE9C:
     binclude "binaries/rnc_archives/rnc_1BEE9C.bin"
     
+    align 2,0
 byte_1BF482:
     binclude "binaries/rnc_archives/rnc_1BF482.bin"
     
+    align 2,0
 byte_1BF5AC:
     binclude "binaries/rnc_archives/rnc_1BF5AC.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1BF744:
     binclude "binaries/rnc_archives/rnc_1BF744.bin"
     
                 dc.b 0
+    align 2,0            
 cheat_photo_rnc:
     binclude "binaries/rnc_archives/rnc_1BF934.bin"
     
+    align 2,0
 byte_1BFB76:
     binclude "binaries/rnc_archives/rnc_1BFB76.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1C3550:
     binclude "binaries/rnc_archives/rnc_1C3550.bin"
     
                 dc.b 0
+    align 2,0            
 byte_1C5BDC:
     binclude "binaries/rnc_archives/rnc_1C5BDC.bin"
     
+    align 2,0
 byte_1C944C:
     binclude "binaries/rnc_archives/rnc_1C944C.bin"
     
                 dc.b 0
+    align 2,0            
 njc_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CC806.bin"
     
+    align 2,0
 wth_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CD184.bin"
     
+    align 2,0
 snt_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CDA30.bin"
     
+    align 2,0
 pete_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CDA5E.bin"
     
                 dc.b 0
+    align 2,0            
 btv_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CE08E.bin"
     
+    align 2,0
 lvl5_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CE990.bin"
     
                 dc.b 0
+    align 2,0
 ints_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CF208.bin"
     
+    align 2,0
 dwn_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CF872.bin"
     
+    align 2,0
 andy_objects_rnc:
     binclude "binaries/rnc_archives/rnc_1CFE34.bin"
     
+    align 2,0
 njc_tilemap:
     binclude "binaries/tilemap/njc_tilemap.bin"
     
+    align 2,0
 wth_tilemap:
     binclude "binaries/tilemap/wth_tilemap.bin"
     
+    align 2,0
 snt_tilemap:
     binclude "binaries/tilemap/snt_tilemap.bin"
     
+    align 2,0
 pete_tilemap:
     binclude "binaries/tilemap/pete_tilemap.bin"
     
+    align 2,0
 btv_tilemap:
     binclude "binaries/tilemap/btv_tilemap.bin"
     
+    align 2,0
 lvl5_tilemap:
     binclude "binaries/tilemap/lvl5_tilemap.bin"
     
+    align 2,0
 ints_tilemap:
     binclude "binaries/tilemap/ints_tilemap.bin"
     
+    align 2,0
 dwn_tilemap:
     binclude "binaries/tilemap/dwn_tilemap.bin"
     
+    align 2,0
 andy_tilemap:
     binclude "binaries/tilemap/andy_tilemap.bin"
     
+    align 2,0
 dma_208044:
     binclude "binaries/dma/dma_208044.bin"
     
+    align 2,0
 dma_208244:
     binclude "binaries/dma/dma_208244.bin"
     
+    align 2,0
 dma_208444:
     binclude "binaries/dma/dma_208444.bin"
     
+    align 2,0
 dma_208644:
     binclude "binaries/dma/dma_208644.bin"
     
+    align 2,0
 dma_208844:
     binclude "binaries/dma/dma_208844.bin"
     
+    align 2,0
 dma_208A44:
     binclude "binaries/dma/dma_208A44.bin"
     
+    align 2,0
 dma_208C44:
     binclude "binaries/dma/dma_208C44.bin"
     
+    align 2,0
 dma_208E44:
     binclude "binaries/dma/dma_208E44.bin"
     
+    align 2,0
 dma_209044:
     binclude "binaries/dma/dma_209044.bin"
     
+    align 2,0
 dma_2090E4:
     binclude "binaries/dma/dma_2090E4.bin"
     
+    align 2,0
 dma_209184:
     binclude "binaries/dma/dma_209184.bin"
     
+    align 2,0
 dma_209224:
     binclude "binaries/dma/dma_209224.bin"
     
+    align 2,0
 dma_2092C4:
     binclude "binaries/dma/dma_2092C4.bin"
     
+    align 2,0
 dma_209364:
     binclude "binaries/dma/dma_209364.bin"
     
+    align 2,0
 dma_209404:
     binclude "binaries/dma/dma_209404.bin"
     
+    align 2,0
 dma_2094A4:
     binclude "binaries/dma/dma_2094A4.bin"
     
+    align 2,0
 dma_209544:
     binclude "binaries/dma/dma_209544.bin"
     
+    align 2,0
 dma_2095E4:
     binclude "binaries/dma/dma_2095E4.bin"
     
+    align 2,0
 dma_209684:
     binclude "binaries/dma/dma_209684.bin"
     
+    align 2,0
 dma_209884:
     binclude "binaries/dma/dma_209884.bin"
     
+    align 2,0
 dma_209A84:
     binclude "binaries/dma/dma_209A84.bin"
     
+    align 2,0
 dma_209C84:
     binclude "binaries/dma/dma_209C84.bin"
     
+    align 2,0
 dma_209E84:
     binclude "binaries/dma/dma_209E84.bin"
     
+    align 2,0
 dma_20A084:
     binclude "binaries/dma/dma_20A084.bin"
     
+    align 2,0
 dma_20A284:
     binclude "binaries/dma/dma_20A284.bin"
     
+    align 2,0    
 dma_20A484:
     binclude "binaries/dma/dma_20A484.bin"
-    
+
+    align 2,0    
 dma_20A684:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,$55,$55,  0,  5,$43,$34,$50,$55,$31,$13,$55,$54,$11,$11,$45,$54,$31,$13,$45,$31,$11,$11,$13
-                                        ; DATA XREF: ROM:000050E6   t
-                                        ; ROM:000050E8   t ...
+    align 2,0
 dma_20A6A4:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  5,  0,  0,  5,  5,  5,  0,  5,$55,$55,  0,$55,$44,$45,$50,$54,$31,$34,$50,$43,$33,$33,$44
-                                        ; DATA XREF: ROM:0000512C   t
-                                        ; ROM:0000512E   t ...
+    align 2,0
 dma_20A6C4:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  5,  0,  0,  5,  5,  5,  0,  5,  5,  5,  0,  5,$55,$55,  5,  5,$54,$45,  5,$43,$33,$33,$44
-                                        ; DATA XREF: ROM:0000513A   t
-                                        ; ROM:0000513C   t ...
+    align 2,0
 dma_20A6E4:     dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  5,  0,  0,  5,  5,  5,  0,  5,  5,  5,  0,  5,$55,$55,  0,$54,$44,$44,$45
-                                        ; DATA XREF: ROM:00005148   t
-                                        ; ROM:0000514A   t ...
+
+    align 2,0                                    
 njc_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_20A704.bin"
     
+    align 2,0
 wth_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_20D654.bin"
     
+    align 2,0
 snt_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_21162E.bin"
     
+    align 2,0
 pete_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_21432C.bin"
     
+    align 2,0
 btv_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_2175F0.bin"
     
                 dc.b 0
+    align 2,0            
 lvl5_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_21A310.bin"
     
+    align 2,0
 ints_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_21DCEA.bin"
     
+    align 2,0
 dwn_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_221782.bin"
     
                 dc.b 0
+    align 2,0            
 andy_graphic_rnc:
     binclude "binaries/rnc_archives/rnc_224FB2.bin"
     
                 dc.b 0
+    align 2,0            
 njc_map_rnc:
     binclude "binaries/rnc_archives/rnc_22715E.bin"
     
                 dc.b 0
+    align 2,0            
 wth_map_rnc:
     binclude "binaries/rnc_archives/rnc_22B43A.bin"
     
+    align 2,0
 wth_snw_map_rnc:
     binclude "binaries/rnc_archives/rnc_22ED26.bin"
     
 wth_evl_map_rnc:
     binclude "binaries/rnc_archives/rnc_22F04E.bin"
     
+    align 2,0
 snt_map_rnc:
     binclude "binaries/rnc_archives/rnc_22F26A.bin"
     
                 dc.b 0
+    align 2,0            
 pete_map_rnc:
     binclude "binaries/rnc_archives/rnc_2307B2.bin"
     
+    align 2,0
 btv_sfb_map_rnc:
     binclude "binaries/rnc_archives/rnc_232720.bin"
     
                 dc.b 0
+    align 2,0            
 btv_heli_map_rnc:
     binclude "binaries/rnc_archives/rnc_2358EC.bin"
     
+    align 2,0
 lvl5_lab_map_rnc:
     binclude "binaries/rnc_archives/rnc_236E7E.bin"
     
                 dc.b 0
+    align 2,0            
 lvl5_chi_map_rnc:
     binclude "binaries/rnc_archives/rnc_239AE8.bin"
     
+    align 2,0
 lvl5_nkd_map_rnc:
     binclude "binaries/rnc_archives/rnc_23A20A.bin"
     
                 dc.b 0
+    align 2,0            
 ints_map_rnc:
     binclude "binaries/rnc_archives/rnc_23B346.bin"
     
+    align 2,0
 dwn_sea_map_rnc:
     binclude "binaries/rnc_archives/rnc_23EBE4.bin"
     
+    align 2,0
 dwn_pod_map_rnc:
     binclude "binaries/rnc_archives/rnc_241B38.bin"
     
+    align 2,0
 andy_map_rnc:
     binclude "binaries/rnc_archives/rnc_2447D6.bin"
     
                 dc.b 0
+    align 2,0            
 psy_map_rnc:
     binclude "binaries/rnc_archives/rnc_244A42.bin"
     
                 dc.b 0
+    align 2,0
 drk1_map_rnc:
     binclude "binaries/rnc_archives/rnc_244C00.bin"
-    
+    align 2,0
 drk2_map_rnc:
     binclude "binaries/rnc_archives/rnc_244EBA.bin"
     
                 dc.b 0
+    align 2,0
 drk3_map_rnc:
     binclude "binaries/rnc_archives/rnc_2450CC.bin"
-    
+    align 2,0
 drk4_map_rnc:
     binclude "binaries/rnc_archives/rnc_2452D4.bin"
-    
+    align 2,0
 drk5_map_rnc:
     binclude "binaries/rnc_archives/rnc_24543E.bin"
     
                 dc.b 0
 
-
+                align 2,0
 oksub_2456C8:                           ; CODE XREF: j_oksub_2456C8   j
                 lea     (unk_FFFBD8).l,sp
                 move    #$2000,sr

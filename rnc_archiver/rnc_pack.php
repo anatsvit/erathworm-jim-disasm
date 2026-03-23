@@ -259,29 +259,35 @@ function updateBitsTable($table, $value) {
 
 // ===================== LZ77 Matching =====================
 
-function findBestMatch($data, $pos, $endPos, $dictStart, $maxDist = 0x7FFF) {
+// Max lookback = ring buffer size (ring is 0x4000 bytes, max offset = 0x3FFF)
+define('RNC_MAX_DIST', 0x3FFF);
+
+// Find best LZ match using pre-built 2-byte hash chain.
+// The chain is built for the entire file so cross-chunk lookback works.
+// prevTable[pos] = most recent position < pos with the same 2-byte key.
+function findBestMatch($data, $pos, $endPos, &$prevTable) {
     $bestLen = 1;
     $bestDist = 0;
     $maxLen = min($endPos - $pos, 0xFFFF);
     if ($maxLen < 2) return null;
 
-    $searchStart = max($dictStart, $pos - $maxDist);
-    $c0 = $data[$pos];
+    $searchStart = max(0, $pos - RNC_MAX_DIST);
+    $i = $prevTable[$pos] ?? -1;
 
-    for ($i = $pos - 1; $i >= $searchStart; $i--) {
-        if ($data[$i] !== $c0) continue;
-        if ($bestLen > 1 && $data[$i + $bestLen] !== $data[$pos + $bestLen]) continue;
-
-        $len = 1;
-        while ($len < $maxLen && $data[$i + $len] === $data[$pos + $len]) {
-            $len++;
+    while ($i >= $searchStart) {
+        // First 2 bytes already match (same hash key) — start comparison at offset 2
+        if ($bestLen < 2 || $data[$i + $bestLen] === $data[$pos + $bestLen]) {
+            $len = 2;
+            while ($len < $maxLen && $data[$i + $len] === $data[$pos + $len]) {
+                $len++;
+            }
+            if ($len > $bestLen) {
+                $bestLen = $len;
+                $bestDist = $pos - $i;
+                if ($bestLen >= $maxLen) break;
+            }
         }
-
-        if ($len > $bestLen) {
-            $bestLen = $len;
-            $bestDist = $pos - $i;
-            if ($bestLen >= $maxLen) break;
-        }
+        $i = $prevTable[$i] ?? -1;
     }
 
     return $bestLen >= 2 ? ['count' => $bestLen, 'offset' => $bestDist] : null;
@@ -289,11 +295,8 @@ function findBestMatch($data, $pos, $endPos, $dictStart, $maxDist = 0x7FFF) {
 
 // ===================== Main Packing =====================
 
-function rncPack($inputFile, $outputFile) {
-    $data = file_get_contents($inputFile);
-    $dataLen = strlen($data);
-    logMsg("Input: $inputFile, size: $dataLen");
-
+// Pack $data using a specific block size and len-2 offset threshold. Returns [packed_body, chunks_count].
+function packWithBlockSize($data, $dataLen, $packBlockSize, &$prevTable, $len2Threshold = 1024) {
     $RAW_TABLE_SIZE = 32;
     $LEN_TABLE_SIZE = 32;
     $POS_TABLE_SIZE = 32;
@@ -301,14 +304,11 @@ function rncPack($inputFile, $outputFile) {
     $packer = new RNCPacker();
     $chunksCount = 0;
     $inputPos = 0;
-    $packBlockSize = 0x3CE6; // ~15552 - optimized for 2 chunks
 
     // Write lock bits
     $packer->writeBits(0, 2);
 
     while ($inputPos < $dataLen) {
-        logMsg("=== CHUNK $chunksCount start at inputPos=$inputPos ===");
-
         $rawTable = [];
         $lenTable = [];
         $posTable = [];
@@ -323,14 +323,22 @@ function rncPack($inputFile, $outputFile) {
         $v17 = 0;
 
         while ($pos < $chunkEnd - 1 && $v17 < 0xFFFE) {
-            $match = findBestMatch($data, $pos, $chunkEnd, $inputPos);
+            $match = findBestMatch($data, $pos, $chunkEnd, $prevTable);
 
             if ($match !== null && $pos + $match['count'] <= $chunkEnd) {
-                // Lazy matching: check if next position has a better match
+                // Skip length-2 matches with large offsets: they cost more bits than they save.
+                // A len-2 match saves 16 bits but encoding the offset of O costs roughly
+                // floor(log2(O)) extra bits plus Huffman overhead.
+                if ($match['count'] === 2 && $match['offset'] > $len2Threshold) {
+                    $pos++;
+                    $litLen++;
+                    continue;
+                }
+
+                // Lazy matching: check if next position has a strictly better match
                 if ($pos + 1 < $chunkEnd - 1 && $match['count'] < 0xFFFF) {
-                    $nextMatch = findBestMatch($data, $pos + 1, $chunkEnd, $inputPos);
-                    if ($nextMatch !== null && $nextMatch['count'] > $match['count'] + 1) {
-                        // Skip current match, emit literal, take next match
+                    $nextMatch = findBestMatch($data, $pos + 1, $chunkEnd, $prevTable);
+                    if ($nextMatch !== null && $nextMatch['count'] > $match['count']) {
                         $pos++;
                         $litLen++;
                         continue;
@@ -353,20 +361,17 @@ function rncPack($inputFile, $outputFile) {
 
         // Remaining literal bytes
         $litLen += $chunkEnd - $pos;
-        $pos = $chunkEnd;
 
         updateBitsTable($rawTable, $litLen);
         $commands[] = ['lit_len' => $litLen, 'match_count' => 0, 'match_offset' => 0];
         $v17++;
 
-        logMsg("  Commands: $v17, final chunk end: $chunkEnd");
-
-        // Phase 2: Build Huffman tables
+        // Build Huffman tables
         buildHufTable($rawTable, $RAW_TABLE_SIZE);
         buildHufTable($lenTable, $LEN_TABLE_SIZE);
         buildHufTable($posTable, $POS_TABLE_SIZE);
 
-        // Phase 3: Encode
+        // Encode
         encodeHufTable($packer, $rawTable, $RAW_TABLE_SIZE);
         encodeHufTable($packer, $lenTable, $LEN_TABLE_SIZE);
         encodeHufTable($packer, $posTable, $POS_TABLE_SIZE);
@@ -395,20 +400,65 @@ function rncPack($inputFile, $outputFile) {
 
         $inputPos = $readPos;
         $chunksCount++;
-        logMsg("  Chunk done, inputPos=$inputPos, output so far: " . strlen($packer->output));
     }
 
-    // Finalize bit stream
     $packer->finalize();
+    return [$packer->output, $chunksCount];
+}
 
-    $packedData = $packer->output;
-    logMsg("Packed data size: " . strlen($packedData));
+function rncPack($inputFile, $outputFile) {
+    $data = file_get_contents($inputFile);
+    $dataLen = strlen($data);
+    logMsg("Input: $inputFile, size: $dataLen");
+
+    // Build 2-byte hash chain for the entire file (built once, reused across block size attempts).
+    $prevTable = array_fill(0, $dataLen, -1);
+    $hashHead  = [];
+    for ($i = 0; $i < $dataLen - 1; $i++) {
+        $key = ord($data[$i]) | (ord($data[$i + 1]) << 8);
+        $prevTable[$i] = $hashHead[$key] ?? -1;
+        $hashHead[$key] = $i;
+    }
+    unset($hashHead);
+
+    // Try multiple block sizes and len-2 thresholds; keep the smallest output.
+    // Include per-chunk-count optimal sizes plus fixed strategic candidates.
+    $blockSizes = [7000, 8000, 9000, 9400, 9600, 9700, 9800, 9900, 10000, 10200, 10400,
+                   10700, 11000, 11500, 12000, 12500, 13000, 14000, 16000, $dataLen];
+    for ($k = 1; $k <= 8; $k++) {
+        $blockSizes[] = (int)ceil($dataLen / $k);
+    }
+    $blockSizes = array_unique($blockSizes);
+    sort($blockSizes);
+
+    // Len-2 match offset thresholds to try (smaller = skip more short matches).
+    $thresholds = [128, 256, 512, 1024];
+
+    $bestBody = null;
+    $bestChunks = 0;
+    $bestBS = 0;
+    $bestThreshold = 0;
+
+    foreach ($thresholds as $thresh) {
+        foreach ($blockSizes as $bs) {
+            if ($bs < 1) continue;
+            [$body, $chunks] = packWithBlockSize($data, $dataLen, $bs, $prevTable, $thresh);
+            if ($bestBody === null || strlen($body) < strlen($bestBody)) {
+                $bestBody = $body;
+                $bestChunks = $chunks;
+                $bestBS = $bs;
+                $bestThreshold = $thresh;
+            }
+        }
+    }
+
+    $packedData = $bestBody;
+    $chunksCount = $bestChunks;
+    logMsg("Best block size: $bestBS thresh: $bestThreshold, chunks: $chunksCount, packed body: " . strlen($packedData));
 
     // Compute CRCs
     $unpackedCRC = rnc_crc16($data);
     $packedCRC = rnc_crc16($packedData);
-    logMsg("Unpacked CRC: 0x" . sprintf('%04X', $unpackedCRC));
-    logMsg("Packed CRC: 0x" . sprintf('%04X', $packedCRC));
 
     // Build header
     $header = "RNC\x01";
@@ -424,7 +474,6 @@ function rncPack($inputFile, $outputFile) {
     if (file_exists($outputFile)) unlink($outputFile);
     file_put_contents($outputFile, $result);
     logMsg("Output: $outputFile, size: " . strlen($result));
-    logMsg("Chunks: $chunksCount");
 
     return strlen($result);
 }

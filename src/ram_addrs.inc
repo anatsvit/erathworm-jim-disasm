@@ -181,8 +181,8 @@ word_FFFCC6 equ $FFFFFCC6
 word_FFFCC8 equ $FFFFFCC8
 word_FFFCCA equ $FFFFFCCA
 jim_walking_speed equ $FFFFFCCE
-word_FFFCD0 equ $FFFFFCD0
-word_FFFCD2 equ $FFFFFCD2
+scroll_debt_x equ $FFFFFCD0
+scroll_debt_y equ $FFFFFCD2
 word_FFFCD4 equ $FFFFFCD4
 word_FFFCD6 equ $FFFFFCD6
 word_FFFCD8 equ $FFFFFCD8
@@ -202,7 +202,7 @@ byte_FFFCF5 equ $FFFFFCF5
 byte_FFFCF6 equ $FFFFFCF6
 byte_FFFCF7 equ $FFFFFCF7
 is_jim_jumping equ $FFFFFCF8
-byte_FFFCF9 equ $FFFFFCF9
+jump_hold_timer equ $FFFFFCF9
 byte_FFFCFA equ $FFFFFCFA
 byte_FFFCFB equ $FFFFFCFB
 byte_FFFCFC equ $FFFFFCFC
@@ -238,7 +238,7 @@ byte_FFFD1E equ $FFFFFD1E
 jim_dead_enable equ $FFFFFD21
 byte_FFFD22 equ $FFFFFD22
 is_jim_blocked_by_enemy equ $FFFFFD23
-byte_FFFD24 equ $FFFFFD24
+level_end_timer equ $FFFFFD24
 jim_timer_in_air equ $FFFFFD25
 byte_FFFD26 equ $FFFFFD26
 byte_FFFD27 equ $FFFFFD27
@@ -249,7 +249,7 @@ byte_FFFD2E equ $FFFFFD2E
 byte_FFFD2F equ $FFFFFD2F
 byte_FFFD30 equ $FFFFFD30
 byte_FFFD31 equ $FFFFFD31
-byte_FFFD33 equ $FFFFFD33
+is_new_shot_started equ $FFFFFD33
 byte_FFFD34 equ $FFFFFD34
 byte_FFFD35 equ $FFFFFD35
 byte_FFFD36 equ $FFFFFD36
@@ -337,13 +337,13 @@ byte_FFFD98 equ $FFFFFD98
 byte_FFFD99 equ $FFFFFD99
 byte_FFFD9A equ $FFFFFD9A
 byte_FFFD9B equ $FFFFFD9B
-byte_FFFD9C equ $FFFFFD9C
-byte_FFFD9D equ $FFFFFD9D
+palette2_index equ $FFFFFD9C
+palette2_index_loaded equ $FFFFFD9D
 byte_FFFD9E equ $FFFFFD9E
 byte_FFFD9F equ $FFFFFD9F
 dword_FFFDA0 equ $FFFFFDA0
 dword_FFFDA8 equ $FFFFFDA8
-word_FFFDAC equ $FFFFFDAC
+menu_selected_item equ $FFFFFDAC
 word_FFFDAE equ $FFFFFDAE
 word_FFFDB0 equ $FFFFFDB0
 word_FFFDB2 equ $FFFFFDB2
@@ -359,8 +359,8 @@ word_FFFDCC equ $FFFFFDCC
 word_FFFDCE equ $FFFFFDCE
 word_FFFDD4 equ $FFFFFDD4
 word_FFFDD6 equ $FFFFFDD6
-word_FFFDD8 equ $FFFFFDD8
-word_FFFDDA equ $FFFFFDDA
+shot_angle_target equ $FFFFFDD8
+shot_angle_current equ $FFFFFDDA
 air_refiller_seconds equ $FFFFFDDC
 byte_FFFDDD equ $FFFFFDDD
 byte_FFFDDE equ $FFFFFDDE

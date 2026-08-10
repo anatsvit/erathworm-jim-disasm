@@ -433,8 +433,8 @@ unk_FFFF1A equ $FFFFFF1A
 word_FFFF3A equ $FFFFFF3A
 word_FFFF3C equ $FFFFFF3C
 word_FFFF3E equ $FFFFFF3E
-word_FFFF40 equ $FFFFFF40
-word_FFFF42 equ $FFFFFF42
+vanish_point_x equ $FFFFFF40
+vanish_point_y equ $FFFFFF42
 word_FFFF44 equ $FFFFFF44
 word_FFFF46 equ $FFFFFF46
 word_FFFF48 equ $FFFFFF48
@@ -448,7 +448,7 @@ word_FFFF5A equ $FFFFFF5A
 word_FFFF5C equ $FFFFFF5C
 byte_FFFF5E equ $FFFFFF5E
 byte_FFFF5F equ $FFFFFF5F
-byte_FFFF60 equ $FFFFFF60
+andy_flight_speed equ $FFFFFF60
 super_bubble_count equ $FFFFFF61
 byte_FFFF62 equ $FFFFFF62
 byte_FFFF63 equ $FFFFFF63
@@ -476,7 +476,7 @@ word_FFFF7C equ $FFFFFF7C
 byte_FFFF80 equ $FFFFFF80
 dword_FFFF82 equ $FFFFFF82
 dword_FFFF86 equ $FFFFFF86
-word_FFFF8A equ $FFFFFF8A
+demo_index equ $FFFFFF8A
 word_FFFF8C equ $FFFFFF8C
 word_FFFF8E equ $FFFFFF8E
 word_FFFF90 equ $FFFFFF90

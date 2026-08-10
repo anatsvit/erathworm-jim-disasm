@@ -26533,9 +26533,9 @@ sub_247022:                             ; CODE XREF: sub_247022+22A   j
                 bsr.s   sub_246FFC
                 tst.b   (level_end_timer).l
                 beq.s   loc_247046
-                tst.b   (byte_FFFF60).l
+                tst.b   (andy_flight_speed).l
                 beq.s   loc_247042
-                subq.b  #1,(byte_FFFF60).l
+                subq.b  #1,(andy_flight_speed).l
 loc_247042:                             ; CODE XREF: sub_247022+18   j
                 bra.w   loc_247190
 ; ---------------------------------------------------------------------------
@@ -26577,14 +26577,14 @@ loc_24709E:                             ; CODE XREF: sub_247022+6A   j
                 st      (byte_FFFF5F).l
                 move.b  #$10,d0
 loc_2470C6:                             ; CODE XREF: sub_247022+96   j
-                cmp.b   (byte_FFFF60).l,d0
+                cmp.b   (andy_flight_speed).l,d0
                 beq.s   loc_2470DE
                 bcs.s   loc_2470D8
-                addq.b  #1,(byte_FFFF60).l
+                addq.b  #1,(andy_flight_speed).l
                 bra.s   loc_2470DE
 ; ---------------------------------------------------------------------------
 loc_2470D8:                             ; CODE XREF: sub_247022+AC   j
-                subq.b  #1,(byte_FFFF60).l
+                subq.b  #1,(andy_flight_speed).l
 loc_2470DE:                             ; CODE XREF: sub_247022+86   j
                                         ; sub_247022+AA   j ...
                 tst.b   (is_jim_move_right).l
@@ -26911,7 +26911,7 @@ sub_247576:                             ; CODE XREF: oksub_2456C8+A   p
                 clr.b   (byte_FFFD31).l
                 clr.b   (byte_FF993E).l
                 move.b  #0,(byte_FFFF98).l
-                clr.w   (word_FFFF8A).l
+                clr.w   (demo_index).l
                 move.b  #0,(selectedLevelOption).l
                 clr.b   (cheat_mode).l
                 clr.b   (freezeability).l
@@ -35321,16 +35321,16 @@ locret_24D608:                          ; CODE XREF: sub_24D5C0+8   j
 loc_24D60A:                             ; CODE XREF: sub_24D5C0+30   j
                 clr.b   (byte_FFFF9A).l
                 move.l  (sp)+,d0
-                tst.w   (word_FFFF8A).l
+                tst.w   (demo_index).l
                 beq.w   loc_24D69E
                 bsr.w   sub_24ACBC
                 bsr.w   sub_24CC9A
                 bsr.w   sub_24CB8C
                 move.b  #0,(selectedLevelOption).l
                 clr.w   d7
-                move.w  (word_FFFF8A).l,d7
+                move.w  (demo_index).l,d7
                 mulu.w  #6,d7
-                lea     (off_25C3CC).l,a0
+                lea     (demo_table).l,a0
                 move.l  (a0,d7.w),(dword_FFFF86).l
                 move.b  4(a0,d7.w),(selectedLevelOption).l
                 clr.b   (byte_FFFF9A).l
@@ -35340,10 +35340,10 @@ loc_24D60A:                             ; CODE XREF: sub_24D5C0+30   j
                 move.w  (a0)+,(word_FFFF94).l
                 move.w  (a0)+,(word_FFFF96).l
                 move.l  a0,(dword_FFFF86).l
-                addq.w  #1,(word_FFFF8A).l
-                cmpi.w  #8,(word_FFFF8A).l
+                addq.w  #1,(demo_index).l
+                cmpi.w  #8,(demo_index).l
                 bne.w   loc_24D694
-                clr.w   (word_FFFF8A).l
+                clr.w   (demo_index).l
 loc_24D694:                             ; CODE XREF: sub_24D5C0+CA   j
                 jsr     (sub_24D730).l
                 jmp     loc_2457AA(pc)
@@ -38201,7 +38201,7 @@ sub_24F99E:                             ; DATA XREF: ROM:0025BFF0   o
                 tst.b   (level_end_timer).l
                 bne.w   loc_24FB36
                 move.w  (word_FFFEAA).l,d0
-                add.b   (byte_FFFF60).l,d0
+                add.b   (andy_flight_speed).l,d0
                 move.w  d0,(word_FFFEAA).l
                 cmpi.w  #$80,d0
                 bcs.w   loc_24FB36
@@ -38325,7 +38325,7 @@ loc_24FB36:                             ; CODE XREF: sub_24F99E+6   j
                 jsr     (sub_24FBC0).l
 loc_24FB6A:                             ; CODE XREF: sub_24F99E+19E   j
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 cmpi.w  #4,d0
                 bcc.s   loc_24FB7C
                 move.b  #4,d0
@@ -38948,8 +38948,8 @@ loc_2502D4:                             ; DATA XREF: ROM:0025C12C   o
                 jsr     (sub_25035A).l
 loc_2502E0:                             ; CODE XREF: sub_250288+A   j
                                         ; sub_250288+16   j ...
-                move.w  #$B0,(word_FFFF40).l
-                move.w  #$164,(word_FFFF42).l
+                move.w  #$B0,(vanish_point_x).l
+                move.w  #$164,(vanish_point_y).l
                 move.w  (camera_x).l,(camera_target_x).l
                 move.w  (camera_y).l,(camera_target_y).l
                 st      (camera_disable_value).l
@@ -38985,7 +38985,7 @@ sub_25035A:                             ; CODE XREF: sub_250288+4   p
                 clr.b   (jim_idle_anim_delay).l
                 move.w  #$4000,(jim_obj_var_50).l
                 clr.b   (word_FFFEAA).l
-                clr.b   (byte_FFFF60).l
+                clr.b   (andy_flight_speed).l
                 jsr     sub_24AD36(pc)  ; При отключении не рисует огонь, и нет звука стрельбы
                 bne.s   loc_2503F6
                 lea     (stru_25B7BC).l,a6
@@ -41042,7 +41042,7 @@ loc_2519D6:                             ; CODE XREF: andy_asteroids_tunnel_bg+1C
                 clr.l   d2
                 move.w  (word_FFFF3E).l,d2
                 clr.w   d3
-                move.b  (byte_FFFF60).l,d3
+                move.b  (andy_flight_speed).l,d3
                 add.w   d3,d2
                 move.w  d2,(word_FFFF3E).l
                 lsr.w   #3,d2
@@ -41050,7 +41050,7 @@ loc_2519D6:                             ; CODE XREF: andy_asteroids_tunnel_bg+1C
                 clr.l   d2
                 move.w  (word_FFFF3C).l,d2
                 clr.w   d3
-                move.b  (byte_FFFF60).l,d3
+                move.b  (andy_flight_speed).l,d3
                 add.w   d3,d2
                 move.w  d2,(word_FFFF3C).l
                 lsr.w   #2,d2
@@ -42450,7 +42450,7 @@ loc_252BB8:                             ; CODE XREF: sub_252B90+1C   j
 sub_252BC2:                             ; DATA XREF: ROM:stru_25B72C   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (sub_258BA4).l
                 lea     (off_6D78).w,a0
@@ -42469,7 +42469,7 @@ loc_252BF2:                             ; CODE XREF: sub_252BC2+28   j
 sub_252BF8:                             ; DATA XREF: ROM:stru_25B744   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (sub_258BA4).l
                 lea     (off_6E58).w,a0
@@ -42571,7 +42571,7 @@ collision_with_speed_bubble:                             ; DATA XREF: ROM:000036
                 clr.b   (a1)
                 jsr     sub_24AE7A(pc)
                 move.b  #$C0,(invincibility_timer).l
-                move.b  #$22,(byte_FFFF60).l ; '"'
+                move.b  #$22,(andy_flight_speed).l ; '"'
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_252D0C
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -49807,7 +49807,7 @@ sub_2585CA:                             ; DATA XREF: ROM:stru_25B7BC   o
                 subq.w  #1,(word_FFFE92).l
                 move.w  $52(a1),d0
                 clr.w   d2
-                move.b  (byte_FFFF60).l,d2
+                move.b  (andy_flight_speed).l,d2
                 add.w   d2,d0
                 subq.w  #4,d0
                 cmpi.w  #$6A0,d0
@@ -49984,7 +49984,7 @@ loc_258802:                             ; CODE XREF: sub_2587CC+18   j
                                         ; sub_2587CC+2E   j
                 move.w  $52(a1),d0
                 clr.w   d2
-                move.b  (byte_FFFF60).l,d2
+                move.b  (andy_flight_speed).l,d2
                 add.w   d2,d0
                 sub.w   (word_FFFE96).l,d0
                 move.w  d0,$52(a1)
@@ -49996,7 +49996,7 @@ loc_25881C:                             ; CODE XREF: sub_2587CC+C   j
                 add.w   d1,d1
                 lea     (word_FFFE9E).l,a0
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 sub.w   (a0,d1.w),d0
                 move.w  $52(a1),d1
                 sub.w   (jim_obj_var_52).l,d1
@@ -50056,7 +50056,7 @@ loc_2588A8:                             ; CODE XREF: sub_258888+1A   j
 sub_2588B0:                             ; DATA XREF: ROM:stru_25B774   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (sub_258BA4).l
                 lea     (off_685A).w,a0
@@ -50121,7 +50121,7 @@ loc_25896C:                             ; CODE XREF: collision_with_asteroid+3C 
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_258996:                             ; CODE XREF: collision_with_asteroid+94   j
                 jsr     (sub_24B3CE).l
-                move.b  #1,(byte_FFFF60).l
+                move.b  #1,(andy_flight_speed).l
                 move.w  #$FFFF,(word_FFFC9E).l
                 clr.w   (word_FFFE8E).l
                 move.l  #off_1AFDE4,(jim_anim_offset).l
@@ -50152,7 +50152,7 @@ locret_258A00:                          ; CODE XREF: collision_with_asteroid+FE 
 sub_258A02:                             ; DATA XREF: ROM:stru_25B804   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (sub_258BA4).l
                 move.w  $52(a1),d0
@@ -50169,7 +50169,7 @@ loc_258A2A:                             ; CODE XREF: sub_258A02+1E   j
 sub_258A30:                             ; DATA XREF: ROM:stru_25B75C   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (sub_258BA4).l
                 lea     (off_6CAC).w,a0
@@ -50338,7 +50338,7 @@ loc_258BF6:                             ; CODE XREF: sub_258BA4+48   j
                 mulu.w  d4,d1
 loc_258BF8:                             ; CODE XREF: sub_258BA4+50   j
                 lsr.l   #8,d1
-                add.w   (word_FFFF40).l,d1
+                add.w   (vanish_point_x).l,d1
                 move.w  d1,2(a1)
                 tst.w   d2
                 bpl.s   loc_258C10
@@ -50351,7 +50351,7 @@ loc_258C10:                             ; CODE XREF: sub_258BA4+62   j
                 mulu.w  d4,d2
 loc_258C12:                             ; CODE XREF: sub_258BA4+6A   j
                 lsr.l   #8,d2
-                add.w   (word_FFFF42).l,d2
+                add.w   (vanish_point_y).l,d2
                 move.w  d2,4(a1)
                 move.w  $52(a1),d0
                 bmi.s   loc_258C36
@@ -50843,7 +50843,7 @@ locret_2592B4:                          ; CODE XREF: sub_25929A+10   j
 sub_2592B6:                             ; DATA XREF: ROM:stru_25B78C   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
-                move.b  (byte_FFFF60).l,d0
+                move.b  (andy_flight_speed).l,d0
                 addq.w  #8,d0
                 add.w   d0,$52(a1)
                 move.w  $18(a1),d0
@@ -51380,8 +51380,8 @@ oksub_259906:                           ; DATA XREF: ROM:001AD282   o
                 st      (is_jim_blocked_by_enemy).l
                 btst    #0,(frame_counter).l
                 bne.w   loc_25992C
-                addq.w  #1,(word_FFFF40).l
-                subq.w  #1,(word_FFFF42).l
+                addq.w  #1,(vanish_point_x).l
+                subq.w  #1,(vanish_point_y).l
 loc_25992C:                             ; CODE XREF: oksub_259906+16   j
                 cmpi.w  #$5000,$50(a1)
                 beq.s   loc_259956
@@ -51432,24 +51432,24 @@ loc_25999C:                             ; CODE XREF: oksub_25995E+26   j
                 bcc.s   loc_2599A8
                 clr.w   $52(a1)
 loc_2599A8:                             ; CODE XREF: oksub_25995E+44   j
-                cmpi.w  #$194,(word_FFFF42).l
+                cmpi.w  #$194,(vanish_point_y).l
                 beq.s   loc_2599C2
                 bcc.s   loc_2599BC
-                addq.w  #1,(word_FFFF42).l
+                addq.w  #1,(vanish_point_y).l
                 bra.s   loc_2599C2
 ; ---------------------------------------------------------------------------
 loc_2599BC:                             ; CODE XREF: oksub_25995E+54   j
-                subq.w  #1,(word_FFFF42).l
+                subq.w  #1,(vanish_point_y).l
 loc_2599C2:                             ; CODE XREF: oksub_25995E+52   j
                                         ; oksub_25995E+5C   j
-                cmpi.w  #$C0,(word_FFFF40).l
+                cmpi.w  #$C0,(vanish_point_x).l
                 beq.s   locret_2599DC
                 bcc.s   loc_2599D6
-                addq.w  #1,(word_FFFF40).l
+                addq.w  #1,(vanish_point_x).l
                 bra.s   locret_2599DC
 ; ---------------------------------------------------------------------------
 loc_2599D6:                             ; CODE XREF: oksub_25995E+6E   j
-                subq.w  #1,(word_FFFF40).l
+                subq.w  #1,(vanish_point_x).l
 locret_2599DC:                          ; CODE XREF: oksub_25995E+6C   j
                                         ; oksub_25995E+76   j
                 rts
@@ -52303,9 +52303,9 @@ loc_25A3D2:                             ; CODE XREF: sub_259DFE+2F6   j
                 move.l  #$BC614E,(dword_FFA6BC).l
                 move.b  #1,(byte_FFFF98).l
                 clr.w   d7
-                move.w  (word_FFFF8A).l,d7
+                move.w  (demo_index).l,d7
                 mulu.w  #6,d7
-                lea     (off_25C3CC).l,a0
+                lea     (demo_table).l,a0
                 move.l  (a0,d7.w),(dword_FFFF86).l
                 move.b  4(a0,d7.w),(selectedLevelOption).l
                 clr.b   (byte_FFFF9A).l
@@ -52316,10 +52316,10 @@ loc_25A3D2:                             ; CODE XREF: sub_259DFE+2F6   j
                 move.w  (a0)+,(word_FFFF96).l
                 move.l  a0,(dword_FFFF86).l
                 jsr     (sub_24D730).l
-                addq.w  #1,(word_FFFF8A).l
-                cmpi.w  #8,(word_FFFF8A).l
+                addq.w  #1,(demo_index).l
+                cmpi.w  #8,(demo_index).l
                 bne.w   loc_25A16C
-                clr.w   (word_FFFF8A).l
+                clr.w   (demo_index).l
                 move.b  #0,(byte_FFFF98).l
                 jsr     (sub_25A4FE).l
                 jsr     (sub_24D730).l
@@ -56703,25 +56703,25 @@ byte_25C3B8:    dc.b   0,  3,  0,$30,  0,  0,  0,$B7,  1,$C3
                                         ; DATA XREF: sub_24F1D8+2A   o
 byte_25C3C2:    dc.b   0, $B,  0,  0,  0,  0,  0,$B0,  1,$70
                                         ; DATA XREF: sub_24F808+1C   o
-off_25C3CC:     dc.l byte_25C3FC        ; DATA XREF: sub_24D5C0+7C   o
+demo_table:     dc.l demo_new_junk_city        ; DATA XREF: sub_24D5C0+7C   o
                                         ; sub_259DFE+622   o
                 dc.w 0
-                dc.l byte_25C58A
+                dc.l demo_what_the_heck
                 dc.w $100
-                dc.l byte_25C6C4
+                dc.l demo_snot_a_problem
                 dc.w $600
-                dc.l byte_25C842
+                dc.l demo_for_petes_sake
                 dc.w $700
-                dc.l byte_25C9E4
+                dc.l demo_buttville
                 dc.w $900
-                dc.l byte_25CCE0
+                dc.l demo_level_5
                 dc.w $B00
-                dc.l byte_25CEFE
+                dc.l demo_down_the_tubes
                 dc.w $F00
-                dc.l byte_25D054
+                dc.l demo_andy_asteroids
                 dc.w $1000
-byte_25C3FC:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  7,$F7,$16,$D7,$18,$F7,  8,$FF,  0,$FE,  0,$F6,  1,$FE,$1B,$BE, $A,$B6,$20,$BE,  7,$FE
-                                        ; DATA XREF: ROM:off_25C3CC   o
+demo_new_junk_city:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  7,$F7,$16,$D7,$18,$F7,  8,$FF,  0,$FE,  0,$F6,  1,$FE,$1B,$BE, $A,$B6,$20,$BE,  7,$FE
+                                        ; DATA XREF: ROM:demo_table   o
                 dc.b   6,$FA,  1,$BA,  3,$BB,  8,$B9,  1,$BD,  4,$B5,$1F,$F5,  6,$D5,$1E,$F5,$9A,$F7,$24,$FF,$12,$FD,$6C,$BD,  5,$FD,$29,$FF,$17,$F7
                 dc.b $13,$D7,$5D,$F7,$15,$FF,  1,$F7,  9,$D7,  4,$F7,  5,$D7,  3,$F7,  5,$D7,  8,$F7,  1,$D7,$2A,$F7,$11,$FF,$12,$FB,$15,$FF,  6,$DF
                 dc.b   3,$FF,  6,$EF,  2,$EB,  4,$FA,  0,$FB,$38,$FF,$29,$F7,$16,$FF,  5,$F7,  8,$D7,  5,$F7,  5,$D7,  3,$F7,  6,$D7,  3,$F7,  6,$D7
@@ -56734,7 +56734,7 @@ byte_25C3FC:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  7,$F7,$16,$D7,$18
                 dc.b   1,$DE,  1,$D6, $D,$D7,  4,$F7,$20,$FF,  2,$DF,$10,$D7, $F,$F7,  2,$D6,  6,$DE,  9,$DF,$15,$FF,$13,$DF,  6,$FB,$19,$FF,  4,$DF
                 dc.b   4,$DB,  3,$FB,$2A,$F9,  6,$FB,  1,$FE, $C,$F6,$17,$FE,$1D,$BE,$15,$FE,$16,$F6,$3B,$F7,  4,$D7, $C,$F7,$16,$FF, $E,$F7,  2,$D7
                 dc.b  $C,$F7,$12,$FF,  6,$FB,  4,$FF, $D,$F7,  0,  0,  0,  0
-byte_25C58A:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$28,$FF, $B,$DF,  5,$FF,$64,$F7, $F,$FF, $F,$F7,  4,$F6, $C,$E6,  9,$F6,  7,$E6,  1,$F6,  5,$FE
+demo_what_the_heck:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$28,$FF, $B,$DF,  5,$FF,$64,$F7, $F,$FF, $F,$F7,  4,$F6, $C,$E6,  9,$F6,  7,$E6,  1,$F6,  5,$FE
                                         ; DATA XREF: ROM:0025C3D2   o
                 dc.b   6,$EE,  8,$FE,  7,$EE, $B,$FE,$16,$BE,$12,$B6,  7,$BE, $D,$B6,$15,$F6,$58,$F7,$1E,$FF,$20,$FB,$14,$FA,  0,$BA,  0,$BE,  2,$B7
                 dc.b $16,$B6,  1,$BE, $E,$BA,  0,$BE,  0,$B6,  5,$B7,  2,$B6,  1,$BE,$27,$BA,  1,$BE,  5,$B6,  2,$BE,  7,$BA,  5,$BE,  0,$B6,  2,$BE
@@ -56745,7 +56745,7 @@ byte_25C58A:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$28,$FF, $B,$DF,  5,$FF,$64
                 dc.b   2,$FB,  1,$BB,$14,$BA,  7,$FA,  1,$FE,  1,$F6,  2,$F7, $F,$D7,  3,$D6,  0,$DE,  3,$DA,  4,$FA,  2,$DE,  3,$D7,  4,$F7,  5,$D7
                 dc.b   4,$F7,  6,$D7,$4A,$F7,$25,$FF,  2,$FB, $A,$DB,$13,$FB,  7,$DB,  4,$FB,  6,$DA,  6,$FA,  0,$FB,  2,$DB,$1B,$FB,  7,$FA,  4,$FB
                 dc.b $18,$FF,$5C,$F7,  5,$D6,  2,$DE,  9,$DA,  5,$CA,  9,$EA,$1B,$FA,  7,$FE, $A,$F6,  8,$F7,  0,  0,  0,  0
-byte_25C6C4:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$21,$FF,  4,$F7,$19,$B7,  6,$F7,  5,$B7,  7,$B5,  3,$F5,  0,$F7,  0,$FF,  0,$FE,$19,$FA,  1,$FE
+demo_snot_a_problem:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$21,$FF,  4,$F7,$19,$B7,  6,$F7,  5,$B7,  7,$B5,  3,$F5,  0,$F7,  0,$FF,  0,$FE,$19,$FA,  1,$FE
                                         ; DATA XREF: ROM:0025C3D8   o
                 dc.b   0,$FF,$16,$F7, $A,$FF,  4,$F7, $F,$FF,  5,$FB,$13,$FF,$13,$FB,  8,$BB,  1,$FB,$12,$FF,  6,$F7,$4B,$FF,  6,$F7,$36,$FF, $E,$FB
                 dc.b $16,$FF,$1B,$FD,$58,$FF, $F,$F7,  7,$FF, $B,$FB, $E,$F9,  7,$B9, $C,$F9,  2,$B9,  2,$BB,  1,$BA,  1,$FA, $A,$BA,$16,$FA,  1,$FE
@@ -56758,7 +56758,7 @@ byte_25C6C4:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$21,$FF,  4,$F7,$19,$B7,  6
                 dc.b   8,$BB, $B,$FB,  2,$FF,$12,$F7,  0,$B7,  5,$B5,  5,$F5,  0,$B5,  2,$B7,  2,$F7,  2,$F6,  4,$FE,$14,$FA, $A,$FB,  3,$BB,  1,$BA
                 dc.b   0,$BB,  2,$FB,  7,$FA,  7,$BA,  0,$FA,  3,$FE,$25,$F6,  5,$B6, $F,$F6,  5,$B6,$10,$F6,  2,$FE,  0,$FA,  0,$FB, $D,$FF,$15,$FE
                 dc.b $4C,$FF,  5,$F7,$17,$FF,  5,$FB,  6,$FF,$26,$F7,  7,$FF,  9,$FB,$2D,$FF,$15,$FB,$2B,$FA,  0,$FB,$27,$FF,  0,  0,  0,  0
-byte_25C842:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  6,$F7, $D,$FF,$22,$FB,  5,$FF,$41,$F7, $A,$FF,$3A,$F7, $B,$FF,  5,$BF,$14,$FF,$17,$FB
+demo_for_petes_sake:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  6,$F7, $D,$FF,$22,$FB,  5,$FF,$41,$F7, $A,$FF,$3A,$F7, $B,$FF,  5,$BF,$14,$FF,$17,$FB
                                         ; DATA XREF: ROM:0025C3DE   o
                 dc.b   2,$FF,  3,$F7,  5,$E7,  1,$F7, $A,$FF,$1F,$F7,$13,$D7,$77,$F7,  4,$FF,$1B,$B6,  7,$F6,$13,$F7,  0,$B7, $B,$B6,  9,$B7,  0,$B6
                 dc.b   9,$F6,$36,$F7, $C,$F6,  0,$F7, $F,$FF,  8,$F7,  6,$FF,$39,$FB,$12,$FF, $A,$F7,  7,$FF,  8,$F7,$11,$FF,  6,$F7,$1A,$FF,  7,$F7
@@ -56773,7 +56773,7 @@ byte_25C842:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  6,$F7, $D,$FF,$22
                 dc.b   7,$B7,  7,$B6,  8,$B7, $A,$B6,  9,$B7,  5,$B6,  7,$B7,  5,$B6,  8,$B7,  6,$B6,  2,$B7,  2,$B5,  1,$B7,  6,$B6,  2,$B7,  2,$B5
                 dc.b   2,$B7,  5,$B6,  5,$B7,$17,$B6, $A,$B7,  6,$B6,  7,$B7,  6,$B6,  1,$B7,  3,$B5,  2,$B7, $B,$B6,  1,$B7,  9,$B6,  1,$B7,  0,  0
                 dc.b   0,  0
-byte_25C9E4:    dc.b   0,$70,  0,  0,  0,$B0,  1,$7F,$17,$FF, $E,$F7,  6,$D7,$11,$F7,  5,$D7,  0,$DF,  2,$FF,  2,$DF,  2,$D7,  4,$F7,  3,$D7,  1,$DF
+demo_buttville:    dc.b   0,$70,  0,  0,  0,$B0,  1,$7F,$17,$FF, $E,$F7,  6,$D7,$11,$F7,  5,$D7,  0,$DF,  2,$FF,  2,$DF,  2,$D7,  4,$F7,  3,$D7,  1,$DF
                                         ; DATA XREF: ROM:0025C3E4   o
                 dc.b   3,$FF,  5,$DF,  3,$FF,  1,$DF,  2,$DB,  3,$FB,  4,$DB,  0,$DA,  4,$FA,  1,$DB,  2,$DA,  4,$FA,  1,$DA,  2,$DF,  3,$FF,  5,$DF
                 dc.b   3,$F7,  1,$D7,  3,$DF,  0,$FF,  2,$F7,  1,$D7,  2,$DF,  3,$FF,  5,$DF,  3,$FF,  6,$DF,  2,$FF,  5,$DF,  3,$FF,  4,$DF,  1,$FF
@@ -56798,7 +56798,7 @@ byte_25C9E4:    dc.b   0,$70,  0,  0,  0,$B0,  1,$7F,$17,$FF, $E,$F7,  6,$D7,$11
                 dc.b  $C,$EA,$57,$FA,  0,$FE,  8,$F6,  4,$FE,$3C,$F6,$15,$D6,  0,$DE,  1,$CE,  2,$EE, $A,$EA,$1C,$FA,  3,$FE, $A,$F6,$14,$E6,$1C,$F6
                 dc.b   2,$FE, $C,$FA, $F,$EA,$1A,$FA,  3,$FE, $B,$F6,$17,$E6,$1F,$F6,  3,$FE, $C,$FA,$12,$EA,$79,$FA, $F,$BA,$2F,$FA,$1C,$FB,$40,$FA
                 dc.b  $C,$BA, $B,$FA,  1,$FE,  4,$F6,  1,$B6,  0,$BF,  0,$BB,  9,$B9,  0,$BB,$11,$BA,  7,$BB,$28,$FA,  0,  0,  0,  0
-byte_25CCE0:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$15,$FF,$32,$F7, $D,$F6,  5,$FE,  9,$BA,  0,$FA,  0,$FE,  0,$FF,  3,$F7,$17,$F5,  1,$FD,$1A,$F9
+demo_level_5:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$15,$FF,$32,$F7, $D,$F6,  5,$FE,  9,$BA,  0,$FA,  0,$FE,  0,$FF,  3,$F7,$17,$F5,  1,$FD,$1A,$F9
                                         ; DATA XREF: ROM:0025C3EA   o
                 dc.b  $D,$FB,$14,$FA,  1,$BA, $A,$BE,  1,$B6,  6,$B7,  0,$BF,  0,$BE,  0,$BA,  7,$BB,  2,$B9,  4,$F9,  3,$FD,$17,$F5,  6,$FD,$13,$F5
                 dc.b   0,$B5,  0,$BF, $A,$BB,  1,$B9,  1,$BD, $A,$B5,$10,$F5,  3,$F7, $A,$F6,  2,$BE, $C,$BA,  1,$BB,  3,$FB,$19,$F9,  1,$B9,  0,$BD
@@ -56816,7 +56816,7 @@ byte_25CCE0:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$15,$FF,$32,$F7, $D,$F6,  5
                 dc.b $2E,$BF,  0,$BB,  8,$BA,  6,$FA,  5,$FE,$29,$F6,$1D,$F7,  0,$FF,  5,$FD,$1A,$F5,  1,$FD, $C,$BB,  1,$B9,$16,$F9, $E,$FB,$1C,$FA
                 dc.b   0,$FB,  0,$FF,$17,$BF,  9,$BD,  0,$BF,  8,$FF,$11,$F5, $A,$F7, $D,$F5,$25,$F7, $B,$F6,  0,$FE, $C,$BF,  0,$BE,  1,$BA,$3F,$FA
                 dc.b $14,$FB,  3,$F9,  7,$FD,$34,$F5,  2,$F7,  0,$FF,$15,$FA,  1,$FE,  9,$F6,  3,$F7,  6,$F6,  5,$FE,  4,$F6,  0,  0,  0,  0
-byte_25CEFE:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$13,$FF,$1E,$F7, $C,$B7,  5,$B5,  3,$B7,$3C,$F7, $A,$B7,$46,$F7,$1D,$B7,  9,$B6,  6,$B7,  9,$B5
+demo_down_the_tubes:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$13,$FF,$1E,$F7, $C,$B7,  5,$B5,  3,$B7,$3C,$F7, $A,$B7,$46,$F7,$1D,$B7,  9,$B6,  6,$B7,  9,$B5
                                         ; DATA XREF: ROM:0025C3F0   o
                 dc.b   5,$F5,$3E,$F7,$8F,$FF, $E,$F7, $D,$B7,  2,$B5,  0,$B7,  0,$BF,$16,$BA,  1,$BB,  0,$BA,  1,$BB,  5,$B5,  1,$BD,  8,$B9,  0,$BD
                 dc.b  $C,$B5,  1,$BD,  7,$B9,  6,$BB,  8,$B9,  0,$BD,$10,$B5,  1,$BF,  1,$BB,  5,$BA,  2,$B5,  0,$B7,  0,$B5,  1,$B7,  0,$BF,  0,$BB
@@ -56828,7 +56828,7 @@ byte_25CEFE:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$13,$FF,$1E,$F7, $C,$B7,  5
                 dc.b   6,$DF, $A,$FF,  3,$DB,  3,$FB,  2,$FF,  2,$DF,  5,$FF,  8,$F7,  5,$FF,  8,$F7,  6,$DF,  5,$FF,  6,$FB,  4,$DB,  3,$FB,  2,$FF
                 dc.b   5,$FB,  4,$DF,  8,$FF, $A,$DF,  4,$FF, $A,$F7, $A,$FF,  4,$DF,  8,$FF,  4,$DF,$30,$FF,$12,$FB, $C,$FF,  7,$F7,$FF,$FF,$61,$FF
                 dc.b $2C,$DF,$1E,$FF,  7,$DF, $B,$FF,  8,$DF,  7,$FF,  5,$DF,  9,$FF,  4,$DF,  0,  0,  0,  0
-byte_25D054:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$2D,$BF,$10,$BB,  5,$BF,$1F,$B7,  8,$BF,$1B,$BB,  2,$BF,$1A,$B7,  0,$B6,  0,$BE,  7,$BA,  6,$BB
+demo_andy_asteroids:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$2D,$BF,$10,$BB,  5,$BF,$1F,$B7,  8,$BF,$1B,$BB,  2,$BF,$1A,$B7,  0,$B6,  0,$BE,  7,$BA,  6,$BB
                                         ; DATA XREF: ROM:0025C3F6   o
                 dc.b   9,$BA,  2,$BF,$10,$B7, $D,$BF, $A,$BB,$12,$BF,  2,$BB,$14,$BF,  4,$BB,$2B,$BF,  6,$BB, $E,$BF,$20,$B7,$21,$BF,  2,$BB, $F,$BF
                 dc.b $11,$BB, $B,$BF,  2,$BB,$19,$BF,  5,$BB, $A,$BF,$14,$B7,$20,$BF,  8,$BB,  9,$BF,  4,$BB,$1B,$BF,$11,$B5,  0,$B7,  5,$BF, $E,$BB

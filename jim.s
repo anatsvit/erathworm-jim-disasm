@@ -25104,7 +25104,7 @@ loc_245B1E:                             ; CODE XREF: sub_245AE4+2E   j
                 jsr     (oksub_24CB2C).l
                 move.l  #off_1ADFA0,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 move.w  #$6000,(jim_obj_tile_offset).l
                 jsr     (sub_24CD18).l
                 bra.w   loc_245BD6
@@ -25316,15 +25316,15 @@ loc_245E72:                             ; CODE XREF: jim_fire+A   j
                 beq.w   locret_24608E
                 cmpi.b  #$3C,(jim_state).l ; '<'
                 bcc.w   loc_245F44
-                cmpi.b  #$40,(byte_FFFD11).l ; '@'
+                cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   loc_245F44
-                cmpi.b  #$72,(byte_FFFD11).l ; 'r'
+                cmpi.b  #$72,(jim_ride_obj_id).l ; 'r'
                 beq.w   loc_245F44
                 tst.b   (byte_FFFD14).l
                 bne.w   loc_245F30
-                cmpi.b  #$5F,(byte_FFFD11).l ; '_'
+                cmpi.b  #$5F,(jim_ride_obj_id).l ; '_'
                 beq.w   loc_245F30
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.w   loc_245F30
                 tst.b   (byte_FFFDF9).l
                 beq.w   loc_245F12
@@ -25401,9 +25401,9 @@ loc_245FEC:                             ; CODE XREF: jim_fire+192   j
 loc_245FF8:                             ; CODE XREF: jim_fire+19A   j
                 tst.b   (byte_FFFD14).l
                 bne.w   loc_246256
-                cmpi.b  #$5F,(byte_FFFD11).l ; '_'
+                cmpi.b  #$5F,(jim_ride_obj_id).l ; '_'
                 beq.w   loc_246256
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.w   loc_246256
                 tst.b   (byte_FFFDF9).l
                 bne.w   loc_246092
@@ -25715,9 +25715,9 @@ oksub_2464C8:                           ; CODE XREF: oksub_2456C8+270   p
                 beq.w   locret_246616
                 cmpi.b  #$3C,(jim_state).l ; '<'
                 bcc.w   locret_246616
-                cmpi.b  #$40,(byte_FFFD11).l ; '@'
+                cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   locret_246616
-                move.b  (byte_FFFD11).l,d0
+                move.b  (jim_ride_obj_id).l,d0
                 cmpi.b  #$5F,d0 ; '_'
                 beq.w   locret_246616
                 cmpi.b  #$5E,d0 ; '^'
@@ -25827,11 +25827,11 @@ sub_24669E:                             ; CODE XREF: oksub_2456C8+258   p
                 bne.w   locret_2467EE
                 tst.b   (byte_FFFF6B).l
                 beq.w   locret_2467EE
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   locret_2467EE
-                cmpi.b  #$72,(byte_FFFD11).l ; 'r'
+                cmpi.b  #$72,(jim_ride_obj_id).l ; 'r'
                 beq.w   locret_2467EE
-                cmpi.b  #$40,(byte_FFFD11).l ; '@'
+                cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   locret_2467EE
                 cmpi.b  #$45,(jim_state).l ; 'E'
                 beq.w   locret_2467EE
@@ -25869,7 +25869,7 @@ loc_24674A:                             ; CODE XREF: sub_24669E+A2   j
                 bne.w   locret_2467EE
                 clr.b   (byte_FFFD1E).l
                 st      (is_jim_jumping).l ; Прыжок при нажатии джойстика
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.b   (is_jim_fire).l
                 clr.b   (byte_FFFCFA).l
                 move.b  #1,(jump_hold_timer).l
@@ -26321,7 +26321,7 @@ loc_246D64:                             ; CODE XREF: sub_246D12+48   j
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  (jim_x).l,2(a5)
                 move.w  (jim_y).l,4(a5)
-                move.w  (jim_x).l,(word_FFFE06).l
+                move.w  (jim_x).l,(pete_return_x).l
 locret_246D8E:                          ; CODE XREF: sub_246D12+34   j
                 rts
 ; ---------------------------------------------------------------------------
@@ -26705,7 +26705,7 @@ loc_24722E:                             ; CODE XREF: sub_247022+200   j
                 bne.s   loc_2472A8
                 tst.b   (platform_type_under_jim).l
                 bne.s   loc_2472A8
-                tst.b   (byte_FFFD11).l
+                tst.b   (jim_ride_obj_id).l
                 bne.s   loc_2472A8
                 cmpi.b  #$A,(jim_timer_in_air).l
                 bcs.s   loc_2472A8
@@ -26718,9 +26718,9 @@ loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                 clr.b   (is_jim_left_direction).l
                 cmpi.b  #$19,(jim_state).l
                 bcc.w   loc_2473FE
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   locret_24752E
-                cmpi.b  #$40,(byte_FFFD11).l ; '@'
+                cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   locret_24752E
                 tst.b   (byte_FFFD06).l
                 bne.w   locret_24752E
@@ -26760,9 +26760,9 @@ loc_247352:                             ; CODE XREF: sub_247022+28C   j
                 st      (is_jim_left_direction).l
                 cmpi.b  #$19,(jim_state).l
                 bcc.w   loc_2473FE
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   locret_24752E
-                cmpi.b  #$40,(byte_FFFD11).l ; '@'
+                cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   locret_24752E
                 tst.b   (byte_FFFD03).l
                 bne.w   locret_24752E
@@ -28684,8 +28684,8 @@ sub_248C3A:                             ; CODE XREF: oksub_2456C8+1F8   p
                 beq.s   loc_248C6A
                 subq.b  #1,(invincibility_timer).l
 loc_248C6A:                             ; CODE XREF: sub_248C3A+28   j
-                move.b  (byte_FFFD11).l,(byte_FFFD12).l
-                clr.b   (byte_FFFD11).l
+                move.b  (jim_ride_obj_id).l,(jim_ride_obj_id_prev).l
+                clr.b   (jim_ride_obj_id).l
                 clr.b   (byte_FFFD2A).l
                 clr.b   (is_jim_hanging).l
                 tst.l   (jim_current_sprite_offset).l
@@ -28819,7 +28819,7 @@ loc_248E26:                             ; CODE XREF: sub_248C3A+1CC   j
                 clr.b   (jim_walking_direction).l
 loc_248E38:                             ; CODE XREF: sub_248C3A+1B4   j
                 st      (platform_type_under_jim).l
-                move.b  (a1),(byte_FFFD11).l
+                move.b  (a1),(jim_ride_obj_id).l
                 st      (is_jim_hanging).l
                 bsr.w   oksub_2459BE
 loc_248E4E:                             ; CODE XREF: sub_248C3A+AA   j
@@ -29907,9 +29907,9 @@ locret_2497C2:                          ; CODE XREF: sub_249772+40   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_2497C4:                             ; CODE XREF: sub_249772+2A   j
-                cmpi.b  #$5F,(byte_FFFD11).l ; '_'
+                cmpi.b  #$5F,(jim_ride_obj_id).l ; '_'
                 beq.s   loc_2497D8
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 bne.s   loc_2497E8
 loc_2497D8:                             ; CODE XREF: sub_249772+5A   j
                 lea     (off_1AEFDC).l,a2
@@ -30336,7 +30336,7 @@ loc_249C34:                             ; CODE XREF: sub_249A24+212   j
 
 
 jim_wall_collision:                             ; CODE XREF: oksub_2456C8+1EC   p
-                cmpi.b  #$40,(byte_FFFD11).l ; '@'
+                cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   loc_249EEE
                 clr.b   (byte_FFFD09).l
                 clr.b   (byte_FFFD0A).l
@@ -32123,7 +32123,7 @@ damage_from_enemy:                      ; CODE XREF: do_damage_from_enemy+6   p
                 beq.w   loc_24B0C4
                 tst.b   (byte_FFFD14).l
                 bne.w   loc_24B0C4
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   loc_24B0C4
                 tst.b   (naked_worm_enable).l
                 beq.s   loc_24B09A
@@ -33115,7 +33115,7 @@ jim_activities_collision:                             ; CODE XREF: oksub_2456C8+
                 beq.w   locret_24BDA6
                 clr.b   (byte_FFFD13).l
                 clr.b   (is_jim_sliding).l
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   locret_24BDA6
                 move.w  (jim_collider_y).l,d6
                 add.w   (camera_y).l,d6
@@ -33513,7 +33513,7 @@ loc_24C324:                             ; CODE XREF: ure_the_best_screen+1EE   j
 loc_24C33A:                             ; CODE XREF: ure_the_best_screen+222   j
                 move.w  (a0)+,(a1)+
                 dbf     d0,loc_24C33A
-                move.b  #1,(byte_FFFD11).l
+                move.b  #1,(jim_ride_obj_id).l
 loc_24C348:                             ; CODE XREF: ure_the_best_screen:loc_24C392   j
                 bsr.w   sub_24CD3A
                 bsr.w   sub_24C40A
@@ -36005,7 +36005,7 @@ sub_24DC60:                             ; DATA XREF: ROM:000057C8   o
 
 
 sub_24DC72:                             ; DATA XREF: ROM:000058B8   o
-                cmpi.b  #9,(byte_FFFE08).l
+                cmpi.b  #9,(pete_state).l
                 bcc.w   locret_24DC8C
                 tst.w   (word_FFFD54).l
                 bne.s   locret_24DC8C
@@ -36265,7 +36265,7 @@ sub_24DFE8:                             ; CODE XREF: sub_24DFE8+10   j
                 rts
 ; ---------------------------------------------------------------------------
 activity_tire_2:                             ; DATA XREF: ROM:00005638   o
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.s   sub_24DFE8
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_24E016
@@ -36277,7 +36277,7 @@ locret_24E016:                          ; CODE XREF: sub_24DFE8+18   j
                 rts
 ; ---------------------------------------------------------------------------
 activity_tire:                             ; DATA XREF: ROM:0000563C   o
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.s   sub_24DFE8
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_24E03E
@@ -36289,7 +36289,7 @@ locret_24E03E:                          ; CODE XREF: sub_24DFE8+40   j
                 rts
 ; ---------------------------------------------------------------------------
 activity_tire_3:                             ; DATA XREF: ROM:00005640   o
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.s   sub_24DFE8
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_24E0BE
@@ -36355,7 +36355,7 @@ locret_24E11A:                          ; CODE XREF: sub_24E0C0+8   j
 
 
 activity_tire_4:                             ; DATA XREF: ROM:00005644   o
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.w   sub_24DFE8
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_24E144
@@ -36367,7 +36367,7 @@ locret_24E144:                          ; CODE XREF: activity_tire_4+12   j
                 rts
 ; ---------------------------------------------------------------------------
 activity_tire_5:                             ; DATA XREF: ROM:00005648   o
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.w   sub_24DFE8
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_24E16E
@@ -36379,7 +36379,7 @@ locret_24E16E:                          ; CODE XREF: activity_tire_4+3C   j
                 rts
 ; ---------------------------------------------------------------------------
 activity_tire_6:                             ; DATA XREF: ROM:0000564C   o
-                cmpi.b  #$5E,(byte_FFFD11).l ; '^'
+                cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 beq.w   sub_24DFE8
                 tst.w   (jim_y_speed).l
                 bpl.s   locret_24E190
@@ -36404,7 +36404,7 @@ locret_24E1B6:                          ; CODE XREF: activity_tire_4+7C   j
 ;Калоить
 activity_thorn:                             ; DATA XREF: ROM:00005654   o
                                         ; ROM:00005694   o ...
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E1CA
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E1DC
@@ -36420,7 +36420,7 @@ locret_24E1DC:                          ; CODE XREF: activity_thorn+10   j
 ; ---------------------------------------------------------------------------
 activity_thorn_2:                             ; DATA XREF: ROM:00005658   o
                                         ; ROM:00005698   o
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E1F4
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E208
@@ -36436,7 +36436,7 @@ locret_24E208:                          ; CODE XREF: activity_thorn+3A   j
 ; ---------------------------------------------------------------------------
 activity_thorn_3:                             ; DATA XREF: ROM:0000565C   o
                                         ; ROM:0000569C   o ...
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E220
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E232
@@ -36452,7 +36452,7 @@ locret_24E232:                          ; CODE XREF: activity_thorn+66   j
 ; ---------------------------------------------------------------------------
 activity_thorn_4:                             ; DATA XREF: ROM:00005660   o
                                         ; ROM:000056A0   o
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E24A
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E25E
@@ -36468,7 +36468,7 @@ locret_24E25E:                          ; CODE XREF: activity_thorn+90   j
 ; ---------------------------------------------------------------------------
 activity_thorn_5:                             ; DATA XREF: ROM:00005664   o
                                         ; ROM:000056A4   o
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E276
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E288
@@ -36484,7 +36484,7 @@ locret_24E288:                          ; CODE XREF: activity_thorn+BC   j
 ; ---------------------------------------------------------------------------
 activity_thorn_6:                             ; DATA XREF: ROM:00005668   o
                                         ; ROM:000056A8   o
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E2A0
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E2B4
@@ -36500,7 +36500,7 @@ locret_24E2B4:                          ; CODE XREF: activity_thorn+E6   j
 ; ---------------------------------------------------------------------------
 activity_thorn_7:                             ; DATA XREF: ROM:0000566C   o
                                         ; ROM:00005674   o ...
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E2CC
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E2DE
@@ -36516,7 +36516,7 @@ locret_24E2DE:                          ; CODE XREF: activity_thorn+112   j
 ; ---------------------------------------------------------------------------
 activity_thorn_8:                             ; DATA XREF: ROM:00005670   o
                                         ; ROM:000056B0   o
-                cmpi.b  #$61,(byte_FFFD11).l ; 'a'
+                cmpi.b  #$61,(jim_ride_obj_id).l ; 'a'
                 beq.s   loc_24E2F6
                 tst.b   (is_jim_hanging).l
                 bne.s   locret_24E30A
@@ -36535,7 +36535,7 @@ loc_24E310:                             ; CODE XREF: activity_thorn+20   j
                 clr.b   (is_jim_jumping).l
                 clr.b   (byte_FFFCFA).l
                 clr.b   (jim_timer_in_air).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.b   (is_jim_fire).l
                 clr.b   (timer_whip_blocking).l
                 move.b  #$C,(jump_hold_timer).l
@@ -36565,7 +36565,7 @@ loc_24E392:                             ; CODE XREF: activity_thorn+26   j
                 clr.b   (is_jim_jumping).l
                 clr.b   (byte_FFFCFA).l
                 clr.b   (jim_timer_in_air).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.b   (is_jim_fire).l
                 clr.b   (timer_whip_blocking).l
                 move.b  #$C,(jump_hold_timer).l
@@ -36596,7 +36596,7 @@ sub_24E3F8:                             ; DATA XREF: ROM:0000573C   o
                                         ; ROM:00005740   o
                 cmpi.b  #$42,(jim_state).l ; 'B'
                 beq.s   locret_24E424
-                cmpi.b  #$5A,(byte_FFFD11).l ; 'Z'
+                cmpi.b  #$5A,(jim_ride_obj_id).l ; 'Z'
                 beq.s   locret_24E424
                 tst.b   (naked_worm_enable).l
                 bne.s   locret_24E424
@@ -36614,7 +36614,7 @@ activity_climbing_from_right:                             ; DATA XREF: ROM:00005
                 bne.w   loc_24E4E6
                 cmpi.b  #$42,(jim_state).l ; 'B'
                 beq.w   loc_24E4E6
-                cmpi.b  #$5A,(byte_FFFD11).l ; 'Z'
+                cmpi.b  #$5A,(jim_ride_obj_id).l ; 'Z'
                 beq.w   locret_24E4E4
                 tst.b   (naked_worm_enable).l
                 bne.w   locret_24E4E4
@@ -36636,7 +36636,7 @@ activity_climbing_from_right:                             ; DATA XREF: ROM:00005
                 andi.w  #$FFF0,d7
                 sub.w   (camera_y).l,d7
                 move.w  d7,(jim_collider_y).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_delta_x_speed).l
                 clr.b   (jim_walking_direction).l
@@ -36650,7 +36650,7 @@ locret_24E4E4:                          ; CODE XREF: activity_climbing_from_righ
 ; ---------------------------------------------------------------------------
 loc_24E4E6:                             ; CODE XREF: activity_climbing_from_right+6   j
                                         ; activity_climbing_from_right+12   j ...
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 rts
 ; End of function activity_climbing_from_right
 
@@ -36660,7 +36660,7 @@ activity_climbing_from_left:                             ; DATA XREF: ROM:000057
                 bne.s   loc_24E4E6
                 cmpi.b  #$42,(jim_state).l ; 'B'
                 beq.s   loc_24E4E6
-                cmpi.b  #$5A,(byte_FFFD11).l ; 'Z'
+                cmpi.b  #$5A,(jim_ride_obj_id).l ; 'Z'
                 beq.w   locret_24E5A4
                 tst.b   (naked_worm_enable).l
                 bne.w   locret_24E5A4
@@ -36681,7 +36681,7 @@ activity_climbing_from_left:                             ; DATA XREF: ROM:000057
                 andi.w  #$FFF0,d7
                 sub.w   (camera_y).l,d7
                 move.w  d7,(jim_collider_y).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_delta_x_speed).l
                 clr.b   (jim_walking_direction).l
@@ -37865,7 +37865,7 @@ loc_24F548:                             ; CODE XREF: sub_24F4F0+44   j
                 cmpi.b  #$1E,d7
                 bne.s   loc_24F580
                 clr.b   (byte_FFFD66).l
-                move.l  #byte_1A2F3E,(jim_obj_script_ptr).l
+                move.l  #byte_1A2F3E,(jim_move_script_ptr).l
                 clr.b   (jim_obj_script_delay).l
 loc_24F580:                             ; CODE XREF: sub_24F4F0+5E   j
                                         ; sub_24F4F0+78   j
@@ -38267,10 +38267,10 @@ loc_24FA40:                             ; CODE XREF: sub_24F99E+8C   j
                 addq.b  #1,(byte_FFFBF1).l
 loc_24FA8A:                             ; CODE XREF: sub_24F99E+BC   j
                                         ; sub_24F99E+C2   j ...
-                move.l  #byte_1AD26A,(jim_obj_script_ptr).l
+                move.l  #byte_1AD26A,(jim_move_script_ptr).l
                 tst.b   (byte_FFFBF1).l
                 bne.s   loc_24FAA6
-                move.l  #byte_1AD298,(jim_obj_script_ptr).l
+                move.l  #byte_1AD298,(jim_move_script_ptr).l
 loc_24FAA6:                             ; CODE XREF: sub_24F99E+FC   j
                 clr.b   (jim_obj_script_delay).l
                 rts
@@ -38792,11 +38792,11 @@ loc_2500DE:                             ; CODE XREF: sub_2500A8+4A   j
                 lea     (obj_01).l,a5
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.l  #0,$20(a5)
-                tst.w   (word_FFFE06).l
+                tst.w   (pete_return_x).l
                 bne.s   loc_25011E
-                move.w  #$A0,(word_FFFE06).l
+                move.w  #$A0,(pete_return_x).l
 loc_25011E:                             ; CODE XREF: sub_2500A8+6C   j
-                move.w  (word_FFFE06).l,2(a5)
+                move.w  (pete_return_x).l,2(a5)
                 move.w  #$1B0,4(a5)
                 rts
 ; End of function sub_2500A8
@@ -38839,7 +38839,7 @@ sub_250194:                             ; DATA XREF: ROM:0025BEAC   o
                 st      (is_jim_on_rocket).l
                 move.w  #$10,(shot_angle_current).l
                 move.w  #$10,(shot_angle_target).l
-                move.l  #byte_1A4444,(jim_obj_script_ptr).l
+                move.l  #byte_1A4444,(jim_move_script_ptr).l
                 move.b  #5,(palette2_index).l
                 lea     (obj_01).l,a1
                 move.w  #$19,d4
@@ -40455,7 +40455,7 @@ spawn_electro_up_down:                             ; DATA XREF: ROM:000053B4   o
                 bne.s   locret_2511D0
                 addq.w  #3,2(a5)
                 subi.w  #$23,4(a5) ; '#'
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 bne.s   locret_2511D0
                 move.b  #$86,(a5)
 locret_2511D0:                          ; CODE XREF: spawn_electro_up_down+A   j
@@ -41956,7 +41956,7 @@ locret_2525DC:                          ; CODE XREF: collision_with_machine+8   
 collision_with_puppy_evil:                             ; DATA XREF: ROM:0000378C   o
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.s   locret_252650
-                cmpi.b  #$C,(byte_FFFE08).l
+                cmpi.b  #$C,(pete_state).l
                 bne.s   locret_252650
                 jsr     do_damage_from_enemy(pc)
                 clr.b   (invincibility_timer).l
@@ -41965,7 +41965,7 @@ collision_with_puppy_evil:                             ; DATA XREF: ROM:0000378C
                 move.l  #off_1B44E2,$20(a1)
                 clr.w   (word_FFFD54).l
                 clr.b   (byte_FFFD4C).l
-                move.b  #$D,(byte_FFFE08).l
+                move.b  #$D,(pete_state).l
                 move.l  #off_1B015A,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 clr.w   (jim_delta_x_speed).l
@@ -42125,7 +42125,7 @@ loc_2527CA:                             ; CODE XREF: collision_with_butt_crab_32
                 move.b  #$78,(jim_dead_enable).l ; 'x'
                 move.l  #off_1AFC34,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.b   (jim_obj_script_delay).l
                 move.b  #$40,(jim_obj_flags).l ; '@'
                 move.w  #$FD00,(jim_y_speed).l
@@ -42330,7 +42330,7 @@ collision_with_fan:                             ; DATA XREF: ROM:00003784   o
                 move.l  #off_1AF6B2,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 move.b  #$47,(jim_state).l ; 'G'
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
                 move.w  d7,(jim_collider_y).l
@@ -42643,7 +42643,7 @@ nullsub_34:                             ; DATA XREF: ROM:000035FC   o
 collision_with_crow:                             ; DATA XREF: ROM:000036DC   o
                 cmpi.b  #$3E,(jim_state).l ; '>'
                 beq.w   locret_252DE2
-                tst.l   (jim_obj_script_ptr).l
+                tst.l   (jim_move_script_ptr).l
                 bne.w   locret_252DE2
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_252DE2
@@ -42670,7 +42670,7 @@ sub_252DE4:                             ; DATA XREF: ROM:000035F8   o
                 beq.w   loc_252EDE
                 tst.w   (jim_y_speed).l
                 bne.w   loc_252EDE
-                tst.l   (jim_obj_script_ptr).l
+                tst.l   (jim_move_script_ptr).l
                 bne.w   locret_252EE2
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   loc_252EDE
@@ -43371,7 +43371,7 @@ locret_253778:                          ; CODE XREF: collision_with_diamond+64  
 ; ---------------------------------------------------------------------------
 collision_with_spring_platform:                             ; DATA XREF: ROM:00003740   o
                                         ; ROM:00003744   o
-                cmpi.b  #$E,(byte_FFFE08).l
+                cmpi.b  #$E,(pete_state).l
                 beq.w   loc_253CF6
                 move.b  6(a1),d0
                 btst    #4,d0
@@ -43408,7 +43408,7 @@ loc_2537F0:                             ; CODE XREF: collision_with_diamond+DC  
                 bra.w   loc_253CF6
 ; ---------------------------------------------------------------------------
 collision_with_balance_platform:                             ; DATA XREF: ROM:00003748   o
-                cmpi.b  #$E,(byte_FFFE08).l
+                cmpi.b  #$E,(pete_state).l
                 beq.w   loc_253CF6
                 move.l  a2,-(sp)
                 tst.w   (jim_y_speed).l
@@ -43543,7 +43543,7 @@ collision_with_bobcat:                             ; DATA XREF: ROM:00003690   o
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
                 move.w  d7,(jim_collider_y).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.w   (jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_walking_speed).l
@@ -43666,7 +43666,7 @@ loc_253B44:                             ; CODE XREF: collision_with_diamond+432 
                 move.w  4(a1),d7
                 sub.w   (camera_y).l,d7
                 move.w  d7,(jim_collider_y).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.w   (jim_delta_x_speed).l
                 clr.w   (jim_y_speed).l
                 clr.w   (jim_walking_speed).l
@@ -43704,7 +43704,7 @@ loc_253C08:                             ; CODE XREF: collision_with_diamond+4F6 
                 bne.w   locret_253CF4
                 tst.w   $1A(a1)
                 bmi.w   locret_253CF4
-                tst.l   (jim_obj_script_ptr).l
+                tst.l   (jim_move_script_ptr).l
                 bne.w   locret_253CF4
                 tst.b   (level_end_timer).l
                 bne.w   locret_253CF4
@@ -45830,17 +45830,17 @@ nullsub_43:                             ; DATA XREF: ROM:00003944   o
 
 
 whip_to_puppy:                             ; DATA XREF: ROM:00003960   o
-                cmpi.b  #6,(byte_FFFE08).l
+                cmpi.b  #6,(pete_state).l
                 beq.s   locret_2554E6
-                cmpi.b  #$A,(byte_FFFE08).l
+                cmpi.b  #$A,(pete_state).l
                 beq.s   locret_2554E6
-                cmpi.b  #1,(byte_FFFE08).l
+                cmpi.b  #1,(pete_state).l
                 beq.s   locret_2554E6
-                cmpi.b  #8,(byte_FFFE08).l
+                cmpi.b  #8,(pete_state).l
                 beq.s   locret_2554E6
                 move.l  #off_1B4242,$20(a2)
                 clr.b   $37(a2)
-                cmpi.b  #5,(byte_FFFE08).l
+                cmpi.b  #5,(pete_state).l
                 beq.s   loc_2554D6
                 move.w  (jim_x).l,d7
                 cmp.w   2(a2),d7
@@ -45848,7 +45848,7 @@ whip_to_puppy:                             ; DATA XREF: ROM:00003960   o
                 st      9(a2)
 loc_2554D6:                             ; CODE XREF: whip_to_puppy+3C   j
                                         ; whip_to_puppy+48   j
-                move.b  #1,(byte_FFFE08).l
+                move.b  #1,(pete_state).l
                 clr.w   $18(a2)
                 clr.w   $1A(a2)
 locret_2554E6:                          ; CODE XREF: whip_to_puppy+8   j
@@ -45967,13 +45967,13 @@ prize_faucet_objects_table:     dc.l stru_25A964        ; DATA XREF: whip_to_pri
 whip_to_hook:                             ; DATA XREF: ROM:00003930   o
                 cmpi.b  #$46,(jim_state).l ; 'F'
                 beq.w   locret_2556E6
-                cmpi.b  #$60,(byte_FFFD11).l ; '`'
+                cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   locret_2556E6
-                cmpi.b  #$72,(byte_FFFD11).l ; 'r'
+                cmpi.b  #$72,(jim_ride_obj_id).l ; 'r'
                 beq.w   locret_2556E6
                 btst    #0,(frame_counter).l
                 bne.s   locret_2556E6
-                tst.l   (jim_obj_script_ptr).l
+                tst.l   (jim_move_script_ptr).l
                 bne.s   locret_2556E6
                 move.l  #off_1AF5F6,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
@@ -45988,7 +45988,7 @@ whip_to_hook:                             ; DATA XREF: ROM:00003930   o
                 move.w  d7,(jim_collider_y).l
                 tst.b   (is_jim_left_direction).l
                 bne.s   loc_2556E8
-                move.l  #byte_1A4312,(jim_obj_script_ptr).l
+                move.l  #byte_1A4312,(jim_move_script_ptr).l
                 clr.b   (jim_obj_script_delay).l
                 move.w  2(a2),d7
                 sub.w   (camera_x).l,d7
@@ -45999,7 +45999,7 @@ locret_2556E6:                          ; CODE XREF: whip_to_hook+8   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_2556E8:                             ; CODE XREF: whip_to_hook+80   j
-                move.l  #byte_1A43AE,(jim_obj_script_ptr).l
+                move.l  #byte_1A43AE,(jim_move_script_ptr).l
                 clr.b   (jim_obj_script_delay).l
                 move.w  2(a2),d7
                 sub.w   (camera_x).l,d7
@@ -46378,15 +46378,15 @@ fire_to_puppy:                             ; DATA XREF: ROM:00003824   o
                 beq.s   loc_255BAE
                 cmpi.b  #$83,(a1)
                 beq.w   loc_255CCE
-                cmpi.b  #5,(byte_FFFE08).l
+                cmpi.b  #5,(pete_state).l
                 beq.s   loc_255B7C
-                cmpi.b  #0,(byte_FFFE08).l
+                cmpi.b  #0,(pete_state).l
                 bne.s   locret_255B9C
 loc_255B7C:                             ; CODE XREF: fire_to_puppy+22   j
                 bsr.w   sub_25449C
                 move.l  #off_1B43A0,$20(a2)
                 clr.b   $37(a2)
-                move.b  #4,(byte_FFFE08).l
+                move.b  #4,(pete_state).l
                 clr.b   9(a2)
                 clr.l   $A(a1)
 locret_255B9C:                          ; CODE XREF: fire_to_puppy+2C   j
@@ -46402,7 +46402,7 @@ loc_255B9E:                             ; CODE XREF: fire_to_puppy+4   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_255BAE:                             ; CODE XREF: fire_to_puppy+10   j
-                cmpi.b  #6,(byte_FFFE08).l
+                cmpi.b  #6,(pete_state).l
                 beq.s   loc_255C1A
                 bcc.s   locret_255B9C
                 tst.l   $A(a1)
@@ -46425,7 +46425,7 @@ loc_255BAE:                             ; CODE XREF: fire_to_puppy+10   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255C12:                             ; CODE XREF: fire_to_puppy+A8   j
-                move.b  #6,(byte_FFFE08).l
+                move.b  #6,(pete_state).l
 loc_255C1A:                             ; CODE XREF: fire_to_puppy+68   j
                 move.w  2(a1),d7
                 move.w  d7,2(a2)
@@ -46434,9 +46434,9 @@ loc_255C1A:                             ; CODE XREF: fire_to_puppy+68   j
                 move.w  d7,4(a2)
                 rts
 ; ---------------------------------------------------------------------------
-                cmpi.b  #9,(byte_FFFE08).l
+                cmpi.b  #9,(pete_state).l
                 bcc.w   locret_255B9C
-                cmpi.b  #1,(byte_FFFE08).l
+                cmpi.b  #1,(pete_state).l
                 beq.w   locret_255B9C
                 tst.w   $1A(a2)
                 bmi.w   locret_255B9C
@@ -46444,7 +46444,7 @@ loc_255C1A:                             ; CODE XREF: fire_to_puppy+68   j
                 movea.l $48(a1),a3
                 cmpi.b  #$81,$3D(a3)
                 beq.w   loc_255CA6
-                cmpi.b  #5,(byte_FFFE08).l
+                cmpi.b  #5,(pete_state).l
                 beq.s   loc_255C82
                 move.l  #0,$A(a2)
                 move.l  #off_1B4356,$20(a2)
@@ -46457,11 +46457,11 @@ loc_255C82:                             ; CODE XREF: fire_to_puppy+11A   j
                 move.w  d7,4(a2)
                 clr.w   $18(a2)
                 clr.w   $1A(a2)
-                move.b  #5,(byte_FFFE08).l
+                move.b  #5,(pete_state).l
                 bra.w   loc_255D4E
 ; ---------------------------------------------------------------------------
 loc_255CA6:                             ; CODE XREF: fire_to_puppy+10E   j
-                cmpi.b  #5,(byte_FFFE08).l
+                cmpi.b  #5,(pete_state).l
                 bne.w   loc_255D4E
                 move.w  #$400,$18(a2)
                 move.w  #$FD00,$1A(a2)
@@ -46470,9 +46470,9 @@ loc_255CA6:                             ; CODE XREF: fire_to_puppy+10E   j
                 bra.w   loc_255D4E
 ; ---------------------------------------------------------------------------
 loc_255CCE:                             ; CODE XREF: fire_to_puppy+16   j
-                cmpi.b  #9,(byte_FFFE08).l
+                cmpi.b  #9,(pete_state).l
                 bcc.w   locret_255B9C
-                cmpi.b  #8,(byte_FFFE08).l
+                cmpi.b  #8,(pete_state).l
                 beq.w   locret_255B9C
                 move.l  a3,-(sp)
                 movea.l $48(a1),a3
@@ -46492,7 +46492,7 @@ loc_255CCE:                             ; CODE XREF: fire_to_puppy+16   j
                 move.w  d7,4(a2)
                 clr.w   $18(a2)
                 clr.w   $1A(a2)
-                move.b  #8,(byte_FFFE08).l
+                move.b  #8,(pete_state).l
                 clr.b   (a1)
                 jsr     (sub_24AE7A).l
 loc_255D4E:                             ; CODE XREF: fire_to_puppy+154   j
@@ -47843,7 +47843,7 @@ loc_256DCC:                             ; CODE XREF: sub_256D82+24   j
 loc_256DEC:                             ; CODE XREF: sub_256D82+2C   j
                                         ; sub_256D82+34   j ...
                 move.w  #$C0,(word_FFA67E).l
-                cmpi.b  #$C,(byte_FFFE08).l
+                cmpi.b  #$C,(pete_state).l
                 bcc.s   loc_256E28
                 move.w  (jim_x).l,d7
                 sub.w   2(a1),d7
@@ -47868,14 +47868,14 @@ loc_256E36:                             ; CODE XREF: sub_256D82+AC   j
                 bcc.s   loc_256E44
                 move.w  #$40,4(a1) ; '@'
 loc_256E44:                             ; CODE XREF: sub_256D82+BA   j
-                cmpi.b  #$B,(byte_FFFE08).l
+                cmpi.b  #$B,(pete_state).l
                 bcs.s   loc_256E5A
                 cmpi.w  #$198,4(a1)
                 bcs.s   loc_256E5A
                 subq.w  #2,4(a1)
 loc_256E5A:                             ; CODE XREF: sub_256D82+CA   j
                                         ; sub_256D82+D2   j
-                cmpi.b  #$E,(byte_FFFE08).l
+                cmpi.b  #$E,(pete_state).l
                 bne.w   loc_256EFC
                 move.l  a0,-(sp)
                 cmpi.w  #$132,4(a1)
@@ -47897,7 +47897,7 @@ loc_256E8A:                             ; CODE XREF: sub_256D82+F4   j
                 clr.w   d1
                 lea     (byte_3AF6).w,a0
                 move.w  2(a1),d0
-                sub.w   (word_FFFE06).l,d0
+                sub.w   (pete_return_x).l,d0
                 beq.s   loc_256EF0
                 bpl.s   loc_256EB4
                 neg.w   d0
@@ -47928,24 +47928,24 @@ loc_256EC6:                             ; CODE XREF: sub_256D82+130   j
                 bra.s   loc_256EF8
 ; ---------------------------------------------------------------------------
 loc_256EF0:                             ; CODE XREF: sub_256D82+118   j
-                move.b  #$D,(byte_FFFE08).l
+                move.b  #$D,(pete_state).l
 loc_256EF8:                             ; CODE XREF: sub_256D82+14A   j
                                         ; sub_256D82+16C   j
                 movea.l (sp)+,a0
                 rts
 ; ---------------------------------------------------------------------------
 loc_256EFC:                             ; CODE XREF: sub_256D82+E0   j
-                cmpi.b  #9,(byte_FFFE08).l
+                cmpi.b  #9,(pete_state).l
                 beq.w   loc_25702E
-                cmpi.b  #9,(byte_FFFE08).l
+                cmpi.b  #9,(pete_state).l
                 bcc.w   locret_257056
-                cmpi.b  #6,(byte_FFFE08).l
+                cmpi.b  #6,(pete_state).l
                 beq.w   locret_257056
-                cmpi.b  #8,(byte_FFFE08).l
+                cmpi.b  #8,(pete_state).l
                 beq.w   locret_257056
                 cmpi.b  #$7B,$3D(a1) ; '{'
                 bne.s   loc_256FA0
-                move.w  2(a1),(word_FFFE06).l
+                move.w  2(a1),(pete_return_x).l
                 movem.l d1-d5,-(sp)
                 move.w  (camera_x).l,d2
                 move.w  (camera_y).l,d3
@@ -48002,11 +48002,11 @@ loc_256FE6:                             ; CODE XREF: sub_256D82+258   j
 loc_256FEC:                             ; CODE XREF: sub_256D82+262   j
                 movea.l (sp)+,a5
                 movea.l (sp)+,a4
-                cmpi.b  #2,(byte_FFFE08).l
+                cmpi.b  #2,(pete_state).l
                 beq.s   loc_257014
-                cmpi.b  #1,(byte_FFFE08).l
+                cmpi.b  #1,(pete_state).l
                 beq.s   loc_257014
-                cmpi.b  #7,(byte_FFFE08).l
+                cmpi.b  #7,(pete_state).l
                 beq.s   loc_257014
                 bset    #0,6(a1)
 loc_257014:                             ; CODE XREF: sub_256D82+276   j
@@ -48022,7 +48022,7 @@ loc_25702E:                             ; CODE XREF: sub_256D82+182   j
                 move.l  #off_1B43CA,$20(a1)
                 clr.b   $37(a1)
                 bclr    #5,7(a1)
-                move.b  #$A,(byte_FFFE08).l
+                move.b  #$A,(pete_state).l
                 clr.l   $A(a1)
                 clr.b   $36(a1)
                 bclr    #0,6(a1)
@@ -48074,9 +48074,9 @@ loc_2570B2:                             ; CODE XREF: sub_257058+4A   j
                 bclr    #0,6(a1)
                 bset    #4,7(a1)
                 clr.w   $1A(a1)
-                cmpi.b  #2,(byte_FFFE08).l
+                cmpi.b  #2,(pete_state).l
                 bne.s   loc_2570D4
-                move.b  #3,(byte_FFFE08).l
+                move.b  #3,(pete_state).l
 loc_2570D4:                             ; CODE XREF: sub_257058+58   j
                                         ; sub_257058+72   j
                 move.l  (sp)+,d0
@@ -48605,7 +48605,7 @@ loc_2576B6:                             ; CODE XREF: collision_with_hamster+5C  
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257708:                             ; CODE XREF: collision_with_hamster+D6   j
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.w   (jim_walking_speed).l
                 clr.b   (jim_walking_direction).l
                 clr.w   (jim_delta_x_speed).l
@@ -49344,7 +49344,7 @@ sub_257FE8:                             ; DATA XREF: ROM:stru_25AF1C   o
                 bne.w   loc_2580BE
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   loc_2580BE
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 move.b  #$40,(jim_obj_flags).l ; '@'
                 clr.w   d7
                 move.b  (jim_obj_screen_y).l,d7
@@ -49459,7 +49459,7 @@ loc_2581BE:                             ; CODE XREF: collision_with_water_monste
                 st      (is_jim_blocked_by_enemy).l
                 move.l  #off_1AFC34,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
-                clr.l   (jim_obj_script_ptr).l
+                clr.l   (jim_move_script_ptr).l
                 clr.b   (jim_obj_script_delay).l
                 move.b  #$40,(jim_obj_flags).l ; '@'
                 move.l  #$30303030,(jim_health).l

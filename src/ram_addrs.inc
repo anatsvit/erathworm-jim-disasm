@@ -81,7 +81,7 @@ jim_obj_flags equ $FFFFA6D8
 jim_obj_draw_flags equ $FFFFA6D9
 jim_obj_var_08 equ $FFFFA6DA
 is_jim_left_direction equ $FFFFA6DB
-jim_obj_script_ptr equ $FFFFA6DC
+jim_move_script_ptr equ $FFFFA6DC
 jim_current_sprite_offset equ $FFFFA6E6
 jim_delta_x_speed equ $FFFFA6EA
 jim_y_speed equ $FFFFA6EC
@@ -224,8 +224,8 @@ is_jim_hanging equ $FFFFFD0D
 is_jim_sliding equ $FFFFFD0E ;Jim на крутой поверхности лезет вверх или скользит вниз
 byte_FFFD0F equ $FFFFFD0F
 byte_FFFD10 equ $FFFFFD10
-byte_FFFD11 equ $FFFFFD11
-byte_FFFD12 equ $FFFFFD12
+jim_ride_obj_id equ $FFFFFD11 ;ID объекта, на котором Джим едет/стоит в текущем кадре (фуникулёр $5E/$5F, подлодка $40, изумрудные лифты $56/$5A/$5B, движущаяся платформа $61 - флаг bit4 в байте 6 объекта). 0 - ни на чём. Обычная земля/тайлы сюда НЕ пишутся, для них platform_type_under_jim
+jim_ride_obj_id_prev equ $FFFFFD12 ;Значение jim_ride_obj_id за прошлый кадр
 byte_FFFD13 equ $FFFFFD13
 byte_FFFD14 equ $FFFFFD14
 is_jim_on_rocket equ $FFFFFD15
@@ -400,8 +400,8 @@ byte_FFFE01 equ $FFFFFE01
 level_finish_enable equ $FFFFFE02
 byte_FFFE03 equ $FFFFFE03
 byte_FFFE04 equ $FFFFFE04
-word_FFFE06 equ $FFFFFE06
-byte_FFFE08 equ $FFFFFE08
+pete_return_x equ $FFFFFE06
+pete_state equ $FFFFFE08
 byte_FFFE09 equ $FFFFFE09
 dword_FFFE0A equ $FFFFFE0A
 unk_FFFE0E equ $FFFFFE0E

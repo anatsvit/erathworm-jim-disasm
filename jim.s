@@ -25117,7 +25117,7 @@ loc_245BA2:                             ; CODE XREF: sub_245AE4+18   j
                 jsr     (sub_24CC9A).l
                 lea     (jim_obj_id).l,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 bsr.w   sub_24ACC8
                 jsr     (sub_24CB8C).l
                 move.w  #$23,d0 ; '#'
@@ -25374,7 +25374,7 @@ loc_245F9C:                             ; CODE XREF: jim_fire+182   j
                 tst.b   (a5)
                 beq.s   loc_245FA6
                 movea.l a5,a1
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_245FA6:                             ; CODE XREF: jim_fire+14E   j
                 lea     (stru_25A73C).l,a6
                 tst.b   (plasma_count_ammo).l
@@ -26314,7 +26314,7 @@ sub_246D12:                             ; CODE XREF: sub_247022+1F4   j
 loc_246D5C:                             ; CODE XREF: sub_246D12+3E   j
                 movea.l a5,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_246D64:                             ; CODE XREF: sub_246D12+48   j
                 lea     (stru_25B09C).l,a6
                 lea     (obj_01).l,a5
@@ -26552,7 +26552,7 @@ loc_247050:                             ; CODE XREF: sub_247022+2A   j
                 tst.b   (super_bubble_count).l
                 beq.s   loc_247090
                 subq.b  #1,(super_bubble_count).l
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 bne.s   loc_247090
                 lea     (stru_25B7A4).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -29546,7 +29546,7 @@ loc_2494B4:                             ; CODE XREF: sub_2493EA+A4   j
 
 
 sub_2494BC:
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 btst    #3,6(a1)
                 beq.s   loc_2494DC
                 movea.l a1,a5
@@ -29699,7 +29699,7 @@ oksub_2495B0:                           ; CODE XREF: collision_with_fish_boss+1C
 
 sub_2495B8:
                 movem.l a5-a6,-(sp)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 lea     (stru_25A85C).l,a6
                 movea.l a1,a5
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -29821,7 +29821,7 @@ loc_2496E2:                             ; CODE XREF: sub_249692+14   j
                 bra.s   loc_2496F4      ; Zadampil
 ; ---------------------------------------------------------------------------
 loc_2496EC:                             ; CODE XREF: sub_249692+4   j
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 bne.w   loc_249742
 loc_2496F4:                             ; CODE XREF: sub_249692+3A   j
                                         ; sub_249692+44   j ...
@@ -29865,7 +29865,7 @@ loc_249742:                             ; CODE XREF: sub_249692+26   j
 sub_24974A:                             ; DATA XREF: ROM:000059A8   o
                 addq.l  #2,a2
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 move.l  (dword_FFA65E).l,(sp)
                 rts
 ; End of function sub_24974A
@@ -31092,7 +31092,7 @@ loc_24A508:                             ; CODE XREF: enemy_read_map+26C   j
 loc_24A5BE:                             ; CODE XREF: enemy_read_map+A0   j
                                         ; enemy_read_map+B4   j ...
                 movea.l a0,a1
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 jsr     (sub_253EAA).l
                 bra.w   loc_24A75C
 ; ---------------------------------------------------------------------------
@@ -31288,32 +31288,32 @@ loc_24A83E:                             ; CODE XREF: sub_24A766+CE   j
                 beq.s   loc_24A858
                 movea.l (dword_FFFC86).l,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 bsr.w   sub_24AB3A
 loc_24A858:                             ; CODE XREF: sub_24A766+E0   j
                 tst.l   (dword_FFFC8A).l
                 beq.s   loc_24A86C
                 movea.l (dword_FFFC8A).l,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_24A86C:                             ; CODE XREF: sub_24A766+F8   j
                 tst.l   (dword_FFFC8E).l
                 beq.s   loc_24A880
                 movea.l (dword_FFFC8E).l,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_24A880:                             ; CODE XREF: sub_24A766+10C   j
                 tst.l   (dword_FFFC92).l
                 beq.s   loc_24A894
                 movea.l (dword_FFFC92).l,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_24A894:                             ; CODE XREF: sub_24A766+120   j
                 tst.l   (dword_FFFC96).l
                 beq.s   loc_24A8A8
                 movea.l (dword_FFFC96).l,a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_24A8A8:                             ; CODE XREF: sub_24A766+134   j
                 movea.l (sp)+,a1
                 bra.w   loc_24AAF0
@@ -31561,14 +31561,14 @@ loc_24AB0C:                             ; CODE XREF: sub_24A766+30   j
 
 sub_24AB16:                             ; CODE XREF: sub_24A766+D0   p
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 bsr.w   sub_24AB3A
                 tst.l   $3E(a1)
                 beq.s   locret_24AB38
                 move.l  a1,-(sp)
                 movea.l $3E(a1),a1
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 bsr.w   sub_24AB3A
                 movea.l (sp)+,a1
 locret_24AB38:                          ; CODE XREF: sub_24AB16+E   j
@@ -31744,7 +31744,7 @@ loc_24ACD2:                             ; CODE XREF: sub_24ACBC+A   j
                 tst.b   (a1)
                 beq.s   loc_24ACFC
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
                 btst    #5,6(a1)
                 beq.s   loc_24ACFC
                 move.b  $34(a1),d1
@@ -31761,20 +31761,20 @@ loc_24ACFC:                             ; CODE XREF: sub_24ACC8+C   j
 ; End of function sub_24ACC8
 
 
-sub_24AD06:                             ; CODE XREF: sub_247022+4C   p
+find_free_obj_slot_ad06:                             ; CODE XREF: sub_247022+4C   p
                                         ; sub_249692:loc_2496EC   p ...
                 lea     (obj_pool_ad06).l,a5
                 move.w  #$15,d0
-loc_24AD10:                             ; CODE XREF: sub_24AD06+12   j
+loc_24AD10:                             ; CODE XREF: find_free_obj_slot_ad06+12   j
                                         ; spawn_ufo+C   p
                                         ; DATA XREF: ...
                 tst.b   (a5)
                 beq.s   locret_24AD1C
                 adda.w  #$56,a5 ; 'V'
                 dbf     d0,loc_24AD10
-locret_24AD1C:                          ; CODE XREF: sub_24AD06+C   j
+locret_24AD1C:                          ; CODE XREF: find_free_obj_slot_ad06+C   j
                 rts
-; End of function sub_24AD06
+; End of function find_free_obj_slot_ad06
 
 
 sub_24AD1E:                             ; CODE XREF: spawn_air_refiller_99_sec:spawn_air_refiller_main   p
@@ -31943,7 +31943,7 @@ load_sprite_struct:                     ; CODE XREF: jim_fire:loc_245FBA   p
 ; End of function load_sprite_struct
 
 
-sub_24AE7A:                             ; CODE XREF: sub_245AE4+DA   p
+free_obj_vram_a1:                             ; CODE XREF: sub_245AE4+DA   p
                                         ; jim_fire+152   p ...
                 move.l  a6,-(sp)
                 move.w  d0,-(sp)
@@ -31955,14 +31955,14 @@ sub_24AE7A:                             ; CODE XREF: sub_245AE4+DA   p
                 clr.w   d0
                 move.b  $29(a1),d0
                 clr.b   $29(a1)
-loc_24AE9C:                             ; CODE XREF: sub_24AE7A+24   j
+loc_24AE9C:                             ; CODE XREF: free_obj_vram_a1+24   j
                 clr.b   (a6)+
                 dbf     d0,loc_24AE9C
-loc_24AEA2:                             ; CODE XREF: sub_24AE7A+E   j
+loc_24AEA2:                             ; CODE XREF: free_obj_vram_a1+E   j
                 move.w  (sp)+,d0
                 movea.l (sp)+,a6
                 rts
-; End of function sub_24AE7A
+; End of function free_obj_vram_a1
 
 
 sub_24AEA8:
@@ -31986,7 +31986,7 @@ loc_24AED0:                             ; CODE XREF: sub_24AEA8+E   j
 ; End of function sub_24AEA8
 
 
-sub_24AED6:                             ; CODE XREF: sub_25246C+10   p
+free_obj_vram_a2:                             ; CODE XREF: sub_25246C+10   p
                                         ; fire_to_frog+10   p ...
                 move.l  a6,-(sp)
                 move.w  d0,-(sp)
@@ -31998,14 +31998,14 @@ sub_24AED6:                             ; CODE XREF: sub_25246C+10   p
                 clr.w   d0
                 move.b  $29(a2),d0
                 clr.b   $29(a2)
-loc_24AEF8:                             ; CODE XREF: sub_24AED6+24   j
+loc_24AEF8:                             ; CODE XREF: free_obj_vram_a2+24   j
                 clr.b   (a6)+
                 dbf     d0,loc_24AEF8
-loc_24AEFE:                             ; CODE XREF: sub_24AED6+E   j
+loc_24AEFE:                             ; CODE XREF: free_obj_vram_a2+E   j
                 move.w  (sp)+,d0
                 movea.l (sp)+,a6
                 rts
-; End of function sub_24AED6
+; End of function free_obj_vram_a2
 
 
 sub_24AF04:                             ; CODE XREF: sub_248024+F4   p
@@ -33025,11 +33025,11 @@ sub_24BBE6:                             ; CODE XREF: sub_24BBE0   p
                 jsr     (oksub_2CBD3E).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 move.l  a1,-(sp)
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 beq.s   loc_24BC0A
                 lea     (unk_FFA8D6).l,a1
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 movea.l a1,a5
 loc_24BC0A:                             ; CODE XREF: sub_24BBE6+14   j
                 movea.l (sp)+,a1
@@ -33043,7 +33043,7 @@ loc_24BC20:                             ; CODE XREF: sub_24BBE6+32   j
                 move.w  (jim_y).l,4(a5)
                 lea     (jim_obj_id).l,a1
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 tst.b   (andy_asteroids_race_result).l
                 beq.s   loc_24BC6C
                 tst.b   (music_enable).l
@@ -33480,12 +33480,12 @@ loc_24C1E6:                             ; CODE XREF: ure_the_best_screen+AC   j
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$165,2(a5)
                 move.w  #$179,4(a5)
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 lea     (stru_25B9E4).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$A0,2(a5)
                 move.w  #$1CA,4(a5)
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 lea     (stru_25B9E4).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$117,2(a5)
@@ -33659,7 +33659,7 @@ sub_24C4E4:                             ; CODE XREF: sub_24B638+A6   p
                 neg.w   d3
                 addi.w  #$120,d3
 loc_24C4FE:                             ; CODE XREF: sub_24C4E4+38   j
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 bne.w   loc_24C520
                 lea     (stru_25BA44).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -34103,7 +34103,7 @@ sub_24C8F8:                             ; DATA XREF: ROM:00005A08   o
                 move.b  (a0)+,d1
                 lsl.l   #8,d1
                 move.b  (a0)+,d1
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 bne.s   loc_24C92E
                 movea.l d2,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -34123,7 +34123,7 @@ loc_24C942:                             ; CODE XREF: sub_24C934+1E   j
                 cmpi.b  #$87,(a1)
                 bne.s   loc_24C94E
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_24C94E:                             ; CODE XREF: sub_24C934+12   j
                 adda.w  #$56,a1 ; 'V'
                 dbf     d4,loc_24C942
@@ -35841,7 +35841,7 @@ loc_24DB10:                             ; CODE XREF: spawn_tree_trampoline+6   p
 ; ---------------------------------------------------------------------------
 loc_24DB18:                             ; CODE XREF: spawn_cow+10   p
                                         ; spawn_crow_dragging+14   p ...
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_24DB50
 loc_24DB1E:                             ; CODE XREF: sub_24DB00+6   j
                                         ; spawn_object+6   j ...
@@ -35863,7 +35863,7 @@ locret_24DB50:                          ; CODE XREF: sub_24DB00+4   j
 
 
 sub_24DB52:
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_24DB50
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  d2,$32(a5)
@@ -35952,7 +35952,7 @@ loc_24DBDA:                             ; CODE XREF: sub_24DC1E+E   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24DBFC:                             ; CODE XREF: sub_24DBCC+14   j
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_24DC1C
                 lea     (stru_25A994).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -36113,7 +36113,7 @@ loc_24DE0A:                             ; CODE XREF: sub_24DD18+15E   j
                 beq.s   loc_24DE18
                 move.l  a1,-(sp)
                 movea.l a5,a1
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 movea.l (sp)+,a1
 loc_24DE18:                             ; CODE XREF: sub_24DD18+F4   j
                 lea     (stru_25B33C).l,a6
@@ -36218,7 +36218,7 @@ loc_24DF76:                             ; CODE XREF: sub_24DEF2+F0   j
                 beq.s   loc_24DF84
                 move.l  a1,-(sp)
                 movea.l a5,a1
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 movea.l (sp)+,a1
 loc_24DF84:                             ; CODE XREF: sub_24DEF2+86   j
                 lea     (stru_25AAFC).l,a6
@@ -36325,7 +36325,7 @@ sub_24E0C0:                             ; CODE XREF: sub_24DFE8   p
                 jsr     random_function(pc)
                 btst    #0,d7
                 beq.s   locret_24E11A
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_24E11A
                 lea     (stru_25AA0C).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -37504,12 +37504,12 @@ loc_24F062:                             ; CODE XREF: sub_24F04A+32   j
                 bne.w   loc_24F0FC
                 movea.l a5,a1
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 btst    #5,7(a1)
                 bne.s   loc_24F062
                 lea     (stru_25A8A4).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_24F0D8
                 lea     (stru_25A8BC).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -37519,7 +37519,7 @@ loc_24F062:                             ; CODE XREF: sub_24F04A+32   j
                 move.w  4(a1),d0
                 addi.w  #$18,d0
                 move.w  d0,4(a5)
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_24F0D8
                 lea     (stru_25A8A4).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -37559,7 +37559,7 @@ loc_24F122:                             ; CODE XREF: sub_24F04A+6   j
                 bcs.s   loc_24F18C
                 cmpi.w  #$ADB,d6
                 bcc.s   loc_24F18C
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_24F18C
                 lea     (stru_25AB8C).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -37669,7 +37669,7 @@ loc_24F28A:                             ; CODE XREF: sub_24F23E+18   j
                 bcs.w   loc_24F318
                 andi.w  #3,d7
                 bne.s   loc_24F318
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_24F318
                 lea     (stru_25A8BC).l,a6
                 jsr     random_function(pc)
@@ -37789,7 +37789,7 @@ loc_24F43C:                             ; CODE XREF: sub_24F336+F4   j
                 asl.w   #3,d7
                 move.w  d7,d3
                 lea     (dword_24F4B0).l,a4
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.w   locret_24F49E
                 lea     (stru_25AE74).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -37956,7 +37956,7 @@ loc_24F678:                             ; CODE XREF: sub_24F644+6   j
                 move.b  (frame_counter).l,d7
                 andi.b  #3,d7
                 bne.s   loc_24F6D6
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 bne.s   loc_24F6D6
                 lea     (stru_25B294).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -38285,7 +38285,7 @@ loc_24FAAE:                             ; CODE XREF: sub_24F99E+A6   j
 loc_24FAC8:                             ; CODE XREF: sub_24F99E+114   j
                 cmpi.w  #$A,d0
                 bne.s   loc_24FAFC
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_24FAF8
                 lea     (stru_25B714).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -38581,7 +38581,7 @@ sub_24FD78:                             ; DATA XREF: ROM:0025BC6C   o
                 st      (camera_disable_value).l
                 move.w  #$8B02,(VDP_CTRL).l
                 jsr     sub_24D2C0(pc)
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_24FDB6
                 lea     (stru_25AC64).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -38606,19 +38606,19 @@ sub_24FDB8:                             ; DATA XREF: ROM:0025BCAC   o
                 move.w  #$1C6,4(a5)
                 move.b  #$14,(byte_FFFD7E).l
                 move.b  #$14,(byte_FFFD7D).l
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.w   loc_24FEAC
                 lea     (stru_25AE5C).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$EB,2(a5)
                 move.w  #$135,4(a5)
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.w   loc_24FEAC
                 lea     (stru_25AED4).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$EB,2(a5)
                 move.w  #$134,4(a5)
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.w   loc_24FEAC
                 lea     (stru_25AEEC).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -38633,7 +38633,7 @@ loc_24FE66:                             ; CODE XREF: sub_24FDB8+6   j
                 st      (camera_disable_value).l
                 jsr     sub_24B47A(pc)
                 move.b  #4,(palette2_index).l
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.w   loc_24FEAC
                 lea     (stru_25AEEC).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -38699,7 +38699,7 @@ sub_24FF38:                             ; CODE XREF: sub_24FEC6   p
                 st      (is_jim_ropejumper).l
                 clr.l   (dword_FFFCDA).l
                 lea     (jim_obj_id).l,a1
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 lea     (object_ropejump).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 lea     (stru_25AF7C).l,a6
@@ -39007,13 +39007,13 @@ loc_2503F6:                             ; CODE XREF: sub_25035A+56   j
                 clr.b   (super_bubble_count).l
                 jsr     (sub_250436).l
                 clr.w   (word_FFFE9C).l
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_250424
                 lea     (stru_25B7D4).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #3,$46(a5)
 loc_250424:                             ; CODE XREF: sub_25035A+B8   j
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_250434
                 lea     (stru_25B7EC).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -39543,7 +39543,7 @@ spawn_fridge:                             ; DATA XREF: ROM:00005258   o
                 move.l  a1,-(sp)
                 movea.l a5,a1
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 movea.l (sp)+,a1
 locret_2508FA:                          ; CODE XREF: spawn_fridge+8   j
                                         ; spawn_fridge+14   j ...
@@ -40266,7 +40266,7 @@ spawn_monkey_head_rotating_valve:                             ; DATA XREF: ROM:0
                 addi.w  #$C,2(a5)
                 move.l  a1,-(sp)
                 movea.l a5,a1
-                jsr     sub_24AD06(pc)
+                jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_251006
                 lea     (stru_25B48C).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -40306,7 +40306,7 @@ spawn_monkey_head:                             ; DATA XREF: ROM:00005344   o
                 movea.l a5,a1
                 jsr     (sub_253D20).l
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_25104A:                             ; CODE XREF: spawn_monkey_head+12   j
                 lea     (stru_25B45C).l,a6
                 jsr     spawn_object(pc)
@@ -40329,7 +40329,7 @@ spawn_monkey_head_2:                             ; DATA XREF: ROM:00005348   o
                 movea.l a5,a1
                 jsr     (sub_253D20).l
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_25108C:                             ; CODE XREF: spawn_monkey_head_2+12   j
                 lea     (stru_25B45C).l,a6
                 jsr     spawn_object(pc)
@@ -40352,7 +40352,7 @@ spawn_monkey_head_3:                             ; DATA XREF: ROM:0000534C   o
                 movea.l a5,a1
                 jsr     (sub_253D20).l
                 clr.b   (a1)
-                bsr.w   sub_24AE7A
+                bsr.w   free_obj_vram_a1
 loc_2510CE:                             ; CODE XREF: spawn_monkey_head_3+12   j
                 lea     (stru_25B45C).l,a6
                 jsr     spawn_object(pc)
@@ -40416,7 +40416,7 @@ spawn_fish_boss:                             ; DATA XREF: ROM:000053F4   o
                 bsr.w   loc_24DB18
                 bne.s   loc_251184
                 movea.l a5,a2
-                bsr.w   sub_24AD06
+                bsr.w   find_free_obj_slot_ad06
                 bne.s   loc_251184
                 lea     (stru_25B654).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -41814,7 +41814,7 @@ sub_25246C:                             ; DATA XREF: ROM:000038D4   o
                 beq.s   locret_252482
                 jsr     (spawn_hit_effect).l
                 clr.b   (a2)
-                jsr     sub_24AED6(pc)
+                jsr     free_obj_vram_a2(pc)
                 rts
 ; ---------------------------------------------------------------------------
 locret_252482:                          ; CODE XREF: sub_25246C+6   j
@@ -41827,13 +41827,13 @@ fire_to_frog:                             ; DATA XREF: ROM:000038D0   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   whip_to_frog
                 clr.b   (a2)
-                jsr     sub_24AED6(pc)
+                jsr     free_obj_vram_a2(pc)
                 rts
 ; ---------------------------------------------------------------------------
 whip_to_frog:                             ; CODE XREF: fire_to_frog+C   j
                                         ; DATA XREF: ROM:00003A0C   o
                 clr.b   (a2)
-                bsr.w   sub_24AED6
+                bsr.w   free_obj_vram_a2
 locret_2524A0:                          ; DATA XREF: ROM:00003A10   o
                 rts
 ; End of function fire_to_frog
@@ -41865,7 +41865,7 @@ collision_with_mechanism:                             ; DATA XREF: ROM:000037B0 
 collision_with_bubble:                             ; DATA XREF: ROM:00003630   o
                 addq.b  #1,(bubble_count).l
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_252516
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -41996,7 +41996,7 @@ collision_with_meteor:                             ; CODE XREF: collision_with_m
 collision_with_bee:                             ; DATA XREF: ROM:00003644   o
                 jsr     (spawn_hit_effect).l
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 jsr     do_damage_from_enemy(pc)
                 rts
 ; End of function collision_with_bee
@@ -42039,7 +42039,7 @@ collision_with_space_suit:                             ; DATA XREF: ROM:00003788
                 beq.w   locret_25275A
                 bmi.w   locret_25275A
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2526FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -42178,7 +42178,7 @@ nullsub_32:                             ; DATA XREF: ROM:0000365C   o
 collision_with_flying_bomb:                             ; DATA XREF: ROM:00003684   o
                 tst.b   (byte_FFFD47).l
                 bne.w   locret_25290C
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 tst.b   (is_chicken_boss_fight).l
                 bne.s   loc_2528D0
                 lea     (stru_25A8D4).l,a6
@@ -42305,7 +42305,7 @@ collision_with_green_goose:                             ; DATA XREF: ROM:0000364
 loc_2529EC:                             ; CODE XREF: collision_with_green_goose+6   j
                 jsr     (spawn_hit_effect).l
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 rts
 ; End of function collision_with_green_goose
 
@@ -42459,7 +42459,7 @@ sub_252BC2:                             ; DATA XREF: ROM:stru_25B72C   o
                 cmpi.w  #$6A0,d0
                 bcs.s   loc_252BF2
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
 loc_252BF2:                             ; CODE XREF: sub_252BC2+28   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
@@ -42478,7 +42478,7 @@ sub_252BF8:                             ; DATA XREF: ROM:stru_25B744   o
                 cmpi.w  #$6A0,d0
                 bcs.s   loc_252C28
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
 loc_252C28:                             ; CODE XREF: sub_252BF8+28   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
@@ -42552,7 +42552,7 @@ nullsub_33:                             ; DATA XREF: ROM:00003620   o
 
 collision_with_super_bubble:                             ; DATA XREF: ROM:00003624   o
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 addq.b  #1,(super_bubble_count).l
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_252CD2
@@ -42569,7 +42569,7 @@ locret_252CD2:                          ; CODE XREF: collision_with_super_bubble
 
 collision_with_speed_bubble:                             ; DATA XREF: ROM:0000362C   o
                 clr.b   (a1)
-                jsr     sub_24AE7A(pc)
+                jsr     free_obj_vram_a1(pc)
                 move.b  #$C0,(invincibility_timer).l
                 move.b  #$22,(andy_flight_speed).l ; '"'
                 tst.b   (sound_fx_enable).l
@@ -42820,7 +42820,7 @@ collision_with_sphere_electro:                             ; DATA XREF: ROM:0000
                 move.b  #$86,(a1)
                 move.l  #off_1B4610,$20(a1)
                 clr.b   $37(a1)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_253052
                 lea     (stru_25B384).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -43065,14 +43065,14 @@ loc_253352:                             ; CODE XREF: collision_with_submarine+4A
 loc_253374:                             ; CODE XREF: collision_with_submarine+60   j
                 tst.b   (byte_FFFD4F).l
                 bne.s   loc_2533D2
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_2533D2
                 lea     (stru_25B69C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.l  #sub_258CC2,$42(a5)
                 move.w  #$1D7,2(a5)
                 move.w  #$D3,4(a5)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_2533D2
                 lea     (stru_25B69C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -43641,7 +43641,7 @@ loc_253AF8:                             ; CODE XREF: collision_with_diamond+3D6 
                 jsr     (sub_254DE4).l
                 jsr     (sub_254DE4).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
@@ -43678,7 +43678,7 @@ loc_253B44:                             ; CODE XREF: collision_with_diamond+432 
 ; ---------------------------------------------------------------------------
 loc_253BC6:                             ; CODE XREF: collision_with_diamond+428   j
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 lea     (stru_25A8BC).l,a6
                 movea.l a1,a5
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -43724,7 +43724,7 @@ loc_253C08:                             ; CODE XREF: collision_with_diamond+4F6 
                 move.w  (jim_y).l,d7
                 subi.w  #$28,d7 ; '('
                 move.w  d7,4(a1)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_253CF4
                 lea     (stru_25B204).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -43812,7 +43812,7 @@ sub_253D64:
 collision_with_monkey_head_flask:                             ; DATA XREF: ROM:00003708   o
                                         ; ROM:0000370C   o ...
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 jsr     (do_damage_from_enemy).l
                 rts
 ; End of function collision_with_monkey_head_flask
@@ -43925,7 +43925,7 @@ locret_253EC6:                          ; CODE XREF: sub_253EAA+16   j
 
 sub_253EC8:
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 jsr     sub_253EAA(pc)
                 rts
 ; End of function sub_253EC8
@@ -43933,7 +43933,7 @@ sub_253EC8:
 
 sub_253ED6:
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 jsr     sub_253EAA(pc)
                 rts
 ; End of function sub_253ED6
@@ -43951,7 +43951,7 @@ locret_253EF8:                          ; CODE XREF: sub_253EE4+6   j
 
 sub_253EFA:
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 jsr     sub_253EAA(pc)
                 tst.b   1(a2)
                 beq.s   loc_253F12
@@ -43960,7 +43960,7 @@ sub_253EFA:
 ; ---------------------------------------------------------------------------
 loc_253F12:                             ; CODE XREF: sub_253EFA+10   j
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 lea     (stru_25A85C).l,a6
                 movea.l a2,a5
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -43997,7 +43997,7 @@ fire_to_sponge:                             ; DATA XREF: ROM:000038D8   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   whip_to_sponge
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 whip_to_sponge:                             ; CODE XREF: fire_to_sponge+C   j
@@ -44089,7 +44089,7 @@ fire_to_daemon:                             ; DATA XREF: ROM:000038DC   o
                 beq.s   loc_25406C
                 jsr     (spawn_hit_effect).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
 locret_25406A:                          ; CODE XREF: fire_to_daemon+22   j
                 rts
 ; ---------------------------------------------------------------------------
@@ -44108,7 +44108,7 @@ loc_25406C:                             ; CODE XREF: fire_to_daemon+6   j
 whip_to_daemon:                             ; CODE XREF: fire_to_daemon+2E   j
                                         ; DATA XREF: ROM:00003A18   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44136,7 +44136,7 @@ fire_to_fan_fish:                             ; DATA XREF: ROM:000038E0   o
                 beq.s   loc_2540F4
 loc_2540DC:                             ; CODE XREF: fire_to_fan_fish+36   j
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44157,7 +44157,7 @@ loc_2540F4:                             ; CODE XREF: fire_to_fan_fish+6   j
 
 whip_to_fan_fish:                             ; DATA XREF: ROM:00003A1C   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44170,7 +44170,7 @@ sub_25412A:                             ; DATA XREF: ROM:00003900   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_254142
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_254142:                             ; CODE XREF: sub_25412A+C   j
@@ -44217,7 +44217,7 @@ fire_to_butt_crab:                             ; DATA XREF: ROM:00003850   o
                 beq.s   loc_2541BA
                 jsr     (spawn_hit_effect).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
 locret_2541B8:                          ; CODE XREF: fire_to_butt_crab+22   j
                 rts
 ; ---------------------------------------------------------------------------
@@ -44343,7 +44343,7 @@ loc_254366:                             ; CODE XREF: jim_win_queen+9E   j
                 tst.b   (a1)
                 beq.s   loc_254378
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_254378:                             ; CODE XREF: jim_win_queen+8C   j
                                         ; jim_win_queen+90   j
                 adda.w  #$56,a1 ; 'V'
@@ -44392,7 +44392,7 @@ whip_to_butt_sub_boss:                             ; DATA XREF: ROM:00003998   o
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254408:                             ; CODE XREF: whip_to_butt_sub_boss+20   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_25442E
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44412,7 +44412,7 @@ loc_254438:                             ; CODE XREF: fire_to_butt_sub_boss+12   
                 st      (byte_FFFF6E).l
                 st      (byte_FFFE00).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44578,7 +44578,7 @@ fire_to_dog:                             ; DATA XREF: ROM:000037D4   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   whip_to_dog
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 whip_to_dog:                             ; CODE XREF: fire_to_dog+A   j
@@ -44603,7 +44603,7 @@ loc_254684:                             ; CODE XREF: fire_to_dog+1A   j
                 jsr     (spawn_dog_bone).l
                 jsr     (spawn_dog_bone).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function fire_to_dog
 
@@ -44611,7 +44611,7 @@ loc_254684:                             ; CODE XREF: fire_to_dog+1A   j
 spawn_dog_eye:                             ; CODE XREF: fire_to_dog:loc_254684   p
                                         ; fire_to_dog+42   p
                 move.l  d0,-(sp)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_25470A
                 lea     (stru_25AB74).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44636,7 +44636,7 @@ loc_25470A:                             ; CODE XREF: spawn_dog_eye+8   j
 spawn_dog_bone:                             ; CODE XREF: fire_to_dog+48   p
                                         ; fire_to_dog+4E   p ...
                 move.l  d0,-(sp)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_25475A
                 lea     (stru_25AB74).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44663,7 +44663,7 @@ sub_25475E:                             ; CODE XREF: fire_to_dog+34   p
                 cmpi.l  #'0100',(jim_health).l
                 bcc.s   locret_2547B0
                 move.l  d0,-(sp)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_2547AE
                 lea     (stru_25A94C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -44780,7 +44780,7 @@ nullsub_37:                             ; DATA XREF: ROM:00003808   o
 fire_to_chicken_boss_egg:                             ; DATA XREF: ROM:0000386C   o
                                         ; ROM:000039A8   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 tst.b   (is_chicken_boss_fight).l
                 bne.s   loc_2548DA
                 movea.l a2,a5
@@ -44871,7 +44871,7 @@ loc_2549AC:                             ; CODE XREF: fire_to_chicken_fly_boss+36
 loc_2549D4:                             ; CODE XREF: fire_to_chicken_fly_boss+AA   j
                 move.b  #$25,(byte_FFFD47).l ; '%'
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_254A06
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -44916,7 +44916,7 @@ fire_to_ufo:                             ; DATA XREF: ROM:00003874   o
                 beq.s   loc_254A66
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
 locret_254A64:                          ; CODE XREF: fire_to_ufo+4   j
                 rts
 ; ---------------------------------------------------------------------------
@@ -44964,7 +44964,7 @@ fire_to_lawyer_with_kill:                             ; DATA XREF: ROM:00003890 
                 beq.s   loc_254AEC
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_254AEC:                             ; CODE XREF: fire_to_lawyer_with_kill+6   j
@@ -45022,7 +45022,7 @@ loc_254B5E:                             ; CODE XREF: fire_to_snowman_boss+6   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254B98:                             ; CODE XREF: fire_to_snowman_boss+48   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_254BDC
                 lea     (stru_25AC94).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -45045,7 +45045,7 @@ locret_254BDE:                          ; CODE XREF: fire_to_snowman_boss+34   j
 loc_254BE0:                             ; CODE XREF: fire_to_snowman_boss+1E   j
                                         ; fire_to_snowman_boss+3A   j ...
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 move.w  2(a2),d7
                 move.w  d7,(word_FFFCD4).l
                 move.w  4(a2),d7
@@ -45067,7 +45067,7 @@ whip_to_snowman_boss:                             ; DATA XREF: ROM:000039BC   o
                 bcs.s   loc_254BE0
                 subi.b  #$A,1(a2)
                 move.w  d0,-(sp)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_254C62
                 move.w  (sp)+,d0
                 lea     (stru_25ACAC).l,a6
@@ -45089,7 +45089,7 @@ sub_254C66:                             ; DATA XREF: ROM:00003884   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   locret_254C7C
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 locret_254C7C:                          ; CODE XREF: sub_254C66+A   j
@@ -45099,7 +45099,7 @@ locret_254C7C:                          ; CODE XREF: sub_254C66+A   j
 
 sub_254C7E:                             ; DATA XREF: ROM:000039C0   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function sub_254C7E
 
@@ -45121,7 +45121,7 @@ locret_254CB0:                          ; CODE XREF: collision_with_snowman_burp
 
 sub_254CB2:                             ; DATA XREF: ROM:0000388C   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -45137,7 +45137,7 @@ loc_254CEA:                             ; CODE XREF: sub_254CB2+1C   j
                 move.b  #$9B,d0
                 jsr     (sub_24ADBA).l
                 beq.s   loc_254D26
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_254D6E
                 lea     (stru_25AD24).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -45147,7 +45147,7 @@ loc_254CEA:                             ; CODE XREF: sub_254CB2+1C   j
                 clr.l   $A(a5)
                 move.b  #$40,6(a5) ; '@'
 loc_254D26:                             ; CODE XREF: sub_254CB2+42   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_254D6E
                 lea     (stru_25A9DC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -45190,7 +45190,7 @@ sub_254D94:                             ; DATA XREF: ROM:000038A0   o
                 beq.s   loc_254DAA
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_254DAA:                             ; CODE XREF: sub_254D94+6   j
@@ -45208,14 +45208,14 @@ whip_to_lawyer_2:                             ; DATA XREF: ROM:000039DC   o
                 jsr     (sub_254DE4).l
                 jsr     (sub_254DE4).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function whip_to_lawyer_2
 
 
 sub_254DE4:                             ; CODE XREF: collision_with_diamond+3F6   p
                                         ; collision_with_diamond+3FC   p ...
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_254E04
                 lea     (stru_25AD0C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -45301,7 +45301,7 @@ loc_254EB6:                             ; CODE XREF: whip_to_chicken_boss_lever+
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l
                 beq.s   loc_254F1C
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_254F1C
                 lea     (stru_25A9C4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -45398,11 +45398,11 @@ fire_to_plant:                             ; DATA XREF: ROM:0000389C   o
                 cmpi.b  #$83,(a2)
                 bne.s   loc_254FC4
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
 loc_254FC4:                             ; CODE XREF: fire_to_plant+1E   j
                 movea.l a3,a2
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l (sp)+,a3
 locret_254FD0:                          ; CODE XREF: fire_to_plant+4   j
                                         ; fire_to_plant+40   j
@@ -45438,7 +45438,7 @@ fire_to_fox:                             ; DATA XREF: ROM:00003898   o
                 beq.s   loc_255036
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255036:                             ; CODE XREF: fire_to_fox+6   j
@@ -45467,7 +45467,7 @@ fire_to_bee_generator:                             ; DATA XREF: ROM:00003894   o
                 beq.s   loc_255080
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255080:                             ; CODE XREF: fire_to_bee_generator+6   j
@@ -45531,7 +45531,7 @@ fire_to_bob_cat:                             ; DATA XREF: ROM:00003878   o
                 beq.s   loc_25513E
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_25513E:                             ; CODE XREF: fire_to_bob_cat+6   j
@@ -45614,7 +45614,7 @@ locret_255224:                          ; CODE XREF: fire_to_bucket_boss+36   j
 loc_255226:                             ; CODE XREF: fire_to_bucket_boss+F4   j
                 st      (byte_FFFDF5).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 tst.b   (sound_fx_enable).l
                 beq.s   locret_255256
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -45775,7 +45775,7 @@ fire_to_egg_with_needles:                             ; DATA XREF: ROM:000037EC 
                 tst.b   (is_current_gun_plasma).l
                 beq.s   whip_to_prickly_egg
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 whip_to_prickly_egg:                             ; CODE XREF: fire_to_egg_with_needles+A   j
@@ -45795,14 +45795,14 @@ fire_to_eye:                             ; DATA XREF: ROM:000037F0   o
                 beq.s   loc_255458
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255458:                             ; CODE XREF: fire_to_eye+6   j
                 jsr     spawn_hit_effect(pc)
 whip_to_eye:                             ; DATA XREF: ROM:0000392C   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function fire_to_eye
 
@@ -45860,7 +45860,7 @@ locret_2554E6:                          ; CODE XREF: whip_to_puppy+8   j
 whip_to_bee:                             ; DATA XREF: ROM:00003968   o
                 jsr     sub_2545F4(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function whip_to_bee
 
@@ -45905,7 +45905,7 @@ whip_to_prize_faucet:                             ; DATA XREF: ROM:00003934   o
                 andi.w  #$1C,d7
                 lea     (prize_faucet_objects_table).l,a5
                 movea.l (a5,d7.w),a6
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.w   locret_2555BA
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a2),d7
@@ -45929,7 +45929,7 @@ locret_2555BA:                          ; CODE XREF: whip_to_prize_faucet+3A   j
                 rts
 ; ---------------------------------------------------------------------------
 prize_faucet_create_daemon:                             ; CODE XREF: whip_to_prize_faucet+18   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_2555BA
                 lea     (object_daemon).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46026,7 +46026,7 @@ loc_25571C:                             ; CODE XREF: whip_to_green_goose_caterpi
                 move.l  #off_1B1F92,$20(a2)
                 clr.b   $37(a2)
                 clr.l   $A(a2)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_25576E
                 lea     (stru_25A85C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46042,7 +46042,7 @@ fire_to_green_goose_caterpillar:                             ; DATA XREF: ROM:00
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255786
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255786:                             ; CODE XREF: fire_to_green_goose_caterpillar+A   j
@@ -46061,7 +46061,7 @@ fire_to_queen_abscess:                             ; DATA XREF: ROM:00003844   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_2557B8
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_2557B8:                             ; CODE XREF: fire_to_queen_abscess+A   j
@@ -46087,7 +46087,7 @@ sub_2557EC:                             ; DATA XREF: ROM:00003848   o
                 beq.s   loc_255802
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255802:                             ; CODE XREF: sub_2557EC+6   j
@@ -46154,7 +46154,7 @@ loc_2558C4:                             ; CODE XREF: sub_255814+A   j
                 st      (byte_FFFDF6).l
                 bsr.w   spawn_hit_effect
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46182,13 +46182,13 @@ fire_to_dark_mini_monster:                             ; DATA XREF: ROM:00003838
                 beq.s   loc_255920
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255920:                             ; CODE XREF: fire_to_dark_mini_monster+6   j
                 jsr     sub_2545F4(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function fire_to_dark_mini_monster
 
@@ -46198,7 +46198,7 @@ fire_to_green_goose:                             ; DATA XREF: ROM:00003834   o
                 beq.s   whip_to_green_goose
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 whip_to_green_goose:                             ; CODE XREF: fire_to_green_goose+6   j
@@ -46216,14 +46216,14 @@ fire_to_brain:                             ; DATA XREF: ROM:0000384C   o
                 beq.s   loc_255970
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255970:                             ; CODE XREF: fire_to_brain+6   j
                 jsr     spawn_hit_effect(pc)
 whip_to_brain:                             ; DATA XREF: ROM:00003988   o
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; End of function fire_to_brain
 
@@ -46233,7 +46233,7 @@ fire_to_bee:                             ; DATA XREF: ROM:0000382C   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255994
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255994:                             ; CODE XREF: fire_to_bee+A   j
@@ -46255,7 +46255,7 @@ fire_to_box:                             ; DATA XREF: ROM:00003830   o
                 beq.s   whip_to_box
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 clr.b   (magnet_box_spawned).l
                 btst    #4,7(a2)
                 bne.s   locret_2559E6
@@ -46300,7 +46300,7 @@ loc_255A40:                             ; CODE XREF: fire_to_box+4   j
                 lea     (unk_FFB2EA).l,a1
                 tst.b   (a1)
                 beq.s   loc_255A7E
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_255A7E:                             ; CODE XREF: fire_to_box+C0   j
                 move.w  #$2A,d4 ; '*'
 loc_255A82:                             ; CODE XREF: fire_to_box+CE   j
@@ -46494,7 +46494,7 @@ loc_255CCE:                             ; CODE XREF: fire_to_puppy+16   j
                 clr.w   $1A(a2)
                 move.b  #8,(pete_state).l
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_255D4E:                             ; CODE XREF: fire_to_puppy+154   j
                                         ; fire_to_puppy+160   j ...
                 movea.l (sp)+,a3
@@ -46509,7 +46509,7 @@ fire_to_machine:                             ; DATA XREF: ROM:000038AC   o
                 beq.s   loc_255D6E
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
 locret_255D6C:                          ; CODE XREF: fire_to_machine+4   j
                                         ; fire_to_machine+26   j
                 rts
@@ -46541,7 +46541,7 @@ whip_to_machine:                             ; DATA XREF: ROM:000039E8   o
 ; ---------------------------------------------------------------------------
 loc_255DBA:                             ; CODE XREF: fire_to_machine+52   j
                                         ; fire_to_machine+60   j
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46555,7 +46555,7 @@ fire_to_meteor:                             ; DATA XREF: ROM:000038A4   o
                 bne.s   locret_255DE2
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
 locret_255DE2:                          ; CODE XREF: fire_to_meteor+4   j
                 rts
 ; End of function fire_to_meteor
@@ -46621,7 +46621,7 @@ locret_255E88:                          ; CODE XREF: sub_255DF8+4   j
 ; ---------------------------------------------------------------------------
 loc_255E8A:                             ; CODE XREF: sub_255DF8+16   j
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 movea.l a1,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46634,7 +46634,7 @@ loc_255E8A:                             ; CODE XREF: sub_255DF8+16   j
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255EC2:                             ; CODE XREF: sub_255DF8+AE   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_255E88
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46652,7 +46652,7 @@ fire_to_saxophone:                             ; CODE XREF: fire_to_garbage+4   
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255F16
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 cmpi.b  #2,(magnet_cargo_type).l
                 bne.s   locret_255F14
                 clr.b   (magnet_cargo_type).l
@@ -46698,7 +46698,7 @@ fire_to_crow:                             ; DATA XREF: ROM:000037E0   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_255F94
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_255F94:                             ; CODE XREF: fire_to_crow+A   j
@@ -46794,7 +46794,7 @@ whip_crow:                             ; DATA XREF: ROM:0000391C   o
 
 sub_256114:                             ; CODE XREF: fire_to_crow+20   j
                                         ; whip_crow   p
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 movea.l a2,a5
                 lea     (stru_25AC04).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46823,7 +46823,7 @@ loc_256156:                             ; CODE XREF: sub_256114+26   j
 
 crow_plumage_create:                             ; CODE XREF: fire_to_crow+44   p
                                         ; fire_to_crow+4A   p ...
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_2561CA
                 lea     (stru_25ABEC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -46967,7 +46967,7 @@ chuck_boss_magnet:                             ; DATA XREF: ROM:stru_25AAB4   o
                 rts
 ; ---------------------------------------------------------------------------
 loc_256302:                             ; CODE XREF: chuck_boss_magnet+1C   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256366
                 tst.b   (magnet_box_spawned).l
                 beq.s   loc_25633A
@@ -47166,7 +47166,7 @@ sub_256518:                             ; CODE XREF: sub_24FD52+8   p
 
 
 oksub_25655C:                           ; DATA XREF: ROM:001A2A08   o
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256598
                 lea     (stru_25ABA4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -47192,7 +47192,7 @@ ammo_prize_fall:                             ; CODE XREF: sub_2522D0   p
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l
                 beq.s   loc_256608
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_256608
                 lea     (stru_25A9C4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -47224,7 +47224,7 @@ sub_25660E:                             ; CODE XREF: sub_2522C8   p
                 move.b  #$53,d0 ; 'S'
                 jsr     (sub_24ADBA).l
                 beq.s   loc_25666C
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   loc_25666C
                 lea     (stru_25A9C4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -47512,7 +47512,7 @@ loc_256A38:                             ; CODE XREF: sub_256856+1AE   j
                 bcs.w   locret_256AFA
                 clr.w   $18(a1)
                 move.w  #$27A,2(a1)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.w   locret_256AFA
                 lea     (stru_25A8A4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -47535,7 +47535,7 @@ loc_256AA2:                             ; CODE XREF: sub_256856+230   j
 loc_256AA4:                             ; CODE XREF: sub_256856+1E8   j
                 clr.w   $18(a1)
                 move.w  #$94,2(a1)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256AFA
                 lea     (stru_25A8A4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -47573,7 +47573,7 @@ loc_256B10:                             ; CODE XREF: sub_256AFC+10   j
                 dbf     d6,loc_256B08
                 cmpi.b  #6,d7
                 bcc.s   locret_256B3E
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256B3E
                 lea     (stru_25B3FC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -47625,7 +47625,7 @@ loc_256B94:                             ; CODE XREF: oksub_256B84+C   j
 sub_256B9A:                             ; CODE XREF: oksub_256BCC+14   p
                                         ; oksub_256C02+14   p ...
                 clr.b   d6
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256BCA
                 st      d6
                 lea     (stru_25B564).l,a6
@@ -48299,7 +48299,7 @@ sub_257320:                             ; CODE XREF: ropejump_control+6   p
                 cmpi.w  #$C80,d7
                 bcs.w   locret_25734C
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 movea.l a1,a5
                 lea     (stru_25AF4C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -48973,7 +48973,7 @@ loc_257BC4:                             ; CODE XREF: sub_257B10+20   j
 ; ---------------------------------------------------------------------------
 loc_257BDE:                             ; CODE XREF: sub_257B10+C2   j
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 movea.l a1,a5
                 lea     (stru_25AF4C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -49265,7 +49265,7 @@ loc_257F4C:                             ; CODE XREF: sub_257ED4+62   j
 loc_257F56:                             ; CODE XREF: sub_257ED4+A   j
                                         ; sub_257ED4+10   j ...
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 movea.l (sp)+,a2
                 rts
 ; End of function sub_257ED4
@@ -49275,7 +49275,7 @@ sub_257F62:                             ; DATA XREF: ROM:stru_25AF7C   o
                 cmpi.b  #$93,(jim_obj_id).l
                 bne.s   loc_257F76
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_257F76:                             ; CODE XREF: sub_257F62+8   j
@@ -49629,7 +49629,7 @@ oksub_25839E:                           ; DATA XREF: ROM:001B4064   o
                 jsr     (sub_24ADD2).l
                 cmpi.b  #5,d7
                 bcc.s   locret_2583D6
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_2583D6
                 lea     (stru_25B57C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50065,7 +50065,7 @@ sub_2588B0:                             ; DATA XREF: ROM:stru_25B774   o
                 cmpi.w  #$6A0,d0
                 bcs.s   loc_2588E0
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_2588E0:                             ; CODE XREF: sub_2588B0+26   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
@@ -50077,7 +50077,7 @@ collision_with_asteroid:                             ; DATA XREF: ROM:000035E8  
                 tst.b   (invincibility_timer).l
                 bne.w   locret_2589DC
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 move.w  $52(a1),-(sp)
                 move.w  $50(a1),-(sp)
                 lea     (stru_25B804).l,a6
@@ -50159,7 +50159,7 @@ sub_258A02:                             ; DATA XREF: ROM:stru_25B804   o
                 cmpi.w  #$6A0,d0
                 bcs.s   loc_258A2A
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_258A2A:                             ; CODE XREF: sub_258A02+1E   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
@@ -50178,7 +50178,7 @@ sub_258A30:                             ; DATA XREF: ROM:stru_25B75C   o
                 cmpi.w  #$6A0,d0
                 bcs.s   loc_258A60
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_258A60:                             ; CODE XREF: sub_258A30+26   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
@@ -50191,7 +50191,7 @@ sub_258A66:                             ; CODE XREF: sub_24BEDC+11C   p
                 cmpi.b  #$12,(a1)
                 beq.s   loc_258AC4
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_258A7C:                             ; CODE XREF: sub_258A66+4   j
@@ -50217,7 +50217,7 @@ locret_258AC2:                          ; CODE XREF: sub_258A66+1A   j
 loc_258AC4:                             ; CODE XREF: sub_258A66+A   j
                 move.w  #$2C,(word_FFFE96).l ; ','
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 rts
 ; End of function sub_258A66
 
@@ -50470,7 +50470,7 @@ sub_258D60:                             ; DATA XREF: ROM:001B1A62   o
                 move.b  #$98,d0
                 jsr     (sub_24ADBA).l
                 beq.w   locret_258D9C
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_258D9C
                 lea     (stru_25B51C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50498,7 +50498,7 @@ sub_258D9E:                             ; DATA XREF: ROM:001B56CE   o
 
 
 oksub_258DC6:                           ; DATA XREF: ROM:001AD942   o
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_258E12
                 lea     (stru_25B39C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50531,7 +50531,7 @@ collision_with_wheel_intestinal:                             ; DATA XREF: ROM:00
 collision_with_stalactite:                             ; DATA XREF: ROM:000037BC   o
                 jsr     spawn_hit_effect(pc)
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 move.w  #$14,d0
                 jsr     (damage_from_enemy).l ; Повреждения от врагов (но не все)
                 rts
@@ -50572,7 +50572,7 @@ loc_258EA8:                             ; CODE XREF: sub_258E3C+10   j
 
 oksub_258EB2:                           ; DATA XREF: ROM:001B39EE   o
                                         ; ROM:001B3A08   o ...
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.w   locret_258FE0
                 lea     (stru_25ADFC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50657,7 +50657,7 @@ sub_258FE2:                             ; DATA XREF: ROM:stru_25AED4   o
                 btst    #4,7(a1)
                 beq.s   locret_25902E
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 movea.l a1,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50773,7 +50773,7 @@ whip_to_evil_cat_soul:                             ; DATA XREF: ROM:00003A24   o
                 bne.w   locret_259298
                 addq.b  #1,(byte_FFFD7A).l
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_2591D2
                 movem.l d0-d1/a0-a1/a6,-(sp)
@@ -50783,7 +50783,7 @@ whip_to_evil_cat_soul:                             ; DATA XREF: ROM:00003A24   o
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2591D2:                             ; CODE XREF: fire_to_evil_cat_soul_boss+28   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.w   locret_259298
                 lea     (stru_25AE2C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50791,7 +50791,7 @@ loc_2591D2:                             ; CODE XREF: fire_to_evil_cat_soul_boss+
                 move.w  4(a2),4(a5)
                 move.b  9(a1),9(a5)
                 bclr    #7,$3C(a5)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.w   locret_259298
                 lea     (stru_25AE2C).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50810,13 +50810,13 @@ loc_2591D2:                             ; CODE XREF: fire_to_evil_cat_soul_boss+
                 rts
 ; ---------------------------------------------------------------------------
 loc_259252:                             ; CODE XREF: fire_to_evil_cat_soul_boss+C0   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_259298
                 lea     (stru_25AEA4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$180,2(a5)
                 move.w  #$1A0,4(a5)
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_259298
                 lea     (stru_25AEA4).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -50853,7 +50853,7 @@ sub_2592B6:                             ; DATA XREF: ROM:stru_25B78C   o
                 cmpi.w  #$6A0,d0
                 bcs.s   loc_2592E6
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
 loc_2592E6:                             ; CODE XREF: sub_2592B6+26   j
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
@@ -51064,7 +51064,7 @@ locret_259574:                          ; CODE XREF: whip_to_psycrow+8   j
 collision_with_psycrow_hook:                             ; DATA XREF: ROM:0000367C   o
                 jsr     (do_damage_from_enemy).l
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 rts
 ; End of function collision_with_psycrow_hook
 
@@ -51074,7 +51074,7 @@ sub_259586:                             ; DATA XREF: ROM:00003864   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_25959C
                 clr.b   (a2)
-                jsr     (sub_24AED6).l
+                jsr     (free_obj_vram_a2).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_25959C:                             ; CODE XREF: sub_259586+A   j
@@ -51193,7 +51193,7 @@ loc_2596D6:                             ; CODE XREF: sub_259658+3C   j
                 cmpi.b  #$DD,$3D(a1)
                 bne.s   loc_2596F6
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 movea.l a1,a5
                 lea     (stru_25A8BC).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
@@ -51205,7 +51205,7 @@ loc_2596F6:                             ; CODE XREF: sub_259658+84   j
                 cmp.w   4(a1),d7
                 bcc.s   loc_259710
                 clr.b   (a1)
-                jsr     (sub_24AE7A).l
+                jsr     (free_obj_vram_a1).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_259710:                             ; CODE XREF: sub_259658+AC   j
@@ -51247,7 +51247,7 @@ loc_25975E:                             ; CODE XREF: sub_259746+24   j
                 bra.s   loc_25975E
 ; ---------------------------------------------------------------------------
 loc_25976C:                             ; CODE XREF: sub_259746+20   j
-                jsr     (sub_24AD06).l
+                jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_2597A6
                 lea     (stru_25BB7C).l,a6
                 cmpi.b  #1,(a0)

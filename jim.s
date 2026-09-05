@@ -26138,7 +26138,7 @@ sub_246B08:                             ; CODE XREF: sub_247022+216   p
                 bmi.s   loc_246B6A
                 cmpi.w  #$28,d0 ; '('
                 bcs.s   loc_246B62
-                tst.b   (byte_FFFD06).l
+                tst.b   (is_wall_right).l
                 bne.s   loc_246B62
                 tst.w   (camera_disable_value).l
                 beq.s   loc_246B4A
@@ -26166,7 +26166,7 @@ loc_246B7C:                             ; CODE XREF: sub_246B08+68   j
                 neg.w   d0
                 cmpi.w  #$28,d0 ; '('
                 bcs.s   loc_246B62
-                tst.b   (byte_FFFD03).l
+                tst.b   (is_wall_left).l
                 bne.s   loc_246B62
                 move.b  (jim_delta_x_speed).l,d0
                 addq.b  #1,d0
@@ -26191,7 +26191,7 @@ loc_246BD0:                             ; CODE XREF: sub_246B08+A6   j
                 neg.w   d0
                 cmpi.w  #$3C,d0 ; '<'
                 bcs.s   loc_246C32
-                tst.b   (byte_FFFD09).l
+                tst.b   (is_wall_up).l
                 bne.s   loc_246BFA
                 move.b  (jim_y_speed).l,d0
                 addq.b  #1,d0
@@ -26722,7 +26722,7 @@ loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                 beq.w   locret_24752E
                 cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   locret_24752E
-                tst.b   (byte_FFFD06).l
+                tst.b   (is_wall_right).l
                 bne.w   locret_24752E
                 cmpi.w  #$130,(jim_collider_x).l
                 bcc.w   locret_24752E
@@ -26764,7 +26764,7 @@ loc_247352:                             ; CODE XREF: sub_247022+28C   j
                 beq.w   locret_24752E
                 cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   locret_24752E
-                tst.b   (byte_FFFD03).l
+                tst.b   (is_wall_left).l
                 bne.w   locret_24752E
                 cmpi.w  #$14,(jim_collider_x).l
                 bcs.w   locret_24752E
@@ -30338,8 +30338,8 @@ loc_249C34:                             ; CODE XREF: sub_249A24+212   j
 jim_wall_collision:                             ; CODE XREF: oksub_2456C8+1EC   p
                 cmpi.b  #$40,(jim_ride_obj_id).l ; '@'
                 beq.w   loc_249EEE
-                clr.b   (byte_FFFD09).l
-                clr.b   (byte_FFFD0A).l
+                clr.b   (is_wall_up).l
+                clr.b   (is_wall_down).l
                 tst.l   (jim_current_sprite_offset).l
                 beq.w   locret_249EEC
                 move.w  (jim_collider_y).l,d6
@@ -30366,7 +30366,7 @@ jim_wall_collision:                             ; CODE XREF: oksub_2456C8+1EC   
                 move.b  #$EF,d6
                 move.w  (map_width_x2).l,d7
                 move.l  a0,-(sp)
-                clr.b   (byte_FFFD03).l
+                clr.b   (is_wall_left).l
                 clr.b   (byte_FFFD04).l
                 clr.b   (byte_FFFD05).l
                 move.w  (a0),d0
@@ -30445,12 +30445,12 @@ loc_249DB4:                             ; CODE XREF: jim_wall_collision+156   j
 ; ---------------------------------------------------------------------------
 loc_249DB6:                             ; CODE XREF: jim_wall_collision+9C   j
                                         ; jim_wall_collision+A4   j ...
-                st      (byte_FFFD03).l
+                st      (is_wall_left).l
 loc_249DBC:                             ; CODE XREF: jim_wall_collision:loc_249DB4   j
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
                 addq.w  #4,a0
-                clr.b   (byte_FFFD06).l
+                clr.b   (is_wall_right).l
                 clr.b   (byte_FFFD07).l
                 clr.b   (byte_FFFD08).l
                 move.w  (a0),d0
@@ -30525,7 +30525,7 @@ loc_249E9A:                             ; CODE XREF: jim_wall_collision+23C   j
 ; ---------------------------------------------------------------------------
 loc_249E9C:                             ; CODE XREF: jim_wall_collision+188   j
                                         ; jim_wall_collision+190   j ...
-                st      (byte_FFFD06).l
+                st      (is_wall_right).l
 loc_249EA2:                             ; CODE XREF: jim_wall_collision:loc_249E9A   j
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
@@ -30538,7 +30538,7 @@ loc_249EA2:                             ; CODE XREF: jim_wall_collision:loc_249E
                 lsr.w   #1,d0
                 cmp.b   (a1,d0.w),d6
                 bcc.s   loc_249EC6
-                st      (byte_FFFD09).l
+                st      (is_wall_up).l
 loc_249EC6:                             ; CODE XREF: jim_wall_collision+25C   j
                                         ; jim_wall_collision+268   j
                 movea.l (sp)+,a0
@@ -30553,14 +30553,14 @@ loc_249EC6:                             ; CODE XREF: jim_wall_collision+25C   j
                 lsr.w   #1,d0
                 cmp.b   (a1,d0.w),d6
                 bcc.s   locret_249EEC
-                st      (byte_FFFD0A).l
+                st      (is_wall_down).l
 locret_249EEC:                          ; CODE XREF: jim_wall_collision+1E   j
                                         ; jim_wall_collision+32   j ...
                 rts
 ; ---------------------------------------------------------------------------
 loc_249EEE:                             ; CODE XREF: jim_wall_collision+8   j
-                clr.b   (byte_FFFD09).l
-                clr.b   (byte_FFFD0A).l
+                clr.b   (is_wall_up).l
+                clr.b   (is_wall_down).l
                 tst.l   (jim_current_sprite_offset).l
                 beq.w   locret_24A03A
                 move.w  (jim_collider_y).l,d6
@@ -30589,7 +30589,7 @@ loc_249EEE:                             ; CODE XREF: jim_wall_collision+8   j
                 move.b  #$75,d5 ; 'u'
                 move.w  (map_width_x2).l,d7
                 move.l  a0,-(sp)
-                clr.b   (byte_FFFD03).l
+                clr.b   (is_wall_left).l
                 clr.b   (byte_FFFD04).l
                 clr.b   (byte_FFFD05).l
                 adda.w  d7,a0
@@ -30608,12 +30608,12 @@ loc_249EEE:                             ; CODE XREF: jim_wall_collision+8   j
                 bne.s   loc_249FA6
 loc_249FA0:                             ; CODE XREF: jim_wall_collision+330   j
                                         ; jim_wall_collision+336   j ...
-                st      (byte_FFFD03).l
+                st      (is_wall_left).l
 loc_249FA6:                             ; CODE XREF: jim_wall_collision+348   j
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
                 addq.w  #4,a0
-                clr.b   (byte_FFFD06).l
+                clr.b   (is_wall_right).l
                 clr.b   (byte_FFFD07).l
                 clr.b   (byte_FFFD08).l
                 adda.w  d7,a0
@@ -30632,7 +30632,7 @@ loc_249FA6:                             ; CODE XREF: jim_wall_collision+348   j
                 bne.s   loc_249FE8
 loc_249FE2:                             ; CODE XREF: jim_wall_collision+372   j
                                         ; jim_wall_collision+378   j ...
-                st      (byte_FFFD06).l
+                st      (is_wall_right).l
 loc_249FE8:                             ; CODE XREF: jim_wall_collision+38A   j
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
@@ -30644,7 +30644,7 @@ loc_249FE8:                             ; CODE XREF: jim_wall_collision+38A   j
                 lsr.w   #1,d0
                 cmp.b   (a1,d0.w),d6
                 bcc.s   loc_24A00A
-                st      (byte_FFFD09).l
+                st      (is_wall_up).l
 loc_24A00A:                             ; CODE XREF: jim_wall_collision+3A0   j
                                         ; jim_wall_collision+3AC   j
                 movea.l (sp)+,a0
@@ -30663,7 +30663,7 @@ loc_24A00A:                             ; CODE XREF: jim_wall_collision+3A0   j
                 cmp.b   (a1,d0.w),d6
                 bne.s   locret_24A03A
 loc_24A034:                             ; CODE XREF: jim_wall_collision+3D2   j
-                st      (byte_FFFD0A).l
+                st      (is_wall_down).l
 locret_24A03A:                          ; CODE XREF: jim_wall_collision+2AA   j
                                         ; jim_wall_collision+2BE   j ...
                 rts
@@ -36966,7 +36966,7 @@ locret_24E8A6:                          ; CODE XREF: activity_chain+6   j
 
 
 sub_24E8A8:                             ; DATA XREF: ROM:00005720   o
-                tst.b   (byte_FFFD03).l
+                tst.b   (is_wall_left).l
                 bne.w   locret_24E8C8
                 tst.b   (byte_FFFCFD).l
                 bne.s   locret_24E8C8
@@ -36980,7 +36980,7 @@ locret_24E8C8:                          ; CODE XREF: sub_24E8A8+6   j
 
 
 sub_24E8CA:                             ; DATA XREF: ROM:00005724   o
-                tst.b   (byte_FFFD06).l
+                tst.b   (is_wall_right).l
                 bne.w   locret_24E8EA
                 tst.b   (byte_FFFCFD).l
                 bne.s   locret_24E8EA
@@ -42516,11 +42516,11 @@ loc_252C58:                             ; CODE XREF: collision_with_hell_gates+4
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_252C6C
-                st      (byte_FFFD03).l
+                st      (is_wall_left).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_252C6C:                             ; CODE XREF: collision_with_hell_gates+2A   j
-                st      (byte_FFFD06).l
+                st      (is_wall_right).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_252C74:                             ; CODE XREF: collision_with_hell_gates+E   j
@@ -43174,7 +43174,7 @@ loc_2534E2:                             ; CODE XREF: collision_with_submarine+1D
 loc_2534E6:                             ; CODE XREF: collision_with_submarine+17E   j
                 tst.w   $18(a1)
                 beq.s   loc_253524
-                tst.b   (byte_FFFD03).l
+                tst.b   (is_wall_left).l
                 beq.s   loc_253508
                 tst.w   $18(a1)
                 bpl.s   loc_253508
@@ -43183,7 +43183,7 @@ loc_2534E6:                             ; CODE XREF: collision_with_submarine+17
                 jsr     (sub_258340).l
 loc_253508:                             ; CODE XREF: collision_with_submarine+1F8   j
                                         ; collision_with_submarine+1FE   j
-                tst.b   (byte_FFFD06).l
+                tst.b   (is_wall_right).l
                 beq.s   loc_253524
                 tst.w   $18(a1)
                 bmi.s   loc_253524
@@ -43194,7 +43194,7 @@ loc_253524:                             ; CODE XREF: collision_with_submarine+1F
                                         ; collision_with_submarine+214   j ...
                 tst.w   $1A(a1)
                 beq.s   loc_253562
-                tst.b   (byte_FFFD09).l
+                tst.b   (is_wall_up).l
                 beq.s   loc_253546
                 tst.w   $1A(a1)
                 bpl.s   loc_253546
@@ -43203,7 +43203,7 @@ loc_253524:                             ; CODE XREF: collision_with_submarine+1F
                 jsr     (sub_258340).l
 loc_253546:                             ; CODE XREF: collision_with_submarine+236   j
                                         ; collision_with_submarine+23C   j
-                tst.b   (byte_FFFD0A).l
+                tst.b   (is_wall_down).l
                 beq.s   loc_253562
                 tst.w   $1A(a1)
                 bmi.s   loc_253562
@@ -43570,11 +43570,11 @@ loc_253A2C:                             ; CODE XREF: collision_with_diamond+348 
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_253A40
-                st      (byte_FFFD03).l
+                st      (is_wall_left).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_253A40:                             ; CODE XREF: collision_with_diamond+330   j
-                st      (byte_FFFD06).l
+                st      (is_wall_right).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_253A48:                             ; CODE XREF: collision_with_diamond+314   j
@@ -43584,7 +43584,7 @@ loc_253A48:                             ; CODE XREF: collision_with_diamond+314 
                 rts
 ; ---------------------------------------------------------------------------
 loc_253A54:                             ; CODE XREF: collision_with_diamond+324   j
-                st      (byte_FFFD09).l
+                st      (is_wall_up).l
                 cmpi.b  #1,(cow_scene_state).l
                 bne.s   locret_253A84
                 tst.b   1(a1)
@@ -45332,11 +45332,11 @@ collision_with_sea_gate:                             ; DATA XREF: ROM:000036CC  
                 move.w  (jim_x).l,d7
                 cmp.w   2(a1),d7
                 bcs.s   loc_254F54
-                st      (byte_FFFD03).l
+                st      (is_wall_left).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_254F54:                             ; CODE XREF: collision_with_sea_gate+A   j
-                st      (byte_FFFD06).l
+                st      (is_wall_right).l
                 rts
 ; End of function collision_with_sea_gate
 

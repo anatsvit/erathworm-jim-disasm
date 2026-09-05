@@ -211,14 +211,14 @@ byte_FFFCFE equ $FFFFFCFE
 platform_type_under_jim equ $FFFFFCFF
 byte_FFFD00 equ $FFFFFD00
 byte_FFFD01 equ $FFFFFD01
-byte_FFFD03 equ $FFFFFD03
-byte_FFFD04 equ $FFFFFD04
-byte_FFFD05 equ $FFFFFD05
-byte_FFFD06 equ $FFFFFD06
-byte_FFFD07 equ $FFFFFD07
-byte_FFFD08 equ $FFFFFD08
-byte_FFFD09 equ $FFFFFD09
-byte_FFFD0A equ $FFFFFD0A
+is_wall_left equ $FFFFFD03 ;Флаг: слева от Джима стена/препятствие. Ставит jim_wall_collision (тайлы карты) и коллизии с объектами-барьерами (ворота ада, морские ворота, алмаз, подлодка). Блокирует движение влево
+byte_FFFD04 equ $FFFFFD04 ;Доп. проба слева, только пишется, нигде не читается
+byte_FFFD05 equ $FFFFFD05 ;Доп. проба слева, только пишется, нигде не читается
+is_wall_right equ $FFFFFD06 ;Флаг: справа от Джима стена/препятствие. Пары к is_wall_left, блокирует движение вправо
+byte_FFFD07 equ $FFFFFD07 ;Доп. проба справа, только пишется, нигде не читается
+byte_FFFD08 equ $FFFFFD08 ;Доп. проба справа, только пишется, нигде не читается
+is_wall_up equ $FFFFFD09 ;Флаг: над Джимом стена/потолок
+is_wall_down equ $FFFFFD0A ;Флаг: под Джимом стена/пол
 jim_walking_direction equ $FFFFFD0B ;0 - никуда, -1 - движение влево, 1 - движение вправо
 is_jim_hanging equ $FFFFFD0D
 is_jim_sliding equ $FFFFFD0E ;Jim на крутой поверхности лезет вверх или скользит вниз

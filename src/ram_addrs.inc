@@ -226,8 +226,8 @@ byte_FFFD0F equ $FFFFFD0F
 byte_FFFD10 equ $FFFFFD10
 jim_ride_obj_id equ $FFFFFD11 ;ID объекта, на котором Джим едет/стоит в текущем кадре (фуникулёр $5E/$5F, подлодка $40, изумрудные лифты $56/$5A/$5B, движущаяся платформа $61 - флаг bit4 в байте 6 объекта). 0 - ни на чём. Обычная земля/тайлы сюда НЕ пишутся, для них platform_type_under_jim
 jim_ride_obj_id_prev equ $FFFFFD12 ;Значение jim_ride_obj_id за прошлый кадр
-byte_FFFD13 equ $FFFFFD13
-byte_FFFD14 equ $FFFFFD14
+is_chain_activity_under_jim equ $FFFFFD13 ;Джим пересёкся с активностью цепи в этом кадре (ставит activity_chain, сбрасывает jim_activities_collision каждый кадр)
+is_jim_on_chain equ $FFFFFD14 ;Джим реально висит/лезет по цепи (ставит и сбрасывает chain_main). Отключает гравитацию и удар хлыстом, разрешает стрельбу и прыжок без земли под ногами, включает анимацию висения. Не путать с is_jim_hanging (подтягивание на уступе)
 is_jim_on_rocket equ $FFFFFD15
 byte_FFFD16 equ $FFFFFD16
 byte_FFFD17 equ $FFFFFD17
@@ -321,11 +321,11 @@ byte_FFFD84 equ $FFFFFD84
 byte_FFFD85 equ $FFFFFD85
 byte_FFFD86 equ $FFFFFD86
 byte_FFFD87 equ $FFFFFD87
-byte_FFFD88 equ $FFFFFD88
-byte_FFFD89 equ $FFFFFD89
-byte_FFFD8A equ $FFFFFD8A
-byte_FFFD8B equ $FFFFFD8B
-byte_FFFD8D equ $FFFFFD8D
+psycrow_state equ $FFFFFD88 ;Состояние босса Psy-Crow (объект obj_01, ИИ sub_2592EC): 0-3 - поза прицеливания (индекс в off_C9D6), 4 - разворот, 6 - атака, 7 - сбит выстрелом, 8 - удар хлыстом (только из 7), 9 - смерть. Значение 5 не используется, это порог: при >= 5 ИИ вороны отключён. Значения 0-3 и 9 записываются анимационными скриптами через опкод $ED01
+psycrow_target_slot equ $FFFFFD89 ;Слот цели/высоты Psy-Crow, 0..5. Индекс в dword_C9BE (координаты точки полёта) и в off_C9E6 (анимация атаки). При спавне выбирается случайно, после атаки меняется на +-1 в пределах 0..5
+psycrow_invul_timer equ $FFFFFD8A ;Таймер неуязвимости Psy-Crow, $3C после попадания. Пока не 0, выстрелы по вороне игнорируются
+psycrow_anim_lock_timer equ $FFFFFD8B ;Таймер блокировки смены анимации Psy-Crow, $1E. Пока не 0, ИИ не переключает позу прицеливания
+psycrow_facing equ $FFFFFD8D ;Направление взгляда Psy-Crow: 0 - вправо, $FF - влево. При изменении запускается разворот (psycrow_state = 4)
 word_FFFD8E equ $FFFFFD8E
 word_FFFD90 equ $FFFFFD90
 word_FFFD92 equ $FFFFFD92
@@ -382,9 +382,9 @@ byte_FFFDEE equ $FFFFFDEE
 byte_FFFDF0 equ $FFFFFDF0
 byte_FFFDF1 equ $FFFFFDF1
 byte_FFFDF2 equ $FFFFFDF2
-byte_FFFDF3 equ $FFFFFDF3
+bucket_boss_phase equ $FFFFFDF3 ;Фаза босса-ведра на NJC (объект stru_25AB14, проц sub_2522D0). 0 - бой не начался, 1 - просто стоит и ждёт (HP $A), 2 - прикрывает голову, на Джима сверху падают саксофоны (HP $96), 5 - трансформация в ведро-мобиль, стоит (HP $FA, неуязвим), 4 - ведро-мобиль стреляет наковальнями стоя на месте, 3 - ведро-мобиль ездит туда-сюда, попадания засчитываются только с той стороны, куда он смотрит (HP $FA), 6 - босс дотронулся до Джима, по концу скрипта откат в фазу 1. Цепочка при расстреле: 1 -> 2 -> 5 -> 4 -> 3 -> уничтожен (is_bucket_boss_destroyed). Номер фазы пишут сами move-скрипты объекта командой $83,1,$FD,$F3,0,N
 chicken_boss_anim_id equ $FFFFFDF4
-byte_FFFDF5 equ $FFFFFDF5
+is_bucket_boss_destroyed equ $FFFFFDF5 ;Босс-ведро на NJC добит (ставится в fire_to_bucket_boss, когда в фазе 3 кончился HP). Пока флаг взведён, sub_24F04A каждые 8 кадров подрывает объекты сцены (звук $4A), а когда взрывать больше нечего - снимает флаг, ставит byte_FFFBF0, отпускает камеру и запускает реплику $23. Cм. bucket_boss_phase
 byte_FFFDF6 equ $FFFFFDF6
 byte_FFFDF7 equ $FFFFFDF7
 byte_FFFDF8 equ $FFFFFDF8

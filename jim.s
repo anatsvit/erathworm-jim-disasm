@@ -25320,7 +25320,7 @@ loc_245E72:                             ; CODE XREF: jim_fire+A   j
                 beq.w   loc_245F44
                 cmpi.b  #$72,(jim_ride_obj_id).l ; 'r'
                 beq.w   loc_245F44
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.w   loc_245F30
                 cmpi.b  #$5F,(jim_ride_obj_id).l ; '_'
                 beq.w   loc_245F30
@@ -25399,7 +25399,7 @@ loc_245FEC:                             ; CODE XREF: jim_fire+192   j
                 clr.b   (is_current_gun_plasma).l
                 subq.w  #1,(ammo_adding_buffer).l
 loc_245FF8:                             ; CODE XREF: jim_fire+19A   j
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.w   loc_246256
                 cmpi.b  #$5F,(jim_ride_obj_id).l ; '_'
                 beq.w   loc_246256
@@ -25748,7 +25748,7 @@ loc_246568:                             ; CODE XREF: oksub_2464C8+98   j
                 beq.s   loc_246576
                 clr.b   (is_jim_left_direction).l
 loc_246576:                             ; CODE XREF: oksub_2464C8+A6   j
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.w   locret_246616
                 move.b  #$10,(timer_whip_blocking).l
                 tst.b   (platform_type_under_jim).l
@@ -25850,7 +25850,7 @@ sub_24669E:                             ; CODE XREF: oksub_2456C8+258   p
                 rts
 ; ---------------------------------------------------------------------------
 loc_246722:                             ; CODE XREF: sub_24669E+54   j
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.s   loc_24673C
                 tst.b   (is_jim_hanging).l
                 bne.s   loc_24673C
@@ -25881,7 +25881,7 @@ loc_24674A:                             ; CODE XREF: sub_24669E+A2   j
                 st      (byte_FFFCFC).l
 loc_2467A0:                             ; CODE XREF: sub_24669E+1AA   j
                                         ; sub_24669E+1BE   j
-                tst.b   (byte_FFFD13).l
+                tst.b   (is_chain_activity_under_jim).l
                 beq.s   loc_2467C6
                 st      (is_jim_jumping).l
                 move.w  #1,(jim_y_speed).l
@@ -25985,7 +25985,7 @@ locret_24690A:                          ; CODE XREF: sub_246860+6   j
 
 ; Если отключить эту функцию Jim перестает реагировать на цепь
 chain_main:                             ; CODE XREF: oksub_2456C8+25C   p
-                tst.b   (byte_FFFD13).l
+                tst.b   (is_chain_activity_under_jim).l
                 beq.w   loc_246A70
                 tst.w   (jim_y_speed).l
                 bmi.w   loc_246A70
@@ -25999,7 +25999,7 @@ chain_main:                             ; CODE XREF: oksub_2456C8+25C   p
                 clr.w   (jim_walking_speed).l
                 clr.b   (is_jim_jumping).l
                 clr.b   (jim_timer_in_air).l
-                st      (byte_FFFD14).l
+                st      (is_jim_on_chain).l
                 clr.b   (jim_walking_direction).l
                 bsr.w   oksub_246AEC
                 rts
@@ -26068,12 +26068,12 @@ loc_246A60:                             ; CODE XREF: chain_main+14C   j
 loc_246A64:                             ; CODE XREF: chain_main+72   j
                                         ; chain_main+A2   j ...
                 bsr.w   oksub_246AEC
-                st      (byte_FFFD14).l
+                st      (is_jim_on_chain).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_246A70:                             ; CODE XREF: chain_main+6   j
                                         ; chain_main+10   j ...
-                clr.b   (byte_FFFD14).l
+                clr.b   (is_jim_on_chain).l
 locret_246A76:                          ; CODE XREF: chain_main+62   j
                 rts
 ; End of function chain_main
@@ -26693,7 +26693,7 @@ loc_24722E:                             ; CODE XREF: sub_247022+200   j
                 bne.w   sub_246EB4
                 tst.b   (is_jim_on_rocket).l
                 bne.w   sub_247022
-                tst.b   (byte_FFFD13).l
+                tst.b   (is_chain_activity_under_jim).l
                 bne.w   locret_24752E
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   locret_24752E
@@ -29917,7 +29917,7 @@ loc_2497D8:                             ; CODE XREF: sub_249772+5A   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_2497E8:                             ; CODE XREF: sub_249772+64   j
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 beq.s   loc_249800
                 lea     (off_1ADD54).l,a2
                 move.b  #1,(jim_state).l
@@ -30927,7 +30927,7 @@ loc_24A3E6:                             ; CODE XREF: jim_platform_collision+354 
                 tst.b   (byte_FFFCFA).l
                 beq.w   locret_24A46C
 loc_24A3F8:                             ; CODE XREF: jim_platform_collision+366   j
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.w   locret_24A46C
                 move.w  (jim_y_speed).l,d0
                 addi.w  #$78,d0 ; 'x'
@@ -32121,7 +32121,7 @@ damage_from_enemy:                      ; CODE XREF: do_damage_from_enemy+6   p
                 bne.w   loc_24B0C4
                 tst.b   (platform_type_under_jim).l
                 beq.w   loc_24B0C4
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.w   loc_24B0C4
                 cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   loc_24B0C4
@@ -32190,7 +32190,7 @@ sub_24B124:                             ; CODE XREF: collision_with_sphere_elect
                 bmi.w   loc_24B1B2
                 tst.b   (platform_type_under_jim).l
                 beq.w   loc_24B1B2
-                tst.b   (byte_FFFD14).l
+                tst.b   (is_jim_on_chain).l
                 bne.w   loc_24B1B2
                 tst.b   (naked_worm_enable).l
                 beq.s   loc_24B190
@@ -33113,7 +33113,7 @@ jim_activities_collision:                             ; CODE XREF: oksub_2456C8+
                 bne.w   locret_24BDA6
                 tst.l   (jim_current_sprite_offset).l
                 beq.w   locret_24BDA6
-                clr.b   (byte_FFFD13).l
+                clr.b   (is_chain_activity_under_jim).l
                 clr.b   (is_jim_sliding).l
                 cmpi.b  #$60,(jim_ride_obj_id).l ; '`'
                 beq.w   locret_24BDA6
@@ -36198,7 +36198,7 @@ sub_24DEF2:                             ; DATA XREF: ROM:00005754   o
                 lea     (obj_01).l,a1
                 move.w  #$19,d4
                 jsr     loc_24ACD2(pc)
-                move.b  #0,(byte_FFFDF3).l
+                move.b  #0,(bucket_boss_phase).l
                 move.b  #1,(palette2_index).l
                 jsr     sub_24AD4E(pc)
                 bne.w   locret_24DFE6
@@ -36958,7 +36958,7 @@ activity_chain:                             ; DATA XREF: ROM:00005604   o
                 bne.s   locret_24E8A6
                 cmpi.b  #$E,(jim_state).l
                 beq.s   locret_24E8A6
-                st      (byte_FFFD13).l
+                st      (is_chain_activity_under_jim).l
 locret_24E8A6:                          ; CODE XREF: activity_chain+6   j
                                         ; activity_chain+10   j
                 rts
@@ -37493,7 +37493,7 @@ loc_24F040:                             ; CODE XREF: sub_24F016+2C   j
 
 
 sub_24F04A:                             ; DATA XREF: ROM:0025BBF0   o
-                tst.b   (byte_FFFDF5).l ; При отключении нет very cool ведробосс не уничтожается, пружина на боссе не прыгает
+                tst.b   (is_bucket_boss_destroyed).l ; При отключении нет very cool ведробосс не уничтожается, пружина на боссе не прыгает
                 beq.w   loc_24F122
                 move.b  (frame_counter).l,d7
                 andi.b  #7,d7
@@ -37544,7 +37544,7 @@ loc_24F0FA:                             ; CODE XREF: sub_24F04A+94   j
 ; ---------------------------------------------------------------------------
 loc_24F0FC:                             ; CODE XREF: sub_24F04A+20   j
                 st      (byte_FFFBF0).l
-                clr.b   (byte_FFFDF5).l
+                clr.b   (is_bucket_boss_destroyed).l
                 clr.b   (camera_disable_value+1).l
                 move.w  #$190,(camera_anchor_y).l
                 move.b  #$23,(funchar_text_id).l ; '#'
@@ -39091,8 +39091,8 @@ sub_25049A:                             ; DATA XREF: ROM:0025C2EC   o
                 move.b  d0,1(a5)
                 move.w  #5,d7
                 jsr     sub_24D416(pc)
-                move.b  d7,(byte_FFFD89).l
-                move.b  #0,(byte_FFFD88).l
+                move.b  d7,(psycrow_target_slot).l
+                move.b  #0,(psycrow_state).l
                 rts
 ; End of function sub_25049A
 
@@ -41670,7 +41670,7 @@ sub_2522C8:                             ; DATA XREF: ROM:stru_25B5DC   o
 ; Что-то связанное с боссом ведром на NJC
 sub_2522D0:                             ; DATA XREF: ROM:stru_25AB14   o
                 jsr     (ammo_prize_fall).l
-                cmpi.b  #3,(byte_FFFDF3).l
+                cmpi.b  #3,(bucket_boss_phase).l
                 bne.s   loc_2522FE
                 move.b  $3D(a1),d7
                 cmpi.b  #$83,d7
@@ -42409,9 +42409,9 @@ loc_252B32:                             ; CODE XREF: collision_with_bucket_boss+
 
 
 sub_252B3A:                             ; CODE XREF: collision_with_bucket_boss   p
-                cmpi.b  #6,(byte_FFFDF3).l
+                cmpi.b  #6,(bucket_boss_phase).l
                 beq.s   locret_252B8E
-                move.b  #6,(byte_FFFDF3).l
+                move.b  #6,(bucket_boss_phase).l
                 move.l  #byte_1A2CBA,$A(a1)
                 clr.b   $36(a1)
                 move.l  #off_1AF6A0,(jim_anim_offset).l
@@ -42845,7 +42845,7 @@ locret_253068:                          ; CODE XREF: collision_with_sphere_elect
 
 
 collision_with_electrical_charge:                             ; DATA XREF: ROM:00003778   o
-                tst.b   (byte_FFFD13).l
+                tst.b   (is_chain_activity_under_jim).l
                 bne.w   loc_25308A
                 tst.w   (jim_y_speed).l
                 bmi.s   locret_253088
@@ -45582,13 +45582,13 @@ whip_to_bucket_boss:                             ; DATA XREF: ROM:00003958   o
 
 
 fire_to_bucket_boss:                             ; DATA XREF: ROM:0000381C   o
-                cmpi.b  #1,(byte_FFFDF3).l
+                cmpi.b  #1,(bucket_boss_phase).l
                 beq.w   loc_25537A
-                cmpi.b  #2,(byte_FFFDF3).l
+                cmpi.b  #2,(bucket_boss_phase).l
                 beq.w   loc_255330
-                cmpi.b  #4,(byte_FFFDF3).l
+                cmpi.b  #4,(bucket_boss_phase).l
                 beq.w   loc_2552EA
-                cmpi.b  #3,(byte_FFFDF3).l
+                cmpi.b  #3,(bucket_boss_phase).l
                 beq.s   loc_255258
                 rts
 ; ---------------------------------------------------------------------------
@@ -45612,7 +45612,7 @@ locret_255224:                          ; CODE XREF: fire_to_bucket_boss+36   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_255226:                             ; CODE XREF: fire_to_bucket_boss+F4   j
-                st      (byte_FFFDF5).l
+                st      (is_bucket_boss_destroyed).l
                 clr.b   (a2)
                 jsr     (free_obj_vram_a2).l
                 tst.b   (sound_fx_enable).l
@@ -45686,7 +45686,7 @@ loc_2552EA:                             ; CODE XREF: fire_to_bucket_boss+20   j
 ; ---------------------------------------------------------------------------
 loc_2552F2:                             ; CODE XREF: fire_to_bucket_boss+134   j
                 move.l  #byte_1A2A34,$A(a2)
-                move.b  #3,(byte_FFFDF3).l
+                move.b  #3,(bucket_boss_phase).l
                 clr.b   $36(a2)
                 move.b  #$FA,1(a2)
                 tst.b   (sound_fx_enable).l
@@ -45707,7 +45707,7 @@ loc_255330:                             ; CODE XREF: fire_to_bucket_boss+14   j
 ; ---------------------------------------------------------------------------
 loc_25533C:                             ; CODE XREF: fire_to_bucket_boss+17A   j
                 move.l  #byte_1A2BD6,$A(a2)
-                move.b  #5,(byte_FFFDF3).l
+                move.b  #5,(bucket_boss_phase).l
                 clr.b   $36(a2)
                 move.b  #$FA,1(a2)
                 tst.b   (sound_fx_enable).l
@@ -45728,7 +45728,7 @@ loc_25537A:                             ; CODE XREF: fire_to_bucket_boss+8   j
 ; ---------------------------------------------------------------------------
 loc_255384:                             ; CODE XREF: fire_to_bucket_boss+1C4   j
                 move.l  #byte_1A29AE,$A(a2)
-                move.b  #2,(byte_FFFDF3).l
+                move.b  #2,(bucket_boss_phase).l
                 clr.b   $36(a2)
                 move.b  #$96,1(a2)
                 tst.b   (sound_fx_enable).l
@@ -50862,15 +50862,15 @@ loc_2592E6:                             ; CODE XREF: sub_2592B6+26   j
 
 sub_2592EC:                             ; DATA XREF: ROM:stru_25BB04   o
                 movem.l d0-d5/a2,-(sp)
-                tst.b   (byte_FFFD8A).l
+                tst.b   (psycrow_invul_timer).l
                 beq.s   loc_2592FE
-                subq.b  #1,(byte_FFFD8A).l
+                subq.b  #1,(psycrow_invul_timer).l
 loc_2592FE:                             ; CODE XREF: sub_2592EC+A   j
-                tst.b   (byte_FFFD8B).l
+                tst.b   (psycrow_anim_lock_timer).l
                 beq.s   loc_25930C
-                subq.b  #1,(byte_FFFD8B).l
+                subq.b  #1,(psycrow_anim_lock_timer).l
 loc_25930C:                             ; CODE XREF: sub_2592EC+18   j
-                cmpi.b  #5,(byte_FFFD88).l
+                cmpi.b  #5,(psycrow_state).l
                 bcc.w   loc_2594C8
                 clr.w   d3
                 move.b  $1C(a1),d3
@@ -50919,27 +50919,27 @@ loc_259370:                             ; CODE XREF: sub_2592EC+40   j
                 bmi.s   loc_259384
                 move.b  #$FF,d4
 loc_259384:                             ; CODE XREF: sub_2592EC+92   j
-                cmp.b   (byte_FFFD8D).l,d4
+                cmp.b   (psycrow_facing).l,d4
                 beq.s   loc_2593BA
-                move.b  (byte_FFFD8D).l,9(a1)
-                move.b  d4,(byte_FFFD8D).l
+                move.b  (psycrow_facing).l,9(a1)
+                move.b  d4,(psycrow_facing).l
                 move.l  #off_1B4724,$20(a1)
                 clr.b   $37(a1)
-                move.b  #4,(byte_FFFD88).l
-                move.b  #$1E,(byte_FFFD8B).l
+                move.b  #4,(psycrow_state).l
+                move.b  #$1E,(psycrow_anim_lock_timer).l
                 bra.w   loc_2594C8
 ; ---------------------------------------------------------------------------
 loc_2593BA:                             ; CODE XREF: sub_2592EC+9E   j
-                cmp.b   (byte_FFFD88).l,d5
+                cmp.b   (psycrow_state).l,d5
                 beq.s   loc_2593EA
-                tst.b   (byte_FFFD8B).l
+                tst.b   (psycrow_anim_lock_timer).l
                 bne.s   loc_2593EA
-                move.b  d5,(byte_FFFD88).l
+                move.b  d5,(psycrow_state).l
                 lsl.w   #2,d5
                 lea     (off_C9D6).l,a2
                 move.l  (a2,d5.w),$20(a1)
                 clr.b   $37(a1)
-                move.b  #$1E,(byte_FFFD8B).l
+                move.b  #$1E,(psycrow_anim_lock_timer).l
 loc_2593EA:                             ; CODE XREF: sub_2592EC+D4   j
                                         ; sub_2592EC+DC   j
                 move.b  (frame_counter).l,d0
@@ -50947,7 +50947,7 @@ loc_2593EA:                             ; CODE XREF: sub_2592EC+D4   j
                 bne.w   loc_2594C8
                 lea     (dword_C9BE).l,a2
                 clr.l   d0
-                move.b  (byte_FFFD89).l,d0
+                move.b  (psycrow_target_slot).l,d0
                 lsl.l   #2,d0
                 adda.l  d0,a2
                 jsr     (sub_2498D2).l
@@ -50956,9 +50956,9 @@ loc_2593EA:                             ; CODE XREF: sub_2592EC+D4   j
                 ext.w   d3
                 add.w   (jim_x).l,d3
                 bpl.w   loc_259432
-                cmpi.b  #3,(byte_FFFD89).l
+                cmpi.b  #3,(psycrow_target_slot).l
                 bcc.s   loc_259432
-                addq.b  #3,(byte_FFFD89).l
+                addq.b  #3,(psycrow_target_slot).l
 loc_259432:                             ; CODE XREF: sub_2592EC+132   j
                                         ; sub_2592EC+13E   j
                 move.w  2(a1),d1
@@ -50980,26 +50980,26 @@ loc_259432:                             ; CODE XREF: sub_2592EC+132   j
                 subi.w  #$22,d2 ; '"'
                 bpl.w   loc_2594C8
                 lea     (off_C9E6).l,a2
-                move.b  (byte_FFFD89).l,d0
+                move.b  (psycrow_target_slot).l,d0
                 lsl.l   #2,d0
                 move.l  (a2,d0.w),$20(a1)
                 clr.b   $37(a1)
-                move.b  #6,(byte_FFFD88).l
-                clr.b   (byte_FFFD8B).l
-                tst.b   (byte_FFFD89).l
+                move.b  #6,(psycrow_state).l
+                clr.b   (psycrow_anim_lock_timer).l
+                tst.b   (psycrow_target_slot).l
                 beq.s   loc_2594C2
-                cmpi.b  #5,(byte_FFFD89).l
+                cmpi.b  #5,(psycrow_target_slot).l
                 beq.s   loc_2594BA
                 jsr     (random_function).l
                 btst    #0,d7
                 beq.w   loc_2594C2
 loc_2594BA:                             ; CODE XREF: sub_2592EC+1BE   j
-                subq.b  #1,(byte_FFFD89).l
+                subq.b  #1,(psycrow_target_slot).l
                 bra.s   loc_2594C8
 ; ---------------------------------------------------------------------------
 loc_2594C2:                             ; CODE XREF: sub_2592EC+1B4   j
                                         ; sub_2592EC+1CA   j
-                addq.b  #1,(byte_FFFD89).l
+                addq.b  #1,(psycrow_target_slot).l
 loc_2594C8:                             ; CODE XREF: sub_2592EC+28   j
                                         ; sub_2592EC+CA   j ...
                 movem.l (sp)+,d0-d5/a2
@@ -51008,7 +51008,7 @@ loc_2594C8:                             ; CODE XREF: sub_2592EC+28   j
 
 
 collision_with_psycrow:                             ; DATA XREF: ROM:00003678   o
-                cmpi.b  #7,(byte_FFFD88).l
+                cmpi.b  #7,(psycrow_state).l
                 bcc.s   locret_2594E2
                 move.w  #5,d0
                 jsr     (damage_from_enemy).l ; Повреждения от врагов (но не все)
@@ -51019,15 +51019,15 @@ locret_2594E2:                          ; CODE XREF: collision_with_psycrow+8   
 
 fire_to_psycrow:                             ; DATA XREF: ROM:00003860   o
                 jsr     spawn_hit_effect(pc)
-                tst.b   (byte_FFFD8A).l
+                tst.b   (psycrow_invul_timer).l
                 bne.s   locret_259518
-                cmpi.b  #7,(byte_FFFD88).l
+                cmpi.b  #7,(psycrow_state).l
                 bcc.s   locret_259518
                 move.l  #off_1B47C6,$20(a2)
                 clr.b   $37(a2)
                 move.w  #$FF00,$1A(a2)
                 clr.w   (dword_18).w
-                move.b  #7,(byte_FFFD88).l
+                move.b  #7,(psycrow_state).l
 locret_259518:                          ; CODE XREF: fire_to_psycrow+A   j
                                         ; fire_to_psycrow+14   j
                 rts
@@ -51035,7 +51035,7 @@ locret_259518:                          ; CODE XREF: fire_to_psycrow+A   j
 
 
 whip_to_psycrow:                             ; DATA XREF: ROM:0000399C   o
-                cmpi.b  #7,(byte_FFFD88).l
+                cmpi.b  #7,(psycrow_state).l
                 bne.s   locret_259574
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_259556
@@ -51051,7 +51051,7 @@ whip_to_psycrow:                             ; DATA XREF: ROM:0000399C   o
 loc_259556:                             ; CODE XREF: whip_to_psycrow+10   j
                 move.l  #off_1B47F8,$20(a2)
                 clr.b   $37(a2)
-                move.b  #8,(byte_FFFD88).l
+                move.b  #8,(psycrow_state).l
                 tst.b   1(a2)
                 beq.s   locret_259574
                 subq.b  #1,1(a2)

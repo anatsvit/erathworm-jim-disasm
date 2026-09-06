@@ -73,7 +73,7 @@ skip_enabled equ $FFFFA6CC
 skip_requested equ $FFFFA6CD
 byte_FFA6CE equ $FFFFA6CE
 frame_counter equ $FFFFA6CF
-byte_FFA6D0 equ $FFFFA6D0
+continues_count equ $FFFFA6D0
 jim_obj_id equ $FFFFA6D2
 jim_obj_x equ $FFFFA6D4
 jim_obj_y equ $FFFFA6D6
@@ -475,7 +475,7 @@ joypad_state equ $FFFFFF7A
 word_FFFF7C equ $FFFFFF7C
 byte_FFFF80 equ $FFFFFF80
 dword_FFFF82 equ $FFFFFF82
-dword_FFFF86 equ $FFFFFF86
+demo_stream_ptr equ $FFFFFF86
 demo_index equ $FFFFFF8A
 word_FFFF8C equ $FFFFFF8C
 word_FFFF8E equ $FFFFFF8E
@@ -483,9 +483,9 @@ word_FFFF90 equ $FFFFFF90
 word_FFFF92 equ $FFFFFF92
 word_FFFF94 equ $FFFFFF94
 word_FFFF96 equ $FFFFFF96
-byte_FFFF98 equ $FFFFFF98
-byte_FFFF99 equ $FFFFFF99
-byte_FFFF9A equ $FFFFFF9A
+demo_mode equ $FFFFFF98
+demo_pad_state equ $FFFFFF99
+demo_repeat_count equ $FFFFFF9A
 sound_fx_enable equ $FFFFFF9C
 byte_FFFF9E equ $FFFFFF9E
 music_enable equ $FFFFFF9F

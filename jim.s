@@ -24826,7 +24826,7 @@ loc_2456D6:                             ; CODE XREF: sub_24B4C8+16C   j
                 bsr.w   sub_24AC98
                 jsr     (sub_24CB8C).l
 loc_24579C:                             ; CODE XREF: sub_24D5C0+F2   j
-                move.b  #0,(byte_FFFF98).l
+                move.b  #0,(demo_mode).l
                 jsr     (sub_259DFE).l
 loc_2457AA:                             ; CODE XREF: cheat_code+164   j
                                         ; cheat_code+292   j ...
@@ -24846,7 +24846,7 @@ loc_2457BC:                             ; CODE XREF: oksub_2459F0+E6   j
                 jsr     (sub_24D282).l
                 jsr     (sub_2513F8).l
                 bsr.w   sub_24ACC8
-                cmpi.b  #1,(byte_FFFF98).l
+                cmpi.b  #1,(demo_mode).l
                 bne.w   loc_2457FC
                 clr.b   (frame_counter).l
                 move.l  #$BC614E,(dword_FFA6BC).l
@@ -26910,7 +26910,7 @@ sub_247576:                             ; CODE XREF: oksub_2456C8+A   p
                 clr.b   (byte_FF993F).l
                 clr.b   (byte_FFFD31).l
                 clr.b   (byte_FF993E).l
-                move.b  #0,(byte_FFFF98).l
+                move.b  #0,(demo_mode).l
                 clr.w   (demo_index).l
                 move.b  #0,(selectedLevelOption).l
                 clr.b   (cheat_mode).l
@@ -26949,14 +26949,14 @@ sub_247652:                             ; CODE XREF: oksub_2456C8:loc_2456D6   p
                 move.l  #word_4E14,(dword_FFFF82).l
                 move.b  #0,(selectedLevelOption).l
                 move.b  #1,(andy_asteroids_race_result).l
-                move.b  #3,(byte_FFA6D0).l
+                move.b  #3,(continues_count).l
                 move.b  (difficulty_level).l,d0
                 cmpi.b  #0,d0
                 beq.s   locret_2476AA
-                move.b  #1,(byte_FFA6D0).l
+                move.b  #1,(continues_count).l
                 cmpi.b  #1,d0
                 beq.s   locret_2476AA
-                clr.b   (byte_FFA6D0).l
+                clr.b   (continues_count).l
 locret_2476AA:                          ; CODE XREF: sub_247652+42   j
                                         ; sub_247652+50   j
                 rts
@@ -31599,7 +31599,7 @@ background_anim:                        ; CODE XREF: oksub_2456C8+17E   p
                                         ; oksub_2456C8+2B4   p ...
                 tst.b   (byte_FFFCFD).l
                 bne.w   locret_24AC2A
-                cmpi.b  #2,(byte_FFFF98).l
+                cmpi.b  #2,(demo_mode).l
                 beq.w   locret_24AC2A
                 btst    #0,(frame_counter).l
                 bne.w   locret_24AC2A
@@ -32605,7 +32605,7 @@ loc_24B62E:                             ; CODE XREF: sub_24B4C8+146   j
 
 
 sub_24B638:                             ; CODE XREF: sub_245AE4+FE   p
-                tst.b   (byte_FFA6D0).l
+                tst.b   (continues_count).l
                 beq.w   locret_24B83E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (oksub_2CBD3E).l
@@ -32715,7 +32715,7 @@ loc_24B7D4:                             ; CODE XREF: sub_24B638+122   j
                 bsr.w   set_start_lives
                 bsr.w   set_100_health
                 jsr     (sub_24D8FC).l
-                subq.b  #1,(byte_FFA6D0).l
+                subq.b  #1,(continues_count).l
                 move.w  #$78,d0 ; 'x'
 loc_24B81A:                             ; CODE XREF: sub_24B638+1EA   j
                 move.w  d0,-(sp)
@@ -32900,9 +32900,9 @@ loc_24BA56:                             ; CODE XREF: cheat_code+128   j
                 bne.w   locret_24B85E
                 st      (byte_FFFF76).l
 loc_24BA66:                             ; CODE XREF: cheat_code+120   j
-                cmpi.b  #5,(byte_FFA6D0).l
+                cmpi.b  #5,(continues_count).l
                 beq.w   locret_24B85E
-                addq.b  #1,(byte_FFA6D0).l
+                addq.b  #1,(continues_count).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24BA7A:                             ; CODE XREF: cheat_code+130   j
@@ -33652,7 +33652,7 @@ sub_24C4E4:                             ; CODE XREF: sub_24B638+A6   p
                 movem.l d0-d4/a6,-(sp)
                 move.w  d0,d4
                 clr.w   d3
-                move.b  (byte_FFA6D0).l,d3
+                move.b  (continues_count).l,d3
                 subq.b  #1,d3
                 move.w  d3,d2
                 lsl.w   #4,d3
@@ -33674,7 +33674,7 @@ loc_24C520:                             ; CODE XREF: sub_24C4E4+1E   j
 
 
 sub_24C526:                             ; CODE XREF: sub_24BBE6+C2   p
-                addq.b  #1,(byte_FFA6D0).l
+                addq.b  #1,(continues_count).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (oksub_2CBD3E).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
@@ -34156,7 +34156,7 @@ loc_24C9A4:                             ; CODE XREF: VBLANK+34   j
                 st      (skip_requested).l
 loc_24C9AA:                             ; CODE XREF: VBLANK+C   j
                                         ; VBLANK+2E   j ...
-                cmpi.b  #1,(byte_FFFF98).l
+                cmpi.b  #1,(demo_mode).l
                 bne.s   locret_24C9BE
                 move.b  (byte_FFFF80).l,(joypad_state).l
 locret_24C9BE:                          ; CODE XREF: VBLANK+56   j
@@ -35222,24 +35222,24 @@ sub_24D476:                             ; CODE XREF: oksub_2456C8:loc_245870   p
 
 
 sub_24D4AC:
-                cmpi.b  #2,(byte_FFFF98).l
+                cmpi.b  #2,(demo_mode).l
                 bne.w   locret_24D560
                 tst.b   (map_view_mode).l
                 bne.w   locret_24D560
                 addq.w  #1,(word_FFFF8C).l
                 move.b  (joypad_state).l,d0
-                cmp.b   (byte_FFFF99).l,d0
+                cmp.b   (demo_pad_state).l,d0
                 bne.s   loc_24D4E8
-                cmpi.b  #$FF,(byte_FFFF9A).l
+                cmpi.b  #$FF,(demo_repeat_count).l
                 beq.s   loc_24D4E8
-                addq.b  #1,(byte_FFFF9A).l
+                addq.b  #1,(demo_repeat_count).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_24D4E8:                             ; CODE XREF: sub_24D4AC+28   j
                                         ; sub_24D4AC+32   j
-                tst.b   (byte_FFFF99).l
+                tst.b   (demo_pad_state).l
                 beq.s   loc_24D550
-                move.l  (dword_FFFF86).l,d2
+                move.l  (demo_stream_ptr).l,d2
                 move.l  d2,d1
                 rol.l   #2,d1
                 lsr.w   #2,d1
@@ -35247,7 +35247,7 @@ loc_24D4E8:                             ; CODE XREF: sub_24D4AC+28   j
                 swap    d1
                 move.l  d1,(VDP_CTRL).l
                 clr.w   d0
-                move.b  (byte_FFFF9A).l,d0
+                move.b  (demo_repeat_count).l,d0
                 move.w  d0,(VDP_DATA).l
                 addq.w  #2,d2
                 move.l  d2,d1
@@ -35257,16 +35257,16 @@ loc_24D4E8:                             ; CODE XREF: sub_24D4AC+28   j
                 swap    d1
                 move.l  d1,(VDP_CTRL).l
                 clr.w   d0
-                move.b  (byte_FFFF99).l,d0
+                move.b  (demo_pad_state).l,d0
                 move.w  d0,(VDP_DATA).l
                 addq.w  #2,d2
                 addq.w  #2,(word_FFFF8E).l
                 cmpi.w  #$A8C,(word_FFFF8C).l
                 bcc.s   loc_24D562
-                move.l  d2,(dword_FFFF86).l
+                move.l  d2,(demo_stream_ptr).l
 loc_24D550:                             ; CODE XREF: sub_24D4AC+42   j
-                move.b  (joypad_state).l,(byte_FFFF99).l
-                clr.b   (byte_FFFF9A).l
+                move.b  (joypad_state).l,(demo_pad_state).l
+                clr.b   (demo_repeat_count).l
 locret_24D560:                          ; CODE XREF: sub_24D4AC+8   j
                                         ; sub_24D4AC+12   j
                 rts
@@ -35301,25 +35301,25 @@ loc_24D5AE:                             ; CODE XREF: sub_24D4AC+112   j
 
 
 sub_24D5C0:                             ; CODE XREF: oksub_2456C8+2A2   p
-                cmpi.b  #1,(byte_FFFF98).l
+                cmpi.b  #1,(demo_mode).l
                 bne.s   locret_24D608
-                tst.b   (byte_FFFF9A).l
+                tst.b   (demo_repeat_count).l
                 bne.s   loc_24D5F8
-                movea.l (dword_FFFF86).l,a0
-                move.b  (a0)+,(byte_FFFF9A).l
-                move.b  (a0)+,(byte_FFFF99).l
-                addq.b  #1,(byte_FFFF9A).l
-                tst.b   (byte_FFFF99).l
+                movea.l (demo_stream_ptr).l,a0
+                move.b  (a0)+,(demo_repeat_count).l
+                move.b  (a0)+,(demo_pad_state).l
+                addq.b  #1,(demo_repeat_count).l
+                tst.b   (demo_pad_state).l
                 beq.s   loc_24D60A
-                move.l  a0,(dword_FFFF86).l
+                move.l  a0,(demo_stream_ptr).l
 loc_24D5F8:                             ; CODE XREF: sub_24D5C0+10   j
-                move.b  (byte_FFFF99).l,(joypad_state).l
-                subq.b  #1,(byte_FFFF9A).l
+                move.b  (demo_pad_state).l,(joypad_state).l
+                subq.b  #1,(demo_repeat_count).l
 locret_24D608:                          ; CODE XREF: sub_24D5C0+8   j
                 rts
 ; ---------------------------------------------------------------------------
 loc_24D60A:                             ; CODE XREF: sub_24D5C0+30   j
-                clr.b   (byte_FFFF9A).l
+                clr.b   (demo_repeat_count).l
                 move.l  (sp)+,d0
                 tst.w   (demo_index).l
                 beq.w   loc_24D69E
@@ -35331,15 +35331,15 @@ loc_24D60A:                             ; CODE XREF: sub_24D5C0+30   j
                 move.w  (demo_index).l,d7
                 mulu.w  #6,d7
                 lea     (demo_table).l,a0
-                move.l  (a0,d7.w),(dword_FFFF86).l
+                move.l  (a0,d7.w),(demo_stream_ptr).l
                 move.b  4(a0,d7.w),(selectedLevelOption).l
-                clr.b   (byte_FFFF9A).l
-                movea.l (dword_FFFF86).l,a0
+                clr.b   (demo_repeat_count).l
+                movea.l (demo_stream_ptr).l,a0
                 move.w  (a0)+,(word_FFFF90).l
                 move.w  (a0)+,(word_FFFF92).l
                 move.w  (a0)+,(word_FFFF94).l
                 move.w  (a0)+,(word_FFFF96).l
-                move.l  a0,(dword_FFFF86).l
+                move.l  a0,(demo_stream_ptr).l
                 addq.w  #1,(demo_index).l
                 cmpi.w  #8,(demo_index).l
                 bne.w   loc_24D694
@@ -40649,7 +40649,7 @@ loc_2513C8:                             ; CODE XREF: sub_251306+D6   j
                 dbf     d4,loc_2513C8
 loc_2513E0:                             ; CODE XREF: sub_251306+D4   j
                 jsr     sub_24CC9A(pc)
-                cmpi.b  #1,(byte_FFFF98).l
+                cmpi.b  #1,(demo_mode).l
                 bne.w   locret_2513F6
                 move.l  (sp)+,d0
                 bra.w   loc_24D69E
@@ -40725,7 +40725,7 @@ loc_2514E4:                             ; CODE XREF: sub_2513F8+DE   j
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (oksub_2CBD3E).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
-                cmpi.b  #1,(byte_FFFF98).l
+                cmpi.b  #1,(demo_mode).l
                 bne.w   loc_25150C
                 move.l  (sp)+,d0
                 bra.w   loc_24D69E
@@ -52301,26 +52301,26 @@ loc_25A3D2:                             ; CODE XREF: sub_259DFE+2F6   j
                 jsr     (sub_24792E).l
                 clr.b   (frame_counter).l
                 move.l  #$BC614E,(dword_FFA6BC).l
-                move.b  #1,(byte_FFFF98).l
+                move.b  #1,(demo_mode).l
                 clr.w   d7
                 move.w  (demo_index).l,d7
                 mulu.w  #6,d7
                 lea     (demo_table).l,a0
-                move.l  (a0,d7.w),(dword_FFFF86).l
+                move.l  (a0,d7.w),(demo_stream_ptr).l
                 move.b  4(a0,d7.w),(selectedLevelOption).l
-                clr.b   (byte_FFFF9A).l
-                movea.l (dword_FFFF86).l,a0
+                clr.b   (demo_repeat_count).l
+                movea.l (demo_stream_ptr).l,a0
                 move.w  (a0)+,(word_FFFF90).l
                 move.w  (a0)+,(word_FFFF92).l
                 move.w  (a0)+,(word_FFFF94).l
                 move.w  (a0)+,(word_FFFF96).l
-                move.l  a0,(dword_FFFF86).l
+                move.l  a0,(demo_stream_ptr).l
                 jsr     (sub_24D730).l
                 addq.w  #1,(demo_index).l
                 cmpi.w  #8,(demo_index).l
                 bne.w   loc_25A16C
                 clr.w   (demo_index).l
-                move.b  #0,(byte_FFFF98).l
+                move.b  #0,(demo_mode).l
                 jsr     (sub_25A4FE).l
                 jsr     (sub_24D730).l
                 bra.w   loc_25A16C

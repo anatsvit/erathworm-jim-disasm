@@ -85,7 +85,7 @@ jim_move_script_ptr equ $FFFFA6DC
 jim_current_sprite_offset equ $FFFFA6E6
 jim_delta_x_speed equ $FFFFA6EA
 jim_y_speed equ $FFFFA6EC
-jim_obj_screen_y equ $FFFFA6EF
+jim_ropejumper_obj_delta_y equ $FFFFA6EF ; смещение Джима по Y за кадр (obj+$1D), уровень с соплей/верёвкой
 jim_obj_tile_offset equ $FFFFA6F0
 jim_anim_offset equ $FFFFA6F2
 jim_obj_script_delay equ $FFFFA708
@@ -163,7 +163,7 @@ dword_FFFC96 equ $FFFFFC96
 word_FFFC9A equ $FFFFFC9A
 word_FFFC9C equ $FFFFFC9C
 word_FFFC9E equ $FFFFFC9E
-word_FFFCA0 equ $FFFFFCA0
+submarine_air_seconds_left equ $FFFFFCA0 ; запас воздуха в подлодке (Down the Tubes), старт 30, тик по byte_FFFCFE=$41 кадров, потолок заправки air_refiller_seconds
 screen_shake_sprite_offset equ $FFFFFCA2
 word_FFFCA4 equ $FFFFFCA4
 word_FFFCA6 equ $FFFFFCA6
@@ -189,7 +189,7 @@ word_FFFCD8 equ $FFFFFCD8
 dword_FFFCDA equ $FFFFFCDA
 word_FFFCDE equ $FFFFFCDE
 word_FFFCE0 equ $FFFFFCE0
-word_FFFCE2 equ $FFFFFCE2
+snot_knockback_speed_x equ $FFFFFCE2 ; импульс сопли по X при столкновении с Джимом, задаётся на раунд банджи-уровня ($700/$600/$580)
 dword_FFFCE4 equ $FFFFFCE4
 word_FFFCE8 equ $FFFFFCE8
 word_FFFCEA equ $FFFFFCEA
@@ -210,7 +210,7 @@ byte_FFFCFD equ $FFFFFCFD
 byte_FFFCFE equ $FFFFFCFE
 platform_type_under_jim equ $FFFFFCFF
 byte_FFFD00 equ $FFFFFD00
-byte_FFFD01 equ $FFFFFD01
+activity_id_under_jim equ $FFFFFD01 ; тип спецтайла под Джимом: байт из unk_FFB86A по тайлу карты, индекс в таблицу обработчиков off_5578. 0 - обычный тайл
 is_wall_left equ $FFFFFD03 ;Флаг: слева от Джима стена/препятствие. Ставит jim_wall_collision (тайлы карты) и коллизии с объектами-барьерами (ворота ада, морские ворота, алмаз, подлодка). Блокирует движение влево
 byte_FFFD04 equ $FFFFFD04 ;Доп. проба слева, только пишется, нигде не читается
 byte_FFFD05 equ $FFFFFD05 ;Доп. проба слева, только пишется, нигде не читается
@@ -222,7 +222,7 @@ is_wall_down equ $FFFFFD0A ;Флаг: под Джимом стена/пол
 jim_walking_direction equ $FFFFFD0B ;0 - никуда, -1 - движение влево, 1 - движение вправо
 is_jim_hanging equ $FFFFFD0D
 is_jim_sliding equ $FFFFFD0E ;Jim на крутой поверхности лезет вверх или скользит вниз
-byte_FFFD0F equ $FFFFFD0F
+submarine_turbines_angle equ $FFFFFD0F ; угол двух турбин подлодки 0..$3F (влево +1, вправо -1), задаёт кадры турбин/пламени и вектор тяги из dword_253686
 byte_FFFD10 equ $FFFFFD10
 jim_ride_obj_id equ $FFFFFD11 ;ID объекта, на котором Джим едет/стоит в текущем кадре (фуникулёр $5E/$5F, подлодка $40, изумрудные лифты $56/$5A/$5B, движущаяся платформа $61 - флаг bit4 в байте 6 объекта). 0 - ни на чём. Обычная земля/тайлы сюда НЕ пишутся, для них platform_type_under_jim
 jim_ride_obj_id_prev equ $FFFFFD12 ;Значение jim_ride_obj_id за прошлый кадр
@@ -292,14 +292,14 @@ byte_FFFD62 equ $FFFFFD62
 byte_FFFD63 equ $FFFFFD63
 byte_FFFD64 equ $FFFFFD64
 byte_FFFD65 equ $FFFFFD65
-byte_FFFD66 equ $FFFFFD66
+snot_level_intro_delay equ $FFFFFD66 ; Snot a Problem: счётчик 1..$1E в начале раунда, блокирует ropejump_control и snot_on_rope, по истечении запускает move-скрипт byte_1A2F3E
 byte_FFFD67 equ $FFFFFD67
 byte_FFFD68 equ $FFFFFD68
 byte_FFFD69 equ $FFFFFD69
 byte_FFFD6A equ $FFFFFD6A
 byte_FFFD6B equ $FFFFFD6B
 byte_FFFD6C equ $FFFFFD6C
-byte_FFFD6D equ $FFFFFD6D
+snot_hits_count equ $FFFFFD6D ; счётчик столкновений Джима с соплёй, на 12-м обнуляется и включает snot_rage_timer
 is_snot_defeated equ $FFFFFD6E
 byte_FFFD6F equ $FFFFFD6F
 byte_FFFD70 equ $FFFFFD70
@@ -348,15 +348,15 @@ word_FFFDAE equ $FFFFFDAE
 word_FFFDB0 equ $FFFFFDB0
 word_FFFDB2 equ $FFFFFDB2
 word_FFFDB4 equ $FFFFFDB4
-word_FFFDB6 equ $FFFFFDB6
+chain_climb_anim_offset equ $FFFFFDB6 ; фаза лазания по цепи: смещение в stru_1ADC0C (24 записи по 6 байт - анимация + шаг по X), шаг +6, сброс на $90
 dword_FFFDB8 equ $FFFFFDB8
 word_FFFDC0 equ $FFFFFDC0
 word_FFFDC4 equ $FFFFFDC4
 ammo_adding_buffer equ $FFFFFDC6
 health_buffer equ $FFFFFDC8
 word_FFFDCA equ $FFFFFDCA
-word_FFFDCC equ $FFFFFDCC
-word_FFFDCE equ $FFFFFDCE
+spawn_offset_x equ $FFFFFDCC ; смещение точки спавна по X от ячейки карты word_FFA698: $FFF0 - левый край экрана, $150 - правый
+spawn_offset_y equ $FFFFFDCE ; смещение точки спавна по Y от ячейки карты word_FFA69A: $F0 - верх экрана, $1E0 - низ
 word_FFFDD4 equ $FFFFFDD4
 word_FFFDD6 equ $FFFFFDD6
 shot_angle_target equ $FFFFFDD8
@@ -409,8 +409,8 @@ andy_side_speed equ $FFFFFE8E
 super_bubble_timer equ $FFFFFE90
 word_FFFE92 equ $FFFFFE92
 word_FFFE94 equ $FFFFFE94
-word_FFFE96 equ $FFFFFE96
-word_FFFE98 equ $FFFFFE98
+psycrow_speed equ $FFFFFE96 ; текущая скорость Псай-Ворона в гонке Andy Asteroids, плавно подтягивается к цели word_FFFEA4
+psycrow_target_angle equ $FFFFFE98 ; Andy Asteroids: угол, к которому ворон доворачивает obj_01_tunnel_angle. Берётся из буфера unk_FFFE0E (символы 'P' в andy_map), при таране - текущий угол +-$1000
 word_FFFE9A equ $FFFFFE9A
 word_FFFE9C equ $FFFFFE9C
 word_FFFE9E equ $FFFFFE9E
@@ -437,9 +437,9 @@ vanish_point_x equ $FFFFFF40
 vanish_point_y equ $FFFFFF42
 word_FFFF44 equ $FFFFFF44
 word_FFFF46 equ $FFFFFF46
-word_FFFF48 equ $FFFFFF48
-word_FFFF4A equ $FFFFFF4A
-word_FFFF4C equ $FFFFFF4C
+snot_state_request equ $FFFFFF48 ; заявка на состояние сопли: 3 внизу и 1 вверху из move-скрипта byte_1A2F3E (команда $83,$02), 2 и 0 из скриптов анимаций-трансформаций
+snot_state equ $FFFFFF4A ; применённое состояние сопли: 0 - вверх ногами (тянет вниз), 2 - ногами вниз (тянет вверх), 1 и 3 - трансформации в 0 и 2, 4 - rage, $FF - сброс
+snot_rage_timer equ $FFFFFF4C ; Snot a Problem: 360 кадров бешеного режима сопли (состояние snot_state=4) после 12 таранов, хаотичная цель и тройной шаг, урона о стены не получает
 word_FFFF52 equ $FFFFFF52
 word_FFFF54 equ $FFFFFF54
 word_FFFF56 equ $FFFFFF56
@@ -462,7 +462,7 @@ byte_FFFF6A equ $FFFFFF6A
 byte_FFFF6B equ $FFFFFF6B
 byte_FFFF6C equ $FFFFFF6C
 byte_FFFF6D equ $FFFFFF6D
-byte_FFFF6E equ $FFFFFF6E
+is_queen_butt_defeated equ $FFFFFF6E ; Buttville: подбосс-зад добит - меняются спавны (нарывы, платформы вместо хвоста) и палитра фона
 byte_FFFF6F equ $FFFFFF6F
 byte_FFFF72 equ $FFFFFF72
 byte_FFFF73 equ $FFFFFF73

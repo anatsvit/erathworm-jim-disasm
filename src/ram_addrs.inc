@@ -63,12 +63,12 @@ dword_FFA6AC equ $FFFFA6AC
 dword_FFA6B0 equ $FFFFA6B0
 dword_FFA6B4 equ $FFFFA6B4
 level_pointer equ $FFFFA6B8
-dword_FFA6BC equ $FFFFA6BC
+random_seed equ $FFFFA6BC ; зерно ЛКГ seed = 13*seed + 7, общее для random_function и random_in_range. Инициализируется константой $BC614E (12345678)
 dword_FFA6C0 equ $FFFFA6C0
 dword_FFA6C4 equ $FFFFA6C4
 jim_lives_count equ $FFFFA6C8
 byte_FFA6C9 equ $FFFFA6C9
-byte_FFA6CA equ $FFFFA6CA
+vblank_flag equ $FFFFA6CA ; флаг "кадровое прерывание произошло": взводится в VBLANK, wait_for_vblank сбрасывает и ждёт в цикле
 skip_enabled equ $FFFFA6CC
 skip_requested equ $FFFFA6CD
 byte_FFA6CE equ $FFFFA6CE
@@ -188,7 +188,7 @@ word_FFFCD6 equ $FFFFFCD6
 word_FFFCD8 equ $FFFFFCD8
 dword_FFFCDA equ $FFFFFCDA
 word_FFFCDE equ $FFFFFCDE
-word_FFFCE0 equ $FFFFFCE0
+water_monster_speed_x equ $FFFFFCE0 ; шаг по X за кадр, с которым водяной монстр преследует Джима на банджи-уровне (1/1/2 по раундам)
 snot_knockback_speed_x equ $FFFFFCE2 ; импульс сопли по X при столкновении с Джимом, задаётся на раунд банджи-уровня ($700/$600/$580)
 dword_FFFCE4 equ $FFFFFCE4
 word_FFFCE8 equ $FFFFFCE8
@@ -203,7 +203,7 @@ byte_FFFCF6 equ $FFFFFCF6
 byte_FFFCF7 equ $FFFFFCF7
 is_jim_jumping equ $FFFFFCF8
 jump_hold_timer equ $FFFFFCF9
-byte_FFFCFA equ $FFFFFCFA
+is_jump_apex_reached equ $FFFFFCFA ; восходящая фаза прыжка закончена: |jim_y_speed| упала ниже $3C либо удар головой о потолок. Пока сброшен, гравитация к Джиму не применяется и за цепь не зацепиться
 byte_FFFCFB equ $FFFFFCFB
 byte_FFFCFC equ $FFFFFCFC
 byte_FFFCFD equ $FFFFFCFD

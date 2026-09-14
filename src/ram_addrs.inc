@@ -28,7 +28,7 @@ unk_FF9F52 equ $FFFF9F52
 dword_FFA65A equ $FFFFA65A
 dword_FFA65E equ $FFFFA65E
 is_move_script equ $FFFFA662
-dword_FFA664 equ $FFFFA664
+level_scroll_proc equ $FFFFA664
 teleport_data_offset equ $FFFFA668
 map_width_x2 equ $FFFFA66C
 map_width equ $FFFFA66E
@@ -53,9 +53,9 @@ selectedLevelOption equ $FFFFA692
 dword_FFA694 equ $FFFFA694
 word_FFA698 equ $FFFFA698
 word_FFA69A equ $FFFFA69A
-dword_FFA69C equ $FFFFA69C
-dword_FFA6A0 equ $FFFFA6A0
-dword_FFA6A4 equ $FFFFA6A4
+whip_button_proc equ $FFFFA69C
+fire_button_proc equ $FFFFA6A0
+jump_button_proc equ $FFFFA6A4
 freezeability equ $FFFFA6A8
 cheat_mode equ $FFFFA6AA
 difficulty_level equ $FFFFA6AB
@@ -284,14 +284,14 @@ camera_target_x equ $FFFFFD56
 camera_target_y equ $FFFFFD58
 camera_disable_value equ $FFFFFD5A
 byte_FFFD5C equ $FFFFFD5C
-byte_FFFD5E equ $FFFFFD5E
-byte_FFFD5F equ $FFFFFD5F
-byte_FFFD60 equ $FFFFFD60
-byte_FFFD61 equ $FFFFFD61
-byte_FFFD62 equ $FFFFFD62
-byte_FFFD63 equ $FFFFFD63
-byte_FFFD64 equ $FFFFFD64
-byte_FFFD65 equ $FFFFFD65
+incubator_right_egg_chance equ $FFFFFD5E
+incubator_left_egg_chance equ $FFFFFD5F
+incubator_down_egg_chance equ $FFFFFD60
+incubator_up_egg_chance equ $FFFFFD61
+incubator_right_down_egg_chance equ $FFFFFD62
+incubator_left_down_egg_chance equ $FFFFFD63
+incubator_right_up_egg_chance equ $FFFFFD64
+incubator_left_up_egg_chance equ $FFFFFD65
 snot_level_intro_delay equ $FFFFFD66 ; Snot a Problem: счётчик 1..$1E в начале раунда, блокирует ropejump_control и snot_on_rope, по истечении запускает move-скрипт byte_1A2F3E
 byte_FFFD67 equ $FFFFFD67
 byte_FFFD68 equ $FFFFFD68

@@ -29888,7 +29888,7 @@ sub_249772:                             ; CODE XREF: sub_246B08+11A   p
                                         ; DATA XREF: ...
                 clr.b   (jim_state).l
                 clr.b   (jim_idle_anim_delay).l
-                tst.b   (byte_FFFD9A).l
+                tst.b   (is_continue_screen).l
                 beq.s   loc_249796
                 lea     (anim_jim_idle).l,a2
                 move.b  #4,(jim_state).l
@@ -32631,7 +32631,7 @@ sub_24B638:                             ; CODE XREF: sub_245AE4+FE   p
                 move.w  #$138,d3
                 move.w  #$80,(camera_x).l
                 clr.w   (camera_y).l
-                st      (byte_FFFD9A).l
+                st      (is_continue_screen).l
                 lea     (obj_01).l,a5
                 lea     (stru_25B8DC).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
@@ -32695,7 +32695,7 @@ loc_24B7A8:                             ; CODE XREF: sub_24B638+178   j
                 move.w  (sp)+,d0
                 dbf     d0,loc_24B7A8
                 bsr.w   fade_palettes_to_black
-                clr.b   (byte_FFFD9A).l
+                clr.b   (is_continue_screen).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (stop_music).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
@@ -32723,7 +32723,7 @@ loc_24B81A:                             ; CODE XREF: sub_24B638+1EA   j
                 move.w  (sp)+,d0
                 dbf     d0,loc_24B81A
                 bsr.w   fade_palettes_to_black
-                clr.b   (byte_FFFD9A).l
+                clr.b   (is_continue_screen).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 jsr     (stop_music).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
@@ -33491,7 +33491,7 @@ loc_24C1E6:                             ; CODE XREF: ure_the_best_screen+AC   j
                 move.w  #$117,2(a5)
                 move.w  #$1CB,4(a5)
                 move.l  #off_1B5F56,$20(a5)
-                move.b  #0,(byte_FFFD77).l
+                move.b  #0,(ure_the_best_state).l
                 bsr.w   run_first_frame
                 lea     (word_1B83A2).l,a0
                 bsr.w   sub_24CAEE
@@ -33518,18 +33518,18 @@ loc_24C348:                             ; CODE XREF: ure_the_best_screen:loc_24C
                 bsr.w   run_one_frame
                 bsr.w   sub_24C40A
                 bsr.w   sub_24C3AC
-                cmpi.b  #$D,(byte_FFFD77).l
+                cmpi.b  #$D,(ure_the_best_state).l
                 beq.s   loc_24C394
                 jsr     (is_joypad_button_start).l
                 beq.s   loc_24C394
-                cmpi.b  #7,(byte_FFFD77).l
+                cmpi.b  #7,(ure_the_best_state).l
                 bne.s   loc_24C392
                 jsr     (sub_24D25A).l
                 lea     (white_palette).l,a0
                 jsr     (load_palette_line2).l
                 bsr.w   sub_24C44A
                 bsr.w   clear_plane_a
-                move.b  #8,(byte_FFFD77).l
+                move.b  #8,(ure_the_best_state).l
 loc_24C392:                             ; CODE XREF: ure_the_best_screen+254   j
                 bra.s   loc_24C348
 ; ---------------------------------------------------------------------------
@@ -35938,9 +35938,9 @@ nullsub_6:                              ; DATA XREF: ROM:00005764   o
 
 
 sub_24DBCC:                             ; DATA XREF: ROM:000057B8   o
-                tst.b   (byte_FFFD94).l
+                tst.b   (secret_continue_enabled).l
                 bne.s   locret_24DC1C
-                st      (byte_FFFD94).l
+                st      (secret_continue_enabled).l
 loc_24DBDA:                             ; CODE XREF: sub_24DC1E+E   j
                                         ; sub_24DC2E+E   j ...
                 tst.b   (sound_fx_enable).l
@@ -35965,41 +35965,41 @@ locret_24DC1C:                          ; CODE XREF: sub_24DBCC+6   j
 
 
 sub_24DC1E:                             ; DATA XREF: ROM:000057BC   o
-                tst.b   (byte_FFFD95).l
+                tst.b   (secret_life_enabled).l
                 bne.s   locret_24DC1C
-                st      (byte_FFFD95).l
+                st      (secret_life_enabled).l
                 bra.s   loc_24DBDA
 ; End of function sub_24DC1E
 
 
 sub_24DC2E:                             ; DATA XREF: ROM:000057C0   o
-                tst.b   (byte_FFFD96).l
+                tst.b   (secret_hp_atom_enabled).l
                 bne.s   locret_24DC1C
-                st      (byte_FFFD96).l
+                st      (secret_hp_atom_enabled).l
                 bra.s   loc_24DBDA
 ; End of function sub_24DC2E
 
 
 sub_24DC3E:                             ; DATA XREF: ROM:000057CC   o
-                tst.b   (byte_FFFD97).l
+                tst.b   (secret_hp_molecule_enabled).l
                 bne.s   locret_24DC1C
-                st      (byte_FFFD97).l
+                st      (secret_hp_molecule_enabled).l
                 bra.s   loc_24DBDA
 ; End of function sub_24DC3E
 
 
 sub_24DC4E:                             ; DATA XREF: ROM:000057C4   o
-                tst.b   (byte_FFFD98).l
+                tst.b   (secret_gun_enabled).l
                 bne.s   locret_24DC1C
-                st      (byte_FFFD98).l
+                st      (secret_gun_enabled).l
                 bra.w   loc_24DBDA
 ; End of function sub_24DC4E
 
 
 sub_24DC60:                             ; DATA XREF: ROM:000057C8   o
-                tst.b   (byte_FFFD99).l
+                tst.b   (secret_plasma_enabled).l
                 bne.s   locret_24DC1C
-                st      (byte_FFFD99).l
+                st      (secret_plasma_enabled).l
                 bra.w   loc_24DBDA
 ; End of function sub_24DC60
 
@@ -37716,17 +37716,17 @@ locret_24F334:                          ; CODE XREF: sub_24F23E+E0   j
 sub_24F336:                             ; DATA XREF: ROM:0025BCB0   o
                 tst.b   (byte_FFFDE1).l
                 bne.w   loc_24F374
-                tst.b   (byte_FFFD7B).l
+                tst.b   (evil_cat_invul_timer).l
                 beq.s   loc_24F354
-                subq.b  #1,(byte_FFFD7B).l
-                clr.b   (byte_FFFD7C).l
+                subq.b  #1,(evil_cat_invul_timer).l
+                clr.b   (evil_cat_hit_pending).l
 loc_24F354:                             ; CODE XREF: sub_24F336+10   j
-                tst.b   (byte_FFFD7C).l
+                tst.b   (evil_cat_hit_pending).l
                 beq.s   locret_24F372
-                tst.b   (byte_FFFD7D).l
+                tst.b   (evil_cat_hp).l
                 beq.s   locret_24F372
-                subq.b  #1,(byte_FFFD7D).l
-                move.b  #$1E,(byte_FFFD7B).l
+                subq.b  #1,(evil_cat_hp).l
+                move.b  #$1E,(evil_cat_invul_timer).l
 locret_24F372:                          ; CODE XREF: sub_24F336+24   j
                                         ; sub_24F336+2C   j
                 rts
@@ -37747,9 +37747,9 @@ loc_24F396:                             ; CODE XREF: sub_24F336+62   j
                 adda.w  d7,a1
                 dbf     d0,loc_24F392
                 clr.b   (byte_FFFDFB).l
-                clr.b   (byte_FFFD78).l
+                clr.b   (evil_cat_phase1_active).l
 loc_24F3B0:                             ; CODE XREF: sub_24F336+44   j
-                cmpi.b  #9,(byte_FFFD7A).l
+                cmpi.b  #9,(evil_cat_souls_killed).l
                 beq.w   loc_24F4A0
                 tst.b   (camera_disable_value).l
                 bne.w   loc_24F3E6
@@ -37759,11 +37759,11 @@ loc_24F3B0:                             ; CODE XREF: sub_24F336+44   j
                 clr.w   (camera_target_y).l
                 st      (camera_disable_value).l
 loc_24F3E6:                             ; CODE XREF: sub_24F336+8C   j
-                tst.b   (byte_FFFD79).l
+                tst.b   (evil_cat_phase2_state).l
                 bne.s   loc_24F410
                 tst.b   (naked_worm_enable).l
                 bne.w   locret_24F49E
-                move.b  #1,(byte_FFFD79).l
+                move.b  #1,(evil_cat_phase2_state).l
                 move.b  #$27,(funchar_text_id).l ; '''
                 jsr     sub_24C6EE(pc)
                 bra.w   locret_24F49E
@@ -37775,10 +37775,10 @@ loc_24F410:                             ; CODE XREF: sub_24F336+B6   j
                 bra.w   locret_24F49E
 ; ---------------------------------------------------------------------------
 loc_24F422:                             ; CODE XREF: sub_24F336+E0   j
-                cmpi.b  #1,(byte_FFFD79).l
+                cmpi.b  #1,(evil_cat_phase2_state).l
                 bne.s   loc_24F43C
                 move.b  #4,(palette2_index).l
-                move.b  #2,(byte_FFFD79).l
+                move.b  #2,(evil_cat_phase2_state).l
 loc_24F43C:                             ; CODE XREF: sub_24F336+F4   j
                 jsr     random_function(pc)
                 andi.w  #$7F,d7
@@ -37950,9 +37950,9 @@ loc_24F664:                             ; CODE XREF: sub_24F644+22   j
                 dbf     d0,loc_24F660
                 clr.b   (byte_FFFE00).l
 loc_24F678:                             ; CODE XREF: sub_24F644+6   j
-                tst.b   (byte_FFFD76).l
+                tst.b   (butt_boss_debris_timer).l
                 beq.s   loc_24F6D6
-                subq.b  #1,(byte_FFFD76).l
+                subq.b  #1,(butt_boss_debris_timer).l
                 move.b  (frame_counter).l,d7
                 andi.b  #3,d7
                 bne.s   loc_24F6D6
@@ -38604,8 +38604,8 @@ sub_24FDB8:                             ; DATA XREF: ROM:0025BCAC   o
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$146,2(a5)
                 move.w  #$1C6,4(a5)
-                move.b  #$14,(byte_FFFD7E).l
-                move.b  #$14,(byte_FFFD7D).l
+                move.b  #$14,(evil_cat_hp_shown).l
+                move.b  #$14,(evil_cat_hp).l
                 jsr     find_free_obj_slot_ad06(pc)
                 bne.w   loc_24FEAC
                 lea     (stru_25AE5C).l,a6
@@ -38624,7 +38624,7 @@ sub_24FDB8:                             ; DATA XREF: ROM:0025BCAC   o
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$15C,2(a5)
                 move.w  #$14D,4(a5)
-                move.b  #1,(byte_FFFD78).l
+                move.b  #1,(evil_cat_phase1_active).l
                 bra.s   loc_24FEAC
 ; ---------------------------------------------------------------------------
 loc_24FE66:                             ; CODE XREF: sub_24FDB8+6   j
@@ -38639,7 +38639,7 @@ loc_24FE66:                             ; CODE XREF: sub_24FDB8+6   j
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$1B8,2(a5)
                 move.w  #$180,4(a5)
-                clr.b   (byte_FFFD78).l
+                clr.b   (evil_cat_phase1_active).l
 loc_24FEAC:                             ; CODE XREF: sub_24FDB8+20   j
                                         ; sub_24FDB8+4E   j ...
                 st      (naked_worm_enable).l
@@ -39334,7 +39334,7 @@ locret_250726:                          ; CODE XREF: spawn_down_fire+A   j
 
 
 spawn_continue_conditionally:                             ; DATA XREF: ROM:000051BC   o
-                tst.b   (byte_FFFD94).l
+                tst.b   (secret_continue_enabled).l
                 beq.w   nullsub_5
 spawn_continue:                             ; DATA XREF: ROM:000051B8   o
                 lea     (stru_25A9F4).l,a6
@@ -39358,7 +39358,7 @@ locret_250766:                          ; CODE XREF: spawn_continue_actived+A   
 
 
 spawn_live_conditionally:
-                tst.b   (byte_FFFD95).l
+                tst.b   (secret_life_enabled).l
                 beq.w   nullsub_5
 spawn_live:
                 cmpi.b  #$39,(jim_lives_count).l ; '9'
@@ -39371,7 +39371,7 @@ locret_250786:
 
 
 spawn_hp_atom_conditionally:
-                tst.b   (byte_FFFD96).l
+                tst.b   (secret_hp_atom_enabled).l
                 beq.w   nullsub_5
 spawn_hp_atom:
                 lea     (stru_25A964).l,a6
@@ -39381,7 +39381,7 @@ spawn_hp_atom:
 
 
 spawn_hp_molecule_conditionally:
-                tst.b   (byte_FFFD97).l
+                tst.b   (secret_hp_molecule_enabled).l
                 beq.w   nullsub_5
 spawn_hp_molecule:
                 lea     (stru_25A97C).l,a6
@@ -39391,7 +39391,7 @@ spawn_hp_molecule:
 
 
 spawn_gun_conditionally:
-                tst.b   (byte_FFFD98).l
+                tst.b   (secret_gun_enabled).l
                 beq.w   nullsub_5
 spawn_gun:
                 lea     (stru_25A9C4).l,a6
@@ -39401,7 +39401,7 @@ spawn_gun:
 
 
 spawn_plasma_gun_conditionally:
-                tst.b   (byte_FFFD99).l
+                tst.b   (secret_plasma_enabled).l
                 beq.w   nullsub_5
 spawn_plasma_gun:
                 cmpi.b  #9,(plasma_count_ammo).l
@@ -44284,9 +44284,9 @@ fire_to_queen_boss:                             ; DATA XREF: ROM:00003858   o
                 tst.b   (is_current_gun_plasma).l
                 beq.s   loc_2542AA
                 jsr     (spawn_hit_effect).l
-                cmpi.b  #$3C,(byte_FFFD9B).l ; '<'
+                cmpi.b  #$3C,(queen_boss_damage).l ; '<'
                 bcc.s   loc_254308
-                addq.b  #5,(byte_FFFD9B).l
+                addq.b  #5,(queen_boss_damage).l
                 move.b  #$86,(a2)
                 move.l  #off_1B1666,$20(a2)
                 clr.b   $37(a2)
@@ -44301,9 +44301,9 @@ loc_2542AA:                             ; CODE XREF: fire_to_queen_boss+6   j
                 move.b  #$86,(a2)
                 move.l  #off_1B1666,$20(a2)
                 clr.b   $37(a2)
-                cmpi.b  #$3C,(byte_FFFD9B).l ; '<'
+                cmpi.b  #$3C,(queen_boss_damage).l ; '<'
                 bcc.s   loc_254308
-                addq.b  #1,(byte_FFFD9B).l
+                addq.b  #1,(queen_boss_damage).l
                 rts
 ; End of function fire_to_queen_boss
 
@@ -44314,9 +44314,9 @@ jim_win_queen:                             ; DATA XREF: ROM:00003994   o
                 clr.b   $37(a2)
                 tst.b   1(a2)
                 beq.w   loc_254308
-                cmpi.b  #$3C,(byte_FFFD9B).l ; '<'
+                cmpi.b  #$3C,(queen_boss_damage).l ; '<'
                 bcc.s   loc_254308
-                addq.b  #3,(byte_FFFD9B).l
+                addq.b  #3,(queen_boss_damage).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_254308:                             ; CODE XREF: fire_to_queen_boss+16   j
@@ -44433,7 +44433,7 @@ loc_254486:                             ; CODE XREF: whip_to_butt_sub_boss+AA   
                 adda.w  #$56,a1 ; 'V'
                 dbf     d0,loc_25446C
                 movea.l (sp)+,a1
-                move.b  #$1E,(byte_FFFD76).l
+                move.b  #$1E,(butt_boss_debris_timer).l
                 rts
 ; End of function whip_to_butt_sub_boss
 
@@ -50708,10 +50708,10 @@ sub_259090:                             ; DATA XREF: collision_with_evil_cat_sou
 
 sub_2590A2:                             ; DATA XREF: ROM:stru_25AE44   o
                 clr.w   d0
-                move.b  (byte_FFFD7D).l,d0
-                cmp.b   (byte_FFFD7E).l,d0
+                move.b  (evil_cat_hp).l,d0
+                cmp.b   (evil_cat_hp_shown).l,d0
                 beq.w   locret_259104
-                move.b  d0,(byte_FFFD7E).l
+                move.b  d0,(evil_cat_hp_shown).l
                 bne.w   loc_2590E4
                 move.l  #off_1B3BC6,$20(a1)
                 clr.b   $37(a1)
@@ -50723,7 +50723,7 @@ sub_2590A2:                             ; DATA XREF: ROM:stru_25AE44   o
 ; ---------------------------------------------------------------------------
 loc_2590E4:                             ; CODE XREF: sub_2590A2+18   j
                 clr.w   d0
-                move.b  (byte_FFFD7E).l,d0
+                move.b  (evil_cat_hp_shown).l,d0
                 lsr.w   #2,d0
                 lsl.w   #2,d0
                 move.l  a6,-(sp)
@@ -50774,7 +50774,7 @@ whip_to_evil_cat_soul:                             ; DATA XREF: ROM:00003A24   o
                 beq.w   locret_259298
                 subq.b  #1,1(a2)
                 bne.w   locret_259298
-                addq.b  #1,(byte_FFFD7A).l
+                addq.b  #1,(evil_cat_souls_killed).l
                 clr.b   (a2)
                 jsr     (free_obj_vram_a2).l
                 tst.b   (sound_fx_enable).l
@@ -50803,12 +50803,12 @@ loc_2591D2:                             ; CODE XREF: fire_to_evil_cat_soul_boss+
                 move.b  9(a1),9(a5)
                 bset    #7,$3C(a5)
                 clr.w   d0
-                move.b  (byte_FFFD7A).l,d0
+                move.b  (evil_cat_souls_killed).l,d0
                 subq.w  #1,d0
                 lsl.w   #2,d0
                 lea     (off_C902).l,a6
                 move.l  (a6,d0.w),$20(a5)
-                cmpi.b  #9,(byte_FFFD7A).l
+                cmpi.b  #9,(evil_cat_souls_killed).l
                 bne.s   loc_259252
                 rts
 ; ---------------------------------------------------------------------------

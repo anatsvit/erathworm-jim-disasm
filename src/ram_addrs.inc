@@ -306,15 +306,15 @@ byte_FFFD70 equ $FFFFFD70
 byte_FFFD71 equ $FFFFFD71
 byte_FFFD72 equ $FFFFFD72
 word_FFFD74 equ $FFFFFD74
-byte_FFFD76 equ $FFFFFD76
-byte_FFFD77 equ $FFFFFD77
-byte_FFFD78 equ $FFFFFD78
-byte_FFFD79 equ $FFFFFD79
-byte_FFFD7A equ $FFFFFD7A
-byte_FFFD7B equ $FFFFFD7B
-byte_FFFD7C equ $FFFFFD7C
-byte_FFFD7D equ $FFFFFD7D
-byte_FFFD7E equ $FFFFFD7E
+butt_boss_debris_timer equ $FFFFFD76 ;Таймер обломков после победы над саб-боссом Buttville. $1E в whip_to_butt_sub_boss, в sub_24F644 -1 за кадр, раз в 4 кадра спавнит обломок stru_25B294 около X=$17CC
+ure_the_best_state equ $FFFFFD77 ;Фаза финального экрана ure_the_best_screen. Обнуляется при входе, промежуточные значения пишут анимационные скрипты. 7 + Start -> 8 (белая палитра, очистка plane A), $D - выход
+evil_cat_phase1_active equ $FFFFFD78 ;Evil the Cat: 1 при старте первой фазы (sub_24FDB8), 0 при переходе во вторую (sub_24F336, loc_24FE66). В коде не читается, видимо читается скриптами
+evil_cat_phase2_state equ $FFFFFD79 ;Evil the Cat, начало второй фазы (sub_24F336): 0 - ещё не было реплики (funchar_text_id=$27), 1 - после реплики, 2 - после таймера word_FFFD92 (palette2_index=4), дальше спавн огня
+evil_cat_souls_killed equ $FFFFFD7A ;Evil the Cat: число убитых кошачьих душ во второй фазе, 0..9. +1 в whip_to_evil_cat_soul, индекс в off_C902. При 9 - конец боя (sub_24F336)
+evil_cat_invul_timer equ $FFFFFD7B ;Evil the Cat: кулдаун после попадания, $1E кадров. Пока не 0, evil_cat_hit_pending обнуляется (sub_24F336)
+evil_cat_hit_pending equ $FFFFFD7C ;Evil the Cat: попадание. +1 делает скрипт byte_1ACEB6 объекта stru_25AE8C (anim_fireburn_5) командой $90 (sub_249936/loc_249970). Если не 0 и нет кулдауна - evil_cat_hp -1
+evil_cat_hp equ $FFFFFD7D ;Evil the Cat: здоровье первой фазы, $14 в sub_24FDB8. -1 за попадание в sub_24F336. При 0 - вторая фаза (sub_2590A2)
+evil_cat_hp_shown equ $FFFFFD7E ;Evil the Cat: последнее отображённое evil_cat_hp. sub_2590A2 при изменении выбирает анимацию off_C926[hp/4], при 0 ставит byte_FFFDE1/byte_FFFDFB/byte_FFFD5C
 word_FFFD80 equ $FFFFFD80
 word_FFFD82 equ $FFFFFD82
 byte_FFFD84 equ $FFFFFD84
@@ -329,14 +329,14 @@ psycrow_facing equ $FFFFFD8D ;Направление взгляда Psy-Crow: 0 
 word_FFFD8E equ $FFFFFD8E
 word_FFFD90 equ $FFFFFD90
 word_FFFD92 equ $FFFFFD92
-byte_FFFD94 equ $FFFFFD94
-byte_FFFD95 equ $FFFFFD95
-byte_FFFD96 equ $FFFFFD96
-byte_FFFD97 equ $FFFFFD97
-byte_FFFD98 equ $FFFFFD98
-byte_FFFD99 equ $FFFFFD99
-byte_FFFD9A equ $FFFFFD9A
-byte_FFFD9B equ $FFFFFD9B
+secret_continue_enabled equ $FFFFFD94 ;Флаг тайника континью. Ставится один раз в sub_24DBCC (вызов из скрипта объекта): звук $3C + объект stru_25A994 у Джима. Пока не 0, spawn_continue_conditionally создаёт континью
+secret_life_enabled equ $FFFFFD95 ;Флаг тайника жизни. Ставится один раз в sub_24DC1E (вызов из скрипта объекта). Пока не 0, spawn_live_conditionally создаёт жизнь
+secret_hp_atom_enabled equ $FFFFFD96 ;Флаг тайника атома здоровья. Ставится один раз в sub_24DC2E (вызов из скрипта объекта). Пока не 0, spawn_hp_atom_conditionally создаёт атом
+secret_hp_molecule_enabled equ $FFFFFD97 ;Флаг тайника молекулы здоровья. Ставится один раз в sub_24DC3E (вызов из скрипта объекта). Пока не 0, spawn_hp_molecule_conditionally создаёт молекулу
+secret_gun_enabled equ $FFFFFD98 ;Флаг тайника патронов. Ставится один раз в sub_24DC4E (вызов из скрипта объекта). Пока не 0, spawn_gun_conditionally создаёт патроны
+secret_plasma_enabled equ $FFFFFD99 ;Флаг тайника плазмы. Ставится один раз в sub_24DC60 (вызов из скрипта объекта). Пока не 0, spawn_plasma_gun_conditionally создаёт плазму (если plasma_count_ammo < 9)
+is_continue_screen equ $FFFFFD9A ;Флаг экрана континью (sub_24B638). $FF на время экрана, сбрасывается при выходе. Пока не 0, sub_249772 держит Джима в anim_jim_idle (jim_state = 4)
+queen_boss_damage equ $FFFFFD9B ;Урон боссу-королеве, 0..$3C. Плазма +5, обычный выстрел +1 (раз в 8 кадров), jim_win_queen +3. При $3C - победа (loc_254308)
 palette2_index equ $FFFFFD9C
 palette2_index_loaded equ $FFFFFD9D
 byte_FFFD9E equ $FFFFFD9E

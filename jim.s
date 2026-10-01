@@ -7192,9 +7192,9 @@ byte_1AC2F8:    dc.b $FF,$FF,$FF,$FF,$FE,$FF,$FE,  0,$FF,  0,$FF,  1,  0,  1,$FF
                 dc.l sub_256D2E
                 dc.b $82,  0
 byte_1AC342:    dc.b   0,  0,$84,$F7,  0,  0
-                                        ; DATA XREF: ROM:stru_25BA2C   o
+                                        ; DATA XREF: ROM:object_jim_on_rocket_fail   o
 byte_1AC348:    dc.b   1,  0,  1,  0,  1,  0,  1,  0,  1,  1,  1,  0,  1,  1,  1,  0,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1,  1,  0,  0,  0,$84,$77
-                                        ; DATA XREF: ROM:stru_25BA14   o
+                                        ; DATA XREF: ROM:object_jim_on_rocket_win   o
                 dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,$85,  0,$8C,  0
 byte_1AC376:    dc.b   3,  0,$8A,$A1,  0,$3D,  0,$84
                                         ; DATA XREF: ROM:001AC38A   o
@@ -7516,11 +7516,11 @@ byte_1ACB80:    dc.b   0,  6,$8A,$B2,  0,  4
                 dc.w $210
                 dc.l byte_1ACB80
                 dc.b $8B,  1
-                dc.l stru_25B9FC
+                dc.l object_water_after_fall
                 dc.b   0,$B0,  0,  0,  0,  0,  0,  0,  0,  0,$8B,  1
-                dc.l stru_25B9FC
+                dc.l object_water_after_fall
                 dc.b $20,$AF,  0,  0,  0,  0,  0,  0,  0,  0,$8B,  1
-                dc.l stru_25B9FC
+                dc.l object_water_after_fall
                 dc.b $10,$AE,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  0,  8,  0,  9
 byte_1ACBC2:    dc.b   0, $A,$8A,$B2,  0,  4
                                         ; DATA XREF: ROM:001ACBCA   o
@@ -11718,7 +11718,7 @@ word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
                 dc.w $B
                 dc.w $EA00
                 dc.l off_1AE610
-jim_on_rocket_fail:     dc.w off_16F8           ; DATA XREF: ROM:stru_25BA2C   o
+jim_on_rocket_fail:     dc.w off_16F8           ; DATA XREF: ROM:object_jim_on_rocket_fail   o
                 dc.w $EEB1
                 dc.w off_16F8
                 dc.w $F35D
@@ -11898,7 +11898,7 @@ off_1AF7A4:     dc.w off_1A80           ; DATA XREF: ROM:001AF712   o
                 dc.w $EA00
                 dc.l anim_spacesuit
 off_1AF7E8:     dc.w off_16DC           ; DATA XREF: ROM:001AF804   o
-                                        ; ROM:stru_25BA14   o
+                                        ; ROM:object_jim_on_rocket_win   o
                 dc.w off_16DC
                 dc.w off_16E0
                 dc.w off_16E0
@@ -15036,7 +15036,7 @@ off_1B123C:     dc.w off_23E4           ; DATA XREF: ROM:001B126E   o
                 dc.l oksub_249568
                 dc.w $EC01
 anim_water_after_fall:dc.w off_2414     ; DATA XREF: ROM:stru_25AF4C   o
-                                        ; ROM:stru_25B9FC   o
+                                        ; ROM:object_water_after_fall   o
                 dc.w $F356
                 dc.w off_2414
                 dc.w off_2418
@@ -33052,10 +33052,10 @@ sub_24BBE6:                             ; CODE XREF: sub_24BBE0   p
                 movea.l a1,a5
 loc_24BC0A:                             ; CODE XREF: sub_24BBE6+14   j
                 movea.l (sp)+,a1
-                lea     (stru_25BA14).l,a6
+                lea     (object_jim_on_rocket_win).l,a6
                 tst.b   (andy_asteroids_race_result).l
                 bne.s   loc_24BC20
-                lea     (stru_25BA2C).l,a6
+                lea     (object_jim_on_rocket_fail).l,a6
 loc_24BC20:                             ; CODE XREF: sub_24BBE6+32   j
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  (jim_x).l,2(a5)
@@ -55691,7 +55691,7 @@ stru_25B9E4:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B9FC:    dc.b $86                ; obj_id
+object_water_after_fall:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ACB8E   o
                                         ; ROM:001ACB9E   o ...
                 dc.b 0                  ; health
@@ -55707,7 +55707,7 @@ stru_25B9FC:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25BA14:    dc.b $86                ; obj_id
+object_jim_on_rocket_win:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24BBE6+26   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55722,7 +55722,7 @@ stru_25BA14:    dc.b $86                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25BA2C:    dc.b $86                ; obj_id
+object_jim_on_rocket_fail:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24BBE6+34   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags

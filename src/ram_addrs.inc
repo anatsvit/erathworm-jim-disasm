@@ -86,7 +86,7 @@ jim_current_sprite_offset equ $FFFFA6E6
 jim_delta_x_speed equ $FFFFA6EA
 jim_y_speed equ $FFFFA6EC
 jim_ropejumper_obj_delta_y equ $FFFFA6EF ; смещение Джима по Y за кадр (obj+$1D), уровень с соплей/верёвкой
-jim_obj_tile_offset equ $FFFFA6F0
+jim_obj_sprite_attr equ $FFFFA6F0 ; атрибуты спрайта Джима (obj+$1E): бит 15 - приоритет, 13-14 - строка палитры
 jim_anim_offset equ $FFFFA6F2
 jim_obj_script_delay equ $FFFFA708
 jim_idle_anim_delay equ $FFFFA709

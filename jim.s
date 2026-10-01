@@ -3900,19 +3900,19 @@ byte_1A2D94:    dc.b   0,  3,  0,  2,  0,  1,$84,$82,  0,  0,  0,$FF,  0,  0,  0
                                         ; collision_with_diamond+266   o
 byte_1A2DB4:    dc.b   0,  0,$8B,  0    ; DATA XREF: ROM:001A2E7A   o
                                         ; fire_to_chicken_fly_boss+44   o ...
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,  0,  0,  0,  0,  0,$FF,$8B,  0
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,$8B,  0
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,  0,$8B,  0
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,$8B,  0
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,$8B,  0
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  0,  0,  1,  0,  0,$8B,  0
-                dc.l stru_25BAA4
+                dc.l object_prize_stars
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,$80,  0
                 dc.l byte_1A2DB4
 byte_1A2E7E:    dc.b   0,  0,  0,  0,  0,$FF,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF
@@ -7258,7 +7258,7 @@ byte_1AC43A:    dc.b $8A,$21            ; DATA XREF: ROM:001AC430   o
                 dc.l byte_1AC3A0
 byte_1AC454:    dc.b   0,$FF,$FF,$FF,  0,$FE,$FF,$FF,  0,$FF,$84,$84,$FF,$FF,  0,$FF,$84,$85,$FF,$FF,  0,$FF,$FF,$FF,$FF,$FF,  0,$FF,$FF,$FF,$FF,$FF
                                         ; DATA XREF: ROM:001AC596   o
-                                        ; ROM:stru_25BB04   o
+                                        ; ROM:object_psyq_boss   o
                 dc.b $FF,  0,  0,$FF,$FF,$FF,$FF,$FF,  0,$FF,$FF,  0,$FF,$FF,$FF,$FF,$FF,  0,$FF,$FF,$FF,  0,$FF,$FF,$FF,  0,$FF,$FF,$FF,  0,$FF,$FF
                 dc.b $84,$82,$FF,  0,$FE,$FF,$84,$82,$FF,  0,$FE,  0,$84,$82,$FF,  0,$FE,  0,$FF,  0,$FF,  0,$FE,  0,$FF,  0,$FF,  1,$FF,  0,$FF,  1
                 dc.b $FF,  0,$84,$82,$FF,  1,  0,  0,$FF,  1,$FF,  1,$FF,  2,  0,  1,$FF,  1,$FF,  1,  0,  1,$FF,  2,$FF,  1,  0,  1,$FF,  2,$FF,  1
@@ -7279,7 +7279,7 @@ byte_1AC5B0:    dc.b   2,$FD,$90,$42,  0,$18,  0,$50,$8A,$C2,  0,  4,  0,$80
                 dc.b $84,$BB,  0,  0,$8C,  0
 byte_1AC5C8:    dc.b   0,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001AC5CE   o
-                                        ; ROM:stru_25BB1C   o
+                                        ; ROM:object_psyq_hook   o
                 dc.l byte_1AC5C8
                 dc.b $89,$2D,$91,  0
                 dc.l oksub_2495DE
@@ -7605,7 +7605,7 @@ byte_1ACD54:    dc.b   0,$FF,  0,$FF,  0,  0,$FF,$FF,  0,$FF,  0,$FF,  0,  0,  0
                 dc.b   1,  0,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,$FF,  1,$FF,  0,  0,  0,$FF,  0,$FF,$80,  0
                 dc.l byte_1ACD54
 byte_1ACE4E:    dc.b   0,$FF,$84,$82,  0,$FE,$84,$82,  0,$FD,$84,$82,  0,$FC,$84,$82,  0,$FB,$84,$82,  0,$FA,$84,$82,  0,$F9
-                                        ; DATA XREF: ROM:stru_25BAA4   o
+                                        ; DATA XREF: ROM:object_prize_stars   o
 byte_1ACE68:    dc.b   0,$F8,$80,  0    ; DATA XREF: ROM:001ACE6C   o
                 dc.l byte_1ACE68
 byte_1ACE70:    dc.b   1,  0,$90,$42,  0,$1A,  0,$32,$88,$84,  0,  7
@@ -7686,7 +7686,7 @@ byte_1ACF6A:    dc.b   0,$FF,  1,$FF,  1,$FF,  0,$FF,  1,$FF,  0,$FF,  1,$FF,  0
                 dc.l byte_1ACF6A
 byte_1ACFDA:    dc.b   0,$FD,  0,$FD,  0,$FD,$FF,$FD,  0,$FD,$FF,$FD,  0,$FD,$84,$82,$FF,$FD,  0,$FE,$FF,$FD,$FF,$FD,$FE,$FD,$FF,$FE,$FF,$FD,$FF,$FD
                                         ; DATA XREF: ROM:001AD190   o
-                                        ; ROM:stru_25BAEC   o
+                                        ; ROM:object_moving_platform   o
                 dc.b $FE,$FE,$FF,$FD,$FE,$FD,$FE,$FE,$FF,$FD,$FE,$FE,$FE,$FD,$FE,$FE,$FE,$FD,$FE,$FE,$FE,$FE,$FE,$FD,$84,$83,$FE,$FE,$FD,$FE,$FE,$FE
                 dc.b $FD,$FF,$FE,$FE,$FD,$FE,$FD,$FF,$FD,$FE,$FD,$FE,$FD,$FF,$FD,$FF,$FD,$FE,$FC,$FF,$FD,$FE,$84,$87,$FD,$FF,$FD,  0,$FD,$FF,$FD,$FF
                 dc.b $FC,  0,$FD,  0,$FC,$FF,$FD,  0,$FC,  0,$FD,  0,$FC,  0,$FC,  0,$FD,  0,$FD,  0,$FC,  0,$FD,  1,$FC,  0,$FD,  0,$FD,  1,$FD,  1
@@ -8176,7 +8176,7 @@ anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1F9C
                 dc.w off_1F9C
                 dc.w $F500
-                dc.l stru_25BB64
+                dc.l object_intestinal_wheel
                 dc.w $120A
                 dc.l off_1B6206
                 dc.l 0
@@ -8647,7 +8647,7 @@ off_1ADBB2:     dc.w off_2F74           ; DATA XREF: sub_259DFE+548   o
                 dc.w off_2FA0
                 dc.w off_2FA4
                 dc.w off_2FA4
-off_1ADBE4:     dc.w off_2F74           ; DATA XREF: ROM:stru_25BBAC   o
+off_1ADBE4:     dc.w off_2F74           ; DATA XREF: ROM:object_joystick_cable   o
                 dc.w $EC01
 off_1ADBE8:     dc.w off_2F60           ; DATA XREF: sub_259DFE+53E   o
                 dc.w off_2F60
@@ -8665,7 +8665,7 @@ off_1ADBE8:     dc.w off_2F60           ; DATA XREF: sub_259DFE+53E   o
                 dc.w off_2F6C
                 dc.w off_2F6C
                 dc.w off_2F6C
-off_1ADC08:     dc.w off_2F60           ; DATA XREF: ROM:stru_25BB94   o
+off_1ADC08:     dc.w off_2F60           ; DATA XREF: ROM:object_joystick_buttons   o
                 dc.w $EC01
 stru_1ADC0C:    dc.l off_1ADC9C         ; field_0
                                         ; DATA XREF: chain_move_left+E   o
@@ -13132,7 +13132,7 @@ off_1B0182:     dc.w off_1A0C           ; DATA XREF: ROM:001B016E   o
 anim_live:      dc.w off_2450           ; DATA XREF: ROM:stru_25A9AC   o
                 dc.w $EC01
 off_1B01BC:     dc.w off_978            ; DATA XREF: ROM:001A36F6   o
-                                        ; ROM:stru_25BAA4   o
+                                        ; ROM:object_prize_stars   o
                 dc.w off_97C
                 dc.w off_980
                 dc.w off_984
@@ -19387,7 +19387,7 @@ anim_star:     dc.w off_870            ; DATA XREF: ROM:stru_25B804   o
                 dc.w off_898
                 dc.w off_898
                 dc.w $F600
-off_1B37A8:     dc.w off_9B0            ; DATA XREF: ROM:stru_25BA5C   o
+off_1B37A8:     dc.w off_9B0            ; DATA XREF: ROM:object_explosion_with_spiral   o
                 dc.w $F500
                 dc.l stru_25A8A4
                 dc.w off_C0C
@@ -21253,7 +21253,7 @@ off_1B4736:     dc.w off_2A10           ; DATA XREF: ROM:0000C9EE   o
                 dc.w off_2A10
                 dc.w $F345
                 dc.w $F500
-                dc.l stru_25BB1C
+                dc.l object_psyq_hook
                 dc.w $1600
                 dc.l anim_psyq_hook
                 dc.l 0
@@ -21274,7 +21274,7 @@ off_1B4766:     dc.w off_2A1C           ; DATA XREF: ROM:0000C9EA   o
                 dc.w off_2A1C
                 dc.w $F345
                 dc.w $F500
-                dc.l stru_25BB1C
+                dc.l object_psyq_hook
                 dc.w off_20F0
                 dc.l off_1B48EC
                 dc.l 0
@@ -21295,7 +21295,7 @@ off_1B4796:     dc.w off_2A28           ; DATA XREF: ROM:off_C9E6   o
                 dc.w off_2A28
                 dc.w $F345
                 dc.w $F500
-                dc.l stru_25BB1C
+                dc.l object_psyq_hook
                 dc.w off_28D8
                 dc.l off_1B48A0
                 dc.l 0
@@ -21438,7 +21438,7 @@ off_1B48B8:     dc.w off_34D0           ; DATA XREF: ROM:001B48AE   o
                 dc.w $EA00
                 dc.l off_1B48B8
 anim_psyq_hook:     dc.w off_34F0           ; DATA XREF: ROM:001B4744   o
-                                        ; ROM:stru_25BB1C   o
+                                        ; ROM:object_psyq_hook   o
                 dc.w $ED12
                 dc.w $1A
                 dc.w $300
@@ -23709,7 +23709,7 @@ off_1B5F70:     dc.w off_C9C            ; DATA XREF: sub_24C526+A8   o
                 dc.w off_CC4
                 dc.w off_CC8
                 dc.w $EC01
-off_1B5FB4:     dc.w off_CC8            ; DATA XREF: ROM:stru_25BA44   o
+off_1B5FB4:     dc.w off_CC8            ; DATA XREF: ROM:object_continue_tin_can   o
                 dc.w $EC01
 off_1B5FB8:     dc.w off_CCC            ; DATA XREF: sub_24B638:loc_24B7D4   o
                 dc.w off_CCC
@@ -23785,7 +23785,7 @@ off_1B6016:     dc.w off_864            ; DATA XREF: whip_to_chicken_boss_lever:
                 dc.w $EC01
 off_1B604A:     dc.w off_864            ; DATA XREF: sub_254E48:loc_254E7A   o
                 dc.w $EC01
-anim_bomb_2:     dc.w off_34B8           ; DATA XREF: ROM:stru_25BA74   o
+anim_bomb_2:     dc.w off_34B8           ; DATA XREF: ROM:object_bomb   o
                 dc.w $EE86
                 dc.w off_34B8
                 dc.w $ED11
@@ -23951,7 +23951,7 @@ off_1B617E:     dc.w off_7DC            ; DATA XREF: ROM:001ACE84   o
 anim_aquarium_column:     dc.w off_7F4            ; DATA XREF: ROM:stru_25B654   o
                 dc.w $EC01
 anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
-                                        ; ROM:stru_25BAEC   o
+                                        ; ROM:object_moving_platform   o
                 dc.w off_2C4C
                 dc.w off_2C4C
                 dc.w off_2C50
@@ -23965,7 +23965,7 @@ anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                 dc.w off_2C60
                 dc.w $EA00
                 dc.l anim_moving_platform
-off_1B61C0:     dc.w off_2CF8           ; DATA XREF: ROM:stru_25BAD4   o
+off_1B61C0:     dc.w off_2CF8           ; DATA XREF: ROM:object_platform_queen_butt   o
                 dc.w $EC01
 off_1B61C4:     dc.w off_2EA0           ; DATA XREF: ROM:stru_25B78C   o
                 dc.w $F072
@@ -23978,10 +23978,10 @@ off_1B61D6:     dc.w off_2F30           ; DATA XREF: ROM:001B61C8   o
                 dc.w $EC01
 off_1B61DA:     dc.w off_2F38           ; DATA XREF: ROM:001B61CE   o
                 dc.w $EC01
-anim_advanced_home:     dc.w off_974            ; DATA XREF: ROM:stru_25BB34   o
+anim_advanced_home:     dc.w off_974            ; DATA XREF: ROM:object_advanced_home   o
                 dc.w $EC01
 anim_petes_home_door:     dc.w off_264C           ; DATA XREF: ROM:001B61F2   o
-                                        ; ROM:stru_25BB4C   o
+                                        ; ROM:object_petes_home_door   o
                 dc.w $ED11
                 dc.w 9
                 dc.w $FF
@@ -24018,7 +24018,7 @@ off_1B6228:     dc.w off_20B8           ; DATA XREF: ROM:0025964C   o
                 dc.w $EC01
 off_1B622C:     dc.w off_20BC           ; DATA XREF: ROM:off_259648   o
                 dc.w $EC01
-anim_intestinal_ball:     dc.w off_20AC           ; DATA XREF: ROM:stru_25BB7C   o
+anim_intestinal_ball:     dc.w off_20AC           ; DATA XREF: ROM:object_intestinal_ball   o
                 dc.w $EA00
                 dc.l off_1B625C
 word_1B6238:    dc.w $FB00              ; DATA XREF: ROM:001B629A   o
@@ -25105,7 +25105,7 @@ loc_245B1E:                             ; CODE XREF: sub_245AE4+2E   j
                 move.l  #off_1ADFA0,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
                 clr.l   (jim_move_script_ptr).l
-                move.w  #$6000,(jim_obj_tile_offset).l
+                move.w  #$6000,(jim_obj_sprite_attr).l
                 jsr     (sub_24CD18).l
                 bra.w   loc_245BD6
 ; ---------------------------------------------------------------------------
@@ -31903,37 +31903,56 @@ loc_24ADE8:                             ; CODE XREF: count_obj_slots_by_id+12   
 
 
 ; При отключении нет спрайтов и объектов на уровнях
+; Копирует шаблон объекта (master_sprite, $18 байт) из ROM в слот объекта в RAM,
+; остальные поля слота обнуляет.
+; a6 = шаблон master_sprite, a5 = слот объекта
+;
+; master_sprite        шаблон   объект
+;   obj_id          +$00 -> +$00  ID/тип объекта, 0 = слот свободен
+;   health          +$01 -> +$01  здоровье, уменьшается при попадании
+;   obj_flags       +$02 -> +$06  флаги объекта (как jim_obj_flags)
+;   draw_flags      +$03 -> +$07  флаги отрисовки (как jim_obj_draw_flags)
+;   skipped_1       +$04          не копируется
+;   flip_x          +$05 -> +$09  отражение по X / смотрит влево (как is_jim_left_direction)
+;   move_script     +$06 -> +$0A  указатель на move-скрипт (как jim_move_script_ptr)
+;   sprite_attr     +$0A -> +$1E  атрибуты спрайта: бит 15 - приоритет, 13-14 - строка палитры (как jim_obj_sprite_attr)
+;   anim_address    +$0C -> +$20  указатель на анимацию (как jim_anim_offset)
+;   vram_blocks     +$10 -> +$29  сколько блоков vram_alloc_table занимает объект
+;   flip_y          +$11 -> +$35  отражение по Y (вверх ногами)
+;   behavior_flags  +$12 -> +$3C  битовые флаги поведения (бит 3 - проверка карты под объектом, ...)
+;   skipped_2       +$13          не копируется
+;   update_proc     +$14 -> +$42  обработчик объекта, вызывается каждый кадр из sub_24A766
 load_sprite_struct:                     ; CODE XREF: jim_fire:loc_245FBA   p
                                         ; jim_fire+266   p ...
-                move.b  (a6)+,(a5)
-                move.b  (a6)+,1(a5)
-                move.b  (a6)+,6(a5)
-                move.b  (a6)+,7(a5)
+                move.b  (a6)+,(a5)      ; obj_id
+                move.b  (a6)+,1(a5)     ; health
+                move.b  (a6)+,6(a5)     ; obj_flags
+                move.b  (a6)+,7(a5)     ; draw_flags
                 clr.b   8(a5)
-                addq.l  #1,a6
-                move.b  (a6)+,9(a5)
-                move.l  (a6)+,10(a5)
+                addq.l  #1,a6           ; skipped_1
+                move.b  (a6)+,9(a5)     ; flip_x
+                move.l  (a6)+,10(a5)    ; move_script
                 clr.b   19(a5)
                 clr.l   20(a5)
                 clr.w   24(a5)
                 clr.w   26(a5)
                 clr.b   28(a5)
                 clr.b   29(a5)
-                move.w  (a6)+,30(a5)
-                move.l  (a6)+,32(a5)
-                move.b  (a6)+,41(a5)
+                move.w  (a6)+,30(a5)    ; sprite_attr
+                move.l  (a6)+,32(a5)    ; anim_address
+                move.b  (a6)+,41(a5)    ; vram_blocks
                 clr.l   42(a5)
                 clr.l   46(a5)
                 clr.w   50(a5)
                 clr.b   52(a5)
-                move.b  (a6)+,53(a5)
+                move.b  (a6)+,53(a5)    ; flip_y
                 clr.b   54(a5)
                 clr.b   55(a5)
-                move.b  (a6)+,60(a5)
+                move.b  (a6)+,60(a5)    ; behavior_flags
                 clr.b   61(a5)
                 clr.l   62(a5)
-                addq.l  #1,a6
-                move.l  (a6)+,66(a5)
+                addq.l  #1,a6           ; skipped_2
+                move.l  (a6)+,66(a5)    ; update_proc
                 clr.b   70(a5)
                 clr.l   72(a5)
                 clr.w   80(a5)
@@ -33661,7 +33680,7 @@ sub_24C4E4:                             ; CODE XREF: sub_24B638+A6   p
 loc_24C4FE:                             ; CODE XREF: sub_24C4E4+38   j
                 bsr.w   find_free_obj_slot_ad06
                 bne.w   loc_24C520
-                lea     (stru_25BA44).l,a6
+                lea     (object_continue_tin_can).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  d3,2(a5)
                 move.w  d4,4(a5)
@@ -36824,7 +36843,7 @@ loc_24E70C:                             ; CODE XREF: sub_24E6C8+96   j
                 addq.b  #3,d7
                 move.b  d7,$55(a5)
 loc_24E72A:                             ; CODE XREF: sub_24E6C8+52   j
-                lea     (stru_25BAD4).l,a6
+                lea     (object_platform_queen_butt).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  d2,2(a5)
                 move.w  d3,4(a5)
@@ -37091,7 +37110,7 @@ teleport:                             ; CODE XREF: activity_teleport_toilet+A   
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24EA68:                             ; CODE XREF: activity_teleport_toilet+160   j
-                move.w  #$6000,(jim_obj_tile_offset).l
+                move.w  #$6000,(jim_obj_sprite_attr).l
                 jsr     destroy_objects_except_jim(pc)
 loc_24EA74:                             ; CODE XREF: activity_teleport_toilet+194   j
                 jsr     (sub_24EB7A).l
@@ -39079,7 +39098,7 @@ locret_250498:                          ; CODE XREF: sub_250436+56   j
 
 
 sub_25049A:                             ; DATA XREF: ROM:0025C2EC   o
-                lea     (stru_25BB04).l,a6
+                lea     (object_psyq_boss).l,a6
                 lea     (obj_01).l,a5
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$200,2(a5)
@@ -39100,7 +39119,7 @@ sub_25049A:                             ; DATA XREF: ROM:0025C2EC   o
 sub_2504E6:                             ; DATA XREF: ROM:0025C1AC   o
                                         ; ROM:0025C1EC   o ...
                 st      (is_jim_blocked_by_enemy).l
-                move.w  #$4000,(jim_obj_tile_offset).l
+                move.w  #$4000,(jim_obj_sprite_attr).l
                 jsr     sub_24BE54(pc)
                 clr.b   (jim_obj_id).l
                 move.b  #0,(is_jim_left_direction).l
@@ -39130,7 +39149,7 @@ locret_250538:                          ; CODE XREF: spawn_sea_gate+6   j
 
 
 spawn_petes_home_door:                             ; DATA XREF: ROM:00005540   o
-                lea     (stru_25BB4C).l,a6
+                lea     (object_petes_home_door).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_25054E
                 addq.w  #8,2(a5)
@@ -39752,7 +39771,7 @@ locret_250AE0:                          ; CODE XREF: spawn_queen_boss+3A   j
 spawn_moving_platform:                             ; DATA XREF: ROM:000054DC   o
                 tst.b   (is_queen_butt_defeated).l
                 beq.s   locret_250AFE
-                lea     (stru_25BAEC).l,a6
+                lea     (object_moving_platform).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_250AFE
                 move.b  #6,(palette2_index).l
@@ -39765,7 +39784,7 @@ locret_250AFE:                          ; CODE XREF: spawn_moving_platform+6   j
 spawn_moving_platform_right:                             ; DATA XREF: ROM:000054E0   o
                 tst.b   (is_queen_butt_defeated).l
                 beq.s   locret_250B24
-                lea     (stru_25BAEC).l,a6
+                lea     (object_moving_platform).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_250B24
                 move.b  #6,(palette2_index).l
@@ -39777,7 +39796,7 @@ locret_250B24:                          ; CODE XREF: spawn_moving_platform_right
 
 
 spawn_advanced_home:                             ; DATA XREF: ROM:000054F4   o
-                lea     (stru_25BB34).l,a6
+                lea     (object_advanced_home).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_advanced_home
@@ -44802,7 +44821,7 @@ oksub_2548E8:                           ; CODE XREF: collision_with_flying_bomb:
                                         ; DATA XREF: ...
                 jsr     (find_free_obj_slot_ad1e).l
                 bne.s   locret_25490C
-                lea     (stru_25BA5C).l,a6
+                lea     (object_explosion_with_spiral).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),d7
                 move.w  d7,2(a5)
@@ -44849,7 +44868,7 @@ loc_25495C:                             ; CODE XREF: fire_to_chicken_fly_boss+16
 loc_25497E:                             ; CODE XREF: fire_to_chicken_fly_boss+54   j
                 jsr     (find_free_obj_slot_ad66).l
                 bne.s   loc_2549AC
-                lea     (stru_25BA74).l,a6
+                lea     (object_bomb).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 bset    #1,$3C(a5)
                 move.l  #byte_1A2DB4,$A(a5)
@@ -50863,7 +50882,7 @@ loc_2592E6:                             ; CODE XREF: sub_2592B6+26   j
 ; End of function sub_2592B6
 
 
-sub_2592EC:                             ; DATA XREF: ROM:stru_25BB04   o
+sub_2592EC:                             ; DATA XREF: ROM:object_psyq_boss   o
                 movem.l d0-d5/a2,-(sp)
                 tst.b   (psycrow_invul_timer).l
                 beq.s   loc_2592FE
@@ -51146,7 +51165,7 @@ off_259648:     dc.l off_1B622C         ; DATA XREF: sub_259658+8   o
                 dc.l anim_intestinal_wheel
 
 
-sub_259658:                             ; DATA XREF: ROM:stru_25BB64   o
+sub_259658:                             ; DATA XREF: ROM:object_intestinal_wheel   o
                 move.w  2(a1),d7
                 andi.w  #$C,d7
                 lea     off_259648(pc),a5
@@ -51252,10 +51271,10 @@ loc_25975E:                             ; CODE XREF: sub_259746+24   j
 loc_25976C:                             ; CODE XREF: sub_259746+20   j
                 jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_2597A6
-                lea     (stru_25BB7C).l,a6
+                lea     (object_intestinal_ball).l,a6
                 cmpi.b  #1,(a0)
                 beq.s   loc_259786
-                lea     (stru_25BB64).l,a6
+                lea     (object_intestinal_wheel).l,a6
 loc_259786:                             ; CODE XREF: sub_259746+38   j
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a0),2(a5)
@@ -52181,12 +52200,12 @@ loc_25A180:                             ; CODE XREF: sub_259DFE+324   j
                 jsr     (joypad_reconfig).l ; Вызывается в options (связана с joypad настройкой)
                 jsr     (sub_25A4BA).l
                 lea     (obj_01).l,a5
-                lea     (stru_25BB94).l,a6
+                lea     (object_joystick_buttons).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$144,2(a5)
                 move.w  #$168,4(a5)
                 lea     (obj_02).l,a5
-                lea     (stru_25BBAC).l,a6
+                lea     (object_joystick_cable).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$11D,2(a5)
                 move.w  #$123,4(a5)
@@ -52439,3528 +52458,3528 @@ loc_25A60A:                             ; CODE XREF: sub_25A4FE+BA   j
                 rts
 ; End of function sub_25A4FE
 ; ---------------------------------------------------------------------------
-stru_25A634:    dc.b $85                ; field_0
+stru_25A634:    dc.b $85                ; obj_id
                                         ; DATA XREF: sub_2478C8+6   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_idle      ; anim_address
-                dc.b $14                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $14                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A64C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A64C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_259DFE+AE   o
-                dc.b 0                  ; field_1 ; on sega logo
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health ; on sega logo
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $E000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $E000              ; sprite_attr
                 dc.l anim_jim_strong    ; anim_address
-                dc.b $14                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $14                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A664:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A664:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AE01A   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $E000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $E000              ; sprite_attr
                 dc.l anim_explosion     ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A67C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A67C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ADFC2   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $E000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $E000              ; sprite_attr
                 dc.l anim_sparks        ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_spacesuit:    dc.b $69                ; field_0
+                dc.l off_0              ; update_proc
+object_spacesuit:    dc.b $69                ; obj_id
                                         ; DATA XREF: spawn_spacesuit   o
                                         ; collision_with_fan+9E   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC396        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC396        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_spacesuit     ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_groovy:  dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_groovy:  dc.b $86                ; obj_id
                                         ; DATA XREF: show_groovy_screen+86   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_groovy        ; anim_address
-                dc.b $A                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $A                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-                dc.b $86                ; field_0
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.l off_0              ; update_proc
+                dc.b $86                ; obj_id
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_plasma_shot   ; anim_address
-                dc.b $B                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $B                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; proc_address
-stru_25A6DC:    dc.b $95                ; field_0
+                dc.l sub_2521C2         ; update_proc
+stru_25A6DC:    dc.b $95                ; obj_id
                                         ; DATA XREF: ROM:001AE1FE   o
                                         ; ROM:001AE7B4   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_plasma_shot   ; anim_address
-                dc.b $B                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $B                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; proc_address
-stru_25A6F4:    dc.b $86                ; field_0
+                dc.l sub_2521C2         ; update_proc
+stru_25A6F4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AE7E8   o
                                         ; ROM:001AE878   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_gunfire       ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; proc_address
-stru_25A70C:    dc.b $86                ; field_0
+                dc.l sub_2521C2         ; update_proc
+stru_25A70C:    dc.b $86                ; obj_id
                                         ; DATA XREF: jim_fire+260   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_gunfire_2     ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A724:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A724:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AE80A   o
                                         ; ROM:001AE89A   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3A70        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3A70        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_shell_casing  ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A73C:    dc.b $7B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A73C:    dc.b $7B                ; obj_id
                                         ; DATA XREF: jim_fire:loc_245FA6   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_air_part      ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; proc_address
-stru_25A754:    dc.b $7B                ; field_0
+                dc.l sub_2521C2         ; update_proc
+stru_25A754:    dc.b $7B                ; obj_id
                                         ; DATA XREF: jim_fire+164   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_air_part_2    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; proc_address
-stru_25A76C:    dc.b $6D                ; field_0
+                dc.l sub_2521C2         ; update_proc
+stru_25A76C:    dc.b $6D                ; obj_id
                                         ; DATA XREF: sub_250842   o
                                         ; sub_25084E   o ...
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A44C2        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A44C2        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_air_part_3    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A784:    dc.b $6D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A784:    dc.b $6D                ; obj_id
                                         ; DATA XREF: sub_250836   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4520        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4520        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_air_part_4    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A79C:    dc.b $6D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A79C:    dc.b $6D                ; obj_id
                                         ; DATA XREF: ROM:001B0C66   o
-                dc.b 0                  ; field_1
-                dc.b $81                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $81                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4510        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4510        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fireburn      ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A7B4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A7B4:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_chain_fire_to_right   o
                                         ; spawn_chain_fire_to_left   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fireburn_2    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_hook:    dc.b $A                 ; field_0
+                dc.l off_0              ; update_proc
+object_hook:    dc.b $A                 ; obj_id
                                         ; DATA XREF: spawn_hook   o
                                         ; spawn_hook_2   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_hook_briliance; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A7E4:    dc.b $B                 ; field_0
+                dc.l off_0              ; update_proc
+stru_25A7E4:    dc.b $B                 ; obj_id
                                         ; DATA XREF: spawn_valve_gifter   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_hook_briliance; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_run_here:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_run_here:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_run_here   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_run_here      ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A814:    dc.b $87                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A814:    dc.b $87                ; obj_id
                                         ; DATA XREF: sub_24C710:loc_24C79E   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $A000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $A000              ; sprite_attr
                 dc.l off_0              ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-                dc.b $86                ; field_0
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.l off_0              ; update_proc
+                dc.b $86                ; obj_id
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_0              ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A844:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A844:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AE576   o
                                         ; ROM:001AE59E   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_dust          ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A85C:    dc.b $90                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A85C:    dc.b $90                ; obj_id
                                         ; DATA XREF: ROM:001AED20   o
                                         ; ROM:001AED82   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_whip_air_fx   ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A874:    dc.b $91                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A874:    dc.b $91                ; obj_id
                                         ; DATA XREF: ROM:001B1D98   o
                                         ; ROM:001B1DB2   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_air_fx        ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A88C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A88C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001A4060   o
                                         ; ROM:001A4070   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_dust_2        ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A8A4:    dc.b $8A                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A8A4:    dc.b $8A                ; obj_id
                                         ; DATA XREF: ROM:001A3EDC   o
                                         ; ROM:001A3EEC   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_bullet_explode; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A8BC:    dc.b $8A                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A8BC:    dc.b $8A                ; obj_id
                                         ; DATA XREF: ROM:001A4FDE   o
                                         ; ROM:001A5012   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_spiral_explode; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A8D4:    dc.b $4E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A8D4:    dc.b $4E                ; obj_id
                                         ; DATA XREF: ROM:001A5614   o
                                         ; ROM:001A563C   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_explosion_sparks; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A8EC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A8EC:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B3F8E   o
                                         ; ROM:001B3F9E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_sparks_2      ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A904:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A904:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001A39B8   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_explosion_2   ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A91C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A91C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AF04A   o
                                         ; ROM:001AF07A   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3FD4        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3FD4        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_rock          ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A934:    dc.b $4D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A934:    dc.b $4D                ; obj_id
                                         ; DATA XREF: ROM:001A2B7A   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4616        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4616        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_anvil         ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A94C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A94C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_25475E+16   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3396        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3396        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_health_atom   ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A964:    dc.b $51                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A964:    dc.b $51                ; obj_id
                                         ; DATA XREF: spawn_hp_atom_conditionally:spawn_hp_atom   o
                                         ; ROM:prize_faucet_objects_table   o ...
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A33E4        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A33E4        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_health_atom   ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A97C:    dc.b $52                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A97C:    dc.b $52                ; obj_id
                                         ; DATA XREF: spawn_hp_molecule_conditionally:spawn_hp_molecule   o
                                         ; ROM:0025562C   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_health_molecule; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A994:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A994:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24DBCC+36   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC8CA        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC8CA        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_stars         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A9AC:    dc.b $50                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A9AC:    dc.b $50                ; obj_id
                                         ; DATA XREF: spawn_live+A   o
                                         ; ROM:00255634   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_live          ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A9C4:    dc.b $53                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A9C4:    dc.b $53                ; obj_id
                                         ; DATA XREF: spawn_gun_conditionally:spawn_gun   o
                                         ; fire_to_chicken_fly_boss+38   o ...
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_gun           ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A9DC:    dc.b $54                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A9DC:    dc.b $54                ; obj_id
                                         ; DATA XREF: spawn_plasma_gun_conditionally+14   o
                                         ; sub_254CB2+7C   o ...
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_plasma_gun    ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25A9F4:    dc.b $4F                ; field_0
+                dc.l off_0              ; update_proc
+stru_25A9F4:    dc.b $4F                ; obj_id
                                         ; DATA XREF: spawn_continue_conditionally:spawn_continue   o
                                         ; spawn_continue_actived   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_continue      ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AA0C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AA0C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24E0C0+10   o
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_car_tire      ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-                dc.b $8F                ; field_0
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.l off_0              ; update_proc
+                dc.b $8F                ; obj_id
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_car_tire_2    ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AA3C:    dc.b $29                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AA3C:    dc.b $29                ; obj_id
                                         ; DATA XREF: spawn_cow+A   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_cow           ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l cow_launch         ; proc_address
-stru_25AA54:    dc.b $86                ; field_0
+                dc.l cow_launch         ; update_proc
+stru_25AA54:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_minicow_to_right+1A   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC804        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC804        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_cow_mini      ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AA6C:    dc.b $5E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AA6C:    dc.b $5E                ; obj_id
                                         ; DATA XREF: spawn_funicular_to_left_down   o
                                         ; spawn_funicular_to_right_down   o ...
-                dc.b 0                  ; field_1
-                dc.b $B1                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $B1                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_funicular     ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l funicular_end_falling         ; proc_address
-stru_25AA84:    dc.b $19                ; field_0
+                dc.l funicular_end_falling         ; update_proc
+stru_25AA84:    dc.b $19                ; obj_id
                                         ; DATA XREF: chuck_boss_magnet:loc_25633A   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_box           ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l box_on_magnet         ; proc_address
-stru_25AA9C:    dc.b $15                ; field_0
+                dc.l box_on_magnet         ; update_proc
+stru_25AA9C:    dc.b $15                ; obj_id
                                         ; DATA XREF: chuck_boss_magnet+3C   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_saxophone     ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l saxophone_on_magnet         ; proc_address
-stru_25AAB4:    dc.b $86                ; field_0
+                dc.l saxophone_on_magnet         ; update_proc
+stru_25AAB4:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24DCB2+4E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_magnet        ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l chuck_boss_magnet         ; proc_address
-stru_25AACC:    dc.b $86                ; field_0
+                dc.l chuck_boss_magnet         ; update_proc
+stru_25AACC:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24DCB2+26   o
-                dc.b 5                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 5                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC600        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC600        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_boss_chuck    ; anim_address
-                dc.b $E                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $E                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AAE4:    dc.b $6F                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AAE4:    dc.b $6F                ; obj_id
                                         ; DATA XREF: ROM:001ADB62   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4104        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4104        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_chuck_fish    ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AAFC:    dc.b $8D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AAFC:    dc.b $8D                ; obj_id
                                         ; DATA XREF: sub_24DEF2:loc_24DF84   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_bucket        ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AB14:    dc.b $14                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AB14:    dc.b $14                ; obj_id
                                         ; DATA XREF: sub_24DEF2+54   o
-                dc.b $A                 ; field_1 ; Что-то связанное с боссом ведром на NJC
-                dc.b $21                ; field_2
-                dc.b $20                ; field_3
+                dc.b $A                 ; health ; Что-то связанное с боссом ведром на NJC
+                dc.b $21                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A282A        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A282A        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown       ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2522D0         ; proc_address
-stru_25AB2C:    dc.b $2C                ; field_0
+                dc.l sub_2522D0         ; update_proc
+stru_25AB2C:    dc.b $2C                ; obj_id
                                         ; DATA XREF: spawn_fridge+A   o
-                dc.b 2                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 2                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_fridge        ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l fridge_fall         ; proc_address
-stru_25AB44:    dc.b $86                ; field_0
+                dc.l fridge_fall         ; update_proc
+stru_25AB44:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_tree_trampoline   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_tree_trampoline; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_dog:    dc.b 2                  ; field_0
+                dc.l off_0              ; update_proc
+object_dog:    dc.b 2                  ; obj_id
                                         ; DATA XREF: spawn_dog   o
-                dc.b 3                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 3                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_dog           ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2521EA         ; proc_address
-stru_25AB74:    dc.b $86                ; field_0
+                dc.l sub_2521EA         ; update_proc
+stru_25AB74:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B35B6   o
                                         ; ROM:001B35EC   o ...
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_rotate_egg    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AB8C:    dc.b $3F                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AB8C:    dc.b $3F                ; obj_id
                                         ; DATA XREF: sub_24F04A+FC   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4006        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4006        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_faucet        ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ABA4:    dc.b $15                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ABA4:    dc.b $15                ; obj_id
                                         ; DATA XREF: oksub_25655C+8   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4092        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4092        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_saxophone     ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ABBC:    dc.b $3E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ABBC:    dc.b $3E                ; obj_id
                                         ; DATA XREF: spawn_crow   o
-                dc.b 1                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 1                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A41D0        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A41D0        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_crow          ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ABD4:    dc.b 5                  ; field_0
+                dc.l off_0              ; update_proc
+stru_25ABD4:    dc.b 5                  ; obj_id
                                         ; DATA XREF: spawn_crow_dragging+E   o
-                dc.b 2                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 2                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A41D0        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A41D0        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_crow          ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ABEC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ABEC:    dc.b $86                ; obj_id
                                         ; DATA XREF: crow_plumage_create+8   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4266        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4266        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_crow_plumage  ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AC04:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AC04:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_256114+8   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3A70        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3A70        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_crow_beak     ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AC1C:    dc.b $D                 ; field_0
+                dc.l off_0              ; update_proc
+stru_25AC1C:    dc.b $D                 ; obj_id
                                         ; DATA XREF: spawn_gates_chain_mechanism   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_chain_mechanism; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AC34:    dc.b $E                 ; field_0
+                dc.l off_0              ; update_proc
+stru_25AC34:    dc.b $E                 ; obj_id
                                         ; DATA XREF: spawn_hell_gates   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_hell_gates    ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_257224         ; proc_address
-stru_25AC4C:    dc.b $7C                ; field_0
+                dc.l sub_257224         ; update_proc
+stru_25AC4C:    dc.b $7C                ; obj_id
                                         ; DATA XREF: spawn_jump_spring   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown_2     ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AC64:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AC64:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FD78+28   o
-                dc.b $96                ; field_1
-                dc.b 1                  ; field_2
-                dc.b $20                ; field_3
+                dc.b $96                ; health
+                dc.b 1                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_boss_snowman  ; anim_address
-                dc.b $F                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $F                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AC7C:    dc.b $2E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AC7C:    dc.b $2E                ; obj_id
                                         ; DATA XREF: ROM:001B586E   o
                                         ; ROM:001B588E   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC7FC        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC7FC        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_snowman_bullet; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AC94:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AC94:    dc.b $86                ; obj_id
                                         ; DATA XREF: fire_to_snowman_boss+6C   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_snowman_burp  ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ACAC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ACAC:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24F23E+76   o
                                         ; whip_to_snowman_boss+2A   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_snowman_parts ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ACC4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ACC4:    dc.b $86                ; obj_id
                                         ; DATA XREF: fire_to_snowman_boss+D2   o
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_snowman_hat   ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ACDC:    dc.b $2F                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ACDC:    dc.b $2F                ; obj_id
                                         ; DATA XREF: spawn_lawyer   o
-                dc.b 3                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 3                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_lawyer        ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_259802         ; proc_address
-stru_25ACF4:    dc.b $35                ; field_0
+                dc.l sub_259802         ; update_proc
+stru_25ACF4:    dc.b $35                ; obj_id
                                         ; DATA XREF: ROM:001B0A46   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC742        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC742        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_lawyer_papers ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD0C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD0C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B571C   o
                                         ; ROM:001B5738   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC760        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC760        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_lawyer_papers_2; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD24:    dc.b $9B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD24:    dc.b $9B                ; obj_id
                                         ; DATA XREF: ROM:001B09E2   o
                                         ; sub_254CB2+4C   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC790        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC790        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_lawyer_suitcase; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD3C:    dc.b $6E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD3C:    dc.b $6E                ; obj_id
                                         ; DATA XREF: ROM:001B2CD0   o
                                         ; ROM:001B2D10   o ...
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fireburn_3    ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD54:    dc.b $6E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD54:    dc.b $6E                ; obj_id
                                         ; DATA XREF: spawn_side_left_fire   o
                                         ; spawn_side_right_fire   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_flame         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD6C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD6C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ACEE2   o
                                         ; ROM:001B0B9A   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_smoke         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD84:    dc.b $67                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD84:    dc.b $67                ; obj_id
                                         ; DATA XREF: ROM:001B0BB4   o
                                         ; ROM:001B0BEA   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fireburn_4    ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AD9C:    dc.b $56                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AD9C:    dc.b $56                ; obj_id
                                         ; DATA XREF: spawn_run_emerald_lift_right   o
                                         ; spawn_run_emerald_lift_left   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_diamond       ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ADB4:    dc.b $5A                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ADB4:    dc.b $5A                ; obj_id
                                         ; DATA XREF: spawn_emerald_lift   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A2EE4        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A2EE4        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_diamond_waiting; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ADCC:    dc.b $5B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ADCC:    dc.b $5B                ; obj_id
                                         ; DATA XREF: sub_24F23E+1A   o
                                         ; spawn_run_emerald   o ...
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_diamond_2     ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ADE4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ADE4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B3A56   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AD1B8        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AD1B8        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_bomb          ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25ADFC:    dc.b $76                ; field_0
+                dc.l off_0              ; update_proc
+stru_25ADFC:    dc.b $76                ; obj_id
                                         ; DATA XREF: oksub_258EB2+A   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AD194        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AD194        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_stalactite    ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AE14:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AE14:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_evil_cat_bomber+14   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown_3     ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258E3C         ; proc_address
-stru_25AE2C:    dc.b $86                ; field_0
+                dc.l sub_258E3C         ; update_proc
+stru_25AE2C:    dc.b $86                ; obj_id
                                         ; DATA XREF: fire_to_evil_cat_soul_boss+4E   o
                                         ; fire_to_evil_cat_soul_boss+7C   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACF6A        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACF6A        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_evilcat_soul  ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_25929A         ; proc_address
-stru_25AE44:    dc.b $86                ; field_0
+                dc.l sub_25929A         ; update_proc
+stru_25AE44:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FDB8+24   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_evilcat_pillar; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2590A2         ; proc_address
-stru_25AE5C:    dc.b $86                ; field_0
+                dc.l sub_2590A2         ; update_proc
+stru_25AE5C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FDB8+52   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_evilcat       ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_259052         ; proc_address
-stru_25AE74:    dc.b $47                ; field_0
+                dc.l sub_259052         ; update_proc
+stru_25AE74:    dc.b $47                ; obj_id
                                         ; DATA XREF: sub_24F336+132   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_evilcat       ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AE8C:    dc.b $6D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AE8C:    dc.b $6D                ; obj_id
                                         ; DATA XREF: ROM:001ACEA0   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACEB6        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACEB6        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fireburn_5    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AEA4:    dc.b $6D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AEA4:    dc.b $6D                ; obj_id
                                         ; DATA XREF: fire_to_evil_cat_soul_boss+CC   o
                                         ; fire_to_evil_cat_soul_boss+EC   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACEF2        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACEF2        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fireburn_5    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AEBC:    dc.b $2E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AEBC:    dc.b $2E                ; obj_id
                                         ; DATA XREF: ROM:001B3B64   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACE8A        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACE8A        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_snowman_bullet; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AED4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AED4:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FDB8+70   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_evilcat_gun   ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258FE2         ; proc_address
-stru_25AEEC:    dc.b $69                ; field_0
+                dc.l sub_258FE2         ; update_proc
+stru_25AEEC:    dc.b $69                ; obj_id
                                         ; DATA XREF: sub_24FDB8+8E   o
                                         ; sub_24FDB8+D8   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_spacesuit     ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_259030         ; proc_address
-object_ropejump:dc.b $85                ; field_0
+                dc.l sub_259030         ; update_proc
+object_ropejump:dc.b $85                ; obj_id
                                         ; DATA XREF: sub_24FF38+34   o
-                dc.b 0                  ; field_1 ; На уровне Snot a problem
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health ; На уровне Snot a problem
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_ropejumper; anim_address
-                dc.b $14                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $14                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l ropejump_control   ; proc_address
-stru_25AF1C:    dc.b $86                ; field_0
+                dc.l ropejump_control   ; update_proc
+stru_25AF1C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FF38+64   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $E000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $E000              ; sprite_attr
                 dc.l anim_rope_health_bar; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_257FE8         ; proc_address
-stru_25AF34:    dc.b $86                ; field_0
+                dc.l sub_257FE8         ; update_proc
+stru_25AF34:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FF38+12C   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $A000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $A000              ; sprite_attr
                 dc.l anim_rope_health_bar_2; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2580D8         ; proc_address
-stru_25AF4C:    dc.b $93                ; field_0
+                dc.l sub_2580D8         ; update_proc
+stru_25AF4C:    dc.b $93                ; obj_id
                                         ; DATA XREF: sub_257320+16   o
                                         ; sub_257B10+D8   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_water_after_fall; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AF64:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AF64:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_butt_crab_32+A6   o
                                         ; collision_with_water_monster+A0   o
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_legs      ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258300         ; proc_address
-stru_25AF7C:    dc.b $86                ; field_0
+                dc.l sub_258300         ; update_proc
+stru_25AF7C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FF38+3E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_rope          ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_257F62         ; proc_address
-stru_25AF94:    dc.b $71                ; field_0
+                dc.l sub_257F62         ; update_proc
+stru_25AF94:    dc.b $71                ; obj_id
                                         ; DATA XREF: sub_24FF38+DE   o
-                dc.b $A                 ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b $A                 ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_snot_boss     ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_257B10         ; proc_address
-stru_25AFAC:    dc.b $86                ; field_0
+                dc.l sub_257B10         ; update_proc
+stru_25AFAC:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24FF38+8A   o
                                         ; sub_24FF38+9C   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_snot_rope     ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_257ED4         ; proc_address
-stru_25AFC4:    dc.b $94                ; field_0
+                dc.l sub_257ED4         ; update_proc
+stru_25AFC4:    dc.b $94                ; obj_id
                                         ; DATA XREF: ROM:001B10B4   o
                                         ; ROM:001B10C6   o ...
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_snot_part     ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AFDC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AFDC:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_water_monster   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_water_monster ; anim_address
-                dc.b $D                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $D                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25AFF4:    dc.b $83                ; field_0
+                dc.l off_0              ; update_proc
+stru_25AFF4:    dc.b $83                ; obj_id
                                         ; DATA XREF: spawn_plant+8   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_unknown_4     ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B00C:    dc.b $34                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B00C:    dc.b $34                ; obj_id
                                         ; DATA XREF: spawn_plant+14   o
                                         ; spawn_plant_dead   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_pete_plant    ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B024:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B024:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B564A   o
                                         ; ROM:001B565A   o
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_fish_jumps    ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B03C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B03C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B566A   o
                                         ; ROM:001B567A   o ...
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_fish_jumps_2  ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B054:    dc.b $6B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B054:    dc.b $6B                ; obj_id
                                         ; DATA XREF: sub_24F5A2+3A   o
                                         ; sub_24F5A2+4E   o
-                dc.b 0                  ; field_1
-                dc.b $81                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $81                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3262        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3262        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_unknown_5     ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B06C:    dc.b $36                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B06C:    dc.b $36                ; obj_id
                                         ; DATA XREF: sub_24F5A2+5A   o
-                dc.b 0                  ; field_1
-                dc.b $81                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $81                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A328C        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A328C        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_rock_2        ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B084:    dc.b $37                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B084:    dc.b $37                ; obj_id
                                         ; DATA XREF: sub_24F5A2+66   o
-                dc.b 0                  ; field_1
-                dc.b $81                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $81                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A32B8        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A32B8        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_big_skyrock   ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B09C:    dc.b $16                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B09C:    dc.b $16                ; obj_id
                                         ; DATA XREF: sub_246D12:loc_246D64   o
                                         ; sub_2500A8+4E   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4660        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4660        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_pete          ; anim_address
-                dc.b $13                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $13                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256D82         ; proc_address
-stru_25B0B4:    dc.b $2A                ; field_0
+                dc.l sub_256D82         ; update_proc
+stru_25B0B4:    dc.b $2A                ; obj_id
                                         ; DATA XREF: spawn_ufo+18   o
-                dc.b 4                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 4                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3212        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3212        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_ufo           ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_pete_hook:    dc.b $81                ; field_0
+                dc.l off_0              ; update_proc
+object_pete_hook:    dc.b $81                ; obj_id
                                         ; DATA XREF: spawn_pete_hook   o
-                dc.b 0                  ; field_1
-                dc.b $A1                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $A1                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_pete_hook     ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_machine:    dc.b $38                ; field_0
+                dc.l off_0              ; update_proc
+object_machine:    dc.b $38                ; obj_id
                                         ; DATA XREF: spawn_machine   o
-                dc.b $C                 ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b $C                 ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A335E        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A335E        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_machine       ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_fox:    dc.b $33                ; field_0
+                dc.l off_0              ; update_proc
+object_fox:    dc.b $33                ; obj_id
                                         ; DATA XREF: spawn_fox   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_fox           ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_bob_cat:    dc.b $2B                ; field_0
+                dc.l off_0              ; update_proc
+object_bob_cat:    dc.b $2B                ; obj_id
                                         ; DATA XREF: spawn_bob_cat   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC640        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC640        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_bob_cat       ; anim_address
-                dc.b $F                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $F                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_hamster:    dc.b $9A                ; field_0
+                dc.l off_0              ; update_proc
+object_hamster:    dc.b $9A                ; obj_id
                                         ; DATA XREF: spawn_hamster:loc_250C58   o
-                dc.b 0                  ; field_1
-                dc.b $31                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $31                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_hamster       ; anim_address
-                dc.b $15                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $15                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B144:    dc.b $59                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B144:    dc.b $59                ; obj_id
                                         ; DATA XREF: spawn_counterpoise+36   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_counterpoise  ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B15C:    dc.b $80                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B15C:    dc.b $80                ; obj_id
                                         ; DATA XREF: spawn_counterpoise+2A   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_unknown_7     ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B174:    dc.b $57                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B174:    dc.b $57                ; obj_id
                                         ; DATA XREF: spawn_spring_platform+36   o
                                         ; spawn_spring_platform_2+34   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_spring_platform; anim_address
-                dc.b $10                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $10                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B18C:    dc.b $7F                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B18C:    dc.b $7F                ; obj_id
                                         ; DATA XREF: spawn_spring_platform+2A   o
                                         ; spawn_spring_platform_2+28   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_unknown_8     ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B1A4:    dc.b $40                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B1A4:    dc.b $40                ; obj_id
                                         ; DATA XREF: spawn_submarine+2E   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_submarine     ; anim_address
-                dc.b $1C                ; field_10
-                dc.b 0                  ; field_11
-                dc.b $C0                ; field_12
+                dc.b $1C                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $C0                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B1BC:    dc.b $96                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B1BC:    dc.b $96                ; obj_id
                                         ; DATA XREF: spawn_submarine+B6   o
                                         ; spawn_submarine+EA   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_unknown_9     ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $C0                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $C0                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B1D4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B1D4:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_submarine+52   o
                                         ; spawn_submarine+82   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_submarine_air ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $C0                ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $C0                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B1EC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B1EC:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B13F0   o
                                         ; ROM:001B1404   o
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A322A        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A322A        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_unknown_10    ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B204:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B204:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_diamond+590   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_ufo_signal    ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B21C:    dc.b $1E                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B21C:    dc.b $1E                ; obj_id
                                         ; DATA XREF: spawn_abscess_down+8   o
                                         ; spawn_abscess_left+8   o ...
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_bee_generator ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B234:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B234:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_queen_boss:loc_250AC0   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_queen_closed  ; anim_address
-                dc.b $1C                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $1C                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B24C:    dc.b $24                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B24C:    dc.b $24                ; obj_id
                                         ; DATA XREF: spawn_queen_tail+8   o
-                dc.b $32                ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b $32                ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_queen_tail    ; anim_address
-                dc.b $1C                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $1C                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B264:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B264:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B14D4   o
                                         ; ROM:001B1764   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_egg_move      ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-                dc.b $86                ; field_0
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.l off_0              ; update_proc
+                dc.b $86                ; obj_id
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_queen_abscess ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B294:    dc.b $74                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B294:    dc.b $74                ; obj_id
                                         ; DATA XREF: ROM:001B14EA   o
                                         ; ROM:001B1776   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3306        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3306        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown_11    ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B2AC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B2AC:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AD202   o
-                dc.b 0                  ; field_1
-                dc.b $40                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $40                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown_12    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B2C4:    dc.b $6C                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B2C4:    dc.b $6C                ; obj_id
                                         ; DATA XREF: spawn_butt_monster   o
-                dc.b 8                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 8                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_butt_monster  ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B2DC:    dc.b $39                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B2DC:    dc.b $39                ; obj_id
                                         ; DATA XREF: sub_24DD18+66   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_lever         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b $FF                ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b $FF                ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B2F4:    dc.b $7D                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B2F4:    dc.b $7D                ; obj_id
                                         ; DATA XREF: whip_to_chicken_boss_lever+9C   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3F24        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3F24        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_egg_with_needles; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B30C:    dc.b $28                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B30C:    dc.b $28                ; obj_id
                                         ; DATA XREF: ROM:001A529E   o
                                         ; ROM:001A532A   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A544A        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A544A        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_chicken_egg   ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B324:    dc.b $28                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B324:    dc.b $28                ; obj_id
                                         ; DATA XREF: ROM:001A53B0   o
                                         ; fire_to_chicken_fly_boss+5E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A545E        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A545E        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_egg_stay      ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258B50         ; proc_address
-stru_25B33C:    dc.b $8E                ; field_0
+                dc.l sub_258B50         ; update_proc
+stru_25B33C:    dc.b $8E                ; obj_id
                                         ; DATA XREF: sub_24DD18:loc_24DE18   o
                                         ; sub_250194:loc_25020E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_eye_gate      ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B354:    dc.b $1C                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B354:    dc.b $1C                ; obj_id
                                         ; DATA XREF: sub_24DD18+C2   o
-                dc.b 4                  ; field_1
-                dc.b $21                ; field_2
-                dc.b $20                ; field_3
+                dc.b 4                  ; health
+                dc.b $21                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4A0A        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4A0A        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown_13    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256856         ; proc_address
-object_sphere_electro:    dc.b $63                ; field_0
+                dc.l sub_256856         ; update_proc
+object_sphere_electro:    dc.b $63                ; obj_id
                                         ; DATA XREF: spawn_sphere_electro   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_unknown_14    ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B384:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B384:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_sphere_electro+28   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_sphere_energy ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B39C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B39C:    dc.b $86                ; obj_id
                                         ; DATA XREF: oksub_258DC6+8   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_sphere_energy_2; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B3B4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B3B4:    dc.b $86                ; obj_id
                                         ; DATA XREF: oksub_258DC6+34   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_sphere_parts  ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_electro_up_down:    dc.b $65                ; field_0
+                dc.l off_0              ; update_proc
+object_electro_up_down:    dc.b $65                ; obj_id
                                         ; DATA XREF: spawn_electro_up_down   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_electro_up_down; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B3E4:    dc.b $32                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B3E4:    dc.b $32                ; obj_id
                                         ; DATA XREF: spawn_bee_home   o
-                dc.b 5                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 5                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_bee_home      ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B3FC:    dc.b $18                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B3FC:    dc.b $18                ; obj_id
                                         ; DATA XREF: ROM:001B1592   o
                                         ; ROM:001B15A4   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A47A4        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A47A4        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_bee           ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256672         ; proc_address
-stru_25B414:    dc.b 6                  ; field_0
+                dc.l sub_256672         ; update_proc
+stru_25B414:    dc.b 6                  ; obj_id
                                         ; DATA XREF: spawn_lever   o
                                         ; spawn_lever_actived   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_lever_2       ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B42C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B42C:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_eyes_generator_closed+8   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_eyes_generator         ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B444:    dc.b $48                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B444:    dc.b $48                ; obj_id
                                         ; DATA XREF: spawn_eyes_generator_active   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_eyes_generator_2         ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B45C:    dc.b 3                  ; field_0
+                dc.l off_0              ; update_proc
+stru_25B45C:    dc.b 3                  ; obj_id
                                         ; DATA XREF: spawn_monkey_head:loc_25104A   o
                                         ; spawn_monkey_head_2:loc_25108C   o ...
-                dc.b 0                  ; field_1
-                dc.b $A1                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $A1                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_monkey_head         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B474:    dc.b 4                  ; field_0
+                dc.l off_0              ; update_proc
+stru_25B474:    dc.b 4                  ; obj_id
                                         ; DATA XREF: spawn_monkey_head_rotating_valve   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_monkey_head_2         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b $FF                ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b $FF                ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B48C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B48C:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_monkey_head_rotating_valve+2A   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_valve         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b $FF                ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b $FF                ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B4A4:    dc.b $4B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B4A4:    dc.b $4B                ; obj_id
                                         ; DATA XREF: ROM:001B218A   o
                                         ; ROM:001B21B0   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A39AA        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A39AA        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_chemical_flask         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_cage:    dc.b $60                ; field_0
+                dc.l off_0              ; update_proc
+object_cage:    dc.b $60                ; obj_id
                                         ; DATA XREF: spawn_cage   o
-                dc.b 0                  ; field_1
-                dc.b $30                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $30                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_cage         ; anim_address
-                dc.b $18                ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b $18                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B4D4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B4D4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AD2C6   o
                                         ; ROM:001AD2D8   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A3F3A        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A3F3A        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_larva         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B4EC:    dc.b $1A                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B4EC:    dc.b $1A                ; obj_id
                                         ; DATA XREF: spawn_green_goose   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A2E7E        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A2E7E        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_green_goose         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B504:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B504:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_frog_3   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_frog         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B51C:    dc.b $98                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B51C:    dc.b $98                ; obj_id
                                         ; DATA XREF: sub_258D60+24   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_frog_2         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B534:    dc.b $42                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B534:    dc.b $42                ; obj_id
                                         ; DATA XREF: spawn_frog   o
                                         ; spawn_frog_2   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_frog_3         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_252440         ; proc_address
-object_incubator:    dc.b $86                ; field_0
+                dc.l sub_252440         ; update_proc
+object_incubator:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_incubator_left   o
                                         ; spawn_incubator_right   o ...
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l off_1B1C36         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B564:    dc.b 8                  ; field_0
+                dc.l off_0              ; update_proc
+stru_25B564:    dc.b 8                  ; obj_id
                                         ; DATA XREF: spawn_egg_with_needles+C   o
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_egg_with_needles; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B57C:    dc.b 9                  ; field_0
+                dc.l off_0              ; update_proc
+stru_25B57C:    dc.b 9                  ; obj_id
                                         ; DATA XREF: oksub_25839E+18   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_eye         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_fan:    dc.b $68                ; field_0
+                dc.l off_0              ; update_proc
+object_fan:    dc.b $68                ; obj_id
                                         ; DATA XREF: spawn_fan   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_fan         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_brain:    dc.b $20                ; field_0
+                dc.l off_0              ; update_proc
+object_brain:    dc.b $20                ; obj_id
                                         ; DATA XREF: spawn_brain   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_brain         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_fan_fish:    dc.b $45                ; field_0
+                dc.l off_0              ; update_proc
+object_fan_fish:    dc.b $45                ; obj_id
                                         ; DATA XREF: spawn_fan_fish   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC6E8        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC6E8        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_fan_fish         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B5DC:    dc.b $17                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B5DC:    dc.b $17                ; obj_id
                                         ; DATA XREF: sub_24DEA6+2C   o
-                dc.b $14                ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b $14                ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_intestinal_boss         ; anim_address
-                dc.b $B                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $B                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2522C8         ; proc_address
-stru_25B5F4:    dc.b $79                ; field_0
+                dc.l sub_2522C8         ; update_proc
+stru_25B5F4:    dc.b $79                ; obj_id
                                         ; DATA XREF: ROM:001AD818   o
                                         ; ROM:001AD828   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_unknown_enemy         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B60C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B60C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AD7AA   o
                                         ; ROM:001AD7BC   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_chips         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_daemon:    dc.b $44                ; field_0
+                dc.l off_0              ; update_proc
+object_daemon:    dc.b $44                ; obj_id
                                         ; DATA XREF: spawn_daemon   o
                                         ; whip_to_prize_faucet+96   o
-                dc.b 3                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 3                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACCFA        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACCFA        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_daemon         ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B63C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B63C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B6188   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_bob_goldfish         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B654:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B654:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_fish_boss+16   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_aquarium_column         ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B66C:    dc.b $46                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B66C:    dc.b $46                ; obj_id
                                         ; DATA XREF: spawn_fish_boss+2   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_aquarium_breaking         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-object_sponge:    dc.b $43                ; field_0
+                dc.l off_0              ; update_proc
+object_sponge:    dc.b $43                ; obj_id
                                         ; DATA XREF: spawn_sponge   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACD54        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACD54        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_sponge         ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B69C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B69C:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_submarine+8A   o
                                         ; collision_with_submarine+B2   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACA96        ; rom_addr_1
-                dc.w $E000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACA96        ; move_script
+                dc.w $E000              ; sprite_attr
                 dc.l off_1B5A1C         ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B6B4:    dc.b $3A                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B6B4:    dc.b $3A                ; obj_id
                                         ; DATA XREF: spawn_sea_gate+8   o
                                         ; spawn_sea_gate_2+8   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_sea_gate         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B6CC:    dc.b $82                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B6CC:    dc.b $82                ; obj_id
                                         ; DATA XREF: spawn_air_refiller_99_sec+2C   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_air_refiller         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B6E4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B6E4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ADA36   o
                                         ; ROM:001ADA52   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC9AA        ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC9AA        ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_air_bubble         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B6FC:    dc.b $3C                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B6FC:    dc.b $3C                ; obj_id
                                         ; DATA XREF: spawn_open_handler   o
                                         ; spawn_open_handler_2   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_open_handler         ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B714:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B714:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24F99E+136   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A45D0        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A45D0        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_planet         ; anim_address
-                dc.b $24                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $24                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B72C:    dc.b $10                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B72C:    dc.b $10                ; obj_id
                                         ; DATA XREF: sub_24FCE4+6   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B29E0         ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_252BC2         ; proc_address
-stru_25B744:    dc.b $12                ; field_0
+                dc.l sub_252BC2         ; update_proc
+stru_25B744:    dc.b $12                ; obj_id
                                         ; DATA XREF: sub_24FCFA+1E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B2980         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_252BF8         ; proc_address
-stru_25B75C:    dc.b $13                ; field_0
+                dc.l sub_252BF8         ; update_proc
+stru_25B75C:    dc.b $13                ; obj_id
                                         ; DATA XREF: sub_24FC9C+1E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B2A02         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258A30         ; proc_address
-stru_25B774:    dc.b 1                  ; field_0
+                dc.l sub_258A30         ; update_proc
+stru_25B774:    dc.b 1                  ; obj_id
                                         ; DATA XREF: sub_24FCCE+6   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l off_1B2A02         ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2588B0         ; proc_address
-stru_25B78C:    dc.b $86                ; field_0
+                dc.l sub_2588B0         ; update_proc
+stru_25B78C:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_asteroid+3E   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l off_1B61C4         ; anim_address
-                dc.b 8                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 8                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2592B6         ; proc_address
-stru_25B7A4:    dc.b $86                ; field_0
+                dc.l sub_2592B6         ; update_proc
+stru_25B7A4:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_247022+52   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_sphere_energy_3         ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B7BC:    dc.b $F                 ; field_0
+                dc.l off_0              ; update_proc
+stru_25B7BC:    dc.b $F                 ; obj_id
                                         ; DATA XREF: sub_25035A+58   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_psyq         ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2585CA         ; proc_address
-stru_25B7D4:    dc.b $86                ; field_0
+                dc.l sub_2585CA         ; update_proc
+stru_25B7D4:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_25035A+BA   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B25D8         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258C50         ; proc_address
-stru_25B7EC:    dc.b $86                ; field_0
+                dc.l sub_258C50         ; update_proc
+stru_25B7EC:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_25035A+D0   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B2794         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258518         ; proc_address
-stru_25B804:    dc.b $86                ; field_0
+                dc.l sub_258518         ; update_proc
+stru_25B804:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_asteroid+1A   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_star         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_258A02         ; proc_address
-                dc.b $85                ; field_0
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.l sub_258A02         ; update_proc
+                dc.b $85                ; obj_id
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_on_rocket         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B834:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B834:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_jim_entering_in_darkroom   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_open_door         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B84C:    dc.b $62                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B84C:    dc.b $62                ; obj_id
                                         ; DATA XREF: spawn_jim_exit_door   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_exit_door         ; anim_address
-                dc.b $B                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $B                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B864:    dc.b $66                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B864:    dc.b $66                ; obj_id
                                         ; DATA XREF: spawn_dark_monster   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_dark_monster         ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B87C:    dc.b $1B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B87C:    dc.b $1B                ; obj_id
                                         ; DATA XREF: spawn_dark_mini_monster   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_dark_enemy         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B894:    dc.b $73                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B894:    dc.b $73                ; obj_id
                                         ; DATA XREF: spawn_gears   o
                                         ; spawn_gears_down   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l anim_gears         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B8AC:    dc.b $1B                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B8AC:    dc.b $1B                ; obj_id
                                         ; DATA XREF: spawn_dark_mini_monster_2   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A335E        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A335E        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_dark_enemy_2         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2571B4         ; proc_address
-stru_25B8C4:    dc.b $86                ; field_0
+                dc.l sub_2571B4         ; update_proc
+stru_25B8C4:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_2504E6+26   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b $20                ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_eyes_in_dark         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256D2E         ; proc_address
-stru_25B8DC:    dc.b $86                ; field_0
+                dc.l sub_256D2E         ; update_proc
+stru_25B8DC:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24B638+8C   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_jim_idle      ; anim_address
-                dc.b $14                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $14                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B8F4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B8F4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+106   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACACC        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACACC        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B5C9C         ; anim_address
-                dc.b $14                ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $14                ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B90C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B90C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+122   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l byte_1ACBE4        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l byte_1ACBE4        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_princess         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B924:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B924:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B5B6E   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l byte_1ACC2C        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l byte_1ACC2C        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B5BA4         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B93C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B93C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ACC86   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l byte_1ACC2C        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l byte_1ACC2C        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B5BFA         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B954:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B954:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B5D04   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B5C34         ; anim_address
-                dc.b 9                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 9                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B96C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B96C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+13E   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACB22        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACB22        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B5C56         ; anim_address
-                dc.b $C                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b $C                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B984:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B984:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+15A   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACBE4        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACBE4        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l off_1B5ECC         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B99C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B99C:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+176   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l off_1B5ED0         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B9B4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B9B4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B5EF4   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACBF6        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACBF6        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l off_1B5F3A         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B9CC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B9CC:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B5F08   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACBF6        ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACBF6        ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l off_1B5F3E         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B9E4:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B9E4:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+190   o
                                         ; ure_the_best_screen+1AA   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $2000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $2000              ; sprite_attr
                 dc.l off_1B5F42         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25B9FC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25B9FC:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ACB8E   o
                                         ; ROM:001ACB9E   o ...
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_water_after_fall; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BA14:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25BA14:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24BBE6+26   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l byte_1AC348        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l byte_1AC348        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1AF7E8         ; anim_address
-                dc.b $E                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b $E                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BA2C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+stru_25BA2C:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24BBE6+34   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b $FF                ; field_5
-                dc.l byte_1AC342        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b $FF                ; flip_x
+                dc.l byte_1AC342        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l jim_on_rocket_fail         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BA44:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_continue_tin_can:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24C4E4+22   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B5FB4         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BA5C:    dc.b $84                ; field_0
+                dc.l off_0              ; update_proc
+object_explosion_with_spiral:    dc.b $84                ; obj_id
                                         ; DATA XREF: oksub_2548E8+8   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B37A8         ; anim_address
-                dc.b 6                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 6                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BA74:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_bomb:    dc.b $86                ; obj_id
                                         ; DATA XREF: fire_to_chicken_fly_boss+78   o
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4444        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4444        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_bomb_2         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BA8C:    dc.b $27                ; field_0
+                dc.l off_0              ; update_proc
+stru_25BA8C:    dc.b $27                ; obj_id
                                         ; DATA XREF: sub_250194+44   o
-                dc.b $13                ; field_1
-                dc.b 0                  ; field_2
-                dc.b $20                ; field_3
+                dc.b $13                ; health
+                dc.b 0                  ; obj_flags
+                dc.b $20                ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1A4F6A        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1A4F6A        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B3F46         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256856         ; proc_address
-stru_25BAA4:    dc.b $86                ; field_0
+                dc.l sub_256856         ; update_proc
+object_prize_stars:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001A2DB8   o
                                         ; ROM:001A2DD2   o ...
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACE4E        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACE4E        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l off_1B01BC         ; anim_address
-                dc.b 0                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 0                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-                dc.b $75                ; field_0
-                dc.b 0                  ; field_1
-                dc.b 0                  ; field_2
-                dc.b 0                  ; field_3
+                dc.l off_0              ; update_proc
+                dc.b $75                ; obj_id
+                dc.b 0                  ; health
+                dc.b 0                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l off_1B607A         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_24E764         ; proc_address
-stru_25BAD4:    dc.b $61                ; field_0
+                dc.l sub_24E764         ; update_proc
+object_platform_queen_butt:    dc.b $61                ; obj_id
                                         ; DATA XREF: sub_24E6C8:loc_24E72A   o
-                dc.b 0                  ; field_1
-                dc.b $10                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $10                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l off_1B61C0         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_24E764         ; proc_address
-stru_25BAEC:    dc.b $61                ; field_0
+                dc.l sub_24E764         ; update_proc
+object_moving_platform:    dc.b $61                ; obj_id
                                         ; DATA XREF: spawn_moving_platform+8   o
                                         ; spawn_moving_platform_right+8   o
-                dc.b 0                  ; field_1
-                dc.b $10                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $10                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1ACFDA        ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1ACFDA        ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_moving_platform         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BB04:    dc.b $25                ; field_0
+                dc.l off_0              ; update_proc
+object_psyq_boss:    dc.b $25                ; obj_id
                                         ; DATA XREF: sub_25049A   o
-                dc.b 5                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 5                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC454        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC454        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_psyq_boss         ; anim_address
-                dc.b $B                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b $82                ; field_12
+                dc.b $B                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2592EC         ; proc_address
-stru_25BB1C:    dc.b $26                ; field_0
+                dc.l sub_2592EC         ; update_proc
+object_psyq_hook:    dc.b $26                ; obj_id
                                         ; DATA XREF: ROM:001B473E   o
                                         ; ROM:001B476E   o ...
-                dc.b 0                  ; field_1
-                dc.b 1                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 1                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l byte_1AC5C8        ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l byte_1AC5C8        ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_psyq_hook         ; anim_address
-                dc.b 1                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b 1                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BB34:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_advanced_home:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_advanced_home   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l anim_advanced_home         ; anim_address
-                dc.b $B                 ; field_10
-                dc.b 0                  ; field_11
-                dc.b $80                ; field_12
+                dc.b $B                 ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BB4C:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_petes_home_door:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_petes_home_door   o
-                dc.b 0                  ; field_1
-                dc.b $20                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $20                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $6000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $6000              ; sprite_attr
                 dc.l anim_petes_home_door         ; anim_address
-                dc.b 2                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 2                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BB64:    dc.b $78                ; field_0
+                dc.l off_0              ; update_proc
+object_intestinal_wheel:    dc.b $78                ; obj_id
                                         ; DATA XREF: ROM:001AD67E   o
                                         ; sub_259746+3A   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_intestinal_wheel         ; anim_address
-                dc.b 5                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 5                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_259658         ; proc_address
-stru_25BB7C:    dc.b $77                ; field_0
+                dc.l sub_259658         ; update_proc
+object_intestinal_ball:    dc.b $77                ; obj_id
                                         ; DATA XREF: sub_259746+2E   o
-                dc.b 0                  ; field_1
-                dc.b $21                ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b $21                ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w $4000              ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w $4000              ; sprite_attr
                 dc.l anim_intestinal_ball         ; anim_address
-                dc.b 3                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 2                  ; field_12
+                dc.b 3                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l loc_2596D6         ; proc_address
-stru_25BB94:    dc.b $86                ; field_0
+                dc.l loc_2596D6         ; update_proc
+object_joystick_buttons:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_259DFE+3DC   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l off_1ADC08         ; anim_address
-                dc.b 7                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 7                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
-stru_25BBAC:    dc.b $86                ; field_0
+                dc.l off_0              ; update_proc
+object_joystick_cable:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_259DFE+3FA   o
-                dc.b 0                  ; field_1
-                dc.b 8                  ; field_2
-                dc.b 0                  ; field_3
+                dc.b 0                  ; health
+                dc.b 8                  ; obj_flags
+                dc.b 0                  ; draw_flags
                 dc.b 0                  ; skipped_1
-                dc.b 0                  ; field_5
-                dc.l off_0              ; rom_addr_1
-                dc.w 0                  ; vram_offset
+                dc.b 0                  ; flip_x
+                dc.l off_0              ; move_script
+                dc.w 0                  ; sprite_attr
                 dc.l off_1ADBE4         ; anim_address
-                dc.b 4                  ; field_10
-                dc.b 0                  ; field_11
-                dc.b 0                  ; field_12
+                dc.b 4                  ; vram_blocks
+                dc.b 0                  ; flip_y
+                dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l off_0              ; proc_address
+                dc.l off_0              ; update_proc
 level_config:   dc.w 0                  ; DATA XREF: sub_2476AC+38   o
                                         ; sub_24AC2C+C   o ...
                                         ; Jim start X

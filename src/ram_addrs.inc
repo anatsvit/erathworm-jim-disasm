@@ -293,18 +293,18 @@ incubator_left_down_egg_chance equ $FFFFFD63
 incubator_right_up_egg_chance equ $FFFFFD64
 incubator_left_up_egg_chance equ $FFFFFD65
 snot_level_intro_delay equ $FFFFFD66 ; Snot a Problem: счётчик 1..$1E в начале раунда, блокирует ropejump_control и snot_on_rope, по истечении запускает move-скрипт byte_1A2F3E
-byte_FFFD67 equ $FFFFFD67
+ropejump_button_latch equ $FFFFFD67 ;Snot a Problem: защёлка кнопок на тарзанке (sub_25734E). 0 когда отпущены кнут, огонь и прыжок; $FF при первом нажатии, тогда при word_FFFCDE<0 вызывается sub_25757E - срабатывание один раз на нажатие
 byte_FFFD68 equ $FFFFFD68
-byte_FFFD69 equ $FFFFFD69
-byte_FFFD6A equ $FFFFFD6A
+ropejump_impact_timer equ $FFFFFD69 ;Snot a Problem: таймер удара. 2 при ударе о стену каньона (sub_257602) и при столкновении с соплёй (collision_with_snot), вместе с X точки удара в word_FFFCF0. В sub_24F4F0 -1 раз в 16 кадров (~32 кадра). Кроме этого декремента в коде не читается
+is_jim_bungee_snapped equ $FFFFFD6A ;Snot a Problem: Джим сорвался с тарзанки. 0 при старте (sub_24FF38), $FF в sub_257FE8 когда jim_bungee_health_shown дошло до 0 (Джим падает, звук $3D). В коде не читается
 byte_FFFD6B equ $FFFFFD6B
-byte_FFFD6C equ $FFFFFD6C
+snot_intro_bungee_phase equ $FFFFFD6C ;Snot a Problem: фаза спуска на тарзанке во вступлении. 2 при старте (sub_24FF38), move-скрипт byte_1A2F3E по ходу спуска пишет 1 -> 0 -> 1 -> 2 (команда $83,1). Читатель не найден
 snot_hits_count equ $FFFFFD6D ; счётчик столкновений Джима с соплёй, на 12-м обнуляется и включает snot_rage_timer
 is_snot_defeated equ $FFFFFD6E
 byte_FFFD6F equ $FFFFFD6F
-byte_FFFD70 equ $FFFFFD70
-byte_FFFD71 equ $FFFFFD71
-byte_FFFD72 equ $FFFFFD72
+jim_bungee_health_shown equ $FFFFFD70 ;Snot a Problem: последнее отображённое здоровье Джима (две ASCII-цифры jim_health+1/+2) для индикатора stru_25AF1C (sub_257FE8). $A при старте (sub_24FF38). При изменении анимация из off_258112, при 0 Джим срывается (is_jim_bungee_snapped=$FF)
+snot_bungee_health_shown equ $FFFFFD71 ;Snot a Problem: последнее отображённое здоровье сопли (младший полубайт байта 1 объекта dword_FFFCE4) для индикатора stru_25AF34 (sub_2580D8). $A при старте (sub_24FF38). При изменении анимация из off_25813E
+rope_anim_index equ $FFFFFD72 ;Snot a Problem: анимация верёвки stru_25AF7C (anim_rope), читается в sub_257F62. Бит 7 - зеркалирование (байт 9 объекта), биты 0-6 - индекс в off_257FB0. Записи нет ни в коде, ни в скриптах - всегда 0 (off_1B0FDC)
 word_FFFD74 equ $FFFFFD74
 butt_boss_debris_timer equ $FFFFFD76 ;Таймер обломков после победы над саб-боссом Buttville. $1E в whip_to_butt_sub_boss, в sub_24F644 -1 за кадр, раз в 4 кадра спавнит обломок stru_25B294 около X=$17CC
 ure_the_best_state equ $FFFFFD77 ;Фаза финального экрана ure_the_best_screen. Обнуляется при входе, промежуточные значения пишут анимационные скрипты. 7 + Start -> 8 (белая палитра, очистка plane A), $D - выход

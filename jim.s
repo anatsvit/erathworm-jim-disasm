@@ -3917,7 +3917,7 @@ byte_1A2DB4:    dc.b   0,  0,$8B,  0    ; DATA XREF: ROM:001A2E7A   o
                 dc.l byte_1A2DB4
 byte_1A2E7E:    dc.b   0,  0,  0,  0,  0,$FF,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF
                                         ; DATA XREF: ROM:001A2EE0   o
-                                        ; ROM:stru_25B4EC   o
+                                        ; ROM:object_green_goose   o
                 dc.b   0,  0,  0,  0,  0,$FF
 byte_1A2EA4:    dc.b   0,  0,  0,  0,$86,$9A
                                         ; DATA XREF: ROM:001A2EAA   o
@@ -4975,7 +4975,7 @@ byte_1A45C6:    dc.b $84,$87,  2,  0,$80,  0
                                         ; DATA XREF: ROM:001A45CC   o
                 dc.l byte_1A45C6
 byte_1A45D0:    dc.b   0,  0,$84,$1F,  0,  0,  0,$FF,$85,  0,$84, $F,  0,  0,  0,  0,  0,$FF,$85,  0,$84,  7,  0,  0,  0,  0,  0,  0,  0,$FF,$85,  0
-                                        ; DATA XREF: ROM:stru_25B714   o
+                                        ; DATA XREF: ROM:object_planet   o
                 dc.b $84,  7,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,$85,  0,$82,  0,  0,  1,  0,  1,  0,  2,  0,  2,  0,  3,  0,  3
 byte_1A460C:    dc.b   0,  4,  0,  4,$80,  0
                                         ; DATA XREF: ROM:001A4612   o
@@ -5098,7 +5098,7 @@ byte_1A4794:    dc.b $FE,  0,$88,$84,  0,  7
                 dc.l byte_1A4794
                 dc.b $80,  0
                 dc.l byte_1A4730
-byte_1A47A4:    dc.b   0,  0,$86,$5E    ; DATA XREF: ROM:stru_25B3FC   o
+byte_1A47A4:    dc.b   0,  0,$86,$5E    ; DATA XREF: ROM:object_bee   o
                 dc.l byte_1A47F6
                 dc.b $86,$5E
                 dc.l byte_1A481A
@@ -7407,7 +7407,7 @@ byte_1AC9A2:    dc.b   3,  0,$80,  0    ; DATA XREF: ROM:001AC9A6   o
                                         ; sub_24B638+1BA   o
                 dc.l byte_1AC9A2
 byte_1AC9AA:    dc.b   0,  0,$84,  3,  0,$FF
-                                        ; DATA XREF: ROM:stru_25B6E4   o
+                                        ; DATA XREF: ROM:object_air_bubble   o
 byte_1AC9B0:    dc.b   1,$FF,$86,$72    ; DATA XREF: ROM:001AC9B4   o
                 dc.l byte_1AC9B0
                 dc.b   0,$FF,  1,$FF
@@ -7468,7 +7468,7 @@ byte_1ACA96:    dc.b $F9,  7,$F9,  7,$FA,  6,$FA,  6,$FA,  6,$FA,  6,$FB,  5,$FB
                                         ; DATA XREF: ROM:stru_25B69C   o
                 dc.b $FD,  3,$FD,  3,$FE,  2,$FE,  2,$FE,  2,$FE,  2,$FF,  1,$FF,  1,$FF,  1,$FF,  1,$82,  0
 byte_1ACACC:    dc.b   0,  0,$84,$B1,  0,  0,$84,$F7,  0,  0
-                                        ; DATA XREF: ROM:stru_25B8F4   o
+                                        ; DATA XREF: ROM:object_jim_end_screen   o
 byte_1ACAD6:    dc.b   3,  0,$8A,$B2,  0,  2,  0,$DC
                                         ; DATA XREF: ROM:001ACADE   o
                 dc.l byte_1ACAD6
@@ -7487,7 +7487,7 @@ byte_1ACB00:    dc.b   0,  0,$8A,$31    ; DATA XREF: ROM:001ACB08   o
                 dc.l byte_1ACB00
                 dc.b $83,$11,  0,  9,  0,  0,$40,  0,$84,$E3,  0,  0,$84,$E3,  0,  0,$84,$E3,  0,  0,$82,  0
 byte_1ACB22:    dc.b   0,  0,$8A,$31    ; DATA XREF: ROM:001ACB2A   o
-                                        ; ROM:stru_25B96C   o
+                                        ; ROM:object_cow_end_screen   o
                 dc.w $FD77
                 dc.w 2
                 dc.l byte_1ACB22
@@ -7528,7 +7528,7 @@ byte_1ACBC2:    dc.b   0, $A,$8A,$B2,  0,  4
                 dc.l byte_1ACBC2
                 dc.b $84,$E3,  0,  0,$84,$F7,  0,  0,$84,$BB,  0,  0,$83,  1,$FD,$77,  0, $B,  0,  0,$8C,  0
 byte_1ACBE4:    dc.b   0,  0,$8A,$31    ; DATA XREF: ROM:001ACBEC   o
-                                        ; ROM:stru_25B90C   o ...
+                                        ; ROM:object_princess   o ...
                 dc.w $FD77
                 dc.w 9
                 dc.l byte_1ACBE4
@@ -7546,8 +7546,8 @@ byte_1ACC0A:    dc.b   0,  2,  0,  2,  0,$FE,  0,$FE,  0,$FE,  0,$FE,  0,  2,  0
                                         ; DATA XREF: ROM:001ACB76   o
                                         ; ROM:001ACBF2   o
                 dc.b $92,$80
-byte_1ACC2C:    dc.b   0,  0,$91,  0    ; DATA XREF: ROM:stru_25B924   o
-                                        ; ROM:stru_25B93C   o
+byte_1ACC2C:    dc.b   0,  0,$91,  0    ; DATA XREF: ROM:object_crown   o
+                                        ; ROM:object_gleam   o
                 dc.l oksub_24950E
                 dc.b $83,$12,  0,$18,$F8,$40,$83,$12
                 dc.l off_1AF300
@@ -7565,7 +7565,7 @@ byte_1ACC5E:    dc.b   0,  0,$8A,$B2,  0,  4
                 dc.b $89,$2D,$83,$12,  0,$18,  0,  0,$83,$12,  0,$1A,  0,  0,$83,  1,$FD,$77,  0,  5,$91,  0
                 dc.l oksub_249516
                 dc.b $8B,  1
-                dc.l stru_25B93C
+                dc.l object_gleam
                 dc.b   3,$FB,  0,  0,  0,  0
                 dc.l byte_1ACC94
 byte_1ACC94:    dc.b   0,$FD,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  3,  0,  0,  0,  0,  0,  0,  0,$FE,  0,  0,  0,  0,  0,  0,  0,  2
@@ -7781,15 +7781,15 @@ off_1AD2B2:     dc.w off_2234           ; DATA XREF: fire_to_green_goose+1A   o
                 dc.w off_2248
                 dc.w off_224C
                 dc.b $F5,  0
-                dc.l stru_25B4D4
+                dc.l object_larva
                 dc.b $F4,$F4,  0,  0,  0,  0,  0,  0,  0,  0
                 dc.w off_224C
                 dc.b $F5,  0
-                dc.l stru_25B4D4
+                dc.l object_larva
                 dc.b  $C,  6,  0,  0,  0,  0,  0,  0,  0,  0
                 dc.w off_2250
                 dc.b $F5,  0
-                dc.l stru_25B4D4
+                dc.l object_larva
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0
                 dc.w off_2250
                 dc.b $F6,  0
@@ -8188,8 +8188,8 @@ anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1FB0
                 dc.w $EA00
                 dc.l anim_fan_fish
-anim_unknown_enemy:     dc.w off_344C           ; DATA XREF: ROM:001AD6B0   o
-                                        ; ROM:stru_25B5F4   o
+anim_intestinal_boss_tear:     dc.w off_344C           ; DATA XREF: ROM:001AD6B0   o
+                                        ; ROM:object_intestinal_boss_tear   o
                 dc.w off_344C
 off_1AD6A2:     dc.w off_3450           ; DATA XREF: ROM:001AD82E   o
                 dc.w off_3450
@@ -8198,7 +8198,7 @@ off_1AD6A6:     dc.w off_3454           ; DATA XREF: ROM:001AD81E   o
 off_1AD6AA:     dc.w off_3458           ; DATA XREF: ROM:001AD83E   o
                 dc.w off_3458
                 dc.w $EA00
-                dc.l anim_unknown_enemy
+                dc.l anim_intestinal_boss_tear
 off_1AD6B4:     dc.w off_345C           ; DATA XREF: ROM:001A4762   o
                 dc.w off_345C
                 dc.w off_3460
@@ -8284,19 +8284,19 @@ off_1AD788:     dc.w off_E84            ; DATA XREF: ROM:001AD794   o
                 dc.b $FA,$42,  0,$1A,  0,$3C,$F2,$84,  0,  7
                 dc.l off_1AD788
                 dc.b $F3,$38,$ED,  1,$FD,$3A,  0,$10,$ED,$14,  0, $A,  0,  0,  0,  0,$F5,  0
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.w $F800
                 dc.l off_1AD6D8
                 dc.l byte_1A471E
                 dc.w off_E68
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.b   0,$FE
                 dc.l off_1AD6D0
                 dc.l byte_1A471E
                 dc.w off_E68
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.w $8FC
                 dc.l off_1AD6D4
                 dc.l byte_1A471E
@@ -8318,7 +8318,7 @@ off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                 dc.w off_E58
                 dc.w off_E5C
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.w $F4DC
                 dc.l off_1AD6D8
                 dc.l byte_1A478C
@@ -8327,17 +8327,17 @@ off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                 dc.w off_E60
                 dc.w off_E60
                 dc.w $F500
-                dc.l stru_25B5F4
+                dc.l object_intestinal_boss_tear
                 dc.w $45DA
                 dc.l off_1AD6A6
                 dc.l byte_1A477A
                 dc.w $F500
-                dc.l stru_25B5F4
+                dc.l object_intestinal_boss_tear
                 dc.w $3000
                 dc.l off_1AD6A2
                 dc.l byte_1A477A
                 dc.w $F500
-                dc.l stru_25B5F4
+                dc.l object_intestinal_boss_tear
                 dc.w $47E4
                 dc.l off_1AD6AA
                 dc.l byte_1A477A
@@ -8376,25 +8376,25 @@ off_1AD87A:     dc.w off_E88            ; DATA XREF: whip_to_intestinal_boss+26 
                 dc.w $F338
                 dc.w off_E90
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.w $F8FC
                 dc.l off_1AD6D8
                 dc.l byte_1A471E
                 dc.w off_E90
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.w $10F0
                 dc.l anim_chips
                 dc.l byte_1A471E
                 dc.w off_E90
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.b   4,  4
                 dc.l off_1AD6D0
                 dc.l byte_1A471E
                 dc.w off_E90
                 dc.w $F500
-                dc.l stru_25B60C
+                dc.l object_chips
                 dc.b   0,$E0
                 dc.l off_1AD6D4
                 dc.l byte_1A471E
@@ -8556,35 +8556,35 @@ off_1ADA04:     dc.w off_2460           ; DATA XREF: ROM:001A33A2   o
                 dc.l off_1ADA04
 dword_1ADA32:   dc.l $25E8F500          ; DATA XREF: ROM:0000C982   o
                                         ; ROM:0000C986   o ...
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b  $C, $C,  0,  0,  0,  0,  0,  0,  0,  0,$ED,  1,$A6,$D9,  0,$20,$FB,  0
                 dc.l fill_palettes_white
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$F3,$1E,$25,$E8,$FB,  0
                 dc.l oksub_249664
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b   8,$F4,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b   0,$F2,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b $F0,$10,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E0,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b $16,  0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E0,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b $E0,$20,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b $EA,  4,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b   0,$E0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E8,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b $FC,$18,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E8,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b  $E,$F2,  0,  0,  0,  0,  0,  0,  0,  0,$F3,$1E,$25,$EC,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b $F8,$E0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$EC,$F5,  0
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$F0,$25,$F0,$ED,  1,$FD,$21,  0,$FF,$EC,  1
 off_1ADB3C:     dc.w off_B60            ; DATA XREF: ROM:001ADB94   o
                                         ; ROM:001ADBA8   o ...
@@ -11440,7 +11440,7 @@ off_1AF3C4:     dc.w off_13AC           ; DATA XREF: sub_252DE4+96   o
                 dc.w $FD22
                 dc.w 0
                 dc.w $F800
-anim_jim_eyes_in_dark:     dc.w off_14CC           ; DATA XREF: ROM:stru_25B8C4   o
+anim_jim_eyes_in_dark:     dc.w off_14CC           ; DATA XREF: ROM:object_jim_eyes_in_dark   o
                 dc.w $FB00
                 dc.l oksub_24951E
                 dc.w $EC01
@@ -15365,13 +15365,13 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B54
                 dc.w off_2B58
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w $E009
                 dc.l 0
                 dc.l 0
                 dc.w off_2B58
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w 7
                 dc.w 0
                 dc.w 0
@@ -15379,14 +15379,14 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w 0
                 dc.w off_2B5C
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w off_2EE8
                 dc.l 0
                 dc.l 0
                 dc.w off_2B5C
                 dc.w off_2B60
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w $42CF
                 dc.l 0
                 dc.l 0
@@ -15396,7 +15396,7 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B64
                 dc.w off_2B68
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w $3EB9
                 dc.l 0
                 dc.l 0
@@ -15421,13 +15421,13 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w $EF00
                 dc.w off_2B7C
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w $3EB9
                 dc.l 0
                 dc.l 0
                 dc.w off_2B7C
                 dc.w $F500
-                dc.l stru_25B3FC
+                dc.l object_bee
                 dc.w $3EB9
                 dc.l 0
                 dc.l 0
@@ -15892,7 +15892,7 @@ off_1B1A5E:     dc.w frame_none           ; DATA XREF: ROM:001B1A54   o
                 dc.w frame_none
                 dc.w $EA00
                 dc.l anim_frog
-anim_frog_2:     dc.w off_232C           ; DATA XREF: ROM:stru_25B51C   o
+anim_frog_2:     dc.w off_232C           ; DATA XREF: ROM:object_frog_emerging_from_underground   o
                 dc.w off_2330
                 dc.w off_2334
                 dc.w off_2338
@@ -16093,7 +16093,7 @@ off_1B1BDE:     dc.w off_2360           ; DATA XREF: ROM:0000C7A0   o
                 dc.w $FF
                 dc.w $EC01
 anim_frog_3:     dc.w off_2310           ; DATA XREF: spawn_frog_2+14   o
-                                        ; ROM:stru_25B534   o
+                                        ; ROM:object_frog   o
                 dc.w $EC01
 off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
                 dc.w off_2360
@@ -16221,7 +16221,7 @@ anim_fan:     dc.w off_24E4           ; DATA XREF: ROM:001B1CF4   o
                 dc.w off_24F0
                 dc.w $EA00
                 dc.l anim_fan
-anim_eye:     dc.w off_774            ; DATA XREF: ROM:stru_25B57C   o
+anim_eye:     dc.w off_774            ; DATA XREF: ROM:object_eye   o
                 dc.w off_774
 off_1B1CFC:     dc.w off_778            ; DATA XREF: ROM:001B1D12   o
                 dc.w off_778
@@ -16347,7 +16347,7 @@ off_1B1D94:     dc.w off_2094           ; DATA XREF: ROM:001B1E2C   o
                 dc.w $EA00
                 dc.l off_1B1D94
 anim_bee:       dc.w off_2180           ; DATA XREF: ROM:002566FC   o
-                                        ; ROM:stru_25B3FC   o
+                                        ; ROM:object_bee   o
                 dc.w $EC01
 off_1B1E34:     dc.w off_2184           ; DATA XREF: ROM:00256700   o
                 dc.w $EC01
@@ -16537,7 +16537,7 @@ word_1B1FB0:    dc.w $F32D              ; DATA XREF: ROM:001B1FA2   o
                 dc.w $EA00
                 dc.l anim_cage
 anim_chemical_flask:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
-                                        ; ROM:stru_25B4A4   o
+                                        ; ROM:object_chemical_flask   o
                 dc.w off_33E4
                 dc.w off_33E8
                 dc.w off_33E8
@@ -16583,7 +16583,7 @@ off_1B1FE2:     dc.w off_2780           ; DATA XREF: ROM:001B201A   o
                 dc.w $EA00
                 dc.l off_1B1FE2
 anim_monkey_head_2:     dc.w off_27D8           ; DATA XREF: ROM:001B2086   o
-                                        ; ROM:stru_25B474   o
+                                        ; ROM:object_monkey_head_rotating_valve   o
                 dc.w $ED11
                 dc.w $47
                 dc.w 1
@@ -16762,7 +16762,7 @@ off_1B217A:     dc.w off_27B0           ; DATA XREF: ROM:001B21C6   o
                 dc.w $F700
                 dc.w off_27BC
                 dc.w $F500
-                dc.l stru_25B4A4
+                dc.l object_chemical_flask
                 dc.w $1808
                 dc.l 0
                 dc.l 0
@@ -16778,7 +16778,7 @@ off_1B217A:     dc.w off_27B0           ; DATA XREF: ROM:001B21C6   o
                 dc.w $F700
                 dc.w off_27D0
                 dc.w $F500
-                dc.l stru_25B4A4
+                dc.l object_chemical_flask
                 dc.w $2008
                 dc.l 0
                 dc.l byte_1A39AA
@@ -16985,7 +16985,7 @@ off_1B22FA:     dc.w off_33B0           ; DATA XREF: ROM:001B238C   o
                 dc.w off_33DC
                 dc.w $EA00
                 dc.l off_1B22FA
-anim_air_bubble:     dc.w off_3368           ; DATA XREF: ROM:stru_25B6E4   o
+anim_air_bubble:     dc.w off_3368           ; DATA XREF: ROM:object_air_bubble   o
                 dc.w $EE8A
                 dc.w off_3368
                 dc.w $EE8B
@@ -17003,9 +17003,9 @@ anim_air_bubble:     dc.w off_3368           ; DATA XREF: ROM:stru_25B6E4   o
                 dc.w off_3384
                 dc.w $EC01
 anim_air_refiller:     dc.w off_33E0           ; DATA XREF: ROM:001B23CC   o
-                                        ; ROM:stru_25B6CC   o
+                                        ; ROM:object_air_refiller   o
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $3109
                 dc.l 0
                 dc.l 0
@@ -17024,7 +17024,7 @@ word_1B23D2:    dc.w $EE8F              ; DATA XREF: ROM:001B23DC   o
                 dc.w 0
                 dc.l word_1B23D2
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17041,7 +17041,7 @@ word_1B23FC:    dc.w $EE8E              ; DATA XREF: ROM:001B2406   o
                 dc.w 0
                 dc.l word_1B23FC
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17057,7 +17057,7 @@ word_1B2424:    dc.w $EE8D              ; DATA XREF: ROM:001B242E   o
                 dc.w 0
                 dc.l word_1B2424
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17073,7 +17073,7 @@ word_1B244C:    dc.w $EE8C              ; DATA XREF: ROM:001B2456   o
                 dc.w 0
                 dc.l word_1B244C
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17089,7 +17089,7 @@ word_1B2474:    dc.w $EE8B              ; DATA XREF: ROM:001B247E   o
                 dc.w 0
                 dc.l word_1B2474
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17101,7 +17101,7 @@ word_1B249C:    dc.w $EE8A              ; DATA XREF: ROM:001B24B6   o
                                         ; ROM:001B24CC   o
                 dc.w off_2608
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $E0
                 dc.l 0
                 dc.l 0
@@ -17110,7 +17110,7 @@ word_1B249C:    dc.w $EE8A              ; DATA XREF: ROM:001B24B6   o
                 dc.w 0
                 dc.l word_1B249C
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17122,7 +17122,7 @@ word_1B24D4:    dc.w $EE89              ; DATA XREF: ROM:001B24EE   o
                                         ; ROM:001B2504   o
                 dc.w off_260C
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $E0
                 dc.l 0
                 dc.l 0
@@ -17131,7 +17131,7 @@ word_1B24D4:    dc.w $EE89              ; DATA XREF: ROM:001B24EE   o
                 dc.w 0
                 dc.l word_1B24D4
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17143,7 +17143,7 @@ word_1B250C:    dc.w $EE88              ; DATA XREF: ROM:001B2526   o
                                         ; ROM:001B253C   o
                 dc.w off_2610
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $E0
                 dc.l 0
                 dc.l 0
@@ -17152,7 +17152,7 @@ word_1B250C:    dc.w $EE88              ; DATA XREF: ROM:001B2526   o
                 dc.w 0
                 dc.l word_1B250C
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17164,7 +17164,7 @@ word_1B2544:    dc.w $EE87              ; DATA XREF: ROM:001B255E   o
                                         ; ROM:001B2574   o
                 dc.w off_2614
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $E0
                 dc.l 0
                 dc.l 0
@@ -17173,7 +17173,7 @@ word_1B2544:    dc.w $EE87              ; DATA XREF: ROM:001B255E   o
                 dc.w 0
                 dc.l word_1B2544
                 dc.w $F500
-                dc.l stru_25B6E4
+                dc.l object_air_bubble
                 dc.w $D1F3
                 dc.l 0
                 dc.l 0
@@ -17224,7 +17224,7 @@ off_1B25BE:     dc.w off_DAC            ; DATA XREF: fire_to_bob_cat+40   o
                 dc.w $2B
                 dc.w $EA00
                 dc.l anim_bob_cat
-anim_planet:     dc.w off_2FA8           ; DATA XREF: ROM:stru_25B714   o
+anim_planet:     dc.w off_2FA8           ; DATA XREF: ROM:object_planet   o
                 dc.w $EC01
 off_1B25D8:     dc.w off_A10            ; DATA XREF: ROM:off_665A   o
                                         ; ROM:0000674A   o ...
@@ -17289,7 +17289,7 @@ off_1B2624:     dc.w off_A5C            ; DATA XREF: ROM:000066BE   o
 off_1B2628:     dc.w off_A60            ; DATA XREF: ROM:000066C2   o
                                         ; ROM:000066D2   o ...
                 dc.w $EC01
-anim_sphere_energy_3:     dc.w off_2FAC           ; DATA XREF: ROM:stru_25B7A4   o
+anim_sphere_energy_3:     dc.w off_2FAC           ; DATA XREF: ROM:object_protective_sphere   o
                 dc.w off_2FAC
 off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
                 dc.w off_2FB0
@@ -17994,7 +17994,7 @@ anim_air_fx:    dc.w off_998            ; DATA XREF: sub_2545A0+10   o
                 dc.w off_9AC
                 dc.w off_9AC
                 dc.w $F600
-anim_jim_open_door:     dc.w off_1494           ; DATA XREF: ROM:stru_25B834   o
+anim_jim_open_door:     dc.w off_1494           ; DATA XREF: ROM:object_jim_open_door   o
                 dc.w $EE9D
                 dc.w off_1494
                 dc.w $F32F
@@ -18015,7 +18015,7 @@ anim_jim_open_door:     dc.w off_1494           ; DATA XREF: ROM:stru_25B834   o
                 dc.w $FB00
                 dc.l sub_2564D4
                 dc.w $F600
-anim_jim_exit_door:     dc.w off_1460           ; DATA XREF: ROM:stru_25B84C   o
+anim_jim_exit_door:     dc.w off_1460           ; DATA XREF: ROM:object_exit_door   o
                 dc.w $EC01
 off_1B2B36:     dc.w off_1464           ; DATA XREF: sub_252FF4+10   o
                 dc.w $F32F
@@ -18049,7 +18049,7 @@ off_1B2B36:     dc.w off_1464           ; DATA XREF: sub_252FF4+10   o
                 dc.w 1
                 dc.w $F600
 anim_dark_monster:     dc.w off_1E54           ; DATA XREF: ROM:001B2B82   o
-                                        ; ROM:stru_25B864   o
+                                        ; ROM:object_dark_monster   o
                 dc.w $FB00
                 dc.l oksub_24951E
                 dc.w $F411
@@ -18118,7 +18118,7 @@ off_1B2BCA:     dc.w off_1E60           ; DATA XREF: ROM:001B2C0A   o
                 dc.w $F334
                 dc.w $EA00
                 dc.l off_1B2BCA
-anim_dark_enemy_2:     dc.w off_1E2C           ; DATA XREF: ROM:stru_25B8AC   o
+anim_dark_enemy_2:     dc.w off_1E2C           ; DATA XREF: ROM:object_dark_enemy_2   o
                 dc.w $F700
 off_1B2C12:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C38   o
                                         ; sub_2571B4+18   o ...
@@ -19363,7 +19363,7 @@ anim_explosion_2:dc.w off_2524          ; DATA XREF: ROM:stru_25A904   o
                 dc.w off_2548
                 dc.w off_2548
                 dc.w $F600
-anim_star:     dc.w off_870            ; DATA XREF: ROM:stru_25B804   o
+anim_star:     dc.w off_870            ; DATA XREF: ROM:object_collision_explosion   o
                 dc.w off_870
                 dc.w off_874
                 dc.w off_874
@@ -19499,7 +19499,7 @@ anim_cow_mini:  dc.w off_E44            ; DATA XREF: ROM:001B38A0   o
                                         ; ROM:stru_25AA54   o
                 dc.w $EA00
                 dc.l anim_cow_mini
-anim_lever_2:   dc.w off_864            ; DATA XREF: ROM:stru_25B414   o
+anim_lever_2:   dc.w off_864            ; DATA XREF: ROM:object_lever   o
                 dc.w $EC01
 off_1B38A8:     dc.w off_868            ; DATA XREF: fire_to_lever:loc_2560BA   o
                                         ; fire_to_activated_lever:loc_2560FE   o
@@ -20465,7 +20465,7 @@ off_1B4096:     dc.w off_20C8           ; DATA XREF: ROM:001B409E   o
                 dc.w $EA00
                 dc.l anim_eyes_generator
 anim_eyes_generator_2:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
-                                        ; ROM:stru_25B444   o
+                                        ; ROM:object_eyes_generator_active   o
                 dc.w $EE85
                 dc.w off_20C4
                 dc.w off_20C8
@@ -22990,7 +22990,7 @@ off_1B59BA:     dc.w off_2D9C           ; DATA XREF: ROM:001B59B2   o
 off_1B59C6:     dc.w off_2D9C           ; DATA XREF: ROM:001B59BE   o
                 dc.w $F600
 anim_sea_gate:     dc.w off_E94            ; DATA XREF: ROM:001B59D2   o
-                                        ; ROM:stru_25B6B4   o
+                                        ; ROM:object_sea_gate   o
                 dc.w $F411
                 dc.w $FE03
                 dc.w 0
@@ -23008,7 +23008,7 @@ off_1B59DE:     dc.w off_E94            ; DATA XREF: ROM:001B59E6   o
                 dc.l oksub_24950E
                 dc.w $EC01
 anim_open_handler:     dc.w off_E98            ; DATA XREF: spawn_open_handler_2+10   o
-                                        ; ROM:stru_25B6FC   o
+                                        ; ROM:object_open_handler   o
                 dc.w $EC01
 off_1B59F6:     dc.w off_E9C            ; DATA XREF: spawn_open_handler+18   o
                                         ; spawn_open_handler_2+24   o ...
@@ -23019,7 +23019,7 @@ word_1B59F8:    dc.w $EE83              ; DATA XREF: ROM:001B5A02   o
                 dc.w $EA00
                 dc.l word_1B59F8
 anim_gears:     dc.w off_2CB4           ; DATA XREF: ROM:001B5A18   o
-                                        ; ROM:stru_25B894   o
+                                        ; ROM:object_gears   o
                 dc.w off_2CB4
                 dc.w off_2CB0
                 dc.w off_2CB0
@@ -23129,7 +23129,7 @@ off_1B5AD0:     dc.w off_33AC           ; DATA XREF: ROM:0000C618   o
                 dc.w $FD4F
                 dc.w 0
                 dc.w $F600
-anim_princess:     dc.w off_2B04           ; DATA XREF: ROM:stru_25B90C   o
+anim_princess:     dc.w off_2B04           ; DATA XREF: ROM:object_princess   o
 word_1B5AE6:    dc.w $F35B              ; DATA XREF: ROM:001B5B14   o
                 dc.w $EE03
                 dc.w $EE88
@@ -23193,7 +23193,7 @@ off_1B5B48:     dc.w off_2AC0           ; DATA XREF: ROM:001B5B26   o
                 dc.w $FC80
 off_1B5B6A:     dc.w off_2AF0           ; DATA XREF: ROM:001ACB44   o
                 dc.w $F502
-                dc.l stru_25B924
+                dc.l object_crown
                 dc.w $F6F6
                 dc.l 0
                 dc.l 0
@@ -23217,7 +23217,7 @@ off_1B5B84:     dc.w off_2AFC           ; DATA XREF: ROM:001B5B92   o
                 dc.w $EA00
                 dc.l off_1B5B84
 off_1B5BA4:     dc.w off_2A80           ; DATA XREF: ROM:001B5BEC   o
-                                        ; ROM:stru_25B924   o
+                                        ; ROM:object_crown   o
                 dc.w off_2A80
                 dc.w off_2A84
                 dc.w $F441
@@ -23258,7 +23258,7 @@ off_1B5BF0:     dc.w off_2AB0           ; DATA XREF: ROM:001B5BB0   o
                 dc.w off_2AB4
                 dc.w $EC01
 off_1B5BFA:     dc.w off_AB4            ; DATA XREF: ROM:001B5C30   o
-                                        ; ROM:stru_25B93C   o
+                                        ; ROM:object_gleam   o
                 dc.w off_AB8
                 dc.w off_ABC
                 dc.w off_ABC
@@ -23283,7 +23283,7 @@ off_1B5C20:     dc.w off_AB4            ; DATA XREF: ROM:001B5C24   o
                 dc.l oksub_249526
                 dc.w $EA00
                 dc.l off_1B5BFA
-off_1B5C34:     dc.w off_AB4            ; DATA XREF: ROM:stru_25B954   o
+off_1B5C34:     dc.w off_AB4            ; DATA XREF: ROM:object_gleam_2   o
                 dc.w off_AB8
                 dc.w off_ABC
                 dc.w off_ABC
@@ -23301,7 +23301,7 @@ off_1B5C34:     dc.w off_AB4            ; DATA XREF: ROM:stru_25B954   o
                 dc.w off_AB4
                 dc.w $F600
 off_1B5C56:     dc.w off_E24            ; DATA XREF: ROM:001B5C5E   o
-                                        ; ROM:stru_25B96C   o
+                                        ; ROM:object_cow_end_screen   o
                 dc.w $F431
                 dc.w $FD77
                 dc.w 6
@@ -23332,7 +23332,7 @@ off_1B5C76:     dc.w off_E24            ; DATA XREF: ROM:001B5C84   o
 off_1B5C98:     dc.w off_E40            ; DATA XREF: ROM:001B5C70   o
                                         ; ROM:001B5C7E   o
                 dc.w $EC01
-off_1B5C9C:     dc.w off_17E0           ; DATA XREF: ROM:stru_25B8F4   o
+off_1B5C9C:     dc.w off_17E0           ; DATA XREF: ROM:object_jim_end_screen   o
 word_1B5C9E:    dc.w $FC00              ; DATA XREF: ROM:001B5CB0   o
                 dc.l off_1B5E44
                 dc.w $FC00
@@ -23380,7 +23380,7 @@ word_1B5C9E:    dc.w $FC00              ; DATA XREF: ROM:001B5CB0   o
                 dc.w $EE8E
                 dc.w off_1818
                 dc.w $F501
-                dc.l stru_25B954
+                dc.l object_gleam_2
                 dc.w off_1CEC
                 dc.l 0
                 dc.l 0
@@ -23601,10 +23601,10 @@ off_1B5E98:     dc.w off_17A4           ; DATA XREF: ROM:001B5CB6   o
                 dc.w $EE83
                 dc.w off_17B8
                 dc.w $FC80
-off_1B5ECC:     dc.w off_2ACC           ; DATA XREF: ROM:stru_25B984   o
+off_1B5ECC:     dc.w off_2ACC           ; DATA XREF: ROM:object_princess_land   o
                 dc.w $EC01
 off_1B5ED0:     dc.w off_2A4C           ; DATA XREF: ROM:001B5ED8   o
-                                        ; ROM:stru_25B99C   o
+                                        ; ROM:object_destruction_land   o
                 dc.w $F431
                 dc.w $FD77
                 dc.w 7
@@ -23655,7 +23655,7 @@ off_1B5F3A:     dc.w off_2A78           ; DATA XREF: ROM:stru_25B9B4   o
 off_1B5F3E:     dc.w off_2A7C           ; DATA XREF: ROM:stru_25B9CC   o
                 dc.w $EC01
 off_1B5F42:     dc.w off_2AD0           ; DATA XREF: ROM:001B5F6C   o
-                                        ; ROM:stru_25B9E4   o
+                                        ; ROM:object_water_washes_rock   o
                 dc.w off_2AD0
                 dc.w off_2AD4
                 dc.w off_2AD4
@@ -23809,7 +23809,7 @@ anim_bomb_2:     dc.w off_34B8           ; DATA XREF: ROM:object_bomb   o
 off_1B607A:     dc.w off_2CFC           ; DATA XREF: sub_24E764+80   o
                                         ; ROM:0025BABC   o
                 dc.w $EC01
-anim_aquarium_breaking:     dc.w off_788            ; DATA XREF: ROM:stru_25B66C   o
+anim_aquarium_breaking:     dc.w off_788            ; DATA XREF: ROM:object_fish_boss_aquarium   o
                 dc.w $F700
 word_1B6082:    dc.w $EE83              ; DATA XREF: ROM:001B6094   o
                 dc.w off_788
@@ -23822,7 +23822,7 @@ word_1B6082:    dc.w $EE83              ; DATA XREF: ROM:001B6094   o
                 dc.w $EA00
                 dc.l word_1B6082
 anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
-                                        ; ROM:stru_25B63C   o
+                                        ; ROM:object_bob_goldfish   o
                 dc.w $EE01
                 dc.w off_794
                 dc.w off_798
@@ -23940,7 +23940,7 @@ off_1B617E:     dc.w off_7DC            ; DATA XREF: ROM:001ACE84   o
                 dc.w off_7E0
                 dc.w off_7E4
                 dc.w $F500
-                dc.l stru_25B63C
+                dc.l object_bob_goldfish
                 dc.w 0
                 dc.l 0
                 dc.l 0
@@ -23948,7 +23948,7 @@ off_1B617E:     dc.w off_7DC            ; DATA XREF: ROM:001ACE84   o
                 dc.w off_7EC
                 dc.w off_7F0
                 dc.w $F600
-anim_aquarium_column:     dc.w off_7F4            ; DATA XREF: ROM:stru_25B654   o
+anim_aquarium_column:     dc.w off_7F4            ; DATA XREF: ROM:object_aquarium_column   o
                 dc.w $EC01
 anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                                         ; ROM:object_moving_platform   o
@@ -26554,7 +26554,7 @@ loc_247050:                             ; CODE XREF: sub_247022+2A   j
                 subq.b  #1,(super_bubble_count).l
                 bsr.w   find_free_obj_slot_ad06
                 bne.s   loc_247090
-                lea     (stru_25B7A4).l,a6
+                lea     (object_protective_sphere).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #3,$46(a5)
                 move.w  #$F0,(super_bubble_timer).l
@@ -32652,7 +32652,7 @@ sub_24B638:                             ; CODE XREF: sub_245AE4+FE   p
                 clr.w   (camera_y).l
                 st      (is_continue_screen).l
                 lea     (obj_01).l,a5
-                lea     (stru_25B8DC).l,a6
+                lea     (object_jim_tosses_gun_up).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$120,2(a5)
                 move.w  #$1C2,4(a5)
@@ -33475,37 +33475,37 @@ loc_24C1E6:                             ; CODE XREF: ure_the_best_screen+AC   j
                 lea     (0).w,a1
                 bsr.w   pre_unpack_rnc
                 lea     (obj_01).l,a5
-                lea     (stru_25B8F4).l,a6
+                lea     (object_jim_end_screen).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$20,2(a5) ; ' '
                 move.w  #$190,4(a5)
                 lea     (obj_02).l,a5
-                lea     (stru_25B90C).l,a6
+                lea     (object_princess).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$168,2(a5)
                 move.w  #$17B,4(a5)
                 lea     (obj_pool_ad06).l,a5
-                lea     (stru_25B96C).l,a6
+                lea     (object_cow_end_screen).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$152,2(a5)
                 move.w  #$8D,4(a5)
                 lea     (unk_FFA880).l,a5
-                lea     (stru_25B984).l,a6
+                lea     (object_princess_land).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$165,2(a5)
                 move.w  #$179,4(a5)
                 lea     (unk_FFA82A).l,a5
-                lea     (stru_25B99C).l,a6
+                lea     (object_destruction_land).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$165,2(a5)
                 move.w  #$179,4(a5)
                 bsr.w   find_free_obj_slot_ad06
-                lea     (stru_25B9E4).l,a6
+                lea     (object_water_washes_rock).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$A0,2(a5)
                 move.w  #$1CA,4(a5)
                 bsr.w   find_free_obj_slot_ad06
-                lea     (stru_25B9E4).l,a6
+                lea     (object_water_washes_rock).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$117,2(a5)
                 move.w  #$1CB,4(a5)
@@ -36194,7 +36194,7 @@ sub_24DEA6:                             ; DATA XREF: ROM:00005824   o
                 st      (byte_FFFD44).l
                 jsr     find_free_obj_slot_ad66(pc)
                 bne.s   locret_24DEF0
-                lea     (stru_25B5DC).l,a6
+                lea     (object_intestinal_boss).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$22,2(a5) ; '"'
                 move.w  #$23B,4(a5)
@@ -37891,9 +37891,9 @@ loc_24F580:                             ; CODE XREF: sub_24F4F0+5E   j
                 move.b  (frame_counter).l,d7
                 andi.b  #$F,d7
                 bne.w   locret_24F5A0
-                tst.b   (byte_FFFD69).l
+                tst.b   (ropejump_impact_timer).l
                 beq.w   locret_24F5A0
-                subq.b  #1,(byte_FFFD69).l
+                subq.b  #1,(ropejump_impact_timer).l
                 rts
 ; ---------------------------------------------------------------------------
 locret_24F5A0:                          ; CODE XREF: sub_24F4F0+9A   j
@@ -38306,7 +38306,7 @@ loc_24FAC8:                             ; CODE XREF: sub_24F99E+114   j
                 bne.s   loc_24FAFC
                 jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_24FAF8
-                lea     (stru_25B714).l,a6
+                lea     (object_planet).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$10,2(a5)
                 move.w  #$230,4(a5)
@@ -38725,14 +38725,14 @@ sub_24FF38:                             ; CODE XREF: sub_24FEC6   p
                 lea     (obj_01).l,a5
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #4,$46(a5)
-                move.b  #0,(byte_FFFD6A).l
+                move.b  #0,(is_jim_bungee_snapped).l
                 jsr     find_free_obj_slot_ad66(pc)
                 bne.w   loc_25007A
                 lea     (stru_25AF1C).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$98,2(a5)
                 move.w  #$148,4(a5)
-                move.b  #$A,(byte_FFFD70).l
+                move.b  #$A,(jim_bungee_health_shown).l
                 jsr     find_free_obj_slot_ad66(pc)
                 bne.w   loc_25007A
                 lea     (stru_25AFAC).l,a6
@@ -38743,7 +38743,7 @@ sub_24FF38:                             ; CODE XREF: sub_24FEC6   p
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #$FF,$35(a5)
                 st      (byte_FFFD6B).l
-                move.b  #2,(byte_FFFD6C).l
+                move.b  #2,(snot_intro_bungee_phase).l
                 move.w  #$FF,(snot_state).l
                 move.b  #0,(snot_state_request).l
                 clr.w   (word_FFFF54).l
@@ -38760,7 +38760,7 @@ sub_24FF38:                             ; CODE XREF: sub_24FEC6   p
                 move.w  #$180,(word_FFFCEA).l
                 clr.w   (word_FFFCEC).l
                 clr.w   (word_FFFCEE).l
-                move.b  #$A,(byte_FFFD71).l
+                move.b  #$A,(snot_bungee_health_shown).l
                 jsr     find_free_obj_slot_ad66(pc)
                 bne.w   loc_25007A
                 lea     (stru_25AF34).l,a6
@@ -39007,7 +39007,7 @@ sub_25035A:                             ; CODE XREF: sub_250288+4   p
                 clr.b   (andy_flight_speed).l
                 jsr     find_free_obj_slot_ad36(pc)  ; При отключении не рисует огонь, и нет звука стрельбы
                 bne.s   loc_2503F6
-                lea     (stru_25B7BC).l,a6
+                lea     (object_psycrow).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #2,(word_FFFE94).l
                 move.w  #$700,$52(a5)
@@ -39028,13 +39028,13 @@ loc_2503F6:                             ; CODE XREF: sub_25035A+56   j
                 clr.w   (word_FFFE9C).l
                 jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_250424
-                lea     (stru_25B7D4).l,a6
+                lea     (object_rocket_flame).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.b  #3,$46(a5)
 loc_250424:                             ; CODE XREF: sub_25035A+B8   j
                 jsr     find_free_obj_slot_ad06(pc)
                 bne.s   locret_250434
-                lea     (stru_25B7EC).l,a6
+                lea     (object_psycrow_rocket_flame).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
 locret_250434:                          ; CODE XREF: sub_25035A+CE   j
                 rts
@@ -39124,7 +39124,7 @@ sub_2504E6:                             ; DATA XREF: ROM:0025C1AC   o
                 clr.b   (jim_obj_id).l
                 move.b  #0,(is_jim_left_direction).l
                 lea     (obj_01).l,a5
-                lea     (stru_25B8C4).l,a6
+                lea     (object_jim_eyes_in_dark).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 lea     (obj_01).l,a1
                 jsr     (sub_256D2E).l
@@ -39141,7 +39141,7 @@ nullsub_11:                             ; DATA XREF: ROM:off_35E4   o
 spawn_sea_gate:                             ; DATA XREF: ROM:00005528   o
                 tst.b   (byte_FFFE03).l
                 bne.s   locret_250538
-                lea     (stru_25B6B4).l,a6
+                lea     (object_sea_gate).l,a6
                 jsr     spawn_object(pc)
 locret_250538:                          ; CODE XREF: spawn_sea_gate+6   j
                 rts
@@ -39177,7 +39177,7 @@ spawn_air_refiller_main:                             ; CODE XREF: spawn_air_refi
                                         ; spawn_air_refiller_99_sec+12   j ...
                 bsr.w   find_free_obj_slot_ad1e
                 bne.s   locret_250586
-                lea     (stru_25B6CC).l,a6
+                lea     (object_air_refiller).l,a6
                 jsr     loc_24DB1E(pc)
 locret_250586:                          ; CODE XREF: spawn_air_refiller_99_sec+2A   j
                 rts
@@ -39187,7 +39187,7 @@ locret_250586:                          ; CODE XREF: spawn_air_refiller_99_sec+2
 spawn_sea_gate_2:                             ; DATA XREF: ROM:0000552C   o
                 tst.b   (byte_FFFE04).l
                 bne.s   locret_2505A8
-                lea     (stru_25B6B4).l,a6
+                lea     (object_sea_gate).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_2505A8
                 move.b  #$3B,(a5) ; ';'
@@ -39199,7 +39199,7 @@ locret_2505A8:                          ; CODE XREF: spawn_sea_gate_2+6   j
 
 
 spawn_open_handler:                             ; DATA XREF: ROM:00005520   o
-                lea     (stru_25B6FC).l,a6
+                lea     (object_open_handler).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_2505CA
                 tst.b   (byte_FFFE03).l
@@ -39213,7 +39213,7 @@ locret_2505CA:                          ; CODE XREF: spawn_open_handler+A   j
 
 
 spawn_open_handler_2:                             ; DATA XREF: ROM:00005524   o
-                lea     (stru_25B6FC).l,a6
+                lea     (object_open_handler).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_2505F8
                 move.b  #$3D,(a5) ; '='
@@ -39612,7 +39612,7 @@ locret_25095E:                          ; CODE XREF: spawn_water_monster+A   j
 
 
 spawn_eyes_generator_active:                             ; DATA XREF: ROM:000052E8   o
-                lea     (stru_25B444).l,a6
+                lea     (object_eyes_generator_active).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_250974
                 addq.w  #4,2(a5)
@@ -39624,7 +39624,7 @@ locret_250974:                          ; CODE XREF: spawn_eyes_generator_active
 
 spawn_eyes_generator_closed:                             ; DATA XREF: ROM:000052C4   o
                 move.b  #1,(byte_FFFD3E).l
-                lea     (stru_25B42C).l,a6
+                lea     (object_eyes_generator).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_250992
                 addq.w  #4,2(a5)
@@ -39635,7 +39635,7 @@ locret_250992:                          ; CODE XREF: spawn_eyes_generator_closed
 
 
 spawn_green_goose:                             ; DATA XREF: ROM:000052C0   o
-                lea     (stru_25B4EC).l,a6
+                lea     (object_green_goose).l,a6
                 jsr     loc_24DB18(pc)
                 bne.s   locret_2509A8
                 move.b  #$E,(palette2_index).l
@@ -39646,7 +39646,7 @@ locret_2509A8:                          ; CODE XREF: spawn_green_goose+A   j
 
 spawn_jim_exit_door:                             ; DATA XREF: ROM:000053F8   o
                                         ; ROM:000053FC   o ...
-                lea     (stru_25B84C).l,a6
+                lea     (object_exit_door).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_jim_exit_door
@@ -39843,7 +39843,7 @@ spawn_ufo:                             ; DATA XREF: ROM:000054F8   o
                 move.w  #2,d0
                 jsr     loc_24AD10(pc)
                 bne.s   loc_250B96
-                lea     (stru_25B3FC).l,a6
+                lea     (object_bee).l,a6
                 lea     (stru_25B0B4).l,a6
                 bsr.w   loc_24DB1E
 loc_250B96:                             ; CODE XREF: spawn_ufo+10   j
@@ -40109,28 +40109,28 @@ locret_250E7E:                          ; CODE XREF: spawn_spring_platform_2+20 
 
 
 spawn_jim_entering_in_darkroom:                             ; DATA XREF: ROM:00005300   o
-                lea     (stru_25B834).l,a6
+                lea     (object_jim_open_door).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_jim_entering_in_darkroom
 
 
 spawn_dark_mini_monster_2:                             ; DATA XREF: ROM:00005304   o
-                lea     (stru_25B8AC).l,a6
+                lea     (object_dark_enemy_2).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_dark_mini_monster_2
 
 
 spawn_gears:                             ; DATA XREF: ROM:00005308   o
-                lea     (stru_25B894).l,a6
+                lea     (object_gears).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_gears
 
 
 spawn_gears_down:                             ; DATA XREF: ROM:0000530C   o
-                lea     (stru_25B894).l,a6
+                lea     (object_gears).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_250EBC
                 move.b  #$FF,$35(a5)
@@ -40141,14 +40141,14 @@ locret_250EBC:                          ; CODE XREF: spawn_gears_down+A   j
 
 
 spawn_dark_mini_monster:                             ; DATA XREF: ROM:000052F8   o
-                lea     (stru_25B87C).l,a6
+                lea     (object_dark_enemy).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_dark_mini_monster
 
 
 spawn_dark_monster:                             ; DATA XREF: ROM:000052FC   o
-                lea     (stru_25B864).l,a6
+                lea     (object_dark_monster).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_dark_monster
@@ -40277,7 +40277,7 @@ locret_250FC4:                          ; CODE XREF: spawn_jump_spring+E   j
 
 
 spawn_monkey_head_rotating_valve:                             ; DATA XREF: ROM:000053A4   o
-                lea     (stru_25B474).l,a6
+                lea     (object_monkey_head_rotating_valve).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_251008
                 move.b  #$10,(palette2_index).l
@@ -40287,7 +40287,7 @@ spawn_monkey_head_rotating_valve:                             ; DATA XREF: ROM:0
                 movea.l a5,a1
                 jsr     find_free_obj_slot_ad06(pc)
                 bne.s   loc_251006
-                lea     (stru_25B48C).l,a6
+                lea     (object_valve).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
                 move.w  4(a1),4(a5)
@@ -40327,7 +40327,7 @@ spawn_monkey_head:                             ; DATA XREF: ROM:00005344   o
                 clr.b   (a1)
                 bsr.w   free_obj_vram_a1
 loc_25104A:                             ; CODE XREF: spawn_monkey_head+12   j
-                lea     (stru_25B45C).l,a6
+                lea     (object_monkey_head).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_251068
                 move.b  #$10,(palette2_index).l
@@ -40350,7 +40350,7 @@ spawn_monkey_head_2:                             ; DATA XREF: ROM:00005348   o
                 clr.b   (a1)
                 bsr.w   free_obj_vram_a1
 loc_25108C:                             ; CODE XREF: spawn_monkey_head_2+12   j
-                lea     (stru_25B45C).l,a6
+                lea     (object_monkey_head).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_2510AA
                 move.b  #$10,(palette2_index).l
@@ -40373,7 +40373,7 @@ spawn_monkey_head_3:                             ; DATA XREF: ROM:0000534C   o
                 clr.b   (a1)
                 bsr.w   free_obj_vram_a1
 loc_2510CE:                             ; CODE XREF: spawn_monkey_head_3+12   j
-                lea     (stru_25B45C).l,a6
+                lea     (object_monkey_head).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_2510EC
                 move.b  #$10,(palette2_index).l
@@ -40387,28 +40387,28 @@ locret_2510EC:                          ; CODE XREF: spawn_monkey_head_3+8   j
 
 spawn_bee_home:                             ; DATA XREF: ROM:000053AC   o
                                         ; ROM:000054D4   o
-                lea     (stru_25B3E4).l,a6
+                lea     (object_bee_home).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_bee_home
 
 
 spawn_frog_3:                             ; DATA XREF: ROM:000054D8   o
-                lea     (stru_25B504).l,a6
+                lea     (object_frog_trigger).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_frog_3
 
 
 spawn_frog:                             ; DATA XREF: ROM:000054B0   o
-                lea     (stru_25B534).l,a6
+                lea     (object_frog).l,a6
                 jsr     spawn_object(pc)
                 rts
 ; End of function spawn_frog
 
 
 spawn_frog_2:                             ; DATA XREF: ROM:000054B4   o
-                lea     (stru_25B534).l,a6
+                lea     (object_frog).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_251132
                 move.l  #sub_252456,$42(a5)
@@ -40431,13 +40431,13 @@ locret_251148:                          ; CODE XREF: spawn_daemon+A   j
 
 spawn_fish_boss:                             ; DATA XREF: ROM:000053F4   o
                 move.l  a2,-(sp)
-                lea     (stru_25B66C).l,a6
+                lea     (object_fish_boss_aquarium).l,a6
                 bsr.w   loc_24DB18
                 bne.s   loc_251184
                 movea.l a5,a2
                 bsr.w   find_free_obj_slot_ad06
                 bne.s   loc_251184
-                lea     (stru_25B654).l,a6
+                lea     (object_aquarium_column).l,a6
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a2),2(a5)
                 move.w  4(a2),4(a5)
@@ -40594,7 +40594,7 @@ locret_2512D2:                          ; CODE XREF: spawn_incubator_right_up+A 
 
 
 spawn_lever:                             ; DATA XREF: ROM:0000537C   o
-                lea     (stru_25B414).l,a6
+                lea     (object_lever).l,a6
                 jsr     spawn_object(pc)
                 clr.b   (byte_FFFD34).l
                 rts
@@ -40602,7 +40602,7 @@ spawn_lever:                             ; DATA XREF: ROM:0000537C   o
 
 
 spawn_lever_actived:                             ; DATA XREF: ROM:00005570   o
-                lea     (stru_25B414).l,a6
+                lea     (object_lever).l,a6
                 jsr     spawn_object(pc)
                 bne.s   locret_251304
                 move.l  #off_1B38C6,$20(a5)
@@ -41680,7 +41680,7 @@ loc_2522C0:                             ; CODE XREF: oksub_25228E+E   j
 ; End of function oksub_25228E
 
 
-sub_2522C8:                             ; DATA XREF: ROM:stru_25B5DC   o
+sub_2522C8:                             ; DATA XREF: ROM:object_intestinal_boss   o
                 jsr     (sub_25660E).l
                 rts
 ; End of function sub_2522C8
@@ -41810,7 +41810,7 @@ loc_25242E:                             ; CODE XREF: sub_25240E+C   j
 ; End of function sub_25240E
 
 
-sub_252440:                             ; DATA XREF: ROM:stru_25B534   o
+sub_252440:                             ; DATA XREF: ROM:object_frog   o
                 move.w  (word_FFFCC8).l,d7
                 lea     (off_C61C).l,a6
                 move.l  (a6,d7.w),d7
@@ -47261,7 +47261,7 @@ loc_25666C:                             ; CODE XREF: sub_25660E+C   j
 ; End of function sub_25660E
 
 
-sub_256672:                             ; DATA XREF: ROM:stru_25B3FC   o
+sub_256672:                             ; DATA XREF: ROM:object_bee   o
                 btst    #0,(frame_counter).l
                 bne.w   locret_2566F6
                 movem.l d5-d7/a0,-(sp)
@@ -47594,7 +47594,7 @@ loc_256B10:                             ; CODE XREF: spawn_bee+10   j
                 bcc.s   locret_256B3E
                 jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256B3E
-                lea     (stru_25B3FC).l,a6
+                lea     (object_bee).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
                 move.w  4(a1),4(a5)
@@ -47647,7 +47647,7 @@ spawn_egg_with_needles:                             ; CODE XREF: incubator_down_
                 jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_256BCA
                 st      d6
-                lea     (stru_25B564).l,a6
+                lea     (object_egg_with_needles).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
                 move.w  4(a1),4(a5)
@@ -48177,7 +48177,7 @@ loc_2571AE:                             ; CODE XREF: sub_2570E2+24   j
 ; End of function sub_2570E2
 
 
-sub_2571B4:                             ; DATA XREF: ROM:stru_25B8AC   o
+sub_2571B4:                             ; DATA XREF: ROM:object_dark_enemy_2   o
                 cmpi.b  #$83,$3D(a1)
                 beq.s   loc_2571DA
                 cmpi.b  #$84,$3D(a1)
@@ -48337,14 +48337,14 @@ sub_25734E:                             ; CODE XREF: ropejump_control+36   p
                 beq.s   loc_25736E
                 jsr     (is_jump_pressed).l
                 beq.s   loc_25736E
-                clr.b   (byte_FFFD67).l
+                clr.b   (ropejump_button_latch).l
                 rts
 ; ---------------------------------------------------------------------------
 loc_25736E:                             ; CODE XREF: sub_25734E+6   j
                                         ; sub_25734E+E   j ...
-                tst.b   (byte_FFFD67).l
+                tst.b   (ropejump_button_latch).l
                 bne.w   locret_25738E
-                st      (byte_FFFD67).l
+                st      (ropejump_button_latch).l
                 tst.w   (word_FFFCDE).l
                 bpl.w   locret_25738E
                 jsr     (sub_25757E).l
@@ -48563,7 +48563,7 @@ loc_2575F0:                             ; CODE XREF: sub_25759E+6   j
 
 sub_257602:                             ; CODE XREF: sub_2573D4+46   p
                                         ; sub_2573D4+AC   p
-                move.b  #2,(byte_FFFD69).l
+                move.b  #2,(ropejump_impact_timer).l
                 move.w  2(a1),d7
                 move.w  d7,(word_FFFCF0).l
                 rts
@@ -48770,7 +48770,7 @@ loc_257920:                             ; CODE XREF: collision_with_snot+1C0   j
                 add.w   2(a1),d7
                 lsr.w   #1,d7
                 move.w  d7,(word_FFFCF0).l
-                move.b  #2,(byte_FFFD69).l
+                move.b  #2,(ropejump_impact_timer).l
                 move.w  d2,-(sp)
                 move.w  #$500,d2
                 move.w  (jim_obj_y).l,d7
@@ -49299,12 +49299,12 @@ sub_257F62:                             ; DATA XREF: ROM:stru_25AF7C   o
 ; ---------------------------------------------------------------------------
 loc_257F76:                             ; CODE XREF: sub_257F62+8   j
                 move.b  #0,d7
-                tst.b   (byte_FFFD72).l
+                tst.b   (rope_anim_index).l
                 bpl.s   loc_257F86
                 move.b  #$FF,d7
 loc_257F86:                             ; CODE XREF: sub_257F62+1E   j
                 move.b  d7,9(a1)
-                move.b  (byte_FFFD72).l,d7
+                move.b  (rope_anim_index).l,d7
                 andi.w  #$7F,d7
                 add.w   d7,d7
                 add.w   d7,d7
@@ -49347,9 +49347,9 @@ sub_257FE8:                             ; DATA XREF: ROM:stru_25AF1C   o
                 andi.b  #$FF,d7
                 subi.b  #$30,d7 ; '0'
                 add.b   d0,d7
-                cmp.b   (byte_FFFD70).l,d7
+                cmp.b   (jim_bungee_health_shown).l,d7
                 beq.w   loc_2580BE
-                move.b  d7,(byte_FFFD70).l
+                move.b  d7,(jim_bungee_health_shown).l
                 add.b   d7,d7
                 add.b   d7,d7
                 move.l  a0,-(sp)
@@ -49359,7 +49359,7 @@ sub_257FE8:                             ; DATA XREF: ROM:stru_25AF1C   o
                 move.l  d7,$20(a1)
                 clr.b   $37(a1)
                 movea.l (sp)+,a0
-                tst.b   (byte_FFFD70).l
+                tst.b   (jim_bungee_health_shown).l
                 bne.w   loc_2580BE
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   loc_2580BE
@@ -49369,7 +49369,7 @@ sub_257FE8:                             ; DATA XREF: ROM:stru_25AF1C   o
                 move.b  (jim_ropejumper_obj_delta_y).l,d7
                 jsr     (sub_2580C2).l
                 move.w  d7,(jim_y_speed).l
-                move.b  #$FF,(byte_FFFD6A).l
+                move.b  #$FF,(is_jim_bungee_snapped).l
                 move.w  #2,(word_FFFF46).l
                 move.l  #off_1AFBFA,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
@@ -49416,10 +49416,10 @@ sub_2580D8:                             ; DATA XREF: ROM:stru_25AF34   o
                 move.l  a2,-(sp)
                 movea.l (dword_FFFCE4).l,a2
                 move.b  1(a2),d7
-                cmp.b   (byte_FFFD71).l,d7
+                cmp.b   (snot_bungee_health_shown).l,d7
                 beq.w   loc_25810E
                 andi.w  #$F,d7
-                move.b  d7,(byte_FFFD71).l
+                move.b  d7,(snot_bungee_health_shown).l
                 add.w   d7,d7
                 add.w   d7,d7
                 lea     (off_25813E).l,a2
@@ -49650,7 +49650,7 @@ oksub_25839E:                           ; DATA XREF: ROM:001B4064   o
                 bcc.s   locret_2583D6
                 jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_2583D6
-                lea     (stru_25B57C).l,a6
+                lea     (object_eye).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),d7
                 addi.w  #-2,d7
@@ -49757,7 +49757,7 @@ oksub_258504:                           ; DATA XREF: ROM:001B58FC   o
 ; End of function oksub_258504
 
 
-sub_258518:                             ; DATA XREF: ROM:stru_25B7EC   o
+sub_258518:                             ; DATA XREF: ROM:object_psycrow_rocket_flame   o
                 movem.l d0-d7/a0-a6,-(sp)
                 move.b  (obj_01_draw_flags).l,d0
                 move.b  d0,7(a1)
@@ -49819,7 +49819,7 @@ loc_2585C4:                             ; CODE XREF: sub_258518+58   j
 ; End of function sub_258518
 
 
-sub_2585CA:                             ; DATA XREF: ROM:stru_25B7BC   o
+sub_2585CA:                             ; DATA XREF: ROM:object_psycrow   o
                 movem.l d0-d7/a0-a6,-(sp)
                 tst.w   (word_FFFE92).l
                 beq.s   loc_258624
@@ -50099,7 +50099,7 @@ collision_with_asteroid:                             ; DATA XREF: ROM:000035E8  
                 jsr     (free_obj_vram_a1).l
                 move.w  $52(a1),-(sp)
                 move.w  $50(a1),-(sp)
-                lea     (stru_25B804).l,a6
+                lea     (object_collision_explosion).l,a6
                 movea.l a1,a5
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  (sp)+,$50(a5)
@@ -50168,7 +50168,7 @@ locret_258A00:                          ; CODE XREF: collision_with_asteroid+FE 
 ; End of function collision_with_asteroid
 
 
-sub_258A02:                             ; DATA XREF: ROM:stru_25B804   o
+sub_258A02:                             ; DATA XREF: ROM:object_collision_explosion   o
                 movem.l d0-d7/a0-a6,-(sp)
                 clr.w   d0
                 move.b  (andy_flight_speed).l,d0
@@ -50395,7 +50395,7 @@ loc_258C4A:                             ; CODE XREF: project_tunnel_obj+9E   j
 ; End of function project_tunnel_obj
 
 
-sub_258C50:                             ; DATA XREF: ROM:stru_25B7D4   o
+sub_258C50:                             ; DATA XREF: ROM:object_rocket_flame   o
                 movem.l d0-d7/a0-a6,-(sp)
                 tst.b   (is_jim_blocked_by_enemy).l
                 bne.w   loc_258C70
@@ -50494,7 +50494,7 @@ sub_258D60:                             ; DATA XREF: ROM:001B1A62   o
                 beq.w   locret_258D9C
                 jsr     (find_free_obj_slot_ad06).l
                 bne.s   locret_258D9C
-                lea     (stru_25B51C).l,a6
+                lea     (object_frog_emerging_from_underground).l,a6
                 jsr     (load_sprite_struct).l ; При отключении нет спрайтов и объектов на уровнях
                 move.w  2(a1),2(a5)
                 move.w  4(a1),4(a5)
@@ -54701,7 +54701,7 @@ object_electro_up_down:    dc.b $65                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B3E4:    dc.b $32                ; obj_id
+object_bee_home:    dc.b $32                ; obj_id
                                         ; DATA XREF: spawn_bee_home   o
                 dc.b 5                  ; health
                 dc.b $20                ; obj_flags
@@ -54716,7 +54716,7 @@ stru_25B3E4:    dc.b $32                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B3FC:    dc.b $18                ; obj_id
+object_bee:    dc.b $18                ; obj_id
                                         ; DATA XREF: ROM:001B1592   o
                                         ; ROM:001B15A4   o ...
                 dc.b 0                  ; health
@@ -54732,7 +54732,7 @@ stru_25B3FC:    dc.b $18                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_256672         ; update_proc
-stru_25B414:    dc.b 6                  ; obj_id
+object_lever:    dc.b 6                  ; obj_id
                                         ; DATA XREF: spawn_lever   o
                                         ; spawn_lever_actived   o
                 dc.b 0                  ; health
@@ -54748,7 +54748,7 @@ stru_25B414:    dc.b 6                  ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B42C:    dc.b $86                ; obj_id
+object_eyes_generator:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_eyes_generator_closed+8   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -54763,7 +54763,7 @@ stru_25B42C:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B444:    dc.b $48                ; obj_id
+object_eyes_generator_active:    dc.b $48                ; obj_id
                                         ; DATA XREF: spawn_eyes_generator_active   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -54778,7 +54778,7 @@ stru_25B444:    dc.b $48                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B45C:    dc.b 3                  ; obj_id
+object_monkey_head:    dc.b 3                  ; obj_id
                                         ; DATA XREF: spawn_monkey_head:loc_25104A   o
                                         ; spawn_monkey_head_2:loc_25108C   o ...
                 dc.b 0                  ; health
@@ -54794,7 +54794,7 @@ stru_25B45C:    dc.b 3                  ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B474:    dc.b 4                  ; obj_id
+object_monkey_head_rotating_valve:    dc.b 4                  ; obj_id
                                         ; DATA XREF: spawn_monkey_head_rotating_valve   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -54809,7 +54809,7 @@ stru_25B474:    dc.b 4                  ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B48C:    dc.b $86                ; obj_id
+object_valve:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_monkey_head_rotating_valve+2A   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -54824,7 +54824,7 @@ stru_25B48C:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B4A4:    dc.b $4B                ; obj_id
+object_chemical_flask:    dc.b $4B                ; obj_id
                                         ; DATA XREF: ROM:001B218A   o
                                         ; ROM:001B21B0   o
                 dc.b 0                  ; health
@@ -54855,7 +54855,7 @@ object_cage:    dc.b $60                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B4D4:    dc.b $86                ; obj_id
+object_larva:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AD2C6   o
                                         ; ROM:001AD2D8   o ...
                 dc.b 0                  ; health
@@ -54871,7 +54871,7 @@ stru_25B4D4:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B4EC:    dc.b $1A                ; obj_id
+object_green_goose:    dc.b $1A                ; obj_id
                                         ; DATA XREF: spawn_green_goose   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -54886,7 +54886,7 @@ stru_25B4EC:    dc.b $1A                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B504:    dc.b $86                ; obj_id
+object_frog_trigger:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_frog_3   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -54901,7 +54901,7 @@ stru_25B504:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B51C:    dc.b $98                ; obj_id
+object_frog_emerging_from_underground:    dc.b $98                ; obj_id
                                         ; DATA XREF: sub_258D60+24   o
                 dc.b 0                  ; health
                 dc.b 1                  ; obj_flags
@@ -54916,7 +54916,7 @@ stru_25B51C:    dc.b $98                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B534:    dc.b $42                ; obj_id
+object_frog:    dc.b $42                ; obj_id
                                         ; DATA XREF: spawn_frog   o
                                         ; spawn_frog_2   o
                 dc.b 0                  ; health
@@ -54948,7 +54948,7 @@ object_incubator:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B564:    dc.b 8                  ; obj_id
+object_egg_with_needles:    dc.b 8                  ; obj_id
                                         ; DATA XREF: spawn_egg_with_needles+C   o
                 dc.b 0                  ; health
                 dc.b 1                  ; obj_flags
@@ -54963,7 +54963,7 @@ stru_25B564:    dc.b 8                  ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B57C:    dc.b 9                  ; obj_id
+object_eye:    dc.b 9                  ; obj_id
                                         ; DATA XREF: oksub_25839E+18   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55023,7 +55023,7 @@ object_fan_fish:    dc.b $45                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B5DC:    dc.b $17                ; obj_id
+object_intestinal_boss:    dc.b $17                ; obj_id
                                         ; DATA XREF: sub_24DEA6+2C   o
                 dc.b $14                ; health
                 dc.b $21                ; obj_flags
@@ -55038,7 +55038,7 @@ stru_25B5DC:    dc.b $17                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_2522C8         ; update_proc
-stru_25B5F4:    dc.b $79                ; obj_id
+object_intestinal_boss_tear:    dc.b $79                ; obj_id
                                         ; DATA XREF: ROM:001AD818   o
                                         ; ROM:001AD828   o ...
                 dc.b 0                  ; health
@@ -55048,13 +55048,13 @@ stru_25B5F4:    dc.b $79                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $4000              ; sprite_attr
-                dc.l anim_unknown_enemy         ; anim_address
+                dc.l anim_intestinal_boss_tear         ; anim_address
                 dc.b 1                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B60C:    dc.b $86                ; obj_id
+object_chips:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001AD7AA   o
                                         ; ROM:001AD7BC   o ...
                 dc.b 0                  ; health
@@ -55086,7 +55086,7 @@ object_daemon:    dc.b $44                ; obj_id
                 dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B63C:    dc.b $86                ; obj_id
+object_bob_goldfish:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B6188   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55101,7 +55101,7 @@ stru_25B63C:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B654:    dc.b $86                ; obj_id
+object_aquarium_column:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_fish_boss+16   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55116,7 +55116,7 @@ stru_25B654:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B66C:    dc.b $46                ; obj_id
+object_fish_boss_aquarium:    dc.b $46                ; obj_id
                                         ; DATA XREF: spawn_fish_boss+2   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -55162,7 +55162,7 @@ stru_25B69C:    dc.b $86                ; obj_id
                 dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B6B4:    dc.b $3A                ; obj_id
+object_sea_gate:    dc.b $3A                ; obj_id
                                         ; DATA XREF: spawn_sea_gate+8   o
                                         ; spawn_sea_gate_2+8   o
                 dc.b 0                  ; health
@@ -55178,7 +55178,7 @@ stru_25B6B4:    dc.b $3A                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B6CC:    dc.b $82                ; obj_id
+object_air_refiller:    dc.b $82                ; obj_id
                                         ; DATA XREF: spawn_air_refiller_99_sec+2C   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -55193,7 +55193,7 @@ stru_25B6CC:    dc.b $82                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B6E4:    dc.b $86                ; obj_id
+object_air_bubble:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ADA36   o
                                         ; ROM:001ADA52   o ...
                 dc.b 0                  ; health
@@ -55209,7 +55209,7 @@ stru_25B6E4:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B6FC:    dc.b $3C                ; obj_id
+object_open_handler:    dc.b $3C                ; obj_id
                                         ; DATA XREF: spawn_open_handler   o
                                         ; spawn_open_handler_2   o
                 dc.b 0                  ; health
@@ -55225,7 +55225,7 @@ stru_25B6FC:    dc.b $3C                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B714:    dc.b $86                ; obj_id
+object_planet:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24F99E+136   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55315,7 +55315,7 @@ stru_25B78C:    dc.b $86                ; obj_id
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_2592B6         ; update_proc
-stru_25B7A4:    dc.b $86                ; obj_id
+object_protective_sphere:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_247022+52   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55330,7 +55330,7 @@ stru_25B7A4:    dc.b $86                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B7BC:    dc.b $F                 ; obj_id
+object_psycrow:    dc.b $F                 ; obj_id
                                         ; DATA XREF: sub_25035A+58   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55345,7 +55345,7 @@ stru_25B7BC:    dc.b $F                 ; obj_id
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_2585CA         ; update_proc
-stru_25B7D4:    dc.b $86                ; obj_id
+object_rocket_flame:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_25035A+BA   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55360,7 +55360,7 @@ stru_25B7D4:    dc.b $86                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_258C50         ; update_proc
-stru_25B7EC:    dc.b $86                ; obj_id
+object_psycrow_rocket_flame:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_25035A+D0   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55375,7 +55375,7 @@ stru_25B7EC:    dc.b $86                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_258518         ; update_proc
-stru_25B804:    dc.b $86                ; obj_id
+object_collision_explosion:    dc.b $86                ; obj_id
                                         ; DATA XREF: collision_with_asteroid+1A   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55404,7 +55404,7 @@ stru_25B804:    dc.b $86                ; obj_id
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B834:    dc.b $86                ; obj_id
+object_jim_open_door:    dc.b $86                ; obj_id
                                         ; DATA XREF: spawn_jim_entering_in_darkroom   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -55419,7 +55419,7 @@ stru_25B834:    dc.b $86                ; obj_id
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B84C:    dc.b $62                ; obj_id
+object_exit_door:    dc.b $62                ; obj_id
                                         ; DATA XREF: spawn_jim_exit_door   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -55434,7 +55434,7 @@ stru_25B84C:    dc.b $62                ; obj_id
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B864:    dc.b $66                ; obj_id
+object_dark_monster:    dc.b $66                ; obj_id
                                         ; DATA XREF: spawn_dark_monster   o
                 dc.b 0                  ; health
                 dc.b $21                ; obj_flags
@@ -55449,7 +55449,7 @@ stru_25B864:    dc.b $66                ; obj_id
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B87C:    dc.b $1B                ; obj_id
+object_dark_enemy:    dc.b $1B                ; obj_id
                                         ; DATA XREF: spawn_dark_mini_monster   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -55464,7 +55464,7 @@ stru_25B87C:    dc.b $1B                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B894:    dc.b $73                ; obj_id
+object_gears:    dc.b $73                ; obj_id
                                         ; DATA XREF: spawn_gears   o
                                         ; spawn_gears_down   o
                 dc.b 0                  ; health
@@ -55480,7 +55480,7 @@ stru_25B894:    dc.b $73                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B8AC:    dc.b $1B                ; obj_id
+object_dark_enemy_2:    dc.b $1B                ; obj_id
                                         ; DATA XREF: spawn_dark_mini_monster_2   o
                 dc.b 0                  ; health
                 dc.b $21                ; obj_flags
@@ -55495,7 +55495,7 @@ stru_25B8AC:    dc.b $1B                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_2571B4         ; update_proc
-stru_25B8C4:    dc.b $86                ; obj_id
+object_jim_eyes_in_dark:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_2504E6+26   o
                 dc.b 0                  ; health
                 dc.b 0                  ; obj_flags
@@ -55510,7 +55510,7 @@ stru_25B8C4:    dc.b $86                ; obj_id
                 dc.b $82                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l sub_256D2E         ; update_proc
-stru_25B8DC:    dc.b $86                ; obj_id
+object_jim_tosses_gun_up:    dc.b $86                ; obj_id
                                         ; DATA XREF: sub_24B638+8C   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55525,7 +55525,7 @@ stru_25B8DC:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B8F4:    dc.b $86                ; obj_id
+object_jim_end_screen:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+106   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55540,7 +55540,7 @@ stru_25B8F4:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B90C:    dc.b $86                ; obj_id
+object_princess:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+122   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55555,7 +55555,7 @@ stru_25B90C:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B924:    dc.b $86                ; obj_id
+object_crown:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B5B6E   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55570,7 +55570,7 @@ stru_25B924:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B93C:    dc.b $86                ; obj_id
+object_gleam:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001ACC86   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55585,7 +55585,7 @@ stru_25B93C:    dc.b $86                ; obj_id
                 dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B954:    dc.b $86                ; obj_id
+object_gleam_2:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001B5D04   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55600,7 +55600,7 @@ stru_25B954:    dc.b $86                ; obj_id
                 dc.b $80                ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B96C:    dc.b $86                ; obj_id
+object_cow_end_screen:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+13E   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55615,7 +55615,7 @@ stru_25B96C:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B984:    dc.b $86                ; obj_id
+object_princess_land:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+15A   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55630,7 +55630,7 @@ stru_25B984:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B99C:    dc.b $86                ; obj_id
+object_destruction_land:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+176   o
                 dc.b 0                  ; health
                 dc.b 8                  ; obj_flags
@@ -55675,7 +55675,7 @@ stru_25B9CC:    dc.b $86                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B9E4:    dc.b $86                ; obj_id
+object_water_washes_rock:    dc.b $86                ; obj_id
                                         ; DATA XREF: ure_the_best_screen+190   o
                                         ; ure_the_best_screen+1AA   o
                 dc.b 0                  ; health

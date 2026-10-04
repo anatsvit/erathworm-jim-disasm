@@ -163,7 +163,7 @@ dword_FFFC96 equ $FFFFFC96
 word_FFFC9A equ $FFFFFC9A
 word_FFFC9C equ $FFFFFC9C
 word_FFFC9E equ $FFFFFC9E
-submarine_air_seconds_left equ $FFFFFCA0 ; запас воздуха в подлодке (Down the Tubes), старт 30, тик по byte_FFFCFE=$41 кадров, потолок заправки air_refiller_seconds
+submarine_air_seconds_left equ $FFFFFCA0 ; запас воздуха в подлодке (Down the Tubes), старт 30, тик по submarine_air_tick_timer=$41 кадров, потолок заправки air_refiller_seconds
 screen_shake_sprite_offset equ $FFFFFCA2
 word_FFFCA4 equ $FFFFFCA4
 word_FFFCA6 equ $FFFFFCA6
@@ -196,18 +196,18 @@ word_FFFCEA equ $FFFFFCEA
 word_FFFCEC equ $FFFFFCEC
 word_FFFCEE equ $FFFFFCEE
 word_FFFCF0 equ $FFFFFCF0
-byte_FFFCF3 equ $FFFFFCF3
-byte_FFFCF4 equ $FFFFFCF4
-byte_FFFCF5 equ $FFFFFCF5
-byte_FFFCF6 equ $FFFFFCF6
-byte_FFFCF7 equ $FFFFFCF7
+scroll_redraw_left equ $FFFFFCF3 ; камера сдвинулась влево (camera_x уменьшен), oksub_247FD2 вызывает sub_248024 и сбрасывает
+scroll_redraw_right equ $FFFFFCF4 ; камера сдвинулась вправо (camera_x увеличен), oksub_247FD2 вызывает sub_24811E и сбрасывает
+scroll_redraw_up equ $FFFFFCF5 ; камера сдвинулась вверх (camera_y уменьшен), oksub_247FD2 вызывает sub_248330 и сбрасывает
+scroll_redraw_down equ $FFFFFCF6 ; камера сдвинулась вниз (camera_y увеличен), oksub_247FD2 вызывает sub_248228 и сбрасывает
+jim_platforms_disabled equ $FFFFFCF7 ; Джим проваливается сквозь платформы: jim_platform_collision не приземляет. Ставит activity sub_24E5EA (ROM:578C), сбрасывает sub_24E5F2 (ROM:5790); блокирует переключение word_FFFCC6 в sub_24E5FA
 is_jim_jumping equ $FFFFFCF8
 jump_hold_timer equ $FFFFFCF9
 is_jump_apex_reached equ $FFFFFCFA ; восходящая фаза прыжка закончена: |jim_y_speed| упала ниже $3C либо удар головой о потолок. Пока сброшен, гравитация к Джиму не применяется и за цепь не зацепиться
-byte_FFFCFB equ $FFFFFCFB
-byte_FFFCFC equ $FFFFFCFC
-byte_FFFCFD equ $FFFFFCFD
-byte_FFFCFE equ $FFFFFCFE
+heli_hover_frames equ $FFFFFCFB ; зависание в падении (sub_246860): старт 8, пока >0 каждый кадр jim_y_speed=$200, jim_timer_in_air=$34, -1
+heli_hover_used equ $FFFFFCFC ; зависание уже использовано (sub_246860), взводится и при обычном прыжке; сбрасывается по is_jump_pressed
+conveyor_stop_timer equ $FFFFFCFD ; конвейер/фон остановлен: background_anim не анимирует, sub_24E8A8/sub_24E8CA не двигают Джима; -1 в sub_24F95C; пишет скрипт объекта ($8A,$21,$FCFD) у byte_1AC3A0
+submarine_air_tick_timer equ $FFFFFCFE ; делитель воздуха в подлодке: -1 каждый кадр в collision_with_submarine, на 0 = $41 и submarine_air_seconds_left -1 (если не cheat_mode)
 platform_type_under_jim equ $FFFFFCFF
 byte_FFFD00 equ $FFFFFD00
 activity_id_under_jim equ $FFFFFD01 ; тип спецтайла под Джимом: байт из unk_FFB86A по тайлу карты, индекс в таблицу обработчиков off_5578. 0 - обычный тайл
@@ -257,20 +257,20 @@ magnet_box_spawned equ $FFFFFD37
 byte_FFFD38 equ $FFFFFD38
 byte_FFFD39 equ $FFFFFD39
 screen_shake_phase equ $FFFFFD3A
-byte_FFFD3D equ $FFFFFD3D
-byte_FFFD3E equ $FFFFFD3E
-byte_FFFD3F equ $FFFFFD3F
-byte_FFFD40 equ $FFFFFD40
-byte_FFFD41 equ $FFFFFD41
-byte_FFFD42 equ $FFFFFD42
-byte_FFFD43 equ $FFFFFD43
-byte_FFFD44 equ $FFFFFD44
-byte_FFFD45 equ $FFFFFD45
-byte_FFFD46 equ $FFFFFD46
-byte_FFFD47 equ $FFFFFD47
-byte_FFFD48 equ $FFFFFD48
-byte_FFFD49 equ $FFFFFD49
-byte_FFFD4A equ $FFFFFD4A
+active_objects_count equ $FFFFFD3D ; число занятых слотов объектов, считается в sub_24A766; скрипты проверяют $F441,$FD3D,$10 (лимит выстрелов)
+eyes_generator_valve_state equ $FFFFFD3E ; состояние вентиля Monkey Head / генератора глаз: spawn_eyes_generator_closed ставит 1, anim_monkey_head_2 пишет 1/5/6 через $ED01
+pal_flash_delay equ $FFFFFD3F ; счётчик кадров 0..2 между шагами вспышки палитры (sub_24F644)
+pal_flash_active equ $FFFFFD40 ; вспышка палитры активна: построчная загрузка word_1B7CAC/word_1B7E3C в CRAM, запуск случайный (шанс растёт с jim_x)
+bucket_boss_started equ $FFFFFD41 ; бой с bucket boss запущен (sub_24DEF2), повторно не спавнить
+chuck_boss_started equ $FFFFFD42 ; бой с Chuck (уровень 1) запущен (sub_24DCB2), повторно не спавнить
+chicken_boss_started equ $FFFFFD43 ; арена chicken boss запущена (sub_24DD18), повторно не спавнить
+intestinal_boss_started equ $FFFFFD44 ; intestinal boss заспавнен (sub_24DEA6), повторно не спавнить
+chicken_fly_boss_invul_timer equ $FFFFFD45 ; неуязвимость летающего chicken boss после попадания, $3C кадров, уменьшается в sub_24F86E
+fall_long_wrap_flag equ $FFFFFD46 ; уровень с падением: следующий перескок камеры по порогу $8AF вместо $6CF, взводится случайно 1/9 (sub_24F86E)
+chicken_fly_boss_death_timer equ $FFFFFD47 ; после победы над летающим chicken boss = $25, -1 каждые 8 кадров, на 0 -> level_end_timer; пока !=0 collision_with_flying_bomb игнорируется
+teleport_request_to_snowman equ $FFFFFD48 ; флаг от объекта $5B, обрабатывается в sub_24F1D8 (byte_25C3A4)
+teleport_request_from_snowman equ $FFFFFD49 ; флаг от объекта $5C, обрабатывается в sub_24F23E (byte_25C3AE)
+teleport_request_to_evilcat equ $FFFFFD4A ; флаг от объекта $5D, обрабатывается в sub_24F1D8 (byte_25C3B8)
 naked_worm_enable equ $FFFFFD4B
 byte_FFFD4C equ $FFFFFD4C
 byte_FFFD4D equ $FFFFFD4D
@@ -315,12 +315,12 @@ evil_cat_invul_timer equ $FFFFFD7B ;Evil the Cat: кулдаун после по
 evil_cat_hit_pending equ $FFFFFD7C ;Evil the Cat: попадание. +1 делает скрипт byte_1ACEB6 объекта stru_25AE8C (anim_fireburn_5) командой $90 (sub_249936/loc_249970). Если не 0 и нет кулдауна - evil_cat_hp -1
 evil_cat_hp equ $FFFFFD7D ;Evil the Cat: здоровье первой фазы, $14 в sub_24FDB8. -1 за попадание в sub_24F336. При 0 - вторая фаза (sub_2590A2)
 evil_cat_hp_shown equ $FFFFFD7E ;Evil the Cat: последнее отображённое evil_cat_hp. sub_2590A2 при изменении выбирает анимацию off_C926[hp/4], при 0 ставит byte_FFFDE1/byte_FFFDFB/byte_FFFD5C
-word_FFFD80 equ $FFFFFD80
-word_FFFD82 equ $FFFFFD82
-byte_FFFD84 equ $FFFFFD84
-byte_FFFD85 equ $FFFFFD85
-byte_FFFD86 equ $FFFFFD86
-byte_FFFD87 equ $FFFFFD87
+stalactite_spawn_vel_y equ $FFFFFD80 ;Сталактиты: начальная скорость Y (8.8) для следующего сталактита, пишется в $1A объекта в spawn_stalactite. Старт серии $FE00 (подскок вверх), каждый спавн +$80; в режиме 2 сброс в 0 при смене направления. Дальше падение гравитацией ($3C/кадр)
+stalactite_spawn_x equ $FFFFFD82 ;Сталактиты: X следующего сталактита. В начале серии camera_x+$140 (режим 0, правый край) или camera_x-$14 (режим 1, левый край), затем каждый спавн -/+ stalactite_spawn_step_x
+stalactite_rain_cooldown equ $FFFFFD84 ;Сталактиты: пауза перед следующей бомбой Evil the Cat. sub_258E3C (бомбардировщик stru_25AE14) уменьшает раз в 2 кадра; при 0 и бомбардировщике в окне экрана ставит $F0 и включает анимацию off_1B3A30, которая сбрасывает бомбу stru_25ADE4. Каждый спавн сталактита (spawn_stalactite) снова ставит $F0 - пока сыплются сталактиты, новой бомбы нет
+stalactite_rain_pattern equ $FFFFFD85 ;Сталактиты: режим серии, пишет анимация бомбы anim_bomb командой $ED01 после взрыва - по очереди 0, 1, 2. 0 - 15 штук справа налево, 1 - 15 штук слева направо, 2 - зигзаг: 10 справа налево, затем 10 слева направо, по кругу
+stalactite_spawn_index equ $FFFFFD86 ;Сталактиты: номер сталактита в серии, +1 за спавн, обнуляется анимацией anim_bomb ($ED01). 0 - взять стартовый X от камеры. В режиме 2: $0A - смена направления, $14 - сброс в $FF (-> 0)
+stalactite_spawn_step_x equ $FFFFFD87 ;Сталактиты: шаг по X между соседними сталактитами. $1E в режимах 0/1, $1D в режиме 2
 psycrow_state equ $FFFFFD88 ;Состояние босса Psy-Crow (объект obj_01, ИИ sub_2592EC): 0-3 - поза прицеливания (индекс в off_C9D6), 4 - разворот, 6 - атака, 7 - сбит выстрелом, 8 - удар хлыстом (только из 7), 9 - смерть. Значение 5 не используется, это порог: при >= 5 ИИ вороны отключён. Значения 0-3 и 9 записываются анимационными скриптами через опкод $ED01
 psycrow_target_slot equ $FFFFFD89 ;Слот цели/высоты Psy-Crow, 0..5. Индекс в dword_C9BE (координаты точки полёта) и в off_C9E6 (анимация атаки). При спавне выбирается случайно, после атаки меняется на +-1 в пределах 0..5
 psycrow_invul_timer equ $FFFFFD8A ;Таймер неуязвимости Psy-Crow, $3C после попадания. Пока не 0, выстрелы по вороне игнорируются
@@ -446,29 +446,29 @@ word_FFFF56 equ $FFFFFF56
 word_FFFF58 equ $FFFFFF58
 word_FFFF5A equ $FFFFFF5A
 word_FFFF5C equ $FFFFFF5C
-byte_FFFF5E equ $FFFFFF5E
-byte_FFFF5F equ $FFFFFF5F
+ropejump_anim_locked equ $FFFFFF5E ; Snot a Problem: особая анимация Джима, пока взведён sub_2574F8/collision_with_snot не меняют jim_anim_offset. Ставит oksub_25826C (anim off_1AFAA8), сбрасывает anim-скрипт off_1AF900 ($ED01,$FF5E,0)
+andy_boost_active equ $FFFFFF5F ; Andy Asteroids: ускорение по кнопке огня (sub_247022, раз в 8 кадров), целевая andy_flight_speed $10 вместо 4; по нему sub_258C50 показывает пламя ракеты
 andy_flight_speed equ $FFFFFF60
 super_bubble_count equ $FFFFFF61
-byte_FFFF62 equ $FFFFFF62
-byte_FFFF63 equ $FFFFFF63
+psycrow_scale_index equ $FFFFFF62 ; индекс масштаба Psy-Crow по расстоянию (set_scale_anim_by_dist в sub_2585CA), sub_258518 берёт по нему кадр из off_6F38/off_6FF8
+psycrow_facing_front equ $FFFFFF63 ; Psy-Crow в угловой секции Джима (abs(jim_tunnel_angle-$50(a1))<$800): таблицы off_6BEC/off_6FF8 вместо off_6B2C/off_6F38
 bubble_count equ $FFFFFF64
-byte_FFFF65 equ $FFFFFF65
-byte_FFFF66 equ $FFFFFF66
-byte_FFFF67 equ $FFFFFF67
-byte_FFFF68 equ $FFFFFF68
-byte_FFFF69 equ $FFFFFF69
-byte_FFFF6A equ $FFFFFF6A
-byte_FFFF6B equ $FFFFFF6B
-byte_FFFF6C equ $FFFFFF6C
-byte_FFFF6D equ $FFFFFF6D
+tunnel_pal_fade_timer equ $FFFFFF65 ; смена палитры туннеля: команда 6 трека (sub_24F99E) ставит $1F, пока >0 sub_24FBC0 смешивает byte_1B728C+word_FFFEAC в unk_FFFEFA
+rocket_flame_anim_frame equ $FFFFFF66 ; кадр пламени ракеты 5..0 по кругу (sub_258C50), /2 -> off_665A
+frame_mod6_counter equ $FFFFFF67 ; счётчик 5..0 по кругу каждый кадр в главном цикле oksub_2456C8; sub_258518 по нему мигает пламенем Psy-Crow
+level_flag_bit1_off equ $FFFFFF68 ; инвертированный бит 1 байта $3D описателя уровня (sub_2476AC); в коде не читается
+level_flag_bit2_off equ $FFFFFF69 ; инвертированный бит 2 байта $3D описателя уровня (sub_2476AC); в коде не читается
+level_flag_bit3_off equ $FFFFFF6A ; инвертированный бит 3 байта $3D описателя уровня (sub_2476AC); в коде не читается
+level_jump_enabled equ $FFFFFF6B ; инвертированный бит 5 байта $3D описателя уровня (sub_2476AC); при 0 sub_24669E (прыжок) и sub_246860 (зависание) не работают
+is_tunnel_level equ $FFFFFF6C ; бит 4 байта $3D описателя уровня (sub_2476AC); при !=0 sub_248C3A уходит в sub_24BEDC (логика Andy Asteroids)
+psycrow_dodge_timer equ $FFFFFF6D ; Psy-Crow уходит вбок: sub_24BEDC ставит $5A вместе с andy_side_speed +-$1C0 и psycrow_target_angle; sub_2585CA -1 и копирует в word_FFFEA6
 is_queen_butt_defeated equ $FFFFFF6E ; Buttville: подбосс-зад добит - меняются спавны (нарывы, платформы вместо хвоста) и палитра фона
-byte_FFFF6F equ $FFFFFF6F
-byte_FFFF72 equ $FFFFFF72
-byte_FFFF73 equ $FFFFFF73
-byte_FFFF74 equ $FFFFFF74
-byte_FFFF75 equ $FFFFFF75
-byte_FFFF76 equ $FFFFFF76
+bucket_boss_warning_shown equ $FFFFFF6F ; надпись WARNING (funchar $24, warning_txt) перед bucket boss на уровне 1 уже показана (sub_24DC8E, activity ROM:5750)
+cheat_extra_life_used equ $FFFFFF72 ; чит add_live уже использован (cheat_code), повтор заблокирован
+cheat_full_health_used equ $FFFFFF73 ; чит set_100_health уже использован (cheat_code), повтор заблокирован
+cheat_ammo_used equ $FFFFFF74 ; чит bullets_count='1000' уже использован (cheat_code), повтор заблокирован
+cheat_plasma_used equ $FFFFFF75 ; чит plasma_count_ammo=9 уже использован (cheat_code), повтор заблокирован
+cheat_continue_used equ $FFFFFF76 ; чит continues_count+1 уже использован (cheat_code), повтор заблокирован
 prize_faucet_attempts equ $FFFFFF77
 is_jim_off_gravity equ $FFFFFF78
 joypad_state equ $FFFFFF7A

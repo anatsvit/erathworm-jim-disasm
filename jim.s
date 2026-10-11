@@ -24857,7 +24857,7 @@ loc_2457FC:                             ; CODE XREF: oksub_2456C8+120   j
                 bsr.w   sub_24811E
                 bsr.w   sub_248330
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   sub_24AC6A
                 st      (frame_counter).l
@@ -24882,7 +24882,7 @@ loc_24585E:                             ; CODE XREF: oksub_2456C8+1C4   j
                 clr.l   d0
                 move.b  (byte_FFFDEB).l,d0
                 move.l  d0,-(sp)
-                jsr     (play_sound).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
 loc_245870:                             ; CODE XREF: oksub_2456C8+194   j
                 bsr.w   wait_all_buttons_released
@@ -24890,7 +24890,7 @@ loc_245874:                             ; CODE XREF: oksub_2456C8+1B2   j
                 jsr     (sub_24D98A).l
                 bne.s   loc_245874
                 move.l  d0,-(sp)
-                jsr     (stop_sound).l
+                jsr     (gems_stop_song).l
                 tst.b   (byte_FFFDEC).l
                 beq.s   loc_24588E
                 bra.s   loc_24585E
@@ -25016,7 +25016,7 @@ loc_245A4E:                             ; CODE XREF: oksub_2459F0+3E   j
                                         ; oksub_2459F0+4A   j ...
                 jsr     (fade_palettes_to_black).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   destroy_all_objects
                 bsr.w   clear_obj_array
@@ -25090,7 +25090,7 @@ loc_245B1E:                             ; CODE XREF: sub_245AE4+2E   j
                 clr.b   (invincibility_timer).l
                 clr.b   (jim_obj_draw_flags).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 tst.b   (is_jim_ropejumper).l
                 bne.w   loc_245BD6
@@ -25112,7 +25112,7 @@ loc_245B1E:                             ; CODE XREF: sub_245AE4+2E   j
 loc_245BA2:                             ; CODE XREF: sub_245AE4+18   j
                                         ; sub_245AE4+46   j
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 jsr     (fade_palettes_to_black).l
                 lea     (jim_obj_id).l,a1
@@ -25176,7 +25176,7 @@ loc_245C20:                             ; CODE XREF: sub_245AE4+12C   j
                 bsr.w   update_jim_world_pos
                 bsr.w   update_level_scroll
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   sub_24AC6A
                 bsr.w   sub_24AC2C
@@ -25228,7 +25228,7 @@ oksub_245D54:                           ; CODE XREF: oksub_2456C8:loc_2458A4   p
                 bne.w   loc_245E3E
                 tst.b   (byte_FFFDE7).l
                 bne.w   locret_245E3C
-                jsr     (oksub_2CBD22).l
+                jsr     (gems_pause_all).l
                 st      (byte_FFFDE3).l
                 st      (byte_FFFDE7).l
                 move.l  #$20,(VDP_CTRL).l ; ' '
@@ -25272,7 +25272,7 @@ loc_245DF4:                             ; CODE XREF: oksub_245D54+80   j
                 jsr     (load_palette_line3).l
                 clr.b   (byte_FFFDE3).l
                 st      (byte_FFFDE7).l
-                jsr     (oksub_2CBD30).l
+                jsr     (gems_resume_all).l
 locret_245E3C:                          ; CODE XREF: oksub_245D54+1A   j
                 rts
 ; ---------------------------------------------------------------------------
@@ -26205,8 +26205,8 @@ loc_246BFA:                             ; CODE XREF: sub_246B08+D6   j
                 beq.s   loc_246C1C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($1C).w                 ; Удар головой об потолок
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_246C1C:                             ; CODE XREF: sub_246B08+F8   j
@@ -26901,10 +26901,10 @@ sub_247576:                             ; CODE XREF: oksub_2456C8+A   p
                 pea     (SEQUENCE_TBL_Z80).l ; sequence table
                 pea     (ENVELOPE_TBL_Z80).l
                 pea     (PATCH_TBL_Z80).l
-                jsr     (sub_2CBCBC).l
+                jsr     (gems_init).l
                 adda.l  #$10,sp
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 jsr     (sub_24DA50).l
                 clr.b   (byte_FF993F).l
@@ -26942,7 +26942,7 @@ locret_247650:                          ; CODE XREF: sub_247576+9C   j
 sub_247652:                             ; CODE XREF: oksub_2456C8:loc_2456D6   p
                                         ; sub_24D5C0+EA   p ...
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   sub_24790A
                 bsr.w   set_100_health
@@ -26969,7 +26969,7 @@ sub_2476AC:                             ; CODE XREF: oksub_2456C8:loc_2457FC   p
                                         ; FULLSCREEN_VSCROLL_MODE
                                         ; DISABLE_EXT_INTERRUPT
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   sub_24791C
                 bsr.w   sub_24792E
@@ -29080,7 +29080,7 @@ load_sprites_dma:                       ; CODE XREF: oksub_2456C8+172   p
                 beq.s   locret_249166
                 subq.b  #1,d4
                 move.w  d0,-(sp)
-                jsr     (sub_2CBB48).l
+                jsr     (gems_dma_start).l
                 move.w  (sp)+,d0
                 move.w  #$8174,(VDP_CTRL).l ; GENESIS_DISPLAY_MODE_BIT2
                                         ; SET_NTSC_MODE
@@ -29107,7 +29107,7 @@ loc_249152:                             ; CODE XREF: load_sprites_dma+52   j
                 btst    #1,d0
                 bne.s   loc_249152
                 move.w  (sp)+,d0
-                jsr     (sub_2CBB86).l
+                jsr     (gems_dma_end).l
 locret_249166:                          ; CODE XREF: load_sprites_dma+12   j
                                         ; sub_249168+E   j
                 rts
@@ -29408,8 +29408,8 @@ sub_2493A8:                             ; DATA XREF: ROM:0000599C   o
                 bne.s   loc_2493D6
                 movem.l d1/a0-a1/a6,-(sp)
                 move.l  d0,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 move.l  (sp)+,d0
                 movem.l (sp)+,d1/a0-a1/a6
 locret_2493D4:                          ; CODE XREF: sub_2493A8+C   j
@@ -29418,7 +29418,7 @@ locret_2493D4:                          ; CODE XREF: sub_2493A8+C   j
 loc_2493D6:                             ; CODE XREF: sub_2493A8+12   j
                 movem.l d1/a0-a1/a6,-(sp)
                 move.l  d0,-(sp)
-                jsr     (stop_sound).l
+                jsr     (gems_stop_song).l
                 move.l  (sp)+,d0
                 movem.l (sp)+,d1/a0-a1/a6
                 rts
@@ -31697,7 +31697,7 @@ sub_24AC6A:                             ; CODE XREF: oksub_2456C8+156   p
                 tst.b   (music_enable).l
                 beq.s   locret_24AC96
                 move.l  d0,-(sp)
-                jsr     (play_sound).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
 locret_24AC96:                          ; CODE XREF: sub_24AC6A+20   j
                 rts
@@ -32172,8 +32172,8 @@ loc_24B0C4:                             ; CODE XREF: damage_from_enemy+44   j
 loc_24B0EA:                             ; CODE XREF: damage_from_enemy+D6   j
                 addi.l  #$6B,d7 ; 'k'
                 move.l  d7,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24B104:                             ; CODE XREF: damage_from_enemy+C2   j
@@ -32583,8 +32583,8 @@ game_over_screen:                             ; CODE XREF: sub_245AE4+10C   j
                 beq.s   loc_24B5C8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($11).w                     ; Game over music (on Game over screen)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24B5C8:                             ; CODE XREF: restore_respawn_point+E4   j
@@ -32596,8 +32596,8 @@ loc_24B5C8:                             ; CODE XREF: restore_respawn_point+E4   
                 beq.s   loc_24B5FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($5D).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24B5FE:                             ; CODE XREF: restore_respawn_point+11A   j
@@ -32627,7 +32627,7 @@ sub_24B638:                             ; CODE XREF: sub_245AE4+FE   p
                 tst.b   (continues_count).l
                 beq.w   locret_24B83E
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   fade_palettes_to_black
                 move.w  #$8B00,(VDP_CTRL).l
@@ -32668,8 +32668,8 @@ sub_24B638:                             ; CODE XREF: sub_245AE4+FE   p
                 beq.s   loc_24B71E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24B71E:                             ; CODE XREF: sub_24B638+CA   j
@@ -32695,14 +32695,14 @@ loc_24B75E:                             ; CODE XREF: sub_24B638+11A   j
                 move.l  #off_1B00DC,obj_01_anim_ptr-obj_01(a5)
                 clr.b   $37(a5)
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 tst.b   (music_enable).l
                 beq.s   loc_24B7A0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($11).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24B7A0:                             ; CODE XREF: sub_24B638+14C   j
@@ -32716,7 +32716,7 @@ loc_24B7A8:                             ; CODE XREF: sub_24B638+178   j
                 bsr.w   fade_palettes_to_black
                 clr.b   (is_continue_screen).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 move.l  (sp)+,d0
                 move.l  (sp)+,d0
@@ -32744,7 +32744,7 @@ loc_24B81A:                             ; CODE XREF: sub_24B638+1EA   j
                 bsr.w   fade_palettes_to_black
                 clr.b   (is_continue_screen).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_24B83E:                          ; CODE XREF: sub_24B638+6   j
                 rts
@@ -32820,8 +32820,8 @@ loc_24B8E8:                             ; CODE XREF: cheat_code+9C   j
                 beq.s   loc_24B916
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($25).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24B916:                             ; CODE XREF: cheat_code+BA   j
@@ -32888,8 +32888,8 @@ loc_24B9E6:                             ; CODE XREF: cheat_code+100   j
                 beq.s   loc_24BA08
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($64).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24BA08:                             ; CODE XREF: cheat_code+1AC   j
@@ -32905,8 +32905,8 @@ loc_24BA24:                             ; CODE XREF: cheat_code+110   j
                 beq.s   loc_24BA46
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6E).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24BA46:                             ; CODE XREF: cheat_code+1EA   j
@@ -32979,7 +32979,7 @@ show_groovy_screen:                     ; CODE XREF: oksub_2459F0+5A   p
 loc_24BB0C:                             ; CODE XREF: show_groovy_screen+6   j
                                         ; show_groovy_screen+E   j
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   fade_palettes_to_black
                 move.w  #$8B00,(VDP_CTRL).l ; SET_HSCROLL_TYPE_AS_FULLSCREEN
@@ -33041,7 +33041,7 @@ sub_24BBE0:                             ; CODE XREF: show_groovy_screen+10   p
 
 sub_24BBE6:                             ; CODE XREF: sub_24BBE0   p
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 move.l  a1,-(sp)
                 bsr.w   find_free_obj_slot_ad06
@@ -33069,8 +33069,8 @@ loc_24BC20:                             ; CODE XREF: sub_24BBE6+32   j
                 beq.s   loc_24BC6A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($E).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24BC6A:                             ; CODE XREF: sub_24BBE6+68   j
@@ -33081,8 +33081,8 @@ loc_24BC6C:                             ; CODE XREF: sub_24BBE6+60   j
                 beq.s   loc_24BC8E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($11).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24BC8E:                             ; CODE XREF: sub_24BBE6:loc_24BC6A   j
@@ -33368,8 +33368,8 @@ loc_24BFFE:                             ; CODE XREF: sub_24BEDC+82   j
                 beq.s   loc_24C070
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($16).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24C070:                             ; CODE XREF: sub_24BEDC+178   j
@@ -33442,8 +33442,8 @@ ure_the_best_screen:                             ; CODE XREF: oksub_2459F0+A8   
                 beq.s   loc_24C1B6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($26).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24C1B6:                             ; CODE XREF: ure_the_best_screen+80   j
@@ -33465,7 +33465,7 @@ loc_24C1E6:                             ; CODE XREF: ure_the_best_screen+AC   j
                                         ; ure_the_best_screen+B4   j ...
                 bsr.w   fade_palettes_to_black
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   clear_plane_a
                 lea     (byte_1B83E2).l,a0
@@ -33520,8 +33520,8 @@ loc_24C1E6:                             ; CODE XREF: ure_the_best_screen+AC   j
                 beq.s   loc_24C324
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24C324:                             ; CODE XREF: ure_the_best_screen+1EE   j
@@ -33556,7 +33556,7 @@ loc_24C394:                             ; CODE XREF: ure_the_best_screen+242   j
                                         ; ure_the_best_screen+24A   j
                 bsr.w   fade_palettes_to_black
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 move.l  (sp)+,d0
                 bra.w   loc_2456D6
@@ -33695,7 +33695,7 @@ loc_24C520:                             ; CODE XREF: sub_24C4E4+1E   j
 sub_24C526:                             ; CODE XREF: sub_24BBE6+C2   p
                 addq.b  #1,(continues_count).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   fade_palettes_to_black
                 move.w  #$8B00,(VDP_CTRL).l
@@ -33723,8 +33723,8 @@ sub_24C526:                             ; CODE XREF: sub_24BBE6+C2   p
                 beq.s   loc_24C5C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24C5C6:                             ; CODE XREF: sub_24C526+84   j
@@ -33738,7 +33738,7 @@ loc_24C5DA:                             ; CODE XREF: sub_24C526+BC   j
                 move.l  (sp)+,d2
                 dbf     d2,loc_24C5DA
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 rts
 ; End of function sub_24C526
@@ -34766,7 +34766,7 @@ cheat_menu:                             ; CODE XREF: cheat_code+28C   p
                                         ; DISABLE_EXTERNAL_PIXEL_BUS
                                         ; DO_VSYNC_INSTEAD_OF_PIXEL_CLOCK
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 st      (joypad_state).l
                 bsr.w   set_planes_64x32
@@ -35487,8 +35487,8 @@ play_switch_option_sound:                             ; CODE XREF: cheat_menu+24
                 beq.s   locret_24D774
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($47).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_24D774:                          ; CODE XREF: play_switch_option_sound+6   j
@@ -35499,7 +35499,7 @@ locret_24D774:                          ; CODE XREF: play_switch_option_sound+6 
 sub_24D776:                             ; CODE XREF: sub_259DFE+49A   p
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($47).w
-                jsr     (play_sound).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 rts
@@ -35554,7 +35554,7 @@ set_hscroll:                             ; CODE XREF: oksub_2459F0+CE   p
 
 sub_24D7EA:                             ; CODE XREF: cheat_code:loc_24BABC   p
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 bsr.w   fill_palettes_black
                 bsr.w   destroy_all_objects
@@ -35588,8 +35588,8 @@ sub_24D7EA:                             ; CODE XREF: cheat_code:loc_24BABC   p
                 beq.s   loc_24D89E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($25).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24D89E:                             ; CODE XREF: sub_24D7EA+98   j
@@ -35966,8 +35966,8 @@ loc_24DBDA:                             ; CODE XREF: sub_24DC1E+E   j
                 beq.s   loc_24DBFC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3C).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24DBFC:                             ; CODE XREF: sub_24DBCC+14   j
@@ -36080,15 +36080,15 @@ sub_24DD18:                             ; DATA XREF: ROM:0000575C   o
                 bne.w   locret_24DE7A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (3).w
-                jsr     (stop_sound).l
+                jsr     (gems_stop_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 tst.b   (sound_fx_enable).l
                 beq.s   loc_24DD58
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24DD58:                             ; CODE XREF: sub_24DD18+24   j
@@ -36320,8 +36320,8 @@ loc_24E05A:                             ; CODE XREF: sub_24DFE8+2A   j
                 beq.s   loc_24E082
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($31).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24E082:                             ; CODE XREF: sub_24DFE8+7E   j
@@ -36810,8 +36810,8 @@ activity_tube_air_up:                             ; DATA XREF: ROM:000056DC   o
                 beq.s   locret_24E6C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($44).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_24E6C6:                          ; CODE XREF: activity_tube_air_up+32   j
@@ -37105,8 +37105,8 @@ teleport:                             ; CODE XREF: activity_teleport_toilet+A   
                 beq.s   loc_24EA68
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($52).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24EA68:                             ; CODE XREF: activity_teleport_toilet+160   j
@@ -37126,8 +37126,8 @@ loc_24EA74:                             ; CODE XREF: activity_teleport_toilet+19
                 beq.s   loc_24EAC2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($51).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24EAC2:                             ; CODE XREF: activity_teleport_toilet+1BA   j
@@ -37155,8 +37155,8 @@ loc_24EADC:                             ; CODE XREF: activity_teleport_toilet+AA
                 beq.s   loc_24EB42
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($52).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24EB42:                             ; CODE XREF: activity_teleport_toilet+23A   j
@@ -37270,7 +37270,7 @@ loc_24EC7E:                             ; CODE XREF: sub_24EBC6+A6   j
                 jsr     sub_24811E(pc)
                 jsr     sub_248330(pc)
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 jsr     sub_24AC6A(pc)
                 st      (frame_counter).l
@@ -37554,8 +37554,8 @@ loc_24F0D8:                             ; CODE XREF: sub_24F04A+42   j
                 beq.s   loc_24F0FA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24F0FA:                             ; CODE XREF: sub_24F04A+94   j
@@ -37715,8 +37715,8 @@ loc_24F2C6:                             ; CODE XREF: sub_24F23E+74   j
                 beq.s   loc_24F318
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($38).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24F318:                             ; CODE XREF: sub_24F23E+6   j
@@ -38003,8 +38003,8 @@ loc_24F6D6:                             ; CODE XREF: sub_24F644+3A   j
                 beq.s   loc_24F70A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($53).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_24F70A:                             ; CODE XREF: sub_24F644+A2   j
@@ -39278,8 +39278,8 @@ loc_25065C:                             ; CODE XREF: spawn_minicow_to_right+4   
                 beq.s   loc_250698
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($19).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_250698:                             ; CODE XREF: spawn_minicow_to_right+2A   j
@@ -39746,14 +39746,14 @@ locret_250A8E:                          ; CODE XREF: spawn_queen_tail+6   j
 
 spawn_queen_boss:                             ; DATA XREF: ROM:000054C8   o
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 tst.b   (music_enable).l
                 beq.s   loc_250AC0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($12).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_250AC0:                             ; CODE XREF: spawn_queen_boss+14   j
@@ -40682,7 +40682,7 @@ locret_2513F6:                          ; CODE XREF: sub_251306+8   j
 sub_2513F8:                             ; CODE XREF: oksub_2456C8+10E   p
                 clr.w   (menu_selected_item).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 st      (is_jim_fire).l
                 jsr     fill_palettes_black(pc)
@@ -40721,8 +40721,8 @@ sub_2513F8:                             ; CODE XREF: oksub_2456C8+10E   p
                 beq.s   loc_2514C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (5).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2514C6:                             ; CODE XREF: sub_2513F8+B2   j
@@ -40742,7 +40742,7 @@ loc_2514E4:                             ; CODE XREF: sub_2513F8+DE   j
                 tst.b   (is_jim_fire).l
                 bne.s   loc_2514CA
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 cmpi.b  #1,(demo_mode).l
                 bne.w   loc_25150C
@@ -41892,8 +41892,8 @@ collision_with_bubble:                             ; DATA XREF: ROM:00003630   o
                 andi.l  #3,d7
                 addi.l  #$54,d7 ; 'T'
                 move.l  d7,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_252516:                          ; CODE XREF: collision_with_bubble+12   j
@@ -41911,8 +41911,8 @@ oksub_252518:                           ; DATA XREF: ROM:001A4FEE   o
                 lea     (sub_25254E).l,a6
                 move.b  (a6,d7.w),d7
                 move.l  d7,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_25254C:                          ; CODE XREF: oksub_252518+6   j
@@ -41934,8 +41934,8 @@ loc_252556:                             ; DATA XREF: ROM:001B169C   o
                 lea     (sub_25258C).l,a6
                 move.b  (a6,d7.w),d7
                 move.l  d7,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_25258A:                          ; CODE XREF: sub_25254E+E   j
@@ -42063,8 +42063,8 @@ collision_with_space_suit:                             ; DATA XREF: ROM:00003788
                 beq.s   loc_2526FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($54).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2526FE:                             ; CODE XREF: collision_with_space_suit+30   j
@@ -42129,8 +42129,8 @@ collision_with_butt_crab_32:                             ; DATA XREF: ROM:000036
                 beq.s   loc_2527CA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2527CA:                             ; CODE XREF: collision_with_butt_crab_32+14   j
@@ -42207,8 +42207,8 @@ collision_with_flying_bomb:                             ; DATA XREF: ROM:0000368
                 beq.s   loc_2528C4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($48).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2528C4:                             ; CODE XREF: collision_with_flying_bomb+28   j
@@ -42222,8 +42222,8 @@ loc_2528D0:                             ; CODE XREF: collision_with_flying_bomb+
                 beq.s   loc_2528F8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($48).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2528F8:                             ; CODE XREF: collision_with_flying_bomb+5C   j
@@ -42367,8 +42367,8 @@ collision_with_fan:                             ; DATA XREF: ROM:00003784   o
                 beq.s   loc_252AA4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($54).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_252AA4:                             ; CODE XREF: collision_with_fan+7C   j
@@ -42417,8 +42417,8 @@ collision_with_bucket_boss:                             ; DATA XREF: ROM:0000363
                 beq.s   loc_252B32
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_252B32:                             ; CODE XREF: collision_with_bucket_boss+22   j
@@ -42577,8 +42577,8 @@ collision_with_super_bubble:                             ; DATA XREF: ROM:000036
                 beq.s   locret_252CD2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($58).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_252CD2:                          ; CODE XREF: collision_with_super_bubble+12   j
@@ -42595,8 +42595,8 @@ collision_with_speed_bubble:                             ; DATA XREF: ROM:000036
                 beq.s   locret_252D0C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($61).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_252D0C:                          ; CODE XREF: collision_with_speed_bubble+1C   j
@@ -42761,8 +42761,8 @@ pickup_continue:                             ; DATA XREF: ROM:00003720   o
                 beq.s   loc_252F52
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_252F52:                             ; CODE XREF: pickup_continue+52   j
@@ -42782,8 +42782,8 @@ pickup_ammo:                             ; DATA XREF: ROM:00003730   o
                 beq.s   locret_252F96
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($64).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_252F96:                          ; CODE XREF: pickup_ammo+1E   j
@@ -42804,8 +42804,8 @@ loc_252FBE:                             ; CODE XREF: pickup_plasma+1E   j
                 beq.s   locret_252FE0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6E).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_252FE0:                          ; CODE XREF: pickup_plasma+2C   j
@@ -43121,8 +43121,8 @@ loc_253406:                             ; CODE XREF: collision_with_submarine+DE
                 beq.s   loc_253434
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($20).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_253434:                             ; CODE XREF: collision_with_submarine+116   j
@@ -43647,8 +43647,8 @@ collision_with_papers:                             ; DATA XREF: ROM:000036B8   o
                 beq.s   loc_253AF8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($72).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_253AF8:                             ; CODE XREF: collision_with_diamond+3D6   j
@@ -43862,8 +43862,8 @@ loc_253DB4:                             ; CODE XREF: add_live+E   j
                 beq.s   loc_253DDC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($26).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_253DDC:                             ; CODE XREF: add_live+20   j
@@ -43883,8 +43883,8 @@ pickup_health_atom:                             ; DATA XREF: ROM:00003728   o
                 beq.s   loc_253E1A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($49).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_253E1A:                             ; CODE XREF: pickup_health_atom+1E   j
@@ -43911,8 +43911,8 @@ pickup_health_molecule_full:                             ; DATA XREF: ROM:000037
                 beq.s   loc_253E7C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($26).w              ; Wee doolgie(Live up) sound
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_253E7C:                             ; CODE XREF: pickup_health_molecule_full+1E   j
@@ -44031,8 +44031,8 @@ whip_to_sponge:                             ; CODE XREF: fire_to_sponge+C   j
                 beq.s   locret_253FC0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($38).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_253FC0:                          ; CODE XREF: fire_to_sponge+40   j
@@ -44054,8 +44054,8 @@ fire_to_automatic_eyes_generator:                             ; DATA XREF: ROM:0
                 beq.s   locret_253FF8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_253FF8:                          ; CODE XREF: fire_to_automatic_eyes_generator+A   j
@@ -44135,8 +44135,8 @@ whip_to_daemon:                             ; CODE XREF: fire_to_daemon+2E   j
                 beq.s   locret_2540CA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($75).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_2540CA:                          ; CODE XREF: fire_to_daemon+5A   j
@@ -44197,8 +44197,8 @@ loc_254142:                             ; CODE XREF: sub_25412A+C   j
                 beq.s   loc_254164
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254164:                             ; CODE XREF: sub_25412A+1E   j
@@ -44406,8 +44406,8 @@ whip_to_butt_sub_boss:                             ; DATA XREF: ROM:00003998   o
                 beq.s   loc_254408
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($74).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254408:                             ; CODE XREF: whip_to_butt_sub_boss+20   j
@@ -44727,8 +44727,8 @@ loc_2547E2:                             ; CODE XREF: fire_to_chuck_boss+4   j
                 beq.s   loc_254810
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254810:                             ; CODE XREF: fire_to_chuck_boss+42   j
@@ -44777,8 +44777,8 @@ fire_to_hook:                             ; DATA XREF: ROM:000037F4   o
                 beq.s   loc_2548B0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2548B0:                             ; CODE XREF: fire_to_hook+1A   j
@@ -44895,8 +44895,8 @@ loc_2549D4:                             ; CODE XREF: fire_to_chicken_fly_boss+AA
                 beq.s   loc_254A06
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254A06:                             ; CODE XREF: fire_to_chicken_fly_boss+DC   j
@@ -44958,8 +44958,8 @@ fire_to_lawyer:                             ; DATA XREF: ROM:00003888   o
                 beq.s   loc_254AB2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254AB2:                             ; CODE XREF: fire_to_lawyer+A   j
@@ -44995,8 +44995,8 @@ loc_254AEC:                             ; CODE XREF: fire_to_lawyer_with_kill+6 
                 beq.s   loc_254B1E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254B1E:                             ; CODE XREF: fire_to_lawyer_with_kill+2C   j
@@ -45036,8 +45036,8 @@ loc_254B5E:                             ; CODE XREF: fire_to_snowman_boss+6   j
                 beq.s   loc_254B98
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($42).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254B98:                             ; CODE XREF: fire_to_snowman_boss+48   j
@@ -45129,8 +45129,8 @@ collision_with_snowman_burp:                             ; DATA XREF: ROM:000036
                 beq.s   locret_254CB0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($24).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_254CB0:                          ; CODE XREF: collision_with_snowman_burp+C   j
@@ -45148,8 +45148,8 @@ sub_254CB2:                             ; DATA XREF: ROM:0000388C   o
                 beq.s   loc_254CEA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3D).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254CEA:                             ; CODE XREF: sub_254CB2+1C   j
@@ -45285,8 +45285,8 @@ sub_254E48:                             ; DATA XREF: ROM:000038B0   o
                 beq.s   loc_254E7A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254E7A:                             ; CODE XREF: sub_254E48+16   j
@@ -45305,8 +45305,8 @@ whip_to_chicken_boss_lever:                             ; DATA XREF: ROM:000039E
                 beq.s   loc_254EB6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_254EB6:                             ; CODE XREF: whip_to_chicken_boss_lever+12   j
@@ -45439,8 +45439,8 @@ whip_to_plant:                             ; DATA XREF: ROM:000039D8   o
                 beq.s   loc_25500C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($38).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25500C:                             ; CODE XREF: fire_to_plant+54   j
@@ -45517,8 +45517,8 @@ fire_to_fridge:                             ; DATA XREF: ROM:0000387C   o
                 beq.s   loc_2550EC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2550EC:                             ; CODE XREF: fire_to_fridge+A   j
@@ -45559,8 +45559,8 @@ loc_25513E:                             ; CODE XREF: fire_to_bob_cat+6   j
                 beq.s   loc_255164
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255164:                             ; CODE XREF: fire_to_bob_cat+20   j
@@ -45581,8 +45581,8 @@ whip_to_bobcat:                             ; DATA XREF: ROM:000039B4   o
                 beq.s   locret_2551B0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($34).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_2551B0:                          ; CODE XREF: whip_to_bobcat+1A   j
@@ -45622,8 +45622,8 @@ loc_2551EA:                             ; CODE XREF: fire_to_bucket_boss+12C   j
                 beq.s   locret_255224
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_255224:                          ; CODE XREF: fire_to_bucket_boss+36   j
@@ -45638,8 +45638,8 @@ loc_255226:                             ; CODE XREF: fire_to_bucket_boss+F4   j
                 beq.s   locret_255256
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_255256:                          ; CODE XREF: fire_to_bucket_boss+80   j
@@ -45661,8 +45661,8 @@ loc_25526A:                             ; CODE XREF: fire_to_bucket_boss+EE   j
                 beq.s   loc_2552A0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2552A0:                             ; CODE XREF: fire_to_bucket_boss+CA   j
@@ -45712,8 +45712,8 @@ loc_2552F2:                             ; CODE XREF: fire_to_bucket_boss+134   j
                 beq.s   locret_25532E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_25532E:                          ; CODE XREF: fire_to_bucket_boss+158   j
@@ -45733,8 +45733,8 @@ loc_25533C:                             ; CODE XREF: fire_to_bucket_boss+17A   j
                 beq.s   locret_255378
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_255378:                          ; CODE XREF: fire_to_bucket_boss+1A2   j
@@ -45754,8 +45754,8 @@ loc_255384:                             ; CODE XREF: fire_to_bucket_boss+1C4   j
                 beq.s   locret_2553C0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_2553C0:                          ; CODE XREF: fire_to_bucket_boss+1EA   j
@@ -45903,8 +45903,8 @@ fire_to_monkey_head_flask:                             ; DATA XREF: ROM:000037F8
                 beq.s   locret_25552C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_25552C:                          ; CODE XREF: fire_to_monkey_head_flask+A   j
@@ -45939,8 +45939,8 @@ whip_to_prize_faucet:                             ; DATA XREF: ROM:00003934   o
                 beq.s   locret_2555BA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($64).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_2555BA:                          ; CODE XREF: whip_to_prize_faucet+3A   j
@@ -45965,8 +45965,8 @@ prize_faucet_create_daemon:                             ; CODE XREF: whip_to_pri
                 beq.s   locret_25561E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($5A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_25561E:                          ; CODE XREF: whip_to_prize_faucet+D4   j
@@ -46091,8 +46091,8 @@ loc_2557B8:                             ; CODE XREF: fire_to_queen_abscess+A   j
                 beq.s   locret_2557EA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($38).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_2557EA:                          ; CODE XREF: fire_to_queen_abscess+2C   j
@@ -46161,8 +46161,8 @@ loc_255890:                             ; CODE XREF: sub_255814+74   j
                 beq.s   locret_2558C2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_2558C2:                          ; CODE XREF: sub_255814+52   j
@@ -46181,8 +46181,8 @@ loc_2558C4:                             ; CODE XREF: sub_255814+A   j
                 beq.s   locret_255906
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($23).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_255906:                          ; CODE XREF: sub_255814+D6   j
@@ -46350,8 +46350,8 @@ loc_255AC8:                             ; CODE XREF: fire_to_intestinal_boss+6  
                 beq.s   loc_255AEA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($37).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255AEA:                             ; CODE XREF: fire_to_intestinal_boss+38   j
@@ -46439,8 +46439,8 @@ loc_255BAE:                             ; CODE XREF: fire_to_puppy+10   j
                 beq.s   loc_255C12
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($1B).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255C12:                             ; CODE XREF: fire_to_puppy+A8   j
@@ -46542,8 +46542,8 @@ loc_255D6E:                             ; CODE XREF: fire_to_machine+C   j
                 beq.s   loc_255DA0
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2D).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255DA0:                             ; CODE XREF: fire_to_machine+32   j
@@ -46648,8 +46648,8 @@ loc_255E8A:                             ; CODE XREF: sub_255DF8+16   j
                 beq.s   loc_255EC2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($29).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_255EC2:                             ; CODE XREF: sub_255DF8+AE   j
@@ -46683,8 +46683,8 @@ loc_255F16:                             ; CODE XREF: fire_to_saxophone+A   j
                 beq.s   whip_to_garbage
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 whip_to_garbage:                             ; CODE XREF: whip_to_garbage_2+4   j
@@ -46772,8 +46772,8 @@ whip_to_escalator_lever:                             ; DATA XREF: ROM:00003920  
                 beq.s   loc_2560BA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2560BA:                             ; CODE XREF: fire_to_lever+14   j
@@ -46793,8 +46793,8 @@ whip_to_escalator_activated_lever:                             ; DATA XREF: ROM:
                 beq.s   loc_2560FE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($32).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2560FE:                             ; CODE XREF: fire_to_activated_lever+E   j
@@ -46823,8 +46823,8 @@ sub_256114:                             ; CODE XREF: fire_to_crow+20   j
                 beq.s   loc_256156
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($16).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_256156:                             ; CODE XREF: sub_256114+26   j
@@ -47544,8 +47544,8 @@ loc_256A38:                             ; CODE XREF: sub_256856+1AE   j
                 beq.s   loc_256AA2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_256AA2:                             ; CODE XREF: sub_256856+230   j
@@ -47566,8 +47566,8 @@ loc_256AA4:                             ; CODE XREF: sub_256856+1E8   j
                 beq.s   loc_256AF6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_256AF6:                             ; CODE XREF: sub_256856+284   j
@@ -48367,8 +48367,8 @@ sub_257390:                             ; CODE XREF: sub_2573D4+5C   p
                 beq.s   loc_2573CE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 move.l  d7,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2573CE:                             ; CODE XREF: sub_257390+24   j
@@ -48619,8 +48619,8 @@ loc_2576B6:                             ; CODE XREF: collision_with_hamster+5C  
                 beq.s   loc_257708
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($61).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257708:                             ; CODE XREF: collision_with_hamster+D6   j
@@ -48659,8 +48659,8 @@ loc_25777A:                             ; CODE XREF: collision_with_snot+28   j
                 beq.s   loc_2577A4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($38).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2577A4:                             ; CODE XREF: collision_with_snot+40   j
@@ -48785,8 +48785,8 @@ loc_257958:                             ; CODE XREF: collision_with_snot+19E   j
                 beq.s   loc_25797A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($38).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25797A:                             ; CODE XREF: collision_with_snot+216   j
@@ -49012,8 +49012,8 @@ snot_collided_with_walls:                             ; CODE XREF: sub_257B10+C6
                 beq.s   loc_257C3E
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257C3E:                             ; CODE XREF: snot_collided_with_walls+1C   j
@@ -49027,8 +49027,8 @@ snot_collided_with_left_wall:                             ; CODE XREF: snot_coll
                 beq.s   loc_257C70
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257C70:                             ; CODE XREF: snot_collided_with_walls+4E   j
@@ -49050,7 +49050,7 @@ loc_257C80:                             ; CODE XREF: snot_collided_with_walls+3C
                 beq.s   loc_257CCA
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3A).w
-                jsr     (stop_sound).l
+                jsr     (gems_stop_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257CCA:                             ; CODE XREF: snot_collided_with_walls+AE   j
@@ -49058,8 +49058,8 @@ loc_257CCA:                             ; CODE XREF: snot_collided_with_walls+AE
                 beq.s   loc_257CEC
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($5C).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_257CEC:                             ; CODE XREF: snot_collided_with_walls+CA   j
@@ -49377,8 +49377,8 @@ sub_257FE8:                             ; DATA XREF: ROM:stru_25AF1C   o
                 beq.s   loc_2580B8
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3D).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2580B8:                             ; CODE XREF: sub_257FE8+B4   j
@@ -49470,8 +49470,8 @@ collision_with_water_monster:                             ; DATA XREF: ROM:00003
                 beq.s   loc_2581BE
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($6F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2581BE:                             ; CODE XREF: collision_with_water_monster+38   j
@@ -49625,8 +49625,8 @@ sub_258340:                             ; CODE XREF: collision_with_submarine+20
                 beq.s   loc_258394
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3B).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_258394:                             ; CODE XREF: sub_258340+38   j
@@ -49687,8 +49687,8 @@ fridge_fall:                             ; DATA XREF: ROM:stru_25AB2C   o
                 beq.s   loc_25844A
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($19).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25844A:                             ; CODE XREF: fridge_fall+3A   j
@@ -49710,8 +49710,8 @@ loc_258474:                             ; CODE XREF: fridge_fall+70   j
                 beq.s   loc_25849C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($29).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25849C:                             ; CODE XREF: fridge_fall+8C   j
@@ -49737,8 +49737,8 @@ cow_launch:                             ; DATA XREF: ROM:stru_25AA3C   o
                 beq.s   locret_258502
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($19).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_258502:                          ; CODE XREF: cow_launch+8   j
@@ -50134,8 +50134,8 @@ loc_25896C:                             ; CODE XREF: collision_with_asteroid+3C 
                 beq.s   loc_258996
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_258996:                             ; CODE XREF: collision_with_asteroid+94   j
@@ -50159,8 +50159,8 @@ loc_2589DE:                             ; CODE XREF: collision_with_asteroid+8C 
                 beq.s   locret_258A00
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($4A).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 locret_258A00:                          ; CODE XREF: collision_with_asteroid+FE   j
@@ -50800,8 +50800,8 @@ whip_to_evil_cat_soul:                             ; DATA XREF: ROM:00003A24   o
                 beq.s   loc_2591D2
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($21).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_2591D2:                             ; CODE XREF: fire_to_evil_cat_soul_boss+28   j
@@ -51066,8 +51066,8 @@ whip_to_psycrow:                             ; DATA XREF: ROM:0000399C   o
                 andi.l  #3,d7
                 addi.l  #$78,d7 ; 'x'
                 move.l  d7,-(sp)
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_259556:                             ; CODE XREF: whip_to_psycrow+10   j
@@ -51104,8 +51104,8 @@ loc_25959C:                             ; CODE XREF: sub_259586+A   j
                 beq.s   whip_to_psycrow_hook
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($3F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 whip_to_psycrow_hook:                             ; CODE XREF: sub_259586+1C   j
@@ -51991,7 +51991,7 @@ locret_259DFC:                          ; CODE XREF: sub_259DB4+8   j
 
 sub_259DFE:                             ; CODE XREF: oksub_2456C8+DC   p
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 st      (joypad_state).l
                 jsr     (sub_24D730).l
@@ -52060,14 +52060,14 @@ loc_259EEA:                             ; CODE XREF: sub_259DFE+104   j
                 tst.b   (skip_requested).l
                 bne.w   loc_259FFC
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 tst.b   (music_enable).l
                 beq.s   loc_259FA4
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (5).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_259FA4:                             ; CODE XREF: sub_259DFE+18A   j
@@ -52096,8 +52096,8 @@ loc_259FFC:                             ; CODE XREF: sub_259DFE+100   j
                 beq.s   loc_25A02C
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     (5).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25A02C:                             ; CODE XREF: sub_259DFE+20A   j
@@ -52127,8 +52127,8 @@ loc_25A04E:                             ; CODE XREF: sub_259DFE+58E   j
                 beq.s   loc_25A0C6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($28).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25A0C6:                             ; CODE XREF: sub_259DFE+2AC   j
@@ -52243,8 +52243,8 @@ loc_25A26E:                             ; CODE XREF: sub_259DFE+506   j
                 beq.s   loc_25A2D6
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($2B).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25A2D6:                             ; CODE XREF: sub_259DFE+4BC   j
@@ -52381,15 +52381,15 @@ sub_25A4BA:                             ; CODE XREF: sub_259DFE+3D0   p
 
 sub_25A4FE:                             ; CODE XREF: sub_259DFE+688   p
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 jsr     (fade_palettes_to_black).l
                 tst.b   (music_enable).l
                 beq.s   loc_25A534
                 movem.l d0-d1/a0-a1/a6,-(sp)
                 pea     ($F).w
-                jsr     (stop_sound).l
-                jsr     (play_sound).l
+                jsr     (gems_stop_song).l
+                jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_25A534:                             ; CODE XREF: sub_25A4FE+1A   j
@@ -52448,12 +52448,12 @@ loc_25A5C6:                             ; CODE XREF: sub_25A4FE+100   j
 loc_25A60A:                             ; CODE XREF: sub_25A4FE+BA   j
                                         ; sub_25A4FE+E8   j
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 jsr     (fade_palettes_to_black).l
                 jsr     (reset_vscroll).l
                 movem.l d0-d1/a0-a1/a6,-(sp)
-                jsr     (stop_music).l
+                jsr     (gems_stop_all).l
                 movem.l (sp)+,d0-d1/a0-a1/a6
                 rts
 ; End of function sub_25A4FE
@@ -59649,44 +59649,46 @@ snd_for_26b1a0:
                 dc.b 0
 
 
-sub_2CBB48:                             ; CODE XREF: load_sprites_dma+18   p
+; gemsdmastart: сообщить Z80, что 68k начинает DMA
+gems_dma_start:                             ; CODE XREF: load_sprites_dma+18   p
                 move    sr,-(sp)
                 ori     #$700,sr
-loc_2CBB4E:                             ; CODE XREF: sub_2CBB48+38   j
+loc_2CBB4E:                             ; CODE XREF: gems_dma_start+38   j
                 move.w  #$100,(IO_Z80BUS).l
-loc_2CBB56:                             ; CODE XREF: sub_2CBB48+16   j
+loc_2CBB56:                             ; CODE XREF: gems_dma_start+16   j
                 btst    #0,(IO_Z80BUS).l
                 bne.s   loc_2CBB56
-                move.b  #1,(byte_A01B20).l
-                move.b  (byte_A01B21).l,d0
+                move.b  #1,(Z80_DMA_BLOCK).l
+                move.b  (Z80_DMA_UNSAFE).l,d0
                 move.w  #0,(IO_Z80BUS).l
                 tst.b   d0
                 beq.s   loc_2CBB82
                 moveq   #$44,d0 ; 'D'
-loc_2CBB7C:                             ; CODE XREF: sub_2CBB48:loc_2CBB7C   j
+loc_2CBB7C:                             ; CODE XREF: gems_dma_start:loc_2CBB7C   j
                 dbf     d0,loc_2CBB7C
                 bra.s   loc_2CBB4E
 ; ---------------------------------------------------------------------------
-loc_2CBB82:                             ; CODE XREF: sub_2CBB48+30   j
+loc_2CBB82:                             ; CODE XREF: gems_dma_start+30   j
                 move    (sp)+,sr
                 rts
-; End of function sub_2CBB48
+; End of function gems_dma_start
 
 
-sub_2CBB86:                             ; CODE XREF: load_sprites_dma+56   p
+; gemsdmaend: сообщить Z80, что DMA закончен
+gems_dma_end:                             ; CODE XREF: load_sprites_dma+56   p
                 move    sr,-(sp)
                 ori     #$700,sr
                 jsr     (z80_bus_grab).l ; Захватить шины z80
-                move.b  #0,(byte_A01B20).l
-                jsr     (sub_2CBBB8).l
+                move.b  #0,(Z80_DMA_BLOCK).l
+                jsr     (z80_bus_release).l
                 move    (sp)+,sr
                 rts
-; End of function sub_2CBB86
+; End of function gems_dma_end
 
 
 ; Захватить шины z80
 z80_bus_grab:                           ; CODE XREF: background_anim+70   p
-                                        ; sub_2CBB86+6   p ...
+                                        ; gems_dma_end+6   p ...
                 move.w  #$100,(IO_Z80BUS).l
 loc_2CBBAC:                             ; CODE XREF: z80_bus_grab+10   j
                 btst    #0,(IO_Z80BUS).l
@@ -59695,15 +59697,16 @@ loc_2CBBAC:                             ; CODE XREF: z80_bus_grab+10   j
 ; End of function z80_bus_grab
 
 
-sub_2CBBB8:                             ; CODE XREF: sub_2CBB86+14   p
-                                        ; sub_2CBDFE+1A   p
+; gemsreleasez80: отпустить шину Z80
+z80_bus_release:                             ; CODE XREF: gems_dma_end+14   p
+                                        ; gems_read_mbox+1A   p
                 move.w  #0,(IO_Z80BUS).l
                 rts
-; End of function sub_2CBBB8
+; End of function z80_bus_release
 
 
-load_z80_driver:                        ; CODE XREF: sub_2CBCBC+4   p
-                                        ; DATA XREF: sub_2CBCBC+4   o
+load_z80_driver:                        ; CODE XREF: gems_init+4   p
+                                        ; DATA XREF: gems_init+4   o
                 move.l  a1,-(sp)
                 move    sr,-(sp)
                 ori     #$700,sr
@@ -59728,24 +59731,26 @@ fill_zeros_z80:                         ; CODE XREF: load_z80_driver+3C   j
 ; End of function load_z80_driver
 
 
-sub_2CBC06:                             ; CODE XREF: sub_2CBCBC+8   p
-                                        ; DATA XREF: sub_2CBCBC+8   o
+; gemsstartz80: сброс и запуск Z80
+gems_start_z80:                             ; CODE XREF: gems_init+8   p
+                                        ; DATA XREF: gems_init+8   o
                 move    sr,-(sp)
                 ori     #$700,sr
                 move.w  #0,(IO_Z80RES).l
                 moveq   #$F,d0
-loc_2CBC16:                             ; CODE XREF: sub_2CBC06+12   j
+loc_2CBC16:                             ; CODE XREF: gems_start_z80+12   j
                 subq.l  #1,d0
                 bne.s   loc_2CBC16
                 move.w  #0,(IO_Z80BUS).l
                 move.w  #$100,(IO_Z80RES).l
                 move    (sp)+,sr
                 rts
-; End of function sub_2CBC06
+; End of function gems_start_z80
 
 
-init_cmd_fifo_z80:                      ; CODE XREF: sub_2CBC90   p
-                                        ; sub_2CBCA0   p ...
+; GEMS stdsetup
+init_cmd_fifo_z80:                      ; CODE XREF: gems_put_cbyte   p
+                                        ; gems_put_ptr   p ...
                 movea.l (sp)+,a0
                 link    a6,#0
                 movem.l d1/a1,-(sp)
@@ -59764,8 +59769,9 @@ loc_2CBC54:                             ; CODE XREF: init_cmd_fifo_z80+2E   j
 ; End of function init_cmd_fifo_z80
 
 
-end_cmd_fifo_z80:                             ; CODE XREF: sub_2CBC90+C   j
-                                        ; sub_2CBCA0+18   j ...
+; GEMS stdcleanup
+end_cmd_fifo_z80:                             ; CODE XREF: gems_put_cbyte+C   j
+                                        ; gems_put_ptr+18   j ...
                 move.w  #0,(IO_Z80BUS).l
                 move    (sp)+,sr
                 movem.l (sp)+,d1/a1
@@ -59774,8 +59780,9 @@ end_cmd_fifo_z80:                             ; CODE XREF: sub_2CBC90+C   j
 ; End of function end_cmd_fifo_z80
 
 
-put_cmd_start_to_fifo_z80:                             ; CODE XREF: play_sound:loc_2CBD02   p
-                                        ; oksub_2CBD22+6   p ...
+; GEMS stdcmdwrite: пишет $FF и код команды из d0
+put_cmd_start_to_fifo_z80:                             ; CODE XREF: gems_start_song:gems_com1arg   p
+                                        ; gems_pause_all+6   p ...
                 move.b  #$FF,(a1,d1.w)
                 addq.b  #1,d1
                 andi.b  #$3F,d1 ; '?'
@@ -59784,8 +59791,8 @@ put_cmd_start_to_fifo_z80:                             ; CODE XREF: play_sound:l
 
 ; a1 - cmd fifo
 ; d1 - current index of cmd fifo
-put_cmd_byte_to_fifo_z80:               ; CODE XREF: sub_2CBC90+8   p
-                                        ; sub_2CBCA0+8   p ...
+put_cmd_byte_to_fifo_z80:               ; CODE XREF: gems_put_cbyte+8   p
+                                        ; gems_put_ptr+8   p ...
                 move.b  d0,(a1,d1.w)
                 addq.b  #1,d1
                 andi.b  #$3F,d1 ; '?'   ; 3f - cmd fifo size, d1 = max(0x3f, d1)
@@ -59794,19 +59801,21 @@ put_cmd_byte_to_fifo_z80:               ; CODE XREF: sub_2CBC90+8   p
 ; End of function put_cmd_byte_to_fifo_z80
 
 
-sub_2CBC90:                             ; CODE XREF: sub_2CBCBC+10   p
-                                        ; sub_2CBCBC+18   p
+; gemsputcbyte(byte): положить байт в очередь команд Z80
+gems_put_cbyte:                             ; CODE XREF: gems_init+10   p
+                                        ; gems_init+18   p
                                         ; DATA XREF: ...
                 jsr     init_cmd_fifo_z80(pc)
                 move.l  8(a6),d0
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
                                         ; d1 - current index of cmd fifo
                 jmp     end_cmd_fifo_z80(pc)
-; End of function sub_2CBC90
+; End of function gems_put_cbyte
 
 
-sub_2CBCA0:                             ; CODE XREF: sub_2CBCBC+20   p
-                                        ; sub_2CBCBC+28   p ...
+; gemsputptr(long): положить 24-битный указатель в очередь команд Z80
+gems_put_ptr:                             ; CODE XREF: gems_init+20   p
+                                        ; gems_init+28   p ...
                 jsr     init_cmd_fifo_z80(pc)
                 move.l  8(a6),d0
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
@@ -59818,110 +59827,120 @@ sub_2CBCA0:                             ; CODE XREF: sub_2CBCBC+20   p
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
                                         ; d1 - current index of cmd fifo
                 jmp     end_cmd_fifo_z80(pc)
-; End of function sub_2CBCA0
+; End of function gems_put_ptr
 
 
 ; Attributes: bp-based frame
-sub_2CBCBC:                             ; CODE XREF: sub_247576+18   p
+; gemsinit(patchbank, envbank, seqbank, sampbank)
+gems_init:                             ; CODE XREF: sub_247576+18   p
 arg_0           =  8
 arg_4           =  $C
 arg_8           =  $10
 arg_C           =  $14
                 link    a6,#0
                 jsr     load_z80_driver(pc)
-                jsr     sub_2CBC06(pc)
+                jsr     gems_start_z80(pc)
                 moveq   #$FFFFFFFF,d0
                 move.l  d0,-(sp)
-                jsr     sub_2CBC90(pc)
+                jsr     gems_put_cbyte(pc)
                 moveq   #$B,d0
                 move.l  d0,-(sp)
-                jsr     sub_2CBC90(pc)
+                jsr     gems_put_cbyte(pc)
                 move.l  arg_0(a6),-(sp)
-                jsr     sub_2CBCA0(pc)
+                jsr     gems_put_ptr(pc)
                 move.l  arg_4(a6),-(sp)
-                jsr     sub_2CBCA0(pc)
+                jsr     gems_put_ptr(pc)
                 move.l  arg_8(a6),-(sp)
-                jsr     sub_2CBCA0(pc)
+                jsr     gems_put_ptr(pc)
                 move.l  arg_C(a6),-(sp)
-                jsr     sub_2CBCA0(pc)
+                jsr     gems_put_ptr(pc)
                 unlk    a6
                 rts
-; End of function sub_2CBCBC
+; End of function gems_init
 
 
-play_sound:                             ; CODE XREF: oksub_2456C8+1A0   p
+; GEMS cmd $10 gemsstartsong(song)
+gems_start_song:                             ; CODE XREF: oksub_2456C8+1A0   p
                                         ; sub_246B08+108   p ...
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$10,d0
-loc_2CBD02:                             ; CODE XREF: stop_sound+6   j
-                                        ; sub_2CBD1A+6   j ...
+gems_com1arg:                             ; CODE XREF: gems_stop_song+6   j
+                                        ; gems_set_tempo+6   j ...
                 jsr     put_cmd_start_to_fifo_z80(pc)
                 move.l  8(a6),d0        ; d0 - sound number
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
                                         ; d1 - current index of cmd fifo
                 jmp     end_cmd_fifo_z80(pc)
-; End of function play_sound
+; End of function gems_start_song
 
 
-stop_sound:                             ; CODE XREF: oksub_2456C8+1B6   p
+; GEMS cmd $12 gemsstopsong(song)
+gems_stop_song:                             ; CODE XREF: oksub_2456C8+1B6   p
                                         ; sub_246B08+102   p ...
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$12,d0
-                bra.s   loc_2CBD02
-; End of function stop_sound
+                bra.s   gems_com1arg
+; End of function gems_stop_song
 
 
-sub_2CBD1A:
+; GEMS cmd $05 gemssettempo(tempo BPM)
+gems_set_tempo:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #5,d0
-                bra.s   loc_2CBD02
-; End of function sub_2CBD1A
+                bra.s   gems_com1arg
+; End of function gems_set_tempo
 
 
-oksub_2CBD22:                           ; CODE XREF: oksub_245D54+1E   p
+; GEMS cmd $0C gemspauseall()
+gems_pause_all:                           ; CODE XREF: oksub_245D54+1E   p
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$C,d0
                 jsr     put_cmd_start_to_fifo_z80(pc)
                 jmp     end_cmd_fifo_z80(pc)
-; End of function oksub_2CBD22
+; End of function gems_pause_all
 
 
-oksub_2CBD30:                           ; CODE XREF: oksub_245D54+E2   p
+; GEMS cmd $0D gemsresumeall()
+gems_resume_all:                           ; CODE XREF: oksub_245D54+E2   p
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$D,d0
                 jsr     put_cmd_start_to_fifo_z80(pc)
                 jmp     end_cmd_fifo_z80(pc)
-; End of function oksub_2CBD30
+; End of function gems_resume_all
 
 
-stop_music:                           ; CODE XREF: oksub_2456C8+14C   p
+; GEMS cmd $16 gemsstopall()
+gems_stop_all:                           ; CODE XREF: oksub_2456C8+14C   p
                                         ; oksub_2459F0+68   p ...
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$16,d0
                 jsr     put_cmd_start_to_fifo_z80(pc)
                 jmp     end_cmd_fifo_z80(pc)
-; End of function stop_music
+; End of function gems_stop_all
 
 
-sub_2CBD4C:
+; GEMS cmd $1C gemslockchannel(channel)
+gems_lock_channel:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$1C,d0
-                bra.s   loc_2CBD02
-; End of function sub_2CBD4C
+                bra.s   gems_com1arg
+; End of function gems_lock_channel
 
 
-sub_2CBD54:
+; GEMS cmd $1D gemsunlockchannel(channel)
+gems_unlock_channel:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$1D,d0
-                bra.s   loc_2CBD02
-; End of function sub_2CBD54
+                bra.s   gems_com1arg
+; End of function gems_unlock_channel
 
 
-sub_2CBD5C:
+; GEMS cmd $02 gemsprogchange(channel, prog)
+gems_prog_change:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #2,d0
-loc_2CBD62:                             ; CODE XREF: sub_2CBD7A+6   j
-                                        ; sub_2CBD82+6   j ...
+gems_com2arg:                             ; CODE XREF: gems_note_on+6   j
+                                        ; gems_note_off+6   j ...
                 jsr     put_cmd_start_to_fifo_z80(pc)
                 move.l  8(a6),d0
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
@@ -59930,31 +59949,35 @@ loc_2CBD62:                             ; CODE XREF: sub_2CBD7A+6   j
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
                                         ; d1 - current index of cmd fifo
                 jmp     end_cmd_fifo_z80(pc)
-; End of function sub_2CBD5C
+; End of function gems_prog_change
 
 
-sub_2CBD7A:
+; GEMS cmd $00 gemsnoteon(channel, note)
+gems_note_on:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #0,d0
-                bra.s   loc_2CBD62
-; End of function sub_2CBD7A
+                bra.s   gems_com2arg
+; End of function gems_note_on
 
 
-sub_2CBD82:
+; GEMS cmd $01 gemsnoteoff(channel, note)
+gems_note_off:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #1,d0
-                bra.s   loc_2CBD62
-; End of function sub_2CBD82
+                bra.s   gems_com2arg
+; End of function gems_note_off
 
 
-sub_2CBD8A:
+; GEMS cmd $14 gemssetprio(channel, priority)
+gems_set_prio:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$14,d0
-                bra.s   loc_2CBD62
-; End of function sub_2CBD8A
+                bra.s   gems_com2arg
+; End of function gems_set_prio
 
 
-sub_2CBD92:
+; GEMS cmd $05 gemspitchbend(channel, bend) - bend 16 бит, знаковая 8-бит дробь полутонов
+gems_pitch_bend:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #5,d0
                 jsr     put_cmd_start_to_fifo_z80(pc)
@@ -59968,31 +59991,35 @@ sub_2CBD92:
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
                                         ; d1 - current index of cmd fifo
                 jmp     end_cmd_fifo_z80(pc)
-; End of function sub_2CBD92
+; End of function gems_pitch_bend
 
 
-sub_2CBDB6:
+; GEMS cmd $06 gemssetenv(channel, env)
+gems_set_env:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #6,d0
-                bra.s   loc_2CBD62
-; End of function sub_2CBDB6
+                bra.s   gems_com2arg
+; End of function gems_set_env
 
 
-sub_2CBDBE:
+; GEMS cmd $07 gemsretrigenv(channel, val) - $80 вкл, 0 выкл
+gems_retrig_env:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #7,d0
-                bra.s   loc_2CBD62
-; End of function sub_2CBDBE
+                bra.s   gems_com2arg
+; End of function gems_retrig_env
 
 
-sub_2CBDC6:
+; GEMS cmd $0E gemssustain(channel, val) - $80 вкл, 0 выкл
+gems_sustain:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$E,d0
-                bra.s   loc_2CBD62
-; End of function sub_2CBDC6
+                bra.s   gems_com2arg
+; End of function gems_sustain
 
 
-sub_2CBDCE:
+; GEMS cmd $17 gemsmute(song, channel, val) - 1 mute, 0 вкл
+gems_mute:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$17,d0
                 jsr     put_cmd_start_to_fifo_z80(pc)
@@ -60006,35 +60033,38 @@ sub_2CBDCE:
                 jsr     put_cmd_byte_to_fifo_z80(pc) ; a1 - cmd fifo
                                         ; d1 - current index of cmd fifo
                 jmp     end_cmd_fifo_z80(pc)
-; End of function sub_2CBDCE
+; End of function gems_mute
 
 
-sub_2CBDF4:
+; GEMS cmd $1B gemsstorembox(mbox 0..29, val 0..127)
+gems_store_mbox:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$1B,d0
-                bra.w   loc_2CBD62
-; End of function sub_2CBDF4
+                bra.w   gems_com2arg
+; End of function gems_store_mbox
 
 
-sub_2CBDFE:
+; gemsreadmbox(mbox 0..29) -> d0
+gems_read_mbox:
                 move    sr,-(sp)
                 ori     #$700,sr
                 jsr     z80_bus_grab(pc) ; Захватить шины z80
                 moveq   #0,d0
                 move.b  $B(sp),d0
-                lea     (unk_A01B22).l,a0
+                lea     (Z80_MBOX_BASE).l,a0
                 move.b  (a0,d0.w),d0
-                jsr     sub_2CBBB8(pc)
+                jsr     z80_bus_release(pc)
                 move    (sp)+,sr
                 rts
-; End of function sub_2CBDFE
+; End of function gems_read_mbox
 
 
-sub_2CBE20:
+; GEMS cmd $1A gemssamprate(channel, rate) - 4 из заголовка сэмпла, 5 = 10.4 kHz
+gems_samp_rate:
                 jsr     init_cmd_fifo_z80(pc)
                 moveq   #$1A,d0
-                bra.w   loc_2CBD62
-; End of function sub_2CBE20
+                bra.w   gems_com2arg
+; End of function gems_samp_rate
 ; ---------------------------------------------------------------------------
     include "jiminc/spr_general.inc"
     binclude "binaries/endrom.bin"

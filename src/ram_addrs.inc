@@ -491,9 +491,9 @@ byte_FFFF9E equ $FFFFFF9E
 music_enable equ $FFFFFF9F
 Z80_RAM equ $A00000
 CMDWPTR_Z80 equ $A00036
-byte_A01B20 equ $A01B20
-byte_A01B21 equ $A01B21
-unk_A01B22 equ $A01B22
+Z80_DMA_BLOCK equ $A01B20 ; GEMS Z80DMABLOCK: пока установлен, Z80 не читает 68k-память
+Z80_DMA_UNSAFE equ $A01B21 ; GEMS Z80DMAUNSAFE: Z80 может сейчас читать 68k-память
+Z80_MBOX_BASE equ $A01B22 ; GEMS Z80MBOXBASE: почтовые ящики 0..29
 CMD_FIFO_Z80 equ $A01B40
 Z80_YM2612 equ $A04000
 ; ----------------------------------

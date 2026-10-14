@@ -10,6 +10,7 @@
     include "src/ports.inc"
     include "src/equals.inc"
     include "src/text_codes.inc"
+    include "src/move_script.inc"
     include "src/ram_addrs.inc"
 ;
 ; +-------------------------------------------------------------------------+
@@ -4111,369 +4112,326 @@ byte_1A3408:    dc.b   0,$FF,$FF,$FF,  0,$FF,$84,$82,$FF,$FF,$FF,  0,$FE,$FF,$FE
                 dc.b   2,  0,  3,  0,  2,$FF,  2,  0,  2,$FF,  1,  0,$84,$82,  1,$FF,  0,  0,$91,  0
                 dc.l oksub_249536
                 dc.b   1,$FF,  0,$FF,$92,$80
-byte_1A348A:    dc.b   0,  0,$82,  0    ; DATA XREF: sub_24C710+2C   o
-fmove_menu0_wave0: dc.b   0,  0,$8A,$42,$FD,$AC,  0,$FA
-                dc.l fmove_scatter
-byte_1A349A:    dc.b $8A,$22            ; DATA XREF: ROM:001A34AC   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave0
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A349A
-fmove_menu0_wave1: dc.b   0,  0,$8A,$42,$FD,$AC,  0,$FA
+fmove_static:                           ; DATA XREF: sub_24C710+2C   o
+                fm_step 0, 0
+                fm_end
+fmove_menu0_wave0:
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+fmove_menu0_wave0_loop:                 ; DATA XREF: ROM:001A34AC   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave0
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave0_loop
+fmove_menu0_wave1:
                                         ; DATA XREF: ROM:001A34C2   o
                                         ; ROM:001A34CE   o ...
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave1
-                dc.b   0,  0
-byte_1A34C8:    dc.b $8A,$22            ; DATA XREF: ROM:001A34DA   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave1
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A34C8
-fmove_menu0_wave2: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A34F0   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave1
+                fm_step 0, 0
+fmove_menu0_wave1_loop:                 ; DATA XREF: ROM:001A34DA   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave1
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave1_loop
+fmove_menu0_wave2:                      ; DATA XREF: ROM:001A34F0   o
                                         ; ROM:001A34FE   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave2
-                dc.b   0,  0,  0,  0
-byte_1A34F8:    dc.b $8A,$22            ; DATA XREF: ROM:001A350A   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave2
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A34F8
-fmove_menu0_wave3: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3520   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave2
+                fm_step 0, 0
+                fm_step 0, 0
+fmove_menu0_wave2_loop:                 ; DATA XREF: ROM:001A350A   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave2
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave2_loop
+fmove_menu0_wave3:                      ; DATA XREF: ROM:001A3520   o
                                         ; ROM:001A352E   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave3
-                dc.b $84,$82,  0,  0
-byte_1A3528:    dc.b $8A,$22            ; DATA XREF: ROM:001A353A   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave3
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A3528
-fmove_menu0_wave4: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3550   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave3
+                fm_hold 2
+                fm_step 0, 0
+fmove_menu0_wave3_loop:                 ; DATA XREF: ROM:001A353A   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave3
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave3_loop
+fmove_menu0_wave4:                      ; DATA XREF: ROM:001A3550   o
                                         ; ROM:001A355E   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave4
-                dc.b $84,$83,  0,  0
-byte_1A3558:    dc.b $8A,$22            ; DATA XREF: ROM:001A356A   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave4
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A3558
-fmove_menu0_wave5: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3580   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave4
+                fm_hold 3
+                fm_step 0, 0
+fmove_menu0_wave4_loop:                 ; DATA XREF: ROM:001A356A   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave4
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave4_loop
+fmove_menu0_wave5:                      ; DATA XREF: ROM:001A3580   o
                                         ; ROM:001A358E   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave5
-                dc.b $84,$84,  0,  0
-byte_1A3588:    dc.b $8A,$22            ; DATA XREF: ROM:001A359A   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave5
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A3588
-fmove_menu0_wave6: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A35B0   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave5
+                fm_hold 4
+                fm_step 0, 0
+fmove_menu0_wave5_loop:                 ; DATA XREF: ROM:001A359A   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave5
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave5_loop
+fmove_menu0_wave6:                      ; DATA XREF: ROM:001A35B0   o
                                         ; ROM:001A35BE   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave6
-                dc.b $84,$85,  0,  0
-byte_1A35B8:    dc.b $8A,$22            ; DATA XREF: ROM:001A35CA   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave6
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A35B8
-fmove_menu0_wave7: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A35E0   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave6
+                fm_hold 5
+                fm_step 0, 0
+fmove_menu0_wave6_loop:                 ; DATA XREF: ROM:001A35CA   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave6
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave6_loop
+fmove_menu0_wave7:                      ; DATA XREF: ROM:001A35E0   o
                                         ; ROM:001A35EE   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave7
-                dc.b $84,$86,  0,  0
-byte_1A35E8:    dc.b $8A,$22            ; DATA XREF: ROM:001A35FA   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave7
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A35E8
-fmove_menu0_wave8: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3610   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave7
+                fm_hold 6
+                fm_step 0, 0
+fmove_menu0_wave7_loop:                 ; DATA XREF: ROM:001A35FA   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave7
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave7_loop
+fmove_menu0_wave8:                      ; DATA XREF: ROM:001A3610   o
                                         ; ROM:001A361E   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave8
-                dc.b $84,$87,  0,  0
-byte_1A3618:    dc.b $8A,$22            ; DATA XREF: ROM:001A362A   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave8
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A3618
-fmove_menu0_wave9: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3640   o
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave8
+                fm_hold 7
+                fm_step 0, 0
+fmove_menu0_wave8_loop:                 ; DATA XREF: ROM:001A362A   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave8
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave8_loop
+fmove_menu0_wave9:                      ; DATA XREF: ROM:001A3640   o
                                         ; ROM:001A364E   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave9
-                dc.b $84,$88,  0,  0
-byte_1A3648:    dc.b $8A,$22            ; DATA XREF: ROM:001A365A   o
-                dc.w $FDAC
-                dc.w 0
-                dc.l fmove_menu0_wave9
-                dc.b $92,  0
-                dc.l fmove_menu0_bounce
-                dc.b $80,  0
-                dc.l byte_1A3648
-fmove_menu0_bounce: dc.b   0,  0,  0,  1,  0,  1,  0,  2,  0,  1,  0,  2,  0,  1,  0,  1,  0,  0,$8A,$42
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave9
+                fm_hold 8
+                fm_step 0, 0
+fmove_menu0_wave9_loop:                 ; DATA XREF: ROM:001A365A   o
+                fm_if_w FM_NE, menu_selected_item, $00, fmove_menu0_wave9
+                fm_gosub fmove_menu0_bounce
+                fm_goto fmove_menu0_wave9_loop
+fmove_menu0_bounce:
                                         ; DATA XREF: ROM:001A34A6   o
                                         ; ROM:001A34D4   o ...
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b   0,  0,  0,$FF,  0,$FF,  0,$FE,  0,$FF,  0,$FE,  0,$FF,  0,$FF,  0,  0,$8A,$42
-                dc.w $FDAC
-                dc.w $FA
-                dc.l fmove_scatter
-                dc.b $92,$80
-fmove_popup_rise: dc.b   0,  0,  0,  0,$84,  3,$91,  0
+                fm_step 0, 0
+                fm_step 0, 1
+                fm_step 0, 1
+                fm_step 0, 2
+                fm_step 0, 1
+                fm_step 0, 2
+                fm_step 0, 1
+                fm_step 0, 1
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_step 0, 0
+                fm_step 0, -1
+                fm_step 0, -1
+                fm_step 0, -2
+                fm_step 0, -1
+                fm_step 0, -2
+                fm_step 0, -1
+                fm_step 0, -1
+                fm_step 0, 0
+                fm_if_w FM_GT, menu_selected_item, $FA, fmove_scatter
+                fm_return
+fmove_popup_fall:
                                         ; DATA XREF: ROM:dword_1B6F09   t
                                         ; ROM:dword_1B6F18   t ...
-                dc.l oksub_24951E
-                dc.b $84,$85,  0,  0,$91,  0
-                dc.l oksub_249526
-                dc.b $84,$8B,  0,  0,$85,  0
-byte_1A36B4:    dc.b   0,  1,$86,$9A    ; DATA XREF: ROM:001A36B8   o
-                dc.l byte_1A36B4
-byte_1A36BC:    dc.b   0,  2,$86,$9A    ; DATA XREF: ROM:001A36C0   o
-                dc.l byte_1A36BC
-byte_1A36C4:    dc.b   0,  3,$86,$9A    ; DATA XREF: ROM:001A36C8   o
-                dc.l byte_1A36C4
-                dc.b $91,  0
-                dc.l oksub_24950E
-                dc.b $84,$13,  0,  4,$85,  0,$8C,  0
-fmove_scatter: dc.b   0,  0,$91,  0    ; DATA XREF: ROM:001A3496   o
+                fm_step 0, 0
+                fm_step 0, 0
+                fm_loop 3
+                fm_call oksub_24951E
+                fm_hold 5
+                fm_step 0, 0
+                fm_call oksub_249526
+                fm_hold 11
+                fm_step 0, 0
+                fm_next
+fmove_popup_fall_1px:                   ; DATA XREF: ROM:001A36B8   o
+                fm_step 0, 1
+                fm_rand_goto $9A, fmove_popup_fall_1px
+fmove_popup_fall_2px:                   ; DATA XREF: ROM:001A36C0   o
+                fm_step 0, 2
+                fm_rand_goto $9A, fmove_popup_fall_2px
+fmove_popup_fall_3px:                   ; DATA XREF: ROM:001A36C8   o
+                fm_step 0, 3
+                fm_rand_goto $9A, fmove_popup_fall_3px
+                fm_call oksub_24950E
+                fm_loop 19
+                fm_step 0, 4
+                fm_next
+                fm_delete
+fmove_scatter:                          ; DATA XREF: ROM:001A3496   o
                                         ; ROM:001A34B8   o ...
-                dc.l oksub_2495EC
-                dc.b $91,  0
-                dc.l oksub_24950E
-                dc.b $84,$87,  0,  0,$83,$12,  0,$1E,$60,  0,$83,$14,  0,$20
-                dc.l off_1B01BC
-                dc.b $82,  0
-fmove_menu1_wave0: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A370E   o
+                fm_step 0, 0
+                fm_call oksub_2495EC
+                fm_call oksub_24950E
+                fm_hold 7
+                fm_step 0, 0
+                fm_set_obj_w $1E, $6000
+                fm_set_obj_l $20, off_1B01BC
+                fm_end
+fmove_menu1_wave0:                      ; DATA XREF: ROM:001A370E   o
                                         ; ROM:001A371A   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave0
-                dc.b   0,  0
-byte_1A3714:    dc.b $8A,$22            ; DATA XREF: ROM:001A3726   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave0
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A3714
-fmove_menu1_wave1: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A373C   o
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave0
+                fm_step 0, 0
+fmove_menu1_wave0_loop:                 ; DATA XREF: ROM:001A3726   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave0
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave0_loop
+fmove_menu1_wave1:                      ; DATA XREF: ROM:001A373C   o
                                         ; ROM:001A374A   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave1
-                dc.b   0,  0,  0,  0
-byte_1A3744:    dc.b $8A,$22            ; DATA XREF: ROM:001A3756   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave1
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A3744
-fmove_menu1_wave2: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A376C   o
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave1
+                fm_step 0, 0
+                fm_step 0, 0
+fmove_menu1_wave1_loop:                 ; DATA XREF: ROM:001A3756   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave1
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave1_loop
+fmove_menu1_wave2:                      ; DATA XREF: ROM:001A376C   o
                                         ; ROM:001A377A   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave2
-                dc.b $84,$82,  0,  0
-byte_1A3774:    dc.b $8A,$22            ; DATA XREF: ROM:001A3786   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave2
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A3774
-fmove_menu1_wave3: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A379C   o
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave2
+                fm_hold 2
+                fm_step 0, 0
+fmove_menu1_wave2_loop:                 ; DATA XREF: ROM:001A3786   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave2
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave2_loop
+fmove_menu1_wave3:                      ; DATA XREF: ROM:001A379C   o
                                         ; ROM:001A37AA   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave3
-                dc.b $84,$83,  0,  0
-byte_1A37A4:    dc.b $8A,$22            ; DATA XREF: ROM:001A37B6   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave3
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A37A4
-fmove_menu1_wave4: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A37CC   o
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave3
+                fm_hold 3
+                fm_step 0, 0
+fmove_menu1_wave3_loop:                 ; DATA XREF: ROM:001A37B6   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave3
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave3_loop
+fmove_menu1_wave4:                      ; DATA XREF: ROM:001A37CC   o
                                         ; ROM:001A37DA   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave4
-                dc.b $84,$84,  0,  0
-byte_1A37D4:    dc.b $8A,$22            ; DATA XREF: ROM:001A37E6   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave4
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A37D4
-fmove_menu1_wave5: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A37FC   o
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave4
+                fm_hold 4
+                fm_step 0, 0
+fmove_menu1_wave4_loop:                 ; DATA XREF: ROM:001A37E6   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave4
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave4_loop
+fmove_menu1_wave5:                      ; DATA XREF: ROM:001A37FC   o
                                         ; ROM:001A380A   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave5
-                dc.b $84,$85,  0,  0
-byte_1A3804:    dc.b $8A,$22            ; DATA XREF: ROM:001A3816   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave5
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A3804
-fmove_menu1_wave6: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A382C   o
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave5
+                fm_hold 5
+                fm_step 0, 0
+fmove_menu1_wave5_loop:                 ; DATA XREF: ROM:001A3816   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave5
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave5_loop
+fmove_menu1_wave6:                      ; DATA XREF: ROM:001A382C   o
                                         ; ROM:001A383A   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $8A,$22
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave6
-                dc.b $84,$86,  0,  0
-byte_1A3834:    dc.b $8A,$22            ; DATA XREF: ROM:001A3846   o
-                dc.w $FDAC
-                dc.w 1
-                dc.l fmove_menu1_wave6
-                dc.b $92,  0
-                dc.l fmove_menu1_bounce
-                dc.b $80,  0
-                dc.l byte_1A3834
-fmove_menu1_bounce: dc.b   0,  0,  0,  1,  0,  0,$84,$82,  0,  1,  0,  2,  0,  1,  0,  1,  0,  1,  0,  0,$8A,$12
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave6
+                fm_hold 6
+                fm_step 0, 0
+fmove_menu1_wave6_loop:                 ; DATA XREF: ROM:001A3846   o
+                fm_if_w FM_NE, menu_selected_item, $01, fmove_menu1_wave6
+                fm_gosub fmove_menu1_bounce
+                fm_goto fmove_menu1_wave6_loop
+fmove_menu1_bounce:
                                         ; DATA XREF: ROM:001A3720   o
                                         ; ROM:001A3750   o ...
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b   0,  0,  0,$FF,  0,$FF,  0,$FE,  0,$FF,  0,$FE,  0,$FF,  0,$FF,  0,  0,$8A,$12
-                dc.w $FDAC
-                dc.w $FF
-                dc.l fmove_scatter
-                dc.b $92,$80,  0,  0,$84,$8F,  0,  0,$91,  0
-                dc.l oksub_24951E
-                dc.b $84,$87,  0,  0,$91,  0
-                dc.l oksub_249526
-byte_1A389C:    dc.b $84,$13,  0,  0,$8A,$24,$FC,$82,  0,  0,  0,  0
+                fm_step 0, 0
+                fm_step 0, 1
+                fm_step 0, 0
+                fm_hold 2
+                fm_step 0, 1
+                fm_step 0, 2
+                fm_step 0, 1
+                fm_step 0, 1
+                fm_step 0, 1
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_step 0, 0
+                fm_step 0, -1
+                fm_step 0, -1
+                fm_step 0, -2
+                fm_step 0, -1
+                fm_step 0, -2
+                fm_step 0, -1
+                fm_step 0, -1
+                fm_step 0, 0
+                fm_if_w FM_EQ, menu_selected_item, $FF, fmove_scatter
+                fm_return
+                fm_step 0, 0
+                fm_hold 15
+                fm_step 0, 0
+                fm_call oksub_24951E
+                fm_hold 7
+                fm_step 0, 0
+                fm_call oksub_249526
+byte_1A389C:
                                         ; DATA XREF: ROM:001A38CE   o
-                dc.l byte_1A38D2
-                dc.b $85,  0,$91,  0
-                dc.l oksub_24951E
-                dc.b $84,  7,  0,  0,$8A,$24,$FC,$82,  0,  0,  0,  0
-                dc.l byte_1A38D2
-                dc.b $85,  0,$91,  0
-                dc.l oksub_249526
-                dc.b $80,  0
-                dc.l byte_1A389C
-byte_1A38D2:    dc.b $91,  0            ; DATA XREF: ROM:001A38A8   o
+                fm_loop 19
+                fm_step 0, 0
+                fm_if_l FM_NE, is_jim_move_right, $00, byte_1A38D2
+                fm_next
+                fm_call oksub_24951E
+                fm_loop 7
+                fm_step 0, 0
+                fm_if_l FM_NE, is_jim_move_right, $00, byte_1A38D2
+                fm_next
+                fm_call oksub_249526
+                fm_goto byte_1A389C
+byte_1A38D2:                            ; DATA XREF: ROM:001A38A8   o
                                         ; ROM:001A38C0   o
-                dc.l oksub_249526
-                dc.b $84,$83,$FF,  0,$84,$83,$FE,  0,$84,$83,$FD,  0,$84,$83,$FC,  0,$84,$83,$FB,  0,$84,$83,$FA,  0,$84,$83,$F9,  0,$84,$83,$F8,  0
-                dc.b $84,$83,$F7,  0,$84,$83,$F6,  0,$84,$83,$F5,  0,$84,$83,$F4,  0,  0,  0,$8C,  0
+                fm_call oksub_249526
+                fm_hold 3
+                fm_step -1, 0
+                fm_hold 3
+                fm_step -2, 0
+                fm_hold 3
+                fm_step -3, 0
+                fm_hold 3
+                fm_step -4, 0
+                fm_hold 3
+                fm_step -5, 0
+                fm_hold 3
+                fm_step -6, 0
+                fm_hold 3
+                fm_step -7, 0
+                fm_hold 3
+                fm_step -8, 0
+                fm_hold 3
+                fm_step -9, 0
+                fm_hold 3
+                fm_step -10, 0
+                fm_hold 3
+                fm_step -11, 0
+                fm_hold 3
+                fm_step -12, 0
+                fm_step 0, 0
+                fm_delete
 byte_1A390C:    dc.b   0,  0            ; DATA XREF: ROM:001B1FDE   o
 byte_1A390E:    dc.b $88,$C7,  0,  9    ; DATA XREF: ROM:001A3936   o
                 dc.l byte_1A3926
@@ -33874,7 +33832,7 @@ loc_24C714:                             ; CODE XREF: sub_24C6EE+1A   j
                 move.w  6(a1,d2.w),d1
                 lea     (funchar_control_codes_table).w,a2
                 lea     (funchar_sprites_table).w,a3
-                lea     (byte_1A348A).l,a4
+                lea     (fmove_static).l,a4
 loc_24C742:                             ; CODE XREF: sub_24C710+4A   j
                                         ; sub_24C710+CE   j ...
                 clr.w   d2

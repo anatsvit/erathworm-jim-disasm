@@ -648,33 +648,33 @@ joypad_txt:
                 txt_motion fmove_menu1_wave0
                 dc.b "D", TXT_END
 very_cool_txt:
-                txt_motion fmove_popup_rise
+                txt_motion fmove_popup_fall
                                         ; DATA XREF: ROM:001B6A28   o
                                         ; Very cool (win boss-1 in new junk city)
                 dc.b "VERY COOL", TXT_END
                 dc.b 0
 warning_txt:
-                txt_motion fmove_popup_rise
+                txt_motion fmove_popup_fall
                                         ; DATA XREF: ROM:001B6A30   o
                                         ; Warning (boss 1 in new junk city)
                 dc.b "WARNING", TXT_END
 cow_launched:
-                txt_motion fmove_popup_rise
+                txt_motion fmove_popup_fall
                                         ; DATA XREF: ROM:001B6A38   o
                                         ; Cow launched (in new junk city)
                 dc.b "COW LAUNCHED", TXT_END
 use_your_head_txt:
-                txt_motion fmove_popup_rise
+                txt_motion fmove_popup_fall
                                         ; DATA XREF: ROM:001B6A40   o
                                         ; Use your head (?)
                 dc.b "USE YOUR HEAD!", TXT_END
 finish_him_txt:
-                txt_motion fmove_popup_rise
+                txt_motion fmove_popup_fall
                                         ; DATA XREF: ROM:001B6A48   o
                                         ; Finish him (evil boss in what the heck)
                 dc.b "FINISH HIM!", TXT_END
 won_the_race_txt:
-                txt_motion fmove_popup_rise
+                txt_motion fmove_popup_fall
                                         ; DATA XREF: ROM:001B6A50   o
                                         ; Psycrow won the race (text in level)
                 dc.b "PSYCROW"

@@ -1,5 +1,5 @@
-byte_2CC376:    dc.b   0,  1,$82,$82,$96,$98,$8B,$8A,$88,$89
-                                        ; DATA XREF: ROM:off_73C   o
+spr_funchar_R: dc.b   0,  1,$82,$82,$96,$98,$8B,$8A,$88,$89
+                                        ; DATA XREF: ROM:frame_funchar_R   o
                 dc.w sprite_24_24
                 dc.w $8081
                 dc.w $9500 ! ((grp_13D7A0 / 2) & $00FF)

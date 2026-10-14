@@ -121,539 +121,564 @@ fun_texts:      dc.l new_junk_city_txt  ; text_offset
                 dc.l won_the_race_txt   ; text_offset ; Psycrow won the race (text in level)
                 dc.w $E4                ; x_position
                 dc.w $148               ; y_position
-new_junk_city_txt:dc.l $0C000000 ! (byte_1A348E) ; New Junk City (Text)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "W "
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "J"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A350E)
-				dc.B "K "
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "C"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "Y",0
-what_the_heck_txt:dc.l $0C000000 + (byte_1A356E)
+new_junk_city_txt:
+                txt_motion fmove_menu0_wave0 ; New Junk City (Text)
+                dc.b "N"
+                txt_motion fmove_menu0_wave4
+                dc.b "E"
+                txt_motion fmove_menu0_wave6
+                dc.b "W "
+                txt_motion fmove_menu0_wave2
+                dc.b "J"
+                txt_motion fmove_menu0_wave5
+                dc.b "U"
+                txt_motion fmove_menu0_wave1
+                dc.b "N"
+                txt_motion fmove_menu0_wave3
+				dc.b "K "
+                txt_motion fmove_menu0_wave1
+                dc.b "C"
+                txt_motion fmove_menu0_wave4
+                dc.b "I"
+                txt_motion fmove_menu0_wave0
+                dc.b "T"
+                txt_motion fmove_menu0_wave7
+                dc.b "Y", TXT_END
+what_the_heck_txt:
+                txt_motion fmove_menu0_wave5
                                         ; DATA XREF: ROM:001B6918   o
                                         ; ROM:001B6920   o ...
                                         ; What the heck (text)
-                dc.B "W"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "T "
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "E "
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "C"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "K"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "?",0
-snot_a_problem_r1_txt:dc.l $0C000000 + (byte_1A35CE)
+                dc.b "W"
+                txt_motion fmove_menu0_wave0
+                dc.b "H"
+                txt_motion fmove_menu0_wave9
+                dc.b "A"
+                txt_motion fmove_menu0_wave4
+                dc.b "T "
+                txt_motion fmove_menu0_wave8
+                dc.b "T"
+                txt_motion fmove_menu0_wave6
+                dc.b "H"
+                txt_motion fmove_menu0_wave0
+                dc.b "E "
+                txt_motion fmove_menu0_wave1
+                dc.b "H"
+                txt_motion fmove_menu0_wave3
+                dc.b "E"
+                txt_motion fmove_menu0_wave7
+                dc.b "C"
+                txt_motion fmove_menu0_wave2
+                dc.b "K"
+                txt_motion fmove_menu0_wave6
+                dc.b "?", TXT_END
+snot_a_problem_r1_txt:
+                txt_motion fmove_menu0_wave7
                                         ; DATA XREF: ROM:001B6930   o
                                         ; Snot a problem! round 1 (text)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "T "
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "A "
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "B"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "M!"
-                dc.w $186
-                dc.w $1CE
-                dc.w $228
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "D "
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "1",0
-snot_a_problem_r2_txt:dc.l $0C000000 + (byte_1A35CE)
+                dc.b "S"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave8
+                dc.b "O"
+                txt_motion fmove_menu0_wave1
+                dc.b "T "
+                txt_motion fmove_menu0_wave9
+                dc.b "A "
+                txt_motion fmove_menu0_wave2
+                dc.b "P"
+                txt_motion fmove_menu0_wave5
+                dc.b "R"
+                txt_motion fmove_menu0_wave3
+                dc.b "O"
+                txt_motion fmove_menu0_wave7
+                dc.b "B"
+                txt_motion fmove_menu0_wave4
+                dc.b "L"
+                txt_motion fmove_menu0_wave8
+                dc.b "E"
+                txt_motion fmove_menu0_wave1
+                dc.b "M!"
+                dc.b TXT_MOVE_X, -122
+                dc.b TXT_MOVE_X, -50
+                dc.b TXT_MOVE_Y, 40
+                txt_motion fmove_menu0_wave4
+                dc.b "R"
+                txt_motion fmove_menu0_wave7
+                dc.b "O"
+                txt_motion fmove_menu0_wave5
+                dc.b "U"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave2
+                dc.b "D "
+                txt_motion fmove_menu0_wave5
+                dc.b "1", TXT_END
+snot_a_problem_r2_txt:
+                txt_motion fmove_menu0_wave7
                                         ; DATA XREF: ROM:001B6938   o
                                         ; Snot a problem! round 2 (text)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "T "
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "A "
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "B"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "M!"
-                dc.w $186
-                dc.w $1CE
-                dc.w $228
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "D "
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "2",0
-snot_a_problem_r3_txt:dc.l $0C000000 + (byte_1A35CE)
+                dc.b "S"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave8
+                dc.b "O"
+                txt_motion fmove_menu0_wave1
+                dc.b "T "
+                txt_motion fmove_menu0_wave9
+                dc.b "A "
+                txt_motion fmove_menu0_wave2
+                dc.b "P"
+                txt_motion fmove_menu0_wave5
+                dc.b "R"
+                txt_motion fmove_menu0_wave3
+                dc.b "O"
+                txt_motion fmove_menu0_wave7
+                dc.b "B"
+                txt_motion fmove_menu0_wave4
+                dc.b "L"
+                txt_motion fmove_menu0_wave8
+                dc.b "E"
+                txt_motion fmove_menu0_wave1
+                dc.b "M!"
+                dc.b TXT_MOVE_X, -122
+                dc.b TXT_MOVE_X, -50
+                dc.b TXT_MOVE_Y, 40
+                txt_motion fmove_menu0_wave4
+                dc.b "R"
+                txt_motion fmove_menu0_wave7
+                dc.b "O"
+                txt_motion fmove_menu0_wave5
+                dc.b "U"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave2
+                dc.b "D "
+                txt_motion fmove_menu0_wave5
+                dc.b "2", TXT_END
+snot_a_problem_r3_txt:
+                txt_motion fmove_menu0_wave7
                                         ; DATA XREF: ROM:001B6940   o
                                         ; Snot a problem! round 3 (text)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "T "
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "A "
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "B"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "M!"
-                dc.w $186
-                dc.w $1CE
-                dc.w $228
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "D "
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "3",0
-for_petes_sake_txt:dc.l $0C000000 + (byte_1A34DE)
+                dc.b "S"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave8
+                dc.b "O"
+                txt_motion fmove_menu0_wave1
+                dc.b "T "
+                txt_motion fmove_menu0_wave9
+                dc.b "A "
+                txt_motion fmove_menu0_wave2
+                dc.b "P"
+                txt_motion fmove_menu0_wave5
+                dc.b "R"
+                txt_motion fmove_menu0_wave3
+                dc.b "O"
+                txt_motion fmove_menu0_wave7
+                dc.b "B"
+                txt_motion fmove_menu0_wave4
+                dc.b "L"
+                txt_motion fmove_menu0_wave8
+                dc.b "E"
+                txt_motion fmove_menu0_wave1
+                dc.b "M!"
+                dc.b TXT_MOVE_X, -122
+                dc.b TXT_MOVE_X, -50
+                dc.b TXT_MOVE_Y, 40
+                txt_motion fmove_menu0_wave4
+                dc.b "R"
+                txt_motion fmove_menu0_wave7
+                dc.b "O"
+                txt_motion fmove_menu0_wave5
+                dc.b "U"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave2
+                dc.b "D "
+                txt_motion fmove_menu0_wave5
+                dc.b "3", TXT_END
+for_petes_sake_txt:
+                txt_motion fmove_menu0_wave2
                                         ; DATA XREF: ROM:001B6948   o
                                         ; For Pete's sake! (text)
-                dc.B "F"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "R "
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "E",$27
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "S "
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "K"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "!",0
-buttville_txt:  dc.l $0C000000 + (byte_1A348E)
+                dc.b "F"
+                txt_motion fmove_menu0_wave5
+                dc.b "O"
+                txt_motion fmove_menu0_wave3
+                dc.b "R "
+                txt_motion fmove_menu0_wave7
+                dc.b "P"
+                txt_motion fmove_menu0_wave4
+                dc.b "E"
+                txt_motion fmove_menu0_wave5
+                dc.b "T"
+                txt_motion fmove_menu0_wave6
+                dc.b "E",$27
+                txt_motion fmove_menu0_wave4
+                dc.b "S "
+                txt_motion fmove_menu0_wave0
+                dc.b "S"
+                txt_motion fmove_menu0_wave9
+                dc.b "A"
+                txt_motion fmove_menu0_wave1
+                dc.b "K"
+                txt_motion fmove_menu0_wave8
+                dc.b "E"
+                txt_motion fmove_menu0_wave0
+                dc.b "!", TXT_END
+buttville_txt:
+                txt_motion fmove_menu0_wave0
                                         ; DATA XREF: ROM:001B6950   o
                                         ; ROM:001B6958   o
                                         ; Buttville (text)
-                dc.B "B"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "V"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "E",0
-level_5_txt:    dc.l $0C000000 + (byte_1A348E)
+                dc.b "B"
+                txt_motion fmove_menu0_wave2
+                dc.b "U"
+                txt_motion fmove_menu0_wave4
+                dc.b "T"
+                txt_motion fmove_menu0_wave5
+                dc.b "T"
+                txt_motion fmove_menu0_wave8
+                dc.b "V"
+                txt_motion fmove_menu0_wave7
+                dc.b "I"
+                txt_motion fmove_menu0_wave6
+                dc.b "L"
+                txt_motion fmove_menu0_wave1
+                dc.b "L"
+                txt_motion fmove_menu0_wave3
+                dc.b "E", TXT_END
+level_5_txt:
+                txt_motion fmove_menu0_wave0
                                         ; DATA XREF: ROM:001B6960   o
                                         ; ROM:001B6968   o ...
                                         ; Level 5 (text)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "V"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "L "
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "5",0
-intestinal_distress_txt:dc.l $0C000000 + (byte_1A34DE)
+                dc.b "L"
+                txt_motion fmove_menu0_wave4
+                dc.b "E"
+                txt_motion fmove_menu0_wave6
+                dc.b "V"
+                txt_motion fmove_menu0_wave1
+                dc.b "E"
+                txt_motion fmove_menu0_wave2
+                dc.b "L "
+                txt_motion fmove_menu0_wave9
+                dc.b "5", TXT_END
+intestinal_distress_txt:
+                txt_motion fmove_menu0_wave2
                                         ; DATA XREF: ROM:001B6978   o
                                         ; Intestinal distress! (text)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "L"
-                dc.w $188
-                dc.w $1E8
-                dc.w $228
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "D"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "!",0
-down_the_tubes_txt:dc.l $0C000000 + (byte_1A35FE)
+                dc.b "I"
+                txt_motion fmove_menu0_wave5
+                dc.b "N"
+                txt_motion fmove_menu0_wave3
+                dc.b "T"
+                txt_motion fmove_menu0_wave7
+                dc.b "E"
+                txt_motion fmove_menu0_wave4
+                dc.b "S"
+                txt_motion fmove_menu0_wave8
+                dc.b "T"
+                txt_motion fmove_menu0_wave0
+                dc.b "I"
+                txt_motion fmove_menu0_wave6
+                dc.b "N"
+                txt_motion fmove_menu0_wave1
+                dc.b "A"
+                txt_motion fmove_menu0_wave2
+                dc.b "L"
+                dc.b TXT_MOVE_X, -120
+                dc.b TXT_MOVE_X, -24
+                dc.b TXT_MOVE_Y, 40
+                txt_motion fmove_menu0_wave0
+                dc.b "D"
+                txt_motion fmove_menu0_wave3
+                dc.b "I"
+                txt_motion fmove_menu0_wave8
+                dc.b "S"
+                txt_motion fmove_menu0_wave2
+                dc.b "T"
+                txt_motion fmove_menu0_wave5
+                dc.b "R"
+                txt_motion fmove_menu0_wave1
+                dc.b "E"
+                txt_motion fmove_menu0_wave4
+                dc.b "S"
+                txt_motion fmove_menu0_wave7
+                dc.b "S"
+                txt_motion fmove_menu0_wave3
+                dc.b "!", TXT_END
+down_the_tubes_txt:
+                txt_motion fmove_menu0_wave8
                                         ; DATA XREF: ROM:001B6980   o
                                         ; ROM:001B6988   o
                                         ; Down the tubes (text)
-                dc.B "D"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "W"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "N "
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "E "
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "B"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "S",0
-andy_asteroids_txt:dc.l $0C000000 + (byte_1A34DE)
+                dc.b "D"
+                txt_motion fmove_menu0_wave0
+                dc.b "O"
+                txt_motion fmove_menu0_wave6
+                dc.b "W"
+                txt_motion fmove_menu0_wave1
+                dc.b "N "
+                txt_motion fmove_menu0_wave5
+                dc.b "T"
+                txt_motion fmove_menu0_wave3
+                dc.b "H"
+                txt_motion fmove_menu0_wave7
+                dc.b "E "
+                txt_motion fmove_menu0_wave4
+                dc.b "T"
+                txt_motion fmove_menu0_wave8
+                dc.b "U"
+                txt_motion fmove_menu0_wave0
+                dc.b "B"
+                txt_motion fmove_menu0_wave6
+                dc.b "E"
+                txt_motion fmove_menu0_wave2
+                dc.b "S", TXT_END
+andy_asteroids_txt:
+                txt_motion fmove_menu0_wave2
                                         ; DATA XREF: ROM:001B6990   o
                                         ; ROM:001B6998   o ...
                                         ; Andy asteroids? (text)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "D"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "Y "
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "D"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "?",0
-who_turned_out_txt:dc.l $0C000000 + (byte_1A34DE)
+                dc.b "A"
+                txt_motion fmove_menu0_wave5
+                dc.b "N"
+                txt_motion fmove_menu0_wave3
+                dc.b "D"
+                txt_motion fmove_menu0_wave7
+                dc.b "Y "
+                txt_motion fmove_menu0_wave4
+                dc.b "A"
+                txt_motion fmove_menu0_wave8
+                dc.b "S"
+                txt_motion fmove_menu0_wave1
+                dc.b "T"
+                txt_motion fmove_menu0_wave9
+                dc.b "E"
+                txt_motion fmove_menu0_wave0
+                dc.b "R"
+                txt_motion fmove_menu0_wave6
+                dc.b "O"
+                txt_motion fmove_menu0_wave1
+                dc.b "I"
+                txt_motion fmove_menu0_wave5
+                dc.b "D"
+                txt_motion fmove_menu0_wave3
+                dc.b "S"
+                txt_motion fmove_menu0_wave0
+                dc.b "?", TXT_END
+who_turned_out_txt:
+                txt_motion fmove_menu0_wave2
                                         ; DATA XREF: ROM:001B69C8   o
                                         ; ROM:001B69D0   o ...
                                         ; Who turned out the light? (text)
-                dc.B "W"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "O "
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "D "
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "T"
-                dc.w $194
-                dc.w $1B4
-                dc.w $228
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "E "
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "G"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "H"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "?",0
-psycrow_txt:    dc.l $0C000000 + (byte_1A34DE)
+                dc.b "W"
+                txt_motion fmove_menu0_wave5
+                dc.b "H"
+                txt_motion fmove_menu0_wave0
+                dc.b "O "
+                txt_motion fmove_menu0_wave3
+                dc.b "T"
+                txt_motion fmove_menu0_wave8
+                dc.b "U"
+                txt_motion fmove_menu0_wave1
+                dc.b "R"
+                txt_motion fmove_menu0_wave4
+                dc.b "N"
+                txt_motion fmove_menu0_wave6
+                dc.b "E"
+                txt_motion fmove_menu0_wave2
+                dc.b "D "
+                txt_motion fmove_menu0_wave8
+                dc.b "O"
+                txt_motion fmove_menu0_wave0
+                dc.b "U"
+                txt_motion fmove_menu0_wave5
+                dc.b "T"
+                dc.b TXT_MOVE_X, -108
+                dc.b TXT_MOVE_X, -76
+                dc.b TXT_MOVE_Y, 40
+                txt_motion fmove_menu0_wave3
+                dc.b "T"
+                txt_motion fmove_menu0_wave2
+                dc.b "H"
+                txt_motion fmove_menu0_wave4
+                dc.b "E "
+                txt_motion fmove_menu0_wave2
+                dc.b "L"
+                txt_motion fmove_menu0_wave6
+                dc.b "I"
+                txt_motion fmove_menu0_wave0
+                dc.b "G"
+                txt_motion fmove_menu0_wave8
+                dc.b "H"
+                txt_motion fmove_menu0_wave7
+                dc.b "T"
+                txt_motion fmove_menu0_wave1
+                dc.b "?", TXT_END
+psycrow_txt:
+                txt_motion fmove_menu0_wave2
                                         ; DATA XREF: ROM:001B69F0   o
                                         ; Psycrow! (text)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "Y"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "C"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "W"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "!",0
-press_start_txt:dc.l $0C000000 + (byte_1A353E)
+                dc.b "P"
+                txt_motion fmove_menu0_wave5
+                dc.b "S"
+                txt_motion fmove_menu0_wave0
+                dc.b "Y"
+                txt_motion fmove_menu0_wave3
+                dc.b "C"
+                txt_motion fmove_menu0_wave8
+                dc.b "R"
+                txt_motion fmove_menu0_wave1
+                dc.b "O"
+                txt_motion fmove_menu0_wave4
+                dc.b "W"
+                txt_motion fmove_menu0_wave1
+                dc.b "!", TXT_END
+press_start_txt:
+                txt_motion fmove_menu0_wave4
                                         ; DATA XREF: ROM:001B69F8   o
                                         ; Press start (text)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "E"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "S "
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "S"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A362E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "T",0
-options_txt:    dc.l $0C000000 + (byte_1A37BA)
+                dc.b "P"
+                txt_motion fmove_menu0_wave6
+                dc.b "R"
+                txt_motion fmove_menu0_wave8
+                dc.b "E"
+                txt_motion fmove_menu0_wave1
+                dc.b "S"
+                txt_motion fmove_menu0_wave5
+                dc.b "S "
+                txt_motion fmove_menu0_wave7
+                dc.b "S"
+                txt_motion fmove_menu0_wave3
+                dc.b "T"
+                txt_motion fmove_menu0_wave0
+                dc.b "A"
+                txt_motion fmove_menu0_wave9
+                dc.b "R"
+                txt_motion fmove_menu0_wave2
+                dc.b "T", TXT_END
+options_txt:
+                txt_motion fmove_menu1_wave4
                                         ; DATA XREF: ROM:001B6A00   o
                                         ; Options (text)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A372A)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A381A)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A375A)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A37EA)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A36FC)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A378A)
-                dc.B "S",0
-practice_txt:   dc.l $0C000000 + (byte_1A34B0)
+                dc.b "O"
+                txt_motion fmove_menu1_wave1
+                dc.b "P"
+                txt_motion fmove_menu1_wave6
+                dc.b "T"
+                txt_motion fmove_menu1_wave2
+                dc.b "I"
+                txt_motion fmove_menu1_wave5
+                dc.b "O"
+                txt_motion fmove_menu1_wave0
+                dc.b "N"
+                txt_motion fmove_menu1_wave3
+                dc.b "S", TXT_END
+practice_txt:
+                txt_motion fmove_menu0_wave1
                                         ; DATA XREF: ROM:001B6A08   o
                                         ; Practice (text in options)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "C"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "T"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "C"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "E",0
-normal_txt:     dc.l $0C000000 + (byte_1A353E)
+                dc.b "P"
+                txt_motion fmove_menu0_wave5
+                dc.b "R"
+                txt_motion fmove_menu0_wave7
+                dc.b "A"
+                txt_motion fmove_menu0_wave4
+                dc.b "C"
+                txt_motion fmove_menu0_wave0
+                dc.b "T"
+                txt_motion fmove_menu0_wave6
+                dc.b "I"
+                txt_motion fmove_menu0_wave3
+                dc.b "C"
+                txt_motion fmove_menu0_wave2
+                dc.b "E", TXT_END
+normal_txt:
+                txt_motion fmove_menu0_wave4
                                         ; DATA XREF: ROM:001B6A10   o
                                         ; Normal (text in options)
-                dc.B "N"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "R"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "M"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A35CE)
-                dc.B "L",0
-difficult_txt:  dc.l $0C000000 + (byte_1A35CE)
+                dc.b "N"
+                txt_motion fmove_menu0_wave6
+                dc.b "O"
+                txt_motion fmove_menu0_wave8
+                dc.b "R"
+                txt_motion fmove_menu0_wave1
+                dc.b "M"
+                txt_motion fmove_menu0_wave5
+                dc.b "A"
+                txt_motion fmove_menu0_wave7
+                dc.b "L", TXT_END
+difficult_txt:
+                txt_motion fmove_menu0_wave7
                                         ; DATA XREF: ROM:001B6A18   o
                                         ; Difficult (text in options)
-                dc.B "D"
-                dc.l $0C000000 + (byte_1A348E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A35FE)
-                dc.B "F"
-                dc.l $0C000000 + (byte_1A34B0)
-                dc.B "F"
-                dc.l $0C000000 + (byte_1A350E)
-                dc.B "I"
-                dc.l $0C000000 + (byte_1A359E)
-                dc.B "C"
-                dc.l $0C000000 + (byte_1A353E)
-                dc.B "U"
-                dc.l $0C000000 + (byte_1A34DE)
-                dc.B "L"
-                dc.l $0C000000 + (byte_1A356E)
-                dc.B "T",0
-joypad_txt:     dc.l $0C000000 + (byte_1A37BA)
+                dc.b "D"
+                txt_motion fmove_menu0_wave0
+                dc.b "I"
+                txt_motion fmove_menu0_wave8
+                dc.b "F"
+                txt_motion fmove_menu0_wave1
+                dc.b "F"
+                txt_motion fmove_menu0_wave3
+                dc.b "I"
+                txt_motion fmove_menu0_wave6
+                dc.b "C"
+                txt_motion fmove_menu0_wave4
+                dc.b "U"
+                txt_motion fmove_menu0_wave2
+                dc.b "L"
+                txt_motion fmove_menu0_wave5
+                dc.b "T", TXT_END
+joypad_txt:
+                txt_motion fmove_menu1_wave4
                                         ; DATA XREF: ROM:001B6A20   o
                                         ; Joypad (text in options)
-                dc.B "J"
-                dc.l $0C000000 + (byte_1A372A)
-                dc.B "O"
-                dc.l $0C000000 + (byte_1A381A)
-                dc.B "Y"
-                dc.l $0C000000 + (byte_1A375A)
-                dc.B "P"
-                dc.l $0C000000 + (byte_1A37EA)
-                dc.B "A"
-                dc.l $0C000000 + (byte_1A36FC)
-                dc.B "D",0
-very_cool_txt:  dc.l $0C000000 + (byte_1A3698)
+                dc.b "J"
+                txt_motion fmove_menu1_wave1
+                dc.b "O"
+                txt_motion fmove_menu1_wave6
+                dc.b "Y"
+                txt_motion fmove_menu1_wave2
+                dc.b "P"
+                txt_motion fmove_menu1_wave5
+                dc.b "A"
+                txt_motion fmove_menu1_wave0
+                dc.b "D", TXT_END
+very_cool_txt:
+                txt_motion fmove_popup_rise
                                         ; DATA XREF: ROM:001B6A28   o
                                         ; Very cool (win boss-1 in new junk city)
-                dc.B "VERY COOL",0
+                dc.b "VERY COOL", TXT_END
                 dc.b 0
-warning_txt:    dc.l $0C000000 + (byte_1A3698)
+warning_txt:
+                txt_motion fmove_popup_rise
                                         ; DATA XREF: ROM:001B6A30   o
                                         ; Warning (boss 1 in new junk city)
-                dc.B "WARNING",0
-cow_launched:   dc.l $0C000000 + (byte_1A3698)
+                dc.b "WARNING", TXT_END
+cow_launched:
+                txt_motion fmove_popup_rise
                                         ; DATA XREF: ROM:001B6A38   o
                                         ; Cow launched (in new junk city)
-                dc.B "COW LAUNCHED",0
-use_your_head_txt:dc.l $0C000000 + (byte_1A3698)
+                dc.b "COW LAUNCHED", TXT_END
+use_your_head_txt:
+                txt_motion fmove_popup_rise
                                         ; DATA XREF: ROM:001B6A40   o
                                         ; Use your head (?)
-                dc.B "USE YOUR HEAD!",0
-finish_him_txt: dc.l $0C000000 + (byte_1A3698)
+                dc.b "USE YOUR HEAD!", TXT_END
+finish_him_txt:
+                txt_motion fmove_popup_rise
                                         ; DATA XREF: ROM:001B6A48   o
                                         ; Finish him (evil boss in what the heck)
-                dc.B "FINISH HIM!",0
-won_the_race_txt:dc.l $0C000000 + (byte_1A3698)
+                dc.b "FINISH HIM!", TXT_END
+won_the_race_txt:
+                txt_motion fmove_popup_rise
                                         ; DATA XREF: ROM:001B6A50   o
                                         ; Psycrow won the race (text in level)
-                dc.B "PSYCROW"
-                dc.w $18B
-                dc.w $1BA
-                dc.w $228
-                dc.B "WON THE RACE!",0
+                dc.b "PSYCROW"
+                dc.b TXT_MOVE_X, -117
+                dc.b TXT_MOVE_X, -70
+                dc.b TXT_MOVE_Y, 40
+                dc.b "WON THE RACE!", TXT_END

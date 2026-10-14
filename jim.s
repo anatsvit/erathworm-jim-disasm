@@ -9,6 +9,7 @@
 
     include "src/ports.inc"
     include "src/equals.inc"
+    include "src/text_codes.inc"
     include "src/ram_addrs.inc"
 ;
 ; +-------------------------------------------------------------------------+
@@ -1738,82 +1739,84 @@ off_5978:       dc.l sub_249232         ; DATA XREF: sub_249178+32   o
                 dc.l oksub_24999A
                 dc.l sub_2499D6
                 dc.l sub_249A02
-off_59CC:       dc.l sub_24C7F0         ; DATA XREF: write_text+4   o
+funchar_control_codes_table: dc.l txtcode_00_end       ; DATA XREF: write_text+4   o
                                         ; sub_24C710+24   o
-                dc.l sub_24C7F4
-                dc.l sub_24C7FC
-                dc.l sub_24C804
-                dc.l sub_24C820
-                dc.l sub_24C83C
-                dc.l sub_24C870
-                dc.l sub_24C898
-                dc.l sub_24C89E
-                dc.l sub_24C8A8
-                dc.l sub_24C8B2
-                dc.l sub_24C8BC
-                dc.l get_funchar_offset ; Процедура отвечает за загрузку адресов спрайтовых надписей
-                dc.l nullsub_23
-                dc.l sub_24C8D8
-                dc.l sub_24C8F8
-dword_5A0C:     dc.l 0                  ; DATA XREF: sub_24C710+28   o
-                dc.l off_1B0262
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l off_1B026E
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l off_1B0272
-                dc.l 0
-                dc.l off_1B0266
-                dc.l 0
-                dc.l off_1B01CE
-                dc.l off_1B01D2
-                dc.l off_1B01D6
-                dc.l off_1B01DA
-                dc.l off_1B01DE
-                dc.l off_1B01E2
-                dc.l off_1B01E6
-                dc.l off_1B01EA
-                dc.l off_1B01EE
-                dc.l off_1B01F2
-                dc.l off_1B01F6
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l 0
-                dc.l off_1B026A
-                dc.l 0
-                dc.l off_1B01FA
-                dc.l off_1B01FE
-                dc.l off_1B0202
-                dc.l off_1B0206
-                dc.l off_1B020A
-                dc.l off_1B020E
-                dc.l off_1B0212
-                dc.l off_1B0216
-                dc.l off_1B021A
-                dc.l off_1B021E
-                dc.l off_1B0222
-                dc.l off_1B0226
-                dc.l off_1B022A
-                dc.l off_1B022E
-                dc.l off_1B0232
-                dc.l off_1B0236
-                dc.l off_1B023A
-                dc.l off_1B023E
-                dc.l off_1B0242
-                dc.l off_1B0246
-                dc.l off_1B024A
-                dc.l off_1B024E
-                dc.l off_1B0252
-                dc.l off_1B0256
-                dc.l off_1B025A
-                dc.l off_1B025E
+                                        ; $00 - Конец строки, выход из процедуры вывода
+                dc.l txtcode_01_move_x  ; $01 - x += signed byte
+                dc.l txtcode_02_move_y  ; $02 - y += signed byte
+                dc.l txtcode_03_repeat_h ; $03 - Повторить символ n раз по горизонтали
+                dc.l txtcode_04_repeat_v ; $04 - Повторить символ n раз по вертикали
+                dc.l txtcode_05_fill_rect ; $05 - Залить прямоугольник w×h символом
+                dc.l txtcode_06_wait_frames ; $06 - Пауза на n кадров, можно пропустить по skip_requested
+                dc.l txtcode_07_newline ; $07 - y++, x = 0
+                dc.l txtcode_08_palette0 ; $08 - font_params = $0000
+                dc.l txtcode_09_palette1 ; $09 - font_params = $2000
+                dc.l txtcode_0A_palette2 ; $0A - font_params = $4000
+                dc.l txtcode_0B_palette3 ; $0B - font_params = $6000
+                dc.l txtcode_0C_set_motion ; $0C - a4 = скрипт движения букв
+                dc.l txtcode_0D_nop     ; $0D - Ничего не делает
+                dc.l txtcode_0E_clear_screen ; $0E - Затемнение палитр, очистка plane A, загрузка палитры word_1B88A2 в линию 3
+                dc.l txtcode_0F_spawn_object ; $0F - Создать объект по спрайтовой структуре в точке (x, y)
+funchar_sprites_table: dc.l 0           ; ' ' - пробел, обрабатывается отдельно (x += $10)
+                                        ; DATA XREF: sub_24C710+28   o
+                dc.l anim_funchar_exclam ; !
+                dc.l 0                  ; двойной апостроф - нет графики
+                dc.l 0                  ; # - нет графики
+                dc.l 0                  ; $ - нет графики
+                dc.l 0                  ; % - нет графики
+                dc.l 0                  ; & - нет графики
+                dc.l anim_funchar_apostrophe ; апостроф
+                dc.l 0                  ; ( - нет графики
+                dc.l 0                  ; ) - нет графики
+                dc.l 0                  ; * - нет графики
+                dc.l 0                  ; + - нет графики
+                dc.l anim_funchar_comma ; ,
+                dc.l 0                  ; - - нет графики
+                dc.l anim_funchar_dot   ; .
+                dc.l 0                  ; / - нет графики
+                dc.l anim_funchar_0     ; 0
+                dc.l anim_funchar_1     ; 1
+                dc.l anim_funchar_2     ; 2
+                dc.l anim_funchar_3     ; 3
+                dc.l anim_funchar_4     ; 4
+                dc.l anim_funchar_5     ; 5
+                dc.l anim_funchar_6     ; 6
+                dc.l anim_funchar_7     ; 7
+                dc.l anim_funchar_8     ; 8
+                dc.l anim_funchar_9     ; 9
+                dc.l anim_funchar_colon ; :
+                dc.l 0                  ; ; - нет графики
+                dc.l 0                  ; < - нет графики
+                dc.l 0                  ; = - нет графики
+                dc.l 0                  ; > - нет графики
+                dc.l anim_funchar_question ; ?
+                dc.l 0                  ; @ - нет графики
+                dc.l anim_funchar_A     ; A
+                dc.l anim_funchar_B     ; B
+                dc.l anim_funchar_C     ; C
+                dc.l anim_funchar_D     ; D
+                dc.l anim_funchar_E     ; E
+                dc.l anim_funchar_F     ; F
+                dc.l anim_funchar_G     ; G
+                dc.l anim_funchar_H     ; H
+                dc.l anim_funchar_I     ; I
+                dc.l anim_funchar_J     ; J
+                dc.l anim_funchar_K     ; K
+                dc.l anim_funchar_L     ; L
+                dc.l anim_funchar_M     ; M
+                dc.l anim_funchar_N     ; N
+                dc.l anim_funchar_O     ; O
+                dc.l anim_funchar_P     ; P
+                dc.l anim_funchar_Q     ; Q
+                dc.l anim_funchar_R     ; R
+                dc.l anim_funchar_S     ; S
+                dc.l anim_funchar_T     ; T
+                dc.l anim_funchar_U     ; U
+                dc.l anim_funchar_V     ; V
+                dc.l anim_funchar_W     ; W
+                dc.l anim_funchar_X     ; X
+                dc.l anim_funchar_Y     ; Y
+                dc.l anim_funchar_Z     ; Z
 byte_5AF8:
     binclude "binaries/byte_5AF8.bin"
     align 2,0
@@ -4109,189 +4112,189 @@ byte_1A3408:    dc.b   0,$FF,$FF,$FF,  0,$FF,$84,$82,$FF,$FF,$FF,  0,$FE,$FF,$FE
                 dc.l oksub_249536
                 dc.b   1,$FF,  0,$FF,$92,$80
 byte_1A348A:    dc.b   0,  0,$82,  0    ; DATA XREF: sub_24C710+2C   o
-byte_1A348E:    dc.b   0,  0,$8A,$42,$FD,$AC,  0,$FA
-                dc.l byte_1A36DA
+fmove_menu0_wave0: dc.b   0,  0,$8A,$42,$FD,$AC,  0,$FA
+                dc.l fmove_scatter
 byte_1A349A:    dc.b $8A,$22            ; DATA XREF: ROM:001A34AC   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A348E
+                dc.l fmove_menu0_wave0
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A349A
-byte_1A34B0:    dc.b   0,  0,$8A,$42,$FD,$AC,  0,$FA
+fmove_menu0_wave1: dc.b   0,  0,$8A,$42,$FD,$AC,  0,$FA
                                         ; DATA XREF: ROM:001A34C2   o
                                         ; ROM:001A34CE   o ...
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A34B0
+                dc.l fmove_menu0_wave1
                 dc.b   0,  0
 byte_1A34C8:    dc.b $8A,$22            ; DATA XREF: ROM:001A34DA   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A34B0
+                dc.l fmove_menu0_wave1
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A34C8
-byte_1A34DE:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A34F0   o
+fmove_menu0_wave2: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A34F0   o
                                         ; ROM:001A34FE   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A34DE
+                dc.l fmove_menu0_wave2
                 dc.b   0,  0,  0,  0
 byte_1A34F8:    dc.b $8A,$22            ; DATA XREF: ROM:001A350A   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A34DE
+                dc.l fmove_menu0_wave2
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A34F8
-byte_1A350E:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3520   o
+fmove_menu0_wave3: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3520   o
                                         ; ROM:001A352E   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A350E
+                dc.l fmove_menu0_wave3
                 dc.b $84,$82,  0,  0
 byte_1A3528:    dc.b $8A,$22            ; DATA XREF: ROM:001A353A   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A350E
+                dc.l fmove_menu0_wave3
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A3528
-byte_1A353E:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3550   o
+fmove_menu0_wave4: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3550   o
                                         ; ROM:001A355E   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A353E
+                dc.l fmove_menu0_wave4
                 dc.b $84,$83,  0,  0
 byte_1A3558:    dc.b $8A,$22            ; DATA XREF: ROM:001A356A   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A353E
+                dc.l fmove_menu0_wave4
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A3558
-byte_1A356E:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3580   o
+fmove_menu0_wave5: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3580   o
                                         ; ROM:001A358E   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A356E
+                dc.l fmove_menu0_wave5
                 dc.b $84,$84,  0,  0
 byte_1A3588:    dc.b $8A,$22            ; DATA XREF: ROM:001A359A   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A356E
+                dc.l fmove_menu0_wave5
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A3588
-byte_1A359E:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A35B0   o
+fmove_menu0_wave6: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A35B0   o
                                         ; ROM:001A35BE   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A359E
+                dc.l fmove_menu0_wave6
                 dc.b $84,$85,  0,  0
 byte_1A35B8:    dc.b $8A,$22            ; DATA XREF: ROM:001A35CA   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A359E
+                dc.l fmove_menu0_wave6
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A35B8
-byte_1A35CE:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A35E0   o
+fmove_menu0_wave7: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A35E0   o
                                         ; ROM:001A35EE   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A35CE
+                dc.l fmove_menu0_wave7
                 dc.b $84,$86,  0,  0
 byte_1A35E8:    dc.b $8A,$22            ; DATA XREF: ROM:001A35FA   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A35CE
+                dc.l fmove_menu0_wave7
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A35E8
-byte_1A35FE:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3610   o
+fmove_menu0_wave8: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3610   o
                                         ; ROM:001A361E   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A35FE
+                dc.l fmove_menu0_wave8
                 dc.b $84,$87,  0,  0
 byte_1A3618:    dc.b $8A,$22            ; DATA XREF: ROM:001A362A   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A35FE
+                dc.l fmove_menu0_wave8
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A3618
-byte_1A362E:    dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3640   o
+fmove_menu0_wave9: dc.b   0,  0,$8A,$42    ; DATA XREF: ROM:001A3640   o
                                         ; ROM:001A364E   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A362E
+                dc.l fmove_menu0_wave9
                 dc.b $84,$88,  0,  0
 byte_1A3648:    dc.b $8A,$22            ; DATA XREF: ROM:001A365A   o
                 dc.w $FDAC
                 dc.w 0
-                dc.l byte_1A362E
+                dc.l fmove_menu0_wave9
                 dc.b $92,  0
-                dc.l byte_1A365E
+                dc.l fmove_menu0_bounce
                 dc.b $80,  0
                 dc.l byte_1A3648
-byte_1A365E:    dc.b   0,  0,  0,  1,  0,  1,  0,  2,  0,  1,  0,  2,  0,  1,  0,  1,  0,  0,$8A,$42
+fmove_menu0_bounce: dc.b   0,  0,  0,  1,  0,  1,  0,  2,  0,  1,  0,  2,  0,  1,  0,  1,  0,  0,$8A,$42
                                         ; DATA XREF: ROM:001A34A6   o
                                         ; ROM:001A34D4   o ...
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b   0,  0,  0,$FF,  0,$FF,  0,$FE,  0,$FF,  0,$FE,  0,$FF,  0,$FF,  0,  0,$8A,$42
                 dc.w $FDAC
                 dc.w $FA
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $92,$80
-byte_1A3698:    dc.b   0,  0,  0,  0,$84,  3,$91,  0
+fmove_popup_rise: dc.b   0,  0,  0,  0,$84,  3,$91,  0
                                         ; DATA XREF: ROM:dword_1B6F09   t
                                         ; ROM:dword_1B6F18   t ...
                 dc.l oksub_24951E
@@ -4307,7 +4310,7 @@ byte_1A36C4:    dc.b   0,  3,$86,$9A    ; DATA XREF: ROM:001A36C8   o
                 dc.b $91,  0
                 dc.l oksub_24950E
                 dc.b $84,$13,  0,  4,$85,  0,$8C,  0
-byte_1A36DA:    dc.b   0,  0,$91,  0    ; DATA XREF: ROM:001A3496   o
+fmove_scatter: dc.b   0,  0,$91,  0    ; DATA XREF: ROM:001A3496   o
                                         ; ROM:001A34B8   o ...
                 dc.l oksub_2495EC
                 dc.b $91,  0
@@ -4315,142 +4318,142 @@ byte_1A36DA:    dc.b   0,  0,$91,  0    ; DATA XREF: ROM:001A3496   o
                 dc.b $84,$87,  0,  0,$83,$12,  0,$1E,$60,  0,$83,$14,  0,$20
                 dc.l off_1B01BC
                 dc.b $82,  0
-byte_1A36FC:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A370E   o
+fmove_menu1_wave0: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A370E   o
                                         ; ROM:001A371A   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A36FC
+                dc.l fmove_menu1_wave0
                 dc.b   0,  0
 byte_1A3714:    dc.b $8A,$22            ; DATA XREF: ROM:001A3726   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A36FC
+                dc.l fmove_menu1_wave0
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A3714
-byte_1A372A:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A373C   o
+fmove_menu1_wave1: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A373C   o
                                         ; ROM:001A374A   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A372A
+                dc.l fmove_menu1_wave1
                 dc.b   0,  0,  0,  0
 byte_1A3744:    dc.b $8A,$22            ; DATA XREF: ROM:001A3756   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A372A
+                dc.l fmove_menu1_wave1
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A3744
-byte_1A375A:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A376C   o
+fmove_menu1_wave2: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A376C   o
                                         ; ROM:001A377A   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A375A
+                dc.l fmove_menu1_wave2
                 dc.b $84,$82,  0,  0
 byte_1A3774:    dc.b $8A,$22            ; DATA XREF: ROM:001A3786   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A375A
+                dc.l fmove_menu1_wave2
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A3774
-byte_1A378A:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A379C   o
+fmove_menu1_wave3: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A379C   o
                                         ; ROM:001A37AA   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A378A
+                dc.l fmove_menu1_wave3
                 dc.b $84,$83,  0,  0
 byte_1A37A4:    dc.b $8A,$22            ; DATA XREF: ROM:001A37B6   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A378A
+                dc.l fmove_menu1_wave3
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A37A4
-byte_1A37BA:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A37CC   o
+fmove_menu1_wave4: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A37CC   o
                                         ; ROM:001A37DA   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A37BA
+                dc.l fmove_menu1_wave4
                 dc.b $84,$84,  0,  0
 byte_1A37D4:    dc.b $8A,$22            ; DATA XREF: ROM:001A37E6   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A37BA
+                dc.l fmove_menu1_wave4
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A37D4
-byte_1A37EA:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A37FC   o
+fmove_menu1_wave5: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A37FC   o
                                         ; ROM:001A380A   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A37EA
+                dc.l fmove_menu1_wave5
                 dc.b $84,$85,  0,  0
 byte_1A3804:    dc.b $8A,$22            ; DATA XREF: ROM:001A3816   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A37EA
+                dc.l fmove_menu1_wave5
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A3804
-byte_1A381A:    dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A382C   o
+fmove_menu1_wave6: dc.b   0,  0,$8A,$12    ; DATA XREF: ROM:001A382C   o
                                         ; ROM:001A383A   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $8A,$22
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A381A
+                dc.l fmove_menu1_wave6
                 dc.b $84,$86,  0,  0
 byte_1A3834:    dc.b $8A,$22            ; DATA XREF: ROM:001A3846   o
                 dc.w $FDAC
                 dc.w 1
-                dc.l byte_1A381A
+                dc.l fmove_menu1_wave6
                 dc.b $92,  0
-                dc.l byte_1A384A
+                dc.l fmove_menu1_bounce
                 dc.b $80,  0
                 dc.l byte_1A3834
-byte_1A384A:    dc.b   0,  0,  0,  1,  0,  0,$84,$82,  0,  1,  0,  2,  0,  1,  0,  1,  0,  1,  0,  0,$8A,$12
+fmove_menu1_bounce: dc.b   0,  0,  0,  1,  0,  0,$84,$82,  0,  1,  0,  2,  0,  1,  0,  1,  0,  1,  0,  0,$8A,$12
                                         ; DATA XREF: ROM:001A3720   o
                                         ; ROM:001A3750   o ...
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b   0,  0,  0,$FF,  0,$FF,  0,$FE,  0,$FF,  0,$FE,  0,$FF,  0,$FF,  0,  0,$8A,$12
                 dc.w $FDAC
                 dc.w $FF
-                dc.l byte_1A36DA
+                dc.l fmove_scatter
                 dc.b $92,$80,  0,  0,$84,$8F,  0,  0,$91,  0
                 dc.l oksub_24951E
                 dc.b $84,$87,  0,  0,$91,  0
@@ -13141,89 +13144,89 @@ off_1B01BC:     dc.w off_978            ; DATA XREF: ROM:001A36F6   o
                 dc.w off_990
                 dc.w off_990
                 dc.w $F600
-off_1B01CE:     dc.w off_6CC            ; DATA XREF: ROM:00005A4C   o
+anim_funchar_0:     dc.w frame_funchar_0            ; DATA XREF: ROM:00005A4C   o
                 dc.w $EC01
-off_1B01D2:     dc.w off_6D0            ; DATA XREF: ROM:00005A50   o
+anim_funchar_1:     dc.w frame_funchar_1            ; DATA XREF: ROM:00005A50   o
                 dc.w $EC01
-off_1B01D6:     dc.w off_6D4            ; DATA XREF: ROM:00005A54   o
+anim_funchar_2:     dc.w frame_funchar_2            ; DATA XREF: ROM:00005A54   o
                 dc.w $EC01
-off_1B01DA:     dc.w off_6D8            ; DATA XREF: ROM:00005A58   o
+anim_funchar_3:     dc.w frame_funchar_3            ; DATA XREF: ROM:00005A58   o
                 dc.w $EC01
-off_1B01DE:     dc.w off_6DC            ; DATA XREF: ROM:00005A5C   o
+anim_funchar_4:     dc.w frame_funchar_4            ; DATA XREF: ROM:00005A5C   o
                 dc.w $EC01
-off_1B01E2:     dc.w off_6E0            ; DATA XREF: ROM:00005A60   o
+anim_funchar_5:     dc.w frame_funchar_5            ; DATA XREF: ROM:00005A60   o
                 dc.w $EC01
-off_1B01E6:     dc.w off_6E4            ; DATA XREF: ROM:00005A64   o
+anim_funchar_6:     dc.w frame_funchar_6            ; DATA XREF: ROM:00005A64   o
                 dc.w $EC01
-off_1B01EA:     dc.w off_6E8            ; DATA XREF: ROM:00005A68   o
+anim_funchar_7:     dc.w frame_funchar_7            ; DATA XREF: ROM:00005A68   o
                 dc.w $EC01
-off_1B01EE:     dc.w off_6EC            ; DATA XREF: ROM:00005A6C   o
+anim_funchar_8:     dc.w frame_funchar_8            ; DATA XREF: ROM:00005A6C   o
                 dc.w $EC01
-off_1B01F2:     dc.w off_6F0            ; DATA XREF: ROM:00005A70   o
+anim_funchar_9:     dc.w frame_funchar_9            ; DATA XREF: ROM:00005A70   o
                 dc.w $EC01
-off_1B01F6:     dc.w off_6F4            ; DATA XREF: ROM:00005A74   o
+anim_funchar_colon:     dc.w frame_funchar_colon            ; DATA XREF: ROM:00005A74   o
                 dc.w $EC01
-off_1B01FA:     dc.w off_6F8            ; DATA XREF: ROM:00005A90   o
+anim_funchar_A:     dc.w frame_funchar_A            ; DATA XREF: ROM:00005A90   o
                 dc.w $EC01
-off_1B01FE:     dc.w off_6FC            ; DATA XREF: ROM:00005A94   o
+anim_funchar_B:     dc.w frame_funchar_B            ; DATA XREF: ROM:00005A94   o
                 dc.w $EC01
-off_1B0202:     dc.w off_700            ; DATA XREF: ROM:00005A98   o
+anim_funchar_C:     dc.w frame_funchar_C            ; DATA XREF: ROM:00005A98   o
                 dc.w $EC01
-off_1B0206:     dc.w off_704            ; DATA XREF: ROM:00005A9C   o
+anim_funchar_D:     dc.w frame_funchar_D            ; DATA XREF: ROM:00005A9C   o
                 dc.w $EC01
-off_1B020A:     dc.w off_708            ; DATA XREF: ROM:00005AA0   o
+anim_funchar_E:     dc.w frame_funchar_E            ; DATA XREF: ROM:00005AA0   o
                 dc.w $EC01
-off_1B020E:     dc.w off_70C            ; DATA XREF: ROM:00005AA4   o
+anim_funchar_F:     dc.w frame_funchar_F            ; DATA XREF: ROM:00005AA4   o
                 dc.w $EC01
-off_1B0212:     dc.w off_710            ; DATA XREF: ROM:00005AA8   o
+anim_funchar_G:     dc.w frame_funchar_G            ; DATA XREF: ROM:00005AA8   o
                 dc.w $EC01
-off_1B0216:     dc.w off_714            ; DATA XREF: ROM:00005AAC   o
+anim_funchar_H:     dc.w frame_funchar_H            ; DATA XREF: ROM:00005AAC   o
                 dc.w $EC01
-off_1B021A:     dc.w off_718            ; DATA XREF: ROM:00005AB0   o
+anim_funchar_I:     dc.w frame_funchar_I            ; DATA XREF: ROM:00005AB0   o
                 dc.w $EC01
-off_1B021E:     dc.w off_71C            ; DATA XREF: ROM:00005AB4   o
+anim_funchar_J:     dc.w frame_funchar_J            ; DATA XREF: ROM:00005AB4   o
                 dc.w $EC01
-off_1B0222:     dc.w off_720            ; DATA XREF: ROM:00005AB8   o
+anim_funchar_K:     dc.w frame_funchar_K            ; DATA XREF: ROM:00005AB8   o
                 dc.w $EC01
-off_1B0226:     dc.w off_724            ; DATA XREF: ROM:00005ABC   o
+anim_funchar_L:     dc.w frame_funchar_L            ; DATA XREF: ROM:00005ABC   o
                 dc.w $EC01
-off_1B022A:     dc.w off_728            ; DATA XREF: ROM:00005AC0   o
+anim_funchar_M:     dc.w frame_funchar_M            ; DATA XREF: ROM:00005AC0   o
                 dc.w $EC01
-off_1B022E:     dc.w off_72C            ; DATA XREF: ROM:00005AC4   o
+anim_funchar_N:     dc.w frame_funchar_N            ; DATA XREF: ROM:00005AC4   o
                 dc.w $EC01
-off_1B0232:     dc.w off_730            ; DATA XREF: ROM:00005AC8   o
+anim_funchar_O:     dc.w frame_funchar_O            ; DATA XREF: ROM:00005AC8   o
                 dc.w $EC01
-off_1B0236:     dc.w off_734            ; DATA XREF: ROM:00005ACC   o
+anim_funchar_P:     dc.w frame_funchar_P            ; DATA XREF: ROM:00005ACC   o
                 dc.w $EC01
-off_1B023A:     dc.w off_738            ; DATA XREF: ROM:00005AD0   o
+anim_funchar_Q:     dc.w frame_funchar_Q            ; DATA XREF: ROM:00005AD0   o
                 dc.w $EC01
-off_1B023E:     dc.w off_73C            ; DATA XREF: ROM:00005AD4   o
+anim_funchar_R:     dc.w frame_funchar_R            ; DATA XREF: ROM:00005AD4   o
                 dc.w $EC01
-off_1B0242:     dc.w off_740            ; DATA XREF: ROM:00005AD8   o
+anim_funchar_S:     dc.w frame_funchar_S            ; DATA XREF: ROM:00005AD8   o
                 dc.w $EC01
-off_1B0246:     dc.w off_744            ; DATA XREF: ROM:00005ADC   o
+anim_funchar_T:     dc.w frame_funchar_T            ; DATA XREF: ROM:00005ADC   o
                 dc.w $EC01
-off_1B024A:     dc.w off_748            ; DATA XREF: ROM:00005AE0   o
+anim_funchar_U:     dc.w frame_funchar_U            ; DATA XREF: ROM:00005AE0   o
                 dc.w $EC01
-off_1B024E:     dc.w off_74C            ; DATA XREF: ROM:00005AE4   o
+anim_funchar_V:     dc.w frame_funchar_V            ; DATA XREF: ROM:00005AE4   o
                 dc.w $EC01
-off_1B0252:     dc.w off_750            ; DATA XREF: ROM:00005AE8   o
+anim_funchar_W:     dc.w frame_funchar_W            ; DATA XREF: ROM:00005AE8   o
                 dc.w $EC01
-off_1B0256:     dc.w off_754            ; DATA XREF: ROM:00005AEC   o
+anim_funchar_X:     dc.w frame_funchar_X            ; DATA XREF: ROM:00005AEC   o
                 dc.w $EC01
-off_1B025A:     dc.w off_758            ; DATA XREF: ROM:00005AF0   o
+anim_funchar_Y:     dc.w frame_funchar_Y            ; DATA XREF: ROM:00005AF0   o
                 dc.w $EC01
-off_1B025E:     dc.w off_75C            ; DATA XREF: ROM:00005AF4   o
+anim_funchar_Z:     dc.w frame_funchar_Z            ; DATA XREF: ROM:00005AF4   o
                 dc.w $EC01
-off_1B0262:     dc.w off_760            ; DATA XREF: ROM:00005A10   o
+anim_funchar_exclam:     dc.w frame_funchar_exclam            ; DATA XREF: ROM:00005A10   o
                 dc.w $EC01
-off_1B0266:     dc.w off_764            ; DATA XREF: ROM:00005A44   o
+anim_funchar_dot:     dc.w frame_funchar_dot            ; DATA XREF: ROM:00005A44   o
                 dc.w $EC01
-off_1B026A:     dc.w off_768            ; DATA XREF: ROM:00005A88   o
+anim_funchar_question:     dc.w frame_funchar_question            ; DATA XREF: ROM:00005A88   o
                 dc.w $EC01
-off_1B026E:     dc.w off_76C            ; DATA XREF: ROM:00005A28   o
+anim_funchar_apostrophe:     dc.w frame_funchar_apostrophe            ; DATA XREF: ROM:00005A28   o
                 dc.w $EC01
-off_1B0272:     dc.w off_770            ; DATA XREF: ROM:00005A3C   o
+anim_funchar_comma:     dc.w frame_funchar_comma            ; DATA XREF: ROM:00005A3C   o
                 dc.w $EC01
 anim_gun:       dc.w off_254C           ; DATA XREF: ROM:001B0294   o
                                         ; ROM:stru_25A9C4   o
@@ -14999,39 +15002,39 @@ off_1B123C:     dc.w off_23E4           ; DATA XREF: ROM:001B126E   o
                 dc.w off_23F8
                 dc.w off_23F8
                 dc.w $EC01
-                dc.w off_73C
+                dc.w frame_funchar_R
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_730
+                dc.w frame_funchar_O
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_748
+                dc.w frame_funchar_U
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_72C
+                dc.w frame_funchar_N
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_704
+                dc.w frame_funchar_D
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_708
+                dc.w frame_funchar_E
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_744
+                dc.w frame_funchar_T
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_750
+                dc.w frame_funchar_W
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
-                dc.w off_714
+                dc.w frame_funchar_H
                 dc.w $FB00
                 dc.l oksub_249568
                 dc.w $EC01
@@ -24281,7 +24284,7 @@ word_1B8882:    dc.w     0,   $E, $228, $28E,  $4E, $2CE,  $8C, $2C2,  $80, $A82
                                         ; DATA XREF: sub_24C6EE+C   o
                                         ; sub_2513F8+A2   o ...
 word_1B88A2:    dc.w  $CCC,    0, $400, $602, $A24, $A66, $EA6, $EEA,    6,   $C,  $2E, $46E,  $AE, $6CE, $200, $EEE
-                                        ; DATA XREF: sub_24C8D8+10   o
+                                        ; DATA XREF: txtcode_0E_clear_screen+10   o
                                         ; sub_251306+6E   o
 word_1B88C2:    dc.w  $CCC,    0, $400, $602, $A24, $A66, $EA6, $EEA,    6,   $C,  $2E, $46E,  $AE, $6CE, $200, $EEE, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E, $E0E
                                         ; DATA XREF: restore_respawn_point:loc_24B5C8   o
@@ -33814,7 +33817,7 @@ sub_24C69C:
 write_text:                             ; CODE XREF: sub_24C44A+1A   p
                                         ; sub_24C44A+38   p ...
                 movem.l a1-a2,-(sp)
-                lea     (off_59CC).w,a2
+                lea     (funchar_control_codes_table).w,a2
 loc_24C6B6:                             ; CODE XREF: write_text+26   j
                                         ; write_text+3E   j
                 tst.b   (skip_requested).l
@@ -33869,8 +33872,8 @@ loc_24C714:                             ; CODE XREF: sub_24C6EE+1A   j
                 movea.l (a1,d2.w),a0    ; Zadampil
                 move.w  4(a1,d2.w),d0
                 move.w  6(a1,d2.w),d1
-                lea     (off_59CC).w,a2
-                lea     (dword_5A0C).w,a3
+                lea     (funchar_control_codes_table).w,a2
+                lea     (funchar_sprites_table).w,a3
                 lea     (byte_1A348A).l,a4
 loc_24C742:                             ; CODE XREF: sub_24C710+4A   j
                                         ; sub_24C710+CE   j ...
@@ -33945,61 +33948,67 @@ loc_24C7EA:                             ; CODE XREF: write_text+E   j
 ; End of function sub_24C710
 
 
-sub_24C7F0:                             ; DATA XREF: ROM:off_59CC   o
+; Управляющий код $00: Конец строки, выход из процедуры вывода
+txtcode_00_end:                             ; DATA XREF: ROM:funchar_control_codes_table   o
                 movea.l (sp)+,a1
                 bra.s   loc_24C7EA
-; End of function sub_24C7F0
+; End of function txtcode_00_end
 
 
-sub_24C7F4:                             ; DATA XREF: ROM:000059D0   o
+; Управляющий код $01: x += signed byte
+txtcode_01_move_x:                             ; DATA XREF: ROM:000059D0   o
                 move.b  (a0)+,d2
                 ext.w   d2
                 add.w   d2,d0
                 rts
-; End of function sub_24C7F4
+; End of function txtcode_01_move_x
 
 
-sub_24C7FC:                             ; DATA XREF: ROM:000059D4   o
+; Управляющий код $02: y += signed byte
+txtcode_02_move_y:                             ; DATA XREF: ROM:000059D4   o
                 move.b  (a0)+,d2
                 ext.w   d2
                 add.w   d2,d1
                 rts
-; End of function sub_24C7FC
+; End of function txtcode_02_move_y
 
 
-sub_24C804:                             ; DATA XREF: ROM:000059D8   o
+; Управляющий код $03: Повторить символ n раз по горизонтали
+txtcode_03_repeat_h:                             ; DATA XREF: ROM:000059D8   o
                 move.w  d3,-(sp)
                 clr.w   d3
                 move.b  (a0)+,d3
                 subq.b  #1,d3
                 move.b  (a0)+,d2
                 subi.b  #$20,d2 ; ' '
-loc_24C812:                             ; CODE XREF: sub_24C804+14   j
+loc_24C812:                             ; CODE XREF: txtcode_03_repeat_h+14   j
                 bsr.w   sub_24C660
                 addq.b  #1,d0
                 dbf     d3,loc_24C812
                 move.w  (sp)+,d3
                 rts
-; End of function sub_24C804
+; End of function txtcode_03_repeat_h
 
 
-sub_24C820:                             ; DATA XREF: ROM:000059DC   o
+; Управляющий код $04: Повторить символ n раз по вертикали
+txtcode_04_repeat_v:                             ; DATA XREF: ROM:000059DC   o
                 move.w  d3,-(sp)
                 clr.w   d3
                 move.b  (a0)+,d3
                 subq.b  #1,d3
                 move.b  (a0)+,d2
                 subi.b  #$20,d2 ; ' '
-loc_24C82E:                             ; CODE XREF: sub_24C820+14   j
+loc_24C82E:                             ; CODE XREF: txtcode_04_repeat_v+14   j
                 bsr.w   sub_24C660
                 addq.b  #1,d1
                 dbf     d3,loc_24C82E
                 move.w  (sp)+,d3
                 rts
-; End of function sub_24C820
+; End of function txtcode_04_repeat_v
 
 
-sub_24C83C:                             ; DATA XREF: ROM:000059E0   o
+; Управляющий код $05: Залить прямоугольник w×h символом
+txtcode_05_fill_rect:                             ; DATA XREF: ROM:000059E0   o
                 movem.w d3-d4,-(sp)
                 clr.w   d3
                 move.b  (a0)+,d3
@@ -34009,10 +34018,10 @@ sub_24C83C:                             ; DATA XREF: ROM:000059E0   o
                 subq.b  #1,d4
                 move.b  (a0)+,d2
                 subi.b  #$20,d2 ; ' '
-loc_24C852:                             ; CODE XREF: sub_24C83C+2A   j
+loc_24C852:                             ; CODE XREF: txtcode_05_fill_rect+2A   j
                 move.w  d3,-(sp)
                 move.b  d0,-(sp)
-loc_24C856:                             ; CODE XREF: sub_24C83C+20   j
+loc_24C856:                             ; CODE XREF: txtcode_05_fill_rect+20   j
                 bsr.w   sub_24C660
                 addq.b  #1,d0
                 dbf     d3,loc_24C856
@@ -34022,15 +34031,16 @@ loc_24C856:                             ; CODE XREF: sub_24C83C+20   j
                 dbf     d4,loc_24C852
                 movem.w (sp)+,d3-d4
                 rts
-; End of function sub_24C83C
+; End of function txtcode_05_fill_rect
 
 
-sub_24C870:                             ; DATA XREF: ROM:000059E4   o
+; Управляющий код $06: Пауза на n кадров, можно пропустить по skip_requested
+txtcode_06_wait_frames:                             ; DATA XREF: ROM:000059E4   o
                 move.w  d3,-(sp)
                 clr.w   d3
                 move.b  (a0)+,d3
                 subq.b  #1,d3
-loc_24C878:                             ; CODE XREF: sub_24C870+20   j
+loc_24C878:                             ; CODE XREF: txtcode_06_wait_frames+20   j
                 bsr.w   wait_for_vblank
                 movem.l d0-d7/a0-a6,-(sp)
                 bsr.w   run_one_frame
@@ -34038,45 +34048,50 @@ loc_24C878:                             ; CODE XREF: sub_24C870+20   j
                 tst.b   (skip_requested).l
                 bne.s   loc_24C894
                 dbf     d3,loc_24C878
-loc_24C894:                             ; CODE XREF: sub_24C870+1E   j
+loc_24C894:                             ; CODE XREF: txtcode_06_wait_frames+1E   j
                 move.w  (sp)+,d3
                 rts
-; End of function sub_24C870
+; End of function txtcode_06_wait_frames
 
 
-sub_24C898:                             ; DATA XREF: ROM:000059E8   o
+; Управляющий код $07: y++, x = 0
+txtcode_07_newline:                             ; DATA XREF: ROM:000059E8   o
                 addq.b  #1,d1
                 clr.b   d0
                 rts
-; End of function sub_24C898
+; End of function txtcode_07_newline
 
 
-sub_24C89E:                             ; DATA XREF: ROM:000059EC   o
+; Управляющий код $08: font_params = $0000
+txtcode_08_palette0:                             ; DATA XREF: ROM:000059EC   o
                 move.w  #0,(font_params).l
                 rts
-; End of function sub_24C89E
+; End of function txtcode_08_palette0
 
 
-sub_24C8A8:                             ; DATA XREF: ROM:000059F0   o
+; Управляющий код $09: font_params = $2000
+txtcode_09_palette1:                             ; DATA XREF: ROM:000059F0   o
                 move.w  #$2000,(font_params).l
                 rts
-; End of function sub_24C8A8
+; End of function txtcode_09_palette1
 
 
-sub_24C8B2:                             ; DATA XREF: ROM:000059F4   o
+; Управляющий код $0A: font_params = $4000
+txtcode_0A_palette2:                             ; DATA XREF: ROM:000059F4   o
                 move.w  #$4000,(font_params).l
                 rts
-; End of function sub_24C8B2
+; End of function txtcode_0A_palette2
 
 
-sub_24C8BC:                             ; DATA XREF: ROM:000059F8   o
+; Управляющий код $0B: font_params = $6000
+txtcode_0B_palette3:                             ; DATA XREF: ROM:000059F8   o
                 move.w  #$6000,(font_params).l
                 rts
-; End of function sub_24C8BC
+; End of function txtcode_0B_palette3
 
 
-; Процедура отвечает за загрузку адресов спрайтовых надписей
-get_funchar_offset:                     ; DATA XREF: ROM:000059FC   o
+; Управляющий код $0C: a4 = скрипт движения букв
+txtcode_0C_set_motion:                     ; DATA XREF: ROM:000059FC   o
                 clr.b   d2
                 move.b  (a0)+,d2        ; Zadampil
                 lsl.l   #8,d2
@@ -34085,15 +34100,17 @@ get_funchar_offset:                     ; DATA XREF: ROM:000059FC   o
                 move.b  (a0)+,d2
                 movea.l d2,a4
                 rts
-; End of function get_funchar_offset
+; End of function txtcode_0C_set_motion
 
 
-nullsub_23:                             ; DATA XREF: ROM:00005A00   o
+; Управляющий код $0D: Ничего не делает
+txtcode_0D_nop:                             ; DATA XREF: ROM:00005A00   o
                 rts
-; End of function nullsub_23
+; End of function txtcode_0D_nop
 
 
-sub_24C8D8:                             ; DATA XREF: ROM:00005A04   o
+; Управляющий код $0E: Затемнение палитр, очистка plane A, загрузка палитры word_1B88A2 в линию 3
+txtcode_0E_clear_screen:                             ; DATA XREF: ROM:00005A04   o
                 movem.l d0-d7/a0-a6,-(sp)
                 bsr.w   wait_for_vblank
                 bsr.w   fade_palettes_to_black
@@ -34102,10 +34119,11 @@ sub_24C8D8:                             ; DATA XREF: ROM:00005A04   o
                 bsr.w   load_palette_line3
                 movem.l (sp)+,d0-d7/a0-a6
                 rts
-; End of function sub_24C8D8
+; End of function txtcode_0E_clear_screen
 
 
-sub_24C8F8:                             ; DATA XREF: ROM:00005A08   o
+; Управляющий код $0F: Создать объект по спрайтовой структуре в точке (x, y)
+txtcode_0F_spawn_object:                             ; DATA XREF: ROM:00005A08   o
                 movem.l d0-d7/a1-a6,-(sp)
                 move.b  (a0)+,d2
                 lsl.l   #8,d2
@@ -34128,10 +34146,10 @@ sub_24C8F8:                             ; DATA XREF: ROM:00005A08   o
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.w  d3,2(a5)
                 move.w  d1,4(a5)
-loc_24C92E:                             ; CODE XREF: sub_24C8F8+26   j
+loc_24C92E:                             ; CODE XREF: txtcode_0F_spawn_object+26   j
                 movem.l (sp)+,d0-d7/a1-a6
                 rts
-; End of function sub_24C8F8
+; End of function txtcode_0F_spawn_object
 
 
 sub_24C934:                             ; CODE XREF: sub_24C70A   p

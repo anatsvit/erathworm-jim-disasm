@@ -11,6 +11,7 @@
     include "src/equals.inc"
     include "src/text_codes.inc"
     include "src/move_script.inc"
+    include "src/anim_script.inc"
     include "src/ram_addrs.inc"
 ;
 ; +-------------------------------------------------------------------------+
@@ -1718,28 +1719,29 @@ off_5578:       dc.l nullsub_11         ; DATA XREF: sub_24BCB6   o
                 dc.l activity_thorn
                 dc.l nullsub_11
                 dc.l nullsub_11
-off_5978:       dc.l sub_249232         ; DATA XREF: sub_249178+32   o
+obj_script_cmd_table:       dc.l scmd_00_goto         ; DATA XREF: sub_249178+32   o
                                         ; sub_24A766+20   o
-                dc.l sub_249238
-                dc.l sub_24924E
-                dc.l sub_24927C
-                dc.l sub_2492C2
-                dc.l sub_249308
-                dc.l sub_249332
-                dc.l sub_249346
-                dc.l sub_24936C
-                dc.l sub_2493A8
-                dc.l sub_2493EA
-                dc.l sub_249692
-                dc.l sub_24974A
-                dc.l sub_24975A
-                dc.l sub_249772
-                dc.l sub_2498D2
-                dc.l sub_249936
-                dc.l oksub_249994
-                dc.l oksub_24999A
-                dc.l sub_2499D6
-                dc.l sub_249A02
+                                        ; $EA/$80 - goto addr.l
+                dc.l scmd_01_toggle_flip     ; $EB/$81 - 0: инвертировать отражение X ($9), иначе Y ($35)
+                dc.l scmd_02_end             ; $EC/$82 - конец скрипта: !0 - clr $20 (анимация), 0 - clr $A (движение)
+                dc.l scmd_03_set_var         ; $ED/$83 - записать b/w/l в RAM или поле объекта (бит 4)
+                dc.l scmd_04_loop_or_hold    ; $EE/$84 - бит 7: пауза n кадров, иначе начало цикла на n+1 раз
+                dc.l scmd_05_next            ; $EF/$85 - конец тела цикла
+                dc.l scmd_06_rand_goto       ; $F0/$86 - goto с вероятностью p/256
+                dc.l scmd_07_add_pos         ; $F1/$87 - 0: x += w, иначе y += w (с учётом отражения)
+                dc.l scmd_08_if_bit          ; $F2/$88 - goto, если бит n в RAM/поле объекта = 0 (бит 6: = 1)
+                dc.l scmd_09_sound           ; $F3/$89 - запустить звук/песню n (бит 7: остановить)
+                dc.l scmd_0A_if_cmp          ; $F4/$8A - if [addr] <cond> val goto (см. fm_if_*)
+                dc.l scmd_0B_spawn_obj       ; $F5/$8B - создать объект со смещением dx,dy, скриптами анимации и движения
+                dc.l scmd_0C_delete          ; $F6/$8C - удалить объект
+                dc.l scmd_0D_face_jim        ; $F7/$8D - повернуться к Джиму по X
+                dc.l scmd_0E_jim_default_anim ; $F8/$8E - a2 = анимация Джима по умолчанию для его состояния
+                dc.l scmd_0F_chase_jim       ; $F9/$8F - разгон скорости $18/$1A в сторону Джима
+                dc.l scmd_10_add_var         ; $FA/$90 - прибавить/вычесть (бит 7) b/w/l в RAM или поле объекта (бит 6)
+                dc.l scmd_11_call            ; $FB/$91 - вызвать процедуру addr.l
+                dc.l scmd_12_gosub_return    ; $FC/$92 - gosub addr.l / бит 7: return (адрес возврата $38 или $4C)
+                dc.l scmd_13_if_jim_near_x   ; $FD/$93 - goto, если |jim_x - x| <= n ($FF = $140)
+                dc.l scmd_14_if_jim_near_y   ; $FE/$94 - goto, если |jim_y - y| <= n
 funchar_control_codes_table: dc.l txtcode_00_end       ; DATA XREF: write_text+4   o
                                         ; sub_24C710+24   o
                                         ; $00 - Конец строки, выход из процедуры вывода
@@ -4005,7 +4007,7 @@ byte_1A3262:    dc.b $FD,  4,$88,$84,  0,  7
                                         ; ROM:stru_25B054   o
                 dc.l byte_1A3262
                 dc.b $83,$11,  0,  0,  0,$86,$83,$12
-                dc.l word_1AFC00
+                dc.w $1A, $FC00
                 dc.b $91,  0
                 dc.l oksub_24950E
                 dc.b $91,  0
@@ -4017,7 +4019,7 @@ byte_1A328C:    dc.b $FB,  6,$88,$84,  0,  7
                                         ; ROM:stru_25B06C   o
                 dc.l byte_1A328C
                 dc.b $83,$11,  0,  0,  0,$86,$89,$29,$83,$12
-                dc.l word_1AFC00
+                dc.w $1A, $FC00
                 dc.b $91,  0
                 dc.l oksub_24950E
                 dc.b $91,  0
@@ -4482,7 +4484,7 @@ byte_1A3986:    dc.b   5,  0,$8A,$91,  0,$3D
                 dc.l byte_1A3986
 byte_1A39A2:    dc.b $83,$12            ; DATA XREF: ROM:001A398E   o
                                         ; ROM:001A3998   o
-                dc.l word_1AF600
+                dc.w $1A, $F600
                 dc.b $82,  0
 byte_1A39AA:    dc.b   4,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001A39B0   o
@@ -4819,7 +4821,7 @@ byte_1A418C:    dc.b   0,  0,$88,$84,  0,  7
                 dc.b $91,  0
                 dc.l oksub_249506
                 dc.b $83,$12
-                dc.l word_1AFC00
+                dc.w $1A, $FC00
                 dc.b $82,  0
 byte_1A41D0:    dc.b   1,  0,  2,  0,  1,$FF,  2,$FF,  2,  1,  1,  0,  2,  0,  1,  1,  2,  1,  2,$FF,$8A,$11
                                         ; DATA XREF: ROM:001A41F4   o
@@ -5053,7 +5055,7 @@ byte_1A477C:    dc.b   6,  0,$88,$84,  0,  7
                 dc.b $80,  0
                 dc.l byte_1A475E
 byte_1A478C:    dc.b $FE,  0,$83,$12    ; DATA XREF: ROM:001AD80A   o
-                dc.l word_1AFC00
+                dc.w $1A, $FC00
 byte_1A4794:    dc.b $FE,  0,$88,$84,  0,  7
                                         ; DATA XREF: ROM:001A479A   o
                 dc.l byte_1A4794
@@ -7805,8 +7807,8 @@ off_1AD2FC:     dc.w off_DC4            ; DATA XREF: collision_with_diamond+282 
                 dc.l off_1B2594
 anim_fridge:    dc.w off_1F34           ; DATA XREF: ROM:001AD410   o
                                         ; ROM:001AD44C   o ...
-                dc.b $ED,$11,  0,  0
-                dc.l $2CEE85
+                fa_set_obj_b $0, $2C
+                fa_hold 5
                 dc.w off_1F34
                 dc.w off_1F38
                 dc.w off_1F38
@@ -7837,7 +7839,7 @@ anim_fridge:    dc.w off_1F34           ; DATA XREF: ROM:001AD410   o
                 dc.w off_1F58
                 dc.w off_1F58
                 dc.w off_1F58
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_1F5C
                 dc.w off_1F58
                 dc.w off_1F58
@@ -7868,8 +7870,7 @@ anim_fridge:    dc.w off_1F34           ; DATA XREF: ROM:001AD410   o
                 dc.w off_1F38
                 dc.w off_1F38
                 dc.w off_1F38
-                dc.w $EA00
-                dc.l anim_fridge
+                fa_goto anim_fridge
 off_1AD414:     dc.w off_1F34           ; DATA XREF: whip_to_fridge   o
                 dc.w off_1F34
                 dc.w off_1F34
@@ -7897,42 +7898,34 @@ off_1AD414:     dc.w off_1F34           ; DATA XREF: whip_to_fridge   o
                 dc.w off_1F3C
                 dc.w off_1F38
                 dc.w off_1F38
-                dc.w $EA00
-                dc.l anim_fridge
+                fa_goto anim_fridge
 anim_saxophone: dc.w off_2594           ; DATA XREF: ROM:001AD464   o
                                         ; ROM:stru_25AA9C   o ...
                 dc.w off_2594
-                dc.b $F2,$C4,  0,  7
-                dc.l off_1AD468
+                fa_if_obj_bit_set $7, 4, off_1AD468
                 dc.w off_2598
                 dc.w off_2598
-                dc.b $F2,$84,  0,  7
-                dc.l anim_saxophone
+                fa_if_obj_bit_clr $7, 4, anim_saxophone
 off_1AD468:     dc.w off_259C           ; DATA XREF: ROM:001AD458   o
                 dc.w off_259C
                 dc.w off_259C
                 dc.w off_2594
-                dc.b $EC,  1
+                fa_end
 anim_hamster:   dc.w off_2064           ; DATA XREF: ROM:001AD49E   o
                                         ; ROM:object_hamster   o
-                dc.b $ED,$14,  0, $A,  0,  0,  0,  0
+                fa_set_obj_l $A, 0
                 dc.w off_2088
 off_1AD47E:     dc.w off_2064           ; DATA XREF: ROM:001AD484   o
                 dc.w off_2064
-                dc.w $F0D6
-                dc.l off_1AD47E
-                dc.w $EE85
+                fa_rand_goto 214, off_1AD47E
+                fa_hold 5
                 dc.w off_2064
-                dc.w $FDC8
-                dc.l byte_1AD498
-                dc.b $ED,$11,  0,$3C,  0,  0
-byte_1AD498:    dc.b $F4,$11            ; DATA XREF: ROM:001AD48E   o
-                dc.w $FE03
-                dc.w 0
-                dc.l anim_hamster
-                dc.b $ED,$14,  0, $A
-                dc.l byte_1AC674
-                dc.b $EE,  3
+                fa_if_jim_near_x 200, byte_1AD498
+                fa_set_obj_b $3C, $0
+byte_1AD498:                            ; DATA XREF: ROM:001AD48E   o
+                fa_if_b FM_EQ, byte_FFFE03, $0, anim_hamster
+                fa_set_obj_l $A, byte_1AC674
+                fa_loop 3
                 dc.w off_2060
                 dc.w off_2064
                 dc.w off_2068
@@ -7943,21 +7936,22 @@ byte_1AD498:    dc.b $F4,$11            ; DATA XREF: ROM:001AD48E   o
                 dc.w off_207C
                 dc.w off_2080
                 dc.w off_2084
-                dc.b $EF,  0,$ED,$14,  0, $A,  0,  0,  0,  0,$ED,$11,  0,  0,  0,$72
+                fa_next
+                fa_set_obj_l $A, 0
+                fa_set_obj_b $0, $72
 off_1AD4D0:     dc.w off_2064           ; DATA XREF: ROM:001AD4FA   o
-                dc.b $ED,$14,  0, $A,  0,  0,  0,  0
+                fa_set_obj_l $A, 0
                 dc.w off_2088
 off_1AD4DC:     dc.w off_2064           ; DATA XREF: ROM:001AD4E2   o
                 dc.w off_2064
-                dc.w $F0D6
-                dc.l off_1AD4DC
-                dc.w $EE85
+                fa_rand_goto 214, off_1AD4DC
+                fa_hold 5
                 dc.w off_2064
-                dc.w $FDC8
-                dc.l byte_1AD4F8
-                dc.b $ED,$11,  0,$3C,  0,  0,$EC,  1
-byte_1AD4F8:    dc.b $EA,  0            ; DATA XREF: ROM:001AD4EC   o
-                dc.l off_1AD4D0
+                fa_if_jim_near_x 200, byte_1AD4F8
+                fa_set_obj_b $3C, $0
+                fa_end
+byte_1AD4F8:                            ; DATA XREF: ROM:001AD4EC   o
+                fa_goto off_1AD4D0
 off_1AD4FE:     dc.w off_2060           ; DATA XREF: ROM:001AD520   o
                                         ; ROM:001AD546   o ...
                 dc.w off_2064
@@ -7969,16 +7963,15 @@ off_1AD4FE:     dc.w off_2060           ; DATA XREF: ROM:001AD520   o
                 dc.w off_207C
                 dc.w off_2080
                 dc.w off_2084
-                dc.b $FD,$C8
-                dc.l word_1AD51E
-                dc.b $ED,$11,  0,$3C,  0,  0
-word_1AD51E:    dc.w $EA00              ; DATA XREF: ROM:001AD514   o
-                dc.l off_1AD4FE
+                fa_if_jim_near_x 200, word_1AD51E
+                fa_set_obj_b $3C, $0
+word_1AD51E:                            ; DATA XREF: ROM:001AD514   o
+                fa_goto off_1AD4FE
 off_1AD524:     dc.w off_2054           ; DATA XREF: collision_with_hamster:loc_257694   o
                 dc.w off_2058
                 dc.w off_2058
                 dc.w off_205C
-                dc.w $F31D
+                fa_sound $1D
                 dc.w off_205C
                 dc.w off_205C
                 dc.w off_2070
@@ -7987,68 +7980,33 @@ off_1AD524:     dc.w off_2054           ; DATA XREF: collision_with_hamster:loc_
                 dc.w off_207C
                 dc.w off_2080
                 dc.w off_2084
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $4A
-                dc.w $EA00
-                dc.l off_1AD4FE
+                fa_set_b jim_state, $4A
+                fa_goto off_1AD4FE
 off_1AD54A:     dc.w off_15F8           ; DATA XREF: ROM:001AD5CA   o
                                         ; collision_with_hamster+B8   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$4A
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_set_b jim_state, $4A
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_15FC
-                dc.b $F4,$21
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_1600
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_1604
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_1608
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_160C
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_1610
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_1614
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_1618
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
                 dc.w off_161C
-                dc.w $F421
-                dc.w $FD11
-                dc.w $72
-                dc.l word_1AD5CE
-                dc.w $EA00
-                dc.l off_1AD54A
-word_1AD5CE:    dc.w $F800              ; DATA XREF: ROM:001AD558   o
+                fa_if_b FM_NE, jim_ride_obj_id, $72, word_1AD5CE
+                fa_goto off_1AD54A
+word_1AD5CE:                            ; DATA XREF: ROM:001AD558   o
+                fa_jim_default_anim
                                         ; ROM:001AD564   o ...
 off_1AD5D0:     dc.w off_1960           ; DATA XREF: ROM:001AE108   o
                 dc.w off_1960
@@ -8061,7 +8019,7 @@ off_1AD5D0:     dc.w off_1960           ; DATA XREF: ROM:001AE108   o
                 dc.w off_1970
                 dc.w off_1970
                 dc.w off_1974
-                dc.w $F366
+                fa_sound $66
                 dc.w off_1978
                 dc.w off_1978
                 dc.w off_197C
@@ -8091,7 +8049,7 @@ off_1AD5D0:     dc.w off_1960           ; DATA XREF: ROM:001AE108   o
                 dc.w off_1980
                 dc.w off_197C
                 dc.w off_1978
-                dc.w $F800
+                fa_jim_default_anim
 anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                                         ; ROM:001AD69A   o ...
                 dc.w off_1F64
@@ -8109,7 +8067,7 @@ anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1F94
                 dc.w off_1F98
                 dc.w off_1F90
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_1F94
                 dc.w off_1F98
                 dc.w off_1F84
@@ -8124,8 +8082,7 @@ anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1F60
                 dc.w off_1F64
                 dc.w off_1F68
-                dc.w $EA00
-                dc.l anim_fan_fish
+                fa_goto anim_fan_fish
                 dc.w off_1F64
                 dc.w off_1F64
                 dc.w off_1F9C
@@ -8136,19 +8093,14 @@ anim_fan_fish:     dc.w off_1F60           ; DATA XREF: ROM:001AD664   o
                 dc.w off_1FA4
                 dc.w off_1F9C
                 dc.w off_1F9C
-                dc.w $F500
-                dc.l object_intestinal_wheel
-                dc.w $120A
-                dc.l off_1B6206
-                dc.l 0
+                fa_spawn 0, object_intestinal_wheel, 18, 10, off_1B6206, 0
                 dc.w off_1FA8
                 dc.w off_1FA8
                 dc.w off_1FAC
                 dc.w off_1FAC
                 dc.w off_1FB0
                 dc.w off_1FB0
-                dc.w $EA00
-                dc.l anim_fan_fish
+                fa_goto anim_fan_fish
 anim_intestinal_boss_tear:     dc.w off_344C           ; DATA XREF: ROM:001AD6B0   o
                                         ; ROM:object_intestinal_boss_tear   o
                 dc.w off_344C
@@ -8158,8 +8110,7 @@ off_1AD6A6:     dc.w off_3454           ; DATA XREF: ROM:001AD81E   o
                 dc.w off_3454
 off_1AD6AA:     dc.w off_3458           ; DATA XREF: ROM:001AD83E   o
                 dc.w off_3458
-                dc.w $EA00
-                dc.l anim_intestinal_boss_tear
+                fa_goto anim_intestinal_boss_tear
 off_1AD6B4:     dc.w off_345C           ; DATA XREF: ROM:001A4762   o
                 dc.w off_345C
                 dc.w off_3460
@@ -8171,7 +8122,7 @@ off_1AD6B4:     dc.w off_345C           ; DATA XREF: ROM:001A4762   o
                 dc.w off_346C
                 dc.w off_346C
                 dc.w off_346C
-                dc.w $F600
+                fa_delete
 anim_chips:     dc.w off_341C           ; DATA XREF: ROM:001AD6E2   o
                                         ; ROM:001AD8AE   o ...
                 dc.w off_341C
@@ -8186,8 +8137,7 @@ off_1AD6D8:     dc.w off_3434           ; DATA XREF: ROM:001AD7B0   o
                 dc.w off_3434
                 dc.w off_3428
                 dc.w off_3428
-                dc.w $EA00
-                dc.l anim_chips
+                fa_goto anim_chips
 off_1AD6E6:     dc.w off_3438           ; DATA XREF: ROM:001A4734   o
                 dc.w off_3438
                 dc.w off_343C
@@ -8199,73 +8149,59 @@ off_1AD6E6:     dc.w off_3438           ; DATA XREF: ROM:001A4734   o
                 dc.w off_3448
                 dc.w off_3448
                 dc.w off_3448
-                dc.w $F600
+                fa_delete
 anim_intestinal_boss:     dc.w off_E48            ; DATA XREF: ROM:001AD7E4   o
                                         ; ROM:001AD852   o ...
-                dc.w $F700
+                fa_face_jim
                 dc.w off_E48
-                dc.w $FD40
-                dc.l off_1AD7E8
-                dc.w $EA00
-                dc.l off_1AD710
+                fa_if_jim_near_x 64, off_1AD7E8
+                fa_goto off_1AD710
 off_1AD710:     dc.w off_E68            ; DATA XREF: ROM:001AD70C   o
                                         ; ROM:001AD716   o ...
-                dc.b $F2,$84,  0,  7
-                dc.l off_1AD710
+                fa_if_obj_bit_clr $7, 4, off_1AD710
                 dc.w off_E68
                 dc.w off_E68
                 dc.w off_E68
-                dc.b $F7,  0
+                fa_face_jim
                 dc.w off_E6C
-                dc.b $FA,$C2,  0,$1A,$10,  0,$ED,$14,  0, $A
-                dc.l byte_1A469C
+                fa_sub_obj_w $1A, $1000
+                fa_set_obj_l $A, byte_1A469C
                 dc.w off_E70
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E70
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E74
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E74
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E78
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E78
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E78
-                dc.b $FA,$42,  0,$1A,  0,$3C
-                dc.w $ED11
-                dc.b   0,  0,  0,$17
+                fa_add_obj_w $1A, $3C
+                fa_set_obj_b $0, $17
                 dc.w off_E7C
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E7C
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
                 dc.w off_E80
-                dc.b $FA,$42,  0,$1A,  0,$3C
+                fa_add_obj_w $1A, $3C
 off_1AD788:     dc.w off_E84            ; DATA XREF: ROM:001AD794   o
-                dc.b $FA,$42,  0,$1A,  0,$3C,$F2,$84,  0,  7
-                dc.l off_1AD788
-                dc.b $F3,$38,$ED,  1,$FD,$3A,  0,$10,$ED,$14,  0, $A,  0,  0,  0,  0,$F5,  0
-                dc.l object_chips
-                dc.w $F800
-                dc.l off_1AD6D8
-                dc.l byte_1A471E
+                fa_add_obj_w $1A, $3C
+                fa_if_obj_bit_clr $7, 4, off_1AD788
+                fa_sound $38
+                fa_set_b screen_shake_phase, $10
+                fa_set_obj_l $A, 0
+                fa_spawn 0, object_chips, -8, 0, off_1AD6D8, byte_1A471E
                 dc.w off_E68
-                dc.w $F500
-                dc.l object_chips
-                dc.b   0,$FE
-                dc.l off_1AD6D0
-                dc.l byte_1A471E
+                fa_spawn 0, object_chips, 0, -2, off_1AD6D0, byte_1A471E
                 dc.w off_E68
-                dc.w $F500
-                dc.l object_chips
-                dc.w $8FC
-                dc.l off_1AD6D4
-                dc.l byte_1A471E
+                fa_spawn 0, object_chips, 8, -4, off_1AD6D4, byte_1A471E
                 dc.w off_E68
                 dc.w off_E68
                 dc.w off_E68
-                dc.w $EA00
-                dc.l anim_intestinal_boss
+                fa_goto anim_intestinal_boss
 off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                                         ; ROM:001AD870   o
                 dc.w off_E48
@@ -8278,51 +8214,30 @@ off_1AD7E8:     dc.w off_E48            ; DATA XREF: ROM:001AD706   o
                 dc.w off_E58
                 dc.w off_E58
                 dc.w off_E5C
-                dc.w $F500
-                dc.l object_chips
-                dc.w $F4DC
-                dc.l off_1AD6D8
-                dc.l byte_1A478C
+                fa_spawn 0, object_chips, -12, -36, off_1AD6D8, byte_1A478C
                 dc.w off_E5C
-                dc.w $F338
+                fa_sound $38
                 dc.w off_E60
                 dc.w off_E60
-                dc.w $F500
-                dc.l object_intestinal_boss_tear
-                dc.w $45DA
-                dc.l off_1AD6A6
-                dc.l byte_1A477A
-                dc.w $F500
-                dc.l object_intestinal_boss_tear
-                dc.w $3000
-                dc.l off_1AD6A2
-                dc.l byte_1A477A
-                dc.w $F500
-                dc.l object_intestinal_boss_tear
-                dc.w $47E4
-                dc.l off_1AD6AA
-                dc.l byte_1A477A
+                fa_spawn 0, object_intestinal_boss_tear, 69, -38, off_1AD6A6, byte_1A477A
+                fa_spawn 0, object_intestinal_boss_tear, 48, 0, off_1AD6A2, byte_1A477A
+                fa_spawn 0, object_intestinal_boss_tear, 71, -28, off_1AD6AA, byte_1A477A
                 dc.w off_E64
                 dc.w off_E64
-                dc.w $ED11
-                dc.b   0,  0,  0,$17,$EA,  0
-                dc.l anim_intestinal_boss
+                fa_set_obj_b $0, $17
+                fa_goto anim_intestinal_boss
 off_1AD856:     dc.w off_E48            ; DATA XREF: fire_to_intestinal_boss+20   o
                                         ; fire_to_intestinal_boss+68   o ...
-                dc.w $F700
+                fa_face_jim
                 dc.w off_E48
                 dc.w off_E88
                 dc.w off_E88
                 dc.w off_E88
 off_1AD862:     dc.w off_E88            ; DATA XREF: ROM:001AD86A   o
-                dc.w $F700
-                dc.w $F284
-                dc.b   0,  7
-                dc.l off_1AD862
-                dc.w $FD40
-                dc.l off_1AD7E8
-                dc.w $EA00
-                dc.l off_1AD710
+                fa_face_jim
+                fa_if_obj_bit_clr $7, 4, off_1AD862
+                fa_if_jim_near_x 64, off_1AD7E8
+                fa_goto off_1AD710
 off_1AD87A:     dc.w off_E88            ; DATA XREF: whip_to_intestinal_boss+26   o
                 dc.w off_E8C
                 dc.w off_E88
@@ -8331,35 +8246,19 @@ off_1AD87A:     dc.w off_E88            ; DATA XREF: whip_to_intestinal_boss+26 
                 dc.w off_E8C
                 dc.w off_E88
                 dc.w off_E88
-                dc.w $F338
-                dc.w $EE86
+                fa_sound $38
+                fa_hold 6
                 dc.w off_E8C
-                dc.w $F338
+                fa_sound $38
                 dc.w off_E90
-                dc.w $F500
-                dc.l object_chips
-                dc.w $F8FC
-                dc.l off_1AD6D8
-                dc.l byte_1A471E
+                fa_spawn 0, object_chips, -8, -4, off_1AD6D8, byte_1A471E
                 dc.w off_E90
-                dc.w $F500
-                dc.l object_chips
-                dc.w $10F0
-                dc.l anim_chips
-                dc.l byte_1A471E
+                fa_spawn 0, object_chips, 16, -16, anim_chips, byte_1A471E
                 dc.w off_E90
-                dc.w $F500
-                dc.l object_chips
-                dc.b   4,  4
-                dc.l off_1AD6D0
-                dc.l byte_1A471E
+                fa_spawn 0, object_chips, 4, 4, off_1AD6D0, byte_1A471E
                 dc.w off_E90
-                dc.w $F500
-                dc.l object_chips
-                dc.b   0,$E0
-                dc.l off_1AD6D4
-                dc.l byte_1A471E
-                dc.b $F6,  0
+                fa_spawn 0, object_chips, 0, -32, off_1AD6D4, byte_1A471E
+                fa_delete
 anim_sphere_parts:dc.w off_F00          ; DATA XREF: ROM:stru_25B3B4   o
                 dc.w off_F00
                 dc.w off_F00
@@ -8370,7 +8269,7 @@ anim_sphere_parts:dc.w off_F00          ; DATA XREF: ROM:stru_25B3B4   o
                 dc.w off_F00
                 dc.w off_F00
                 dc.w off_F00
-                dc.w $F600
+                fa_delete
 anim_sphere_energy_2:dc.w off_EFC       ; DATA XREF: ROM:stru_25B39C   o
                 dc.w off_EFC
                 dc.w off_EF8
@@ -8390,26 +8289,23 @@ anim_sphere_energy_2:dc.w off_EFC       ; DATA XREF: ROM:stru_25B39C   o
                 dc.w off_EDC
                 dc.w off_EDC
                 dc.w off_EDC
-                dc.w $F600
+                fa_delete
 anim_sphere_energy:dc.w off_EDC         ; DATA XREF: ROM:stru_25B384   o
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_EDC
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_EDC
-                dc.w $F352
+                fa_sound $52
                 dc.w off_EDC
                 dc.w off_EE0
                 dc.w off_EE0
                 dc.w off_EE4
                 dc.w off_EE4
-                dc.w $ED11
-                dc.b   0,  0,  0,$64
+                fa_set_obj_b $0, $64
                 dc.w off_EE8
                 dc.w off_EE8
                 dc.w off_EEC
-                dc.w $FB00
-                dc.l oksub_258DC6
+                fa_call oksub_258DC6
                 dc.w off_EEC
                 dc.w off_EF0
                 dc.w off_EF0
@@ -8421,11 +8317,11 @@ anim_sphere_energy:dc.w off_EDC         ; DATA XREF: ROM:stru_25B384   o
                 dc.w off_EFC
                 dc.w off_F00
                 dc.w off_F00
-                dc.w $ED11
-                dc.b   0,  0,  0,$86,$F6,  0
+                fa_set_obj_b $0, $86
+                fa_delete
 off_1AD964:     dc.w off_19C4           ; DATA XREF: activity_teleport_toilet+13E   o
                                         ; activity_teleport_toilet+218   o
-                dc.b $ED,  1,$FD,$EA,  0,$44
+                fa_set_b jim_state, $44
                 dc.w off_19C8
                 dc.w off_19CC
                 dc.w off_19D0
@@ -8444,12 +8340,9 @@ off_1AD964:     dc.w off_19C4           ; DATA XREF: activity_teleport_toilet+13
                 dc.w off_19EC
                 dc.w off_19F0
                 dc.w off_19F0
-                dc.b $ED,  1,$FD,$F1,  0,  1
+                fa_set_b byte_FFFDF1, $1
 off_1AD996:     dc.w off_19F0           ; DATA XREF: ROM:001AD99E   o
-                dc.w $F421
-                dc.w $FDF1
-                dc.w 0
-                dc.l off_1AD996
+                fa_if_b FM_NE, byte_FFFDF1, $0, off_1AD996
                 dc.w off_19F0
                 dc.w off_19F0
                 dc.w off_19EC
@@ -8469,9 +8362,8 @@ off_1AD996:     dc.w off_19F0           ; DATA XREF: ROM:001AD99E   o
                 dc.w off_19CC
                 dc.w off_19C8
                 dc.w off_19C4
-                dc.w $ED01
-                dc.w $FDF1
-                dc.b   0,  1,$F8,  0
+                fa_set_b byte_FFFDF1, $1
+                fa_jim_default_anim
 anim_health_atom:dc.w off_2460          ; DATA XREF: ROM:001AD9E6   o
                                         ; ROM:stru_25A94C   o ...
                 dc.w off_2464
@@ -8483,8 +8375,7 @@ anim_health_atom:dc.w off_2460          ; DATA XREF: ROM:001AD9E6   o
                 dc.w off_247C
                 dc.w off_2480
                 dc.w off_2484
-                dc.w $EA00
-                dc.l anim_health_atom
+                fa_goto anim_health_atom
 anim_health_molecule:dc.w off_2488      ; DATA XREF: ROM:001ADA00   o
                                         ; ROM:stru_25A97C   o
                 dc.w off_248C
@@ -8496,93 +8387,88 @@ anim_health_molecule:dc.w off_2488      ; DATA XREF: ROM:001ADA00   o
                 dc.w off_24A4
                 dc.w off_24A8
                 dc.w off_24AC
-                dc.w $EA00
-                dc.l anim_health_molecule
+                fa_goto anim_health_molecule
 off_1ADA04:     dc.w off_2460           ; DATA XREF: ROM:001A33A2   o
                                         ; ROM:001ADA2E   o
                 dc.w off_2464
-                dc.b $F9,  1,  0,  0
+                fa_chase_jim 1, 0, 0
                 dc.w off_2468
                 dc.w off_246C
-                dc.b $F9,  1,  0,  0
+                fa_chase_jim 1, 0, 0
                 dc.w off_2470
                 dc.w off_2474
-                dc.b $F9,  1,  0,  0
+                fa_chase_jim 1, 0, 0
                 dc.w off_2478
                 dc.w off_247C
-                dc.b $F9,  1,  0,  0
+                fa_chase_jim 1, 0, 0
                 dc.w off_2480
                 dc.w off_2484
-                dc.b $F9,  1,  0,  0,$EA,  0
-                dc.l off_1ADA04
-dword_1ADA32:   dc.l $25E8F500          ; DATA XREF: ROM:0000C982   o
+                fa_chase_jim 1, 0, 0
+                fa_goto off_1ADA04
+dword_1ADA32:   dc.w $25E8              ; DATA XREF: ROM:0000C982   o
+                fa_spawn 0, object_air_bubble, 12, 12, 0, 0
                                         ; ROM:0000C986   o ...
-                dc.l object_air_bubble
-                dc.b  $C, $C,  0,  0,  0,  0,  0,  0,  0,  0,$ED,  1,$A6,$D9,  0,$20,$FB,  0
-                dc.l fill_palettes_white
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$F3,$1E,$25,$E8,$FB,  0
-                dc.l oksub_249664
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.b   8,$F4,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l object_air_bubble
-                dc.b   0,$F2,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l object_air_bubble
-                dc.b $F0,$10,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E0,$F5,  0
-                dc.l object_air_bubble
-                dc.b $16,  0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E0,$F5,  0
-                dc.l object_air_bubble
-                dc.b $E0,$20,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l object_air_bubble
-                dc.b $EA,  4,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E4,$F5,  0
-                dc.l object_air_bubble
-                dc.b   0,$E0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E8,$F5,  0
-                dc.l object_air_bubble
-                dc.b $FC,$18,  0,  0,  0,  0,  0,  0,  0,  0,$25,$E8,$F5,  0
-                dc.l object_air_bubble
-                dc.b  $E,$F2,  0,  0,  0,  0,  0,  0,  0,  0,$F3,$1E,$25,$EC,$F5,  0
-                dc.l object_air_bubble
-                dc.b $F8,$E0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$EC,$F5,  0
-                dc.l object_air_bubble
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,$25,$F0,$25,$F0,$ED,  1,$FD,$21,  0,$FF,$EC,  1
+                fa_set_b jim_obj_draw_flags, $20
+                fa_call fill_palettes_white
+                fa_spawn 0, object_air_bubble, 0, 0, 0, 0
+                fa_sound $1E
+                dc.w $25E8
+                fa_call oksub_249664
+                fa_spawn 0, object_air_bubble, 8, -12, 0, 0
+                dc.w $25E4
+                fa_spawn 0, object_air_bubble, 0, -14, 0, 0
+                dc.w $25E4
+                fa_spawn 0, object_air_bubble, -16, 16, 0, 0
+                dc.w $25E0
+                fa_spawn 0, object_air_bubble, 22, 0, 0, 0
+                dc.w $25E0
+                fa_spawn 0, object_air_bubble, -32, 32, 0, 0
+                dc.w $25E4
+                fa_spawn 0, object_air_bubble, -22, 4, 0, 0
+                dc.w $25E4
+                fa_spawn 0, object_air_bubble, 0, -32, 0, 0
+                dc.w $25E8
+                fa_spawn 0, object_air_bubble, -4, 24, 0, 0
+                dc.w $25E8
+                fa_spawn 0, object_air_bubble, 14, -14, 0, 0
+                fa_sound $1E
+                dc.w $25EC
+                fa_spawn 0, object_air_bubble, -8, -32, 0, 0
+                dc.w $25EC
+                fa_spawn 0, object_air_bubble, 0, 0, 0, 0
+                dc.w $25F0
+                dc.w $25F0
+                fa_set_b jim_dead_enable, $FF
+                fa_end
 off_1ADB3C:     dc.w off_B60            ; DATA XREF: ROM:001ADB94   o
                                         ; ROM:001ADBA8   o ...
-                dc.b $FB,  0
-                dc.l oksub_2495A0
-                dc.b $ED,  1,$FD,$F7,  0,  0,$EE,  6
+                fa_call oksub_2495A0
+                fa_set_b byte_FFFDF7, $0
+                fa_loop 6
                 dc.w off_B60
                 dc.w off_B60
                 dc.w off_B64
                 dc.w off_B64
-                dc.w $F336
+                fa_sound $36
                 dc.w off_B68
                 dc.w off_B68
                 dc.w off_B68
                 dc.w off_B68
                 dc.w off_B6C
-                dc.w $F500
-                dc.l stru_25AAE4
-                dc.b $3E,$F6,  0,  0,  0,  0,  0,  0,  0,  0,$FA,  1,$FD,$F7,  0,  1
+                fa_spawn 0, stru_25AAE4, 62, -10, 0, 0
+                fa_add_b byte_FFFDF7, $1
                 dc.w off_B6C
                 dc.w off_B6C
                 dc.w off_B70
                 dc.w off_B70
                 dc.w off_B60
                 dc.w off_B60
-                dc.b $EF,  0,$F4,$11
-                dc.w $A6AB
-                dc.w 0
-                dc.l anim_boss_chuck
-                dc.b $F4,$91,  0,  1,  0,  0
-                dc.l off_1ADB3C
-                dc.b $F4,$11,$A6,$AB,  0,  1
-                dc.l anim_boss_chuck
-                dc.b $F4,$91,  0,  1,  0,  1
-                dc.l off_1ADB3C
-                dc.w $EA00
-                dc.l anim_boss_chuck
+                fa_next
+                fa_if_b FM_EQ, difficulty_level, $0, anim_boss_chuck
+                fa_if_obj_b FM_EQ, $1, $0, off_1ADB3C
+                fa_if_b FM_EQ, difficulty_level, $1, anim_boss_chuck
+                fa_if_obj_b FM_EQ, $1, $1, off_1ADB3C
+                fa_goto anim_boss_chuck
 off_1ADBB2:     dc.w off_2F74           ; DATA XREF: sub_259DFE+548   o
                 dc.w off_2F78
                 dc.w off_2F78
@@ -8590,7 +8476,7 @@ off_1ADBB2:     dc.w off_2F74           ; DATA XREF: sub_259DFE+548   o
                 dc.w off_2F7C
                 dc.w off_2F80
                 dc.w off_2F84
-                dc.w $F338
+                fa_sound $38
                 dc.w off_2F88
                 dc.w off_2F88
                 dc.w off_2F88
@@ -8609,7 +8495,7 @@ off_1ADBB2:     dc.w off_2F74           ; DATA XREF: sub_259DFE+548   o
                 dc.w off_2FA4
                 dc.w off_2FA4
 off_1ADBE4:     dc.w off_2F74           ; DATA XREF: ROM:object_joystick_cable   o
-                dc.w $EC01
+                fa_end
 off_1ADBE8:     dc.w off_2F60           ; DATA XREF: sub_259DFE+53E   o
                 dc.w off_2F60
                 dc.w off_2F60
@@ -8627,7 +8513,7 @@ off_1ADBE8:     dc.w off_2F60           ; DATA XREF: sub_259DFE+53E   o
                 dc.w off_2F6C
                 dc.w off_2F6C
 off_1ADC08:     dc.w off_2F60           ; DATA XREF: ROM:object_joystick_buttons   o
-                dc.w $EC01
+                fa_end
 stru_1ADC0C:    dc.l off_1ADC9C         ; field_0
                                         ; DATA XREF: chain_move_left+E   o
                                         ; chain_move_right+E   o
@@ -8680,66 +8566,56 @@ stru_1ADC0C:    dc.l off_1ADC9C         ; field_0
                 dc.w 0                  ; field_4
 off_1ADC9C:     dc.w off_12E8           ; DATA XREF: ROM:stru_1ADC0C   o
                                         ; ROM:001ADC12   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_12E8
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADCAC:     dc.w off_12EC           ; DATA XREF: ROM:001ADC1E   o
                                         ; ROM:001ADC24   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_12EC
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADCBC:     dc.w off_12F0           ; DATA XREF: ROM:001ADC30   o
                                         ; ROM:001ADC36   o
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_12F0
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADCCC:     dc.w off_12F4           ; DATA XREF: ROM:001ADC3C   o
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_12F4
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADCDC:     dc.w off_12F8           ; DATA XREF: ROM:001ADC42   o
                                         ; ROM:001ADC48   o
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_12F8
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADCEC:     dc.w off_12FC           ; DATA XREF: ROM:001ADC4E   o
                                         ; ROM:001ADC54   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_12FC
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADCFC:     dc.w off_1300           ; DATA XREF: ROM:001ADC60   o
                                         ; ROM:001ADC66   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_1300
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADD0C:     dc.w off_1304           ; DATA XREF: ROM:001ADC72   o
                                         ; ROM:001ADC78   o
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_1304
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADD1C:     dc.w off_1308           ; DATA XREF: ROM:001ADC7E   o
                                         ; ROM:001ADC84   o
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_1308
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADD2C:     dc.w off_130C           ; DATA XREF: ROM:001ADC8A   o
                                         ; ROM:001ADC90   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_130C
-                dc.w $EA00
-                dc.l off_1ADD3C
+                fa_goto off_1ADD3C
 off_1ADD3C:     dc.w off_1354           ; DATA XREF: ROM:001ADCA8   o
                                         ; ROM:001ADCB8   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  1
+                fa_set_b jim_state, $1
                 dc.w off_1358
                 dc.w off_1358
                 dc.w off_135C
@@ -8748,100 +8624,80 @@ off_1ADD3C:     dc.w off_1354           ; DATA XREF: ROM:001ADCA8   o
                 dc.w off_1360
                 dc.w off_1360
                 dc.w off_1360
-off_1ADD54:     dc.w off_1310           ; DATA XREF: sub_249772+7E   o
-                dc.b $ED,  1,$FD,$EA,  0,  1
+off_1ADD54:     dc.w off_1310           ; DATA XREF: scmd_0E_jim_default_anim+7E   o
+                fa_set_b jim_state, $1
                 dc.w off_1314
-                dc.w $EA00
-                dc.l word_1ADD76
+                fa_goto word_1ADD76
 off_1ADD64:     dc.w off_1310           ; DATA XREF: ROM:001ADDF0   o
                 dc.w off_1310
-                dc.w $F411
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
-                dc.w $EE82
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
+                fa_hold 2
                 dc.w off_1314
-word_1ADD76:    dc.w $F411              ; DATA XREF: ROM:001ADD60   o
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
+word_1ADD76:                            ; DATA XREF: ROM:001ADD60   o
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
                 dc.w off_1318
                 dc.w off_1318
                 dc.w off_131C
                 dc.w off_131C
                 dc.w off_1320
                 dc.w off_1320
-                dc.w $F411
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
                 dc.w off_1324
                 dc.w off_1324
                 dc.w off_1328
                 dc.w off_1328
-                dc.w $F411
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
-                dc.w $EE83
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
+                fa_hold 3
                 dc.w off_132C
-                dc.w $F411
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
                 dc.w off_1330
                 dc.w off_1330
                 dc.w off_1334
                 dc.w off_1334
                 dc.w off_1338
                 dc.w off_1338
-                dc.w $F411
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
                 dc.w off_133C
                 dc.w off_133C
                 dc.w off_1340
                 dc.w off_1340
                 dc.w off_1344
                 dc.w off_1344
-                dc.w $F411
-                dc.w $FD13
-                dc.w 0
-                dc.l word_1ADDF4
+                fa_if_b FM_EQ, is_chain_activity_under_jim, $0, word_1ADDF4
                 dc.w off_1348
                 dc.w off_1348
                 dc.w off_134C
                 dc.w off_134C
                 dc.w off_134C
                 dc.w off_134C
-                dc.w $EA00
-                dc.l off_1ADD64
-word_1ADDF4:    dc.w $F800              ; DATA XREF: ROM:001ADD6E   o
+                fa_goto off_1ADD64
+word_1ADDF4:                            ; DATA XREF: ROM:001ADD6E   o
+                fa_jim_default_anim
                                         ; ROM:001ADD7C   o ...
 off_1ADDF6:     dc.w off_19F4           ; DATA XREF: ROM:001ADE22   o
                                         ; sub_246860+6A   o
-                dc.b $ED,  1,$FD,$EA,  0,  2,$F3,$47
+                fa_set_b jim_state, $2
+                fa_sound $47
                 dc.w off_19F4
                 dc.w off_19F8
-                dc.w $F347
+                fa_sound $47
                 dc.w off_19F8
                 dc.w off_19FC
-                dc.w $F347
+                fa_sound $47
                 dc.w off_19FC
                 dc.w off_1A00
-                dc.w $F347
+                fa_sound $47
                 dc.w off_1A00
                 dc.w off_1A04
-                dc.w $F347
+                fa_sound $47
                 dc.w off_1A04
                 dc.w off_1A08
-                dc.w $F347
+                fa_sound $47
                 dc.w off_1A08
-                dc.w $EA00
-                dc.l off_1ADDF6
+                fa_goto off_1ADDF6
 off_1ADE26:     dc.w off_16AC           ; DATA XREF: sub_24669E+120   o
-                dc.b $ED,  1,$FD,$EA,  0, $E,$ED,  1,$FD,$25,  0,$3D
+                fa_set_b jim_state, $E
+                fa_set_b jim_timer_in_air, $3D
                 dc.w off_16AC
                 dc.w off_16AC
                 dc.w off_16B0
@@ -8853,9 +8709,8 @@ off_1ADE26:     dc.w off_16AC           ; DATA XREF: sub_24669E+120   o
                 dc.w off_16B8
                 dc.w off_16B8
                 dc.w off_16B8
-                dc.w $EA00
-                dc.l off_1ADE62
-off_1ADE50:     dc.w off_1664           ; DATA XREF: sub_249772:loc_2498AC   o
+                fa_goto off_1ADE62
+off_1ADE50:     dc.w off_1664           ; DATA XREF: scmd_0E_jim_default_anim:loc_2498AC   o
                 dc.w off_1664
                 dc.w off_1664
                 dc.w off_1668
@@ -8866,7 +8721,8 @@ off_1ADE50:     dc.w off_1664           ; DATA XREF: sub_249772:loc_2498AC   o
                 dc.w off_166C
 off_1ADE62:     dc.w off_1670           ; DATA XREF: ROM:001ADE4C   o
                                         ; ROM:001AE660   o ...
-                dc.b $ED,  1,$FD,$EA,  0,  3,$ED,  1,$FD,$25,  0,$3D
+                fa_set_b jim_state, $3
+                fa_set_b jim_timer_in_air, $3D
 off_1ADE70:     dc.w off_1670           ; DATA XREF: ROM:001ADE84   o
                 dc.w off_1670
                 dc.w off_1670
@@ -8876,64 +8732,49 @@ off_1ADE70:     dc.w off_1670           ; DATA XREF: ROM:001ADE84   o
                 dc.w off_1678
                 dc.w off_1678
                 dc.w off_1678
-                dc.w $EA00
-                dc.l off_1ADE70
+                fa_goto off_1ADE70
 off_1ADE88:     dc.w off_1A78           ; DATA XREF: sub_248C3A+1E2   o
                                         ; jim_platform_collision+258   o
-                dc.b $ED,  1,$FD,$EA,  0, $C
+                fa_set_b jim_state, $C
                 dc.w off_1A78
-                dc.w $EA00
-                dc.l byte_1ADEA0
+                fa_goto byte_1ADEA0
 off_1ADE98:     dc.w off_1A78           ; DATA XREF: jim_platform_collision+244   o
-                dc.b $ED,  1,$FD,$EA,  0, $C
-byte_1ADEA0:    dc.b $F3,$3B,$ED,  1,$FD, $B,  0,  0,$ED,  2,$FC,$CE,  0,  0,$F4,$21
+                fa_set_b jim_state, $C
+byte_1ADEA0:
+                fa_sound $3B
+                fa_set_b jim_walking_direction, $0
+                fa_set_w jim_walking_speed, $0
+                fa_if_b FM_NE, is_wall_left, $0, word_1ADED2
                                         ; DATA XREF: ROM:001ADE94   o
-                dc.w $FD03
-                dc.w 0
-                dc.l word_1ADED2
-                dc.w $F421
-                dc.w $FD04
-                dc.w 0
-                dc.l word_1ADED2
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.b   0,  0
-                dc.l anim_dust_2
-                dc.b   0,  0,  0,  0
-word_1ADED2:    dc.w $F421              ; DATA XREF: ROM:001ADEB4   o
+                fa_if_b FM_NE, byte_FFFD04, $0, word_1ADED2
+                fa_spawn 2, stru_25A88C, 0, 0, anim_dust_2, 0
+word_1ADED2:                            ; DATA XREF: ROM:001ADEB4   o
+                fa_if_b FM_NE, is_wall_right, $0, off_1ADEF6
                                         ; ROM:001ADEBE   o
-                dc.w $FD06
-                dc.w 0
-                dc.l off_1ADEF6
-                dc.w $F421
-                dc.w $FD07
-                dc.w 0
-                dc.l off_1ADEF6
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.b   0,  0
-                dc.l off_1B0420
-                dc.b   0,  0,  0,  0
+                fa_if_b FM_NE, byte_FFFD07, $0, off_1ADEF6
+                fa_spawn 2, stru_25A88C, 0, 0, off_1B0420, 0
 off_1ADEF6:     dc.w off_1A54           ; DATA XREF: ROM:001ADED8   o
                                         ; ROM:001ADEE2   o
                 dc.w off_1A54
                 dc.w off_167C
                 dc.w off_167C
-                dc.w $F800
+                fa_jim_default_anim
 off_1ADF00:     dc.w off_1A78           ; DATA XREF: sub_248C3A+1CE   o
                                         ; jim_platform_collision+2D4   o
-                dc.b $ED,  1,$FD,$EA,  0, $C,$ED,  1,$FD, $B,  0,  0,$ED,  2,$FC,$CE,  0,  0
+                fa_set_b jim_state, $C
+                fa_set_b jim_walking_direction, $0
+                fa_set_w jim_walking_speed, $0
                 dc.w off_1A78
                 dc.w off_1A54
                 dc.w off_1A54
                 dc.w off_167C
                 dc.w off_167C
-                dc.w $F800
+                fa_jim_default_anim
 off_1ADF20:     dc.w off_16BC           ; DATA XREF: jim_platform_collision+312   o
-                dc.b $ED,  1,$FD,$EA,  0, $C
+                fa_set_b jim_state, $C
                 dc.w off_16BC
-                dc.b $ED,  1,$FD,$EA,  0,  8,$EA,  0
-                dc.l off_1AE5BA
+                fa_set_b jim_state, $8
+                fa_goto off_1AE5BA
 anim_explosion: dc.w off_2524           ; DATA XREF: ROM:stru_25A664   o
                 dc.w off_2524
                 dc.w off_2528
@@ -8954,7 +8795,7 @@ anim_explosion: dc.w off_2524           ; DATA XREF: ROM:stru_25A664   o
                 dc.w off_2548
                 dc.w off_2548
                 dc.w off_2548
-                dc.w $F600
+                fa_delete
 anim_sparks:    dc.w off_24F4           ; DATA XREF: ROM:stru_25A67C   o
                 dc.w off_24F4
                 dc.w off_24F8
@@ -8986,14 +8827,14 @@ anim_sparks:    dc.w off_24F4           ; DATA XREF: ROM:stru_25A67C   o
                 dc.w off_24FC
                 dc.w off_24FC
                 dc.w off_24FC
-                dc.w $F600
+                fa_delete
 off_1ADFA0:     dc.w off_1A68           ; DATA XREF: sub_245AE4+96   o
                 dc.w off_1A6C
                 dc.w off_1A6C
                 dc.w off_1A70
                 dc.w off_1A70
                 dc.w off_1A74
-                dc.b $ED,  1,$FD,$EA,  0,$3F
+                fa_set_b jim_state, $3F
                 dc.w off_1A74
                 dc.w off_1A78
                 dc.w off_1A78
@@ -9001,38 +8842,36 @@ off_1ADFA0:     dc.w off_1A68           ; DATA XREF: sub_245AE4+96   o
                 dc.w off_1A54
                 dc.w off_13E0
                 dc.w off_13E0
-                dc.w $F500
-                dc.l stru_25A67C
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+                fa_spawn 0, stru_25A67C, 0, 0, 0, 0
                 dc.w off_13E4
                 dc.w off_13E4
                 dc.w off_13E8
                 dc.w off_13E8
-                dc.w $F330
+                fa_sound $30
                 dc.w off_13EC
                 dc.w off_13EC
                 dc.w off_13F0
                 dc.w off_13F0
                 dc.w off_13F4
                 dc.w off_13F4
-                dc.w $F330
+                fa_sound $30
                 dc.w off_13F8
                 dc.w off_13F8
                 dc.w off_13FC
                 dc.w off_13FC
                 dc.w off_1400
                 dc.w off_1400
-                dc.w $F330
+                fa_sound $30
                 dc.w off_1404
                 dc.w off_1404
                 dc.w off_1408
                 dc.w off_1408
                 dc.w off_1408
-                dc.w $F33B
+                fa_sound $3B
                 dc.w off_140C
                 dc.w off_140C
                 dc.w off_140C
-                dc.w $F330
+                fa_sound $30
                 dc.w off_1410
                 dc.w off_1410
                 dc.w off_1410
@@ -9040,11 +8879,9 @@ off_1ADFA0:     dc.w off_1A68           ; DATA XREF: sub_245AE4+96   o
                 dc.w off_1410
                 dc.w off_1414
                 dc.w off_1414
-                dc.w $F500
-                dc.l stru_25A664
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+                fa_spawn 0, stru_25A664, 0, 0, 0, 0
                 dc.w off_1418
-                dc.w $F348
+                fa_sound $48
                 dc.w off_1418
                 dc.w off_1418
                 dc.w off_141C
@@ -9062,7 +8899,7 @@ off_1ADFA0:     dc.w off_1A68           ; DATA XREF: sub_245AE4+96   o
                 dc.w off_1434
                 dc.w off_1438
                 dc.w off_1438
-                dc.w $EE8E
+                fa_hold 14
                 dc.w off_143C
                 dc.w off_1440
                 dc.w off_1444
@@ -9075,7 +8912,7 @@ off_1ADFA0:     dc.w off_1A68           ; DATA XREF: sub_245AE4+96   o
                 dc.w off_1444
                 dc.w off_1444
                 dc.w off_1440
-                dc.w $EE8A
+                fa_hold 10
                 dc.w off_143C
                 dc.w off_1448
                 dc.w off_1448
@@ -9089,9 +8926,10 @@ off_1ADFA0:     dc.w off_1A68           ; DATA XREF: sub_245AE4+96   o
                 dc.w off_1458
                 dc.w off_145C
                 dc.w off_145C
-                dc.b $ED,  1,$FD,$39,  0,  1,$EC,  1
+                fa_set_b byte_FFFD39, $1
+                fa_end
 off_1AE08C:     dc.w off_17A4           ; DATA XREF: sub_24BDA8+88   o
-                dc.b $ED,  1,$FD,$EA,  0,$33
+                fa_set_b jim_state, $33
                 dc.w off_17A4
                 dc.w off_17A8
                 dc.w off_17A8
@@ -9103,83 +8941,75 @@ off_1AE08C:     dc.w off_17A4           ; DATA XREF: sub_24BDA8+88   o
                 dc.w off_17B4
                 dc.w off_17B8
                 dc.w off_17B8
-anim_jim_idle:  dc.w off_17A4           ; DATA XREF: sub_249772+14   o
-                                        ; sub_249772:loc_24986C   o ...
-byte_1AE0AC:    dc.b $EE,  3,$ED,  1,$FD,$EA,  0,  4,$EE,$82
+anim_jim_idle:  dc.w off_17A4           ; DATA XREF: scmd_0E_jim_default_anim+14   o
+                                        ; scmd_0E_jim_default_anim:loc_24986C   o ...
+byte_1AE0AC:
+                fa_loop 3
+                fa_set_b jim_state, $4
+                fa_hold 2
                                         ; DATA XREF: ROM:001AE128   o
                 dc.w off_17A4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17A8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17AC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B0
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B8
-                dc.w $EF00
-word_1AE0CE:    dc.w $EE82              ; DATA XREF: ROM:001AE0E8   o
+                fa_next
+word_1AE0CE:                            ; DATA XREF: ROM:001AE0E8   o
+                fa_hold 2
                 dc.w off_17A4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17A8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17AC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B0
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B8
-                dc.w $F0CC
-                dc.l word_1AE0CE
-                dc.w $EE82
+                fa_rand_goto 204, word_1AE0CE
+                fa_hold 2
                 dc.w off_17A4
-                dc.w $F421
-                dc.w $FD11
-                dc.w 0
-                dc.l word_1AE112
-                dc.w $F068
-                dc.l off_1AE12C
-                dc.w $F068
-                dc.l off_1AE382
-                dc.w $F068
-                dc.l off_1AD5D0
-                dc.w $F05E
-                dc.l off_1AE4D2
-word_1AE112:    dc.w $EE81              ; DATA XREF: ROM:001AE0F6   o
+                fa_if_b FM_NE, jim_ride_obj_id, $0, word_1AE112
+                fa_rand_goto 104, off_1AE12C
+                fa_rand_goto 104, off_1AE382
+                fa_rand_goto 104, off_1AD5D0
+                fa_rand_goto 94, off_1AE4D2
+word_1AE112:                            ; DATA XREF: ROM:001AE0F6   o
+                fa_hold 1
                 dc.w off_17A8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17AC
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_17B0
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B4
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_17B8
-                dc.w $EA00
-                dc.l byte_1AE0AC
+                fa_goto byte_1AE0AC
 off_1AE12C:     dc.w off_1B74           ; DATA XREF: ROM:001AE0FC   o
                 dc.w off_1B78
                 dc.w off_1B78
                 dc.w off_1B78
                 dc.w off_1B78
-                dc.w $F068
-                dc.l off_1AE2CC
+                fa_rand_goto 104, off_1AE2CC
                 dc.w off_1B7C
                 dc.w off_1B7C
                 dc.w off_1B7C
                 dc.w off_1B80
                 dc.w off_1B80
-                dc.w $F07C
-                dc.l off_1AE1BC
+                fa_rand_goto 124, off_1AE1BC
                 dc.w off_1B88
                 dc.w off_1B88
                 dc.w off_1B8C
-                dc.w $F068
-                dc.l off_1AE188
-                dc.w $F072
-                dc.l off_1AE27E
+                fa_rand_goto 104, off_1AE188
+                fa_rand_goto 114, off_1AE27E
 off_1AE15E:     dc.w off_1B90           ; DATA XREF: ROM:001AE2E0   o
                 dc.w off_1B90
                 dc.w off_1B94
@@ -9200,7 +9030,7 @@ off_1AE15E:     dc.w off_1B90           ; DATA XREF: ROM:001AE2E0   o
                 dc.w off_1B78
                 dc.w off_1B78
                 dc.w off_1B74
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE188:     dc.w off_1C24           ; DATA XREF: ROM:001AE154   o
                 dc.w off_1C28
                 dc.w off_1C28
@@ -9226,7 +9056,7 @@ off_1AE188:     dc.w off_1C24           ; DATA XREF: ROM:001AE154   o
                 dc.w off_1C50
                 dc.w off_1C54
                 dc.w off_1B78
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE1BC:     dc.w off_1B84           ; DATA XREF: ROM:001AE148   o
                 dc.w off_1B84
                 dc.w off_1B88
@@ -9259,11 +9089,7 @@ off_1AE1BC:     dc.w off_1B84           ; DATA XREF: ROM:001AE148   o
                 dc.w off_1BB0
                 dc.w off_1BB0
                 dc.w off_1BB0
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $B2E5
-                dc.l off_1B03DC
-                dc.b   0,  0,  0,  0
+                fa_spawn 3, stru_25A6DC, -78, -27, off_1B03DC, 0
                 dc.w off_1BB4
                 dc.w off_1BB4
                 dc.w off_1BB4
@@ -9282,11 +9108,10 @@ off_1AE1BC:     dc.w off_1B84           ; DATA XREF: ROM:001AE148   o
                 dc.w off_1BCC
                 dc.w off_1BC8
                 dc.w off_1BC4
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_1BC0
                 dc.w off_1BD0
-                dc.w $F04A
-                dc.l word_1AE26A
+                fa_rand_goto 74, word_1AE26A
                 dc.w off_1BD4
                 dc.w off_1BD8
                 dc.w off_1BDC
@@ -9295,7 +9120,7 @@ off_1AE1BC:     dc.w off_1B84           ; DATA XREF: ROM:001AE148   o
                 dc.w off_1BDC
                 dc.w off_1BD8
                 dc.w off_1BD4
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_1BD8
                 dc.w off_1BE4
                 dc.w off_1BE4
@@ -9308,18 +9133,19 @@ off_1AE1BC:     dc.w off_1B84           ; DATA XREF: ROM:001AE148   o
                 dc.w off_1BF4
                 dc.w off_1BF4
                 dc.w off_1BF4
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_1BF0
-word_1AE26A:    dc.w $EE04              ; DATA XREF: ROM:001AE238   o
+word_1AE26A:                            ; DATA XREF: ROM:001AE238   o
+                fa_loop 4
                 dc.w off_1BF8
                 dc.w off_1BFC
                 dc.w off_1C00
                 dc.w off_1C04
                 dc.w off_1C08
                 dc.w off_1C0C
-                dc.w $EF00
+                fa_next
                 dc.w off_1B74
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE27E:     dc.w off_1C58           ; DATA XREF: ROM:001AE15A   o
                 dc.w off_1C58
                 dc.w off_1C58
@@ -9328,7 +9154,7 @@ off_1AE27E:     dc.w off_1C58           ; DATA XREF: ROM:001AE15A   o
                 dc.w off_1C64
                 dc.w off_1C68
                 dc.w off_1C6C
-                dc.w $F327
+                fa_sound $27
                 dc.w off_1C70
                 dc.w off_1C70
                 dc.w off_1C70
@@ -9339,7 +9165,7 @@ off_1AE27E:     dc.w off_1C58           ; DATA XREF: ROM:001AE15A   o
                 dc.w off_1C7C
                 dc.w off_1C7C
                 dc.w off_1C80
-                dc.w $EE04
+                fa_loop 4
                 dc.w off_1C84
                 dc.w off_1C88
                 dc.w off_1C88
@@ -9356,19 +9182,17 @@ off_1AE27E:     dc.w off_1C58           ; DATA XREF: ROM:001AE15A   o
                 dc.w off_1C94
                 dc.w off_1C90
                 dc.w off_1C90
-                dc.w $EF00
+                fa_next
                 dc.w off_1B74
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE2CC:     dc.w off_1C10           ; DATA XREF: ROM:001AE138   o
                 dc.w off_1C10
-                dc.w $FC00
-                dc.l off_1AE2E4
+                fa_gosub off_1AE2E4
                 dc.w off_1B7C
                 dc.w off_1B80
                 dc.w off_1B88
                 dc.w off_1B8C
-                dc.w $EA00
-                dc.l off_1AE15E
+                fa_goto off_1AE15E
 off_1AE2E4:     dc.w off_1C14           ; DATA XREF: ROM:001AE2D2   o
                 dc.w off_1C14
                 dc.w off_1C14
@@ -9405,23 +9229,15 @@ off_1AE2E4:     dc.w off_1C14           ; DATA XREF: ROM:001AE2D2   o
                 dc.w off_1C1C
                 dc.w off_1C20
                 dc.w off_1C20
-                dc.w $EE03
+                fa_loop 3
                 dc.w off_1C14
                 dc.w off_1C18
                 dc.w off_1C1C
                 dc.w off_1C20
-                dc.w $EF00
+                fa_next
                 dc.w off_1C14
                 dc.w off_1C18
                 dc.w off_1C18
-                dc.w off_1C1C
-                dc.w off_1C20
-                dc.w off_1C20
-                dc.w off_1C14
-                dc.w off_1C14
-                dc.w off_1C18
-                dc.w off_1C18
-                dc.w off_1C1C
                 dc.w off_1C1C
                 dc.w off_1C20
                 dc.w off_1C20
@@ -9429,6 +9245,14 @@ off_1AE2E4:     dc.w off_1C14           ; DATA XREF: ROM:001AE2D2   o
                 dc.w off_1C14
                 dc.w off_1C18
                 dc.w off_1C18
+                dc.w off_1C1C
+                dc.w off_1C1C
+                dc.w off_1C20
+                dc.w off_1C20
+                dc.w off_1C14
+                dc.w off_1C14
+                dc.w off_1C18
+                dc.w off_1C18
                 dc.w off_1C18
                 dc.w off_1C1C
                 dc.w off_1C1C
@@ -9447,7 +9271,7 @@ off_1AE2E4:     dc.w off_1C14           ; DATA XREF: ROM:001AE2D2   o
                 dc.w off_1C20
                 dc.w off_1C20
                 dc.w off_1C20
-                dc.w $FC80
+                fa_return
 off_1AE382:     dc.w off_120C           ; DATA XREF: ROM:001AE102   o
                 dc.w off_120C
                 dc.w off_120C
@@ -9460,48 +9284,47 @@ off_1AE382:     dc.w off_120C           ; DATA XREF: ROM:001AE102   o
                 dc.w off_121C
                 dc.w off_1220
                 dc.w off_1220
-                dc.w $F359
-                dc.w $EE03
+                fa_sound $59
+                fa_loop 3
                 dc.w off_1224
                 dc.w off_1224
                 dc.w off_1228
                 dc.w off_1228
-                dc.w $EF00
-                dc.w $F09A
-                dc.l off_1AE3F0
-                dc.w $EE03
+                fa_next
+                fa_rand_goto 154, off_1AE3F0
+                fa_loop 3
                 dc.w off_1224
                 dc.w off_1228
-                dc.w $EF00
+                fa_next
                 dc.w off_1224
                 dc.w off_122C
                 dc.w off_122C
-                dc.w $F36D
+                fa_sound $6D
                 dc.w off_1230
                 dc.w off_1230
                 dc.w off_1234
                 dc.w off_1234
-                dc.w $EE97
+                fa_hold 23
                 dc.w off_1238
                 dc.w off_123C
                 dc.w off_123C
                 dc.w off_1240
                 dc.w off_1240
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_123C
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_1238
                 dc.w off_123C
                 dc.w off_1240
                 dc.w off_1240
                 dc.w off_123C
                 dc.w off_123C
-                dc.w $EE8E
+                fa_hold 14
                 dc.w off_1238
                 dc.w off_1234
                 dc.w off_1234
                 dc.w off_122C
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE3F0:     dc.w off_1224           ; DATA XREF: ROM:001AE3AA   o
                 dc.w off_1224
                 dc.w off_1228
@@ -9520,29 +9343,29 @@ off_1AE3F0:     dc.w off_1224           ; DATA XREF: ROM:001AE3AA   o
                 dc.w off_173C
                 dc.w off_1738
                 dc.w off_1738
-                dc.w $EE8A
+                fa_hold 10
                 dc.w off_173C
                 dc.w off_1740
                 dc.w off_1740
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_1744
                 dc.w off_1748
                 dc.w off_1748
-                dc.w $F36D
-                dc.w $EE02
+                fa_sound $6D
+                fa_loop 2
                 dc.w off_174C
                 dc.w off_1750
                 dc.w off_1754
                 dc.w off_1758
                 dc.w off_175C
-                dc.w $EF00
+                fa_next
                 dc.w off_174C
                 dc.w off_1760
                 dc.w off_1760
                 dc.w off_1764
                 dc.w off_1768
                 dc.w off_1768
-                dc.w $EE91
+                fa_hold 17
                 dc.w off_176C
                 dc.w off_1770
                 dc.w off_1770
@@ -9558,7 +9381,7 @@ off_1AE3F0:     dc.w off_1224           ; DATA XREF: ROM:001AE3AA   o
                 dc.w off_1784
                 dc.w off_1788
                 dc.w off_1788
-                dc.w $F800
+                fa_jim_default_anim
                 dc.w off_1224
                 dc.w off_1224
                 dc.w off_1228
@@ -9577,28 +9400,28 @@ off_1AE3F0:     dc.w off_1224           ; DATA XREF: ROM:001AE3AA   o
                 dc.w off_173C
                 dc.w off_1738
                 dc.w off_1738
-                dc.w $EE8A
+                fa_hold 10
                 dc.w off_173C
                 dc.w off_1740
                 dc.w off_1740
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_1744
                 dc.w off_1748
                 dc.w off_1748
-                dc.w $EE02
+                fa_loop 2
                 dc.w off_174C
                 dc.w off_1750
                 dc.w off_1754
                 dc.w off_1758
                 dc.w off_175C
-                dc.w $EF00
+                fa_next
                 dc.w off_174C
                 dc.w off_1760
                 dc.w off_1760
                 dc.w off_1764
                 dc.w off_1768
                 dc.w off_1768
-                dc.w $EE91
+                fa_hold 17
                 dc.w off_176C
                 dc.w off_1770
                 dc.w off_1770
@@ -9614,14 +9437,14 @@ off_1AE3F0:     dc.w off_1224           ; DATA XREF: ROM:001AE3AA   o
                 dc.w off_1784
                 dc.w off_1788
                 dc.w off_1788
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE4D2:     dc.w off_1CB8           ; DATA XREF: ROM:001AE10E   o
                 dc.w off_1CB8
                 dc.w off_1CBC
                 dc.w off_1CBC
                 dc.w off_17BC
                 dc.w off_17BC
-                dc.w $EE03
+                fa_loop 3
                 dc.w off_17C0
                 dc.w off_17C0
                 dc.w off_17C0
@@ -9645,7 +9468,7 @@ off_1AE4D2:     dc.w off_1CB8           ; DATA XREF: ROM:001AE10E   o
                 dc.w off_17DC
                 dc.w off_17DC
                 dc.w off_17DC
-                dc.w $EF00
+                fa_next
                 dc.w off_17C0
                 dc.w off_17C0
                 dc.w off_17C0
@@ -9675,32 +9498,23 @@ off_1AE4D2:     dc.w off_1CB8           ; DATA XREF: ROM:001AE10E   o
                 dc.w off_1CE0
                 dc.w off_1CE4
                 dc.w off_1CE4
-                dc.w $F800
+                fa_jim_default_anim
                 dc.w off_17E0
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$34
-                dc.w $F800
-off_1AE556:     dc.w off_1A14           ; DATA XREF: sub_249772+A0   o
+                fa_set_b jim_state, $34
+                fa_jim_default_anim
+off_1AE556:     dc.w off_1A14           ; DATA XREF: scmd_0E_jim_default_anim+A0   o
                                         ; jim_walk:loc_24BEC2   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,  8
+                fa_set_b jim_state, $8
                 dc.w off_1A14
                 dc.w off_1A18
                 dc.w off_1A18
                 dc.w off_1A1C
                 dc.w off_1A1C
 off_1AE568:     dc.w off_17E0           ; DATA XREF: ROM:001AE5C0   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,  8
+                fa_set_b jim_state, $8
                 dc.w off_17E0
                 dc.w off_17E4
-                dc.w $F502
-                dc.l stru_25A844
-                dc.w $FC10
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0
+                fa_spawn 2, stru_25A844, -4, 16, 0, 0
                 dc.w off_17E4
                 dc.w off_17E8
                 dc.w off_17EC
@@ -9713,10 +9527,7 @@ off_1AE568:     dc.w off_17E0           ; DATA XREF: ROM:001AE5C0   o
                 dc.w off_17FC
                 dc.w off_17FC
                 dc.w off_1800
-                dc.w $F502
-                dc.l stru_25A844
-                dc.w $FC10
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0
+                fa_spawn 2, stru_25A844, -4, 16, 0, 0
                 dc.w off_1800
                 dc.w off_1804
                 dc.w off_1808
@@ -9727,24 +9538,21 @@ off_1AE568:     dc.w off_17E0           ; DATA XREF: ROM:001AE5C0   o
 off_1AE5BA:     dc.w off_1814           ; DATA XREF: ROM:001ADF32   o
                                         ; ROM:001AE5D2   o ...
                 dc.w off_1814
-                dc.w $EA00
-                dc.l off_1AE568
+                fa_goto off_1AE568
 off_1AE5C4:     dc.w off_16BC           ; DATA XREF: sub_248C3A+1BC   o
-                dc.b $ED,  1,$FD,$EA,  0, $C,$F4,$22
-                dc.w $FCCE
-                dc.w 0
-                dc.l off_1AE5BA
+                fa_set_b jim_state, $C
+                fa_if_w FM_NE, jim_walking_speed, $0, off_1AE5BA
                 dc.w off_16BC
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE5DA:     dc.w off_1680           ; DATA XREF: sub_24669E+13E   o
-                dc.b $ED,  1,$FD,$EA,  0,  5
+                fa_set_b jim_state, $5
                 dc.w off_1680
                 dc.w off_1684
                 dc.w off_1684
                 dc.w off_1688
                 dc.w off_168C
                 dc.w off_168C
-                dc.b $ED,  1,$FC,$FA,  0,  1
+                fa_set_b is_jump_apex_reached, $1
                 dc.w off_1690
                 dc.w off_1690
                 dc.w off_1694
@@ -9761,37 +9569,38 @@ off_1AE5DA:     dc.w off_1680           ; DATA XREF: sub_24669E+13E   o
                 dc.w off_16A8
 off_1AE610:     dc.w off_16AC           ; DATA XREF: ROM:001AEF42   o
                                         ; ROM:001AF670   o
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_16AC
-                dc.b $ED,  1,$FD,$EA,  0,  3
+                fa_set_b jim_state, $3
                 dc.w off_16AC
                 dc.w off_16AC
                 dc.w off_16B0
                 dc.w off_16B0
                 dc.w off_16B0
-                dc.b $ED,  1,$FD,$25,  0,$3D
+                fa_set_b jim_timer_in_air, $3D
                 dc.w off_16B4
                 dc.w off_16B4
                 dc.w off_16B4
                 dc.w off_16B8
                 dc.w off_16B8
                 dc.w off_16B8
-                dc.b $ED,  1,$FD,$25,  0,$3D,$EF,  0
+                fa_set_b jim_timer_in_air, $3D
+                fa_next
                 dc.w off_1664
                 dc.w off_1664
                 dc.w off_1664
-                dc.b $ED,  1,$FD,$25,  0,$3D
+                fa_set_b jim_timer_in_air, $3D
                 dc.w off_1668
                 dc.w off_1668
                 dc.w off_1668
                 dc.w off_166C
                 dc.w off_166C
                 dc.w off_166C
-                dc.b $ED,  1,$FD,$25,  0,$3D,$EA,  0
-                dc.l off_1ADE62
+                fa_set_b jim_timer_in_air, $3D
+                fa_goto off_1ADE62
 off_1AE664:     dc.w off_1A54           ; DATA XREF: sub_24669E+130   o
                                         ; sub_24DFE8:loc_24E082   o
-                dc.b $ED,  1,$FD,$EA,  0,  5
+                fa_set_b jim_state, $5
                 dc.w off_1650
                 dc.w off_1650
                 dc.w off_1654
@@ -9801,17 +9610,17 @@ off_1AE664:     dc.w off_1A54           ; DATA XREF: sub_24669E+130   o
                 dc.w off_165C
                 dc.w off_165C
                 dc.w off_165C
-                dc.b $F2,$87,  0,$1A
-                dc.l byte_1AE68C
+                fa_if_obj_bit_clr $1A, 7, byte_1AE68C
                 dc.w off_1660
                 dc.w off_1660
                 dc.w off_1660
-byte_1AE68C:    dc.b $F2,$87,  0,$1A    ; DATA XREF: ROM:001AE682   o
-                dc.l byte_1AE69A
+byte_1AE68C:                            ; DATA XREF: ROM:001AE682   o
+                fa_if_obj_bit_clr $1A, 7, byte_1AE69A
                 dc.w off_1664
                 dc.w off_1664
                 dc.w off_1664
-byte_1AE69A:    dc.b $ED,  1,$FC,$FA,  0,  1
+byte_1AE69A:
+                fa_set_b is_jump_apex_reached, $1
                                         ; DATA XREF: ROM:001AE690   o
                 dc.w off_1668
                 dc.w off_1668
@@ -9830,115 +9639,76 @@ off_1AE6B0:     dc.w off_1670           ; DATA XREF: ROM:001AE6C4   o
                 dc.w off_1678
                 dc.w off_1678
                 dc.w off_1678
-                dc.w $EA00
-                dc.l off_1AE6B0
+                fa_goto off_1AE6B0
                 dc.w off_1660
-                dc.b $ED,  1,$FD,$EA,  0,  5,$EC,  1
+                fa_set_b jim_state, $5
+                fa_end
                 dc.w off_17E0
-                dc.b $ED,  1,$FD,$EA,  0
-                dc.w $36F8
-                dc.b 0
+                fa_set_b jim_state, $36
+                fa_jim_default_anim
 off_1AE6DC:     dc.w off_14B0           ; DATA XREF: sub_247022+42E   o
-                dc.b $ED,  1,$FD,$EA,  0,$23
+                fa_set_b jim_state, $23
                 dc.w off_14B0
-                dc.b $F4,$11
-                dc.w $FD1E
-                dc.w 0
-                dc.l word_1AE748
+                fa_if_b FM_EQ, byte_FFFD1E, $0, word_1AE748
                 dc.w off_14B4
                 dc.w off_14B4
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l word_1AE744
+                fa_if_b FM_EQ, byte_FFFD1E, $0, word_1AE744
                 dc.w off_14B8
                 dc.w off_14B8
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE73E
+                fa_if_b FM_EQ, byte_FFFD1E, $0, off_1AE73E
                 dc.w off_14BC
                 dc.w off_14BC
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE73E
-                dc.w $EE83
+                fa_if_b FM_EQ, byte_FFFD1E, $0, off_1AE73E
+                fa_hold 3
                 dc.w off_14C0
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE734
+                fa_if_b FM_EQ, byte_FFFD1E, $0, off_1AE734
 off_1AE728:     dc.w off_14C0           ; DATA XREF: ROM:001AE730   o
-                                        ; sub_249772+C2   o
-                dc.w $F421
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE728
+                                        ; scmd_0E_jim_default_anim+C2   o
+                fa_if_b FM_NE, byte_FFFD1E, $0, off_1AE728
 off_1AE734:     dc.w off_14C4           ; DATA XREF: ROM:001AE724   o
                 dc.w off_14C4
                 dc.w off_14C8
                 dc.w off_14C8
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE73E:     dc.w off_14C8           ; DATA XREF: ROM:001AE708   o
                                         ; ROM:001AE716   o
                 dc.w off_14C8
-                dc.w $F800
-word_1AE744:    dc.w $EE81              ; DATA XREF: ROM:001AE6FA   o
+                fa_jim_default_anim
+word_1AE744:                            ; DATA XREF: ROM:001AE6FA   o
+                fa_hold 1
                 dc.w off_14B0
-word_1AE748:    dc.w $F800              ; DATA XREF: ROM:001AE6EC   o
+word_1AE748:                            ; DATA XREF: ROM:001AE6EC   o
+                fa_jim_default_anim
 off_1AE74A:     dc.w off_1DF8           ; DATA XREF: sub_247022+446   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$23,$1D,$F8,$F4,$11
-                dc.w $FD1E
-                dc.w 0
-                dc.l word_1AE79C
+                fa_set_b jim_state, $23
+                dc.w off_1DF8
+                fa_if_b FM_EQ, byte_FFFD1E, $0, word_1AE79C
                 dc.w off_1DFC
                 dc.w off_1DFC
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE798
+                fa_if_b FM_EQ, byte_FFFD1E, $0, off_1AE798
                 dc.w off_1E00
                 dc.w off_1E00
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE794
-                dc.w $EE83
+                fa_if_b FM_EQ, byte_FFFD1E, $0, off_1AE794
+                fa_hold 3
                 dc.w off_1E04
-                dc.w $F411
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE794
+                fa_if_b FM_EQ, byte_FFFD1E, $0, off_1AE794
 off_1AE788:     dc.w off_1E04           ; DATA XREF: ROM:001AE790   o
-                                        ; sub_249772:loc_249844   o
-                dc.w $F421
-                dc.w $FD1E
-                dc.w 0
-                dc.l off_1AE788
+                                        ; scmd_0E_jim_default_anim:loc_249844   o
+                fa_if_b FM_NE, byte_FFFD1E, $0, off_1AE788
 off_1AE794:     dc.w off_1DFC           ; DATA XREF: ROM:001AE776   o
                                         ; ROM:001AE784   o
                 dc.w off_1DFC
 off_1AE798:     dc.w off_1DF8           ; DATA XREF: ROM:001AE768   o
                 dc.w off_1DF8
-word_1AE79C:    dc.w $F800              ; DATA XREF: ROM:001AE75A   o
+word_1AE79C:                            ; DATA XREF: ROM:001AE75A   o
+                fa_jim_default_anim
                 dc.w off_17E0
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
-                dc.w $F800
+                fa_set_b is_jim_blocked_by_enemy, $0
+                fa_jim_default_anim
 off_1AE7A8:     dc.w off_118C           ; DATA XREF: jim_fire+204   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1C
+                fa_set_b jim_state, $1C
                 dc.w off_1190
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $7CEB
-                dc.l anim_plasma_shot
-                dc.b   0,  0,  0,  0
+                fa_spawn 3, stru_25A6DC, 124, -21, anim_plasma_shot, 0
                 dc.w off_1190
                 dc.w off_118C
                 dc.w off_118C
@@ -9952,32 +9722,18 @@ off_1AE7A8:     dc.w off_118C           ; DATA XREF: jim_fire+204   o
                 dc.w off_119C
                 dc.w off_11A0
                 dc.w off_11A0
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE7DE:     dc.w off_118C           ; DATA XREF: jim_fire+1F2   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1C
-word_1AE7E6:    dc.w $F501              ; DATA XREF: ROM:001AE820   o
-                dc.l stru_25A6F4
-                dc.w $7CEB
-                dc.l anim_gunfire
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1C
+word_1AE7E6:                            ; DATA XREF: ROM:001AE820   o
+                fa_spawn 1, stru_25A6F4, 124, -21, anim_gunfire, 0
                 dc.w off_1190
-                dc.w $F441
-                dc.w $FD3D
-                dc.w $10
-                dc.l off_1AE818
-                dc.w $F0AE
-                dc.l off_1AE818
-                dc.w $F500
-                dc.l stru_25A724
-                dc.b $13,$E7,  0,  0,  0,  0,  0,  0,  0,  0
+                fa_if_b FM_GT, active_objects_count, $10, off_1AE818
+                fa_rand_goto 174, off_1AE818
+                fa_spawn 0, stru_25A724, 19, -25, 0, 0
 off_1AE818:     dc.w off_118C           ; DATA XREF: ROM:001AE7FE   o
                                         ; ROM:001AE804   o
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AE7E6
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AE7E6
                 dc.w off_1190
                 dc.w off_1194
                 dc.w off_1194
@@ -9987,13 +9743,10 @@ off_1AE818:     dc.w off_118C           ; DATA XREF: ROM:001AE7FE   o
                 dc.w off_119C
                 dc.w off_11A0
                 dc.w off_11A0
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE838:     dc.w off_116C           ; DATA XREF: jim_fire+37C   o
-                dc.b $ED,  1,$FD,$EA,  0,$1D,$F5,  3
-                dc.l stru_25A6DC
-                dc.w $312
-                dc.l off_1B0342
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1D
+                fa_spawn 3, stru_25A6DC, 3, 18, off_1B0342, 0
                 dc.w off_1170
                 dc.w off_116C
                 dc.w off_1170
@@ -10008,31 +9761,18 @@ off_1AE838:     dc.w off_116C           ; DATA XREF: jim_fire+37C   o
                 dc.w off_1184
                 dc.w off_1188
                 dc.w off_1188
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE86E:     dc.w off_116C           ; DATA XREF: jim_fire+36A   o
-                dc.b $ED,  1,$FD,$EA,  0,$1D
-byte_1AE876:    dc.b $F5,  1            ; DATA XREF: ROM:001AE8B0   o
-                dc.l stru_25A6F4
-                dc.w $312
-                dc.l off_1B034E
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1D
+byte_1AE876:                            ; DATA XREF: ROM:001AE8B0   o
+                fa_spawn 1, stru_25A6F4, 3, 18, off_1B034E, 0
                 dc.w off_1170
-                dc.w $F441
-                dc.w $FD3D
-                dc.w $10
-                dc.l off_1AE8A8
-                dc.w $F0AE
-                dc.l off_1AE8A8
-                dc.w $F500
-                dc.l stru_25A724
-                dc.b   0,$F8,  0,  0,  0,  0
-                dc.l byte_1A3AC8
+                fa_if_b FM_GT, active_objects_count, $10, off_1AE8A8
+                fa_rand_goto 174, off_1AE8A8
+                fa_spawn 0, stru_25A724, 0, -8, 0, byte_1A3AC8
 off_1AE8A8:     dc.w off_116C           ; DATA XREF: ROM:001AE88E   o
                                         ; ROM:001AE894   o
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l byte_1AE876
+                fa_if_b FM_NE, is_jim_fire, $0, byte_1AE876
                 dc.w off_1170
                 dc.w off_1174
                 dc.w off_1178
@@ -10045,15 +9785,10 @@ off_1AE8A8:     dc.w off_116C           ; DATA XREF: ROM:001AE88E   o
                 dc.w off_1184
                 dc.w off_1188
                 dc.w off_1188
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE8CE:     dc.w off_11A4           ; DATA XREF: jim_fire+2BA   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$1B,$F5,  3
-                dc.l stru_25A6DC
-                dc.w $F6D2
-                dc.l off_1B0358
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1B
+                fa_spawn 3, stru_25A6DC, -10, -46, off_1B0358, 0
                 dc.w off_11A8
                 dc.w off_11A4
                 dc.w off_11A8
@@ -10063,33 +9798,18 @@ off_1AE8CE:     dc.w off_11A4           ; DATA XREF: jim_fire+2BA   o
                 dc.w off_11B0
                 dc.w off_11B4
                 dc.w off_11B4
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE8FA:     dc.w off_11A4           ; DATA XREF: jim_fire+2A8   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$1B
-word_1AE902:    dc.w $F501              ; DATA XREF: ROM:001AE93C   o
-                dc.l stru_25A6F4
-                dc.w $F6D2
-                dc.l off_1B037E
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1B
+word_1AE902:                            ; DATA XREF: ROM:001AE93C   o
+                fa_spawn 1, stru_25A6F4, -10, -46, off_1B037E, 0
                 dc.w off_11A8
-                dc.w $F441
-                dc.w $FD3D
-                dc.w $10
-                dc.l off_1AE934
-                dc.w $F0AE
-                dc.l off_1AE934
-                dc.w $F500
-                dc.l stru_25A724
-                dc.b   0,$CC,  0,  0,  0,  0
-                dc.l byte_1A3A9C
+                fa_if_b FM_GT, active_objects_count, $10, off_1AE934
+                fa_rand_goto 174, off_1AE934
+                fa_spawn 0, stru_25A724, 0, -52, 0, byte_1A3A9C
 off_1AE934:     dc.w off_11A4           ; DATA XREF: ROM:001AE91A   o
                                         ; ROM:001AE920   o
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AE902
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AE902
                 dc.w off_11A8
                 dc.w off_11AC
                 dc.w off_11AC
@@ -10097,15 +9817,10 @@ off_1AE934:     dc.w off_11A4           ; DATA XREF: ROM:001AE91A   o
                 dc.w off_11B0
                 dc.w off_11B4
                 dc.w off_11B4
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE950:     dc.w off_11B8           ; DATA XREF: jim_fire+30E   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$1A,$F5,  3
-                dc.l stru_25A6DC
-                dc.w $459A
-                dc.l off_1B03A4
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1A
+                fa_spawn 3, stru_25A6DC, 69, -102, off_1B03A4, 0
                 dc.w off_11BC
                 dc.w off_11B8
                 dc.w off_11BC
@@ -10115,22 +9830,14 @@ off_1AE950:     dc.w off_11B8           ; DATA XREF: jim_fire+30E   o
                 dc.w off_11C4
                 dc.w off_11C8
                 dc.w off_11C8
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE97C:     dc.w off_11B8           ; DATA XREF: jim_fire+2FC   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1A
-word_1AE984:    dc.w $F501              ; DATA XREF: ROM:001AE99E   o
-                dc.l stru_25A6F4
-                dc.w $459A
-                dc.l off_1B039C
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1A
+word_1AE984:                            ; DATA XREF: ROM:001AE99E   o
+                fa_spawn 1, stru_25A6F4, 69, -102, off_1B039C, 0
                 dc.w off_11BC
                 dc.w off_11B8
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AE984
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AE984
                 dc.w off_11BC
                 dc.w off_11C0
                 dc.w off_11C0
@@ -10138,15 +9845,10 @@ word_1AE984:    dc.w $F501              ; DATA XREF: ROM:001AE99E   o
                 dc.w off_11C4
                 dc.w off_11C8
                 dc.w off_11C8
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE9B2:     dc.w off_1158           ; DATA XREF: jim_fire+3D0   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.b   0,$1E,$F5,  3
-                dc.l stru_25A6DC
-                dc.w $5647
-                dc.l off_1B0386
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1E
+                fa_spawn 3, stru_25A6DC, 86, 71, off_1B0386, 0
                 dc.w off_115C
                 dc.w off_1158
                 dc.w off_115C
@@ -10156,22 +9858,14 @@ off_1AE9B2:     dc.w off_1158           ; DATA XREF: jim_fire+3D0   o
                 dc.w off_1164
                 dc.w off_1168
                 dc.w off_1168
-                dc.w $F800
+                fa_jim_default_anim
 off_1AE9DE:     dc.w off_1158           ; DATA XREF: jim_fire+3BE   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1E
-word_1AE9E6:    dc.w $F501              ; DATA XREF: ROM:001AEA00   o
-                dc.l stru_25A6F4
-                dc.w $5647
-                dc.l off_1B0392
-                dc.b   0,  0,  0,  0
+                fa_set_b jim_state, $1E
+word_1AE9E6:                            ; DATA XREF: ROM:001AEA00   o
+                fa_spawn 1, stru_25A6F4, 86, 71, off_1B0392, 0
                 dc.w off_115C
                 dc.w off_1158
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AE9E6
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AE9E6
                 dc.w off_115C
                 dc.w off_1160
                 dc.w off_1160
@@ -10179,15 +9873,11 @@ word_1AE9E6:    dc.w $F501              ; DATA XREF: ROM:001AEA00   o
                 dc.w off_1164
                 dc.w off_1168
                 dc.w off_1168
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEA14:     dc.w off_11CC           ; DATA XREF: jim_fire+438   o
-                dc.b $ED,  1,$FD,$EA,  0,$1C
+                fa_set_b jim_state, $1C
                 dc.w off_11D0
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $7FEE
-                dc.l anim_plasma_shot
-                dc.l 0
+                fa_spawn 3, stru_25A6DC, 127, -18, anim_plasma_shot, 0
                 dc.w off_11CC
                 dc.w off_11D0
                 dc.w off_11CC
@@ -10200,22 +9890,14 @@ off_1AEA14:     dc.w off_11CC           ; DATA XREF: jim_fire+438   o
                 dc.w off_11DC
                 dc.w off_11E0
                 dc.w off_11E0
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEA48:     dc.w off_11CC           ; DATA XREF: jim_fire+426   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1C
-word_1AEA50:    dc.w $F501              ; DATA XREF: ROM:001AEA6A   o
-                dc.l stru_25A6F4
-                dc.w $7FEE
-                dc.l anim_gunfire
-                dc.l 0
+                fa_set_b jim_state, $1C
+word_1AEA50:                            ; DATA XREF: ROM:001AEA6A   o
+                fa_spawn 1, stru_25A6F4, 127, -18, anim_gunfire, 0
                 dc.w off_11D0
                 dc.w off_11CC
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AEA50
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AEA50
                 dc.w off_11D0
                 dc.w off_11D4
                 dc.w off_11D4
@@ -10225,17 +9907,11 @@ word_1AEA50:    dc.w $F501              ; DATA XREF: ROM:001AEA6A   o
                 dc.w off_11DC
                 dc.w off_11E0
                 dc.w off_11E0
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEA82:     dc.w off_11E4           ; DATA XREF: jim_fire+496   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1D
+                fa_set_b jim_state, $1D
                 dc.w off_11E8
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $415
-                dc.l off_1B0342
-                dc.l 0
+                fa_spawn 3, stru_25A6DC, 4, 21, off_1B0342, 0
                 dc.w off_11E4
                 dc.w off_11E8
                 dc.w off_11E4
@@ -10248,22 +9924,14 @@ off_1AEA82:     dc.w off_11E4           ; DATA XREF: jim_fire+496   o
                 dc.w off_11F4
                 dc.w off_11F8
                 dc.w off_11F8
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEAB6:     dc.w off_11E4           ; DATA XREF: jim_fire+484   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1D
-word_1AEABE:    dc.w $F501              ; DATA XREF: ROM:001AEAD8   o
-                dc.l stru_25A6F4
-                dc.w $415
-                dc.l off_1B034E
-                dc.l 0
+                fa_set_b jim_state, $1D
+word_1AEABE:                            ; DATA XREF: ROM:001AEAD8   o
+                fa_spawn 1, stru_25A6F4, 4, 21, off_1B034E, 0
                 dc.w off_11E8
                 dc.w off_11E4
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AEABE
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AEABE
                 dc.w off_11E8
                 dc.w off_11EC
                 dc.w off_11EC
@@ -10273,17 +9941,11 @@ word_1AEABE:    dc.w $F501              ; DATA XREF: ROM:001AEAD8   o
                 dc.w off_11F4
                 dc.w off_11F8
                 dc.w off_11F8
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEAF0:     dc.w off_11FC           ; DATA XREF: jim_fire+4F4   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1B
+                fa_set_b jim_state, $1B
                 dc.w off_1200
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $9DA
-                dc.l off_1B0358
-                dc.b   0,  0,  0,  0
+                fa_spawn 3, stru_25A6DC, 9, -38, off_1B0358, 0
                 dc.w off_11FC
                 dc.w off_1200
                 dc.w off_11FC
@@ -10292,74 +9954,46 @@ off_1AEAF0:     dc.w off_11FC           ; DATA XREF: jim_fire+4F4   o
                 dc.w off_1204
                 dc.w off_1208
                 dc.w off_1208
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEB1C:     dc.w off_11FC           ; DATA XREF: jim_fire+4E2   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1B
-word_1AEB24:    dc.w $F501              ; DATA XREF: ROM:001AEB3E   o
-                dc.l stru_25A6F4
-                dc.w $9DA
-                dc.l off_1B037E
-                dc.l 0
+                fa_set_b jim_state, $1B
+word_1AEB24:                            ; DATA XREF: ROM:001AEB3E   o
+                fa_spawn 1, stru_25A6F4, 9, -38, off_1B037E, 0
                 dc.w off_1200
                 dc.w off_11FC
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AEB24
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AEB24
                 dc.w off_1200
                 dc.w off_1204
                 dc.w off_1204
                 dc.w off_1208
                 dc.w off_1208
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEB4E:     dc.w off_113C           ; DATA XREF: jim_fire+59C   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1A
+                fa_set_b jim_state, $1A
                 dc.w off_1140
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $509F
-                dc.l off_1B03A4
-                dc.l 0
+                fa_spawn 3, stru_25A6DC, 80, -97, off_1B03A4, 0
                 dc.w off_113C
                 dc.w off_1140
                 dc.w off_113C
                 dc.w off_1140
                 dc.w off_1144
                 dc.w off_1144
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEB76:     dc.w off_113C           ; DATA XREF: jim_fire+58A   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1A
-word_1AEB7E:    dc.w $F501              ; DATA XREF: ROM:001AEB98   o
-                dc.l stru_25A6F4
-                dc.w $509F
-                dc.l off_1B039C
-                dc.l 0
+                fa_set_b jim_state, $1A
+word_1AEB7E:                            ; DATA XREF: ROM:001AEB98   o
+                fa_spawn 1, stru_25A6F4, 80, -97, off_1B039C, 0
                 dc.w off_1140
                 dc.w off_113C
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AEB7E
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AEB7E
                 dc.w off_1140
                 dc.w off_1144
                 dc.w off_1144
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEBA4:     dc.w off_1148              ; DATA XREF: jim_fire+548   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1E
+                fa_set_b jim_state, $1E
                 dc.w off_114C
-                dc.w $F503
-                dc.l stru_25A6DC
-                dc.w $564A
-                dc.l off_1B0386
-                dc.l 0
+                fa_spawn 3, stru_25A6DC, 86, 74, off_1B0386, 0
                 dc.w off_1148
                 dc.w off_114C
                 dc.w off_1148
@@ -10376,22 +10010,14 @@ off_1AEBA4:     dc.w off_1148              ; DATA XREF: jim_fire+548   o
                 dc.w off_135C
                 dc.w off_1360
                 dc.w off_1360
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEBE0:     dc.w off_1148           ; DATA XREF: jim_fire+536   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $1E
-word_1AEBE8:    dc.w $F501              ; DATA XREF: ROM:001AEC02   o
-                dc.l stru_25A6F4
-                dc.w $564A
-                dc.l off_1B0392
-                dc.l 0
+                fa_set_b jim_state, $1E
+word_1AEBE8:                            ; DATA XREF: ROM:001AEC02   o
+                fa_spawn 1, stru_25A6F4, 86, 74, off_1B0392, 0
                 dc.w off_114C
                 dc.w off_1148
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l word_1AEBE8
+                fa_if_b FM_NE, is_jim_fire, $0, word_1AEBE8
                 dc.w off_114C
                 dc.w off_1150
                 dc.w off_1150
@@ -10405,14 +10031,12 @@ word_1AEBE8:    dc.w $F501              ; DATA XREF: ROM:001AEC02   o
                 dc.w off_135C
                 dc.w off_1360
                 dc.w off_1360
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEC22:     dc.w off_1A54           ; DATA XREF: damage_from_enemy:loc_24B09A   o
                                         ; activity_thorn+210   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $3E
+                fa_set_b jim_state, $3E
                 dc.w off_1A54
-                dc.w $F315
+                fa_sound $15
                 dc.w off_1A58
                 dc.w off_1A58
                 dc.w off_1A5C
@@ -10433,18 +10057,14 @@ off_1AEC36:     dc.w off_1A60           ; DATA XREF: ROM:001AF6AE   o
                 dc.w off_1A78
                 dc.w off_1A54
                 dc.w off_1A54
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEC58:     dc.w off_1A54           ; DATA XREF: activity_thorn+1C0   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $3E
+                fa_set_b jim_state, $3E
                 dc.w off_1A54
-                dc.w $F315
+                fa_sound $15
                 dc.w off_1A58
                 dc.w off_1A58
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 3
+                fa_set_b jim_state, $3
                 dc.w off_1A5C
                 dc.w off_1A5C
                 dc.w off_1A60
@@ -10463,13 +10083,11 @@ off_1AEC58:     dc.w off_1A54           ; DATA XREF: activity_thorn+1C0   o
                 dc.w off_1A78
                 dc.w off_1A54
                 dc.w off_1A54
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEC94:     dc.w off_1E08           ; DATA XREF: damage_from_enemy+7A   o
                                         ; sub_24B124+5A   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $3E
-                dc.w $F315
+                fa_set_b jim_state, $3E
+                fa_sound $15
                 dc.w off_1E08
                 dc.w off_1E0C
                 dc.w off_1E0C
@@ -10489,11 +10107,9 @@ off_1AEC94:     dc.w off_1E08           ; DATA XREF: damage_from_enemy+7A   o
                 dc.w off_1E28
                 dc.w off_1E08
                 dc.w off_1E08
-                dc.w $F800
+                fa_jim_default_anim
 off_1AECC6:     dc.w off_1A54           ; DATA XREF: sub_24B124:loc_24B190   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $3E
+                fa_set_b jim_state, $3E
 off_1AECCE:     dc.w off_1A54           ; DATA XREF: collision_with_electrical_charge+3A   o
                 dc.w off_1A58
                 dc.w off_1A58
@@ -10515,45 +10131,27 @@ off_1AECCE:     dc.w off_1A54           ; DATA XREF: collision_with_electrical_c
                 dc.w off_1A78
                 dc.w off_1A54
                 dc.w off_1A54
-                dc.w $F800
+                fa_jim_default_anim
 off_1AECFA:     dc.w off_1CB8           ; DATA XREF: oksub_2464C8:loc_246604   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $35
+                fa_set_b jim_state, $35
                 dc.w off_1CB8
                 dc.w off_1CBC
                 dc.w off_1CBC
 off_1AED08:     dc.w off_1CC0           ; DATA XREF: oksub_2464C8+130   o
                 dc.w off_1CC0
                 dc.w off_1CC4
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1CC8
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F317
-                dc.w $F501
-                dc.l object_whip_air_fx
-                dc.w $4FF8
-                dc.l 0
-                dc.l 0
+                fa_set_b byte_FFFDEE, $1
+                fa_sound $17
+                fa_spawn 1, object_whip_air_fx, 79, -8, 0, 0
                 dc.w off_1CCC
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1CD0
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1CD0
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $ED01
-                dc.w $FBEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
+                fa_set_b timer_whip_blocking, $1
                 dc.w off_1CD4
                 dc.w off_1CD4
                 dc.w off_1CD8
@@ -10564,43 +10162,25 @@ off_1AED08:     dc.w off_1CC0           ; DATA XREF: oksub_2464C8+130   o
                 dc.w off_1CE0
                 dc.w off_1CE4
                 dc.w off_1CE4
-                dc.w $F800
+                fa_jim_default_anim
 off_1AED62:     dc.w off_1CE8           ; DATA XREF: oksub_2464C8:loc_2465CE   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $35
+                fa_set_b jim_state, $35
                 dc.w off_1CE8
 off_1AED6C:     dc.w off_1CEC           ; DATA XREF: oksub_2464C8+FA   o
                 dc.w off_1CEC
                 dc.w off_1CF0
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1CF4
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F501
-                dc.l object_whip_air_fx
-                dc.w $4D32
-                dc.l 0
-                dc.l 0
+                fa_set_b byte_FFFDEE, $1
+                fa_spawn 1, object_whip_air_fx, 77, 50, 0, 0
                 dc.w off_1CF8
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F317
+                fa_set_b byte_FFFDEE, $1
+                fa_sound $17
                 dc.w off_1CFC
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1CFC
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $ED01
-                dc.w $FBEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
+                fa_set_b timer_whip_blocking, $1
                 dc.w off_1D00
                 dc.w off_1D00
                 dc.w off_1D04
@@ -10611,11 +10191,9 @@ off_1AED6C:     dc.w off_1CEC           ; DATA XREF: oksub_2464C8+FA   o
                 dc.w off_1D0C
                 dc.w off_1D10
                 dc.w off_1D10
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEDC6:     dc.w off_1CB8           ; DATA XREF: oksub_2464C8:loc_24668A   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $35
+                fa_set_b jim_state, $35
                 dc.w off_1CB8
                 dc.w off_1CBC
                 dc.w off_1CBC
@@ -10624,42 +10202,22 @@ off_1AEDD4:     dc.w off_1D6C           ; DATA XREF: oksub_2464C8+1B6   o
                 dc.w off_1D70
                 dc.w off_1D70
                 dc.w off_1D74
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D78
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F317
-                dc.w $F501
-                dc.l object_whip_air_fx
-                dc.w $4BBF
-                dc.l 0
-                dc.l 0
+                fa_set_b byte_FFFDEE, $1
+                fa_sound $17
+                fa_spawn 1, object_whip_air_fx, 75, -65, 0, 0
                 dc.w off_1D7C
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D80
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $ED01
-                dc.w $FBEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
+                fa_set_b timer_whip_blocking, $1
                 dc.w off_1D80
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D84
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D84
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D88
                 dc.w off_1D88
                 dc.w off_1CDC
@@ -10668,11 +10226,9 @@ off_1AEDD4:     dc.w off_1D6C           ; DATA XREF: oksub_2464C8+1B6   o
                 dc.w off_1CE0
                 dc.w off_1CE4
                 dc.w off_1CE4
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEE3E:     dc.w off_1CB8           ; DATA XREF: oksub_2464C8:loc_246654   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $35
+                fa_set_b jim_state, $35
                 dc.w off_1CB8
                 dc.w off_1CBC
                 dc.w off_1CBC
@@ -10681,34 +10237,19 @@ off_1AEE4C:     dc.w off_1D48           ; DATA XREF: oksub_2464C8+180   o
                 dc.w off_1D4C
                 dc.w off_1D4C
                 dc.w off_1D50
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D50
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D54
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D54
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F317
-                dc.w $F501
-                dc.l object_whip_air_fx
-                dc.w $A0
-                dc.l 0
-                dc.l 0
+                fa_set_b byte_FFFDEE, $1
+                fa_sound $17
+                fa_spawn 1, object_whip_air_fx, 0, -96, 0, 0
                 dc.w off_1D58
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $ED01
-                dc.w $FBEE
-                dc.w 1              ; Сколько времени блокировать следующий удар кнутом, после конечного кадра удара вверх (чтение на 2492BC)
+                fa_set_b byte_FFFDEE, $1
+                fa_set_b timer_whip_blocking, $1
+                                        ; Сколько времени блокировать следующий удар кнутом, после конечного кадра удара вверх (чтение на 2492BC)
                 dc.w off_1D5C
                 dc.w off_1D5C
                 dc.w off_1D60
@@ -10723,166 +10264,131 @@ off_1AEE4C:     dc.w off_1D48           ; DATA XREF: oksub_2464C8+180   o
                 dc.w off_1CE0
                 dc.w off_1CE4
                 dc.w off_1CE4
-                dc.w $F800
+                fa_jim_default_anim
 off_1AEEB2:     dc.w off_1D14           ; DATA XREF: oksub_2464C8+156   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $D
+                fa_set_b jim_state, $D
                 dc.w off_1D14
                 dc.w off_1D18
                 dc.w off_1D18
                 dc.w off_1D1C
                 dc.w off_1D20
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D24
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F317
+                fa_set_b byte_FFFDEE, $1
+                fa_sound $17
                 dc.w off_1D28
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D28
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D2C
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D2C
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D30
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $F501
-                dc.l object_whip_air_fx
-                dc.w $54D0
-                dc.l 0
-                dc.l 0
+                fa_set_b byte_FFFDEE, $1
+                fa_spawn 1, object_whip_air_fx, 84, -48, 0, 0
                 dc.w off_1D30
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D34
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
                 dc.w off_1D34
-                dc.w $ED01
-                dc.w $FDEE
-                dc.w 1
-                dc.w $ED01
-                dc.w $FBEE
-                dc.w 1
+                fa_set_b byte_FFFDEE, $1
+                fa_set_b timer_whip_blocking, $1
                 dc.w off_1D38
                 dc.w off_1D3C
                 dc.w off_1D40
                 dc.w off_1D40
                 dc.w off_1D44
                 dc.w off_1D44
-                dc.w $F421
-                dc.w $FDF9
-                dc.w 0
-                dc.l off_1AF290
-                dc.w $EA00
-                dc.l off_1AE610
+                fa_if_b FM_NE, is_chicken_boss_fight, $0, off_1AF290
+                fa_goto off_1AE610
 anim_jim_on_rocket:     dc.w off_1570           ; DATA XREF: ROM:off_645A   o
                                         ; ROM:0000654A   o ...
-                dc.w $EA00
-                dc.l anim_jim_on_rocket
+                fa_goto anim_jim_on_rocket
 off_1AEF4E:     dc.w off_1574           ; DATA XREF: ROM:0000645E   o
                                         ; ROM:0000654E   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF52:     dc.w off_1578           ; DATA XREF: ROM:00006462   o
                                         ; ROM:00006552   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF56:     dc.w off_157C           ; DATA XREF: ROM:00006466   o
                                         ; ROM:00006556   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF5A:     dc.w off_1580           ; DATA XREF: ROM:0000646A   o
                                         ; ROM:0000653A   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF5E:     dc.w off_1584           ; DATA XREF: ROM:0000646E   o
                                         ; ROM:0000653E   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF62:     dc.w off_1588           ; DATA XREF: ROM:00006472   o
                                         ; ROM:00006542   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF66:     dc.w off_158C           ; DATA XREF: ROM:00006476   o
                                         ; ROM:00006546   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF6A:     dc.w off_1590           ; DATA XREF: ROM:0000647A   o
                                         ; ROM:0000652A   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF6E:     dc.w off_1594           ; DATA XREF: ROM:0000647E   o
                                         ; ROM:0000652E   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF72:     dc.w off_1598           ; DATA XREF: ROM:00006482   o
                                         ; ROM:00006532   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF76:     dc.w off_159C           ; DATA XREF: ROM:00006486   o
                                         ; ROM:00006536   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF7A:     dc.w off_15A0           ; DATA XREF: ROM:0000648A   o
                                         ; ROM:0000651A   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF7E:     dc.w off_15A4           ; DATA XREF: ROM:0000648E   o
                                         ; ROM:0000651E   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF82:     dc.w off_15A8           ; DATA XREF: ROM:00006492   o
                                         ; ROM:00006522   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF86:     dc.w off_15AC           ; DATA XREF: ROM:00006496   o
                                         ; ROM:00006526   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF8A:     dc.w off_15B0           ; DATA XREF: ROM:0000649A   o
                                         ; ROM:0000650A   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF8E:     dc.w off_15B4           ; DATA XREF: ROM:0000649E   o
                                         ; ROM:0000650E   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF92:     dc.w off_15B8           ; DATA XREF: ROM:000064A2   o
                                         ; ROM:00006512   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF96:     dc.w off_15BC           ; DATA XREF: ROM:000064A6   o
                                         ; ROM:00006516   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF9A:     dc.w off_15C0           ; DATA XREF: ROM:000064AA   o
                                         ; ROM:000064FA   o ...
-                dc.w $EC01
+                fa_end
 off_1AEF9E:     dc.w off_15C4           ; DATA XREF: ROM:000064AE   o
                                         ; ROM:000064FE   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFA2:     dc.w off_15C8           ; DATA XREF: ROM:000064B2   o
                                         ; ROM:00006502   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFA6:     dc.w off_15CC           ; DATA XREF: ROM:000064B6   o
                                         ; ROM:00006506   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFAA:     dc.w off_15D0           ; DATA XREF: ROM:000064BA   o
                                         ; ROM:000064CA   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFAE:     dc.w off_15D4           ; DATA XREF: ROM:000064BE   o
                                         ; ROM:000064CE   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFB2:     dc.w off_15D8           ; DATA XREF: ROM:000064C2   o
                                         ; ROM:000064D2   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFB6:     dc.w off_15DC           ; DATA XREF: ROM:000064C6   o
                                         ; ROM:000064D6   o ...
-                dc.w $EC01
+                fa_end
 off_1AEFBA:     dc.w off_1354           ; DATA XREF: collision_with_funicular+C8   o
                                         ; collision_with_funicular+D8   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $21
+                fa_set_b jim_state, $21
                 dc.w off_1358
                 dc.w off_1358
                 dc.w off_135C
@@ -10893,10 +10399,9 @@ off_1AEFBA:     dc.w off_1354           ; DATA XREF: collision_with_funicular+C8
                 dc.w off_1360
                 dc.w off_1310
                 dc.w off_1314
-                dc.w $EA00
-                dc.l off_1AEFE4
+                fa_goto off_1AEFE4
 off_1AEFDC:     dc.w off_1310           ; DATA XREF: ROM:001AF022   o
-                                        ; sub_249772:loc_2497D8   o
+                                        ; scmd_0E_jim_default_anim:loc_2497D8   o
                 dc.w off_1310
                 dc.w off_1314
                 dc.w off_1314
@@ -10930,183 +10435,98 @@ off_1AEFE4:     dc.w off_1318           ; DATA XREF: ROM:001AEFD8   o
                 dc.w off_134C
                 dc.w off_134C
                 dc.w off_134C
-                dc.w $EA00
-                dc.l off_1AEFDC
+                fa_goto off_1AEFDC
 off_1AF026:     dc.w off_1380           ; DATA XREF: ROM:001AF0A6   o
                                         ; sub_247022+4B2   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 9
+                fa_set_b jim_state, $9
                 dc.w off_1380
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF0AA
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF0AA
                 dc.w off_1384
                 dc.w off_1384
-                dc.w $F421
-                dc.w $A692
-                dc.w 1
-                dc.l off_1AF058
-                dc.w $F500
-                dc.l stru_25A91C
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_if_b FM_NE, selectedLevelOption, $1, off_1AF058
+                fa_spawn 0, stru_25A91C, 0, 0, 0, 0
 off_1AF058:     dc.w off_1388           ; DATA XREF: ROM:001AF044   o
                 dc.w off_1388
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF0AA
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF0AA
                 dc.w off_138C
                 dc.w off_138C
                 dc.w off_1390
                 dc.w off_1390
-                dc.w $F421
-                dc.w $A692
-                dc.w 1
-                dc.l word_1AF088
-                dc.w $F500
-                dc.l stru_25A91C
-                dc.l 0
-                dc.l 0
-                dc.w 0
-word_1AF088:    dc.w $F411              ; DATA XREF: ROM:001AF074   o
-                dc.w $FD0E
-                dc.l $1A
-                dc.w $F0AA
+                fa_if_b FM_NE, selectedLevelOption, $1, word_1AF088
+                fa_spawn 0, stru_25A91C, 0, 0, 0, 0
+word_1AF088:                            ; DATA XREF: ROM:001AF074   o
+                fa_if_b FM_EQ, is_jim_sliding, $0, $1AF0AA
                 dc.w off_1394
                 dc.w off_1394
                 dc.w off_1398
                 dc.w off_1398
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF0AA
-                dc.w $EA00
-                dc.l off_1AF026
-word_1AF0AA:    dc.w $F800              ; DATA XREF: ROM:001AF036   o
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF0AA
+                fa_goto off_1AF026
+word_1AF0AA:                            ; DATA XREF: ROM:001AF036   o
+                fa_jim_default_anim
                                         ; ROM:001AF062   o ...
 off_1AF0AC:     dc.w off_12C0           ; DATA XREF: ROM:001AF16A   o
                                         ; sub_247022+488   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $A
+                fa_set_b jim_state, $A
                 dc.w off_12C0
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12C4
                 dc.w off_12C4
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12C8
                 dc.w off_12C8
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12CC
                 dc.w off_12CC
-                dc.w $F421
-                dc.w $A692
-                dc.w 1
-                dc.l word_1AF0FA
-                dc.w $F500
-                dc.l stru_25A91C
-                dc.l $4000000
-                dc.l 0
-                dc.w 0
-word_1AF0FA:    dc.w $F411              ; DATA XREF: ROM:001AF0E6   o
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_NE, selectedLevelOption, $1, word_1AF0FA
+                fa_spawn 0, stru_25A91C, 4, 0, 0, 0
+word_1AF0FA:                            ; DATA XREF: ROM:001AF0E6   o
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12D0
                 dc.w off_12D0
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12D4
                 dc.w off_12D4
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12D8
                 dc.w off_12D8
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12DC
                 dc.w off_12DC
-                dc.w $F421
-                dc.w $A692
-                dc.w 1
-                dc.l off_1AF14C
-                dc.w $F500
-                dc.l stru_25A91C
-                dc.w $FC00
-                dc.l 0
-                dc.l 0
+                fa_if_b FM_NE, selectedLevelOption, $1, off_1AF14C
+                fa_spawn 0, stru_25A91C, -4, 0, 0, 0
 off_1AF14C:     dc.w off_12E0           ; DATA XREF: ROM:001AF138   o
                 dc.w off_12E0
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
                 dc.w off_12E4
                 dc.w off_12E4
-                dc.w $F411
-                dc.w $FD0E
-                dc.w 0
-                dc.l word_1AF16E
-                dc.w $EA00
-                dc.l off_1AF0AC
-word_1AF16E:    dc.w $F800              ; DATA XREF: ROM:001AF0BC   o
+                fa_if_b FM_EQ, is_jim_sliding, $0, word_1AF16E
+                fa_goto off_1AF0AC
+word_1AF16E:                            ; DATA XREF: ROM:001AF0BC   o
+                fa_jim_default_anim
                                         ; ROM:001AF0CA   o ...
 off_1AF170:     dc.w off_16C0           ; DATA XREF: activity_climbing_from_right+4C   o
                                         ; activity_climbing_from_left+48   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $45
+                fa_set_b jim_state, $45
                 dc.w off_16C4
                 dc.w off_16C4
                 dc.w off_16C8
                 dc.w off_16CC
                 dc.w off_16CC
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
-                dc.w $F05E
-                dc.l off_1AF22E
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
+                fa_rand_goto 94, off_1AF22E
 off_1AF192:     dc.w off_16D0           ; DATA XREF: ROM:001AF1B6   o
                                         ; ROM:001AF22A   o ...
                 dc.w off_16D0
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
                 dc.w off_16D0
                 dc.w off_16D0
-                dc.w $F05E
-                dc.l off_1AF204
-                dc.w $F03C
-                dc.l off_1AF22E
-                dc.w $F421
-                dc.w $FC85
-                dc.w 0
-                dc.l off_1AF192
-word_1AF1BA:    dc.w $ED14              ; DATA XREF: ROM:001AF188   o
+                fa_rand_goto 94, off_1AF204
+                fa_rand_goto 60, off_1AF22E
+                fa_if_b FM_NE, is_jim_downing, $0, off_1AF192
+word_1AF1BA:                            ; DATA XREF: ROM:001AF188   o
+                fa_set_obj_l $A, byte_1A428E
                                         ; ROM:001AF19C   o ...
-                dc.w $A
-                dc.l byte_1A428E
                 dc.w off_1364
                 dc.w off_1364
                 dc.w off_1364
@@ -11118,94 +10538,58 @@ word_1AF1BA:    dc.w $ED14              ; DATA XREF: ROM:001AF188   o
                 dc.w off_1370
                 dc.w off_1370
                 dc.w off_1370
-                dc.w $ED01
-                dc.w $FCF9
-                dc.w 0
+                fa_set_b jump_hold_timer, $0
                 dc.w off_1374
                 dc.w off_1374
-                dc.w $ED01
-                dc.w $FCF9
-                dc.w 0
+                fa_set_b jump_hold_timer, $0
                 dc.w off_1378
                 dc.w off_1378
-                dc.w $ED01
-                dc.w $FCF9
-                dc.w 0
+                fa_set_b jump_hold_timer, $0
                 dc.w off_137C
                 dc.w off_137C
-                dc.w $ED01
-                dc.w $FCF9
-                dc.w 0
-                dc.w $ED01
-                dc.w $FCFF
-                dc.w $FF
-                dc.w $F800
+                fa_set_b jump_hold_timer, $0
+                fa_set_b platform_type_under_jim, $FF
+                fa_jim_default_anim
 off_1AF204:     dc.w off_16D4           ; DATA XREF: ROM:001AF1A6   o
                 dc.w off_16D4
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
                 dc.w off_16D8
                 dc.w off_16D8
                 dc.w off_16D8
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
                 dc.w off_16D4
                 dc.w off_16D4
                 dc.w off_16D4
-                dc.w $EA00
-                dc.l off_1AF192
+                fa_goto off_1AF192
 off_1AF22E:     dc.w off_1640           ; DATA XREF: ROM:001AF18E   o
                                         ; ROM:001AF1AC   o
                 dc.w off_1640
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
-                dc.w $EE01
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
+                fa_loop 1
 off_1AF23E:     dc.w off_1644           ; DATA XREF: ROM:001AF282   o
                 dc.w off_1644
                 dc.w off_1644
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
                 dc.w off_1648
                 dc.w off_1648
                 dc.w off_1648
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
                 dc.w off_164C
                 dc.w off_164C
                 dc.w off_164C
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
                 dc.w off_1648
                 dc.w off_1648
                 dc.w off_1648
-                dc.w $F411
-                dc.w $FC85
-                dc.w 0
-                dc.l word_1AF1BA
-                dc.w $EF00
-                dc.w $F072
-                dc.l off_1AF23E
+                fa_if_b FM_EQ, is_jim_downing, $0, word_1AF1BA
+                fa_next
+                fa_rand_goto 114, off_1AF23E
                 dc.w off_1640
                 dc.w off_1640
-                dc.w $EA00
-                dc.l off_1AF192
+                fa_goto off_1AF192
 off_1AF290:     dc.w off_14E0           ; DATA XREF: ROM:001AEF3C   o
                                         ; ROM:001AF2B8   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $F
+                fa_set_b jim_state, $F
                 dc.w off_14E0
                 dc.w off_14E0
                 dc.w off_14E0
@@ -11221,8 +10605,7 @@ off_1AF290:     dc.w off_14E0           ; DATA XREF: ROM:001AEF3C   o
                 dc.w off_14EC
                 dc.w off_14EC
                 dc.w off_14EC
-                dc.w $F0CC
-                dc.l off_1AF290
+                fa_rand_goto 204, off_1AF290
                 dc.w off_14E0
                 dc.w off_14E0
                 dc.w off_14E0
@@ -11241,13 +10624,10 @@ off_1AF290:     dc.w off_14E0           ; DATA XREF: ROM:001AEF3C   o
                 dc.w off_14EC
                 dc.w off_14EC
                 dc.w off_14EC
-                dc.w $EA00
-                dc.l off_1AF290
+                fa_goto off_1AF290
 off_1AF2E6:     dc.w off_14F0           ; DATA XREF: sub_246EB4+36   o
                                         ; sub_246EB4+96   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $10
+                fa_set_b jim_state, $10
                 dc.w off_14F4
                 dc.w off_14F8
                 dc.w off_14FC
@@ -11307,22 +10687,19 @@ off_1AF300:     dc.w off_14FC           ; DATA XREF: ROM:001ACC3C   o
                 dc.w off_1504
                 dc.w off_1504
                 dc.w off_1504
-                dc.w $EA00
-                dc.l off_1AF290
+                fa_goto off_1AF290
 off_1AF36A:     dc.w off_10EC           ; DATA XREF: collision_with_dog+50   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $42
+                fa_set_b jim_state, $42
                 dc.w off_10EC
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_10F0
                 dc.w off_10F0
                 dc.w off_10EC
                 dc.w off_10EC
-                dc.w $EF00
+                fa_next
                 dc.w off_10F0
                 dc.w off_10F0
-                dc.w $EE04
+                fa_loop 4
                 dc.w off_10F4
                 dc.w off_10F4
                 dc.w off_10F8
@@ -11333,12 +10710,10 @@ off_1AF36A:     dc.w off_10EC           ; DATA XREF: collision_with_dog+50   o
                 dc.w off_1100
                 dc.w off_1104
                 dc.w off_1104
-                dc.w $EF00
-                dc.w $F800
+                fa_next
+                fa_jim_default_anim
 off_1AF39E:     dc.w off_139C           ; DATA XREF: chain_main+C8   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $20
+                fa_set_b jim_state, $20
                 dc.w off_139C
                 dc.w off_13A0
                 dc.w off_13A0
@@ -11346,20 +10721,15 @@ off_1AF39E:     dc.w off_139C           ; DATA XREF: chain_main+C8   o
                 dc.w off_13A4
 off_1AF3B0:     dc.w off_13A8           ; DATA XREF: ROM:001AF3BA   o
                 dc.w off_13A8
-                dc.w $F421
-                dc.w $FC84
-                dc.w 0
-                dc.l off_1AF3B0
+                fa_if_b FM_NE, is_jim_upping, $0, off_1AF3B0
                 dc.w off_13A0
                 dc.w off_13A0
-                dc.w $F800
+                fa_jim_default_anim
 off_1AF3C4:     dc.w off_13AC           ; DATA XREF: sub_252DE4+96   o
                                         ; collision_with_diamond+548   o
-                dc.w $EE02
+                fa_loop 2
                 dc.w off_13AC
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $43
+                fa_set_b jim_state, $43
                 dc.w off_13AC
                 dc.w off_13AC
                 dc.w off_13B0
@@ -11391,26 +10761,18 @@ off_1AF3C4:     dc.w off_13AC           ; DATA XREF: sub_252DE4+96   o
                 dc.w off_13C0
                 dc.w off_13C4
                 dc.w off_13C8
-                dc.w $EF00
+                fa_next
                 dc.w off_13B0
                 dc.w off_13B0
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
-                dc.w $ED01
-                dc.w $FD22
-                dc.w 0
-                dc.w $F800
+                fa_set_b is_jim_blocked_by_enemy, $0
+                fa_set_b byte_FFFD22, $0
+                fa_jim_default_anim
 anim_jim_eyes_in_dark:     dc.w off_14CC           ; DATA XREF: ROM:object_jim_eyes_in_dark   o
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $EC01
+                fa_call oksub_24951E
+                fa_end
 off_1AF42C:     dc.w off_14CC           ; DATA XREF: activity_tire_4+84   o
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $ED14
-                dc.w $42
-                dc.l 0
+                fa_call oksub_249526
+                fa_set_obj_l $42, 0
                 dc.w off_14CC
                 dc.w off_14D0
                 dc.w off_14D0
@@ -11421,106 +10783,74 @@ off_1AF42C:     dc.w off_14CC           ; DATA XREF: activity_tire_4+84   o
                 dc.w off_14CC
                 dc.w off_14D8
                 dc.w off_14D8
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AC2F8
-                dc.w $F36F
-                dc.w $EE91
+                fa_set_obj_l $A, byte_1AC2F8
+                fa_sound $6F
+                fa_hold 17
                 dc.w off_14DC
                 dc.w off_14D8
                 dc.w off_14D8
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
+                fa_set_b is_jim_blocked_by_enemy, $0
                 dc.w off_14CC
 off_1AF46A:     dc.w off_14CC           ; DATA XREF: ROM:001AF49C   o
                                         ; ROM:001AF4B8   o ...
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_14CC
-                dc.w $F421
-                dc.w $FBEE
-                dc.w 0
-                dc.l off_1AF4BC
+                fa_if_b FM_NE, timer_whip_blocking, $0, off_1AF4BC
                 dc.w off_14CC
                 dc.w off_14CC
-                dc.w $F421
-                dc.w $FBEE
-                dc.w 0
-                dc.l off_1AF4BC
+                fa_if_b FM_NE, timer_whip_blocking, $0, off_1AF4BC
                 dc.w off_14CC
                 dc.w off_14CC
-                dc.w $F421
-                dc.w $FBEE
-                dc.w 0
-                dc.l off_1AF4BC
-                dc.w $F0CC
-                dc.l off_1AF46A
+                fa_if_b FM_NE, timer_whip_blocking, $0, off_1AF4BC
+                fa_rand_goto 204, off_1AF46A
                 dc.w off_14D0
                 dc.w off_14D4
-                dc.w $FB00
-                dc.l oksub_24951E
+                fa_call oksub_24951E
                 dc.w off_14D4
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_14D0
                 dc.w off_14D0
-                dc.w $EA00
-                dc.l off_1AF46A
+                fa_goto off_1AF46A
 off_1AF4BC:     dc.w off_14D0           ; DATA XREF: ROM:001AF47A   o
                                         ; ROM:001AF488   o ...
                 dc.w off_14D0
 off_1AF4C0:     dc.w off_14D4           ; DATA XREF: ROM:001AF4C8   o
-                dc.w $F421
-                dc.w $FBEE
-                dc.w 0
-                dc.l off_1AF4C0
-                dc.w $EA00
-                dc.l off_1AF46A
+                fa_if_b FM_NE, timer_whip_blocking, $0, off_1AF4C0
+                fa_goto off_1AF46A
 off_1AF4D2:     dc.w off_1D8C           ; DATA XREF: ROM:001AF4E0   o
                                         ; ROM:001AF4F8   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 4
+                fa_set_b jim_state, $4
                 dc.w off_1D8C
                 dc.w off_1D8C
-                dc.w $F0CC
-                dc.l off_1AF4D2
+                fa_rand_goto 204, off_1AF4D2
                 dc.w off_1D90
                 dc.w off_1D90
 off_1AF4E8:     dc.w off_1D94           ; DATA XREF: ROM:001AF4EE   o
                 dc.w off_1D94
-                dc.w $F09A
-                dc.l off_1AF4E8
+                fa_rand_goto 154, off_1AF4E8
                 dc.w off_1D90
                 dc.w off_1D90
-                dc.w $F068
-                dc.l off_1AF4D2
+                fa_rand_goto 104, off_1AF4D2
                 dc.w off_1D98
                 dc.w off_1D98
 off_1AF500:     dc.w off_1D9C           ; DATA XREF: ROM:001AF508   o
                                         ; ROM:001AF51A   o
                 dc.w off_1D9C
                 dc.w off_1D9C
-                dc.w $F0CC
-                dc.l off_1AF500
+                fa_rand_goto 204, off_1AF500
                 dc.w off_1DA0
                 dc.w off_1DA0
                 dc.w off_1DA4
                 dc.w off_1DA4
                 dc.w off_1DA0
                 dc.w off_1DA0
-                dc.w $F068
-                dc.l off_1AF500
+                fa_rand_goto 104, off_1AF500
                 dc.w off_1DA8
                 dc.w off_1DA8
-                dc.w $EA00
-                dc.l off_1AF4D2
+                fa_goto off_1AF4D2
 off_1AF528:     dc.w off_1DAC           ; DATA XREF: ROM:001AF560   o
                                         ; ROM:001AF5CC   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 8
+                fa_set_b jim_state, $8
                 dc.w off_1DAC
                 dc.w off_1DAC
                 dc.w off_1DB0
@@ -11544,68 +10874,47 @@ off_1AF528:     dc.w off_1DAC           ; DATA XREF: ROM:001AF560   o
                 dc.w off_1DC8
                 dc.w off_1DC8
                 dc.w off_1DC8
-                dc.w $EA00
-                dc.l off_1AF528
+                fa_goto off_1AF528
 off_1AF564:     dc.w off_1DCC           ; DATA XREF: sub_24669E:loc_2467F0   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 5
+                fa_set_b jim_state, $5
                 dc.w off_1DCC
                 dc.w off_1DD0
                 dc.w off_1DD0
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_1DD4
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_1DD8
 off_1AF57A:     dc.w off_1DDC           ; DATA XREF: ROM:001AF580   o
-                dc.w $F2C7
-                dc.w $1A
-                dc.l off_1AF57A
-                dc.w $ED01
-                dc.w $FCFA
-                dc.w 1
+                fa_if_obj_bit_set $1A, 7, off_1AF57A
+                fa_set_b is_jump_apex_reached, $1
                 dc.w off_1DDC
                 dc.w off_1DDC
                 dc.w off_1DDC
                 dc.w off_1DE0
-                dc.w $EC01
+                fa_end
 off_1AF594:     dc.w off_1DD0           ; DATA XREF: jim_platform_collision+270   o
                                         ; jim_platform_collision+2EC   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $C
-                dc.w $ED01
-                dc.w $FD0B
-                dc.w 0
-                dc.w $ED02
-                dc.w $FCCE
-                dc.w 0
+                fa_set_b jim_state, $C
+                fa_set_b jim_walking_direction, $0
+                fa_set_w jim_walking_speed, $0
                 dc.w off_1DCC
                 dc.w off_1DCC
                 dc.w off_1DD0
                 dc.w off_1DB8
                 dc.w off_1DB8
-                dc.w $EA00
-                dc.l off_1AF4D2
+                fa_goto off_1AF4D2
 off_1AF5B8:     dc.w off_1DD0           ; DATA XREF: jim_platform_collision+32A   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $C
+                fa_set_b jim_state, $C
                 dc.w off_1DCC
                 dc.w off_1DCC
                 dc.w off_1DD0
                 dc.w off_1DB8
                 dc.w off_1DB8
-                dc.w $EA00
-                dc.l off_1AF528
+                fa_goto off_1AF528
 off_1AF5D0:     dc.w off_1DE4           ; DATA XREF: ROM:001AF6EA   o
-                                        ; sub_249772+150   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 3
-                dc.w $ED01
-                dc.w $FD25
-                dc.w $3D
+                                        ; scmd_0E_jim_default_anim+150   o
+                fa_set_b jim_state, $3
+                fa_set_b jim_timer_in_air, $3D
                 dc.w off_1DE4
 off_1AF5E0:     dc.w off_1DE8           ; DATA XREF: ROM:001AF5F2   o
                 dc.w off_1DE8
@@ -11615,18 +10924,11 @@ off_1AF5E0:     dc.w off_1DE8           ; DATA XREF: ROM:001AF5F2   o
                 dc.w off_1DF0
                 dc.w $1DF4
                 dc.w $1DF4
-                dc.w $EA00
-                dc.l off_1AF5E0
+                fa_goto off_1AF5E0
 off_1AF5F6:     dc.w off_1AF0           ; DATA XREF: whip_to_hook+36   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $46
-                dc.w $ED01
-word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
-                dc.w 1
-                dc.w $ED01
-                dc.w $FD25
-                dc.w $B
+                fa_set_b jim_state, $46
+                fa_set_b timer_whip_blocking, $1
+                fa_set_b jim_timer_in_air, $B
                 dc.w off_1AF0
                 dc.w off_1AF4
                 dc.w off_1AF4
@@ -11636,9 +10938,7 @@ word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
                 dc.w off_1B00
                 dc.w off_1B04
                 dc.w off_1B04
-                dc.w $ED01
-                dc.w $FD25
-                dc.w $B
+                fa_set_b jim_timer_in_air, $B
                 dc.w off_1B08
                 dc.w off_1B08
                 dc.w off_1B0C
@@ -11648,12 +10948,8 @@ word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
                 dc.w off_1B14
                 dc.w off_1B14
                 dc.w off_1B18
-                dc.w $ED01
-                dc.w $FD25
-                dc.w $B
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w 3
+                fa_set_b jim_timer_in_air, $B
+                fa_set_b jim_state, $3
                 dc.w off_1B18
                 dc.w off_1B1C
                 dc.w off_1B1C
@@ -11661,9 +10957,7 @@ word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
                 dc.w off_1B20
                 dc.w off_1B24
                 dc.w off_1B24
-                dc.w $ED01
-                dc.w $FD25
-                dc.w $B
+                fa_set_b jim_timer_in_air, $B
                 dc.w off_1D34
                 dc.w off_1D34
                 dc.w off_1D38
@@ -11674,20 +10968,17 @@ word_1AF600:    dc.w $FBEE              ; DATA XREF: ROM:001A39A4   o
                 dc.w off_1D40
                 dc.w off_1D44
                 dc.w off_1D44
-                dc.w $ED01
-                dc.w $FD25
-                dc.w $B
-                dc.w $EA00
-                dc.l off_1AE610
+                fa_set_b jim_timer_in_air, $B
+                fa_goto off_1AE610
 jim_on_rocket_fail:     dc.w off_16F8           ; DATA XREF: ROM:object_jim_on_rocket_fail   o
-                dc.w $EEB1
+                fa_hold 49
                 dc.w off_16F8
-                dc.w $F35D
+                fa_sound $5D
                 dc.w off_16FC
                 dc.w off_16FC
                 dc.w off_1700
                 dc.w off_1700
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_1704
                 dc.w off_1708
                 dc.w off_1708
@@ -11697,65 +10988,46 @@ jim_on_rocket_fail:     dc.w off_16F8           ; DATA XREF: ROM:object_jim_on_r
                 dc.w off_1714
                 dc.w off_1718
                 dc.w off_1718
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_171C
                 dc.w off_16F8
-                dc.w $EC01
+                fa_end
 off_1AF6A0:     dc.w off_1988           ; DATA XREF: sub_252B3A+1E   o
                                         ; sub_252B90+8   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $3E
+                fa_set_b jim_state, $3E
                 dc.w off_1988
                 dc.w off_1988
-                dc.w $EA00
-                dc.l off_1AEC36
+                fa_goto off_1AEC36
 off_1AF6B2:     dc.w off_1514           ; DATA XREF: collision_with_fan+12   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $47
-                dc.w $ED01
-                dc.w $A6DB
-                dc.w 0
-                dc.w $EE03
+                fa_set_b jim_state, $47
+                fa_set_b is_jim_left_direction, $0
+                fa_loop 3
                 dc.w off_1508
                 dc.w off_150C
                 dc.w off_1510
                 dc.w off_1514
                 dc.w off_1508
-                dc.w $EF00
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
-                dc.w $ED01
-                dc.w $FD4B
-                dc.w 1
-                dc.w $FA42
-                dc.w $18
-                dc.w $800
-                dc.w $EE83
+                fa_next
+                fa_set_b is_jim_blocked_by_enemy, $0
+                fa_set_b naked_worm_enable, $1
+                fa_add_obj_w $18, $800
+                fa_hold 3
                 dc.w off_1518
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_151C
-                dc.w $EA00
-                dc.l off_1AF5D0
+                fa_goto off_1AF5D0
 anim_spacesuit: dc.w off_1A7C           ; DATA XREF: ROM:001AF6F6   o
                                         ; ROM:001AF756   o ...
-                dc.w $F421
-                dc.w $FD78
-                dc.w 0
-                dc.l anim_spacesuit
-                dc.w $EEBB
+                fa_if_b FM_NE, evil_cat_phase1_active, $0, anim_spacesuit
+                fa_hold 59
                 dc.w off_1A7C
 off_1AF6FE:     dc.w off_1A7C           ; DATA XREF: ROM:001AF702   o
-word_1AF700:    dc.w $F0EA              ; DATA XREF: ROM:001ACC56   o
-                dc.l off_1AF6FE
+word_1AF700:                            ; DATA XREF: ROM:001ACC56   o
+                fa_rand_goto 234, off_1AF6FE
                 dc.w off_1A7C
-                dc.w $F072
-                dc.l off_1AF75A
+                fa_rand_goto 114, off_1AF75A
                 dc.w off_1A7C
-                dc.w $F072
-                dc.l off_1AF7A4
+                fa_rand_goto 114, off_1AF7A4
                 dc.w off_1A80
                 dc.w off_1A80
                 dc.w off_1A84
@@ -11764,21 +11036,21 @@ word_1AF700:    dc.w $F0EA              ; DATA XREF: ROM:001ACC56   o
                 dc.w off_1A88
                 dc.w off_1A8C
                 dc.w off_1A8C
-                dc.w $EE03
-                dc.w $EE84
+                fa_loop 3
+                fa_hold 4
                 dc.w off_1A90
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_1A8C
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_1A94
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_1A98
                 dc.w off_1A94
                 dc.w off_1A8C
                 dc.w off_1A8C
                 dc.w off_1A90
                 dc.w off_1A90
-                dc.w $EF00
+                fa_next
                 dc.w off_1A8C
                 dc.w off_1A8C
                 dc.w off_1A88
@@ -11787,13 +11059,12 @@ word_1AF700:    dc.w $F0EA              ; DATA XREF: ROM:001ACC56   o
                 dc.w off_1A84
                 dc.w off_1A80
                 dc.w off_1A80
-                dc.w $EA00
-                dc.l anim_spacesuit
+                fa_goto anim_spacesuit
 off_1AF75A:     dc.w off_1A80           ; DATA XREF: ROM:001AF70A   o
                 dc.w off_1A80
                 dc.w off_1A9C
                 dc.w off_1A9C
-                dc.w $EE03
+                fa_loop 3
                 dc.w off_1AA0
                 dc.w off_1AA0
                 dc.w off_1AA4
@@ -11810,7 +11081,7 @@ off_1AF75A:     dc.w off_1A80           ; DATA XREF: ROM:001AF70A   o
                 dc.w off_1AB8
                 dc.w off_1ABC
                 dc.w off_1ABC
-                dc.w $EF00
+                fa_next
                 dc.w off_1AA0
                 dc.w off_1AA0
                 dc.w off_1AA4
@@ -11823,13 +11094,12 @@ off_1AF75A:     dc.w off_1A80           ; DATA XREF: ROM:001AF70A   o
                 dc.w off_1A9C
                 dc.w off_1A80
                 dc.w off_1A80
-                dc.w $EA00
-                dc.l anim_spacesuit
+                fa_goto anim_spacesuit
 off_1AF7A4:     dc.w off_1A80           ; DATA XREF: ROM:001AF712   o
                 dc.w off_1A80
                 dc.w off_1A9C
                 dc.w off_1A9C
-                dc.w $EE05
+                fa_loop 5
                 dc.w off_1AA0
                 dc.w off_1AA4
                 dc.w off_1AA4
@@ -11843,7 +11113,7 @@ off_1AF7A4:     dc.w off_1A80           ; DATA XREF: ROM:001AF712   o
                 dc.w off_1AB8
                 dc.w off_1ABC
                 dc.w off_1ABC
-                dc.w $EF00
+                fa_next
                 dc.w off_1AA0
                 dc.w off_1AA0
                 dc.w off_1AA4
@@ -11856,8 +11126,7 @@ off_1AF7A4:     dc.w off_1A80           ; DATA XREF: ROM:001AF712   o
                 dc.w off_1A9C
                 dc.w off_1A80
                 dc.w off_1A80
-                dc.w $EA00
-                dc.l anim_spacesuit
+                fa_goto anim_spacesuit
 off_1AF7E8:     dc.w off_16DC           ; DATA XREF: ROM:001AF804   o
                                         ; ROM:object_jim_on_rocket_win   o
                 dc.w off_16DC
@@ -11872,593 +11141,378 @@ off_1AF7E8:     dc.w off_16DC           ; DATA XREF: ROM:001AF804   o
                 dc.w off_16F0
                 dc.w off_16F0
 off_1AF800:     dc.w off_16F4           ; DATA XREF: ROM:001B39A4   o
-                dc.w $EA00
-                dc.l off_1AF7E8
+                fa_goto off_1AF7E8
 off_1AF808:     dc.w off_13CC           ; DATA XREF: ROM:off_BECE   o
                                         ; ROM:off_BEDA   o
-                dc.w $EC01
+                fa_end
 off_1AF80C:     dc.w off_13D0           ; DATA XREF: ROM:0000BED2   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_13D0
                 dc.w off_13D4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_13D4
                 dc.w off_13D8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_13D8
                 dc.w off_13D0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_13D0
                 dc.w off_13D4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_13D4
                 dc.w off_13D8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_13D8
                 dc.w off_13D0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_13D0
                 dc.w off_13D4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_13D4
                 dc.w off_13D8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_13D8
                 dc.w off_13D0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_13D0
                 dc.w off_13D4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_13D4
                 dc.w off_13D8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_13D8
-                dc.w $EA00
-                dc.w $1A
-                dc.w $F80C
+                fa_goto $1AF80C
 off_1AF88A:     dc.w off_13D0           ; DATA XREF: ROM:0000BEDE   o
                                         ; ROM:001AF8B4   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b rope_anim_index, $6
                 dc.w off_13D0
                 dc.w off_13D4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_13D4
                 dc.w off_13D8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_13D8
                 dc.w off_13D0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 9
+                fa_set_b rope_anim_index, $9
                 dc.w off_13D0
-                dc.w $EA00
-                dc.l off_1AF88A
+                fa_goto off_1AF88A
 off_1AF8B8:     dc.w off_13DC           ; DATA XREF: ROM:0000BED6   o
                                         ; collision_with_snot+15A   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_13DC
                 dc.w off_13D0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_13D0
                 dc.w off_13CC
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_13CC
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_call oksub_258254
 off_1AF8DC:     dc.w off_13DC           ; DATA XREF: ROM:0000BEE2   o
                                         ; collision_with_snot+16C   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_13DC
                 dc.w off_13D0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_13D0
                 dc.w off_13CC
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 9
+                fa_set_b rope_anim_index, $9
                 dc.w off_13CC
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_call oksub_258254
 off_1AF900:     dc.w off_1C9C           ; DATA XREF: sub_2575AC:loc_2575BA   o
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w 0
+                fa_set_b ropejump_anim_locked, $0
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b rope_anim_index, $6
                 dc.w off_1CA4
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_1CAC
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_1CB4
 off_1AF926:     dc.w off_1C9C           ; DATA XREF: ROM:001AF960   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 9
+                fa_set_b rope_anim_index, $9
                 dc.w off_1C9C
                 dc.w off_1CA0
                 dc.w off_1CA0
                 dc.w off_1CA4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b rope_anim_index, $6
                 dc.w off_1CA4
                 dc.w off_1CA8
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_1CAC
                 dc.w off_1CAC
                 dc.w off_1CB0
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_1CB4
                 dc.w off_1CB4
-                dc.w $F421
-                dc.w $FD28
-                dc.w 0
-                dc.l off_1AF926
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_if_b FM_NE, invincibility_timer, $0, off_1AF926
+                fa_call oksub_258254
 off_1AF96A:     dc.w off_1CB4           ; DATA XREF: sub_2575AC+20   o
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w 0
+                fa_set_b ropejump_anim_locked, $0
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b rope_anim_index, $6
                 dc.w off_1CAC
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_1CA4
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_1C9C
 off_1AF990:     dc.w off_1CB4           ; DATA XREF: ROM:001AF9CA   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 9
+                fa_set_b rope_anim_index, $9
                 dc.w off_1CB4
                 dc.w off_1CB0
                 dc.w off_1CB0
                 dc.w off_1CAC
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b rope_anim_index, $6
                 dc.w off_1CAC
                 dc.w off_1CA8
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_1CA4
                 dc.w off_1CA4
                 dc.w off_1CA0
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_1C9C
                 dc.w off_1C9C
-                dc.w $F421
-                dc.w $FD28
-                dc.w 0
-                dc.l off_1AF990
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_if_b FM_NE, invincibility_timer, $0, off_1AF990
+                fa_call oksub_258254
 off_1AF9D4:     dc.w off_1C9C           ; DATA XREF: sub_2575AC+32   o
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w 0
+                fa_set_b ropejump_anim_locked, $0
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_1CA4
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_1CAC
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_1CB4
 off_1AF9FA:     dc.w off_1C9C           ; DATA XREF: ROM:001AFA34   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_1C9C
                 dc.w off_1CA0
                 dc.w off_1CA0
                 dc.w off_1CA4
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_1CA4
                 dc.w off_1CA8
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_1CAC
                 dc.w off_1CAC
                 dc.w off_1CB0
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_1CB4
                 dc.w off_1CB4
-                dc.w $F421
-                dc.w $FD28
-                dc.w 0
-                dc.l off_1AF9FA
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_if_b FM_NE, invincibility_timer, $0, off_1AF9FA
+                fa_call oksub_258254
 off_1AFA3E:     dc.w off_1CB4           ; DATA XREF: sub_2575AC:loc_2575F0   o
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w 0
+                fa_set_b ropejump_anim_locked, $0
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_1CAC
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_1CA4
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_1C9C
 off_1AFA64:     dc.w off_1CB4           ; DATA XREF: ROM:001AFA9E   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_1CB4
                 dc.w off_1CB0
                 dc.w off_1CB0
                 dc.w off_1CAC
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                fa_set_b rope_anim_index, $0
                 dc.w off_1CAC
                 dc.w off_1CA8
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_1CA4
                 dc.w off_1CA4
                 dc.w off_1CA0
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_1C9C
                 dc.w off_1C9C
-                dc.w $F421
-                dc.w $FD28
-                dc.w 0
-                dc.l off_1AFA64
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_if_b FM_NE, invincibility_timer, $0, off_1AFA64
+                fa_call oksub_258254
 off_1AFAA8:     dc.w off_1274           ; DATA XREF: oksub_25826C+6   o
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w $FF
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 2
+                fa_set_b ropejump_anim_locked, $FF
+                fa_set_b rope_anim_index, $2
                 dc.w off_1274
                 dc.w off_1274
                 dc.w off_1274
                 dc.w off_1278
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 3
+                fa_set_b rope_anim_index, $3
                 dc.w off_1278
                 dc.w off_1278
                 dc.w off_1278
                 dc.w off_127C
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $83
+                fa_set_b rope_anim_index, $83
                 dc.w off_127C
                 dc.w off_127C
                 dc.w off_127C
                 dc.w off_1280
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 3
+                fa_set_b rope_anim_index, $3
                 dc.w off_1280
                 dc.w off_1280
                 dc.w off_1280
                 dc.w off_1284
-                dc.w $F359
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $83
+                fa_sound $59
+                fa_set_b rope_anim_index, $83
                 dc.w off_1284
                 dc.w off_1284
                 dc.w off_1284
                 dc.w off_1288
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 3
+                fa_set_b rope_anim_index, $3
                 dc.w off_1288
 off_1AFB00:     dc.w off_1288           ; DATA XREF: ROM:001B3D32   o
                 dc.w off_1288
                 dc.w off_128C
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $83
+                fa_set_b rope_anim_index, $83
                 dc.w off_128C
                 dc.w off_128C
                 dc.w off_128C
                 dc.w off_1290
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 3
+                fa_set_b rope_anim_index, $3
                 dc.w off_1290
                 dc.w off_1290
                 dc.w off_1290
                 dc.w off_1294
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $83
+                fa_set_b rope_anim_index, $83
                 dc.w off_1294
                 dc.w off_1294
                 dc.w off_1294
                 dc.w off_1298
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 3
+                fa_set_b rope_anim_index, $3
                 dc.w off_1298
                 dc.w off_1298
                 dc.w off_129C
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 4
+                fa_set_b rope_anim_index, $4
                 dc.w off_129C
                 dc.w off_129C
                 dc.w off_12A0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 5
+                fa_set_b rope_anim_index, $5
                 dc.w off_12A0
                 dc.w off_12A0
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w 0
+                fa_set_b ropejump_anim_locked, $0
 off_1AFB58:     dc.w off_12A4           ; DATA XREF: ROM:001AFB8A   o
                                         ; oksub_258254:loc_258264   o ...
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b rope_anim_index, $6
                 dc.w off_12A4
                 dc.w off_12A4
                 dc.w off_12A8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 7
+                fa_set_b rope_anim_index, $7
                 dc.w off_12A8
                 dc.w off_12A8
                 dc.w off_12AC
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 8
+                fa_set_b rope_anim_index, $8
                 dc.w off_12AC
                 dc.w off_12AC
                 dc.w off_12B0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 9
+                fa_set_b rope_anim_index, $9
                 dc.w off_12B0
                 dc.w off_12B0
-                dc.w $EA00
-                dc.l off_1AFB58
+                fa_goto off_1AFB58
 off_1AFB8E:     dc.w off_12B4           ; DATA XREF: oksub_258280   o
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w $FF
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 6
+                fa_set_b ropejump_anim_locked, $FF
+                fa_set_b rope_anim_index, $6
                 dc.w off_12B4
                 dc.w off_12B4
                 dc.w off_12B4
                 dc.w off_12B8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 5
+                fa_set_b rope_anim_index, $5
                 dc.w off_12B8
                 dc.w off_12B8
                 dc.w off_12B8
                 dc.w off_12BC
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 4
+                fa_set_b rope_anim_index, $4
                 dc.w off_12BC
                 dc.w off_12BC
                 dc.w off_12BC
-                dc.w $ED01
-                dc.w $FF5E
-                dc.w 0
+                fa_set_b ropejump_anim_locked, $0
 anim_jim_ropejumper:dc.w off_1264       ; DATA XREF: ROM:001AFBF6   o
-                                        ; sub_249772+EA   o ...
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 0
+                                        ; scmd_0E_jim_default_anim+EA   o ...
+                fa_set_b rope_anim_index, $0
                 dc.w off_1264
                 dc.w off_1264
                 dc.w off_1268
-                dc.w $ED01
-                dc.w $FD72
-                dc.w 1
+                fa_set_b rope_anim_index, $1
                 dc.w off_1268
                 dc.w off_1268
                 dc.w off_126C
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $80
+                fa_set_b rope_anim_index, $80
                 dc.w off_126C
                 dc.w off_126C
                 dc.w off_1270
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $81
+                fa_set_b rope_anim_index, $81
                 dc.w off_1270
                 dc.w off_1270
-                dc.w $EA00
-                dc.l anim_jim_ropejumper
+                fa_goto anim_jim_ropejumper
 off_1AFBFA:     dc.w off_1C9C           ; DATA XREF: ROM:001AFC30   o
                                         ; sub_257FE8+9E   o
-                dc.w $ED01
-                dc.w $FD72
-word_1AFC00:    dc.w $A                 ; DATA XREF: ROM:001A3274   o
-                                        ; ROM:001A32A0   o ...
+                fa_set_b rope_anim_index, $A
                 dc.w off_1C9C
                 dc.w off_1CA0
                 dc.w off_1CA0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $B
+                fa_set_b rope_anim_index, $B
                 dc.w off_1CA4
                 dc.w off_1CA4
                 dc.w off_1CA8
                 dc.w off_1CA8
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $C
+                fa_set_b rope_anim_index, $C
                 dc.w off_1CAC
                 dc.w off_1CAC
                 dc.w off_1CB0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $D
+                fa_set_b rope_anim_index, $D
                 dc.w off_1CB0
                 dc.w off_1CB4
                 dc.w off_1CB4
-                dc.w $EA00
-                dc.l off_1AFBFA
+                fa_goto off_1AFBFA
 off_1AFC34:     dc.w off_198C           ; DATA XREF: collision_with_butt_crab_32+6C   o
                                         ; collision_with_water_monster+5A   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $A
+                fa_set_b rope_anim_index, $A
                 dc.w off_198C
                 dc.w off_198C
                 dc.w off_1990
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $B
+                fa_set_b rope_anim_index, $B
                 dc.w off_1990
                 dc.w off_1990
                 dc.w off_1994
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $C
+                fa_set_b rope_anim_index, $C
                 dc.w off_1994
                 dc.w off_1994
                 dc.w off_1998
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $D
+                fa_set_b rope_anim_index, $D
                 dc.w off_1998
                 dc.w off_1998
                 dc.w off_199C
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $A
+                fa_set_b rope_anim_index, $A
                 dc.w off_199C
                 dc.w off_199C
 off_1AFC70:     dc.w off_19A0           ; DATA XREF: ROM:001AFCA2   o
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $B
+                fa_set_b rope_anim_index, $B
                 dc.w off_19A0
                 dc.w off_19A0
                 dc.w off_19A0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $C
+                fa_set_b rope_anim_index, $C
                 dc.w off_19A0
                 dc.w off_19A0
                 dc.w off_19A0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $D
+                fa_set_b rope_anim_index, $D
                 dc.w off_19A0
                 dc.w off_19A0
                 dc.w off_19A0
-                dc.w $ED01
-                dc.w $FD72
-                dc.w $A
+                fa_set_b rope_anim_index, $A
                 dc.w off_19A0
                 dc.w off_19A0
-                dc.w $EA00
-                dc.l off_1AFC70
+                fa_goto off_1AFC70
 anim_jim_legs:  dc.w off_19A4           ; DATA XREF: ROM:001AFCD8   o
                                         ; ROM:stru_25AF64   o
                 dc.w off_19A4
@@ -12484,12 +11538,9 @@ anim_jim_legs:  dc.w off_19A4           ; DATA XREF: ROM:001AFCD8   o
                 dc.w off_19C0
                 dc.w off_19C0
                 dc.w off_19C0
-                dc.w $EA00
-                dc.l anim_jim_legs
+                fa_goto anim_jim_legs
 off_1AFCDC:     dc.w off_1828           ; DATA XREF: level_finish+26   o
-                dc.w $ED01
-                dc.w $A6DB
-                dc.w 0
+                fa_set_b is_jim_left_direction, $0
                 dc.w off_1828
                 dc.w off_182C
                 dc.w off_182C
@@ -12547,7 +11598,7 @@ off_1AFD00:     dc.w off_1840           ; DATA XREF: ROM:001AD1C4   o
                 dc.w off_188C
                 dc.w off_188C
                 dc.w off_188C
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_1890
                 dc.w off_1894
                 dc.w off_1894
@@ -12563,7 +11614,7 @@ off_1AFD00:     dc.w off_1840           ; DATA XREF: ROM:001AD1C4   o
                 dc.w off_18A8
                 dc.w off_18AC
                 dc.w off_18AC
-                dc.w $F341
+                fa_sound $41
                 dc.w off_18B0
                 dc.w off_18B0
                 dc.w off_18B4
@@ -12592,9 +11643,9 @@ off_1AFD00:     dc.w off_1840           ; DATA XREF: ROM:001AD1C4   o
                 dc.w off_18E0
                 dc.w off_18E4
                 dc.w off_18E4
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_18E8
-                dc.w $F362
+                fa_sound $62
                 dc.w off_18EC
                 dc.w off_18EC
                 dc.w off_18F0
@@ -12613,10 +11664,8 @@ off_1AFD00:     dc.w off_1840           ; DATA XREF: ROM:001AD1C4   o
                 dc.w off_1904
                 dc.w off_1908
                 dc.w off_1908
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AC6B8
-                dc.w $EC01
+                fa_set_obj_l $A, byte_1AC6B8
+                fa_end
 off_1AFDE4:     dc.w off_1B44           ; DATA XREF: collision_with_asteroid+CC   o
                 dc.w off_1B48
                 dc.w off_1B48
@@ -12632,10 +11681,8 @@ off_1AFDE4:     dc.w off_1B44           ; DATA XREF: collision_with_asteroid+CC 
                 dc.w off_1B58
                 dc.w off_1B58
                 dc.w off_1B58
-                dc.w $ED02
-                dc.w $FC9E
-                dc.w 0
-                dc.w $EC01
+                fa_set_w word_FFFC9E, $0
+                fa_end
 off_1AFE0A:     dc.w off_1B5C           ; DATA XREF: collision_with_asteroid+EC   o
                 dc.w off_1B60
                 dc.w off_1B60
@@ -12651,15 +11698,11 @@ off_1AFE0A:     dc.w off_1B5C           ; DATA XREF: collision_with_asteroid+EC 
                 dc.w off_1B70
                 dc.w off_1B70
                 dc.w off_1B70
-                dc.w $ED02
-                dc.w $FC9E
-                dc.w 0
-                dc.w $EC01
+                fa_set_w word_FFFC9E, $0
+                fa_end
 off_1AFE30:     dc.w off_1CB4           ; DATA XREF: ROM:001AD340   o
                                         ; ROM:001AFF72   o ...
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $4C
+                fa_set_b jim_state, $4C
                 dc.w off_1CB0
                 dc.w off_1CAC
                 dc.w off_1CA8
@@ -12676,21 +11719,13 @@ off_1AFE30:     dc.w off_1CB4           ; DATA XREF: ROM:001AD340   o
                 dc.w off_1CA0
                 dc.w off_1CA0
                 dc.w off_1C9C
-                dc.w $F800
+                fa_jim_default_anim
 off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $4D
+                fa_set_b jim_state, $4D
                 dc.w off_1108
-                dc.w $F32A
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.w $D800
-                dc.l off_1B0420
-                dc.l 0
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 5
+                fa_sound $2A
+                fa_spawn 2, stru_25A88C, -40, 0, off_1B0420, 0
+                fa_sub_w health_buffer, $5
                 dc.w off_110C
                 dc.w off_110C
                 dc.w off_1110
@@ -12703,16 +11738,10 @@ off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454 
                 dc.w off_111C
                 dc.w off_1120
                 dc.w off_1108
-                dc.w $EB00
-                dc.w $F323
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.w $D800
-                dc.l anim_dust_2
-                dc.l 0
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 5
+                fa_flip_x
+                fa_sound $23
+                fa_spawn 2, stru_25A88C, -40, 0, anim_dust_2, 0
+                fa_sub_w health_buffer, $5
                 dc.w off_1108
                 dc.w off_110C
                 dc.w off_110C
@@ -12726,17 +11755,11 @@ off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454 
                 dc.w off_111C
                 dc.w off_1120
                 dc.w off_1108
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_1108
-                dc.w $F32A
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.w $D800
-                dc.l off_1B0420
-                dc.l 0
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 5
+                fa_sound $2A
+                fa_spawn 2, stru_25A88C, -40, 0, off_1B0420, 0
+                fa_sub_w health_buffer, $5
                 dc.w off_110C
                 dc.w off_110C
                 dc.w off_1110
@@ -12749,16 +11772,10 @@ off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454 
                 dc.w off_111C
                 dc.w off_1120
                 dc.w off_1108
-                dc.w $EB00
-                dc.w $F323
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.w $D800
-                dc.l anim_dust_2
-                dc.l 0
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 5
+                fa_flip_x
+                fa_sound $23
+                fa_spawn 2, stru_25A88C, -40, 0, anim_dust_2, 0
+                fa_sub_w health_buffer, $5
                 dc.w off_1108
                 dc.w off_110C
                 dc.w off_110C
@@ -12772,17 +11789,11 @@ off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454 
                 dc.w off_111C
                 dc.w off_1120
                 dc.w off_1108
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_1108
-                dc.w $F32A
-                dc.w $F502
-                dc.l stru_25A88C
-                dc.w $D800
-                dc.l off_1B0420
-                dc.l 0
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 5
+                fa_sound $2A
+                fa_spawn 2, stru_25A88C, -40, 0, off_1B0420, 0
+                fa_sub_w health_buffer, $5
                 dc.w off_110C
                 dc.w off_110C
                 dc.w off_1110
@@ -12794,20 +11805,13 @@ off_1AFE5A:     dc.w off_1108           ; DATA XREF: collision_with_diamond+454 
                 dc.w off_1118
                 dc.w off_111C
                 dc.w off_111C
-                dc.w $F324
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
-                dc.w $ED12
-                dc.w $18
-                dc.w $A00
-                dc.w $EA00
-                dc.l off_1AFE30
+                fa_sound $24
+                fa_set_b is_jim_blocked_by_enemy, $0
+                fa_set_obj_w $18, $A00
+                fa_goto off_1AFE30
 off_1AFF76:     dc.w off_17A4           ; DATA XREF: collision_with_diamond+28A   o
                 dc.w off_17A4
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $4E
+                fa_set_b jim_state, $4E
                 dc.w off_178C
                 dc.w off_178C
                 dc.w off_1790
@@ -12829,8 +11833,7 @@ off_1AFF76:     dc.w off_17A4           ; DATA XREF: collision_with_diamond+28A 
                 dc.w off_179C
                 dc.w off_17A0
                 dc.w off_17A0
-                dc.w $EA00
-                dc.l off_1AFE30
+                fa_goto off_1AFE30
 off_1AFFB0:     dc.w off_1A60           ; DATA XREF: ROM:001AFFCA   o
                 dc.w off_1A60
                 dc.w off_1A64
@@ -12841,11 +11844,8 @@ off_1AFFB0:     dc.w off_1A60           ; DATA XREF: ROM:001AFFCA   o
                 dc.w off_1A68
                 dc.w off_1A64
                 dc.w off_1A64
-                dc.w $F411
-                dc.w $FE08
-                dc.w $E
-                dc.l off_1AFFB0
-                dc.w $F800
+                fa_if_b FM_EQ, pete_state, $E, off_1AFFB0
+                fa_jim_default_anim
 anim_jim_strong:dc.w off_1520           ; DATA XREF: ROM:stru_25A64C   o
                                         ; on sega logo
                 dc.w off_1520
@@ -12861,19 +11861,19 @@ anim_jim_strong:dc.w off_1520           ; DATA XREF: ROM:stru_25A64C   o
                 dc.w off_1534
                 dc.w off_1538
                 dc.w off_1538
-                dc.w $F359
-                dc.w $EE04
+                fa_sound $59
+                fa_loop 4
                 dc.w off_153C
                 dc.w off_153C
                 dc.w off_1540
                 dc.w off_1540
-                dc.w $EF00
+                fa_next
                 dc.w off_153C
                 dc.w off_153C
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_1540
                 dc.w off_153C
-                dc.w $EF00
+                fa_next
                 dc.w off_1544
                 dc.w off_1544
                 dc.w off_1548
@@ -12890,17 +11890,17 @@ anim_jim_strong:dc.w off_1520           ; DATA XREF: ROM:stru_25A64C   o
                 dc.w off_155C
                 dc.w off_1560
                 dc.w off_1560
-                dc.w $F359
-                dc.w $EE04
+                fa_sound $59
+                fa_loop 4
                 dc.w off_1564
                 dc.w off_1564
                 dc.w off_1568
                 dc.w off_1568
-                dc.w $EF00
-                dc.w $EE01
+                fa_next
+                fa_loop 1
                 dc.w off_1564
                 dc.w off_1568
-                dc.w $EF00
+                fa_next
                 dc.w off_156C
                 dc.w off_156C
                 dc.w off_120C
@@ -12915,13 +11915,13 @@ anim_jim_strong:dc.w off_1520           ; DATA XREF: ROM:stru_25A64C   o
                 dc.w off_121C
                 dc.w off_1220
                 dc.w off_1220
-                dc.w $F359
-                dc.w $EE03
+                fa_sound $59
+                fa_loop 3
                 dc.w off_1224
                 dc.w off_1224
                 dc.w off_1228
                 dc.w off_1228
-                dc.w $EF00
+                fa_next
                 dc.w off_1224
                 dc.w off_1224
                 dc.w off_1228
@@ -12940,30 +11940,30 @@ anim_jim_strong:dc.w off_1520           ; DATA XREF: ROM:stru_25A64C   o
                 dc.w off_173C
                 dc.w off_1738
                 dc.w off_1738
-                dc.w $EE8A
+                fa_hold 10
                 dc.w off_173C
                 dc.w off_1740
                 dc.w off_1740
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_1744
                 dc.w off_1748
                 dc.w off_1748
-                dc.w $F36D
-                dc.w $EE02
+                fa_sound $6D
+                fa_loop 2
                 dc.w off_174C
                 dc.w off_1750
                 dc.w off_1754
                 dc.w off_1758
                 dc.w off_175C
-                dc.w $EF00
+                fa_next
                 dc.w off_174C
-                dc.w $F373
+                fa_sound $73
                 dc.w off_1760
                 dc.w off_1760
                 dc.w off_1764
                 dc.w off_1768
                 dc.w off_1768
-                dc.w $EE91
+                fa_hold 17
                 dc.w off_176C
                 dc.w off_1770
                 dc.w off_1770
@@ -12980,118 +11980,88 @@ anim_jim_strong:dc.w off_1520           ; DATA XREF: ROM:stru_25A64C   o
                 dc.w off_1788
                 dc.w off_1788
                 dc.w off_17A4
-                dc.w $EC01
+                fa_end
 off_1B00DC:     dc.w off_1AC0           ; DATA XREF: ROM:001B0156   o
                                         ; sub_24B638+12C   o
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AC0
                 dc.w off_1AC4
-                dc.w $F100
-                dc.w 1
-                dc.w $EE82
+                fa_move_x 1
+                fa_hold 2
                 dc.w off_1AC4
                 dc.w off_1AC8
-                dc.w $F100
-                dc.w 4
-                dc.w $EE82
+                fa_move_x 4
+                fa_hold 2
                 dc.w off_1AC8
                 dc.w off_1ACC
-                dc.w $F100
-                dc.w 3
-                dc.w $EE82
+                fa_move_x 3
+                fa_hold 2
                 dc.w off_1ACC
                 dc.w off_1AD0
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AD0
                 dc.w off_1AD4
-                dc.w $F100
-                dc.w 4
-                dc.w $EE82
+                fa_move_x 4
+                fa_hold 2
                 dc.w off_1AD4
                 dc.w off_1AD8
-                dc.w $F100
-                dc.w 2
-                dc.w $EE82
+                fa_move_x 2
+                fa_hold 2
                 dc.w off_1AD8
                 dc.w off_1ADC
-                dc.w $F100
-                dc.w 8
-                dc.w $EE82
+                fa_move_x 8
+                fa_hold 2
                 dc.w off_1ADC
                 dc.w off_1AE0
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AE0
                 dc.w off_1AE4
-                dc.w $F100
-                dc.w 6
-                dc.w $EE82
+                fa_move_x 6
+                fa_hold 2
                 dc.w off_1AE4
                 dc.w off_1AE8
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AE8
                 dc.w off_1AEC
-                dc.w $F100
-                dc.w 1
-                dc.w $EE82
+                fa_move_x 1
+                fa_hold 2
                 dc.w off_1AEC
-                dc.w $EA00
-                dc.l off_1B00DC
+                fa_goto off_1B00DC
 off_1B015A:     dc.w off_1124           ; DATA XREF: ROM:001B017E   o
                                         ; ROM:001B44FA   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
+                fa_set_obj_b $9, $FF
                 dc.w off_1128
                 dc.w off_1128
                 dc.w off_112C
-                dc.w $F421
-                dc.w $FE08
-                dc.w $E
-                dc.l off_1B0182
+                fa_if_b FM_NE, pete_state, $E, off_1B0182
                 dc.w off_112C
                 dc.w off_1130
                 dc.w off_1130
                 dc.w off_1134
                 dc.w off_1138
-                dc.w $EA00
-                dc.l off_1B015A
+                fa_goto off_1B015A
 off_1B0182:     dc.w off_1A0C           ; DATA XREF: ROM:001B016E   o
                                         ; ROM:001B4566   o
                 dc.w off_1A0C
                 dc.w off_1A0C
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_1A0C
                 dc.w off_1A10
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_1A10
-                dc.w $FA82
-                dc.w $A67A
-                dc.w $38
-                dc.w $FA02
-                dc.w $A67C
-                dc.w $24
-                dc.w $ED02
-                dc.w $A6EA
-                dc.w $FE00
-                dc.w $ED02
-                dc.w $A6EC
-                dc.w 1
+                fa_sub_w jim_collider_x, $38
+                fa_add_w jim_collider_y, $24
+                fa_set_w jim_delta_x_speed, $FE00
+                fa_set_w jim_y_speed, $1
                 dc.w off_16AC
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
-                dc.w $EA00
-                dc.l off_1ADE62
+                fa_set_b is_jim_blocked_by_enemy, $0
+                fa_goto off_1ADE62
 anim_live:      dc.w off_2450           ; DATA XREF: ROM:stru_25A9AC   o
-                dc.w $EC01
+                fa_end
 off_1B01BC:     dc.w off_978            ; DATA XREF: ROM:001A36F6   o
                                         ; ROM:object_prize_stars   o
                 dc.w off_97C
@@ -13101,91 +12071,91 @@ off_1B01BC:     dc.w off_978            ; DATA XREF: ROM:001A36F6   o
                 dc.w off_98C
                 dc.w off_990
                 dc.w off_990
-                dc.w $F600
+                fa_delete
 anim_funchar_0:     dc.w frame_funchar_0            ; DATA XREF: ROM:00005A4C   o
-                dc.w $EC01
+                fa_end
 anim_funchar_1:     dc.w frame_funchar_1            ; DATA XREF: ROM:00005A50   o
-                dc.w $EC01
+                fa_end
 anim_funchar_2:     dc.w frame_funchar_2            ; DATA XREF: ROM:00005A54   o
-                dc.w $EC01
+                fa_end
 anim_funchar_3:     dc.w frame_funchar_3            ; DATA XREF: ROM:00005A58   o
-                dc.w $EC01
+                fa_end
 anim_funchar_4:     dc.w frame_funchar_4            ; DATA XREF: ROM:00005A5C   o
-                dc.w $EC01
+                fa_end
 anim_funchar_5:     dc.w frame_funchar_5            ; DATA XREF: ROM:00005A60   o
-                dc.w $EC01
+                fa_end
 anim_funchar_6:     dc.w frame_funchar_6            ; DATA XREF: ROM:00005A64   o
-                dc.w $EC01
+                fa_end
 anim_funchar_7:     dc.w frame_funchar_7            ; DATA XREF: ROM:00005A68   o
-                dc.w $EC01
+                fa_end
 anim_funchar_8:     dc.w frame_funchar_8            ; DATA XREF: ROM:00005A6C   o
-                dc.w $EC01
+                fa_end
 anim_funchar_9:     dc.w frame_funchar_9            ; DATA XREF: ROM:00005A70   o
-                dc.w $EC01
+                fa_end
 anim_funchar_colon:     dc.w frame_funchar_colon            ; DATA XREF: ROM:00005A74   o
-                dc.w $EC01
+                fa_end
 anim_funchar_A:     dc.w frame_funchar_A            ; DATA XREF: ROM:00005A90   o
-                dc.w $EC01
+                fa_end
 anim_funchar_B:     dc.w frame_funchar_B            ; DATA XREF: ROM:00005A94   o
-                dc.w $EC01
+                fa_end
 anim_funchar_C:     dc.w frame_funchar_C            ; DATA XREF: ROM:00005A98   o
-                dc.w $EC01
+                fa_end
 anim_funchar_D:     dc.w frame_funchar_D            ; DATA XREF: ROM:00005A9C   o
-                dc.w $EC01
+                fa_end
 anim_funchar_E:     dc.w frame_funchar_E            ; DATA XREF: ROM:00005AA0   o
-                dc.w $EC01
+                fa_end
 anim_funchar_F:     dc.w frame_funchar_F            ; DATA XREF: ROM:00005AA4   o
-                dc.w $EC01
+                fa_end
 anim_funchar_G:     dc.w frame_funchar_G            ; DATA XREF: ROM:00005AA8   o
-                dc.w $EC01
+                fa_end
 anim_funchar_H:     dc.w frame_funchar_H            ; DATA XREF: ROM:00005AAC   o
-                dc.w $EC01
+                fa_end
 anim_funchar_I:     dc.w frame_funchar_I            ; DATA XREF: ROM:00005AB0   o
-                dc.w $EC01
+                fa_end
 anim_funchar_J:     dc.w frame_funchar_J            ; DATA XREF: ROM:00005AB4   o
-                dc.w $EC01
+                fa_end
 anim_funchar_K:     dc.w frame_funchar_K            ; DATA XREF: ROM:00005AB8   o
-                dc.w $EC01
+                fa_end
 anim_funchar_L:     dc.w frame_funchar_L            ; DATA XREF: ROM:00005ABC   o
-                dc.w $EC01
+                fa_end
 anim_funchar_M:     dc.w frame_funchar_M            ; DATA XREF: ROM:00005AC0   o
-                dc.w $EC01
+                fa_end
 anim_funchar_N:     dc.w frame_funchar_N            ; DATA XREF: ROM:00005AC4   o
-                dc.w $EC01
+                fa_end
 anim_funchar_O:     dc.w frame_funchar_O            ; DATA XREF: ROM:00005AC8   o
-                dc.w $EC01
+                fa_end
 anim_funchar_P:     dc.w frame_funchar_P            ; DATA XREF: ROM:00005ACC   o
-                dc.w $EC01
+                fa_end
 anim_funchar_Q:     dc.w frame_funchar_Q            ; DATA XREF: ROM:00005AD0   o
-                dc.w $EC01
+                fa_end
 anim_funchar_R:     dc.w frame_funchar_R            ; DATA XREF: ROM:00005AD4   o
-                dc.w $EC01
+                fa_end
 anim_funchar_S:     dc.w frame_funchar_S            ; DATA XREF: ROM:00005AD8   o
-                dc.w $EC01
+                fa_end
 anim_funchar_T:     dc.w frame_funchar_T            ; DATA XREF: ROM:00005ADC   o
-                dc.w $EC01
+                fa_end
 anim_funchar_U:     dc.w frame_funchar_U            ; DATA XREF: ROM:00005AE0   o
-                dc.w $EC01
+                fa_end
 anim_funchar_V:     dc.w frame_funchar_V            ; DATA XREF: ROM:00005AE4   o
-                dc.w $EC01
+                fa_end
 anim_funchar_W:     dc.w frame_funchar_W            ; DATA XREF: ROM:00005AE8   o
-                dc.w $EC01
+                fa_end
 anim_funchar_X:     dc.w frame_funchar_X            ; DATA XREF: ROM:00005AEC   o
-                dc.w $EC01
+                fa_end
 anim_funchar_Y:     dc.w frame_funchar_Y            ; DATA XREF: ROM:00005AF0   o
-                dc.w $EC01
+                fa_end
 anim_funchar_Z:     dc.w frame_funchar_Z            ; DATA XREF: ROM:00005AF4   o
-                dc.w $EC01
+                fa_end
 anim_funchar_exclam:     dc.w frame_funchar_exclam            ; DATA XREF: ROM:00005A10   o
-                dc.w $EC01
+                fa_end
 anim_funchar_dot:     dc.w frame_funchar_dot            ; DATA XREF: ROM:00005A44   o
-                dc.w $EC01
+                fa_end
 anim_funchar_question:     dc.w frame_funchar_question            ; DATA XREF: ROM:00005A88   o
-                dc.w $EC01
+                fa_end
 anim_funchar_apostrophe:     dc.w frame_funchar_apostrophe            ; DATA XREF: ROM:00005A28   o
-                dc.w $EC01
+                fa_end
 anim_funchar_comma:     dc.w frame_funchar_comma            ; DATA XREF: ROM:00005A3C   o
-                dc.w $EC01
+                fa_end
 anim_gun:       dc.w off_254C           ; DATA XREF: ROM:001B0294   o
                                         ; ROM:stru_25A9C4   o
                 dc.w off_254C
@@ -13201,8 +12171,7 @@ anim_gun:       dc.w off_254C           ; DATA XREF: ROM:001B0294   o
                 dc.w off_2560
                 dc.w off_2564
                 dc.w off_2564
-                dc.w $EA00
-                dc.l anim_gun
+                fa_goto anim_gun
 anim_plasma_gun:dc.w off_2578           ; DATA XREF: ROM:001B02B6   o
                                         ; ROM:stru_25A9DC   o
                 dc.w off_2578
@@ -13218,18 +12187,16 @@ anim_plasma_gun:dc.w off_2578           ; DATA XREF: ROM:001B02B6   o
                 dc.w off_258C
                 dc.w off_2590
                 dc.w off_2590
-                dc.w $EA00
-                dc.l anim_plasma_gun
+                fa_goto anim_plasma_gun
 off_1B02BA:     dc.w off_24C8           ; DATA XREF: ROM:001B02F6   o
                                         ; spawn_continue_actived+10   o ...
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_24C8
 off_1B02C0:     dc.w off_24C8           ; DATA XREF: ROM:001B02C4   o
-                dc.w $F0E0
-                dc.l off_1B02C0
+                fa_rand_goto 224, off_1B02C0
                 dc.w off_24CC
                 dc.w off_24CC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_24D0
                 dc.w off_24CC
                 dc.w off_24CC
@@ -13241,31 +12208,28 @@ off_1B02C0:     dc.w off_24C8           ; DATA XREF: ROM:001B02C4   o
                 dc.w off_24D8
                 dc.w off_24DC
                 dc.w off_24DC
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_24E0
                 dc.w off_24DC
                 dc.w off_24DC
                 dc.w off_24D8
                 dc.w off_24D8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_24D4
-                dc.w $EA00
-                dc.l off_1B02BA
+                fa_goto off_1B02BA
 anim_continue:  dc.w off_24C8           ; DATA XREF: ROM:001B0316   o
                                         ; ROM:stru_25A9F4   o
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_24C8
 off_1B0300:     dc.w off_24C8           ; DATA XREF: ROM:001B0304   o
-                dc.w $F0E0
-                dc.l off_1B0300
+                fa_rand_goto 224, off_1B0300
                 dc.w off_24CC
                 dc.w off_24CC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_24D0
                 dc.w off_24CC
                 dc.w off_24CC
-                dc.w $EA00
-                dc.l anim_continue
+                fa_goto anim_continue
 off_1B031A:     dc.w off_978            ; DATA XREF: ROM:001A325C   o
                                         ; pickup_ammo+C   o ...
                 dc.w off_97C
@@ -13275,7 +12239,7 @@ off_1B031A:     dc.w off_978            ; DATA XREF: ROM:001A325C   o
                 dc.w off_98C
                 dc.w off_990
                 dc.w off_990
-                dc.w $F600
+                fa_delete
 anim_stars:     dc.w off_978            ; DATA XREF: ROM:001B033E   o
                                         ; ROM:stru_25A994   o
                 dc.w off_97C
@@ -13285,23 +12249,21 @@ anim_stars:     dc.w off_978            ; DATA XREF: ROM:001B033E   o
                 dc.w off_98C
                 dc.w off_990
                 dc.w off_990
-                dc.w $EA00
-                dc.l anim_stars
+                fa_goto anim_stars
 off_1B0342:     dc.w off_35AC           ; DATA XREF: ROM:001AE848   o
                                         ; ROM:001AEA94   o
-                dc.w $F348
-                dc.w $EB01
-                dc.w $EA00
-                dc.l off_1B035C
+                fa_sound $48
+                fa_flip_y
+                fa_goto off_1B035C
 off_1B034E:     dc.w off_35AC           ; DATA XREF: ROM:001AE87E   o
                                         ; ROM:001AEAC6   o
-                dc.w $F346
-                dc.w $EB01
+                fa_sound $46
+                fa_flip_y
                 dc.w off_35AC
-                dc.w $F600
+                fa_delete
 off_1B0358:     dc.w off_35AC           ; DATA XREF: ROM:001AE8DE   o
                                         ; ROM:001AEB02   o
-                dc.w $F348
+                fa_sound $48
 off_1B035C:     dc.w off_35AC           ; DATA XREF: ROM:001B034A   o
                 dc.w off_35B0
                 dc.w off_35B0
@@ -13318,32 +12280,31 @@ off_1B035C:     dc.w off_35AC           ; DATA XREF: ROM:001B034A   o
                 dc.w off_35C8
                 dc.w off_35C8
                 dc.w off_35C8
-                dc.w $F600
+                fa_delete
 off_1B037E:     dc.w off_35AC           ; DATA XREF: ROM:001AE90A   o
                                         ; ROM:001AEB2C   o
-                dc.w $F346
+                fa_sound $46
                 dc.w off_35AC
-                dc.w $F600
+                fa_delete
 off_1B0386:     dc.w off_3584           ; DATA XREF: ROM:001AE9C2   o
                                         ; ROM:001AEBB6   o
-                dc.w $F348
-                dc.w $EB01
-                dc.w $EA00
-                dc.l off_1B03A8
+                fa_sound $48
+                fa_flip_y
+                fa_goto off_1B03A8
 off_1B0392:     dc.w off_3584           ; DATA XREF: ROM:001AE9EE   o
                                         ; ROM:001AEBF0   o
-                dc.w $F346
-                dc.w $EB01
+                fa_sound $46
+                fa_flip_y
                 dc.w off_3584
-                dc.w $F600
+                fa_delete
 off_1B039C:     dc.w off_3584           ; DATA XREF: ROM:001AE98C   o
                                         ; ROM:001AEB86   o
-                dc.w $F346
+                fa_sound $46
                 dc.w off_3584
-                dc.w $F600
+                fa_delete
 off_1B03A4:     dc.w off_3584           ; DATA XREF: ROM:001AE960   o
                                         ; ROM:001AEB60   o
-                dc.w $F348
+                fa_sound $48
 off_1B03A8:     dc.w off_3584           ; DATA XREF: ROM:001B038E   o
                 dc.w off_3588
                 dc.w off_3588
@@ -13361,26 +12322,24 @@ off_1B03A8:     dc.w off_3584           ; DATA XREF: ROM:001B038E   o
                 dc.w off_35A8
                 dc.w off_35A8
                 dc.w off_35A8
-                dc.w $F600
+                fa_delete
 anim_gunfire_2: dc.w off_355C           ; DATA XREF: ROM:stru_25A70C   o
-                dc.w $F346
+                fa_sound $46
                 dc.w off_355C
-                dc.w $F600
+                fa_delete
 anim_gunfire:   dc.w off_355C           ; DATA XREF: ROM:001AE7EE   o
                                         ; ROM:001AEA58   o ...
-                dc.w $F346
+                fa_sound $46
                 dc.w off_355C
-                dc.w $F600
+                fa_delete
 off_1B03DC:     dc.w off_355C           ; DATA XREF: ROM:001AE204   o
-                dc.w $ED11
-                dc.w $3C
-                dc.w $80
-                dc.w $EB00
-                dc.w $EA00
-                dc.l word_1B03EE
+                fa_set_obj_b $3C, $80
+                fa_flip_x
+                fa_goto word_1B03EE
 anim_plasma_shot:dc.w off_355C          ; DATA XREF: ROM:001AE7BA   o
                                         ; ROM:001AEA26   o ...
-word_1B03EE:    dc.w $F348              ; DATA XREF: ROM:001B03E8   o
+word_1B03EE:                            ; DATA XREF: ROM:001B03E8   o
+                fa_sound $48
                 dc.w off_355C
                 dc.w off_3560
                 dc.w off_3560
@@ -13397,14 +12356,14 @@ word_1B03EE:    dc.w $F348              ; DATA XREF: ROM:001B03E8   o
                 dc.w off_3580
                 dc.w off_3580
                 dc.w off_3580
-                dc.w $F600
+                fa_delete
 anim_dust_2:    dc.w off_9E8            ; DATA XREF: ROM:001A4066   o
                                         ; ROM:001A40A6   o ...
-                dc.b $ED,$11,  0,  9,  0,$FF,$EA,  0
-                dc.l off_1B0428
+                fa_set_obj_b $9, $FF
+                fa_goto off_1B0428
 off_1B0420:     dc.w off_9E8            ; DATA XREF: ROM:001A4076   o
                                         ; ROM:001A40B6   o ...
-                dc.b $ED,$11,  0,  9,  0,  0
+                fa_set_obj_b $9, $0
 off_1B0428:     dc.w off_9E8            ; DATA XREF: ROM:001B041C   o
                 dc.w off_9EC
                 dc.w off_9EC
@@ -13425,7 +12384,7 @@ off_1B0428:     dc.w off_9E8            ; DATA XREF: ROM:001B041C   o
                 dc.w off_A0C
                 dc.w off_A0C
                 dc.w off_A0C
-                dc.w $F600
+                fa_delete
 anim_dust:      dc.w off_960            ; DATA XREF: ROM:stru_25A844   o
                 dc.w off_960
                 dc.w off_964
@@ -13437,48 +12396,40 @@ anim_dust:      dc.w off_960            ; DATA XREF: ROM:stru_25A844   o
                 dc.w off_970
                 dc.w off_970
                 dc.w off_970
-                dc.w $F600
+                fa_delete
 anim_air_part:  dc.w frame_none           ; DATA XREF: ROM:stru_25A73C   o
 off_1B046C:     dc.w frame_none           ; DATA XREF: ROM:001B0474   o
-                dc.w $F421
-                dc.w $FBEC
-                dc.w 0
-                dc.l off_1B046C
-                dc.w $F600
+                fa_if_b FM_NE, is_jim_fire, $0, off_1B046C
+                fa_delete
 anim_air_part_2:dc.w off_3540           ; DATA XREF: ROM:stru_25A754   o
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_3540
                 dc.w off_3540
-                dc.w $F600
+                fa_delete
 anim_shell_casing:dc.w off_AA0          ; DATA XREF: ROM:stru_25A724   o
-                dc.w $F05E
-                dc.l off_1B04B8
-                dc.w $F05E
-                dc.l off_1B04C8
-                dc.w $F05E
-                dc.l off_1B04DE
-                dc.w $F05E
-                dc.l word_1B04F8
-word_1B049E:    dc.w $EE82              ; DATA XREF: ROM:001B04B4   o
+                fa_rand_goto 94, off_1B04B8
+                fa_rand_goto 94, off_1B04C8
+                fa_rand_goto 94, off_1B04DE
+                fa_rand_goto 94, word_1B04F8
+word_1B049E:                            ; DATA XREF: ROM:001B04B4   o
+                fa_hold 2
                 dc.w off_AA0
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_AA4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_AA8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_AAC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_AB0
-                dc.w $EA00
-                dc.l word_1B049E
+                fa_goto word_1B049E
 off_1B04B8:     dc.w off_AA4            ; DATA XREF: ROM:001B0488   o
                                         ; ROM:001B04C4   o
                 dc.w off_AA8
                 dc.w off_AAC
                 dc.w off_AB0
                 dc.w off_AA0
-                dc.w $EA00
-                dc.l off_1B04B8
+                fa_goto off_1B04B8
 off_1B04C8:     dc.w off_AA0            ; DATA XREF: ROM:001B048E   o
                                         ; ROM:001B04DA   o
                 dc.w off_AA0
@@ -13488,8 +12439,7 @@ off_1B04C8:     dc.w off_AA0            ; DATA XREF: ROM:001B048E   o
                 dc.w off_AAC
                 dc.w off_AB0
                 dc.w off_AB0
-                dc.w $EA00
-                dc.l off_1B04C8
+                fa_goto off_1B04C8
 off_1B04DE:     dc.w off_AA0            ; DATA XREF: ROM:001B0494   o
                                         ; ROM:001B04F4   o
                 dc.w off_AA0
@@ -13501,104 +12451,97 @@ off_1B04DE:     dc.w off_AA0            ; DATA XREF: ROM:001B0494   o
                 dc.w off_AAC
                 dc.w off_AB0
                 dc.w off_AB0
-                dc.w $EA00
-                dc.l off_1B04DE
-word_1B04F8:    dc.w $EE82              ; DATA XREF: ROM:001B049A   o
+                fa_goto off_1B04DE
+word_1B04F8:                            ; DATA XREF: ROM:001B049A   o
+                fa_hold 2
                                         ; ROM:001B050E   o
                 dc.w off_AA0
                 dc.w off_AA4
                 dc.w off_AA4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_AA8
                 dc.w off_AAC
                 dc.w off_AAC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_AB0
-                dc.w $EA00
-                dc.l word_1B04F8
+                fa_goto word_1B04F8
 anim_funicular: dc.w off_25C0           ; DATA XREF: ROM:stru_25AA6C   o
-                dc.w $EC01
+                fa_end
 off_1B0516:     dc.w off_25D4           ; DATA XREF: spawn_funicular_straight+10   o
-                dc.w $EC01
+                fa_end
 off_1B051A:     dc.w off_25C0           ; DATA XREF: ROM:001B0522   o
                                         ; collision_with_funicular+EE   o
                 dc.w off_25C4
                 dc.w off_25C8
-                dc.w $EA00
-                dc.l off_1B051A
+                fa_goto off_1B051A
 off_1B0526:     dc.w off_25CC           ; DATA XREF: funicular_end_falling+2C   o
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_25CC
                 dc.w off_25D0
-                dc.w $EC01
+                fa_end
 off_1B0530:     dc.w off_25D4           ; DATA XREF: ROM:off_643A   o
                                         ; ROM:0000644A   o
-                dc.w $EC01
+                fa_end
 off_1B0534:     dc.w off_25D8           ; DATA XREF: ROM:0000643E   o
                                         ; ROM:0000644E   o ...
-                dc.w $EC01
+                fa_end
 off_1B0538:     dc.w off_25DC           ; DATA XREF: ROM:00006442   o
                                         ; ROM:00006446   o ...
-                dc.w $EC01
+                fa_end
 off_1B053C:     dc.w off_25A0           ; DATA XREF: collision_with_diamond+CC   o
-                dc.w $F345
-                dc.w $ED14
-                dc.b   0,$48,  0,  0,  0,  0,$ED,$11,  0,$47,  0,$2B
+                fa_sound $45
+                fa_set_obj_l $48, 0
+                fa_set_obj_b $47, $2B
                 dc.w off_25A4
-                dc.b $ED,$11,  0,$47,  0,$21
+                fa_set_obj_b $47, $21
                 dc.w off_25A8
-                dc.b $ED,$11,  0,$47,  0,$1B
+                fa_set_obj_b $47, $1B
                 dc.w off_25AC
-                dc.b $ED,$11,  0,$47,  0,$17
+                fa_set_obj_b $47, $17
                 dc.w off_25B0
-byte_1B0568:    dc.b $ED,$11,  0,$47,  0,$13
+byte_1B0568:
+                fa_set_obj_b $47, $13
                                         ; DATA XREF: ROM:001B0588   o
                 dc.w off_25B4
-                dc.b $ED,$11,  0,$47,  0,$10,$F4,$A1,  0,  0
-                dc.w $58
-                dc.l off_1B0594
-                dc.b $F4,$A4,  0, $A,  0,  0,  0,  0
-                dc.l byte_1B0568
-                dc.b $ED,$14,  0, $A
-                dc.l byte_1AC94A
+                fa_set_obj_b $47, $10
+                fa_if_obj_b FM_NE, $0, $58, off_1B0594
+                fa_if_obj_l FM_NE, $A, 0, byte_1B0568
+                fa_set_obj_l $A, byte_1AC94A
 off_1B0594:     dc.w off_25B8           ; DATA XREF: ROM:001B057C   o
                                         ; ROM:001B059C   o ...
-                dc.b $F4,$A1,  0,$54
-                dc.w 0
-                dc.l off_1B0594
-                dc.b $F4,$A1,  0,  0
-                dc.w $58
-                dc.l off_1B05CA
-                dc.b $F4,$A4,  0, $A,  0,  0,  0,  0
-                dc.l off_1B0594
-                dc.b $ED,$14,  0, $A
-                dc.l byte_1AC952
-                dc.b $ED,$12,  0,$48,  2,  0,$ED,$12,  0,$4A,$F0,  0
+                fa_if_obj_b FM_NE, $54, $0, off_1B0594
+                fa_if_obj_b FM_NE, $0, $58, off_1B05CA
+                fa_if_obj_l FM_NE, $A, 0, off_1B0594
+                fa_set_obj_l $A, byte_1AC952
+                fa_set_obj_w $48, $200
+                fa_set_obj_w $4A, $F000
 off_1B05CA:     dc.w off_25B8           ; DATA XREF: ROM:001B05A6   o
-                dc.w $F32B
+                fa_sound $2B
                 dc.w off_25B8
                 dc.w off_25B8
-                dc.w $ED12
-                dc.b   0,$48,  2,  0,$ED,$12,  0,$4A,$F0,  0,$ED,$11,  0,$47,  0,$13
+                fa_set_obj_w $48, $200
+                fa_set_obj_w $4A, $F000
+                fa_set_obj_b $47, $13
                 dc.w off_25B4
-                dc.b $ED,$11,  0,$47,  0,$17
+                fa_set_obj_b $47, $17
                 dc.w off_25B0
-                dc.b $ED,$11,  0,$47,  0,$1B
+                fa_set_obj_b $47, $1B
                 dc.w off_25AC
-                dc.b $ED,$11,  0,$47,  0,$21
+                fa_set_obj_b $47, $21
                 dc.w off_25A8
-                dc.b $ED,$11,  0,$47,  0,$2B
+                fa_set_obj_b $47, $2B
                 dc.w off_25A4
-                dc.b $ED,$11,  0,$47,  0,$4A
+                fa_set_obj_b $47, $4A
 anim_spring_platform:dc.w off_25A0      ; DATA XREF: ROM:stru_25B174   o
-                dc.b $ED,$14,  0,$48,  0,  0,  0,  0,$ED,$11,  0,$47,  0,$4A
+                fa_set_obj_l $48, 0
+                fa_set_obj_b $47, $4A
                 dc.w off_25A0
-                dc.w $EC01
+                fa_end
 anim_unknown_8: dc.w off_33F8           ; DATA XREF: ROM:stru_25B18C   o
-                dc.w $EC01
+                fa_end
 anim_diamond_waiting:dc.w off_2020      ; DATA XREF: ROM:001B0650   o
                                         ; ROM:stru_25ADB4   o
-                dc.b $ED,$11,  0,$47,  0,  0
+                fa_set_obj_b $47, $0
                 dc.w off_2020
                 dc.w off_2020
                 dc.w off_2024
@@ -13616,10 +12559,10 @@ anim_diamond_waiting:dc.w off_2020      ; DATA XREF: ROM:001B0650   o
                 dc.w off_2028
                 dc.w off_2024
                 dc.w off_2024
-                dc.w $EA00
-                dc.l anim_diamond_waiting
+                fa_goto anim_diamond_waiting
 anim_diamond:   dc.w off_2020           ; DATA XREF: ROM:stru_25AD9C   o
-byte_1B0656:    dc.b $ED,$11,  0,$47,  0,  1
+byte_1B0656:
+                fa_set_obj_b $47, $1
                                         ; DATA XREF: ROM:001B06AA   o
                                         ; ROM:001B06DE   o
                 dc.w off_2020
@@ -13628,36 +12571,31 @@ byte_1B0656:    dc.b $ED,$11,  0,$47,  0,  1
                 dc.w off_2024
                 dc.w off_2028
                 dc.w off_2028
-                dc.w $FB00
-                dc.l oksub_25720C
+                fa_call oksub_25720C
                 dc.w off_202C
                 dc.w off_202C
                 dc.w off_2030
                 dc.w off_2030
                 dc.w off_2034
                 dc.w off_2034
-                dc.w $FB00
-                dc.l oksub_25720C
+                fa_call oksub_25720C
                 dc.w off_2038
                 dc.w off_2038
                 dc.w off_203C
                 dc.w off_203C
                 dc.w off_2040
                 dc.w off_2040
-                dc.w $FB00
-                dc.l oksub_25720C
+                fa_call oksub_25720C
                 dc.w off_2044
                 dc.w off_2044
                 dc.w off_2048
                 dc.w off_2048
                 dc.w off_204C
                 dc.w off_204C
-                dc.w $FB00
-                dc.l oksub_25720C
-                dc.b $F4,$91,  0,$54
-                dc.w 0
-                dc.l byte_1B0656
-byte_1B06AE:    dc.b $ED,$11,  0,$47,  0,  2
+                fa_call oksub_25720C
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B0656
+byte_1B06AE:
+                fa_set_obj_b $47, $2
                                         ; DATA XREF: ROM:001B0706   o
                 dc.w off_2020
                 dc.w off_2024
@@ -13677,11 +12615,9 @@ byte_1B06AE:    dc.b $ED,$11,  0,$47,  0,  2
                 dc.w off_2048
                 dc.w off_204C
                 dc.w off_204C
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l byte_1B0656
-byte_1B06E2:    dc.b $ED,$11,  0,$47,  0,  3
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B0656
+byte_1B06E2:
+                fa_set_obj_b $47, $3
                                         ; DATA XREF: ROM:001B0722   o
                 dc.w off_2020
                 dc.w off_2024
@@ -13695,10 +12631,7 @@ byte_1B06E2:    dc.b $ED,$11,  0,$47,  0,  3
                 dc.w off_2044
                 dc.w off_2048
                 dc.w off_204C
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l byte_1B06AE
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B06AE
 off_1B070A:     dc.w off_2020           ; DATA XREF: ROM:001B073E   o
                                         ; ROM:001B0760   o
                 dc.w off_2024
@@ -13709,40 +12642,25 @@ off_1B070A:     dc.w off_2020           ; DATA XREF: ROM:001B073E   o
                 dc.w off_2040
                 dc.w off_2044
                 dc.w off_2048
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l byte_1B06E2
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B06E2
 off_1B0726:     dc.w off_2020           ; DATA XREF: ROM:001B076C   o
-                dc.w $FB00
-                dc.l oksub_2571EE
+                fa_call oksub_2571EE
                 dc.w off_2028
-                dc.w $FB00
-                dc.l oksub_2571EE
+                fa_call oksub_2571EE
                 dc.w off_2030
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l off_1B070A
-                dc.w $FB00
-                dc.l oksub_2571EE
+                fa_if_obj_b FM_EQ, $54, $0, off_1B070A
+                fa_call oksub_2571EE
                 dc.w off_2038
-                dc.w $FB00
-                dc.l oksub_2571EE
+                fa_call oksub_2571EE
                 dc.w off_2040
-                dc.w $FB00
-                dc.l oksub_2571EE
+                fa_call oksub_2571EE
                 dc.w off_2048
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l off_1B070A
-                dc.w $FB00
-                dc.l oksub_2571EE
-                dc.w $EA00
-                dc.l off_1B0726
+                fa_if_obj_b FM_EQ, $54, $0, off_1B070A
+                fa_call oksub_2571EE
+                fa_goto off_1B0726
 anim_diamond_2: dc.w off_2020           ; DATA XREF: ROM:stru_25ADCC   o
-byte_1B0772:    dc.b $ED,$11,  0,$47,  0,  2
+byte_1B0772:
+                fa_set_obj_b $47, $2
                                         ; DATA XREF: ROM:001B07AE   o
                                         ; ROM:001B07D6   o
                 dc.w off_2020
@@ -13769,11 +12687,9 @@ byte_1B0772:    dc.b $ED,$11,  0,$47,  0,  2
                 dc.w off_2048
                 dc.w off_204C
                 dc.w off_204C
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l byte_1B0772
-byte_1B07B2:    dc.b $ED,$11,  0,$47,  0,  3
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B0772
+byte_1B07B2:
+                fa_set_obj_b $47, $3
                                         ; DATA XREF: ROM:001B07EC   o
                 dc.w off_2020
                 dc.w off_2024
@@ -13787,27 +12703,25 @@ byte_1B07B2:    dc.b $ED,$11,  0,$47,  0,  3
                 dc.w off_2044
                 dc.w off_2048
                 dc.w off_204C
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l byte_1B0772
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B0772
                 dc.w off_2020
                 dc.w off_2028
                 dc.w off_2030
                 dc.w off_2038
                 dc.w off_2040
                 dc.w off_2048
-                dc.w $F491
-                dc.w $54
-                dc.w 0
-                dc.l byte_1B07B2
-                dc.w $FB00
-                dc.l oksub_24F212
-byte_1B07F6:    dc.b $20,$20,$20,$28,$20,$30,$20,$38,$20,$40,$20,$48,$EA,  0
+                fa_if_obj_b FM_EQ, $54, $0, byte_1B07B2
+                fa_call oksub_24F212
+byte_1B07F6:    dc.w off_2020
+                dc.w off_2028
+                dc.w off_2030
+                dc.w off_2038
+                dc.w off_2040
+                dc.w off_2048
+                fa_goto byte_1B07F6
                                         ; DATA XREF: ROM:001B0804   o
-                dc.l byte_1B07F6
 off_1B0808:     dc.w off_D48            ; DATA XREF: sub_252DE4+AA   o
-                dc.w $EE02
+                fa_loop 2
                 dc.w off_D48
                 dc.w off_D48
                 dc.w off_D48
@@ -13818,9 +12732,7 @@ off_1B0808:     dc.w off_D48            ; DATA XREF: sub_252DE4+AA   o
                 dc.w off_D50
                 dc.w off_D54
                 dc.w off_D54
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 1
+                fa_sub_w health_buffer, $1
                 dc.w off_D58
                 dc.w off_D58
                 dc.w off_D58
@@ -13831,34 +12743,28 @@ off_1B0808:     dc.w off_D48            ; DATA XREF: sub_252DE4+AA   o
                 dc.w off_D60
                 dc.w off_D64
                 dc.w off_D64
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 1
+                fa_sub_w health_buffer, $1
                 dc.w off_D48
                 dc.w off_D48
                 dc.w off_D4C
                 dc.w off_D4C
                 dc.w off_D50
                 dc.w off_D54
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 1
+                fa_sub_w health_buffer, $1
                 dc.w off_D58
                 dc.w off_D58
                 dc.w off_D5C
                 dc.w off_D5C
                 dc.w off_D60
                 dc.w off_D64
-                dc.w $FA82
-                dc.w $FDC8
-                dc.w 1
-                dc.w $EF00
+                fa_sub_w health_buffer, $1
+                fa_next
                 dc.w off_D4C
                 dc.w off_D4C
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A4202
-                dc.b $ED,$14,  0,$42,  0,  0,  0,  0,$F7,  0,$EB,  0
+                fa_set_obj_l $A, byte_1A4202
+                fa_set_obj_l $42, 0
+                fa_face_jim
+                fa_flip_x
 off_1B087E:     dc.w off_D7C            ; DATA XREF: ROM:001B0892   o
                 dc.w off_D7C
                 dc.w off_D80
@@ -13868,21 +12774,21 @@ off_1B087E:     dc.w off_D7C            ; DATA XREF: ROM:001B0892   o
                 dc.w off_D88
                 dc.w off_D8C
                 dc.w off_D8C
-                dc.w $EA00
-                dc.l off_1B087E
+                fa_goto off_1B087E
 off_1B0896:     dc.w off_D34            ; DATA XREF: fire_to_crow+2C   o
-                dc.b $F3,$16,$EE,$8B
+                fa_sound $16
+                fa_hold 11
                 dc.w off_D34
 anim_crow:      dc.w off_D7C            ; DATA XREF: ROM:001B08D8   o
                                         ; oksub_25225E+26   o ...
-                dc.b $F4,$91,  0,$47
-                dc.w $3E
-                dc.l byte_1B08B6
-                dc.b $ED,$11,  0,  0,  0,  5,$EA,  0
-                dc.l word_1B08BC
-byte_1B08B6:    dc.b $ED,$11,  0,  0,  0,$3E
+                fa_if_obj_b FM_EQ, $47, $3E, byte_1B08B6
+                fa_set_obj_b $0, $5
+                fa_goto word_1B08BC
+byte_1B08B6:
+                fa_set_obj_b $0, $3E
                                         ; DATA XREF: ROM:001B08A6   o
-word_1B08BC:    dc.w $F700              ; DATA XREF: ROM:001B08B2   o
+word_1B08BC:                            ; DATA XREF: ROM:001B08B2   o
+                fa_face_jim
                 dc.w off_D7C
                 dc.w off_D7C
                 dc.w off_D80
@@ -13892,24 +12798,20 @@ word_1B08BC:    dc.w $F700              ; DATA XREF: ROM:001B08B2   o
                 dc.w off_D88
                 dc.w off_D8C
                 dc.w off_D8C
-                dc.w $FB00
-                dc.l oksub_25228E
-                dc.w $EA00
-                dc.l anim_crow
-word_1B08DC:    dc.w $ED14              ; DATA XREF: oksub_25228E+2A   o
-                dc.w $A
-                dc.l byte_1A4226
+                fa_call oksub_25228E
+                fa_goto anim_crow
+word_1B08DC:                            ; DATA XREF: oksub_25228E+2A   o
+                fa_set_obj_l $A, byte_1A4226
                 dc.w off_D24
                 dc.w off_D24
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_D28
                 dc.w off_D24
 off_1B08EE:     dc.w off_D2C            ; DATA XREF: ROM:001B08F8   o
                 dc.w off_D2C
                 dc.w off_D30
                 dc.w off_D30
-                dc.w $EA00
-                dc.l off_1B08EE
+                fa_goto off_1B08EE
 anim_crow_beak: dc.w off_D38            ; DATA XREF: ROM:001B090E   o
                                         ; ROM:stru_25AC04   o
                 dc.w off_D38
@@ -13919,8 +12821,7 @@ anim_crow_beak: dc.w off_D38            ; DATA XREF: ROM:001B090E   o
                 dc.w off_D40
                 dc.w off_D44
                 dc.w off_D44
-                dc.w $EA00
-                dc.l anim_crow_beak
+                fa_goto anim_crow_beak
 anim_crow_plumage:dc.w off_D68          ; DATA XREF: ROM:001B0950   o
                                         ; ROM:stru_25ABEC   o
                 dc.w off_D6C
@@ -13952,14 +12853,12 @@ anim_crow_plumage:dc.w off_D68          ; DATA XREF: ROM:001B0950   o
                 dc.w off_D70
                 dc.w off_D70
                 dc.w off_D6C
-                dc.w $EA00
-                dc.l anim_crow_plumage
+                fa_goto anim_crow_plumage
 anim_lawyer:    dc.w off_22E8           ; DATA XREF: ROM:001B09C6   o
                                         ; ROM:001B0A68   o ...
-                dc.b $F7,  0,$ED,$11,  0,  0
-                dc.b   0,$2F,$ED,$14
-                dc.w $A
-                dc.l byte_1AC60C
+                fa_face_jim
+                fa_set_obj_b $0, $2F
+                fa_set_obj_l $A, byte_1AC60C
 off_1B0966:     dc.w off_22E8           ; DATA XREF: ROM:001B0984   o
                                         ; ROM:001B0990   o
                 dc.w off_22E8
@@ -13975,74 +12874,56 @@ off_1B0966:     dc.w off_22E8           ; DATA XREF: ROM:001B0984   o
                 dc.w off_2304
                 dc.w off_2308
                 dc.w off_230C
-                dc.w $FD3C
-                dc.l off_1B0966
-                dc.w $FD64
-                dc.l off_1B0A18
-                dc.w $EA00
-                dc.l off_1B0966
+                fa_if_jim_near_x 60, off_1B0966
+                fa_if_jim_near_x 100, off_1B0A18
+                fa_goto off_1B0966
 off_1B0994:     dc.w off_227C           ; DATA XREF: fire_to_lawyer+2A   o
-                dc.w $F35F
-                dc.w $ED14
-                dc.b   0, $A,  0,  0,  0,  0
+                fa_sound $5F
+                fa_set_obj_l $A, 0
                 dc.w off_2280
                 dc.w off_2280
                 dc.w off_2284
                 dc.w off_2288
                 dc.w off_228C
                 dc.w off_228C
-                dc.b $ED,$11,  0,  0,  0,$31
+                fa_set_obj_b $0, $31
 off_1B09B2:     dc.w off_2290           ; DATA XREF: fire_to_lawyer_with_kill:loc_254B1E   o
-                dc.w $F700
+                fa_face_jim
                 dc.w off_2294
                 dc.w off_2298
                 dc.w off_2298
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_2290
                 dc.w off_228C
                 dc.w off_228C
-                dc.w $EA00
-                dc.l anim_lawyer
+                fa_goto anim_lawyer
 off_1B09CA:     dc.w off_229C           ; DATA XREF: whip_to_lawyer+4   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $30
-                dc.w $F700
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
+                fa_set_obj_b $0, $30
+                fa_face_jim
+                fa_set_obj_l $A, 0
                 dc.w off_229C
-                dc.w $F339
-                dc.w $F500
-                dc.l stru_25AD24
-                dc.w $F0D0
-                dc.l 0
-                dc.l 0
+                fa_sound $39
+                fa_spawn 0, stru_25AD24, -16, -48, 0, 0
                 dc.w off_22A0
                 dc.w off_22A4
                 dc.w off_22A8
                 dc.w off_22A8
                 dc.w off_22AC
                 dc.w off_22AC
-                dc.w $EE90
+                fa_hold 16
                 dc.w off_22B0
-                dc.w $F32B
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_sound $2B
+                fa_set_obj_b $0, $86
                 dc.w off_22B4
                 dc.w off_22B4
                 dc.w off_22B8
                 dc.w off_22BC
                 dc.w off_22C0
-                dc.w $EA00
-                dc.l off_1B0A18
+                fa_goto off_1B0A18
 off_1B0A18:     dc.w off_22C4           ; DATA XREF: ROM:001B098A   o
                                         ; ROM:001B0A14   o
-                dc.w $F700
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
+                fa_face_jim
+                fa_set_obj_l $A, 0
                 dc.w off_22C4
                 dc.w off_22C4
                 dc.w off_22C4
@@ -14059,12 +12940,8 @@ off_1B0A18:     dc.w off_22C4           ; DATA XREF: ROM:001B098A   o
                 dc.w off_22D4
                 dc.w off_22D4
                 dc.w off_22D8
-                dc.w $F500
-                dc.l stru_25ACF4
-                dc.w $30F8
-                dc.l 0
-                dc.l 0
-                dc.w $F33B
+                fa_spawn 0, stru_25ACF4, 48, -8, 0, 0
+                fa_sound $3B
                 dc.w off_22D8
                 dc.w off_22DC
                 dc.w off_22E0
@@ -14073,11 +12950,9 @@ off_1B0A18:     dc.w off_22C4           ; DATA XREF: ROM:001B098A   o
                 dc.w off_22E4
                 dc.w off_22D4
                 dc.w off_22D4
-                dc.w $EA00
-                dc.l anim_lawyer
+                fa_goto anim_lawyer
 anim_rock:      dc.w off_A8C            ; DATA XREF: ROM:stru_25A91C   o
-                dc.w $F078
-                dc.l off_1B0A8E
+                fa_rand_goto 120, off_1B0A8E
 off_1B0A74:     dc.w off_A8C            ; DATA XREF: ROM:001B0A8A   o
                 dc.w off_A8C
                 dc.w off_A90
@@ -14088,11 +12963,9 @@ off_1B0A74:     dc.w off_A8C            ; DATA XREF: ROM:001B0A8A   o
                 dc.w off_A98
                 dc.w off_A9C
                 dc.w off_A9C
-                dc.w $EA00
-                dc.l off_1B0A74
+                fa_goto off_1B0A74
 off_1B0A8E:     dc.w off_A78            ; DATA XREF: ROM:001B0A70   o
-                dc.w $F078
-                dc.l off_1B0AB0
+                fa_rand_goto 120, off_1B0AB0
 off_1B0A96:     dc.w off_A78            ; DATA XREF: ROM:001B0AAC   o
                 dc.w off_A78
                 dc.w off_A7C
@@ -14103,8 +12976,7 @@ off_1B0A96:     dc.w off_A78            ; DATA XREF: ROM:001B0AAC   o
                 dc.w off_A84
                 dc.w off_A88
                 dc.w off_A88
-                dc.w $EA00
-                dc.l off_1B0A96
+                fa_goto off_1B0A96
 off_1B0AB0:     dc.w off_A64            ; DATA XREF: ROM:001B0A92   o
                                         ; ROM:001B0AC6   o
                 dc.w off_A64
@@ -14116,8 +12988,7 @@ off_1B0AB0:     dc.w off_A64            ; DATA XREF: ROM:001B0A92   o
                 dc.w off_A70
                 dc.w off_A74
                 dc.w off_A74
-                dc.w $EA00
-                dc.l off_1B0AB0
+                fa_goto off_1B0AB0
 off_1B0ACA:     dc.l anim_faucet        ; DATA XREF: sub_24F04A+136   o
                 dc.l off_1B0AEE
                 dc.l off_1B0AEE
@@ -14128,18 +12999,18 @@ off_1B0ACA:     dc.l anim_faucet        ; DATA XREF: sub_24F04A+136   o
                 dc.l off_1B0AFA
 anim_faucet:    dc.w off_20D8           ; DATA XREF: ROM:off_1B0ACA   o
                                         ; ROM:stru_25AB8C   o
-                dc.w $EC01
+                fa_end
 off_1B0AEE:     dc.w off_20DC           ; DATA XREF: ROM:001B0ACE   o
                                         ; ROM:001B0AD2   o
-                dc.w $EC01
+                fa_end
 off_1B0AF2:     dc.w off_20E0           ; DATA XREF: ROM:001B0AD6   o
                                         ; ROM:001B0ADA   o
-                dc.w $EC01
+                fa_end
 off_1B0AF6:     dc.w off_20E4           ; DATA XREF: ROM:001B0ADE   o
                                         ; ROM:001B0AE2   o
-                dc.w $EC01
+                fa_end
 off_1B0AFA:     dc.w off_20E8           ; DATA XREF: ROM:001B0AE6   o
-                dc.w $EC01
+                fa_end
 anim_fireburn_4:dc.w off_8D8            ; DATA XREF: ROM:stru_25AD84   o
                 dc.w off_8DC
                 dc.w off_8E0
@@ -14154,9 +13025,7 @@ anim_fireburn_4:dc.w off_8D8            ; DATA XREF: ROM:stru_25AD84   o
                 dc.w off_904
                 dc.w off_908
                 dc.w off_90C
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $0, $86
                 dc.w off_910
                 dc.w off_914
                 dc.w off_918
@@ -14164,7 +13033,7 @@ anim_fireburn_4:dc.w off_8D8            ; DATA XREF: ROM:stru_25AD84   o
                 dc.w off_920
                 dc.w off_924
                 dc.w off_924
-                dc.w $F600
+                fa_delete
 off_1B0B30:     dc.w off_8D8            ; DATA XREF: ROM:001B0BBA   o
                                         ; ROM:001B0BF0   o ...
                 dc.w off_8DC
@@ -14175,16 +13044,14 @@ off_1B0B30:     dc.w off_8D8            ; DATA XREF: ROM:001B0BBA   o
                 dc.w off_8F8
                 dc.w off_900
                 dc.w off_908
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $0, $86
                 dc.w off_910
                 dc.w off_918
                 dc.w off_920
                 dc.w off_920
-                dc.w $F600
+                fa_delete
 anim_smoke:     dc.w off_2D40           ; DATA XREF: ROM:stru_25AD6C   o
-                dc.w $F342
+                fa_sound $42
                 dc.w off_2D44
                 dc.w off_2D44
                 dc.w off_2D48
@@ -14211,67 +13078,37 @@ anim_smoke:     dc.w off_2D40           ; DATA XREF: ROM:stru_25AD6C   o
                 dc.w off_2D6C
                 dc.w off_2D6C
                 dc.w off_2D6C
-                dc.w $F600
+                fa_delete
 anim_air_part_3:dc.w frame_none           ; DATA XREF: ROM:001B0B94   o
                                         ; ROM:stru_25A76C   o
-                dc.w $F491
-                dc.w $50
-                dc.w 0
-                dc.l anim_air_part_3
-                dc.w $F501
-                dc.l stru_25AD6C
-                dc.l 0
-                dc.l 0
-                dc.w 0
-                dc.w $ED01
-                dc.w $FD9C
-                dc.w $C
-                dc.w $EE97
+                fa_if_obj_b FM_EQ, $50, $0, anim_air_part_3
+                fa_spawn 1, stru_25AD6C, 0, 0, 0, 0
+                fa_set_b palette2_index, $C
+                fa_hold 23
                 dc.w frame_none
-word_1B0BB2:    dc.w $F501              ; DATA XREF: ROM:001B0BC8   o
-                dc.l stru_25AD84
-                dc.w 0
-                dc.l off_1B0B30
-                dc.l 0
+word_1B0BB2:                            ; DATA XREF: ROM:001B0BC8   o
+                fa_spawn 1, stru_25AD84, 0, 0, off_1B0B30, 0
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l word_1B0BB2
+                fa_goto word_1B0BB2
 off_1B0BCC:     dc.w frame_none           ; DATA XREF: spawn_fire_activator+C   o
                                         ; spawn_fire_activator_2+10   o
-                dc.w $F501
-                dc.l stru_25AD6C
-                dc.l 0
-                dc.l 0
-                dc.w 0
-                dc.w $ED01
-                dc.w $FD9C
-                dc.w $C
-                dc.w $EE97
+                fa_spawn 1, stru_25AD6C, 0, 0, 0, 0
+                fa_set_b palette2_index, $C
+                fa_hold 23
                 dc.w frame_none
-word_1B0BE8:    dc.w $F501              ; DATA XREF: ROM:001B0BFE   o
-                dc.l stru_25AD84
-                dc.w 0
-                dc.l off_1B0B30
-                dc.w 0
-                dc.w 0
+word_1B0BE8:                            ; DATA XREF: ROM:001B0BFE   o
+                fa_spawn 1, stru_25AD84, 0, 0, off_1B0B30, 0
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l word_1B0BE8
+                fa_goto word_1B0BE8
 anim_air_part_4:dc.w frame_none           ; DATA XREF: ROM:001B0C0A   o
                                         ; ROM:stru_25A784   o
-                dc.w $F491
-                dc.w $50
-                dc.w 0
-                dc.l anim_air_part_4
-                dc.w $EE8B
+                fa_if_obj_b FM_EQ, $50, $0, anim_air_part_4
+                fa_hold 11
                 dc.w frame_none
-word_1B0C12:    dc.w $F501              ; DATA XREF: ROM:001B0C34   o
-                dc.l stru_25AD84
-                dc.l 0
-                dc.l 0
-                dc.w 0
+word_1B0C12:                            ; DATA XREF: ROM:001B0C34   o
+                fa_spawn 1, stru_25AD84, 0, 0, 0, 0
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
@@ -14280,14 +13117,10 @@ word_1B0C12:    dc.w $F501              ; DATA XREF: ROM:001B0C34   o
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l word_1B0C12
+                fa_goto word_1B0C12
 anim_fireburn:  dc.w frame_none           ; DATA XREF: ROM:stru_25A79C   o
-word_1B0C3A:    dc.w $F501              ; DATA XREF: ROM:001B0C5E   o
-                dc.l stru_25AD84
-                dc.l 0
-                dc.l 0
-                dc.w 0
+word_1B0C3A:                            ; DATA XREF: ROM:001B0C5E   o
+                fa_spawn 1, stru_25AD84, 0, 0, 0, 0
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
@@ -14297,94 +13130,89 @@ word_1B0C3A:    dc.w $F501              ; DATA XREF: ROM:001B0C5E   o
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l word_1B0C3A
+                fa_goto word_1B0C3A
 anim_fireburn_2:dc.w frame_none           ; DATA XREF: ROM:stru_25A7B4   o
-word_1B0C64:    dc.w $F501              ; DATA XREF: ROM:001B0C7A   o
-                dc.l stru_25A79C
-                dc.l 0
-                dc.l 0
-                dc.w 0
-                dc.w $EECF
+word_1B0C64:                            ; DATA XREF: ROM:001B0C7A   o
+                fa_spawn 1, stru_25A79C, 0, 0, 0, 0
+                fa_hold 79
                 dc.w frame_none
-                dc.w $EA00
-                dc.l word_1B0C64
+                fa_goto word_1B0C64
 anim_rope_health_bar:dc.w off_7F8       ; DATA XREF: ROM:0025813A   o
                                         ; ROM:stru_25AF1C   o
                 dc.w off_7F8
-                dc.w $EC01
+                fa_end
 off_1B0C84:     dc.w off_7FC            ; DATA XREF: ROM:00258136   o
                 dc.w off_7FC
-                dc.w $EC01
+                fa_end
 off_1B0C8A:     dc.w off_800            ; DATA XREF: ROM:00258132   o
                 dc.w off_800
-                dc.w $EC01
+                fa_end
 off_1B0C90:     dc.w off_804            ; DATA XREF: ROM:0025812E   o
                 dc.w off_804
-                dc.w $EC01
+                fa_end
 off_1B0C96:     dc.w off_808            ; DATA XREF: ROM:0025812A   o
                 dc.w off_808
-                dc.w $EC01
+                fa_end
 off_1B0C9C:     dc.w off_80C            ; DATA XREF: ROM:00258126   o
                 dc.w off_80C
-                dc.w $EC01
+                fa_end
 off_1B0CA2:     dc.w off_810            ; DATA XREF: ROM:00258122   o
                 dc.w off_810
-                dc.w $EC01
+                fa_end
 off_1B0CA8:     dc.w off_814            ; DATA XREF: ROM:0025811E   o
                 dc.w off_814
-                dc.w $EC01
+                fa_end
 off_1B0CAE:     dc.w off_818            ; DATA XREF: ROM:0025811A   o
                 dc.w off_818
-                dc.w $EC01
+                fa_end
 off_1B0CB4:     dc.w off_81C            ; DATA XREF: ROM:00258116   o
                 dc.w off_81C
-                dc.w $EC01
+                fa_end
 off_1B0CBA:     dc.w off_820            ; DATA XREF: ROM:off_258112   o
                 dc.w off_820
                 dc.w off_824
                 dc.w off_824
                 dc.w off_828
                 dc.w off_828
-                dc.w $EC01
+                fa_end
 anim_rope_health_bar_2:dc.w off_23A4    ; DATA XREF: ROM:00258166   o
                                         ; ROM:stru_25AF34   o
                 dc.w off_23A4
-                dc.w $EC01
+                fa_end
 off_1B0CCE:     dc.w off_23A8           ; DATA XREF: ROM:00258162   o
                 dc.w off_23A8
-                dc.w $EC01
+                fa_end
 off_1B0CD4:     dc.w off_23AC           ; DATA XREF: ROM:0025815E   o
                 dc.w off_23AC
-                dc.w $EC01
+                fa_end
 off_1B0CDA:     dc.w off_23B0           ; DATA XREF: ROM:0025815A   o
                 dc.w off_23B0
-                dc.w $EC01
+                fa_end
 off_1B0CE0:     dc.w off_23B4           ; DATA XREF: ROM:00258156   o
                 dc.w off_23B4
-                dc.w $EC01
+                fa_end
 off_1B0CE6:     dc.w off_23B8           ; DATA XREF: ROM:00258152   o
                 dc.w off_23B8
-                dc.w $EC01
+                fa_end
 off_1B0CEC:     dc.w off_23BC           ; DATA XREF: ROM:0025814E   o
                 dc.w off_23BC
-                dc.w $EC01
+                fa_end
 off_1B0CF2:     dc.w off_23C0           ; DATA XREF: ROM:0025814A   o
                 dc.w off_23C0
-                dc.w $EC01
+                fa_end
 off_1B0CF8:     dc.w off_23C4           ; DATA XREF: ROM:00258146   o
                 dc.w off_23C4
-                dc.w $EC01
+                fa_end
 off_1B0CFE:     dc.w off_23C8           ; DATA XREF: ROM:00258142   o
                 dc.w off_23C8
-                dc.w $EC01
+                fa_end
 off_1B0D04:     dc.w off_23CC           ; DATA XREF: ROM:off_25813E   o
                 dc.w off_23CC
                 dc.w off_23D0
                 dc.w off_23D0
                 dc.w off_23D4
                 dc.w off_23D4
-                dc.w $EC01
+                fa_end
 off_1B0D12:     dc.w off_2368           ; DATA XREF: ROM:001B0D24   o
                 dc.w off_2368
                 dc.w off_2368
@@ -14393,8 +13221,7 @@ off_1B0D12:     dc.w off_2368           ; DATA XREF: ROM:001B0D24   o
                 dc.w off_236C
                 dc.w off_236C
                 dc.w off_236C
-                dc.w $EA00
-                dc.l off_1B0D12
+                fa_goto off_1B0D12
 anim_snot_rope: dc.w off_2388           ; DATA XREF: ROM:001B0D42   o
                                         ; ROM:stru_25AFAC   o
                 dc.w off_2388
@@ -14408,8 +13235,7 @@ anim_snot_rope: dc.w off_2388           ; DATA XREF: ROM:001B0D42   o
                 dc.w off_238C
                 dc.w off_238C
                 dc.w off_238C
-                dc.w $EA00
-                dc.l anim_snot_rope
+                fa_goto anim_snot_rope
 off_1B0D46:     dc.w off_2394           ; DATA XREF: ROM:001B0D60   o
                                         ; sub_257ED4+26   o
                 dc.w off_2394
@@ -14423,8 +13249,7 @@ off_1B0D46:     dc.w off_2394           ; DATA XREF: ROM:001B0D60   o
                 dc.w off_23A0
                 dc.w off_23A0
                 dc.w off_23A0
-                dc.w $EA00
-                dc.l off_1B0D46
+                fa_goto off_1B0D46
 anim_snot_part: dc.w off_82C            ; DATA XREF: ROM:001B0D72   o
                                         ; ROM:001B10CC   o ...
                 dc.w off_82C
@@ -14432,8 +13257,7 @@ anim_snot_part: dc.w off_82C            ; DATA XREF: ROM:001B0D72   o
                 dc.w off_830
                 dc.w off_834
                 dc.w off_834
-                dc.w $EA00
-                dc.l anim_snot_part
+                fa_goto anim_snot_part
 off_1B0D76:     dc.w off_838            ; DATA XREF: ROM:001B0D84   o
                                         ; ROM:001B10BA   o ...
                 dc.w off_838
@@ -14441,8 +13265,7 @@ off_1B0D76:     dc.w off_838            ; DATA XREF: ROM:001B0D84   o
                 dc.w off_83C
                 dc.w off_840
                 dc.w off_840
-                dc.w $EA00
-                dc.l off_1B0D76
+                fa_goto off_1B0D76
                 dc.w off_82C
                 dc.w off_82C
                 dc.w off_830
@@ -14468,7 +13291,7 @@ off_1B0D76:     dc.w off_838            ; DATA XREF: ROM:001B0D84   o
                 dc.w off_830
                 dc.w off_830
                 dc.w off_830
-                dc.w $F600
+                fa_delete
 off_1B0DBC:     dc.w off_B0C            ; DATA XREF: ROM:001B0DCE   o
                 dc.w off_B0C
                 dc.w off_B10
@@ -14477,168 +13300,109 @@ off_1B0DBC:     dc.w off_B0C            ; DATA XREF: ROM:001B0DCE   o
                 dc.w off_B14
                 dc.w off_B18
                 dc.w off_B18
-                dc.w $EA00
-                dc.l off_1B0DBC
+                fa_goto off_1B0DBC
 off_1B0DD2:     dc.w off_2444           ; DATA XREF: ROM:001B0E94   o
                                         ; spawn_water_monster+18   o
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
-                dc.w $EA00
-                dc.l off_1B0DD2
+                fa_call water_monster_chase_jim_x
+                fa_goto off_1B0DD2
 anim_water_monster:dc.w off_2444        ; DATA XREF: ROM:001B0F5E   o
                                         ; ROM:001B0F68   o ...
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2444
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_244C
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
+                fa_call water_monster_chase_jim_x
                 dc.w off_2448
-                dc.w $FB00
-                dc.l water_monster_chase_jim_x
-                dc.w $F421
-                dc.w $FD6E
-                dc.w 0
-                dc.l anim_water_monster
-                dc.w $F421
-                dc.w $FD24
-                dc.w 0
-                dc.l anim_water_monster
-                dc.w $F421
-                dc.w $FD21
-                dc.w 0
-                dc.l anim_water_monster
+                fa_call water_monster_chase_jim_x
+                fa_if_b FM_NE, is_snot_defeated, $0, anim_water_monster
+                fa_if_b FM_NE, level_end_timer, $0, anim_water_monster
+                fa_if_b FM_NE, jim_dead_enable, $0, anim_water_monster
                 dc.w off_23FC
                 dc.w off_23FC
                 dc.w off_2400
@@ -14649,13 +13413,9 @@ anim_water_monster:dc.w off_2444        ; DATA XREF: ROM:001B0F5E   o
                 dc.w off_2404
                 dc.w off_2404
                 dc.w off_2408
-                dc.w $F31D
-                dc.w $ED11
-                dc.w 0
-                dc.w $70
-                dc.w $ED11
-                dc.w $3C
-                dc.w $80
+                fa_sound $1D
+                fa_set_obj_b $0, $70
+                fa_set_obj_b $3C, $80
                 dc.w off_2408
                 dc.w off_2408
                 dc.w off_240C
@@ -14687,41 +13447,38 @@ anim_water_monster:dc.w off_2444        ; DATA XREF: ROM:001B0F5E   o
                 dc.w off_2440
                 dc.w off_2440
                 dc.w off_2440
-                dc.w $EA00
-                dc.l anim_water_monster
+                fa_goto anim_water_monster
 off_1B0FDC:     dc.w off_AE4            ; DATA XREF: ROM:off_257FB0   o
-                dc.w $EC01
+                fa_end
 off_1B0FE0:     dc.w off_AE8            ; DATA XREF: ROM:00257FB4   o
-                dc.w $EC01
+                fa_end
 off_1B0FE4:     dc.w off_AEC            ; DATA XREF: ROM:00257FB8   o
-                dc.w $EC01
+                fa_end
 off_1B0FE8:     dc.w off_AF0            ; DATA XREF: ROM:00257FBC   o
-                dc.w $EC01
+                fa_end
 off_1B0FEC:     dc.w off_AF4            ; DATA XREF: ROM:00257FC0   o
-                dc.w $EC01
+                fa_end
 off_1B0FF0:     dc.w off_AF8            ; DATA XREF: ROM:00257FC4   o
-                dc.w $EC01
+                fa_end
 off_1B0FF4:     dc.w off_AFC            ; DATA XREF: ROM:00257FC8   o
-                dc.w $EC01
+                fa_end
 off_1B0FF8:     dc.w off_B00            ; DATA XREF: ROM:00257FCC   o
-                dc.w $EC01
+                fa_end
 off_1B0FFC:     dc.w off_B04            ; DATA XREF: ROM:00257FD0   o
-                dc.w $EC01
+                fa_end
 off_1B1000:     dc.w off_B08            ; DATA XREF: ROM:00257FD4   o
-                dc.w $EC01
+                fa_end
 off_1B1004:     dc.w off_B0C            ; DATA XREF: ROM:00257FD8   o
-                dc.w $EC01
+                fa_end
 off_1B1008:     dc.w off_B10            ; DATA XREF: ROM:00257FDC   o
-                dc.w $EC01
+                fa_end
 off_1B100C:     dc.w off_B14            ; DATA XREF: ROM:00257FE0   o
-                dc.w $EC01
+                fa_end
 off_1B1010:     dc.w off_B18            ; DATA XREF: ROM:00257FE4   o
-                dc.w $EC01
+                fa_end
 anim_snot_legs_down:     dc.w off_2368           ; DATA XREF: ROM:001B1034   o
                                         ; ROM:001B1104   o ...
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $35, $0
                 dc.w off_2368
                 dc.w off_2368
                 dc.w off_236C
@@ -14733,12 +13490,9 @@ anim_snot_legs_down:     dc.w off_2368           ; DATA XREF: ROM:001B1034   o
                 dc.w off_236C
                 dc.w off_236C
                 dc.w off_236C
-                dc.w $EA00
-                dc.l anim_snot_legs_down
+                fa_goto anim_snot_legs_down
 anim_snot_to_hanging:     dc.w off_2374           ; DATA XREF: sub_257B10+68   o
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $35, $0
                 dc.w off_2374
                 dc.w off_2374
                 dc.w off_2374
@@ -14750,15 +13504,11 @@ anim_snot_to_hanging:     dc.w off_2374           ; DATA XREF: sub_257B10+68   o
                 dc.w off_237C
                 dc.w off_237C
                 dc.w off_237C
-                dc.w $ED02
-                dc.w $FF48
-                dc.w 0
-                dc.w $EC01
+                fa_set_w snot_state_request, $0
+                fa_end
 anim_snot_boss: dc.w off_2368           ; DATA XREF: ROM:001B107E   o
                                         ; ROM:001B1162   o ...
-                dc.w $ED11
-                dc.w $35
-                dc.w $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_2368
                 dc.w off_2368
                 dc.w off_236C
@@ -14770,12 +13520,9 @@ anim_snot_boss: dc.w off_2368           ; DATA XREF: ROM:001B107E   o
                 dc.w off_236C
                 dc.w off_236C
                 dc.w off_236C
-                dc.w $EA00
-                dc.l anim_snot_boss
+                fa_goto anim_snot_boss
 anim_snot_to_legs_down:     dc.w off_2374           ; DATA XREF: sub_257B10+A4   o
-                dc.w $ED11
-                dc.w $35
-                dc.w $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_2374
                 dc.w off_2374
                 dc.w off_2374
@@ -14788,217 +13535,115 @@ anim_snot_to_legs_down:     dc.w off_2374           ; DATA XREF: sub_257B10+A4  
                 dc.w off_237C
                 dc.w off_237C
                 dc.w off_237C
-                dc.w $ED02
-                dc.w $FF48
-                dc.w 2
-                dc.w $EC01
+                fa_set_w snot_state_request, $2
+                fa_end
 off_1B10AA:     dc.w off_2380           ; DATA XREF: collision_with_snot+25A   o
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD24C
+                fa_set_obj_b $35, $0
+                fa_spawn 2, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD24C
                 dc.w off_2380
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD24C
+                fa_spawn 2, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD24C
                 dc.w off_2384
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD24C
+                fa_spawn 2, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD24C
                 dc.w off_2384
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD24C
+                fa_spawn 2, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD24C
                 dc.w off_2380
                 dc.w off_2380
                 dc.w off_2384
                 dc.w off_2384
                 dc.w off_2380
-                dc.w $EA00
-                dc.l anim_snot_legs_down
+                fa_goto anim_snot_legs_down
 off_1B1108:     dc.w off_2380           ; DATA XREF: collision_with_snot:loc_2579B0   o
-                dc.w $ED11
-                dc.w $35
-                dc.w $FF
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD256
+                fa_set_obj_b $35, $FF
+                fa_spawn 2, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD256
                 dc.w off_2380
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD256
+                fa_spawn 2, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD256
                 dc.w off_2384
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD256
+                fa_spawn 2, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD256
                 dc.w off_2384
-                dc.w $F502
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD256
+                fa_spawn 2, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD256
                 dc.w off_2380
                 dc.w off_2380
                 dc.w off_2384
                 dc.w off_2384
                 dc.w off_2380
-                dc.w $EA00
-                dc.l anim_snot_boss
+                fa_goto anim_snot_boss
 off_1B1166:     dc.w off_23D8           ; DATA XREF: snot_collided_with_walls+84   o
                 dc.w off_23D8
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD260
+                fa_spawn 0, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD260
                 dc.w off_23DC
                 dc.w off_23DC
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD260
+                fa_spawn 0, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD260
                 dc.w off_23E0
                 dc.w off_23E0
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD260
+                fa_spawn 0, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD260
                 dc.w off_23D8
                 dc.w off_23D8
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD260
+                fa_spawn 0, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD260
                 dc.w off_23DC
                 dc.w off_23DC
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD260
+                fa_spawn 0, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD260
                 dc.w off_23E0
                 dc.w off_23E0
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD260
+                fa_spawn 0, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD260
                 dc.w off_23D8
-                dc.w $ED02
-                dc.w $FF4A
-                dc.w $FF
-                dc.w $EC01
+                fa_set_w snot_state, $FF
+                fa_end
 anim_snot_rage:     dc.w off_23E4           ; DATA XREF: collision_with_snot+B8   o
                 dc.w off_23E4
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD242
+                fa_spawn 0, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD242
                 dc.w off_23E8
                 dc.w off_23E8
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD242
+                fa_spawn 0, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD242
                 dc.w off_23EC
                 dc.w off_23EC
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD242
+                fa_spawn 0, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD242
                 dc.w off_23F0
                 dc.w off_23F0
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD242
+                fa_spawn 0, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD242
                 dc.w off_23F4
                 dc.w off_23F4
 off_1B123C:     dc.w off_23E4           ; DATA XREF: ROM:001B126E   o
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l anim_snot_part
-                dc.l byte_1AD242
-                dc.w $F322
+                fa_spawn 0, stru_25AFC4, 0, 0, anim_snot_part, byte_1AD242
+                fa_sound $22
                 dc.w off_23E8
                 dc.w off_23EC
-                dc.w $F500
-                dc.l stru_25AFC4
-                dc.w 0
-                dc.l off_1B0D76
-                dc.l byte_1AD242
+                fa_spawn 0, stru_25AFC4, 0, 0, off_1B0D76, byte_1AD242
                 dc.w off_23F0
                 dc.w off_23F4
-                dc.w $F412
-                dc.w $FF4A
-                dc.w 4
-                dc.l off_1B123C
+                fa_if_w FM_EQ, snot_state, $4, off_1B123C
                 dc.w off_23F8
                 dc.w off_23F8
-                dc.w $EC01
+                fa_end
                 dc.w frame_funchar_R
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_O
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_U
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_N
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_D
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_E
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_T
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_W
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
                 dc.w frame_funchar_H
-                dc.w $FB00
-                dc.l oksub_249568
-                dc.w $EC01
+                fa_call oksub_249568
+                fa_end
 anim_water_after_fall:dc.w off_2414     ; DATA XREF: ROM:stru_25AF4C   o
                                         ; ROM:object_water_after_fall   o
-                dc.w $F356
+                fa_sound $56
                 dc.w off_2414
                 dc.w off_2418
                 dc.w off_2418
@@ -15023,135 +13668,80 @@ anim_water_after_fall:dc.w off_2414     ; DATA XREF: ROM:stru_25AF4C   o
                 dc.w off_2440
                 dc.w off_2440
                 dc.w off_2440
-                dc.w $F600
+                fa_delete
 anim_pete_hook: dc.w off_6AC            ; DATA XREF: ROM:object_pete_hook   o
-                dc.w $EC01
+                fa_end
                 dc.w off_6AC
-                dc.w $EC01
+                fa_end
 anim_machine:   dc.w off_2C7C           ; DATA XREF: ROM:001B131E   o
                                         ; ROM:object_machine   o
                 dc.w off_2C7C
                 dc.w off_2C7C
                 dc.w off_2C80
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_2C84
-                dc.w $EA00
-                dc.l anim_machine
+                fa_goto anim_machine
 off_1B1322:     dc.w off_312C           ; DATA XREF: collision_with_diamond+19C   o
-                dc.w $F32E
-                dc.w $ED12
-                dc.w $48
-                dc.w $600
-                dc.w $ED12
-                dc.w $4A
-                dc.w $F600
-                dc.w $ED11
-                dc.w $47
-                dc.w 8
-                dc.w $ED11
-                dc.w $47
-                dc.w 6
+                fa_sound $2E
+                fa_set_obj_w $48, $600
+                fa_set_obj_w $4A, $F600
+                fa_set_obj_b $47, $8
+                fa_set_obj_b $47, $6
                 dc.w off_3124
-                dc.w $ED11
-                dc.w $47
-                dc.w 5
+                fa_set_obj_b $47, $5
                 dc.w off_3120
-                dc.w $ED11
-                dc.w $47
-                dc.w 3
+                fa_set_obj_b $47, $3
                 dc.w off_3118
-                dc.w $ED11
-                dc.w $47
-                dc.w 2
+                fa_set_obj_b $47, $2
                 dc.w off_3114
-                dc.w $ED11
-                dc.w $47
-                dc.w 1
-                dc.w $ED14
-                dc.w $48
-                dc.l 0
+                fa_set_obj_b $47, $1
+                fa_set_obj_l $48, 0
                 dc.w off_3110
                 dc.w off_3110
-                dc.w $ED11
-                dc.w $47
-                dc.w 2
+                fa_set_obj_b $47, $2
                 dc.w off_3114
 anim_counterpoise:dc.w off_3110         ; DATA XREF: ROM:stru_25B144   o
-                dc.w $ED14
-                dc.w $48
-                dc.l 0
-                dc.w $ED11
-                dc.w $47
-                dc.w 1
-                dc.w $EC01
+                fa_set_obj_l $48, 0
+                fa_set_obj_b $47, $1
+                fa_end
 off_1B1384:     dc.w off_3114           ; DATA XREF: collision_with_diamond+186   o
-                dc.w $F32E
-                dc.w $ED12
-                dc.w $48
-                dc.w $FA00
-                dc.w $ED12
-                dc.w $4A
-                dc.w $F600
-                dc.w $ED11
-                dc.w $47
-                dc.w 3
+                fa_sound $2E
+                fa_set_obj_w $48, $FA00
+                fa_set_obj_w $4A, $F600
+                fa_set_obj_b $47, $3
                 dc.w off_3118
-                dc.w $ED11
-                dc.w $47
-                dc.w 5
+                fa_set_obj_b $47, $5
                 dc.w off_3120
-                dc.w $ED11
-                dc.w $47
-                dc.w 6
+                fa_set_obj_b $47, $6
                 dc.w off_3124
-                dc.w $ED11
-                dc.w $47
-                dc.w 8
+                fa_set_obj_b $47, $8
                 dc.w off_312C
-                dc.w $ED11
-                dc.w $47
-                dc.w 9
-                dc.w $ED14
-                dc.w $48
-                dc.l 0
+                fa_set_obj_b $47, $9
+                fa_set_obj_l $48, 0
                 dc.w off_3130
                 dc.w off_3130
-                dc.w $ED11
-                dc.w $47
-                dc.w 8
+                fa_set_obj_b $47, $8
                 dc.w off_312C
                 dc.w off_3130
-                dc.w $ED14
-                dc.w $48
-                dc.l 0
-                dc.w $ED11
-                dc.w $47
-                dc.w 9
-                dc.w $EC01
+                fa_set_obj_l $48, 0
+                fa_set_obj_b $47, $9
+                fa_end
 anim_unknown_7: dc.w off_3558           ; DATA XREF: ROM:stru_25B15C   o
-                dc.w $EC01
+                fa_end
 anim_unknown_10:dc.w off_2CF0           ; DATA XREF: ROM:stru_25B1EC   o
-                dc.w $EC01
+                fa_end
 off_1B13E8:     dc.w off_2CD8           ; DATA XREF: fire_to_ufo+2A   o
-                dc.w $F332
+                fa_sound $32
                 dc.w off_2CD8
-                dc.w $F500
-                dc.l stru_25B1EC
-                dc.l 0
-                dc.l 0
-                dc.w 0
-                dc.w $EB00
-                dc.w $EB01
-                dc.w $F500
-                dc.l stru_25B1EC
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25B1EC, 0, 0, 0, 0
+                fa_flip_x
+                fa_flip_y
+                fa_spawn 0, stru_25B1EC, 0, 0, 0, 0
                 dc.w off_2CF4
                 dc.w off_2CF4
-                dc.w $F3B2
-                dc.w $F339
-                dc.w $EC01
+                fa_sound_stop $32
+                fa_sound $39
+                fa_end
 anim_ufo:       dc.w off_2CC8           ; DATA XREF: ROM:001B1446   o
                                         ; ROM:001B148E   o ...
                 dc.w off_2CC8
@@ -15173,13 +13763,10 @@ anim_ufo:       dc.w off_2CC8           ; DATA XREF: ROM:001B1446   o
                 dc.w off_2CE8
                 dc.w off_2CEC
                 dc.w off_2CEC
-                dc.w $EA00
-                dc.l anim_ufo
+                fa_goto anim_ufo
 off_1B144A:     dc.w off_2CC8           ; DATA XREF: ROM:001B1474   o
                                         ; collision_with_diamond+55C   o
-                dc.w $ED01
-                dc.w $FD4D
-                dc.w $14
+                fa_set_b byte_FFFD4D, $14
                 dc.w off_2CCC
                 dc.w off_2CD0
                 dc.w off_2CD4
@@ -15189,29 +13776,16 @@ off_1B144A:     dc.w off_2CC8           ; DATA XREF: ROM:001B1474   o
                 dc.w off_2CE4
                 dc.w off_2CE8
                 dc.w off_2CEC
-                dc.w $F411
-                dc.w $FD22
-                dc.w 0
-                dc.l word_1B1478
-                dc.w $F421
-                dc.w $FD23
-                dc.w 0
-                dc.l off_1B144A
-word_1B1478:    dc.w $FAC2              ; DATA XREF: ROM:001B146A   o
-                dc.w $1A
-                dc.w off_800
-                dc.w $ED11
-                dc.w 0
-                dc.w $2A
-                dc.w $ED14
-                dc.w $A
-                dc.w $1A
-                dc.w $3212
-                dc.w $EA00
-                dc.l anim_ufo
+                fa_if_b FM_EQ, byte_FFFD22, $0, word_1B1478
+                fa_if_b FM_NE, is_jim_blocked_by_enemy, $0, off_1B144A
+word_1B1478:                            ; DATA XREF: ROM:001B146A   o
+                fa_sub_obj_w $1A, $800
+                fa_set_obj_b $0, $2A
+                fa_set_obj_l $A, $1A3212
+                fa_goto anim_ufo
 anim_ufo_signal:dc.w off_2CB8           ; DATA XREF: ROM:001B14B4   o
                                         ; ROM:stru_25B204   o
-                dc.w $F320
+                fa_sound $20
                 dc.w off_2CB8
                 dc.w off_2CBC
                 dc.w off_2CBC
@@ -15219,69 +13793,45 @@ anim_ufo_signal:dc.w off_2CB8           ; DATA XREF: ROM:001B14B4   o
                 dc.w off_2CC0
                 dc.w off_2CC4
                 dc.w off_2CC4
-                dc.w $F411
-                dc.w $FD22
-                dc.w 0
-                dc.l word_1B14B8
-                dc.w $F421
-                dc.w $FD23
-                dc.w 0
-                dc.l anim_ufo_signal
-word_1B14B8:    dc.w $F600              ; DATA XREF: ROM:001B14AA   o
+                fa_if_b FM_EQ, byte_FFFD22, $0, word_1B14B8
+                fa_if_b FM_NE, is_jim_blocked_by_enemy, $0, anim_ufo_signal
+word_1B14B8:                            ; DATA XREF: ROM:001B14AA   o
+                fa_delete
 anim_bee_generator:dc.w off_2BCC        ; DATA XREF: ROM:001B14C0   o
                                         ; ROM:001B1506   o ...
                 dc.w off_2BCC
-                dc.w $F0EA
-                dc.l anim_bee_generator
+                fa_rand_goto 234, anim_bee_generator
                 dc.w off_2BD0
                 dc.w off_2BD4
                 dc.w off_2BD8
-                dc.w $F343
-                dc.w $F0AE
-                dc.l word_1B14E8
-                dc.w $F502
-                dc.l stru_25B264
-                dc.l 0
-                dc.l 0
-                dc.w 0
-                dc.w $EA00
-                dc.l off_1B14F8
-word_1B14E8:    dc.w $F502              ; DATA XREF: ROM:001B14CE   o
-                dc.l stru_25B294
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_sound $43
+                fa_rand_goto 174, word_1B14E8
+                fa_spawn 2, stru_25B264, 0, 0, 0, 0
+                fa_goto off_1B14F8
+word_1B14E8:                            ; DATA XREF: ROM:001B14CE   o
+                fa_spawn 2, stru_25B294, 0, 0, 0, 0
 off_1B14F8:     dc.w off_2BDC           ; DATA XREF: ROM:001B14E4   o
                 dc.w off_2BE0
                 dc.w off_2BE4
                 dc.w off_2BE8
                 dc.w off_2BEC
                 dc.w off_2BF0
-                dc.w $EA00
-                dc.l anim_bee_generator
+                fa_goto anim_bee_generator
 off_1B150A:     dc.w off_2BCC           ; DATA XREF: fire_to_queen_abscess+1A   o
-                dc.w $EC01
+                fa_end
 off_1B150E:     dc.w off_2C04           ; DATA XREF: ROM:001B1528   o
                                         ; spawn_abscess_down+18   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $1F
-                dc.w $EC01
+                fa_set_obj_b $0, $1F
+                fa_end
 off_1B1518:     dc.w off_2C04           ; DATA XREF: sub_2557EC+1A   o
                 dc.w off_2C08
                 dc.w off_2C0C
                 dc.w off_2C10
-                dc.w $ED11
-                dc.w 0
-                dc.w $1F
-                dc.w $EA00
-                dc.l off_1B150E
+                fa_set_obj_b $0, $1F
+                fa_goto off_1B150E
 anim_queen_closed:dc.w off_2B14         ; DATA XREF: ROM:001B1534   o
                                         ; ROM:001B1662   o ...
-                dc.w $F411
-                dc.w $FF6E
-                dc.w 0
-                dc.l anim_queen_closed
+                fa_if_b FM_EQ, is_queen_butt_defeated, $0, anim_queen_closed
                 dc.w off_2B14
                 dc.w off_2B18
                 dc.w off_2B18
@@ -15291,9 +13841,7 @@ anim_queen_closed:dc.w off_2B14         ; DATA XREF: ROM:001B1534   o
                 dc.w off_2B20
                 dc.w off_2B20
 off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $23
+                fa_set_obj_b $0, $23
                 dc.w off_2B24
                 dc.w off_2B28
                 dc.w off_2B28
@@ -15304,15 +13852,12 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B38
                 dc.w off_2B3C
                 dc.w off_2B3C
-                dc.w $F09A
-                dc.l off_1B1548
+                fa_rand_goto 154, off_1B1548
                 dc.w off_2B40
-                dc.w $F32C
+                fa_sound $2C
                 dc.w off_2B40
-                dc.w $ED11
-                dc.w 0
-                dc.w $23
-                dc.w $F700
+                fa_set_obj_b $0, $23
+                fa_face_jim
                 dc.w off_2B44
                 dc.w off_2B44
                 dc.w off_2B48
@@ -15321,46 +13866,24 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B4C
                 dc.w off_2B50
                 dc.w off_2B50
-                dc.w $F32C
+                fa_sound $2C
                 dc.w off_2B54
                 dc.w off_2B54
                 dc.w off_2B58
-                dc.w $F500
-                dc.l object_bee
-                dc.w $E009
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bee, -32, 9, 0, 0
                 dc.w off_2B58
-                dc.w $F500
-                dc.l object_bee
-                dc.w 7
-                dc.w 0
-                dc.w 0
-                dc.w 0
-                dc.w 0
+                fa_spawn 0, object_bee, 0, 7, 0, 0
                 dc.w off_2B5C
-                dc.w $F500
-                dc.l object_bee
-                dc.w off_2EE8
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bee, 46, -24, 0, 0
                 dc.w off_2B5C
                 dc.w off_2B60
-                dc.w $F500
-                dc.l object_bee
-                dc.w $42CF
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bee, 66, -49, 0, 0
                 dc.w off_2B60
-                dc.w $F32C
+                fa_sound $2C
                 dc.w off_2B64
                 dc.w off_2B64
                 dc.w off_2B68
-                dc.w $F500
-                dc.l object_bee
-                dc.w $3EB9
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bee, 62, -71, 0, 0
                 dc.w off_2B68
                 dc.w off_2B6C
                 dc.w off_2B6C
@@ -15374,32 +13897,22 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B78
                 dc.w off_2B78
                 dc.w off_2B78
-                dc.w $EE02
+                fa_loop 2
                 dc.w off_2B80
                 dc.w off_2B80
                 dc.w off_2B84
                 dc.w off_2B84
-                dc.w $EF00
+                fa_next
                 dc.w off_2B7C
-                dc.w $F500
-                dc.l object_bee
-                dc.w $3EB9
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bee, 62, -71, 0, 0
                 dc.w off_2B7C
-                dc.w $F500
-                dc.l object_bee
-                dc.w $3EB9
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bee, 62, -71, 0, 0
                 dc.w off_2B80
                 dc.w off_2B80
                 dc.w off_2B80
                 dc.w off_2B84
                 dc.w off_2B84
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $0, $86
                 dc.w off_2B20
                 dc.w off_2B20
                 dc.w off_2B1C
@@ -15408,13 +13921,12 @@ off_1B1548:     dc.w off_2B24           ; DATA XREF: ROM:001B1566   o
                 dc.w off_2B18
                 dc.w off_2B18
                 dc.w off_2B14
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_2B14
-                dc.w $EA00
-                dc.l anim_queen_closed
+                fa_goto anim_queen_closed
 off_1B1666:     dc.w off_2B88           ; DATA XREF: fire_to_queen_boss+22   o
                                         ; fire_to_queen_boss+46   o ...
-                dc.w $F374
+                fa_sound $74
                 dc.w off_2B88
                 dc.w off_2B88
                 dc.w off_2B8C
@@ -15431,15 +13943,13 @@ off_1B1666:     dc.w off_2B88           ; DATA XREF: fire_to_queen_boss+22   o
                 dc.w off_2B1C
                 dc.w off_2B18
                 dc.w off_2B14
-                dc.w $EA00
-                dc.l anim_queen_closed
+                fa_goto anim_queen_closed
 off_1B1690:     dc.w off_2B50           ; DATA XREF: jim_win_queen+2E   o
                 dc.w off_2B50
                 dc.w off_2B50
                 dc.w off_2B9C
                 dc.w off_2B9C
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2BA0
                 dc.w off_2BA0
                 dc.w off_2BA0
@@ -15447,61 +13957,45 @@ off_1B1690:     dc.w off_2B50           ; DATA XREF: jim_win_queen+2E   o
                 dc.w off_2B9C
                 dc.w off_2BA0
                 dc.w off_2BA0
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2B9C
                 dc.w off_2B9C
                 dc.w off_2B9C
                 dc.w off_2BA4
                 dc.w off_2BA4
                 dc.w off_2BA4
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AD1F0
+                fa_set_obj_l $A, byte_1AD1F0
                 dc.w off_2B9C
                 dc.w off_2B9C
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2BA4
                 dc.w off_2B9C
                 dc.w off_2BA4
                 dc.w off_2B9C
                 dc.w off_2BA0
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2BA0
                 dc.w off_2BA8
                 dc.w off_2BAC
                 dc.w off_2BB0
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2BB4
                 dc.w off_2BB4
                 dc.w off_2BB8
                 dc.w off_2BB8
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2BB8
                 dc.w off_2BBC
                 dc.w off_2BBC
-                dc.w $FB00
-                dc.l loc_252556
+                fa_call loc_252556
                 dc.w off_2BBC
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 1
-                dc.w $ED01
-                dc.w $FD24
-                dc.w $78
+                fa_set_obj_l $A, 0
+                fa_set_b is_jim_blocked_by_enemy, $1
+                fa_set_b level_end_timer, $78
                 dc.w off_2BC0
-                dc.w $EC01
+                fa_end
 anim_queen_tail:dc.w off_2C64           ; DATA XREF: ROM:stru_25B24C   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $24
+                fa_set_obj_b $0, $24
 off_1B172C:     dc.w off_2C64           ; DATA XREF: ROM:001B1748   o
                                         ; ROM:001B178E   o
                 dc.w off_2C64
@@ -15514,77 +14008,46 @@ off_1B172C:     dc.w off_2C64           ; DATA XREF: ROM:001B1748   o
                 dc.w off_2C70
                 dc.w off_2C70
                 dc.w off_2C70
-                dc.w $F411
-                dc.w $FD51
-                dc.w 0
-                dc.l off_1B172C
+                fa_if_b FM_EQ, byte_FFFD51, $0, off_1B172C
                 dc.w off_2C74
-                dc.w $F700
+                fa_face_jim
                 dc.w off_2C74
                 dc.w off_2C74
-                dc.w $EE04
+                fa_loop 4
 off_1B1756:     dc.w off_2C78           ; DATA XREF: ROM:001B175C   o
                 dc.w off_2C78
-                dc.w $F09A
-                dc.l off_1B1756
-                dc.w $F343
-                dc.w $F502
-                dc.l stru_25B264
-                dc.w $1B15
-                dc.l off_1B1792
-                dc.l 0
+                fa_rand_goto 154, off_1B1756
+                fa_sound $43
+                fa_spawn 2, stru_25B264, 27, 21, off_1B1792, 0
                 dc.w off_2C78
-                dc.w $F502
-                dc.l stru_25B294
-                dc.w $1B11
-                dc.l 0
-                dc.l 0
-                dc.w $EF00
-                dc.w $ED01
-                dc.w $FD51
-                dc.w 0
-                dc.w $EA00
-                dc.l off_1B172C
+                fa_spawn 2, stru_25B294, 27, 17, 0, 0
+                fa_next
+                fa_set_b byte_FFFD51, $0
+                fa_goto off_1B172C
 off_1B1792:     dc.w off_2BC4           ; DATA XREF: ROM:001B176A   o
-                dc.w $FB00
-                dc.l sub_256B40
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A32F6
+                fa_call sub_256B40
+                fa_set_obj_l $A, byte_1A32F6
                 dc.w off_2BC4
 off_1B17A4:     dc.w off_2BC4           ; DATA XREF: ROM:001B17AC   o
                 dc.w off_2BC8
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B17A4
-                dc.w $F600
+                fa_if_obj_bit_clr $7, 4, off_1B17A4
+                fa_delete
 anim_egg_move:  dc.w off_2BC4           ; DATA XREF: ROM:stru_25B264   o
-                dc.w $FB00
-                dc.l sub_256B40
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A32F6
+                fa_call sub_256B40
+                fa_set_obj_l $A, byte_1A32F6
                 dc.w off_2BC4
 off_1B17C4:     dc.w off_2BC4           ; DATA XREF: ROM:001B17CC   o
                 dc.w off_2BC8
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B17C4
-                dc.w $F33B
-                dc.w $F502
-                dc.l stru_25B294
-                dc.w 0
-                dc.l off_1B1838
-                dc.l byte_1A3392
-                dc.w $FB00
-                dc.l oksub_2495DE
+                fa_if_obj_bit_clr $7, 4, off_1B17C4
+                fa_sound $3B
+                fa_spawn 2, stru_25B294, 0, 0, off_1B1838, byte_1A3392
+                fa_call oksub_2495DE
                 dc.w off_2BC4
                 dc.w off_2BC4
                 dc.w off_2BC8
                 dc.w off_2BC8
-                dc.w $FB00
-                dc.l spawn_bee
-                dc.w $F600
+                fa_call spawn_bee
+                fa_delete
 anim_queen_abscess:dc.w off_2BCC        ; DATA XREF: ROM:0025B27C   o
                 dc.w off_2BD0
                 dc.w off_2BD4
@@ -15596,215 +14059,168 @@ anim_queen_abscess:dc.w off_2BCC        ; DATA XREF: ROM:0025B27C   o
                 dc.w off_2BEC
                 dc.w off_2BF0
                 dc.w off_2BF0
-                dc.w $F600
+                fa_delete
 anim_unknown_11:dc.w off_2C24           ; DATA XREF: ROM:stru_25B294   o
-                dc.w $F09A
-                dc.l off_1B1828
+                fa_rand_goto 154, off_1B1828
 off_1B1818:     dc.w off_2C14           ; DATA XREF: ROM:001B1824   o
                 dc.w off_2C18
                 dc.w off_2C1C
                 dc.w off_2C20
                 dc.w off_2C24
-                dc.w $EA00
-                dc.l off_1B1818
+                fa_goto off_1B1818
 off_1B1828:     dc.w off_2C28           ; DATA XREF: ROM:001B1814   o
                                         ; ROM:001B1834   o ...
                 dc.w off_2C2C
                 dc.w off_2C30
                 dc.w off_2C34
                 dc.w off_2C38
-                dc.w $EA00
-                dc.l off_1B1828
+                fa_goto off_1B1828
 off_1B1838:     dc.w off_2C3C           ; DATA XREF: ROM:001A331C   o
                                         ; ROM:001A3330   o ...
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $0, $86
                 dc.w off_2C40
                 dc.w off_2C44
                 dc.w off_2C48
                 dc.w off_2C48
-                dc.w $F600
+                fa_delete
 anim_unknown_12:dc.w off_2C24           ; DATA XREF: ROM:stru_25B2AC   o
-                dc.w $FB00
-                dc.l sub_25980C
-                dc.w $F09A
-                dc.l off_1B1828
+                fa_call sub_25980C
+                fa_rand_goto 154, off_1B1828
 off_1B1858:     dc.w off_2C14           ; DATA XREF: ROM:001B1864   o
                 dc.w off_2C18
                 dc.w off_2C1C
                 dc.w off_2C20
                 dc.w off_2C24
-                dc.w $EA00
-                dc.l off_1B1858
+                fa_goto off_1B1858
 off_1B1868:     dc.w off_2004           ; DATA XREF: ROM:001A3350   o
                                         ; fire_to_butt_crab+38   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $0, $86
                 dc.w off_2008
                 dc.w off_2008
                 dc.w off_200C
                 dc.w off_200C
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_2014
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $EE8F
+                fa_call oksub_249526
+                fa_hold 15
                 dc.w off_2014
                 dc.w off_2014
                 dc.w off_2014
                 dc.w off_2018
                 dc.w off_2018
                 dc.w off_201C
-                dc.w $FB00
-                dc.l oksub_24951E
+                fa_call oksub_24951E
                 dc.w off_201C
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_2018
                 dc.w off_2014
-                dc.w $EF00
+                fa_next
 anim_butt_monster:dc.w off_2014         ; DATA XREF: ROM:stru_25B2C4   o
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_2014
-                dc.w $ED11
-                dc.w 0
-                dc.w $6C
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $EE8F
+                fa_set_obj_b $0, $6C
+                fa_call oksub_249526
+                fa_hold 15
                 dc.w off_2014
                 dc.w off_2014
                 dc.w off_2014
                 dc.w off_2018
                 dc.w off_2018
                 dc.w off_201C
-                dc.w $FB00
-                dc.l oksub_24951E
+                fa_call oksub_24951E
                 dc.w off_201C
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_2018
                 dc.w off_2014
-                dc.w $EF00
-                dc.w $EA00
-                dc.l off_1B19FA
-word_1B18DE:    dc.w $ED11              ; DATA XREF: ROM:001B1A2E   o
-                dc.w 0
-                dc.w $21
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A3336
-word_1B18EC:    dc.w $EE85              ; DATA XREF: ROM:001B1912   o
+                fa_next
+                fa_goto off_1B19FA
+word_1B18DE:                            ; DATA XREF: ROM:001B1A2E   o
+                fa_set_obj_b $0, $21
+                fa_set_obj_l $A, byte_1A3336
+word_1B18EC:                            ; DATA XREF: ROM:001B1912   o
+                fa_hold 5
                                         ; ROM:001B199E   o ...
                 dc.w off_1FB4
 off_1B18F0:     dc.w off_1FB4           ; DATA XREF: ROM:001B18F4   o
-                dc.w $F09A
-                dc.l off_1B18F0
-                dc.w $F068
-                dc.l off_1B1990
-                dc.w $F068
-                dc.l off_1B1976
-                dc.w $F068
-                dc.l off_1B1980
-                dc.w $F068
-                dc.l word_1B198A
-                dc.w $EA00
-                dc.l word_1B18EC
-word_1B1916:    dc.w $EE85              ; DATA XREF: ROM:001B1936   o
+                fa_rand_goto 154, off_1B18F0
+                fa_rand_goto 104, off_1B1990
+                fa_rand_goto 104, off_1B1976
+                fa_rand_goto 104, off_1B1980
+                fa_rand_goto 104, word_1B198A
+                fa_goto word_1B18EC
+word_1B1916:                            ; DATA XREF: ROM:001B1936   o
+                fa_hold 5
                                         ; ROM:001B197C   o ...
                 dc.w off_1FC4
 off_1B191A:     dc.w off_1FC4           ; DATA XREF: ROM:001B191E   o
-                dc.w $F09A
-                dc.l off_1B191A
-                dc.w $F078
-                dc.l off_1B19A2
-                dc.w $F078
-                dc.l word_1B19AC
-                dc.w $F078
-                dc.l off_1B19B2
-                dc.w $EA00
-                dc.l word_1B1916
-word_1B193A:    dc.w $EE85              ; DATA XREF: ROM:001B1960   o
+                fa_rand_goto 154, off_1B191A
+                fa_rand_goto 120, off_1B19A2
+                fa_rand_goto 120, word_1B19AC
+                fa_rand_goto 120, off_1B19B2
+                fa_goto word_1B1916
+word_1B193A:                            ; DATA XREF: ROM:001B1960   o
+                fa_hold 5
                                         ; ROM:001B1986   o ...
                 dc.w off_1FC8
 off_1B193E:     dc.w off_1FC8           ; DATA XREF: ROM:001B1942   o
-                dc.w $F09A
-                dc.l off_1B193E
-                dc.w $F068
-                dc.l off_1B19D6
-                dc.w $F068
-                dc.l off_1B19BC
-                dc.w $F068
-                dc.l off_1B19C6
-                dc.w $F068
-                dc.l word_1B19D0
-                dc.w $EA00
-                dc.l word_1B193A
-word_1B1964:    dc.w $F078              ; DATA XREF: ROM:001B198C   o
+                fa_rand_goto 154, off_1B193E
+                fa_rand_goto 104, off_1B19D6
+                fa_rand_goto 104, off_1B19BC
+                fa_rand_goto 104, off_1B19C6
+                fa_rand_goto 104, word_1B19D0
+                fa_goto word_1B193A
+word_1B1964:                            ; DATA XREF: ROM:001B198C   o
+                fa_rand_goto 120, word_1B19E8
                                         ; ROM:001B19AE   o ...
-                dc.l word_1B19E8
-                dc.w $F078
-                dc.l word_1B19EE
-                dc.w $F078
-                dc.l word_1B19F4
+                fa_rand_goto 120, word_1B19EE
+                fa_rand_goto 120, word_1B19F4
 off_1B1976:     dc.w off_1FD8           ; DATA XREF: ROM:001B1900   o
                 dc.w off_1FD8
-                dc.w $EA00
-                dc.l word_1B1916
+                fa_goto word_1B1916
 off_1B1980:     dc.w off_1FE0           ; DATA XREF: ROM:001B1906   o
                 dc.w off_1FE0
-                dc.w $EA00
-                dc.l word_1B193A
-word_1B198A:    dc.w $EA00              ; DATA XREF: ROM:001B190C   o
-                dc.l word_1B1964
+                fa_goto word_1B193A
+word_1B198A:                            ; DATA XREF: ROM:001B190C   o
+                fa_goto word_1B1964
 off_1B1990:     dc.w off_1FB8           ; DATA XREF: ROM:001B18FA   o
                 dc.w off_1FBC
                 dc.w off_1FC0
                 dc.w off_1FC0
                 dc.w off_1FBC
                 dc.w off_1FB8
-                dc.w $EA00
-                dc.l word_1B18EC
+                fa_goto word_1B18EC
 off_1B19A2:     dc.w off_1FD8           ; DATA XREF: ROM:001B1924   o
                 dc.w off_1FD8
-                dc.w $EA00
-                dc.l word_1B18EC
-word_1B19AC:    dc.w $EA00              ; DATA XREF: ROM:001B192A   o
-                dc.l word_1B1964
+                fa_goto word_1B18EC
+word_1B19AC:                            ; DATA XREF: ROM:001B192A   o
+                fa_goto word_1B1964
 off_1B19B2:     dc.w off_1FDC           ; DATA XREF: ROM:001B1930   o
                 dc.w off_1FDC
-                dc.w $EA00
-                dc.l word_1B193A
+                fa_goto word_1B193A
 off_1B19BC:     dc.w off_1FDC           ; DATA XREF: ROM:001B194E   o
                 dc.w off_1FDC
-                dc.w $EA00
-                dc.l word_1B1916
+                fa_goto word_1B1916
 off_1B19C6:     dc.w off_1FE0           ; DATA XREF: ROM:001B1954   o
                 dc.w off_1FE0
-                dc.w $EA00
-                dc.l word_1B18EC
-word_1B19D0:    dc.w $EA00              ; DATA XREF: ROM:001B195A   o
-                dc.l word_1B1964
+                fa_goto word_1B18EC
+word_1B19D0:                            ; DATA XREF: ROM:001B195A   o
+                fa_goto word_1B1964
 off_1B19D6:     dc.w off_1FCC           ; DATA XREF: ROM:001B1948   o
                 dc.w off_1FD0
                 dc.w off_1FD4
                 dc.w off_1FD4
                 dc.w off_1FD0
                 dc.w off_1FCC
-                dc.w $EA00
-                dc.l word_1B193A
-word_1B19E8:    dc.w $EA00              ; DATA XREF: ROM:001B1966   o
-                dc.l word_1B193A
-word_1B19EE:    dc.w $EA00              ; DATA XREF: ROM:001B196C   o
-                dc.l word_1B1916
-word_1B19F4:    dc.w $EA00              ; DATA XREF: ROM:001B1972   o
-                dc.l word_1B18EC
+                fa_goto word_1B193A
+word_1B19E8:                            ; DATA XREF: ROM:001B1966   o
+                fa_goto word_1B193A
+word_1B19EE:                            ; DATA XREF: ROM:001B196C   o
+                fa_goto word_1B1916
+word_1B19F4:                            ; DATA XREF: ROM:001B1972   o
+                fa_goto word_1B18EC
 off_1B19FA:     dc.w off_200C           ; DATA XREF: ROM:001B18DA   o
                                         ; collision_with_butt_crab_3+4   o
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_200C
                 dc.w off_2008
                 dc.w off_2008
@@ -15813,73 +14229,58 @@ off_1B1A0A:     dc.w off_1FE4           ; DATA XREF: collision_with_butt_crab+C 
                 dc.w off_1FE8
                 dc.w off_1FE8
                 dc.w off_1FEC
-                dc.w $ED11
-                dc.w 0
-                dc.w $22
+                fa_set_obj_b $0, $22
                 dc.w off_1FF0
                 dc.w off_1FF0
                 dc.w off_1FF0
-                dc.w $ED11
-                dc.w 0
-                dc.w $21
+                fa_set_obj_b $0, $21
                 dc.w off_1FF4
                 dc.w off_1FF4
                 dc.w off_1FF8
                 dc.w off_1FF8
-                dc.w $EA00
-                dc.l word_1B18DE
+                fa_goto word_1B18DE
 off_1B1A32:     dc.w off_1FFC           ; DATA XREF: fire_to_butt_crab+4A   o
                 dc.w off_1FFC
                 dc.w off_1FFC
                 dc.w off_2000
                 dc.w off_2000
-                dc.w $F500
-                dc.l object_spiral_explode
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, object_spiral_explode, 0, 0, 0, 0
                 dc.w off_2000
-                dc.w $F600
+                fa_delete
 anim_frog:     dc.w frame_none           ; DATA XREF: ROM:001B1A5A   o
                                         ; ROM:001B1A6C   o ...
-                dc.w $FD46
-                dc.l off_1B1A5E
-                dc.w $EA00
-                dc.l anim_frog
+                fa_if_jim_near_x 70, off_1B1A5E
+                fa_goto anim_frog
 off_1B1A5E:     dc.w frame_none           ; DATA XREF: ROM:001B1A54   o
-                dc.w $FB00
-                dc.l sub_258D60
-                dc.w $EE93
+                fa_call sub_258D60
+                fa_hold 19
                 dc.w frame_none
-                dc.w $EA00
-                dc.l anim_frog
+                fa_goto anim_frog
 anim_frog_2:     dc.w off_232C           ; DATA XREF: ROM:object_frog_emerging_from_underground   o
                 dc.w off_2330
                 dc.w off_2334
                 dc.w off_2338
                 dc.w off_233C
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_233C
                 dc.w off_2338
                 dc.w off_2334
                 dc.w off_2330
                 dc.w off_232C
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_2340
                 dc.w off_2344
                 dc.w off_2348
                 dc.w off_234C
                 dc.w off_2350
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_2350
                 dc.w off_234C
                 dc.w off_2348
                 dc.w off_2344
                 dc.w off_2340
-                dc.w $ED11
-                dc.w 0
-                dc.w $41
-                dc.w $EB00
+                fa_set_obj_b $0, $41
+                fa_flip_x
                 dc.w off_2340
                 dc.w off_2344
                 dc.w off_2348
@@ -15896,15 +14297,10 @@ anim_frog_2:     dc.w off_232C           ; DATA XREF: ROM:object_frog_emerging_f
                 dc.w off_2360
                 dc.w off_2360
                 dc.w off_2360
-                dc.w $EA00
-                dc.l word_1B1AF8
+                fa_goto word_1B1AF8
 off_1B1ACC:     dc.w off_2360           ; DATA XREF: ROM:001B1B02   o
                                         ; ROM:001B1B38   o
-                dc.w $F411
-                dc.w $FDEA
-                dc.w $45
-                dc.w $1B
-                dc.w off_1BEC
+                fa_if_b FM_EQ, jim_state, $45, $1B1BEC
                 dc.w off_2364
                 dc.w off_2364
                 dc.w off_2364
@@ -15913,7 +14309,7 @@ off_1B1ACC:     dc.w off_2360           ; DATA XREF: ROM:001B1B02   o
                 dc.w off_2358
                 dc.w off_2358
                 dc.w off_2354
-                dc.w $F700
+                fa_face_jim
                 dc.w off_2358
                 dc.w off_2358
                 dc.w off_235C
@@ -15921,15 +14317,13 @@ off_1B1ACC:     dc.w off_2360           ; DATA XREF: ROM:001B1B02   o
                 dc.w off_2364
                 dc.w off_2364
                 dc.w off_2364
-word_1B1AF8:    dc.w $F700              ; DATA XREF: ROM:001B1AC8   o
-                dc.w $FD3C
-                dc.l off_1B1B0C
-                dc.w $FD50
-                dc.l off_1B1ACC
-                dc.w $EA00
-                dc.l off_1B1BEC
+word_1B1AF8:                            ; DATA XREF: ROM:001B1AC8   o
+                fa_face_jim
+                fa_if_jim_near_x 60, off_1B1B0C
+                fa_if_jim_near_x 80, off_1B1ACC
+                fa_goto off_1B1BEC
 off_1B1B0C:     dc.w off_2360           ; DATA XREF: ROM:001B1AFC   o
-                dc.w $F700
+                fa_face_jim
                 dc.w off_2310
                 dc.w off_2310
                 dc.w off_2310
@@ -15949,118 +14343,79 @@ off_1B1B0C:     dc.w off_2360           ; DATA XREF: ROM:001B1AFC   o
                 dc.w off_2310
                 dc.w off_2310
                 dc.w off_2310
-                dc.w $EA00
-                dc.l off_1B1ACC
+                fa_goto off_1B1ACC
 off_1B1B3C:     dc.w off_2310           ; DATA XREF: ROM:0000C65C   o
                                         ; ROM:0000C660   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B46:     dc.w off_2314           ; DATA XREF: ROM:0000C668   o
                                         ; ROM:0000C66C   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B50:     dc.w off_2318           ; DATA XREF: ROM:0000C674   o
                                         ; ROM:0000C678   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B5A:     dc.w off_231C           ; DATA XREF: ROM:0000C67C   o
                                         ; ROM:0000C698   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $ED01
-                dc.w $FD30
-                dc.w 8
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_set_b byte_FFFD30, $8
+                fa_end
 off_1B1B6A:     dc.w off_2320           ; DATA XREF: ROM:0000C680   o
                                         ; ROM:0000C68C   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B74:     dc.w off_2324           ; DATA XREF: ROM:0000C684   o
                                         ; ROM:0000C690   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B7E:     dc.w off_2328           ; DATA XREF: ROM:0000C688   o
                                         ; ROM:0000C694   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B88:     dc.w off_2360           ; DATA XREF: ROM:off_C61C   o
                                         ; ROM:0000C620   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $0
+                fa_end
 off_1B1B92:     dc.w off_2310           ; DATA XREF: ROM:0000C6E0   o
                                         ; ROM:0000C6E4   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B1B9C:     dc.w off_2314           ; DATA XREF: ROM:0000C6EC   o
                                         ; ROM:0000C6F0   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B1BA6:     dc.w off_2318           ; DATA XREF: ROM:0000C6F8   o
                                         ; ROM:0000C6FC   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B1BB0:     dc.w off_231C           ; DATA XREF: ROM:0000C700   o
                                         ; ROM:0000C71C   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED01
-                dc.w $FD30
-                dc.w 8
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_b byte_FFFD30, $8
+                fa_end
 off_1B1BC0:     dc.w off_2320           ; DATA XREF: ROM:0000C704   o
                                         ; ROM:0000C710   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B1BCA:     dc.w off_2324           ; DATA XREF: ROM:0000C708   o
                                         ; ROM:0000C714   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B1BD4:     dc.w off_2328           ; DATA XREF: ROM:0000C70C   o
                                         ; ROM:0000C718   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B1BDE:     dc.w off_2360           ; DATA XREF: ROM:0000C7A0   o
                                         ; ROM:0000C7A4   o ...
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 anim_frog_3:     dc.w off_2310           ; DATA XREF: spawn_frog_2+14   o
                                         ; ROM:object_frog   o
-                dc.w $EC01
+                fa_end
 off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
                 dc.w off_2360
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $0, $86
                 dc.w off_2364
                 dc.w off_2364
                 dc.w off_2364
@@ -16074,7 +14429,7 @@ off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
                 dc.w off_2348
                 dc.w off_234C
                 dc.w off_2350
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_2350
                 dc.w off_234C
                 dc.w off_2348
@@ -16085,103 +14440,86 @@ off_1B1BEC:     dc.w off_2360           ; DATA XREF: ROM:001B1B08   o
                 dc.w off_2334
                 dc.w off_2338
                 dc.w off_233C
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_233C
                 dc.w off_2338
                 dc.w off_2334
                 dc.w off_2330
                 dc.w off_232C
                 dc.w off_232C
-                dc.w $F600
+                fa_delete
 off_1B1C36:     dc.w frame_none           ; DATA XREF: ROM:001B1C48   o
                                         ; spawn_incubator_left+C   o ...
-                dc.w $FB00
-                dc.l incubator_left_try_egg
+                fa_call incubator_left_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1C36
+                fa_goto off_1B1C36
 off_1B1C4C:     dc.w frame_none           ; DATA XREF: ROM:001B1C5E   o
                                         ; spawn_incubator_right+C   o
-                dc.w $FB00
-                dc.l incubator_right_try_egg
+                fa_call incubator_right_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1C4C
+                fa_goto off_1B1C4C
 off_1B1C62:     dc.w frame_none           ; DATA XREF: ROM:001B1C76   o
                                         ; spawn_incubator_down+C   o
-                dc.w $FB00
-                dc.l incubator_down_try_egg
+                fa_call incubator_down_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1C62
+                fa_goto off_1B1C62
 off_1B1C7A:     dc.w frame_none           ; DATA XREF: ROM:001B1C8E   o
                                         ; spawn_incubator_up+C   o
-                dc.w $FB00
-                dc.l incubator_up_try_egg
+                fa_call incubator_up_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1C7A
+                fa_goto off_1B1C7A
 off_1B1C92:     dc.w frame_none           ; DATA XREF: ROM:001B1CA4   o
                                         ; spawn_incubator_left_down+C   o
-                dc.w $FB00
-                dc.l incubator_left_down_try_egg
+                fa_call incubator_left_down_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1C92
+                fa_goto off_1B1C92
 off_1B1CA8:     dc.w frame_none           ; DATA XREF: ROM:001B1CBA   o
                                         ; spawn_incubator_right_down+C   o
-                dc.w $FB00
-                dc.l incubator_right_down_try_egg
+                fa_call incubator_right_down_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1CA8
+                fa_goto off_1B1CA8
 off_1B1CBE:     dc.w frame_none           ; DATA XREF: ROM:001B1CD0   o
                                         ; spawn_incubator_left_up+C   o
-                dc.w $FB00
-                dc.l incubator_left_up_try_egg
+                fa_call incubator_left_up_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1CBE
+                fa_goto off_1B1CBE
 off_1B1CD4:     dc.w frame_none           ; DATA XREF: ROM:001B1CE6   o
                                         ; spawn_incubator_right_up+C   o
-                dc.w $FB00
-                dc.l incubator_right_up_try_egg
+                fa_call incubator_right_up_try_egg
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l off_1B1CD4
+                fa_goto off_1B1CD4
 anim_fan:     dc.w off_24E4           ; DATA XREF: ROM:001B1CF4   o
                                         ; ROM:object_fan   o
                 dc.w off_24E8
                 dc.w off_24EC
                 dc.w off_24F0
-                dc.w $EA00
-                dc.l anim_fan
+                fa_goto anim_fan
 anim_eye:     dc.w off_774            ; DATA XREF: ROM:object_eye   o
                 dc.w off_774
 off_1B1CFC:     dc.w off_778            ; DATA XREF: ROM:001B1D12   o
@@ -16191,11 +14529,9 @@ off_1B1CFC:     dc.w off_778            ; DATA XREF: ROM:001B1D12   o
                 dc.w off_780
                 dc.w off_780
                 dc.w off_784
-                dc.w $F902
-                dc.w 0
+                fa_chase_jim 2, 0, 0
                 dc.w off_784
-                dc.w $EA00
-                dc.l off_1B1CFC
+                fa_goto off_1B1CFC
 anim_egg_with_needles:dc.w off_212C     ; DATA XREF: ROM:001B1D38   o
                                         ; ROM:stru_25B2F4   o ...
                 dc.w off_212C
@@ -16213,29 +14549,19 @@ anim_egg_with_needles:dc.w off_212C     ; DATA XREF: ROM:001B1D38   o
                 dc.w off_2144
                 dc.w off_2148
                 dc.w off_2148
-                dc.w $EA00
-                dc.l anim_egg_with_needles
+                fa_goto anim_egg_with_needles
 off_1B1D3C:     dc.w off_2148           ; DATA XREF: ROM:001A3F34   o
                                         ; fire_to_egg_with_needles+1A   o
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
-                dc.w $F600
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
+                fa_delete
 anim_bee_home:  dc.w off_208C           ; DATA XREF: ROM:001B1D5A   o
                                         ; ROM:001B1D6A   o ...
-                dc.w $ED11
-                dc.w 0
-                dc.w $32
-                dc.w $F09A
-                dc.l anim_bee_home
-                dc.w $FB00
-                dc.l spawn_bee
-                dc.w $EE86
+                fa_set_obj_b $0, $32
+                fa_rand_goto 154, anim_bee_home
+                fa_call spawn_bee
+                fa_hold 6
                 dc.w off_208C
-                dc.w $EA00
-                dc.l anim_bee_home
+                fa_goto anim_bee_home
 off_1B1D6E:     dc.w off_2090           ; DATA XREF: fire_to_bee_generator+28   o
                 dc.w off_2090
                 dc.w off_2094
@@ -16243,175 +14569,132 @@ off_1B1D6E:     dc.w off_2090           ; DATA XREF: fire_to_bee_generator+28   
                 dc.w off_2098
                 dc.w off_2098
                 dc.w off_208C
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_208C
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_2090
                 dc.w off_2090
-                dc.w $EA00
-                dc.l anim_bee_home
+                fa_goto anim_bee_home
 off_1B1D94:     dc.w off_2094           ; DATA XREF: ROM:001B1E2C   o
                                         ; fire_to_bee_generator+3C   o
-                dc.w $F500
-                dc.l stru_25A874
-                dc.w $4EC
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A874, 4, -20, 0, 0
                 dc.w off_2094
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_208C
-                dc.w $F500
-                dc.l stru_25A874
-                dc.w $FC04
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A874, -4, 4, 0, 0
                 dc.w off_208C
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_2090
-                dc.w $F500
-                dc.l stru_25A874
-                dc.w $F4F4
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A874, -12, -12, 0, 0
                 dc.w off_2090
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_2098
-                dc.w $F500
-                dc.l stru_25A874
-                dc.w $FE00
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A874, -2, 0, 0, 0
                 dc.w off_2098
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_2090
-                dc.w $F500
-                dc.l stru_25A874
-                dc.w $402
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A874, 4, 2, 0, 0
                 dc.w off_2090
-                dc.w $FB00
-                dc.l spawn_bee
+                fa_call spawn_bee
                 dc.w off_208C
-                dc.w $F500
-                dc.l stru_25A874
-                dc.w $FAFA
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A874, -6, -6, 0, 0
                 dc.w off_208C
-                dc.w $EA00
-                dc.l off_1B1D94
+                fa_goto off_1B1D94
 anim_bee:       dc.w off_2180           ; DATA XREF: ROM:002566FC   o
                                         ; ROM:object_bee   o
-                dc.w $EC01
+                fa_end
 off_1B1E34:     dc.w off_2184           ; DATA XREF: ROM:00256700   o
-                dc.w $EC01
+                fa_end
 off_1B1E38:     dc.w off_2188           ; DATA XREF: ROM:00256704   o
-                dc.w $EC01
+                fa_end
 off_1B1E3C:     dc.w off_218C           ; DATA XREF: ROM:00256708   o
-                dc.w $EC01
+                fa_end
 off_1B1E40:     dc.w off_2190           ; DATA XREF: ROM:0025670C   o
-                dc.w $EC01
+                fa_end
 off_1B1E44:     dc.w off_2194           ; DATA XREF: ROM:00256710   o
-                dc.w $EC01
+                fa_end
 off_1B1E48:     dc.w off_2198           ; DATA XREF: ROM:00256714   o
-                dc.w $EC01
+                fa_end
 off_1B1E4C:     dc.w off_219C           ; DATA XREF: ROM:00256718   o
-                dc.w $EC01
+                fa_end
 off_1B1E50:     dc.w off_21A0           ; DATA XREF: ROM:0025671C   o
-                dc.w $EC01
+                fa_end
 off_1B1E54:     dc.w off_21A4           ; DATA XREF: ROM:00256720   o
-                dc.w $EC01
+                fa_end
 off_1B1E58:     dc.w off_21A8           ; DATA XREF: ROM:00256724   o
-                dc.w $EC01
+                fa_end
 off_1B1E5C:     dc.w off_21AC           ; DATA XREF: ROM:00256728   o
-                dc.w $EC01
+                fa_end
 off_1B1E60:     dc.w off_21B0           ; DATA XREF: ROM:0025672C   o
-                dc.w $EC01
+                fa_end
 off_1B1E64:     dc.w off_21B4           ; DATA XREF: ROM:00256730   o
-                dc.w $EC01
+                fa_end
 off_1B1E68:     dc.w off_21B8           ; DATA XREF: ROM:00256734   o
-                dc.w $EC01
+                fa_end
 off_1B1E6C:     dc.w off_21BC           ; DATA XREF: ROM:00256738   o
-                dc.w $EC01
+                fa_end
 off_1B1E70:     dc.w off_21C0           ; DATA XREF: ROM:0025673C   o
-                dc.w $EC01
+                fa_end
 off_1B1E74:     dc.w off_21C4           ; DATA XREF: ROM:00256740   o
-                dc.w $EC01
+                fa_end
 off_1B1E78:     dc.w off_21C8           ; DATA XREF: ROM:00256744   o
-                dc.w $EC01
+                fa_end
 off_1B1E7C:     dc.w off_21CC           ; DATA XREF: ROM:00256748   o
-                dc.w $EC01
+                fa_end
 off_1B1E80:     dc.w off_21D0           ; DATA XREF: ROM:0025674C   o
-                dc.w $EC01
+                fa_end
 off_1B1E84:     dc.w off_21D4           ; DATA XREF: ROM:00256750   o
-                dc.w $EC01
+                fa_end
 off_1B1E88:     dc.w off_21D8           ; DATA XREF: ROM:00256754   o
-                dc.w $EC01
+                fa_end
 off_1B1E8C:     dc.w off_21DC           ; DATA XREF: ROM:00256758   o
-                dc.w $EC01
+                fa_end
 off_1B1E90:     dc.w off_21E0           ; DATA XREF: ROM:0025675C   o
-                dc.w $EC01
+                fa_end
 off_1B1E94:     dc.w off_21E4           ; DATA XREF: ROM:00256760   o
-                dc.w $EC01
+                fa_end
 off_1B1E98:     dc.w off_21E8           ; DATA XREF: ROM:00256764   o
-                dc.w $EC01
+                fa_end
 off_1B1E9C:     dc.w off_21EC           ; DATA XREF: ROM:00256768   o
-                dc.w $EC01
+                fa_end
 off_1B1EA0:     dc.w off_21F0           ; DATA XREF: ROM:0025676C   o
-                dc.w $EC01
+                fa_end
 off_1B1EA4:     dc.w off_21F4           ; DATA XREF: ROM:00256770   o
-                dc.w $EC01
+                fa_end
 off_1B1EA8:     dc.w off_21F8           ; DATA XREF: fire_to_bee+1A   o
                 dc.w off_21FC
                 dc.w off_2200
                 dc.w off_2204
                 dc.w off_2204
-                dc.w $F600
+                fa_delete
 anim_green_goose:     dc.w off_2234           ; DATA XREF: ROM:001B1EBA   o
                                         ; ROM:001B1F02   o ...
                 dc.w off_2234
-                dc.w $F0D6
-                dc.l anim_green_goose
-                dc.w $EE89
+                fa_rand_goto 214, anim_green_goose
+                fa_hold 9
                 dc.w off_2234
-                dc.w $F342
+                fa_sound $42
                 dc.w off_2234
-                dc.w $F700
-                dc.w $F287
-                dc.w 9
-                dc.l word_1B1EDC
-                dc.w $FAC2
-                dc.w $18
-                dc.w $300
-                dc.w $EA00
-                dc.l word_1B1EE2
-word_1B1EDC:    dc.w $FA42              ; DATA XREF: ROM:001B1ECC   o
-                dc.w $18
-                dc.w $300
-word_1B1EE2:    dc.w $FAC2              ; DATA XREF: ROM:001B1ED8   o
-                dc.w $1A
-                dc.w $100
-                dc.w $F902
-                dc.w $F000
+                fa_face_jim
+                fa_if_obj_bit_clr $9, 7, word_1B1EDC
+                fa_sub_obj_w $18, $300
+                fa_goto word_1B1EE2
+word_1B1EDC:                            ; DATA XREF: ROM:001B1ECC   o
+                fa_add_obj_w $18, $300
+word_1B1EE2:                            ; DATA XREF: ROM:001B1ED8   o
+                fa_sub_obj_w $1A, $100
+                fa_chase_jim 2, -16, 0
                 dc.w off_2238
                 dc.w off_2238
                 dc.w off_223C
                 dc.w off_223C
                 dc.w off_2240
                 dc.w off_2240
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_2244
                 dc.w off_2238
                 dc.w off_2238
-                dc.w $EA00
-                dc.l anim_green_goose
+                fa_goto anim_green_goose
 off_1B1F06:     dc.w off_2210           ; DATA XREF: ROM:001A3F50   o
                                         ; ROM:001A3F8E   o
                 dc.w off_2210
@@ -16419,20 +14702,15 @@ off_1B1F06:     dc.w off_2210           ; DATA XREF: ROM:001A3F50   o
                 dc.w off_2214
                 dc.w off_2214
 off_1B1F10:     dc.w off_2218           ; DATA XREF: ROM:001B1F44   o
-                dc.w $F100
-                dc.w 4
-                dc.w $ED11
-                dc.w 0
-                dc.w $1D
-                dc.w $F700
+                fa_move_x 4
+                fa_set_obj_b $0, $1D
+                fa_face_jim
                 dc.w off_2218
                 dc.w off_221C
-                dc.w $F100
-                dc.w 4
+                fa_move_x 4
                 dc.w off_221C
                 dc.w off_2218
-                dc.w $F100
-                dc.w 4
+                fa_move_x 4
                 dc.w off_2218
                 dc.w off_2218
                 dc.w off_2214
@@ -16440,63 +14718,45 @@ off_1B1F10:     dc.w off_2218           ; DATA XREF: ROM:001B1F44   o
                 dc.w off_2214
                 dc.w off_2218
                 dc.w off_2218
-                dc.w $FD30
-                dc.l off_1B1F62
-                dc.w $EA00
-                dc.l off_1B1F10
+                fa_if_jim_near_x 48, off_1B1F62
+                fa_goto off_1B1F10
 anim_larva:     dc.w off_2208           ; DATA XREF: ROM:001A3F6E   o
                                         ; ROM:001A3FA4   o ...
 off_1B1F4A:     dc.w off_2208           ; DATA XREF: ROM:001B1F4E   o
                                         ; ROM:001B1F5E   o
-                dc.w $F09A
-                dc.l off_1B1F4A
+                fa_rand_goto 154, off_1B1F4A
                 dc.w off_220C
 off_1B1F54:     dc.w off_220C           ; DATA XREF: ROM:001B1F58   o
-                dc.w $F09A
-                dc.l off_1B1F54
-                dc.w $EA00
-                dc.l off_1B1F4A
+                fa_rand_goto 154, off_1B1F54
+                fa_goto off_1B1F4A
 off_1B1F62:     dc.w off_221C           ; DATA XREF: ROM:001B1F3E   o
                                         ; ROM:001B1F8E   o
-                dc.w $F700
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A3F78
+                fa_face_jim
+                fa_set_obj_l $A, byte_1A3F78
                 dc.w off_221C
 off_1B1F70:     dc.w off_2220           ; DATA XREF: ROM:001B1F78   o
                 dc.w off_2220
-                dc.w $F2C7
-                dc.w $1A
-                dc.l off_1B1F70
+                fa_if_obj_bit_set $1A, 7, off_1B1F70
                 dc.w off_2224
                 dc.w off_2224
 off_1B1F80:     dc.w off_2228           ; DATA XREF: ROM:001B1F86   o
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B1F80
+                fa_if_obj_bit_clr $7, 4, off_1B1F80
                 dc.w off_2210
-                dc.w $EA00
-                dc.l off_1B1F62
+                fa_goto off_1B1F62
 off_1B1F92:     dc.w off_222C           ; DATA XREF: whip_to_green_goose_caterpillar+30   o
                                         ; fire_to_green_goose_caterpillar+20   o
                 dc.w off_2230
                 dc.w off_2230
-                dc.w $F600
+                fa_delete
 anim_cage:     dc.w off_B1C            ; DATA XREF: ROM:001B1FAC   o
                                         ; ROM:001B1FB8   o ...
-                dc.w $F4A1
-                dc.w $1C
-                dc.w 0
-                dc.l word_1B1FB0
-                dc.w $F491
-                dc.w $1D
-                dc.w 0
-                dc.l anim_cage
-word_1B1FB0:    dc.w $F32D              ; DATA XREF: ROM:001B1FA2   o
-                dc.w $EE87
+                fa_if_obj_b FM_NE, $1C, $0, word_1B1FB0
+                fa_if_obj_b FM_EQ, $1D, $0, anim_cage
+word_1B1FB0:                            ; DATA XREF: ROM:001B1FA2   o
+                fa_sound $2D
+                fa_hold 7
                 dc.w off_B1C
-                dc.w $EA00
-                dc.l anim_cage
+                fa_goto anim_cage
 anim_chemical_flask:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
                                         ; ROM:object_chemical_flask   o
                 dc.w off_33E4
@@ -16506,18 +14766,13 @@ anim_chemical_flask:     dc.w off_33E4           ; DATA XREF: ROM:001B1FCE   o
                 dc.w off_33F0
                 dc.w off_33F4
                 dc.w off_33F4
-                dc.w $EA00
-                dc.l anim_chemical_flask
+                fa_goto anim_chemical_flask
 anim_monkey_head:     dc.w off_2780           ; DATA XREF: ROM:001B21CC   o
                                         ; ROM:001B2210   o ...
-                dc.w $ED11
-                dc.w 0
-                dc.w 3
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A390C
+                fa_set_obj_b $0, $3
+                fa_set_obj_l $A, byte_1A390C
 off_1B1FE2:     dc.w off_2780           ; DATA XREF: ROM:001B201A   o
-                dc.w $F700
+                fa_face_jim
                 dc.w off_2780
                 dc.w off_2784
                 dc.w off_2784
@@ -16527,8 +14782,7 @@ off_1B1FE2:     dc.w off_2780           ; DATA XREF: ROM:001B201A   o
                 dc.w off_278C
                 dc.w off_2790
                 dc.w off_2790
-                dc.w $FD64
-                dc.l off_1B2170
+                fa_if_jim_near_x 100, off_1B2170
                 dc.w off_2794
                 dc.w off_2794
                 dc.w off_2798
@@ -16539,194 +14793,132 @@ off_1B1FE2:     dc.w off_2780           ; DATA XREF: ROM:001B201A   o
                 dc.w off_27A0
                 dc.w off_27A4
                 dc.w off_27A4
-                dc.w $FD64
-                dc.l off_1B2170
-                dc.w $EA00
-                dc.l off_1B1FE2
+                fa_if_jim_near_x 100, off_1B2170
+                fa_goto off_1B1FE2
 anim_monkey_head_2:     dc.w off_27D8           ; DATA XREF: ROM:001B2086   o
                                         ; ROM:object_monkey_head_rotating_valve   o
-                dc.w $ED11
-                dc.w $47
-                dc.w 1
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 1
-                dc.w $EE87
+                fa_set_obj_b $47, $1
+                fa_set_b eyes_generator_valve_state, $1
+                fa_hold 7
                 dc.w off_27D8
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 2
+                fa_set_b eyes_generator_valve_state, $2
                 dc.w off_27DC
                 dc.w off_27DC
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 3
+                fa_set_b eyes_generator_valve_state, $3
                 dc.w off_27E0
                 dc.w off_27E0
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 4
+                fa_set_b eyes_generator_valve_state, $4
                 dc.w off_27E4
                 dc.w off_27E4
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 5
+                fa_set_b eyes_generator_valve_state, $5
                 dc.w off_27E8
                 dc.w off_27E8
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 6
+                fa_set_b eyes_generator_valve_state, $6
                 dc.w off_27EC
                 dc.w off_27EC
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 5
+                fa_set_b eyes_generator_valve_state, $5
                 dc.w off_27E8
                 dc.w off_27E8
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 4
+                fa_set_b eyes_generator_valve_state, $4
                 dc.w off_27E4
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 3
+                fa_set_b eyes_generator_valve_state, $3
                 dc.w off_27E0
-                dc.w $ED01
-                dc.w $FD3E
-                dc.w 2
+                fa_set_b eyes_generator_valve_state, $2
                 dc.w off_27DC
-                dc.w $EA00
-                dc.l anim_monkey_head_2
+                fa_goto anim_monkey_head_2
 off_1B208A:     dc.w off_27A8           ; DATA XREF: fire_to_monkey_head+14   o
-                dc.w $ED11
-                dc.w $47
-                dc.w 3
+                fa_set_obj_b $47, $3
                 dc.w off_27A8
                 dc.w off_27AC
                 dc.w off_27AC
                 dc.w off_27A8
                 dc.w off_27A8
-                dc.w $EA00
-                dc.l off_1B20A2
+                fa_goto off_1B20A2
 off_1B20A2:     dc.w off_2760           ; DATA XREF: ROM:001B209E   o
-                dc.w $EB01
-                dc.w $EB00
-                dc.w $F100
-                dc.w $FFE0
-                dc.w $ED11
-                dc.w $47
-                dc.w 2
-                dc.w $EE01
+                fa_flip_y
+                fa_flip_x
+                fa_move_x -32
+                fa_set_obj_b $47, $2
+                fa_loop 1
                 dc.w off_2760
-                dc.w $F101
-                dc.w $FFFA
+                fa_move_y -6
                 dc.w off_2764
-                dc.w $F101
-                dc.w $FFFA
+                fa_move_y -6
                 dc.w off_2764
                 dc.w off_2768
-                dc.w $F101
-                dc.w $FFFA
+                fa_move_y -6
                 dc.w off_2768
                 dc.w off_276C
-                dc.w $F101
-                dc.w $FFF6
+                fa_move_y -10
                 dc.w off_276C
                 dc.w off_276C
                 dc.w off_2770
-                dc.w $F101
-                dc.w $FFFA
+                fa_move_y -6
                 dc.w off_2770
                 dc.w off_2774
-                dc.w $F101
-                dc.w $FFFA
+                fa_move_y -6
                 dc.w off_2774
                 dc.w off_2778
-                dc.w $F101
-                dc.w $FFFA
+                fa_move_y -6
                 dc.w off_277C
-                dc.w $F101
-                dc.w $FFFA
-                dc.w $EF00
+                fa_move_y -6
+                fa_next
                 dc.w off_2760
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
                 dc.w off_2764
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
                 dc.w off_2764
                 dc.w off_2768
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
                 dc.w off_2768
                 dc.w off_276C
-                dc.w $F101
-                dc.w $FFF5
+                fa_move_y -11
                 dc.w off_276C
                 dc.w off_276C
                 dc.w off_2770
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
                 dc.w off_2770
                 dc.w off_2774
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
                 dc.w off_2774
                 dc.w off_2778
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
                 dc.w off_277C
-                dc.w $F101
-                dc.w $FFF9
+                fa_move_y -7
 off_1B212E:     dc.w off_2760           ; DATA XREF: ROM:001B216C   o
-                dc.w $F101
-                dc.w $FFF8
+                fa_move_y -8
                 dc.w off_2764
-                dc.w $F101
-                dc.w $FFF8
+                fa_move_y -8
                 dc.w off_2764
                 dc.w off_2768
-                dc.w $F101
-                dc.w $FFF8
+                fa_move_y -8
                 dc.w off_2768
                 dc.w off_276C
-                dc.w $F101
-                dc.w $FFF4
+                fa_move_y -12
                 dc.w off_276C
                 dc.w off_276C
                 dc.w off_2770
-                dc.w $F101
-                dc.w $FFF8
+                fa_move_y -8
                 dc.w off_2770
                 dc.w off_2774
-                dc.w $F101
-                dc.w $FFF8
+                fa_move_y -8
                 dc.w off_2774
                 dc.w off_2778
-                dc.w $F101
-                dc.w $FFF8
+                fa_move_y -8
                 dc.w off_277C
-                dc.w $F101
-                dc.w $FFF8
-                dc.w $EA00
-                dc.l off_1B212E
+                fa_move_y -8
+                fa_goto off_1B212E
 off_1B2170:     dc.w off_27B0           ; DATA XREF: ROM:001A393E   o
                                         ; ROM:001B1FFA   o ...
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
+                fa_set_obj_l $A, 0
 off_1B217A:     dc.w off_27B0           ; DATA XREF: ROM:001B21C6   o
                 dc.w off_27B4
                 dc.w off_27B4
                 dc.w off_27B8
                 dc.w off_27B8
-                dc.w $F700
+                fa_face_jim
                 dc.w off_27BC
-                dc.w $F500
-                dc.l object_chemical_flask
-                dc.w $1808
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_chemical_flask, 24, 8, 0, 0
                 dc.w off_27BC
                 dc.w off_27C0
                 dc.w off_27C0
@@ -16736,28 +14928,22 @@ off_1B217A:     dc.w off_27B0           ; DATA XREF: ROM:001B21C6   o
                 dc.w off_27C8
                 dc.w off_27CC
                 dc.w off_27CC
-                dc.w $F700
+                fa_face_jim
                 dc.w off_27D0
-                dc.w $F500
-                dc.l object_chemical_flask
-                dc.w $2008
-                dc.l 0
-                dc.l byte_1A39AA
+                fa_spawn 0, object_chemical_flask, 32, 8, 0, byte_1A39AA
                 dc.w off_27D0
                 dc.w off_27D4
                 dc.w off_27D4
-                dc.w $FD64
-                dc.l off_1B217A
-                dc.w $EA00
-                dc.l anim_monkey_head
+                fa_if_jim_near_x 100, off_1B217A
+                fa_goto anim_monkey_head
 off_1B21D0:     dc.w off_27A8           ; DATA XREF: fire_to_monkey_head_on_chain+14   o
                 dc.w off_27A8
                 dc.w off_27AC
                 dc.w off_27AC
                 dc.w off_27A8
                 dc.w off_27A8
-                dc.b $F7,  0,$ED,$14,  0, $A
-                dc.l byte_1A3944
+                fa_face_jim
+                fa_set_obj_l $A, byte_1A3944
                 dc.w off_27A4
                 dc.w off_27A4
                 dc.w off_27A0
@@ -16778,8 +14964,7 @@ off_1B21D0:     dc.w off_27A8           ; DATA XREF: fire_to_monkey_head_on_chai
                 dc.w off_2784
                 dc.w off_2780
                 dc.w off_2780
-                dc.w $EA00
-                dc.l anim_monkey_head
+                fa_goto anim_monkey_head
 off_1B2214:     dc.w off_2780           ; DATA XREF: ROM:001A3972   o
                                         ; ROM:001B222A   o
                 dc.w off_2784
@@ -16791,8 +14976,7 @@ off_1B2214:     dc.w off_2780           ; DATA XREF: ROM:001A3972   o
                 dc.w off_279C
                 dc.w off_27A0
                 dc.w off_27A4
-                dc.w $EA00
-                dc.l off_1B2214
+                fa_goto off_1B2214
 off_1B222E:     dc.w off_2D24           ; DATA XREF: whip_to_prize_faucet+A6   o
                 dc.w off_2D24
                 dc.w off_2D24
@@ -16802,17 +14986,12 @@ off_1B222E:     dc.w off_2D24           ; DATA XREF: whip_to_prize_faucet+A6   o
                 dc.w off_2D2C
                 dc.w off_2D2C
                 dc.w off_2D2C
-                dc.w $ED11
-                dc.w 0
-                dc.w $44
-                dc.w $EA00
-                dc.l word_1B2284
+                fa_set_obj_b $0, $44
+                fa_goto word_1B2284
 anim_daemon:     dc.w off_2D20           ; DATA XREF: ROM:001B227E   o
                                         ; ROM:001B22BA   o ...
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
-                dc.w $F700
+                fa_set_obj_l $A, 0
+                fa_face_jim
                 dc.w off_2D20
                 dc.w off_2D24
                 dc.w off_2D24
@@ -16828,17 +15007,14 @@ anim_daemon:     dc.w off_2D20           ; DATA XREF: ROM:001B227E   o
                 dc.w off_2D38
                 dc.w off_2D3C
                 dc.w off_2D3C
-                dc.w $FD50
-                dc.l off_1B2282
-                dc.w $EA00
-                dc.l anim_daemon
+                fa_if_jim_near_x 80, off_1B2282
+                fa_goto anim_daemon
 off_1B2282:     dc.w off_2D00           ; DATA XREF: ROM:001B2278   o
-word_1B2284:    dc.w $ED14              ; DATA XREF: ROM:001B2248   o
-                dc.w $A
-                dc.l byte_1ACCDE
+word_1B2284:                            ; DATA XREF: ROM:001B2248   o
+                fa_set_obj_l $A, byte_1ACCDE
 off_1B228C:     dc.w off_2D00           ; DATA XREF: ROM:001B22C0   o
-                dc.w $F334
-                dc.w $F700
+                fa_sound $34
+                fa_face_jim
                 dc.w off_2D00
                 dc.w off_2D04
                 dc.w off_2D04
@@ -16849,8 +15025,8 @@ off_1B228C:     dc.w off_2D00           ; DATA XREF: ROM:001B22C0   o
                 dc.w off_2D10
                 dc.w off_2D10
                 dc.w off_2D10
-                dc.w $F3B4
-                dc.w $F31D
+                fa_sound_stop $34
+                fa_sound $1D
                 dc.w off_2D14
                 dc.w off_2D18
                 dc.w off_2D18
@@ -16858,10 +15034,8 @@ off_1B228C:     dc.w off_2D00           ; DATA XREF: ROM:001B22C0   o
                 dc.w off_2D1C
                 dc.w off_2D1C
                 dc.w off_2D1C
-                dc.w $FD0A
-                dc.l anim_daemon
-                dc.w $EA00
-                dc.l off_1B228C
+                fa_if_jim_near_x 10, anim_daemon
+                fa_goto off_1B228C
 anim_sponge:     dc.w off_33B0           ; DATA XREF: ROM:001B22F6   o
                                         ; ROM:object_sponge   o
                 dc.w off_33B0
@@ -16887,267 +15061,153 @@ anim_sponge:     dc.w off_33B0           ; DATA XREF: ROM:001B22F6   o
                 dc.w off_33D8
                 dc.w off_33DC
                 dc.w off_33DC
-                dc.w $EA00
-                dc.l anim_sponge
+                fa_goto anim_sponge
 off_1B22FA:     dc.w off_33B0           ; DATA XREF: ROM:001B238C   o
                                         ; fire_to_sponge+1C   o
                 dc.w off_33B0
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
                 dc.w off_33B4
                 dc.w off_33B4
                 dc.w off_33B8
                 dc.w off_33B8
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
                 dc.w off_33BC
                 dc.w off_33BC
                 dc.w off_33C0
                 dc.w off_33C0
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
                 dc.w off_33C4
                 dc.w off_33C4
                 dc.w off_33C8
                 dc.w off_33C8
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
                 dc.w off_33CC
                 dc.w off_33CC
                 dc.w off_33D0
                 dc.w off_33D0
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
                 dc.w off_33D4
                 dc.w off_33D4
                 dc.w off_33D8
                 dc.w off_33D8
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.l 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
                 dc.w off_33DC
                 dc.w off_33DC
-                dc.w $EA00
-                dc.l off_1B22FA
+                fa_goto off_1B22FA
 anim_air_bubble:     dc.w off_3368           ; DATA XREF: ROM:object_air_bubble   o
-                dc.w $EE8A
+                fa_hold 10
                 dc.w off_3368
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_336C
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_3370
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_3374
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_3378
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_337C
-                dc.w $EE8B
+                fa_hold 11
                 dc.w off_3380
                 dc.w off_3384
-                dc.w $EC01
+                fa_end
 anim_air_refiller:     dc.w off_33E0           ; DATA XREF: ROM:001B23CC   o
                                         ; ROM:object_air_refiller   o
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $3109
-                dc.l 0
-                dc.l 0
-                dc.w $EE0F
+                fa_spawn 0, object_air_bubble, 49, 9, 0, 0
+                fa_loop 15
                 dc.w off_33E0
-                dc.w $EF00
-                dc.w $EA00
-                dc.l anim_air_refiller
+                fa_next
+                fa_goto anim_air_refiller
 anim_submarine: dc.w off_25F4           ; DATA XREF: ROM:off_C93A   o
                                         ; ROM:stru_25B1A4   o
-word_1B23D2:    dc.w $EE8F              ; DATA XREF: ROM:001B23DC   o
+word_1B23D2:                            ; DATA XREF: ROM:001B23DC   o
+                fa_hold 15
                                         ; ROM:001B23F2   o
                 dc.w off_25F4
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B23D2
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B23D2
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B23D2
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B23D2
 off_1B23F6:     dc.w off_25F8           ; DATA XREF: ROM:0000C942   o
-                dc.w $F3BB
-                dc.w $F31E
-word_1B23FC:    dc.w $EE8E              ; DATA XREF: ROM:001B2406   o
+                fa_sound_stop $3B
+                fa_sound $1E
+word_1B23FC:                            ; DATA XREF: ROM:001B2406   o
+                fa_hold 14
                                         ; ROM:001B241C   o
                 dc.w off_25F8
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B23FC
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B23FC
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B23FC
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B23FC
 off_1B2420:     dc.w off_25FC           ; DATA XREF: ROM:0000C94A   o
-                dc.w $F31E
-word_1B2424:    dc.w $EE8D              ; DATA XREF: ROM:001B242E   o
+                fa_sound $1E
+word_1B2424:                            ; DATA XREF: ROM:001B242E   o
+                fa_hold 13
                                         ; ROM:001B2444   o
                 dc.w off_25FC
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B2424
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B2424
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B2424
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B2424
 off_1B2448:     dc.w off_2600           ; DATA XREF: ROM:0000C952   o
-                dc.w $F31E
-word_1B244C:    dc.w $EE8C              ; DATA XREF: ROM:001B2456   o
+                fa_sound $1E
+word_1B244C:                            ; DATA XREF: ROM:001B2456   o
+                fa_hold 12
                                         ; ROM:001B246C   o
                 dc.w off_2600
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B244C
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B244C
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B244C
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B244C
 off_1B2470:     dc.w off_2604           ; DATA XREF: ROM:0000C95A   o
-                dc.w $F31E
-word_1B2474:    dc.w $EE8B              ; DATA XREF: ROM:001B247E   o
+                fa_sound $1E
+word_1B2474:                            ; DATA XREF: ROM:001B247E   o
+                fa_hold 11
                                         ; ROM:001B2494   o
                 dc.w off_2604
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B2474
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B2474
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B2474
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B2474
 off_1B2498:     dc.w off_2608           ; DATA XREF: ROM:0000C962   o
-                dc.w $F31E
-word_1B249C:    dc.w $EE8A              ; DATA XREF: ROM:001B24B6   o
+                fa_sound $1E
+word_1B249C:                            ; DATA XREF: ROM:001B24B6   o
+                fa_hold 10
                                         ; ROM:001B24CC   o
                 dc.w off_2608
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $E0
-                dc.l 0
-                dc.l 0
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B249C
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B249C
+                fa_spawn 0, object_air_bubble, 0, -32, 0, 0
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B249C
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B249C
 off_1B24D0:     dc.w off_260C           ; DATA XREF: ROM:0000C96A   o
-                dc.w $F31E
-word_1B24D4:    dc.w $EE89              ; DATA XREF: ROM:001B24EE   o
+                fa_sound $1E
+word_1B24D4:                            ; DATA XREF: ROM:001B24EE   o
+                fa_hold 9
                                         ; ROM:001B2504   o
                 dc.w off_260C
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $E0
-                dc.l 0
-                dc.l 0
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B24D4
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B24D4
+                fa_spawn 0, object_air_bubble, 0, -32, 0, 0
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B24D4
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B24D4
 off_1B2508:     dc.w off_2610           ; DATA XREF: ROM:0000C972   o
-                dc.w $F31E
-word_1B250C:    dc.w $EE88              ; DATA XREF: ROM:001B2526   o
+                fa_sound $1E
+word_1B250C:                            ; DATA XREF: ROM:001B2526   o
+                fa_hold 8
                                         ; ROM:001B253C   o
                 dc.w off_2610
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $E0
-                dc.l 0
-                dc.l 0
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B250C
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B250C
+                fa_spawn 0, object_air_bubble, 0, -32, 0, 0
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B250C
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B250C
 off_1B2540:     dc.w off_2614           ; DATA XREF: ROM:0000C97A   o
-                dc.w $F31E
-word_1B2544:    dc.w $EE87              ; DATA XREF: ROM:001B255E   o
+                fa_sound $1E
+word_1B2544:                            ; DATA XREF: ROM:001B255E   o
+                fa_hold 7
                                         ; ROM:001B2574   o
                 dc.w off_2614
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $E0
-                dc.l 0
-                dc.l 0
-                dc.w $F421
-                dc.w $FD4E
-                dc.w 0
-                dc.l word_1B2544
-                dc.w $F500
-                dc.l object_air_bubble
-                dc.w $D1F3
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l word_1B2544
+                fa_spawn 0, object_air_bubble, 0, -32, 0, 0
+                fa_if_b FM_NE, byte_FFFD4E, $0, word_1B2544
+                fa_spawn 0, object_air_bubble, -47, -13, 0, 0
+                fa_goto word_1B2544
 anim_bob_cat:   dc.w off_DF4            ; DATA XREF: ROM:001B25D0   o
                                         ; ROM:object_bob_cat   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $2B
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AC640
+                fa_set_obj_b $0, $2B
+                fa_set_obj_l $A, byte_1AC640
 off_1B2588:     dc.w off_DF4            ; DATA XREF: ROM:001B25BA   o
                 dc.w off_DF4
                 dc.w off_DF8
@@ -17172,84 +15232,80 @@ off_1B2594:     dc.w off_E00            ; DATA XREF: ROM:001AD386   o
                 dc.w off_E1C
                 dc.w off_E20
                 dc.w off_E20
-                dc.w $EA00
-                dc.l off_1B2588
+                fa_goto off_1B2588
 off_1B25BE:     dc.w off_DAC            ; DATA XREF: fire_to_bob_cat+40   o
                                         ; whip_to_bobcat+4   o
-                dc.w $F700
+                fa_face_jim
                 dc.w off_DAC
                 dc.w off_DAC
                 dc.w off_DAC
-                dc.w $ED11
-                dc.w 0
-                dc.w $2B
-                dc.w $EA00
-                dc.l anim_bob_cat
+                fa_set_obj_b $0, $2B
+                fa_goto anim_bob_cat
 anim_planet:     dc.w off_2FA8           ; DATA XREF: ROM:object_planet   o
-                dc.w $EC01
+                fa_end
 off_1B25D8:     dc.w off_A10            ; DATA XREF: ROM:off_665A   o
                                         ; ROM:0000674A   o ...
-                dc.w $EC01
+                fa_end
 off_1B25DC:     dc.w off_A14            ; DATA XREF: ROM:0000665E   o
                                         ; ROM:00006666   o ...
-                dc.w $EC01
+                fa_end
 off_1B25E0:     dc.w off_A18            ; DATA XREF: ROM:00006662   o
                                         ; ROM:00006752   o ...
-                dc.w $EC01
+                fa_end
 off_1B25E4:     dc.w off_A1C            ; DATA XREF: ROM:0000666A   o
                                         ; ROM:0000673A   o ...
-                dc.w $EC01
+                fa_end
 off_1B25E8:     dc.w off_A20            ; DATA XREF: ROM:0000666E   o
                                         ; ROM:00006676   o ...
-                dc.w $EC01
+                fa_end
 off_1B25EC:     dc.w off_A24            ; DATA XREF: ROM:00006672   o
                                         ; ROM:00006742   o ...
-                dc.w $EC01
+                fa_end
 off_1B25F0:     dc.w off_A28            ; DATA XREF: ROM:0000667A   o
                                         ; ROM:0000672A   o ...
-                dc.w $EC01
+                fa_end
 off_1B25F4:     dc.w off_A2C            ; DATA XREF: ROM:0000667E   o
                                         ; ROM:00006686   o ...
-                dc.w $EC01
+                fa_end
 off_1B25F8:     dc.w off_A30            ; DATA XREF: ROM:00006682   o
                                         ; ROM:00006732   o ...
-                dc.w $EC01
+                fa_end
 off_1B25FC:     dc.w off_A34            ; DATA XREF: ROM:0000668A   o
                                         ; ROM:0000671A   o ...
-                dc.w $EC01
+                fa_end
 off_1B2600:     dc.w off_A38            ; DATA XREF: ROM:0000668E   o
                                         ; ROM:00006696   o ...
-                dc.w $EC01
+                fa_end
 off_1B2604:     dc.w off_A3C            ; DATA XREF: ROM:00006692   o
                                         ; ROM:00006722   o ...
-                dc.w $EC01
+                fa_end
 off_1B2608:     dc.w off_A40            ; DATA XREF: ROM:0000670A   o
                                         ; ROM:0000679A   o ...
-                dc.w $EC01
+                fa_end
 off_1B260C:     dc.w off_A44            ; DATA XREF: ROM:0000669A   o
                                         ; ROM:0000669E   o ...
-                dc.w $EC01
+                fa_end
 off_1B2610:     dc.w off_A48            ; DATA XREF: ROM:000066A2   o
                                         ; ROM:00006712   o ...
-                dc.w $EC01
+                fa_end
 off_1B2614:     dc.w off_A4C            ; DATA XREF: ROM:000066AA   o
                                         ; ROM:000066FA   o ...
-                dc.w $EC01
+                fa_end
 off_1B2618:     dc.w off_A50            ; DATA XREF: ROM:000066AE   o
                                         ; ROM:000066B6   o ...
-                dc.w $EC01
+                fa_end
 off_1B261C:     dc.w off_A54            ; DATA XREF: ROM:000066B2   o
                                         ; ROM:00006702   o ...
-                dc.w $EC01
+                fa_end
 off_1B2620:     dc.w off_A58            ; DATA XREF: ROM:000066BA   o
                                         ; ROM:000066CA   o ...
-                dc.w $EC01
+                fa_end
 off_1B2624:     dc.w off_A5C            ; DATA XREF: ROM:000066BE   o
                                         ; ROM:000066C6   o ...
-                dc.w $EC01
+                fa_end
 off_1B2628:     dc.w off_A60            ; DATA XREF: ROM:000066C2   o
                                         ; ROM:000066D2   o ...
-                dc.w $EC01
+                fa_end
 anim_sphere_energy_3:     dc.w off_2FAC           ; DATA XREF: ROM:object_protective_sphere   o
                 dc.w off_2FAC
 off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
@@ -17268,544 +15324,539 @@ off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
                 dc.w off_2FC8
                 dc.w off_2FCC
                 dc.w off_2FCC
-                dc.w $F421
-                dc.w $FD24
-                dc.w 0
-                dc.l word_1B2666
-                dc.w $F422
-                dc.w $FE90
-                dc.w 0
-                dc.l off_1B2630
+                fa_if_b FM_NE, level_end_timer, $0, word_1B2666
+                fa_if_w FM_NE, super_bubble_timer, $0, off_1B2630
                 dc.w off_2FAC
-word_1B2666:    dc.w $F600              ; DATA XREF: ROM:001B2656   o
+word_1B2666:                            ; DATA XREF: ROM:001B2656   o
+                fa_delete
 anim_psyq:     dc.w off_28C0           ; DATA XREF: ROM:00006BD4   o
                                         ; ROM:00006BD8   o ...
-                dc.w $EC01
+                fa_end
 off_1B266C:     dc.w off_28C4           ; DATA XREF: ROM:00006BD0   o
-                dc.w $EC01
+                fa_end
 off_1B2670:     dc.w off_28C8           ; DATA XREF: ROM:00006BCC   o
-                dc.w $EC01
+                fa_end
 off_1B2674:     dc.w off_28CC           ; DATA XREF: ROM:00006BC8   o
-                dc.w $EC01
+                fa_end
 off_1B2678:     dc.w off_28D0           ; DATA XREF: ROM:00006BC4   o
-                dc.w $EC01
+                fa_end
 off_1B267C:     dc.w off_28D4           ; DATA XREF: ROM:00006BC0   o
-                dc.w $EC01
+                fa_end
 off_1B2680:     dc.w off_28D8           ; DATA XREF: ROM:00006BBC   o
-                dc.w $EC01
+                fa_end
 off_1B2684:     dc.w off_28DC           ; DATA XREF: ROM:00006BB8   o
-                dc.w $EC01
+                fa_end
 off_1B2688:     dc.w off_28E0           ; DATA XREF: ROM:00006BB4   o
-                dc.w $EC01
+                fa_end
 off_1B268C:     dc.w off_28E4           ; DATA XREF: ROM:00006BB0   o
-                dc.w $EC01
+                fa_end
 off_1B2690:     dc.w off_28E8           ; DATA XREF: ROM:00006BAC   o
-                dc.w $EC01
+                fa_end
 off_1B2694:     dc.w off_28EC           ; DATA XREF: ROM:00006BA8   o
-                dc.w $EC01
+                fa_end
 off_1B2698:     dc.w off_28F0           ; DATA XREF: ROM:00006BA4   o
-                dc.w $EC01
+                fa_end
 off_1B269C:     dc.w off_28F4           ; DATA XREF: ROM:00006BA0   o
-                dc.w $EC01
+                fa_end
 off_1B26A0:     dc.w off_28F8           ; DATA XREF: ROM:00006B9C   o
-                dc.w $EC01
+                fa_end
 off_1B26A4:     dc.w off_28FC           ; DATA XREF: ROM:00006B98   o
-                dc.w $EC01
+                fa_end
 off_1B26A8:     dc.w off_2900           ; DATA XREF: ROM:00006B94   o
-                dc.w $EC01
+                fa_end
 off_1B26AC:     dc.w off_2904           ; DATA XREF: ROM:00006B90   o
-                dc.w $EC01
+                fa_end
 off_1B26B0:     dc.w off_2908           ; DATA XREF: ROM:00006B8C   o
-                dc.w $EC01
+                fa_end
 off_1B26B4:     dc.w off_290C           ; DATA XREF: ROM:00006B88   o
-                dc.w $EC01
+                fa_end
 off_1B26B8:     dc.w off_2910           ; DATA XREF: ROM:00006B84   o
-                dc.w $EC01
+                fa_end
 off_1B26BC:     dc.w off_2914           ; DATA XREF: ROM:00006B80   o
-                dc.w $EC01
+                fa_end
 off_1B26C0:     dc.w off_2918           ; DATA XREF: ROM:00006B7C   o
-                dc.w $EC01
+                fa_end
 off_1B26C4:     dc.w off_291C           ; DATA XREF: ROM:00006B78   o
-                dc.w $EC01
+                fa_end
 off_1B26C8:     dc.w off_2920           ; DATA XREF: ROM:00006B74   o
-                dc.w $EC01
+                fa_end
 off_1B26CC:     dc.w off_2924           ; DATA XREF: ROM:00006B70   o
                                         ; ROM:00006C30   o
-                dc.w $EC01
+                fa_end
 off_1B26D0:     dc.w off_2928           ; DATA XREF: ROM:00006B6C   o
                                         ; ROM:00006C2C   o
-                dc.w $EC01
+                fa_end
 off_1B26D4:     dc.w off_292C           ; DATA XREF: ROM:00006B68   o
                                         ; ROM:00006C28   o
-                dc.w $EC01
+                fa_end
 off_1B26D8:     dc.w off_2930           ; DATA XREF: ROM:00006B64   o
                                         ; ROM:00006C24   o
-                dc.w $EC01
+                fa_end
 off_1B26DC:     dc.w off_2934           ; DATA XREF: ROM:00006B60   o
                                         ; ROM:00006C20   o
-                dc.w $EC01
+                fa_end
 off_1B26E0:     dc.w off_2938           ; DATA XREF: ROM:00006B5C   o
                                         ; ROM:00006C1C   o
-                dc.w $EC01
+                fa_end
 off_1B26E4:     dc.w off_293C           ; DATA XREF: ROM:00006B58   o
                                         ; ROM:00006C18   o
-                dc.w $EC01
+                fa_end
 off_1B26E8:     dc.w off_2940           ; DATA XREF: ROM:00006B54   o
                                         ; ROM:00006C14   o
-                dc.w $EC01
+                fa_end
 off_1B26EC:     dc.w off_2944           ; DATA XREF: ROM:00006B50   o
                                         ; ROM:00006C10   o
-                dc.w $EC01
+                fa_end
 off_1B26F0:     dc.w off_2948           ; DATA XREF: ROM:00006B4C   o
                                         ; ROM:00006C0C   o
-                dc.w $EC01
+                fa_end
 off_1B26F4:     dc.w off_294C           ; DATA XREF: ROM:00006B48   o
                                         ; ROM:00006C08   o
-                dc.w $EC01
+                fa_end
 off_1B26F8:     dc.w off_2950           ; DATA XREF: ROM:00006B44   o
                                         ; ROM:00006C04   o
-                dc.w $EC01
+                fa_end
 off_1B26FC:     dc.w off_2954           ; DATA XREF: ROM:00006B40   o
                                         ; ROM:00006C00   o
-                dc.w $EC01
+                fa_end
 off_1B2700:     dc.w off_2958           ; DATA XREF: ROM:00006B3C   o
                                         ; ROM:00006BFC   o
-                dc.w $EC01
+                fa_end
 off_1B2704:     dc.w off_295C           ; DATA XREF: ROM:00006B38   o
                                         ; ROM:00006BF8   o
-                dc.w $EC01
+                fa_end
 off_1B2708:     dc.w off_2960           ; DATA XREF: ROM:00006B34   o
                                         ; ROM:00006BF4   o
-                dc.w $EC01
+                fa_end
 off_1B270C:     dc.w off_2964           ; DATA XREF: ROM:00006B30   o
                                         ; ROM:00006BF0   o
-                dc.w $EC01
+                fa_end
 off_1B2710:     dc.w off_2968           ; DATA XREF: ROM:off_6B2C   o
                                         ; ROM:off_6BEC   o
-                dc.w $EC01
+                fa_end
                 dc.w off_296C
-                dc.w $EC01
+                fa_end
                 dc.w off_2970
-                dc.w $EC01
+                fa_end
                 dc.w off_2974
-                dc.w $EC01
+                fa_end
                 dc.w off_2978
-                dc.w $EC01
+                fa_end
                 dc.w off_297C
-                dc.w $EC01
+                fa_end
                 dc.w off_2980
-                dc.w $EC01
+                fa_end
                 dc.w off_2984
-                dc.w $EC01
+                fa_end
 off_1B2730:     dc.w off_2988           ; DATA XREF: ROM:00006C94   o
                                         ; ROM:00006C98   o ...
-                dc.w $EC01
+                fa_end
 off_1B2734:     dc.w off_298C           ; DATA XREF: ROM:00006C90   o
-                dc.w $EC01
+                fa_end
 off_1B2738:     dc.w off_2990           ; DATA XREF: ROM:00006C8C   o
-                dc.w $EC01
+                fa_end
 off_1B273C:     dc.w off_2994           ; DATA XREF: ROM:00006C88   o
-                dc.w $EC01
+                fa_end
 off_1B2740:     dc.w off_2998           ; DATA XREF: ROM:00006C84   o
-                dc.w $EC01
+                fa_end
 off_1B2744:     dc.w off_299C           ; DATA XREF: ROM:00006C80   o
-                dc.w $EC01
+                fa_end
 off_1B2748:     dc.w off_29A0           ; DATA XREF: ROM:00006C7C   o
-                dc.w $EC01
+                fa_end
 off_1B274C:     dc.w off_29A4           ; DATA XREF: ROM:00006C78   o
-                dc.w $EC01
+                fa_end
 off_1B2750:     dc.w off_29A8           ; DATA XREF: ROM:00006C74   o
-                dc.w $EC01
+                fa_end
 off_1B2754:     dc.w off_29AC           ; DATA XREF: ROM:00006C70   o
-                dc.w $EC01
+                fa_end
 off_1B2758:     dc.w off_29B0           ; DATA XREF: ROM:00006C6C   o
-                dc.w $EC01
+                fa_end
 off_1B275C:     dc.w off_29B4           ; DATA XREF: ROM:00006C68   o
-                dc.w $EC01
+                fa_end
 off_1B2760:     dc.w off_29B8           ; DATA XREF: ROM:00006C64   o
-                dc.w $EC01
+                fa_end
 off_1B2764:     dc.w off_29BC           ; DATA XREF: ROM:00006C60   o
-                dc.w $EC01
+                fa_end
 off_1B2768:     dc.w off_29C0           ; DATA XREF: ROM:00006C5C   o
-                dc.w $EC01
+                fa_end
 off_1B276C:     dc.w off_29C4           ; DATA XREF: ROM:00006C58   o
-                dc.w $EC01
+                fa_end
 off_1B2770:     dc.w off_29C8           ; DATA XREF: ROM:00006C54   o
-                dc.w $EC01
+                fa_end
 off_1B2774:     dc.w off_29CC           ; DATA XREF: ROM:00006C50   o
-                dc.w $EC01
+                fa_end
 off_1B2778:     dc.w off_29D0           ; DATA XREF: ROM:00006C4C   o
-                dc.w $EC01
+                fa_end
 off_1B277C:     dc.w off_29D4           ; DATA XREF: ROM:00006C48   o
-                dc.w $EC01
+                fa_end
 off_1B2780:     dc.w off_29D8           ; DATA XREF: ROM:00006C44   o
-                dc.w $EC01
+                fa_end
 off_1B2784:     dc.w off_29DC           ; DATA XREF: ROM:00006C40   o
-                dc.w $EC01
+                fa_end
 off_1B2788:     dc.w off_29E0           ; DATA XREF: ROM:00006C3C   o
-                dc.w $EC01
+                fa_end
 off_1B278C:     dc.w off_29E4           ; DATA XREF: ROM:00006C38   o
-                dc.w $EC01
+                fa_end
 off_1B2790:     dc.w off_29E8           ; DATA XREF: ROM:00006C34   o
-                dc.w $EC01
+                fa_end
 off_1B2794:     dc.w off_27F0           ; DATA XREF: ROM:00006FDC   o
                                         ; ROM:00006FE0   o ...
-                dc.w $EC01
+                fa_end
 off_1B2798:     dc.w off_27F4           ; DATA XREF: ROM:00006FD4   o
                                         ; ROM:00006FD8   o
-                dc.w $EC01
+                fa_end
 off_1B279C:     dc.w off_27F8           ; DATA XREF: ROM:00006FD0   o
-                dc.w $EC01
+                fa_end
 off_1B27A0:     dc.w off_27FC           ; DATA XREF: ROM:00006FCC   o
-                dc.w $EC01
+                fa_end
 off_1B27A4:     dc.w off_2800           ; DATA XREF: ROM:00006FC8   o
-                dc.w $EC01
+                fa_end
 off_1B27A8:     dc.w off_2804           ; DATA XREF: ROM:00006FC4   o
-                dc.w $EC01
+                fa_end
 off_1B27AC:     dc.w off_2808           ; DATA XREF: ROM:00006FC0   o
-                dc.w $EC01
+                fa_end
 off_1B27B0:     dc.w off_280C           ; DATA XREF: ROM:00006FBC   o
-                dc.w $EC01
+                fa_end
 off_1B27B4:     dc.w off_2810           ; DATA XREF: ROM:00006FB8   o
-                dc.w $EC01
+                fa_end
 off_1B27B8:     dc.w off_2814           ; DATA XREF: ROM:00006FB4   o
-                dc.w $EC01
+                fa_end
 off_1B27BC:     dc.w off_2818           ; DATA XREF: ROM:00006FB0   o
-                dc.w $EC01
+                fa_end
 off_1B27C0:     dc.w off_281C           ; DATA XREF: ROM:00006FAC   o
-                dc.w $EC01
+                fa_end
 off_1B27C4:     dc.w off_2820           ; DATA XREF: ROM:00006FA8   o
-                dc.w $EC01
+                fa_end
 off_1B27C8:     dc.w off_2824           ; DATA XREF: ROM:00006FA4   o
-                dc.w $EC01
+                fa_end
 off_1B27CC:     dc.w off_2828           ; DATA XREF: ROM:00006FA0   o
-                dc.w $EC01
+                fa_end
 off_1B27D0:     dc.w off_282C           ; DATA XREF: ROM:00006F9C   o
-                dc.w $EC01
+                fa_end
 off_1B27D4:     dc.w off_2830           ; DATA XREF: ROM:00006F98   o
-                dc.w $EC01
+                fa_end
 off_1B27D8:     dc.w off_2834           ; DATA XREF: ROM:00006F94   o
-                dc.w $EC01
+                fa_end
 off_1B27DC:     dc.w off_2838           ; DATA XREF: ROM:00006F90   o
-                dc.w $EC01
+                fa_end
 off_1B27E0:     dc.w off_283C           ; DATA XREF: ROM:00006F8C   o
-                dc.w $EC01
+                fa_end
 off_1B27E4:     dc.w off_2840           ; DATA XREF: ROM:00006F88   o
-                dc.w $EC01
+                fa_end
 off_1B27E8:     dc.w off_2844           ; DATA XREF: ROM:00006F84   o
-                dc.w $EC01
+                fa_end
 off_1B27EC:     dc.w off_2848           ; DATA XREF: ROM:00006F80   o
-                dc.w $EC01
+                fa_end
 off_1B27F0:     dc.w off_284C           ; DATA XREF: ROM:00006F7C   o
                                         ; ROM:0000703C   o
-                dc.w $EC01
+                fa_end
 off_1B27F4:     dc.w off_2850           ; DATA XREF: ROM:00006F78   o
                                         ; ROM:00007038   o
-                dc.w $EC01
+                fa_end
 off_1B27F8:     dc.w off_2854           ; DATA XREF: ROM:00006F74   o
                                         ; ROM:00007034   o
-                dc.w $EC01
+                fa_end
 off_1B27FC:     dc.w off_2858           ; DATA XREF: ROM:00006F70   o
                                         ; ROM:00007030   o
-                dc.w $EC01
+                fa_end
 off_1B2800:     dc.w off_285C           ; DATA XREF: ROM:00006F6C   o
                                         ; ROM:0000702C   o
-                dc.w $EC01
+                fa_end
 off_1B2804:     dc.w off_2860           ; DATA XREF: ROM:00006F68   o
                                         ; ROM:00007028   o
-                dc.w $EC01
+                fa_end
 off_1B2808:     dc.w off_2864           ; DATA XREF: ROM:00006F64   o
                                         ; ROM:00007024   o
-                dc.w $EC01
+                fa_end
 off_1B280C:     dc.w off_2868           ; DATA XREF: ROM:00006F60   o
                                         ; ROM:00007020   o
-                dc.w $EC01
+                fa_end
 off_1B2810:     dc.w off_286C           ; DATA XREF: ROM:00006F5C   o
                                         ; ROM:0000701C   o
-                dc.w $EC01
+                fa_end
 off_1B2814:     dc.w off_2870           ; DATA XREF: ROM:off_6F38   o
                                         ; ROM:00006F3C   o ...
-                dc.w $EC01
+                fa_end
 off_1B2818:     dc.w off_2874           ; DATA XREF: ROM:0000709C   o
                                         ; ROM:000070A0   o ...
-                dc.w $EC01
+                fa_end
 off_1B281C:     dc.w off_2878           ; DATA XREF: ROM:00007094   o
                                         ; ROM:00007098   o
-                dc.w $EC01
+                fa_end
 off_1B2820:     dc.w off_287C           ; DATA XREF: ROM:00007090   o
-                dc.w $EC01
+                fa_end
 off_1B2824:     dc.w off_2880           ; DATA XREF: ROM:0000708C   o
-                dc.w $EC01
+                fa_end
 off_1B2828:     dc.w off_2884           ; DATA XREF: ROM:00007088   o
-                dc.w $EC01
+                fa_end
 off_1B282C:     dc.w off_2888           ; DATA XREF: ROM:00007084   o
-                dc.w $EC01
+                fa_end
 off_1B2830:     dc.w off_288C           ; DATA XREF: ROM:00007080   o
-                dc.w $EC01
+                fa_end
 off_1B2834:     dc.w off_2890           ; DATA XREF: ROM:0000707C   o
-                dc.w $EC01
+                fa_end
 off_1B2838:     dc.w off_2894           ; DATA XREF: ROM:00007078   o
-                dc.w $EC01
+                fa_end
 off_1B283C:     dc.w off_2898           ; DATA XREF: ROM:00007074   o
-                dc.w $EC01
+                fa_end
 off_1B2840:     dc.w off_289C           ; DATA XREF: ROM:00007070   o
-                dc.w $EC01
+                fa_end
 off_1B2844:     dc.w off_28A0           ; DATA XREF: ROM:0000706C   o
-                dc.w $EC01
+                fa_end
 off_1B2848:     dc.w off_28A4           ; DATA XREF: ROM:00007068   o
-                dc.w $EC01
+                fa_end
 off_1B284C:     dc.w off_28A8           ; DATA XREF: ROM:00007064   o
-                dc.w $EC01
+                fa_end
 off_1B2850:     dc.w off_28AC           ; DATA XREF: ROM:00007060   o
-                dc.w $EC01
+                fa_end
 off_1B2854:     dc.w off_28B0           ; DATA XREF: ROM:0000705C   o
-                dc.w $EC01
+                fa_end
 off_1B2858:     dc.w off_28B4           ; DATA XREF: ROM:00007058   o
-                dc.w $EC01
+                fa_end
 off_1B285C:     dc.w off_28B8           ; DATA XREF: ROM:00007054   o
-                dc.w $EC01
+                fa_end
 off_1B2860:     dc.w off_28BC           ; DATA XREF: ROM:00007040   o
                                         ; ROM:00007044   o ...
-                dc.w $EC01
+                fa_end
 off_1B2864:     dc.w off_2E40           ; DATA XREF: ROM:00006D68   o
                                         ; ROM:00006D6C   o ...
-                dc.w $EC01
+                fa_end
 off_1B2868:     dc.w off_2E40           ; DATA XREF: ROM:00006D64   o
-                dc.w $EC01
+                fa_end
 off_1B286C:     dc.w off_2E44           ; DATA XREF: ROM:00006D60   o
-                dc.w $EC01
+                fa_end
 off_1B2870:     dc.w off_2E44           ; DATA XREF: ROM:00006D5C   o
-                dc.w $EC01
+                fa_end
 off_1B2874:     dc.w off_2E48           ; DATA XREF: ROM:00006D58   o
-                dc.w $EC01
+                fa_end
 off_1B2878:     dc.w off_2E48           ; DATA XREF: ROM:00006D54   o
-                dc.w $EC01
+                fa_end
 off_1B287C:     dc.w off_2E4C           ; DATA XREF: ROM:00006D50   o
-                dc.w $EC01
+                fa_end
 off_1B2880:     dc.w off_2E4C           ; DATA XREF: ROM:00006D4C   o
-                dc.w $EC01
+                fa_end
 off_1B2884:     dc.w off_2E50           ; DATA XREF: ROM:00006D48   o
-                dc.w $EC01
+                fa_end
 off_1B2888:     dc.w off_2E50           ; DATA XREF: ROM:00006D44   o
-                dc.w $EC01
+                fa_end
 off_1B288C:     dc.w off_2E54           ; DATA XREF: ROM:00006D40   o
-                dc.w $EC01
+                fa_end
 off_1B2890:     dc.w off_2E54           ; DATA XREF: ROM:00006D3C   o
-                dc.w $EC01
+                fa_end
 off_1B2894:     dc.w off_2E58           ; DATA XREF: ROM:00006D38   o
-                dc.w $EC01
+                fa_end
 off_1B2898:     dc.w off_2E58           ; DATA XREF: ROM:00006D34   o
-                dc.w $EC01
+                fa_end
 off_1B289C:     dc.w off_2E5C           ; DATA XREF: ROM:00006D30   o
-                dc.w $EC01
+                fa_end
 off_1B28A0:     dc.w off_2E5C           ; DATA XREF: ROM:00006D2C   o
-                dc.w $EC01
+                fa_end
 off_1B28A4:     dc.w off_2E60           ; DATA XREF: ROM:00006D28   o
-                dc.w $EC01
+                fa_end
 off_1B28A8:     dc.w off_2E60           ; DATA XREF: ROM:00006D24   o
-                dc.w $EC01
+                fa_end
 off_1B28AC:     dc.w off_2E64           ; DATA XREF: ROM:00006D20   o
-                dc.w $EC01
+                fa_end
 off_1B28B0:     dc.w off_2E64           ; DATA XREF: ROM:00006D1C   o
-                dc.w $EC01
+                fa_end
 off_1B28B4:     dc.w off_2E68           ; DATA XREF: ROM:00006D18   o
-                dc.w $EC01
+                fa_end
 off_1B28B8:     dc.w off_2E68           ; DATA XREF: ROM:00006D14   o
-                dc.w $EC01
+                fa_end
 off_1B28BC:     dc.w off_2E6C           ; DATA XREF: ROM:00006D10   o
-                dc.w $EC01
+                fa_end
 off_1B28C0:     dc.w off_2E6C           ; DATA XREF: ROM:00006D0C   o
-                dc.w $EC01
+                fa_end
 off_1B28C4:     dc.w off_2E70           ; DATA XREF: ROM:00006D08   o
-                dc.w $EC01
+                fa_end
 off_1B28C8:     dc.w off_2E70           ; DATA XREF: ROM:00006D04   o
-                dc.w $EC01
+                fa_end
 off_1B28CC:     dc.w off_2E74           ; DATA XREF: ROM:00006D00   o
-                dc.w $EC01
+                fa_end
 off_1B28D0:     dc.w off_2E74           ; DATA XREF: ROM:00006CFC   o
-                dc.w $EC01
+                fa_end
 off_1B28D4:     dc.w off_2E78           ; DATA XREF: ROM:00006CF8   o
-                dc.w $EC01
+                fa_end
 off_1B28D8:     dc.w off_2E78           ; DATA XREF: ROM:00006CF4   o
-                dc.w $EC01
+                fa_end
 off_1B28DC:     dc.w off_2E7C           ; DATA XREF: ROM:00006CF0   o
-                dc.w $EC01
+                fa_end
 off_1B28E0:     dc.w off_2E7C           ; DATA XREF: ROM:00006CEC   o
-                dc.w $EC01
+                fa_end
 off_1B28E4:     dc.w off_2E80           ; DATA XREF: ROM:00006CE8   o
-                dc.w $EC01
+                fa_end
 off_1B28E8:     dc.w off_2E80           ; DATA XREF: ROM:00006CE4   o
-                dc.w $EC01
+                fa_end
 off_1B28EC:     dc.w off_2E84           ; DATA XREF: ROM:00006CE0   o
-                dc.w $EC01
+                fa_end
 off_1B28F0:     dc.w off_2E84           ; DATA XREF: ROM:00006CDC   o
-                dc.w $EC01
+                fa_end
 off_1B28F4:     dc.w off_2E88           ; DATA XREF: ROM:00006CD8   o
-                dc.w $EC01
+                fa_end
 off_1B28F8:     dc.w off_2E88           ; DATA XREF: ROM:00006CD4   o
-                dc.w $EC01
+                fa_end
 off_1B28FC:     dc.w off_2E8C           ; DATA XREF: ROM:00006CD0   o
-                dc.w $EC01
+                fa_end
 off_1B2900:     dc.w off_2E8C           ; DATA XREF: ROM:00006CCC   o
-                dc.w $EC01
+                fa_end
 off_1B2904:     dc.w off_2E90           ; DATA XREF: ROM:00006CC8   o
-                dc.w $EC01
+                fa_end
 off_1B2908:     dc.w off_2E90           ; DATA XREF: ROM:00006CC4   o
-                dc.w $EC01
+                fa_end
 off_1B290C:     dc.w off_2E94           ; DATA XREF: ROM:00006CC0   o
-                dc.w $EC01
+                fa_end
 off_1B2910:     dc.w off_2E94           ; DATA XREF: ROM:00006CBC   o
-                dc.w $EC01
+                fa_end
 off_1B2914:     dc.w off_2E98           ; DATA XREF: ROM:00006CB8   o
-                dc.w $EC01
+                fa_end
 off_1B2918:     dc.w off_2E98           ; DATA XREF: ROM:00006CB4   o
-                dc.w $EC01
+                fa_end
 off_1B291C:     dc.w off_2E9C           ; DATA XREF: ROM:00006CB0   o
-                dc.w $EC01
+                fa_end
 off_1B2920:     dc.w off_2E9C           ; DATA XREF: ROM:off_6CAC   o
-                dc.w $EC01
+                fa_end
 off_1B2924:     dc.w off_3030           ; DATA XREF: ROM:00006F08   o
                                         ; ROM:00006F0C   o ...
-                dc.w $EC01
+                fa_end
 off_1B2928:     dc.w off_3034           ; DATA XREF: ROM:00006F00   o
                                         ; ROM:00006F04   o
-                dc.w $EC01
+                fa_end
 off_1B292C:     dc.w off_3038           ; DATA XREF: ROM:00006EF8   o
                                         ; ROM:00006EFC   o
-                dc.w $EC01
+                fa_end
 off_1B2930:     dc.w off_303C           ; DATA XREF: ROM:00006EF0   o
                                         ; ROM:00006EF4   o
-                dc.w $EC01
+                fa_end
 off_1B2934:     dc.w off_3040           ; DATA XREF: ROM:00006EE8   o
                                         ; ROM:00006EEC   o
-                dc.w $EC01
+                fa_end
 off_1B2938:     dc.w off_3044           ; DATA XREF: ROM:00006EE0   o
                                         ; ROM:00006EE4   o
-                dc.w $EC01
+                fa_end
 off_1B293C:     dc.w off_3048           ; DATA XREF: ROM:00006ED8   o
                                         ; ROM:00006EDC   o
-                dc.w $EC01
+                fa_end
 off_1B2940:     dc.w off_304C           ; DATA XREF: ROM:00006ED0   o
                                         ; ROM:00006ED4   o
-                dc.w $EC01
+                fa_end
 off_1B2944:     dc.w off_3050           ; DATA XREF: ROM:00006EC8   o
                                         ; ROM:00006ECC   o
-                dc.w $EC01
+                fa_end
 off_1B2948:     dc.w off_3054           ; DATA XREF: ROM:00006EC0   o
                                         ; ROM:00006EC4   o
-                dc.w $EC01
+                fa_end
 off_1B294C:     dc.w off_3058           ; DATA XREF: ROM:00006EB8   o
                                         ; ROM:00006EBC   o
-                dc.w $EC01
+                fa_end
 off_1B2950:     dc.w off_305C           ; DATA XREF: ROM:00006EB0   o
                                         ; ROM:00006EB4   o
-                dc.w $EC01
+                fa_end
 off_1B2954:     dc.w off_3060           ; DATA XREF: ROM:00006EA8   o
                                         ; ROM:00006EAC   o
-                dc.w $EC01
+                fa_end
 off_1B2958:     dc.w off_3064           ; DATA XREF: ROM:00006EA0   o
                                         ; ROM:00006EA4   o
-                dc.w $EC01
+                fa_end
 off_1B295C:     dc.w off_3068           ; DATA XREF: ROM:00006E98   o
                                         ; ROM:00006E9C   o
-                dc.w $EC01
+                fa_end
 off_1B2960:     dc.w off_306C           ; DATA XREF: ROM:00006E90   o
                                         ; ROM:00006E94   o
-                dc.w $EC01
+                fa_end
 off_1B2964:     dc.w off_3070           ; DATA XREF: ROM:00006E88   o
                                         ; ROM:00006E8C   o
-                dc.w $EC01
+                fa_end
 off_1B2968:     dc.w off_3074           ; DATA XREF: ROM:00006E80   o
                                         ; ROM:00006E84   o
-                dc.w $EC01
+                fa_end
 off_1B296C:     dc.w off_3078           ; DATA XREF: ROM:00006E78   o
                                         ; ROM:00006E7C   o
-                dc.w $EC01
+                fa_end
 off_1B2970:     dc.w off_307C           ; DATA XREF: ROM:00006E70   o
                                         ; ROM:00006E74   o
-                dc.w $EC01
+                fa_end
 off_1B2974:     dc.w off_3080           ; DATA XREF: ROM:00006E68   o
                                         ; ROM:00006E6C   o
-                dc.w $EC01
+                fa_end
 off_1B2978:     dc.w off_3084           ; DATA XREF: ROM:00006E60   o
                                         ; ROM:00006E64   o
-                dc.w $EC01
+                fa_end
 off_1B297C:     dc.w off_3088           ; DATA XREF: ROM:00006E5C   o
-                dc.w $EC01
+                fa_end
 off_1B2980:     dc.w off_308C           ; DATA XREF: ROM:off_6E58   o
                                         ; ROM:stru_25B744   o
-                dc.w $EC01
+                fa_end
 off_1B2984:     dc.w off_2FD0           ; DATA XREF: ROM:00006E28   o
                                         ; ROM:00006E2C   o ...
-                dc.w $EC01
+                fa_end
 off_1B2988:     dc.w off_2FD4           ; DATA XREF: ROM:00006E20   o
                                         ; ROM:00006E24   o
-                dc.w $EC01
+                fa_end
 off_1B298C:     dc.w off_2FD8           ; DATA XREF: ROM:00006E18   o
                                         ; ROM:00006E1C   o
-                dc.w $EC01
+                fa_end
 off_1B2990:     dc.w off_2FDC           ; DATA XREF: ROM:00006E10   o
                                         ; ROM:00006E14   o
-                dc.w $EC01
+                fa_end
 off_1B2994:     dc.w off_2FE0           ; DATA XREF: ROM:00006E08   o
                                         ; ROM:00006E0C   o
-                dc.w $EC01
+                fa_end
 off_1B2998:     dc.w off_2FE4           ; DATA XREF: ROM:00006E00   o
                                         ; ROM:00006E04   o
-                dc.w $EC01
+                fa_end
 off_1B299C:     dc.w off_2FE8           ; DATA XREF: ROM:00006DF8   o
                                         ; ROM:00006DFC   o
-                dc.w $EC01
+                fa_end
 off_1B29A0:     dc.w off_2FEC           ; DATA XREF: ROM:00006DF0   o
                                         ; ROM:00006DF4   o
-                dc.w $EC01
+                fa_end
 off_1B29A4:     dc.w off_2FF0           ; DATA XREF: ROM:00006DE8   o
                                         ; ROM:00006DEC   o
-                dc.w $EC01
+                fa_end
 off_1B29A8:     dc.w off_2FF4           ; DATA XREF: ROM:00006DE0   o
                                         ; ROM:00006DE4   o
-                dc.w $EC01
+                fa_end
 off_1B29AC:     dc.w off_2FF8           ; DATA XREF: ROM:00006DD8   o
                                         ; ROM:00006DDC   o
-                dc.w $EC01
+                fa_end
 off_1B29B0:     dc.w off_2FFC           ; DATA XREF: ROM:00006DD0   o
                                         ; ROM:00006DD4   o
-                dc.w $EC01
+                fa_end
 off_1B29B4:     dc.w off_3000           ; DATA XREF: ROM:00006DC8   o
                                         ; ROM:00006DCC   o
-                dc.w $EC01
+                fa_end
 off_1B29B8:     dc.w off_3004           ; DATA XREF: ROM:00006DC0   o
                                         ; ROM:00006DC4   o
-                dc.w $EC01
+                fa_end
 off_1B29BC:     dc.w off_3008           ; DATA XREF: ROM:00006DB8   o
                                         ; ROM:00006DBC   o
-                dc.w $EC01
+                fa_end
 off_1B29C0:     dc.w off_300C           ; DATA XREF: ROM:00006DB0   o
                                         ; ROM:00006DB4   o
-                dc.w $EC01
+                fa_end
 off_1B29C4:     dc.w off_3010           ; DATA XREF: ROM:00006DA8   o
                                         ; ROM:00006DAC   o
-                dc.w $EC01
+                fa_end
 off_1B29C8:     dc.w off_3014           ; DATA XREF: ROM:00006DA0   o
                                         ; ROM:00006DA4   o
-                dc.w $EC01
+                fa_end
 off_1B29CC:     dc.w off_3018           ; DATA XREF: ROM:00006D98   o
                                         ; ROM:00006D9C   o
-                dc.w $EC01
+                fa_end
 off_1B29D0:     dc.w off_301C           ; DATA XREF: ROM:00006D90   o
                                         ; ROM:00006D94   o
-                dc.w $EC01
+                fa_end
 off_1B29D4:     dc.w off_3020           ; DATA XREF: ROM:00006D88   o
                                         ; ROM:00006D8C   o
-                dc.w $EC01
+                fa_end
 off_1B29D8:     dc.w off_3024           ; DATA XREF: ROM:00006D80   o
                                         ; ROM:00006D84   o
-                dc.w $EC01
+                fa_end
 off_1B29DC:     dc.w off_3028           ; DATA XREF: ROM:00006D7C   o
-                dc.w $EC01
+                fa_end
 off_1B29E0:     dc.w off_302C           ; DATA XREF: ROM:off_6D78   o
                                         ; ROM:stru_25B72C   o
-                dc.w $EC01
+                fa_end
 off_1B29E4:     dc.w off_29EC           ; DATA XREF: sub_24BEDC+1B6   o
                 dc.w off_29EC
 off_1B29E8:     dc.w off_29F0           ; DATA XREF: ROM:001B29FE   o
@@ -17818,113 +15869,112 @@ off_1B29E8:     dc.w off_29F0           ; DATA XREF: ROM:001B29FE   o
                 dc.w off_29FC
                 dc.w off_2A00
                 dc.w off_2A00
-                dc.w $EA00
-                dc.l off_1B29E8
+                fa_goto off_1B29E8
 off_1B2A02:     dc.w off_2EA0           ; DATA XREF: ROM:off_685A   o
                                         ; ROM:0000685E   o ...
-                dc.w $EC01
+                fa_end
 off_1B2A06:     dc.w off_2EA4           ; DATA XREF: ROM:00006862   o
-                dc.w $EC01
+                fa_end
 off_1B2A0A:     dc.w off_2EA8           ; DATA XREF: ROM:00006866   o
-                dc.w $EC01
+                fa_end
 off_1B2A0E:     dc.w off_2EAC           ; DATA XREF: ROM:0000686A   o
-                dc.w $EC01
+                fa_end
 off_1B2A12:     dc.w off_2EB0           ; DATA XREF: ROM:0000686E   o
-                dc.w $EC01
+                fa_end
 off_1B2A16:     dc.w off_2EB4           ; DATA XREF: ROM:00006872   o
-                dc.w $EC01
+                fa_end
 off_1B2A1A:     dc.w off_2EB8           ; DATA XREF: ROM:00006876   o
-                dc.w $EC01
+                fa_end
 off_1B2A1E:     dc.w off_2EBC           ; DATA XREF: ROM:0000687A   o
-                dc.w $EC01
+                fa_end
 off_1B2A22:     dc.w off_2EC0           ; DATA XREF: ROM:0000687E   o
-                dc.w $EC01
+                fa_end
 off_1B2A26:     dc.w off_2EC4           ; DATA XREF: ROM:00006882   o
-                dc.w $EC01
+                fa_end
 off_1B2A2A:     dc.w off_2EC8           ; DATA XREF: ROM:00006886   o
-                dc.w $EC01
+                fa_end
 off_1B2A2E:     dc.w off_2ECC           ; DATA XREF: ROM:0000688A   o
-                dc.w $EC01
+                fa_end
 off_1B2A32:     dc.w off_2ED0           ; DATA XREF: ROM:0000688E   o
-                dc.w $EC01
+                fa_end
 off_1B2A36:     dc.w off_2ED4           ; DATA XREF: ROM:00006892   o
-                dc.w $EC01
+                fa_end
 off_1B2A3A:     dc.w off_2ED8           ; DATA XREF: ROM:00006896   o
-                dc.w $EC01
+                fa_end
 off_1B2A3E:     dc.w off_2EDC           ; DATA XREF: ROM:0000689A   o
-                dc.w $EC01
+                fa_end
 off_1B2A42:     dc.w off_2EE0           ; DATA XREF: ROM:0000689E   o
-                dc.w $EC01
+                fa_end
 off_1B2A46:     dc.w off_2EE4           ; DATA XREF: ROM:000068A2   o
-                dc.w $EC01
+                fa_end
 off_1B2A4A:     dc.w off_2EE8           ; DATA XREF: ROM:000068A6   o
-                dc.w $EC01
+                fa_end
 off_1B2A4E:     dc.w off_2EEC           ; DATA XREF: ROM:000068AA   o
-                dc.w $EC01
+                fa_end
 off_1B2A52:     dc.w off_2EF0           ; DATA XREF: ROM:000068AE   o
-                dc.w $EC01
+                fa_end
 off_1B2A56:     dc.w off_2EF4           ; DATA XREF: ROM:000068B2   o
-                dc.w $EC01
+                fa_end
 off_1B2A5A:     dc.w off_2EF8           ; DATA XREF: ROM:000068B6   o
-                dc.w $EC01
+                fa_end
 off_1B2A5E:     dc.w off_2EFC           ; DATA XREF: ROM:000068BA   o
-                dc.w $EC01
+                fa_end
 off_1B2A62:     dc.w off_2F00           ; DATA XREF: ROM:000068BE   o
-                dc.w $EC01
+                fa_end
 off_1B2A66:     dc.w off_2F04           ; DATA XREF: ROM:000068C2   o
-                dc.w $EC01
+                fa_end
 off_1B2A6A:     dc.w off_2F08           ; DATA XREF: ROM:000068C6   o
-                dc.w $EC01
+                fa_end
 off_1B2A6E:     dc.w off_2F0C           ; DATA XREF: ROM:000068CA   o
-                dc.w $EC01
+                fa_end
 off_1B2A72:     dc.w off_2F10           ; DATA XREF: ROM:000068CE   o
-                dc.w $EC01
+                fa_end
 off_1B2A76:     dc.w off_2F14           ; DATA XREF: ROM:000068D2   o
-                dc.w $EC01
+                fa_end
 off_1B2A7A:     dc.w off_2F18           ; DATA XREF: ROM:000068D6   o
-                dc.w $EC01
+                fa_end
 off_1B2A7E:     dc.w off_2F1C           ; DATA XREF: ROM:000068DA   o
-                dc.w $EC01
+                fa_end
 off_1B2A82:     dc.w off_2F20           ; DATA XREF: ROM:000068DE   o
-                dc.w $EC01
+                fa_end
 off_1B2A86:     dc.w off_2F24           ; DATA XREF: ROM:000068E2   o
-                dc.w $EC01
+                fa_end
 off_1B2A8A:     dc.w off_2F28           ; DATA XREF: ROM:000068E6   o
-                dc.w $EC01
+                fa_end
 off_1B2A8E:     dc.w off_2F2C           ; DATA XREF: ROM:000068EA   o
-                dc.w $EC01
+                fa_end
 off_1B2A92:     dc.w off_2F30           ; DATA XREF: ROM:000068EE   o
-                dc.w $EC01
+                fa_end
 off_1B2A96:     dc.w off_2F34           ; DATA XREF: ROM:000068F2   o
-                dc.w $EC01
+                fa_end
 off_1B2A9A:     dc.w off_2F38           ; DATA XREF: ROM:000068F6   o
-                dc.w $EC01
+                fa_end
 off_1B2A9E:     dc.w off_2F3C           ; DATA XREF: ROM:000068FA   o
-                dc.w $EC01
+                fa_end
 off_1B2AA2:     dc.w off_2F40           ; DATA XREF: ROM:000068FE   o
-                dc.w $EC01
+                fa_end
 off_1B2AA6:     dc.w off_2F44           ; DATA XREF: ROM:00006902   o
-                dc.w $EC01
+                fa_end
 off_1B2AAA:     dc.w off_2F48           ; DATA XREF: ROM:00006906   o
-                dc.w $EC01
+                fa_end
 off_1B2AAE:     dc.w off_2F4C           ; DATA XREF: ROM:0000690A   o
-                dc.w $EC01
+                fa_end
 off_1B2AB2:     dc.w off_2F50           ; DATA XREF: ROM:0000690E   o
-                dc.w $EC01
+                fa_end
 off_1B2AB6:     dc.w off_2F54           ; DATA XREF: ROM:00006912   o
-                dc.w $EC01
+                fa_end
 off_1B2ABA:     dc.w off_2F58           ; DATA XREF: ROM:00006916   o
                                         ; ROM:0000691A   o
-                dc.w $EC01
+                fa_end
 off_1B2ABE:     dc.w off_2F5C           ; DATA XREF: ROM:0000691E   o
                                         ; ROM:00006922   o
-                dc.w $EC01
+                fa_end
 anim_unknown_5: dc.w off_6C4            ; DATA XREF: ROM:stru_25B054   o
-                dc.w $EC01
+                fa_end
 anim_rock_2:    dc.w off_6C8            ; DATA XREF: ROM:stru_25B06C   o
-                dc.w $EC01
+                fa_end
 anim_big_skyrock:dc.w off_6B0           ; DATA XREF: ROM:stru_25B084   o
-                dc.w $EC01
+                fa_end
 off_1B2ACE:     dc.w off_6B4            ; DATA XREF: ROM:001A32DA   o
                 dc.w off_6B4
                 dc.w off_6B8
@@ -17934,7 +15984,7 @@ off_1B2ACE:     dc.w off_6B4            ; DATA XREF: ROM:001A32DA   o
                 dc.w off_6C0
                 dc.w off_6C0
                 dc.w off_6C0
-                dc.w $F600
+                fa_delete
 anim_whip_air_fx:dc.w off_2568          ; DATA XREF: sub_25454C+10   o
                                         ; ROM:object_whip_air_fx   o
                 dc.w off_2568
@@ -17945,7 +15995,7 @@ anim_whip_air_fx:dc.w off_2568          ; DATA XREF: sub_25454C+10   o
                 dc.w off_2574
                 dc.w off_2574
                 dc.w off_2574
-                dc.w $F600
+                fa_delete
 anim_air_fx:    dc.w off_998            ; DATA XREF: sub_2545A0+10   o
                                         ; ROM:stru_25A874   o
                 dc.w off_99C
@@ -17954,39 +16004,38 @@ anim_air_fx:    dc.w off_998            ; DATA XREF: sub_2545A0+10   o
                 dc.w off_9A8
                 dc.w off_9AC
                 dc.w off_9AC
-                dc.w $F600
+                fa_delete
 anim_jim_open_door:     dc.w off_1494           ; DATA XREF: ROM:object_jim_open_door   o
-                dc.w $EE9D
+                fa_hold 29
                 dc.w off_1494
-                dc.w $F32F
+                fa_sound $2F
                 dc.w off_1498
                 dc.w off_1498
                 dc.w off_149C
                 dc.w off_149C
                 dc.w off_14A0
-                dc.w $F3AF
+                fa_sound_stop $2F
                 dc.w off_14A0
                 dc.w off_14A4
                 dc.w off_14A4
                 dc.w off_14A8
                 dc.w off_14A8
                 dc.w off_14AC
-                dc.w $F32E
+                fa_sound $2E
                 dc.w off_14AC
-                dc.w $FB00
-                dc.l sub_2564D4
-                dc.w $F600
+                fa_call sub_2564D4
+                fa_delete
 anim_jim_exit_door:     dc.w off_1460           ; DATA XREF: ROM:object_exit_door   o
-                dc.w $EC01
+                fa_end
 off_1B2B36:     dc.w off_1464           ; DATA XREF: sub_252FF4+10   o
-                dc.w $F32F
+                fa_sound $2F
                 dc.w off_1464
                 dc.w off_1468
                 dc.w off_1468
                 dc.w off_146C
                 dc.w off_146C
                 dc.w off_1470
-                dc.w $F3AF
+                fa_sound_stop $2F
                 dc.w off_1470
                 dc.w off_1474
                 dc.w off_1474
@@ -18003,49 +16052,38 @@ off_1B2B36:     dc.w off_1464           ; DATA XREF: sub_252FF4+10   o
                 dc.w off_148C
                 dc.w off_148C
                 dc.w off_1490
-                dc.w $F32E
+                fa_sound $2E
                 dc.w off_1490
-                dc.w $ED01
-                dc.w $FDF2
-                dc.w 1
-                dc.w $F600
+                fa_set_b byte_FFFDF2, $1
+                fa_delete
 anim_dark_monster:     dc.w off_1E54           ; DATA XREF: ROM:001B2B82   o
                                         ; ROM:object_dark_monster   o
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $F411
-                dc.w $FD9F
-                dc.w 0
-                dc.l anim_dark_monster
-                dc.w $F700
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_24951E
+                fa_if_b FM_EQ, byte_FFFD9F, $0, anim_dark_monster
+                fa_face_jim
+                fa_call oksub_249526
                 dc.w off_1E54
                 dc.w off_1E58
                 dc.w off_1E58
-word_1B2B94:    dc.w $EE8E              ; DATA XREF: ROM:001B2B9A   o
+word_1B2B94:                            ; DATA XREF: ROM:001B2B9A   o
+                fa_hold 14
                 dc.w off_1E5C
-                dc.w $F09A
-                dc.l word_1B2B94
+                fa_rand_goto 154, word_1B2B94
                 dc.w off_1E5C
                 dc.w off_1E5C
                 dc.w off_1E58
                 dc.w off_1E58
                 dc.w off_1E54
                 dc.w off_1E54
-                dc.w $FB00
-                dc.l oksub_24951E
+                fa_call oksub_24951E
                 dc.w off_1E54
-                dc.w $F700
+                fa_face_jim
                 dc.w off_1E54
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_1E54
                 dc.w off_1E58
                 dc.w off_1E5C
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AC376
+                fa_set_obj_l $A, byte_1AC376
 off_1B2BCA:     dc.w off_1E60           ; DATA XREF: ROM:001B2C0A   o
                 dc.w off_1E60
                 dc.w off_1E64
@@ -18076,11 +16114,10 @@ off_1B2BCA:     dc.w off_1E60           ; DATA XREF: ROM:001B2C0A   o
                 dc.w off_1E94
                 dc.w off_1E98
                 dc.w off_1E98
-                dc.w $F334
-                dc.w $EA00
-                dc.l off_1B2BCA
+                fa_sound $34
+                fa_goto off_1B2BCA
 anim_dark_enemy_2:     dc.w off_1E2C           ; DATA XREF: ROM:object_dark_enemy_2   o
-                dc.w $F700
+                fa_face_jim
 off_1B2C12:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C38   o
                                         ; sub_2571B4+18   o ...
                 dc.w off_1E2C
@@ -18096,56 +16133,38 @@ off_1B2C12:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C38   o
                 dc.w off_1E40
                 dc.w off_1E44
                 dc.w off_1E44
-                dc.w $ED11
-                dc.w 0
-                dc.w $1B
-                dc.w $F700
-                dc.w $EA00
-                dc.l off_1B2C12
+                fa_set_obj_b $0, $1B
+                fa_face_jim
+                fa_goto off_1B2C12
 anim_dark_enemy:     dc.w off_1E2C           ; DATA XREF: ROM:001B2C40   o
                                         ; ROM:001B2C5A   o ...
-                dc.w $F0F4
-                dc.l anim_dark_enemy
-                dc.w $EE93
+                fa_rand_goto 244, anim_dark_enemy
+                fa_hold 19
                 dc.w off_1E2C
                 dc.w off_1E48
                 dc.w off_1E48
                 dc.w off_1E4C
-                dc.w $F700
+                fa_face_jim
                 dc.w off_1E4C
-                dc.w $ED11
-                dc.w 0
-                dc.w $1B
-                dc.w $EA00
-                dc.l anim_dark_enemy
+                fa_set_obj_b $0, $1B
+                fa_goto anim_dark_enemy
 anim_fireburn_3:dc.w off_8D8            ; DATA XREF: ROM:001B2C92   o
                                         ; ROM:stru_25AD3C   o
-                dc.w $FC00
-                dc.l off_1B2C96
-                dc.w $FC00
-                dc.l off_1B2C96
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
-                dc.w $EEB1
+                fa_gosub off_1B2C96
+                fa_gosub off_1B2C96
+                fa_call oksub_24951E
+                fa_set_obj_b $0, $86
+                fa_hold 49
                 dc.w off_8D8
 off_1B2C7C:     dc.w off_8D8            ; DATA XREF: ROM:001B2C80   o
-                dc.w $F0EA
-                dc.l off_1B2C7C
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $ED11
-                dc.w 0
-                dc.w $6E
-                dc.w $EA00
-                dc.l anim_fireburn_3
+                fa_rand_goto 234, off_1B2C7C
+                fa_call oksub_249526
+                fa_set_obj_b $0, $6E
+                fa_goto anim_fireburn_3
 off_1B2C96:     dc.w off_8D8            ; DATA XREF: ROM:001B2C62   o
                                         ; ROM:001B2C68   o
-                dc.w $F09A
-                dc.l off_1B2CA0
-                dc.w $EB00
+                fa_rand_goto 154, off_1B2CA0
+                fa_flip_x
 off_1B2CA0:     dc.w off_8DC            ; DATA XREF: ROM:001B2C9A   o
                 dc.w off_8E0
                 dc.w off_8E4
@@ -18166,13 +16185,8 @@ off_1B2CA0:     dc.w off_8DC            ; DATA XREF: ROM:001B2C9A   o
                 dc.w off_908
                 dc.w off_90C
                 dc.w off_90C
-                dc.w $F0CC
-                dc.l off_1B2CDE
-                dc.w $F500
-                dc.l stru_25AD3C
-                dc.w $E0
-                dc.l off_1B2D2C
-                dc.l 0
+                fa_rand_goto 204, off_1B2CDE
+                fa_spawn 0, stru_25AD3C, 0, -32, off_1B2D2C, 0
 off_1B2CDE:     dc.w off_910            ; DATA XREF: ROM:001B2CCA   o
                 dc.w off_910
                 dc.w off_914
@@ -18187,8 +16201,7 @@ off_1B2CDE:     dc.w off_910            ; DATA XREF: ROM:001B2CCA   o
                 dc.w off_924
                 dc.w off_924
                 dc.w off_924
-                dc.w $F0CC
-                dc.l word_1B2D2A
+                fa_rand_goto 204, word_1B2D2A
                 dc.w off_8D8
                 dc.w off_8E4
                 dc.w off_8F4
@@ -18196,23 +16209,19 @@ off_1B2CDE:     dc.w off_910            ; DATA XREF: ROM:001B2CCA   o
                 dc.w off_904
                 dc.w off_908
                 dc.w off_90C
-                dc.w $F500
-                dc.l stru_25AD3C
-                dc.w $E0
-                dc.l off_1B2D2C
-                dc.l 0
+                fa_spawn 0, stru_25AD3C, 0, -32, off_1B2D2C, 0
                 dc.w off_910
                 dc.w off_914
                 dc.w off_914
                 dc.w off_918
                 dc.w off_91C
                 dc.w off_91C
-word_1B2D2A:    dc.w $FC80              ; DATA XREF: ROM:001B2CFC   o
+word_1B2D2A:                            ; DATA XREF: ROM:001B2CFC   o
+                fa_return
 off_1B2D2C:     dc.w off_8D8            ; DATA XREF: ROM:001B2CD6   o
                                         ; ROM:001B2D16   o
-                dc.w $F09A
-                dc.l off_1B2D36
-                dc.w $EB00
+                fa_rand_goto 154, off_1B2D36
+                fa_flip_x
 off_1B2D36:     dc.w off_8DC            ; DATA XREF: ROM:001B2D30   o
                 dc.w off_8E0
                 dc.w off_8E4
@@ -18233,11 +16242,10 @@ off_1B2D36:     dc.w off_8DC            ; DATA XREF: ROM:001B2D30   o
                 dc.w off_920
                 dc.w off_924
                 dc.w off_924
-                dc.w $F600
+                fa_delete
 anim_flame:     dc.w off_928            ; DATA XREF: ROM:001B2DCA   o
                                         ; ROM:001B2E1E   o ...
-                dc.w $F09A
-                dc.l off_1B2D9E
+                fa_rand_goto 154, off_1B2D9E
                 dc.w off_928
                 dc.w off_92C
                 dc.w off_92C
@@ -18286,10 +16294,8 @@ off_1B2D9E:     dc.w off_928            ; DATA XREF: ROM:001B2D64   o
                 dc.w off_958
                 dc.w off_95C
                 dc.w off_95C
-                dc.w $F0CC
-                dc.l anim_flame
-                dc.w $F09A
-                dc.l off_1B2E22
+                fa_rand_goto 204, anim_flame
+                fa_rand_goto 154, off_1B2E22
                 dc.w off_89C
                 dc.w off_89C
                 dc.w off_8A0
@@ -18326,8 +16332,7 @@ off_1B2D9E:     dc.w off_928            ; DATA XREF: ROM:001B2D64   o
                 dc.w off_8D4
                 dc.w off_89C
                 dc.w off_89C
-                dc.w $EA00
-                dc.l anim_flame
+                fa_goto anim_flame
 off_1B2E22:     dc.w off_89C            ; DATA XREF: ROM:001B2DD0   o
                 dc.w off_8A0
                 dc.w off_8A4
@@ -18350,8 +16355,7 @@ off_1B2E22:     dc.w off_89C            ; DATA XREF: ROM:001B2DD0   o
                 dc.w off_8D4
                 dc.w off_89C
                 dc.w off_89C
-                dc.b $EA,  0
-                dc.l anim_flame
+                fa_goto anim_flame
 dword_1B2E54:   dc.l 0                  ; DATA XREF: sub_24DEF2+72   o
                                         ; sub_2522D0+64   o
                 dc.l anim_bucket
@@ -18440,173 +16444,173 @@ dword_1B2E54:   dc.l 0                  ; DATA XREF: sub_24DEF2+72   o
                 dc.l off_1B30F4
 anim_bucket:    dc.w off_3138           ; DATA XREF: ROM:001B2E58   o
                                         ; ROM:stru_25AAFC   o
-                dc.w $EC01
+                fa_end
 off_1B2FAC:     dc.w off_313C           ; DATA XREF: ROM:001B2E5C   o
-                dc.w $EC01
+                fa_end
 off_1B2FB0:     dc.w off_3140           ; DATA XREF: ROM:001B2E60   o
-                dc.w $EC01
+                fa_end
 off_1B2FB4:     dc.w off_3144           ; DATA XREF: ROM:001B2E64   o
-                dc.w $EC01
+                fa_end
 off_1B2FB8:     dc.w off_3148           ; DATA XREF: ROM:001B2E68   o
-                dc.w $EC01
+                fa_end
 off_1B2FBC:     dc.w off_314C           ; DATA XREF: ROM:001B2E6C   o
-                dc.w $EC01
+                fa_end
 off_1B2FC0:     dc.w off_3150           ; DATA XREF: ROM:001B2E70   o
-                dc.w $EC01
+                fa_end
 off_1B2FC4:     dc.w off_3154           ; DATA XREF: ROM:001B2E74   o
-                dc.w $EC01
+                fa_end
 off_1B2FC8:     dc.w off_3158           ; DATA XREF: ROM:001B2E78   o
-                dc.w $EC01
+                fa_end
 off_1B2FCC:     dc.w off_315C           ; DATA XREF: ROM:001B2E7C   o
-                dc.w $EC01
+                fa_end
 off_1B2FD0:     dc.w off_3160           ; DATA XREF: ROM:001B2E80   o
-                dc.w $EC01
+                fa_end
 off_1B2FD4:     dc.w off_3164           ; DATA XREF: ROM:001B2E84   o
-                dc.w $EC01
+                fa_end
 off_1B2FD8:     dc.w off_3168           ; DATA XREF: ROM:001B2E88   o
-                dc.w $EC01
+                fa_end
 off_1B2FDC:     dc.w off_316C           ; DATA XREF: ROM:001B2E8C   o
-                dc.w $EC01
+                fa_end
 off_1B2FE0:     dc.w off_3170           ; DATA XREF: ROM:001B2E90   o
-                dc.w $EC01
+                fa_end
 off_1B2FE4:     dc.w off_3174           ; DATA XREF: ROM:001B2E94   o
-                dc.w $EC01
+                fa_end
 off_1B2FE8:     dc.w off_3178           ; DATA XREF: ROM:001B2E98   o
-                dc.w $EC01
+                fa_end
 off_1B2FEC:     dc.w off_317C           ; DATA XREF: ROM:001B2E9C   o
-                dc.w $EC01
+                fa_end
 off_1B2FF0:     dc.w off_3180           ; DATA XREF: ROM:001B2EA0   o
-                dc.w $EC01
+                fa_end
 off_1B2FF4:     dc.w off_3184           ; DATA XREF: ROM:001B2EA4   o
-                dc.w $EC01
+                fa_end
 off_1B2FF8:     dc.w off_3188           ; DATA XREF: ROM:001B2EA8   o
-                dc.w $EC01
+                fa_end
 off_1B2FFC:     dc.w off_318C           ; DATA XREF: ROM:001B2EAC   o
-                dc.w $EC01
+                fa_end
 off_1B3000:     dc.w off_3190           ; DATA XREF: ROM:001B2EB0   o
-                dc.w $EC01
+                fa_end
 off_1B3004:     dc.w off_3194           ; DATA XREF: ROM:001B2EB4   o
-                dc.w $EC01
+                fa_end
 off_1B3008:     dc.w off_3198           ; DATA XREF: ROM:001B2EB8   o
-                dc.w $EC01
+                fa_end
 off_1B300C:     dc.w off_319C           ; DATA XREF: ROM:001B2EBC   o
-                dc.w $EC01
+                fa_end
 off_1B3010:     dc.w off_31A0           ; DATA XREF: ROM:001B2EC0   o
-                dc.w $EC01
+                fa_end
 off_1B3014:     dc.w off_31A4           ; DATA XREF: ROM:001B2EC4   o
-                dc.w $EC01
+                fa_end
 off_1B3018:     dc.w off_31A8           ; DATA XREF: ROM:001B2EC8   o
-                dc.w $EC01
+                fa_end
 off_1B301C:     dc.w off_31AC           ; DATA XREF: ROM:001B2ECC   o
-                dc.w $EC01
+                fa_end
 off_1B3020:     dc.w off_31B0           ; DATA XREF: ROM:001B2ED0   o
-                dc.w $EC01
+                fa_end
 off_1B3024:     dc.w off_31B4           ; DATA XREF: ROM:001B2ED4   o
-                dc.w $EC01
+                fa_end
 off_1B3028:     dc.w off_31B8           ; DATA XREF: ROM:001B2ED8   o
-                dc.w $EC01
+                fa_end
 off_1B302C:     dc.w off_31BC           ; DATA XREF: ROM:001B2EDC   o
-                dc.w $EC01
+                fa_end
 off_1B3030:     dc.w off_31C0           ; DATA XREF: ROM:001B2EE0   o
-                dc.w $EC01
+                fa_end
 off_1B3034:     dc.w off_31C4           ; DATA XREF: ROM:001B2EE4   o
-                dc.w $EC01
+                fa_end
 off_1B3038:     dc.w off_31C8           ; DATA XREF: ROM:001B2EE8   o
-                dc.w $EC01
+                fa_end
 off_1B303C:     dc.w off_31CC           ; DATA XREF: ROM:001B2EEC   o
-                dc.w $EC01
+                fa_end
 off_1B3040:     dc.w off_31D0           ; DATA XREF: ROM:001B2EF0   o
-                dc.w $EC01
+                fa_end
 off_1B3044:     dc.w off_31D4           ; DATA XREF: ROM:001B2EF4   o
-                dc.w $EC01
+                fa_end
 off_1B3048:     dc.w off_31D8           ; DATA XREF: ROM:001B2EF8   o
-                dc.w $EC01
+                fa_end
 off_1B304C:     dc.w off_31DC           ; DATA XREF: ROM:001B2EFC   o
-                dc.w $EC01
+                fa_end
 off_1B3050:     dc.w off_31E0           ; DATA XREF: ROM:001B2F00   o
-                dc.w $EC01
+                fa_end
 off_1B3054:     dc.w off_31E4           ; DATA XREF: ROM:001B2F04   o
-                dc.w $EC01
+                fa_end
 off_1B3058:     dc.w off_31E8           ; DATA XREF: ROM:001B2F08   o
-                dc.w $EC01
+                fa_end
 off_1B305C:     dc.w off_31EC           ; DATA XREF: ROM:001B2F0C   o
-                dc.w $EC01
+                fa_end
 off_1B3060:     dc.w off_31F0           ; DATA XREF: ROM:001B2F10   o
-                dc.w $EC01
+                fa_end
 off_1B3064:     dc.w off_31F4           ; DATA XREF: ROM:001B2F14   o
-                dc.w $EC01
+                fa_end
 off_1B3068:     dc.w off_31F8           ; DATA XREF: ROM:001B2F18   o
-                dc.w $EC01
+                fa_end
 off_1B306C:     dc.w off_31FC           ; DATA XREF: ROM:001B2F1C   o
-                dc.w $EC01
+                fa_end
 off_1B3070:     dc.w off_3200           ; DATA XREF: ROM:001B2F20   o
-                dc.w $EC01
+                fa_end
 off_1B3074:     dc.w off_3204           ; DATA XREF: ROM:001B2F24   o
-                dc.w $EC01
+                fa_end
 off_1B3078:     dc.w off_3208           ; DATA XREF: ROM:001B2F28   o
-                dc.w $EC01
+                fa_end
 off_1B307C:     dc.w off_320C           ; DATA XREF: ROM:001B2F2C   o
-                dc.w $EC01
+                fa_end
 off_1B3080:     dc.w off_3210           ; DATA XREF: ROM:001B2F30   o
-                dc.w $EC01
+                fa_end
 off_1B3084:     dc.w off_3214           ; DATA XREF: ROM:001B2F34   o
-                dc.w $EC01
+                fa_end
 off_1B3088:     dc.w off_3218           ; DATA XREF: ROM:001B2F38   o
-                dc.w $EC01
+                fa_end
 off_1B308C:     dc.w off_321C           ; DATA XREF: ROM:001B2F3C   o
-                dc.w $EC01
+                fa_end
 off_1B3090:     dc.w off_3220           ; DATA XREF: ROM:001B2F40   o
-                dc.w $EC01
+                fa_end
 off_1B3094:     dc.w off_3224           ; DATA XREF: ROM:001B2F44   o
-                dc.w $EC01
+                fa_end
 off_1B3098:     dc.w off_3228           ; DATA XREF: ROM:001B2F48   o
-                dc.w $EC01
+                fa_end
 off_1B309C:     dc.w off_322C           ; DATA XREF: ROM:001B2F4C   o
-                dc.w $EC01
+                fa_end
 off_1B30A0:     dc.w off_3230           ; DATA XREF: ROM:001B2F50   o
-                dc.w $EC01
+                fa_end
 off_1B30A4:     dc.w off_3234           ; DATA XREF: ROM:001B2F54   o
-                dc.w $EC01
+                fa_end
 off_1B30A8:     dc.w off_3238           ; DATA XREF: ROM:001B2F58   o
-                dc.w $EC01
+                fa_end
 off_1B30AC:     dc.w off_323C           ; DATA XREF: ROM:001B2F5C   o
-                dc.w $EC01
+                fa_end
 off_1B30B0:     dc.w off_3240           ; DATA XREF: ROM:001B2F60   o
-                dc.w $EC01
+                fa_end
 off_1B30B4:     dc.w off_3244           ; DATA XREF: ROM:001B2F64   o
-                dc.w $EC01
+                fa_end
 off_1B30B8:     dc.w off_3248           ; DATA XREF: ROM:001B2F68   o
-                dc.w $EC01
+                fa_end
 off_1B30BC:     dc.w off_324C           ; DATA XREF: ROM:001B2F6C   o
-                dc.w $EC01
+                fa_end
 off_1B30C0:     dc.w off_3250           ; DATA XREF: ROM:001B2F70   o
-                dc.w $EC01
+                fa_end
 off_1B30C4:     dc.w off_3254           ; DATA XREF: ROM:001B2F74   o
-                dc.w $EC01
+                fa_end
 off_1B30C8:     dc.w off_3258           ; DATA XREF: ROM:001B2F78   o
-                dc.w $EC01
+                fa_end
 off_1B30CC:     dc.w off_325C           ; DATA XREF: ROM:001B2F7C   o
-                dc.w $EC01
+                fa_end
 off_1B30D0:     dc.w off_3260           ; DATA XREF: ROM:001B2F80   o
-                dc.w $EC01
+                fa_end
 off_1B30D4:     dc.w off_3264           ; DATA XREF: ROM:001B2F84   o
-                dc.w $EC01
+                fa_end
 off_1B30D8:     dc.w off_3268           ; DATA XREF: ROM:001B2F88   o
-                dc.w $EC01
+                fa_end
 off_1B30DC:     dc.w off_326C           ; DATA XREF: ROM:001B2F8C   o
-                dc.w $EC01
+                fa_end
 off_1B30E0:     dc.w off_3270           ; DATA XREF: ROM:001B2F90   o
-                dc.w $EC01
+                fa_end
 off_1B30E4:     dc.w off_3274           ; DATA XREF: ROM:001B2F94   o
-                dc.w $EC01
+                fa_end
 off_1B30E8:     dc.w off_3278           ; DATA XREF: ROM:001B2F98   o
-                dc.w $EC01
+                fa_end
 off_1B30EC:     dc.w off_327C           ; DATA XREF: ROM:001B2F9C   o
-                dc.w $EC01
+                fa_end
 off_1B30F0:     dc.w off_3280           ; DATA XREF: ROM:001B2FA0   o
-                dc.w $EC01
+                fa_end
 off_1B30F4:     dc.w off_3284           ; DATA XREF: ROM:001B2FA4   o
-                dc.w $EC01
+                fa_end
 dword_1B30F8:   dc.l 0                  ; DATA XREF: sub_24DD18+E0   o
                                         ; sub_250194+68   o ...
                 dc.l anim_eye_gate
@@ -18683,153 +16687,153 @@ dword_1B30F8:   dc.l 0                  ; DATA XREF: sub_24DD18+E0   o
                 dc.l off_1B3338
 anim_eye_gate:  dc.w off_B78            ; DATA XREF: ROM:001B30FC   o
                                         ; ROM:stru_25B33C   o
-                dc.w $EC01
+                fa_end
 off_1B3220:     dc.w off_B7C            ; DATA XREF: ROM:001B3100   o
-                dc.w $EC01
+                fa_end
 off_1B3224:     dc.w off_B80            ; DATA XREF: ROM:001B3104   o
-                dc.w $EC01
+                fa_end
 off_1B3228:     dc.w off_B84            ; DATA XREF: ROM:001B3108   o
-                dc.w $EC01
+                fa_end
 off_1B322C:     dc.w off_B88            ; DATA XREF: ROM:001B310C   o
-                dc.w $EC01
+                fa_end
 off_1B3230:     dc.w off_B8C            ; DATA XREF: ROM:001B3110   o
-                dc.w $EC01
+                fa_end
 off_1B3234:     dc.w off_B90            ; DATA XREF: ROM:001B3114   o
-                dc.w $EC01
+                fa_end
 off_1B3238:     dc.w off_B94            ; DATA XREF: ROM:001B3118   o
-                dc.w $EC01
+                fa_end
 off_1B323C:     dc.w off_B98            ; DATA XREF: ROM:001B311C   o
-                dc.w $EC01
+                fa_end
 off_1B3240:     dc.w off_B9C            ; DATA XREF: ROM:001B3120   o
-                dc.w $EC01
+                fa_end
 off_1B3244:     dc.w off_BA0            ; DATA XREF: ROM:001B3124   o
-                dc.w $EC01
+                fa_end
 off_1B3248:     dc.w off_BA4            ; DATA XREF: ROM:001B3128   o
-                dc.w $EC01
+                fa_end
 off_1B324C:     dc.w off_BA8            ; DATA XREF: ROM:001B312C   o
-                dc.w $EC01
+                fa_end
 off_1B3250:     dc.w off_BAC            ; DATA XREF: ROM:001B3130   o
-                dc.w $EC01
+                fa_end
 off_1B3254:     dc.w off_BB0            ; DATA XREF: ROM:001B3134   o
-                dc.w $EC01
+                fa_end
 off_1B3258:     dc.w off_BB4            ; DATA XREF: ROM:001B3138   o
-                dc.w $EC01
+                fa_end
 off_1B325C:     dc.w off_BB8            ; DATA XREF: ROM:001B313C   o
-                dc.w $EC01
+                fa_end
 off_1B3260:     dc.w off_BBC            ; DATA XREF: ROM:001B3140   o
-                dc.w $EC01
+                fa_end
 off_1B3264:     dc.w off_BC0            ; DATA XREF: ROM:001B3144   o
-                dc.w $EC01
+                fa_end
 off_1B3268:     dc.w off_BC4            ; DATA XREF: ROM:001B3148   o
-                dc.w $EC01
+                fa_end
 off_1B326C:     dc.w off_BC8            ; DATA XREF: ROM:001B314C   o
-                dc.w $EC01
+                fa_end
 off_1B3270:     dc.w off_BCC            ; DATA XREF: ROM:001B3150   o
-                dc.w $EC01
+                fa_end
 off_1B3274:     dc.w off_BD0            ; DATA XREF: ROM:001B3154   o
-                dc.w $EC01
+                fa_end
 off_1B3278:     dc.w off_BD4            ; DATA XREF: ROM:001B3158   o
-                dc.w $EC01
+                fa_end
 off_1B327C:     dc.w off_BD8            ; DATA XREF: ROM:001B315C   o
-                dc.w $EC01
+                fa_end
 off_1B3280:     dc.w off_BDC            ; DATA XREF: ROM:001B3160   o
-                dc.w $EC01
+                fa_end
 off_1B3284:     dc.w off_BE0            ; DATA XREF: ROM:001B3164   o
-                dc.w $EC01
+                fa_end
 off_1B3288:     dc.w off_BE4            ; DATA XREF: ROM:001B3168   o
-                dc.w $EC01
+                fa_end
 off_1B328C:     dc.w off_BE8            ; DATA XREF: ROM:001B316C   o
-                dc.w $EC01
+                fa_end
 off_1B3290:     dc.w off_BEC            ; DATA XREF: ROM:001B3170   o
-                dc.w $EC01
+                fa_end
 off_1B3294:     dc.w off_BF0            ; DATA XREF: ROM:001B3174   o
-                dc.w $EC01
+                fa_end
 off_1B3298:     dc.w off_BF4            ; DATA XREF: ROM:001B3178   o
-                dc.w $EC01
+                fa_end
 off_1B329C:     dc.w off_BF8            ; DATA XREF: ROM:001B317C   o
-                dc.w $EC01
+                fa_end
 off_1B32A0:     dc.w off_BFC            ; DATA XREF: ROM:001B3180   o
-                dc.w $EC01
+                fa_end
 off_1B32A4:     dc.w off_C00            ; DATA XREF: ROM:001B3184   o
-                dc.w $EC01
+                fa_end
 off_1B32A8:     dc.w off_C04            ; DATA XREF: ROM:001B3188   o
-                dc.w $EC01
+                fa_end
 off_1B32AC:     dc.w off_C08            ; DATA XREF: ROM:001B318C   o
-                dc.w $EC01
+                fa_end
 off_1B32B0:     dc.w off_C0C            ; DATA XREF: ROM:001B3190   o
-                dc.w $EC01
+                fa_end
 off_1B32B4:     dc.w off_C10            ; DATA XREF: ROM:001B3194   o
-                dc.w $EC01
+                fa_end
 off_1B32B8:     dc.w off_C14            ; DATA XREF: ROM:001B3198   o
-                dc.w $EC01
+                fa_end
 off_1B32BC:     dc.w off_C18            ; DATA XREF: ROM:001B319C   o
-                dc.w $EC01
+                fa_end
 off_1B32C0:     dc.w off_C1C            ; DATA XREF: ROM:001B31A0   o
-                dc.w $EC01
+                fa_end
 off_1B32C4:     dc.w off_C20            ; DATA XREF: ROM:001B31A4   o
-                dc.w $EC01
+                fa_end
 off_1B32C8:     dc.w off_C24            ; DATA XREF: ROM:001B31A8   o
-                dc.w $EC01
+                fa_end
 off_1B32CC:     dc.w off_C28            ; DATA XREF: ROM:001B31AC   o
-                dc.w $EC01
+                fa_end
 off_1B32D0:     dc.w off_C2C            ; DATA XREF: ROM:001B31B0   o
-                dc.w $EC01
+                fa_end
 off_1B32D4:     dc.w off_C30            ; DATA XREF: ROM:001B31B4   o
-                dc.w $EC01
+                fa_end
 off_1B32D8:     dc.w off_C34            ; DATA XREF: ROM:001B31B8   o
-                dc.w $EC01
+                fa_end
 off_1B32DC:     dc.w off_C38            ; DATA XREF: ROM:001B31BC   o
-                dc.w $EC01
+                fa_end
 off_1B32E0:     dc.w off_C3C            ; DATA XREF: ROM:001B31C0   o
-                dc.w $EC01
+                fa_end
 off_1B32E4:     dc.w off_C40            ; DATA XREF: ROM:001B31C4   o
-                dc.w $EC01
+                fa_end
 off_1B32E8:     dc.w off_C44            ; DATA XREF: ROM:001B31C8   o
-                dc.w $EC01
+                fa_end
 off_1B32EC:     dc.w off_C48            ; DATA XREF: ROM:001B31CC   o
-                dc.w $EC01
+                fa_end
 off_1B32F0:     dc.w off_C4C            ; DATA XREF: ROM:001B31D0   o
-                dc.w $EC01
+                fa_end
 off_1B32F4:     dc.w off_C50            ; DATA XREF: ROM:001B31D4   o
-                dc.w $EC01
+                fa_end
 off_1B32F8:     dc.w off_C54            ; DATA XREF: ROM:001B31D8   o
-                dc.w $EC01
+                fa_end
 off_1B32FC:     dc.w off_C58            ; DATA XREF: ROM:001B31DC   o
-                dc.w $EC01
+                fa_end
 off_1B3300:     dc.w off_C5C            ; DATA XREF: ROM:001B31E0   o
-                dc.w $EC01
+                fa_end
 off_1B3304:     dc.w off_C60            ; DATA XREF: ROM:001B31E4   o
-                dc.w $EC01
+                fa_end
 off_1B3308:     dc.w off_C64            ; DATA XREF: ROM:001B31E8   o
-                dc.w $EC01
+                fa_end
 off_1B330C:     dc.w off_C68            ; DATA XREF: ROM:001B31EC   o
-                dc.w $EC01
+                fa_end
 off_1B3310:     dc.w off_C6C            ; DATA XREF: ROM:001B31F0   o
-                dc.w $EC01
+                fa_end
 off_1B3314:     dc.w off_C70            ; DATA XREF: ROM:001B31F4   o
-                dc.w $EC01
+                fa_end
 off_1B3318:     dc.w off_C74            ; DATA XREF: ROM:001B31F8   o
-                dc.w $EC01
+                fa_end
 off_1B331C:     dc.w off_C78            ; DATA XREF: ROM:001B31FC   o
-                dc.w $EC01
+                fa_end
 off_1B3320:     dc.w off_C7C            ; DATA XREF: ROM:001B3200   o
-                dc.w $EC01
+                fa_end
 off_1B3324:     dc.w off_C80            ; DATA XREF: ROM:001B3204   o
-                dc.w $EC01
+                fa_end
 off_1B3328:     dc.w off_C84            ; DATA XREF: ROM:001B3208   o
-                dc.w $EC01
+                fa_end
 off_1B332C:     dc.w off_C88            ; DATA XREF: ROM:001B320C   o
-                dc.w $EC01
+                fa_end
 off_1B3330:     dc.w off_C8C            ; DATA XREF: ROM:001B3210   o
-                dc.w $EC01
+                fa_end
 off_1B3334:     dc.w off_C90            ; DATA XREF: ROM:001B3214   o
-                dc.w $EC01
+                fa_end
 off_1B3338:     dc.w off_C94            ; DATA XREF: ROM:001B3218   o
-                dc.w $EC01
+                fa_end
 anim_car_tire:  dc.w off_AC8            ; DATA XREF: ROM:001B3362   o
                                         ; ROM:stru_25AA0C   o
-                dc.w $EB00
-                dc.w $EB01
+                fa_flip_x
+                fa_flip_y
                 dc.w off_AC8
                 dc.w off_ACC
                 dc.w off_ACC
@@ -18838,19 +16842,18 @@ anim_car_tire:  dc.w off_AC8            ; DATA XREF: ROM:001B3362   o
                 dc.w off_AD4
                 dc.w off_AD4
                 dc.w off_AD4
-                dc.w $EB00
-                dc.w $EB01
+                fa_flip_x
+                fa_flip_y
                 dc.w off_AD4
                 dc.w off_AD0
                 dc.w off_AD0
                 dc.w off_ACC
                 dc.w off_ACC
-                dc.w $EA00
-                dc.l anim_car_tire
+                fa_goto anim_car_tire
 anim_unknown:   dc.w off_3134           ; DATA XREF: ROM:stru_25AB14   o
-                dc.w $EC01
+                fa_end
 anim_unknown_13:dc.w off_B74            ; DATA XREF: ROM:stru_25B354   o
-                dc.w $EC01
+                fa_end
 anim_car_tire_2:dc.w off_31E8           ; DATA XREF: ROM:001B3388   o
                                         ; ROM:0025AA24   o
                 dc.w off_31E8
@@ -18864,8 +16867,7 @@ anim_car_tire_2:dc.w off_31E8           ; DATA XREF: ROM:001B3388   o
                 dc.w off_31F0
                 dc.w off_31EC
                 dc.w off_31EC
-                dc.w $EA00
-                dc.l anim_car_tire_2
+                fa_goto anim_car_tire_2
 off_1B338C:     dc.w off_858            ; DATA XREF: fire_to_chuck_boss+34   o
                 dc.w off_858
                 dc.w off_85C
@@ -18873,7 +16875,7 @@ off_1B338C:     dc.w off_858            ; DATA XREF: fire_to_chuck_boss+34   o
                 dc.w off_860
                 dc.w off_860
                 dc.w off_860
-                dc.w $F600
+                fa_delete
 anim_box:       dc.w off_844            ; DATA XREF: ROM:001B33C2   o
                                         ; ROM:stru_25AA84   o
                 dc.w off_844
@@ -18881,45 +16883,37 @@ anim_box:       dc.w off_844            ; DATA XREF: ROM:001B33C2   o
 off_1B33A2:     dc.w off_848            ; DATA XREF: ROM:001B33AA   o
                 dc.w off_848
                 dc.w off_848
-                dc.w $F09A
-                dc.l off_1B33A2
+                fa_rand_goto 154, off_1B33A2
                 dc.w off_844
                 dc.w off_844
                 dc.w off_844
 off_1B33B4:     dc.w off_850            ; DATA XREF: ROM:001B33BC   o
                 dc.w off_850
                 dc.w off_850
-                dc.w $F09A
-                dc.l off_1B33B4
-                dc.w $EA00
-                dc.l anim_box
+                fa_rand_goto 154, off_1B33B4
+                fa_goto anim_box
 off_1B33C6:     dc.w off_854            ; DATA XREF: ROM:001A4186   o
                 dc.w off_854
                 dc.w off_844
-                dc.w $EC01
+                fa_end
 off_1B33CE:     dc.w off_848            ; DATA XREF: fire_to_box+7C   o
                 dc.w off_848
                 dc.w off_84C
                 dc.w off_84C
                 dc.w off_850
                 dc.w off_850
-                dc.w $F500
-                dc.l stru_25A88C
-                dc.w 0
-                dc.l anim_dust_2
-                dc.l 0
+                fa_spawn 0, stru_25A88C, 0, 0, anim_dust_2, 0
                 dc.w off_854
                 dc.w off_854
                 dc.w off_848
                 dc.w off_848
                 dc.w off_854
-                dc.w $ED11
-                dc.l $19
+                fa_set_obj_b $0, $19
                 dc.w off_854
                 dc.w off_850
                 dc.w off_850
                 dc.w off_844
-                dc.w $EC01
+                fa_end
 off_1B3404:     dc.w off_850            ; DATA XREF: ROM:001B3416   o
                                         ; fire_to_box+62   o ...
                 dc.w off_850
@@ -18929,17 +16923,14 @@ off_1B3404:     dc.w off_850            ; DATA XREF: ROM:001B3416   o
                 dc.w off_848
                 dc.w off_844
                 dc.w off_844
-                dc.w $EA00
-                dc.l off_1B3404
+                fa_goto off_1B3404
 anim_unknown_2: dc.w off_2264           ; DATA XREF: ROM:001B346C   o
                                         ; ROM:stru_25AC4C   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $7C
-                dc.w $EC01
+                fa_set_obj_b $0, $7C
+                fa_end
 off_1B3424:     dc.w off_2268           ; DATA XREF: sub_24F04A+180   o
                                         ; fire_to_box:loc_255A40   o
-                dc.w $F32B
+                fa_sound $2B
                 dc.w off_2268
                 dc.w off_2268
                 dc.w off_226C
@@ -18973,67 +16964,43 @@ off_1B3424:     dc.w off_2268           ; DATA XREF: sub_24F04A+180   o
                 dc.w off_2274
                 dc.w off_2274
                 dc.w off_2274
-                dc.w $EA00
-                dc.l anim_unknown_2
+                fa_goto anim_unknown_2
 anim_boss_chuck:dc.w off_B54            ; DATA XREF: ROM:001ADB8A   o
                                         ; ROM:001ADB9E   o ...
-                dc.w $ED11
-                dc.w 0
-                dc.w $C
-                dc.w $FB00
-                dc.l oksub_2495A8
+                fa_set_obj_b $0, $C
+                fa_call oksub_2495A8
                 dc.w off_B54
-                dc.w $F411
-                dc.w $FD35
-                dc.w 1
-                dc.l word_1B349C
+                fa_if_b FM_EQ, magnet_move_state, $1, word_1B349C
                 dc.w off_B54
-                dc.w $F411
-                dc.w $FD35
-                dc.w 2
-                dc.l word_1B34B0
-                dc.w $EA00
-                dc.l anim_boss_chuck
-word_1B349C:    dc.w $EE83              ; DATA XREF: ROM:001B3486   o
+                fa_if_b FM_EQ, magnet_move_state, $2, word_1B34B0
+                fa_goto anim_boss_chuck
+word_1B349C:                            ; DATA XREF: ROM:001B3486   o
+                fa_hold 3
                                         ; ROM:001B34A6   o
                 dc.w off_B50
-                dc.w $F411
-                dc.w $FD35
-                dc.w 1
-                dc.l word_1B349C
-                dc.w $EA00
-                dc.l anim_boss_chuck
-word_1B34B0:    dc.w $EE83              ; DATA XREF: ROM:001B3492   o
+                fa_if_b FM_EQ, magnet_move_state, $1, word_1B349C
+                fa_goto anim_boss_chuck
+word_1B34B0:                            ; DATA XREF: ROM:001B3492   o
+                fa_hold 3
                                         ; ROM:001B34BA   o
                 dc.w off_B58
-                dc.w $F411
-                dc.w $FD35
-                dc.w 2
-                dc.l word_1B34B0
-                dc.w $EA00
-                dc.l anim_boss_chuck
+                fa_if_b FM_EQ, magnet_move_state, $2, word_1B34B0
+                fa_goto anim_boss_chuck
 off_1B34C4:     dc.w off_B58            ; DATA XREF: ROM:001B34E4   o
                                         ; fire_to_chuck_boss+A6   o
-                dc.w $FB00
-                dc.l oksub_252518
-                dc.w $F501
-                dc.l stru_25A8A4
-                dc.w $E0
-                dc.l 0
-                dc.l 0
+                fa_call oksub_252518
+                fa_spawn 1, stru_25A8A4, 0, -32, 0, 0
                 dc.w off_B58
                 dc.w off_B58
                 dc.w off_B58
-                dc.w $EA00
-                dc.l off_1B34C4
+                fa_goto off_1B34C4
 off_1B34E8:     dc.w off_B30            ; DATA XREF: fire_to_chuck_boss+12   o
-                dc.w $FB00
-                dc.l oksub_2495A0
-                dc.w $EE02
+                fa_call oksub_2495A0
+                fa_loop 2
                 dc.w off_B30
                 dc.w off_B34
                 dc.w off_B34
-                dc.w $F342
+                fa_sound $42
                 dc.w off_B38
                 dc.w off_B38
                 dc.w off_B3C
@@ -19042,9 +17009,8 @@ off_1B34E8:     dc.w off_B30            ; DATA XREF: fire_to_chuck_boss+12   o
                 dc.w off_B40
                 dc.w off_B40
                 dc.w off_B40
-                dc.w $EF00
-                dc.w $EA00
-                dc.l off_1ADB3C
+                fa_next
+                fa_goto off_1ADB3C
 off_1B3512:     dc.w off_B44            ; DATA XREF: fire_to_chuck_boss:loc_254834   o
                                         ; whip_to_chuck_boss+8   o
                 dc.w off_B44
@@ -19054,20 +17020,19 @@ off_1B3512:     dc.w off_B44            ; DATA XREF: fire_to_chuck_boss:loc_2548
                 dc.w off_B4C
                 dc.w off_B4C
                 dc.w off_B4C
-                dc.w $EA00
-                dc.l off_1ADB3C
+                fa_goto off_1ADB3C
 anim_magnet:    dc.w off_B5C            ; DATA XREF: ROM:object_magnet   o
-                dc.w $EC01
+                fa_end
 anim_chuck_fish:dc.w off_3554           ; DATA XREF: ROM:stru_25AAE4   o
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_3544
                 dc.w off_3548
                 dc.w off_3548
                 dc.w off_354C
                 dc.w off_3550
                 dc.w off_3554
-                dc.w $EF00
-                dc.w $EE02
+                fa_next
+                fa_loop 2
                 dc.w off_3544
                 dc.w off_3544
                 dc.w off_3548
@@ -19078,7 +17043,7 @@ anim_chuck_fish:dc.w off_3554           ; DATA XREF: ROM:stru_25AAE4   o
                 dc.w off_3550
                 dc.w off_3554
                 dc.w off_3554
-                dc.w $EF00
+                fa_next
 off_1B3556:     dc.w off_3544           ; DATA XREF: ROM:001A4152   o
                                         ; ROM:001B3576   o
                 dc.w off_3544
@@ -19095,8 +17060,7 @@ off_1B3556:     dc.w off_3544           ; DATA XREF: ROM:001A4152   o
                 dc.w off_3554
                 dc.w off_3554
                 dc.w off_3554
-                dc.w $EA00
-                dc.l off_1B3556
+                fa_goto off_1B3556
 anim_rope:      dc.w off_AF8            ; DATA XREF: ROM:stru_25AF7C   o
                 dc.w off_AF8
                 dc.w off_AF8
@@ -19104,37 +17068,29 @@ anim_rope:      dc.w off_AF8            ; DATA XREF: ROM:stru_25AF7C   o
                 dc.w off_AF4
                 dc.w off_AF4
 off_1B3586:     dc.w off_AE4            ; DATA XREF: ROM:001B3596   o
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_AE4
                 dc.w off_AE4
                 dc.w off_AE8
                 dc.w off_AE8
                 dc.w off_AE8
-                dc.w $EA00
-                dc.l off_1B3586
+                fa_goto off_1B3586
 off_1B359A:     dc.w off_1ED4           ; DATA XREF: fire_to_dog+24   o
-                dc.w $FB00
-                dc.l oksub_2495B0
-                dc.w $F340
+                fa_call oksub_2495B0
+                fa_sound $40
                 dc.w off_1ED4
                 dc.w off_1ED8
                 dc.w off_1ED8
                 dc.w off_1ED8
-                dc.w $EA00
-                dc.l anim_dog
+                fa_goto anim_dog
 anim_rotate_egg:dc.w off_1EA8           ; DATA XREF: spawn_dog_eye+22   o
                                         ; ROM:stru_25AB74   o
-                dc.w $F500
-                dc.l stru_25AB74
-                dc.w 0
-                dc.l off_1B35D2
-                dc.l 0
+                fa_spawn 0, stru_25AB74, 0, 0, off_1B35D2, 0
 off_1B35C4:     dc.w off_1E9C           ; DATA XREF: ROM:001B35CE   o
                 dc.w off_1EA0
                 dc.w off_1EA4
                 dc.w off_1EA8
-                dc.w $EA00
-                dc.l off_1B35C4
+                fa_goto off_1B35C4
 off_1B35D2:     dc.w off_1E9C           ; DATA XREF: ROM:001B35BC   o
                                         ; ROM:001B35E4   o
                 dc.w off_1E9C
@@ -19144,20 +17100,14 @@ off_1B35D2:     dc.w off_1E9C           ; DATA XREF: ROM:001B35BC   o
                 dc.w off_1EA4
                 dc.w off_1EA8
                 dc.w off_1EA8
-                dc.w $EA00
-                dc.l off_1B35D2
+                fa_goto off_1B35D2
 off_1B35E8:     dc.w off_1EB8           ; DATA XREF: spawn_dog_bone+22   o
-                dc.w $F500
-                dc.l stru_25AB74
-                dc.w 0
-                dc.l off_1B3608
-                dc.l 0
+                fa_spawn 0, stru_25AB74, 0, 0, off_1B3608, 0
 off_1B35FA:     dc.w off_1EAC           ; DATA XREF: ROM:001B3604   o
                 dc.w off_1EB0
                 dc.w off_1EB4
                 dc.w off_1EB8
-                dc.w $EA00
-                dc.l off_1B35FA
+                fa_goto off_1B35FA
 off_1B3608:     dc.w off_1EAC           ; DATA XREF: ROM:001B35F2   o
                                         ; ROM:001B361A   o
                 dc.w off_1EAC
@@ -19167,76 +17117,63 @@ off_1B3608:     dc.w off_1EAC           ; DATA XREF: ROM:001B35F2   o
                 dc.w off_1EB4
                 dc.w off_1EB8
                 dc.w off_1EB8
-                dc.w $EA00
-                dc.l off_1B3608
+                fa_goto off_1B3608
 anim_dog:       dc.w off_1EFC           ; DATA XREF: ROM:001B35AE   o
                                         ; sub_2521EA+20   o ...
 off_1B3620:     dc.w off_1EFC           ; DATA XREF: ROM:001B367E   o
                                         ; ROM:001B36F2   o
-                dc.w $ED11
-                dc.w 0
-                dc.w 2
-                dc.w $EE01
-                dc.w $FD64
-                dc.l off_1B3636
-                dc.w $FB00
-                dc.l oksub_252220
+                fa_set_obj_b $0, $2
+                fa_loop 1
+                fa_if_jim_near_x 100, off_1B3636
+                fa_call oksub_252220
 off_1B3636:     dc.w off_1EFC           ; DATA XREF: ROM:001B362C   o
                 dc.w off_1EFC
                 dc.w off_1F00
                 dc.w off_1F00
                 dc.w off_1F04
                 dc.w off_1F04
-                dc.w $FD40
-                dc.l word_1B364E
-                dc.w $EA00
-                dc.l word_1B3654
-word_1B364E:    dc.w $F09A              ; DATA XREF: ROM:001B3644   o
-                dc.l off_1B36B4
-word_1B3654:    dc.w $F700              ; DATA XREF: ROM:001B364A   o
-                dc.w $EF00
-                dc.w $FD64
-                dc.l word_1B3664
-                dc.w $FB00
-                dc.l oksub_252220
-word_1B3664:    dc.w $F09A              ; DATA XREF: ROM:001B365A   o
-                dc.l word_1B3674
+                fa_if_jim_near_x 64, word_1B364E
+                fa_goto word_1B3654
+word_1B364E:                            ; DATA XREF: ROM:001B3644   o
+                fa_rand_goto 154, off_1B36B4
+word_1B3654:                            ; DATA XREF: ROM:001B364A   o
+                fa_face_jim
+                fa_next
+                fa_if_jim_near_x 100, word_1B3664
+                fa_call oksub_252220
+word_1B3664:                            ; DATA XREF: ROM:001B365A   o
+                fa_rand_goto 154, word_1B3674
                 dc.w off_1F08
-                dc.w $F335
+                fa_sound $35
                 dc.w off_1F08
                 dc.w off_1F0C
                 dc.w off_1F0C
-word_1B3674:    dc.w $F700              ; DATA XREF: ROM:001B3666   o
-                dc.w $FB00
-                dc.l oksub_252220
-                dc.w $EA00
-                dc.l off_1B3620
+word_1B3674:                            ; DATA XREF: ROM:001B3666   o
+                fa_face_jim
+                fa_call oksub_252220
+                fa_goto off_1B3620
 off_1B3682:     dc.w off_1F10           ; DATA XREF: oksub_252220:loc_252236   o
                 dc.w off_1F10
                 dc.w off_1F10
                 dc.w off_1F14
                 dc.w off_1F18
-word_1B368C:    dc.w $F700              ; DATA XREF: ROM:001B36A2   o
+word_1B368C:                            ; DATA XREF: ROM:001B36A2   o
+                fa_face_jim
                 dc.w off_1F1C
                 dc.w off_1F20
                 dc.w off_1F24
                 dc.w off_1F28
                 dc.w off_1F2C
                 dc.w off_1F30
-                dc.w $FD10
-                dc.l word_1B36A6
-                dc.w $EA00
-                dc.l word_1B368C
-word_1B36A6:    dc.w $ED14              ; DATA XREF: ROM:001B369C   o
-                dc.w $A
-                dc.l 0
-                dc.w $EA00
-                dc.l off_1B36B4
+                fa_if_jim_near_x 16, word_1B36A6
+                fa_goto word_1B368C
+word_1B36A6:                            ; DATA XREF: ROM:001B369C   o
+                fa_set_obj_l $A, 0
+                fa_goto off_1B36B4
 off_1B36B4:     dc.w off_1EDC           ; DATA XREF: ROM:001B3650   o
                                         ; ROM:001B36B0   o
-                dc.w $FB00
-                dc.l oksub_2495DE
-                dc.w $F31A
+                fa_call oksub_2495DE
+                fa_sound $1A
                 dc.w off_1EDC
                 dc.w off_1EDC
                 dc.w off_1EE0
@@ -19249,43 +17186,32 @@ off_1B36B4:     dc.w off_1EDC           ; DATA XREF: ROM:001B3650   o
                 dc.w off_1EEC
 off_1B36D2:     dc.w off_1EF0           ; DATA XREF: ROM:001B374A   o
                 dc.w off_1EF0
-                dc.w $FB00
-                dc.l oksub_2495B0
+                fa_call oksub_2495B0
 off_1B36DC:     dc.w off_1EF4           ; DATA XREF: ROM:001B36E2   o
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B36DC
+                fa_if_obj_bit_clr $7, 4, off_1B36DC
                 dc.w off_1EF8
                 dc.w off_1EF8
-                dc.w $F700
+                fa_face_jim
                 dc.w off_1EDC
                 dc.w off_1EDC
-                dc.w $EA00
-                dc.l off_1B3620
+                fa_goto off_1B3620
 off_1B36F6:     dc.w off_1EBC           ; DATA XREF: collision_with_dog+22   o
-                dc.w $F33E
-                dc.w $FB00
-                dc.l oksub_2495DE
+                fa_sound $3E
+                fa_call oksub_2495DE
                 dc.w off_1EBC
                 dc.w off_1EC0
                 dc.w off_1EC0
                 dc.w off_1EC4
                 dc.w off_1EC4
-                dc.w $F421
-                dc.w $FDEA
-                dc.w $42
-                dc.l word_1B3742
+                fa_if_b FM_NE, jim_state, $42, word_1B3742
                 dc.w off_1EC8
                 dc.w off_1EC8
                 dc.w off_1ECC
                 dc.w off_1ECC
                 dc.w off_1ED0
                 dc.w off_1ED0
-                dc.w $EE04
-                dc.w $F421
-                dc.w $FDEA
-                dc.w $42
-                dc.l word_1B3742
+                fa_loop 4
+                fa_if_b FM_NE, jim_state, $42, word_1B3742
                 dc.w off_1EC0
                 dc.w off_1EC0
                 dc.w off_1EC4
@@ -19296,13 +17222,11 @@ off_1B36F6:     dc.w off_1EBC           ; DATA XREF: collision_with_dog+22   o
                 dc.w off_1ECC
                 dc.w off_1ED0
                 dc.w off_1ED0
-                dc.w $EF00
-word_1B3742:    dc.w $ED01              ; DATA XREF: ROM:001B3710   o
+                fa_next
+word_1B3742:                            ; DATA XREF: ROM:001B3710   o
+                fa_set_b is_jim_blocked_by_enemy, $0
                                         ; ROM:001B3728   o
-                dc.w $FD23
-                dc.w 0
-                dc.w $EA00
-                dc.l off_1B36D2
+                fa_goto off_1B36D2
 anim_explosion_2:dc.w off_2524          ; DATA XREF: ROM:stru_25A904   o
                 dc.w off_2524
                 dc.w off_2528
@@ -19323,7 +17247,7 @@ anim_explosion_2:dc.w off_2524          ; DATA XREF: ROM:stru_25A904   o
                 dc.w off_2548
                 dc.w off_2548
                 dc.w off_2548
-                dc.w $F600
+                fa_delete
 anim_star:     dc.w off_870            ; DATA XREF: ROM:object_collision_explosion   o
                 dc.w off_870
                 dc.w off_874
@@ -19347,28 +17271,12 @@ anim_star:     dc.w off_870            ; DATA XREF: ROM:object_collision_explosi
                 dc.w off_898
                 dc.w off_898
                 dc.w off_898
-                dc.w $F600
+                fa_delete
 off_1B37A8:     dc.w off_9B0            ; DATA XREF: ROM:object_explosion_with_spiral   o
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.w off_C0C
-                dc.l 0
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.w off_CF4
-                dc.l 0
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.w $F40C
-                dc.l 0
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.w $F4F4
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, stru_25A8A4, 12, 12, 0, 0
+                fa_spawn 0, stru_25A8A4, 12, -12, 0, 0
+                fa_spawn 0, stru_25A8A4, -12, 12, 0, 0
+                fa_spawn 0, stru_25A8A4, -12, -12, 0, 0
 anim_spiral_explode:dc.w off_9B0        ; DATA XREF: spawn_hit_effect+6C   o
                                         ; ROM:object_spiral_explode   o
                 dc.w off_9B4
@@ -19399,7 +17307,7 @@ anim_spiral_explode:dc.w off_9B0        ; DATA XREF: spawn_hit_effect+6C   o
                 dc.w off_9E4
                 dc.w off_9E4
                 dc.w off_9E4
-                dc.w $F600
+                fa_delete
 anim_bullet_explode:dc.w off_870        ; DATA XREF: spawn_hit_effect+18   o
                                         ; sub_2545F4+10   o ...
                 dc.w off_874
@@ -19413,78 +17321,71 @@ anim_bullet_explode:dc.w off_870        ; DATA XREF: spawn_hit_effect+18   o
                 dc.w off_894
                 dc.w off_898
                 dc.w off_898
-                dc.w $F600
+                fa_delete
 anim_cow:       dc.w off_E24            ; DATA XREF: ROM:001B3894   o
                                         ; ROM:stru_25AA3C   o
-                dc.w $EE93
+                fa_hold 19
                 dc.w off_E24
                 dc.w off_E28
                 dc.w off_E28
-                dc.w $EE05
-                dc.w $EE84
+                fa_loop 5
+                fa_hold 4
                 dc.w off_E2C
 off_1B3850:     dc.w off_E2C            ; DATA XREF: ROM:001B3854   o
-                dc.w $F0CC
-                dc.l off_1B3850
+                fa_rand_goto 204, off_1B3850
                 dc.w off_E30
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_E34
 off_1B385E:     dc.w off_E34            ; DATA XREF: ROM:001B3862   o
-                dc.w $F0CC
-                dc.l off_1B385E
+                fa_rand_goto 204, off_1B385E
                 dc.w off_E30
-                dc.w $EF00
+                fa_next
                 dc.w off_E28
                 dc.w off_E28
                 dc.w off_E24
                 dc.w off_E24
                 dc.w off_E24
                 dc.w off_E24
-                dc.w $F09A
-                dc.l word_1B3884
-                dc.w $F319
-                dc.w $EA00
-                dc.l word_1B3886
-word_1B3884:    dc.w $F368              ; DATA XREF: ROM:001B3878   o
-word_1B3886:    dc.w $EE8D              ; DATA XREF: ROM:001B3880   o
+                fa_rand_goto 154, word_1B3884
+                fa_sound $19
+                fa_goto word_1B3886
+word_1B3884:                            ; DATA XREF: ROM:001B3878   o
+                fa_sound $68
+word_1B3886:                            ; DATA XREF: ROM:001B3880   o
+                fa_hold 13
                 dc.w off_E38
-                dc.w $EEA3
+                fa_hold 35
                 dc.w off_E3C
                 dc.w off_E24
                 dc.w off_E24
-                dc.w $EA00
-                dc.l anim_cow
+                fa_goto anim_cow
 off_1B3898:     dc.w off_E40            ; DATA XREF: cow_launch+12   o
-                dc.w $EC01
+                fa_end
 anim_cow_mini:  dc.w off_E44            ; DATA XREF: ROM:001B38A0   o
                                         ; ROM:stru_25AA54   o
-                dc.w $EA00
-                dc.l anim_cow_mini
+                fa_goto anim_cow_mini
 anim_lever_2:   dc.w off_864            ; DATA XREF: ROM:object_lever   o
-                dc.w $EC01
+                fa_end
 off_1B38A8:     dc.w off_868            ; DATA XREF: fire_to_lever:loc_2560BA   o
                                         ; fire_to_activated_lever:loc_2560FE   o
                 dc.w off_868
                 dc.w off_86C
                 dc.w off_86C
-                dc.w $ED11
-                dc.w 0
-                dc.w 7
-                dc.w $EE82
+                fa_set_obj_b $0, $7
+                fa_hold 2
                 dc.w off_868
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_86C
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_868
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_86C
 off_1B38C6:     dc.w off_868            ; DATA XREF: spawn_lever_actived+C   o
-                dc.w $EC01
+                fa_end
 anim_hook_briliance:dc.w off_AB4        ; DATA XREF: ROM:001B3904   o
                                         ; ROM:object_hook   o ...
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $EB00
+                fa_call oksub_249526
+                fa_flip_x
                 dc.w off_AB8
                 dc.w off_ABC
                 dc.w off_ABC
@@ -19493,58 +17394,43 @@ anim_hook_briliance:dc.w off_AB4        ; DATA XREF: ROM:001B3904   o
                 dc.w off_AC4
                 dc.w off_AC4
                 dc.w off_AC0
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_AC0
                 dc.w off_AB8
                 dc.w off_AB8
                 dc.w off_AB4
                 dc.w off_AB4
                 dc.w off_AB4
-                dc.w $FB00
-                dc.l oksub_24951E
+                fa_call oksub_24951E
 off_1B38F8:     dc.w off_AB4            ; DATA XREF: ROM:001B38FE   o
                 dc.w off_AB4
-                dc.w $F0EA
-                dc.l off_1B38F8
-                dc.w $EA00
-                dc.l anim_hook_briliance
+                fa_rand_goto 234, off_1B38F8
+                fa_goto anim_hook_briliance
 off_1B3908:     dc.w off_AB4            ; DATA XREF: whip_to_prize_faucet+4   o
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_AB4
-                dc.w $ED11
-                dc.w 0
-                dc.w $B
-                dc.w $EC01
+                fa_set_obj_b $0, $B
+                fa_end
 anim_hell_gates:dc.w off_2050           ; DATA XREF: ROM:stru_25AC34   o
-                dc.w $EC01
+                fa_end
 anim_chain_mechanism:dc.w off_B20       ; DATA XREF: ROM:001B3988   o
                                         ; ROM:stru_25AC1C   o
-                dc.w $ED01
-                dc.w $FD38
-                dc.w $FF
-                dc.w $ED11
-                dc.w 0
-                dc.w $D
-                dc.w $EC01
+                fa_set_b byte_FFFD38, $FF
+                fa_set_obj_b $0, $D
+                fa_end
 off_1B392A:     dc.w off_B20            ; DATA XREF: whip_to_hellgate_lever+4   o
-                dc.w $ED01
-                dc.w $FD38
-                dc.w 2
+                fa_set_b byte_FFFD38, $2
                 dc.w off_B24
                 dc.w off_B28
                 dc.w off_B2C
-                dc.w $ED11
-                dc.w 0
-                dc.w $D
+                fa_set_obj_b $0, $D
                 dc.w off_B20
                 dc.w off_B24
                 dc.w off_B24
                 dc.w off_B28
                 dc.w off_B2C
                 dc.w off_B2C
-                dc.w $ED01
-                dc.w $FD38
-                dc.w 1
+                fa_set_b byte_FFFD38, $1
                 dc.w off_B20
                 dc.w off_B20
                 dc.w off_B24
@@ -19553,101 +17439,72 @@ off_1B392A:     dc.w off_B20            ; DATA XREF: whip_to_hellgate_lever+4   
                 dc.w off_B28
                 dc.w off_B2C
                 dc.w off_B2C
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_B20
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_B24
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_B28
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_B2C
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_B20
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_B24
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_B28
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_B2C
-                dc.w $ED01
-                dc.w $FD38
-                dc.w 0
-                dc.w $EA00
-                dc.l anim_chain_mechanism
+                fa_set_b byte_FFFD38, $0
+                fa_goto anim_chain_mechanism
 anim_stalactite:dc.w off_35CC           ; DATA XREF: ROM:001B3996   o
                                         ; ROM:object_stalactite   o
                 dc.w off_35CC
                 dc.w off_35D0
                 dc.w off_35D0
-                dc.w $EA00
-                dc.l anim_stalactite
+                fa_goto anim_stalactite
 anim_bomb:      dc.w off_34B8           ; DATA XREF: ROM:stru_25ADE4   o
-                dc.w $ED12
-                dc.w $18
-                dc.w $300
-                dc.w $ED12
-                dc.l off_1AF800
-                dc.w $EE85
+                fa_set_obj_w $18, $300
+                fa_set_obj_w $1A, $F800
+                fa_hold 5
                 dc.w off_34B8
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_34BC
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_34C0
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_34C4
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_34C8
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_34CC
-                dc.w $F348
-                dc.w $ED01
-                dc.w $FD3A
-                dc.w $30
-                dc.w $F500
-                dc.l stru_25A8A4
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $ED01
-                dc.w $FD85
-                dc.w 0
-                dc.w $ED01
-                dc.w $FD86
-                dc.w 0
-                dc.w $EE0E
-                dc.w $FB00
-                dc.l spawn_stalactite
-                dc.w $EE85
+                fa_sound $48
+                fa_set_b screen_shake_phase, $30
+                fa_spawn 0, stru_25A8A4, 0, 0, 0, 0
+                fa_call oksub_24951E
+                fa_set_b stalactite_rain_pattern, $0
+                fa_set_b stalactite_spawn_index, $0
+                fa_loop 14
+                fa_call spawn_stalactite
+                fa_hold 5
                 dc.w off_34CC
-                dc.w $EF00
-                dc.w $ED01
-                dc.w $FD85
-                dc.w 1
-                dc.w $ED01
-                dc.w $FD86
-                dc.w 0
-                dc.w $EE0E
-                dc.w $FB00
-                dc.l spawn_stalactite
-                dc.w $EE85
+                fa_next
+                fa_set_b stalactite_rain_pattern, $1
+                fa_set_b stalactite_spawn_index, $0
+                fa_loop 14
+                fa_call spawn_stalactite
+                fa_hold 5
                 dc.w off_34CC
-                dc.w $EF00
-                dc.w $ED01
-                dc.w $FD85
-                dc.w 2
-                dc.w $ED01
-                dc.w $FD86
-                dc.w 0
-                dc.w $EE27
-                dc.w $FB00
-                dc.l spawn_stalactite
-                dc.w $EE84
+                fa_next
+                fa_set_b stalactite_rain_pattern, $2
+                fa_set_b stalactite_spawn_index, $0
+                fa_loop 39
+                fa_call spawn_stalactite
+                fa_hold 4
                 dc.w off_34CC
-                dc.w $EF00
+                fa_next
                 dc.w off_34CC
-                dc.w $F600
+                fa_delete
 off_1B3A30:     dc.w off_103C           ; DATA XREF: sub_258E3C+60   o
                 dc.w off_103C
                 dc.w off_103C
@@ -19666,12 +17523,7 @@ off_1B3A30:     dc.w off_103C           ; DATA XREF: sub_258E3C+60   o
                 dc.w off_1058
                 dc.w off_1058
                 dc.w off_105C
-                dc.w $F500
-                dc.l stru_25ADE4
-                dc.w $2800
-                dc.w 0
-                dc.l 0
-                dc.w 0
+                fa_spawn 0, stru_25ADE4, 40, 0, 0, 0
                 dc.w off_1060
                 dc.w off_1064
                 dc.w off_1064
@@ -19691,26 +17543,21 @@ off_1B3A30:     dc.w off_103C           ; DATA XREF: sub_258E3C+60   o
                 dc.w off_1044
                 dc.w off_1078
 anim_unknown_3: dc.w off_1078           ; DATA XREF: ROM:stru_25AE14   o
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $EC01
+                fa_call oksub_24951E
+                fa_end
 anim_evilcat:   dc.w off_107C           ; DATA XREF: ROM:stru_25AE5C   o
                                         ; ROM:stru_25AE74   o
-                dc.w $EA00
-                dc.l off_1B3AEE
-word_1B3A9A:    dc.w $F068              ; DATA XREF: ROM:001B3AEA   o
+                fa_goto off_1B3AEE
+word_1B3A9A:                            ; DATA XREF: ROM:001B3AEA   o
+                fa_rand_goto 104, off_1B3AEE
                                         ; ROM:001B3AFC   o
-                dc.l off_1B3AEE
 off_1B3AA0:     dc.w off_10A4           ; DATA XREF: ROM:001B3AAA   o
-                dc.w $FC00
-                dc.l word_1B3B00
-                dc.w $F0D6
-                dc.l off_1B3AA0
-word_1B3AAE:    dc.w $ED01              ; DATA XREF: ROM:001B3ADE   o
-                dc.w $FD78
-                dc.w 0
-                dc.w $EB00
-                dc.w $EE01
+                fa_gosub word_1B3B00
+                fa_rand_goto 214, off_1B3AA0
+word_1B3AAE:                            ; DATA XREF: ROM:001B3ADE   o
+                fa_set_b evil_cat_phase1_active, $0
+                fa_flip_x
+                fa_loop 1
                 dc.w off_1084
                 dc.w off_1084
                 dc.w off_1088
@@ -19728,34 +17575,23 @@ word_1B3AAE:    dc.w $ED01              ; DATA XREF: ROM:001B3ADE   o
                 dc.w off_109C
                 dc.w off_109C
                 dc.w off_10A0
-                dc.w $EF00
-                dc.w $F07C
-                dc.l word_1B3AAE
-                dc.w $ED01
-                dc.w $FD78
-                dc.w 1
-                dc.w $EA00
-                dc.l word_1B3A9A
+                fa_next
+                fa_rand_goto 124, word_1B3AAE
+                fa_set_b evil_cat_phase1_active, $1
+                fa_goto word_1B3A9A
 off_1B3AEE:     dc.w off_107C           ; DATA XREF: ROM:001B3A96   o
                                         ; ROM:001B3A9C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EE9D
+                fa_set_obj_b $9, $FF
+                fa_hold 29
                 dc.w off_107C
-                dc.w $EA00
-                dc.l word_1B3A9A
-word_1B3B00:    dc.w $ED11              ; DATA XREF: ROM:001B3AA4   o
-                dc.w 9
-                dc.w $FF
-                dc.w $EE8E
+                fa_goto word_1B3A9A
+word_1B3B00:                            ; DATA XREF: ROM:001B3AA4   o
+                fa_set_obj_b $9, $FF
+                fa_hold 14
                 dc.w off_10A4
 off_1B3B0A:     dc.w off_10A4           ; DATA XREF: ROM:001B3B0E   o
-                dc.w $F0EA
-                dc.l off_1B3B0A
-                dc.w $ED01
-                dc.w $FD7F
-                dc.w $FF
+                fa_rand_goto 234, off_1B3B0A
+                fa_set_b $FFFD7F, $FF
                 dc.w off_10A4
                 dc.w off_10A4
                 dc.w off_10A8
@@ -19771,16 +17607,11 @@ off_1B3B0A:     dc.w off_10A4           ; DATA XREF: ROM:001B3B0E   o
                 dc.w off_10C8
                 dc.w off_10CC
                 dc.w off_10D0
-                dc.w $FC80
+                fa_return
 anim_evilcat_gun:dc.w off_1024          ; DATA XREF: ROM:001B3B40   o
                                         ; ROM:001B3B80   o ...
-                dc.w $F411
-                dc.w $FD7F
-                dc.w 0
-                dc.l anim_evilcat_gun
-                dc.w $ED01
-                dc.w $FD7F
-                dc.w 0
+                fa_if_b FM_EQ, $FFFD7F, $0, anim_evilcat_gun
+                fa_set_b $FFFD7F, $0
                 dc.w off_1024
                 dc.w off_1024
                 dc.w off_1028
@@ -19789,65 +17620,51 @@ anim_evilcat_gun:dc.w off_1024          ; DATA XREF: ROM:001B3B40   o
                 dc.w off_1028
                 dc.w off_1030
                 dc.w off_1030
-                dc.w $ED01
-                dc.w $FD3A
-                dc.w $20
-                dc.w $F348
-                dc.w $F500
-                dc.l stru_25AEBC
-                dc.w $4808
-                dc.l 0
-                dc.l 0
+                fa_set_b screen_shake_phase, $20
+                fa_sound $48
+                fa_spawn 0, stru_25AEBC, 72, 8, 0, 0
                 dc.w off_1034
                 dc.w off_1034
                 dc.w off_1024
                 dc.w off_1038
                 dc.w off_1038
                 dc.w off_1038
-                dc.w $EA00
-                dc.l anim_evilcat_gun
-                dc.w $EEF7
+                fa_goto anim_evilcat_gun
+                fa_hold 119
                 dc.w off_102C
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_1030
-                dc.w $EA00
-                dc.l anim_evilcat_gun
-                dc.w $EC01
+                fa_goto anim_evilcat_gun
+                fa_end
 anim_fireburn_5:dc.w frame_none           ; DATA XREF: ROM:stru_25AE8C   o
                                         ; ROM:stru_25AEA4   o
-word_1B3B96:    dc.w $F501              ; DATA XREF: ROM:001B3BAE   o
-                dc.l stru_25AD84
-                dc.w 0
-                dc.l off_1B0B30
-                dc.l 0
+word_1B3B96:                            ; DATA XREF: ROM:001B3BAE   o
+                fa_spawn 1, stru_25AD84, 0, 0, off_1B0B30, 0
                 dc.w frame_none
                 dc.w frame_none
                 dc.w frame_none
-                dc.w $EA00
-                dc.l word_1B3B96
+                fa_goto word_1B3B96
 anim_evilcat_pillar:dc.w off_2C88       ; DATA XREF: ROM:0000C936   o
                                         ; ROM:stru_25AE44   o
-                dc.w $EC01
+                fa_end
 off_1B3BB6:     dc.w off_2C8C           ; DATA XREF: ROM:0000C932   o
-                dc.w $EC01
+                fa_end
 off_1B3BBA:     dc.w off_2C90           ; DATA XREF: ROM:0000C92E   o
-                dc.w $EC01
+                fa_end
 off_1B3BBE:     dc.w off_2C94           ; DATA XREF: ROM:0000C92A   o
-                dc.w $EC01
+                fa_end
 off_1B3BC2:     dc.w off_2C98           ; DATA XREF: ROM:off_C926   o
-                dc.w $EC01
+                fa_end
 off_1B3BC6:     dc.w off_2C9C           ; DATA XREF: sub_2590A2+1C   o
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_2C9C
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_2CA0
                 dc.w off_2CA4
-                dc.w $EC01
+                fa_end
 off_1B3BD4:     dc.w off_107C           ; DATA XREF: ROM:001B3BDA   o
                                         ; sub_259052+8   o
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B3BD4
+                fa_if_obj_bit_clr $7, 4, off_1B3BD4
                 dc.w off_F40
                 dc.w off_F44
                 dc.w off_F44
@@ -19862,202 +17679,136 @@ off_1B3BEA:     dc.w off_F4C            ; DATA XREF: ROM:001B3BFC   o
                 dc.w off_F54
                 dc.w off_F58
                 dc.w off_F58
-                dc.w $EA00
-                dc.l off_1B3BEA
+                fa_goto off_1B3BEA
 off_1B3C00:     dc.w off_F18            ; DATA XREF: ROM:0024F4B4   o
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF1E
-                dc.w $EE88
+                fa_set_obj_l $A, byte_1ACF1E
+                fa_hold 8
                 dc.w off_F18
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3C14:     dc.w off_F1C            ; DATA XREF: ROM:001B3C1E   o
                 dc.w off_F20
                 dc.w off_F24
                 dc.w off_F28
-                dc.w $EA00
-                dc.l off_1B3C14
+                fa_goto off_1B3C14
 off_1B3C22:     dc.w off_F18            ; DATA XREF: ROM:0024F4BC   o
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF2E
-                dc.w $EE88
+                fa_set_obj_l $A, byte_1ACF2E
+                fa_hold 8
                 dc.w off_F18
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3C36:     dc.w off_F1C            ; DATA XREF: ROM:001B3C40   o
                 dc.w off_F20
                 dc.w off_F24
                 dc.w off_F28
-                dc.w $EA00
-                dc.l off_1B3C36
+                fa_goto off_1B3C36
 off_1B3C44:     dc.w off_F2C            ; DATA XREF: ROM:0024F4C4   o
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF3E
-                dc.w $EE88
+                fa_set_obj_l $A, byte_1ACF3E
+                fa_hold 8
                 dc.w off_F2C
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3C58:     dc.w off_F30            ; DATA XREF: ROM:001B3C62   o
                 dc.w off_F34
                 dc.w off_F38
                 dc.w off_F3C
-                dc.w $EA00
-                dc.l off_1B3C58
+                fa_goto off_1B3C58
 off_1B3C66:     dc.w off_F2C            ; DATA XREF: ROM:0024F4CC   o
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF4E
-                dc.w $EE88
+                fa_set_obj_l $A, byte_1ACF4E
+                fa_hold 8
                 dc.w off_F2C
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3C7A:     dc.w off_F30            ; DATA XREF: ROM:001B3C84   o
                 dc.w off_F34
                 dc.w off_F38
                 dc.w off_F3C
-                dc.w $EA00
-                dc.l off_1B3C7A
+                fa_goto off_1B3C7A
 off_1B3C88:     dc.w off_F18            ; DATA XREF: ROM:0024F4D4   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF4E
-                dc.w $EE88
+                fa_set_obj_b $9, $FF
+                fa_set_obj_l $A, byte_1ACF4E
+                fa_hold 8
                 dc.w off_F18
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3CA2:     dc.w off_F1C            ; DATA XREF: ROM:001B3CAC   o
                 dc.w off_F20
                 dc.w off_F24
                 dc.w off_F28
-                dc.w $EA00
-                dc.l off_1B3CA2
+                fa_goto off_1B3CA2
 off_1B3CB0:     dc.w off_F18            ; DATA XREF: ROM:0024F4DC   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF3E
-                dc.w $EE88
+                fa_set_obj_b $9, $FF
+                fa_set_obj_l $A, byte_1ACF3E
+                fa_hold 8
                 dc.w off_F18
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3CCA:     dc.w off_F1C            ; DATA XREF: ROM:001B3CD4   o
                 dc.w off_F20
                 dc.w off_F24
                 dc.w off_F28
-                dc.w $EA00
-                dc.l off_1B3CCA
+                fa_goto off_1B3CCA
 off_1B3CD8:     dc.w off_F2C            ; DATA XREF: ROM:0024F4E4   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF2E
-                dc.w $EE88
+                fa_set_obj_b $9, $FF
+                fa_set_obj_l $A, byte_1ACF2E
+                fa_hold 8
                 dc.w off_F2C
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3CF2:     dc.w off_F30            ; DATA XREF: ROM:001B3CFC   o
                 dc.w off_F34
                 dc.w off_F38
                 dc.w off_F3C
-                dc.w $EA00
-                dc.l off_1B3CF2
+                fa_goto off_1B3CF2
 off_1B3D00:     dc.w off_F2C            ; DATA XREF: ROM:0024F4EC   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF1E
-                dc.w $EE88
+                fa_set_obj_b $9, $FF
+                fa_set_obj_l $A, byte_1ACF1E
+                fa_hold 8
                 dc.w off_F2C
-                dc.w $ED11
-                dc.w 0
-                dc.w $47
+                fa_set_obj_b $0, $47
 off_1B3D1A:     dc.w off_F30            ; DATA XREF: ROM:001B3D24   o
                 dc.w off_F34
                 dc.w off_F38
                 dc.w off_F3C
-                dc.w $EA00
-                dc.l off_1B3D1A
+                fa_goto off_1B3D1A
 off_1B3D28:     dc.w off_F04            ; DATA XREF: ROM:001ACF5C   o
                                         ; ROM:001B3D86   o
                 dc.w off_F04
                 dc.w off_F04
                 dc.w off_F08
-                dc.w $ED12
-                dc.l off_1AFB00
-                dc.w $ED11
-                dc.w 6
-                dc.w $40
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1ACF62
+                fa_set_obj_w $1A, $FB00
+                fa_set_obj_b $6, $40
+                fa_set_obj_l $A, byte_1ACF62
                 dc.w off_F08
                 dc.w off_F0C
                 dc.w off_F0C
                 dc.w off_F10
                 dc.w off_F10
                 dc.w off_F14
-                dc.w $EC01
+                fa_end
 off_1B3D52:     dc.w off_10D4           ; DATA XREF: collision_with_evil_cat_soul+14   o
-                dc.w $EE03
+                fa_loop 3
                 dc.w off_10D4
-                dc.w $ED11
-                dc.w $3C
-                dc.w $80
+                fa_set_obj_b $3C, $80
                 dc.w off_10D8
-                dc.w $ED11
-                dc.w $3C
-                dc.w 0
+                fa_set_obj_b $3C, $0
                 dc.w off_10DC
                 dc.w off_10E0
                 dc.w off_10E4
-                dc.w $ED11
-                dc.w $3C
-                dc.w $80
+                fa_set_obj_b $3C, $80
                 dc.w off_10E8
-                dc.w $EF00
-                dc.w $ED11
-                dc.w $3C
-                dc.w 0
-                dc.w $ED14
-                dc.w $42
-                dc.w 0
-                dc.w 0
-                dc.w $EA00
-                dc.l off_1B3D28
+                fa_next
+                fa_set_obj_b $3C, $0
+                fa_set_obj_l $42, 0
+                fa_goto off_1B3D28
 off_1B3D8A:     dc.w off_193C           ; DATA XREF: collision_with_evil_cat_soul:loc_259162   o
-                dc.w $F36F
+                fa_sound $6F
                 dc.w off_1940
                 dc.w off_1944
                 dc.w off_1948
                 dc.w off_194C
                 dc.w off_1950
-                dc.w $EE02
+                fa_loop 2
                 dc.w off_193C
                 dc.w off_1940
                 dc.w off_1944
                 dc.w off_1948
                 dc.w off_194C
                 dc.w off_1950
-                dc.w $EF00
+                fa_next
                 dc.w off_1954
                 dc.w off_195C
                 dc.w off_195C
@@ -20072,19 +17823,17 @@ off_1B3D8A:     dc.w off_193C           ; DATA XREF: collision_with_evil_cat_sou
                 dc.w off_1954
                 dc.w off_1954
                 dc.w off_1954
-                dc.w $EE04
+                fa_loop 4
                 dc.w off_1BF8
                 dc.w off_1BFC
                 dc.w off_1C00
                 dc.w off_1C04
                 dc.w off_1C08
                 dc.w off_1C0C
-                dc.w $EF00
+                fa_next
                 dc.w off_1B74
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
-                dc.w $F800
+                fa_set_b is_jim_blocked_by_enemy, $0
+                fa_jim_default_anim
 anim_evilcat_soul:dc.w off_1010         ; DATA XREF: ROM:001B3DFE   o
                                         ; ROM:stru_25AE2C   o
                 dc.w off_1010
@@ -20101,8 +17850,7 @@ anim_evilcat_soul:dc.w off_1010         ; DATA XREF: ROM:001B3DFE   o
                 dc.w off_1020
                 dc.w off_1020
                 dc.w off_1020
-                dc.w $EA00
-                dc.l anim_evilcat_soul
+                fa_goto anim_evilcat_soul
 off_1B3E02:     dc.w off_F5C            ; DATA XREF: ROM:off_C902   o
                                         ; ROM:001B3E22   o
                 dc.w off_F5C
@@ -20119,8 +17867,7 @@ off_1B3E02:     dc.w off_F5C            ; DATA XREF: ROM:off_C902   o
                 dc.w off_F6C
                 dc.w off_F6C
                 dc.w off_F6C
-                dc.w $EA00
-                dc.l off_1B3E02
+                fa_goto off_1B3E02
 off_1B3E26:     dc.w off_F70            ; DATA XREF: ROM:0000C906   o
                                         ; ROM:001B3E46   o
                 dc.w off_F70
@@ -20137,8 +17884,7 @@ off_1B3E26:     dc.w off_F70            ; DATA XREF: ROM:0000C906   o
                 dc.w off_F80
                 dc.w off_F80
                 dc.w off_F80
-                dc.w $EA00
-                dc.l off_1B3E26
+                fa_goto off_1B3E26
 off_1B3E4A:     dc.w off_F84            ; DATA XREF: ROM:0000C90A   o
                                         ; ROM:001B3E6A   o
                 dc.w off_F84
@@ -20155,8 +17901,7 @@ off_1B3E4A:     dc.w off_F84            ; DATA XREF: ROM:0000C90A   o
                 dc.w off_F94
                 dc.w off_F94
                 dc.w off_F94
-                dc.w $EA00
-                dc.l off_1B3E4A
+                fa_goto off_1B3E4A
 off_1B3E6E:     dc.w off_F98            ; DATA XREF: ROM:0000C90E   o
                                         ; ROM:001B3E8E   o
                 dc.w off_F98
@@ -20173,8 +17918,7 @@ off_1B3E6E:     dc.w off_F98            ; DATA XREF: ROM:0000C90E   o
                 dc.w off_FA8
                 dc.w off_FA8
                 dc.w off_FA8
-                dc.w $EA00
-                dc.l off_1B3E6E
+                fa_goto off_1B3E6E
 off_1B3E92:     dc.w off_FAC            ; DATA XREF: ROM:0000C912   o
                                         ; ROM:001B3EB2   o
                 dc.w off_FAC
@@ -20191,8 +17935,7 @@ off_1B3E92:     dc.w off_FAC            ; DATA XREF: ROM:0000C912   o
                 dc.w off_FBC
                 dc.w off_FBC
                 dc.w off_FBC
-                dc.w $EA00
-                dc.l off_1B3E92
+                fa_goto off_1B3E92
 off_1B3EB6:     dc.w off_FC0            ; DATA XREF: ROM:0000C916   o
                                         ; ROM:001B3ED6   o
                 dc.w off_FC0
@@ -20209,8 +17952,7 @@ off_1B3EB6:     dc.w off_FC0            ; DATA XREF: ROM:0000C916   o
                 dc.w off_FD0
                 dc.w off_FD0
                 dc.w off_FD0
-                dc.w $EA00
-                dc.l off_1B3EB6
+                fa_goto off_1B3EB6
 off_1B3EDA:     dc.w off_FD4            ; DATA XREF: ROM:0000C91A   o
                                         ; ROM:001B3EFA   o
                 dc.w off_FD4
@@ -20227,8 +17969,7 @@ off_1B3EDA:     dc.w off_FD4            ; DATA XREF: ROM:0000C91A   o
                 dc.w off_FE4
                 dc.w off_FE4
                 dc.w off_FE4
-                dc.w $EA00
-                dc.l off_1B3EDA
+                fa_goto off_1B3EDA
 off_1B3EFE:     dc.w off_FE8            ; DATA XREF: ROM:0000C91E   o
                                         ; ROM:001B3F1E   o
                 dc.w off_FE8
@@ -20245,8 +17986,7 @@ off_1B3EFE:     dc.w off_FE8            ; DATA XREF: ROM:0000C91E   o
                 dc.w off_FF8
                 dc.w off_FF8
                 dc.w off_FF8
-                dc.w $EA00
-                dc.l off_1B3EFE
+                fa_goto off_1B3EFE
 off_1B3F22:     dc.w off_FFC            ; DATA XREF: ROM:0000C922   o
                                         ; ROM:001B3F42   o
                 dc.w off_FFC
@@ -20263,10 +18003,9 @@ off_1B3F22:     dc.w off_FFC            ; DATA XREF: ROM:0000C922   o
                 dc.w off_100C
                 dc.w off_100C
                 dc.w off_100C
-                dc.w $EA00
-                dc.l off_1B3F22
+                fa_goto off_1B3F22
 off_1B3F46:     dc.w off_C98            ; DATA XREF: ROM:stru_25BA8C   o
-                dc.w $EC01
+                fa_end
 anim_chicken_egg:dc.w off_3474          ; DATA XREF: ROM:001B3F5C   o
                                         ; ROM:stru_25B30C   o
                 dc.w off_3478
@@ -20276,40 +18015,29 @@ anim_chicken_egg:dc.w off_3474          ; DATA XREF: ROM:001B3F5C   o
                 dc.w off_3488
                 dc.w off_348C
                 dc.w off_3490
-                dc.w $EA00
-                dc.l anim_chicken_egg
+                fa_goto anim_chicken_egg
 anim_egg_stay:  dc.w off_3494           ; DATA XREF: ROM:stru_25B324   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_end
 off_1B3F6A:     dc.w off_3494           ; DATA XREF: ROM:0000C4FC   o
-                dc.w $EC01
+                fa_end
 off_1B3F6E:     dc.w off_3498           ; DATA XREF: ROM:0000C504   o
-                dc.w $EC01
+                fa_end
 off_1B3F72:     dc.w off_349C           ; DATA XREF: ROM:0000C4F4   o
-                dc.w $EC01
+                fa_end
 off_1B3F76:     dc.w off_34A0           ; DATA XREF: ROM:0000C514   o
-                dc.w $EC01
+                fa_end
 off_1B3F7A:     dc.w off_34A4           ; DATA XREF: ROM:0000C50C   o
-                dc.w $EC01
+                fa_end
 off_1B3F7E:     dc.w off_34A8           ; DATA XREF: ROM:0000C510   o
-                dc.w $EC01
+                fa_end
 off_1B3F82:     dc.w off_34AC           ; DATA XREF: ROM:0000C4F0   o
-                dc.w $EC01
+                fa_end
 off_1B3F86:     dc.w off_34B0           ; DATA XREF: ROM:0000C500   o
-                dc.w $EC01
+                fa_end
 anim_explosion_sparks:dc.w off_2524     ; DATA XREF: ROM:stru_25A8D4   o
-                dc.w $F500
-                dc.l stru_25A8EC
-                dc.w $CD
-                dc.l anim_sparks_2
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25A8EC
-                dc.w $CD
-                dc.l off_1B3FEC
-                dc.l 0
+                fa_spawn 0, stru_25A8EC, 0, -51, anim_sparks_2, 0
+                fa_spawn 0, stru_25A8EC, 0, -51, off_1B3FEC, 0
                 dc.w off_2524
                 dc.w off_2528
                 dc.w off_252C
@@ -20334,14 +18062,11 @@ anim_explosion_sparks:dc.w off_2524     ; DATA XREF: ROM:stru_25A8D4   o
                 dc.w off_2548
                 dc.w off_2548
                 dc.w off_2548
-                dc.w $F600
+                fa_delete
 anim_sparks_2:  dc.w off_24F4           ; DATA XREF: ROM:001B3F94   o
                                         ; ROM:stru_25A8EC   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $EA00
-                dc.l off_1B3FEE
+                fa_set_obj_b $9, $FF
+                fa_goto off_1B3FEE
 off_1B3FEC:     dc.w off_24F4           ; DATA XREF: ROM:001B3FA4   o
 off_1B3FEE:     dc.w off_24F4           ; DATA XREF: ROM:001B3FE8   o
                 dc.w off_24F8
@@ -20367,67 +18092,35 @@ off_1B3FEE:     dc.w off_24F4           ; DATA XREF: ROM:001B3FE8   o
                 dc.w off_2520
                 dc.w off_2520
                 dc.w off_2520
-                dc.w $F600
+                fa_delete
 anim_eyes_generator:     dc.w off_20C4           ; DATA XREF: ROM:001B4028   o
                                         ; ROM:001B40A4   o ...
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 1
-                dc.l anim_eyes_generator
+                fa_if_b FM_EQ, eyes_generator_valve_state, $1, anim_eyes_generator
 off_1B402C:     dc.w off_20C8           ; DATA XREF: ROM:001B4034   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 2
-                dc.l off_1B402C
+                fa_if_b FM_EQ, eyes_generator_valve_state, $2, off_1B402C
 off_1B4038:     dc.w off_20CC           ; DATA XREF: ROM:001B4040   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 3
-                dc.l off_1B4038
+                fa_if_b FM_EQ, eyes_generator_valve_state, $3, off_1B4038
 off_1B4044:     dc.w off_20D0           ; DATA XREF: ROM:001B404C   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 4
-                dc.l off_1B4044
+                fa_if_b FM_EQ, eyes_generator_valve_state, $4, off_1B4044
 off_1B4050:     dc.w off_20D4           ; DATA XREF: ROM:001B4058   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 5
-                dc.l off_1B4050
+                fa_if_b FM_EQ, eyes_generator_valve_state, $5, off_1B4050
 off_1B405C:     dc.w off_20D4           ; DATA XREF: ROM:001B406E   o
-                dc.w $EE8F
+                fa_hold 15
                 dc.w off_20D4
-                dc.w $FB00
-                dc.l oksub_25839E
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 6
-                dc.l off_1B405C
+                fa_call oksub_25839E
+                fa_if_b FM_EQ, eyes_generator_valve_state, $6, off_1B405C
 off_1B4072:     dc.w off_20D4           ; DATA XREF: ROM:001B407A   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 5
-                dc.l off_1B4072
+                fa_if_b FM_EQ, eyes_generator_valve_state, $5, off_1B4072
 off_1B407E:     dc.w off_20D0           ; DATA XREF: ROM:001B4086   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 4
-                dc.l off_1B407E
+                fa_if_b FM_EQ, eyes_generator_valve_state, $4, off_1B407E
 off_1B408A:     dc.w off_20CC           ; DATA XREF: ROM:001B4092   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 3
-                dc.l off_1B408A
+                fa_if_b FM_EQ, eyes_generator_valve_state, $3, off_1B408A
 off_1B4096:     dc.w off_20C8           ; DATA XREF: ROM:001B409E   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 2
-                dc.l off_1B4096
-                dc.w $EA00
-                dc.l anim_eyes_generator
+                fa_if_b FM_EQ, eyes_generator_valve_state, $2, off_1B4096
+                fa_goto anim_eyes_generator
 anim_eyes_generator_2:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
                                         ; ROM:object_eyes_generator_active   o
-                dc.w $EE85
+                fa_hold 5
                 dc.w off_20C4
                 dc.w off_20C8
                 dc.w off_20C8
@@ -20437,8 +18130,7 @@ anim_eyes_generator_2:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
                 dc.w off_20D0
                 dc.w off_20D4
                 dc.w off_20D4
-                dc.w $FB00
-                dc.l oksub_25839E
+                fa_call oksub_25839E
                 dc.w off_20D4
                 dc.w off_20D4
                 dc.w off_20D0
@@ -20447,8 +18139,7 @@ anim_eyes_generator_2:     dc.w off_20C4           ; DATA XREF: ROM:001B40D6   o
                 dc.w off_20CC
                 dc.w off_20C8
                 dc.w off_20C8
-                dc.w $EA00
-                dc.l anim_eyes_generator_2
+                fa_goto anim_eyes_generator_2
 off_1B40DA:     dc.w off_20C4           ; DATA XREF: whip_to_automatic_eyes_generator+4   o
                 dc.w off_20C4
                 dc.w off_20C8
@@ -20463,65 +18154,30 @@ off_1B40DA:     dc.w off_20C4           ; DATA XREF: whip_to_automatic_eyes_gene
                 dc.w off_20C8
                 dc.w off_20C4
                 dc.w off_20C4
-                dc.w $F500
-                dc.l object_spiral_explode
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $F600
+                fa_spawn 0, object_spiral_explode, 0, 0, 0, 0
+                fa_delete
 anim_valve:     dc.w off_AD8            ; DATA XREF: ROM:001B4110   o
                                         ; ROM:001B4182   o ...
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 1
-                dc.l anim_valve
+                fa_if_b FM_EQ, eyes_generator_valve_state, $1, anim_valve
 off_1B4114:     dc.w off_ADC            ; DATA XREF: ROM:001B411C   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 2
-                dc.l off_1B4114
+                fa_if_b FM_EQ, eyes_generator_valve_state, $2, off_1B4114
 off_1B4120:     dc.w off_AE0            ; DATA XREF: ROM:001B4128   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 3
-                dc.l off_1B4120
+                fa_if_b FM_EQ, eyes_generator_valve_state, $3, off_1B4120
 off_1B412C:     dc.w off_AD8            ; DATA XREF: ROM:001B4134   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 4
-                dc.l off_1B412C
+                fa_if_b FM_EQ, eyes_generator_valve_state, $4, off_1B412C
 off_1B4138:     dc.w off_AD8            ; DATA XREF: ROM:001B4140   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 5
-                dc.l off_1B4138
+                fa_if_b FM_EQ, eyes_generator_valve_state, $5, off_1B4138
 off_1B4144:     dc.w off_AD8            ; DATA XREF: ROM:001B414C   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 6
-                dc.l off_1B4144
+                fa_if_b FM_EQ, eyes_generator_valve_state, $6, off_1B4144
 off_1B4150:     dc.w off_AD8            ; DATA XREF: ROM:001B4158   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 5
-                dc.l off_1B4150
+                fa_if_b FM_EQ, eyes_generator_valve_state, $5, off_1B4150
 off_1B415C:     dc.w off_AD8            ; DATA XREF: ROM:001B4164   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 4
-                dc.l off_1B415C
+                fa_if_b FM_EQ, eyes_generator_valve_state, $4, off_1B415C
 off_1B4168:     dc.w off_AE0            ; DATA XREF: ROM:001B4170   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 3
-                dc.l off_1B4168
+                fa_if_b FM_EQ, eyes_generator_valve_state, $3, off_1B4168
 off_1B4174:     dc.w off_ADC            ; DATA XREF: ROM:001B417C   o
-                dc.w $F411
-                dc.w $FD3E
-                dc.w 2
-                dc.l off_1B4174
-                dc.w $EA00
-                dc.l anim_valve
+                fa_if_b FM_EQ, eyes_generator_valve_state, $2, off_1B4174
+                fa_goto anim_valve
 anim_anvil:     dc.w off_2454           ; DATA XREF: ROM:001B4198   o
                                         ; ROM:stru_25A934   o
                 dc.w off_2454
@@ -20531,17 +18187,14 @@ anim_anvil:     dc.w off_2454           ; DATA XREF: ROM:001B4198   o
                 dc.w off_245C
                 dc.w off_2458
                 dc.w off_2458
-                dc.w $EA00
-                dc.l anim_anvil
+                fa_goto anim_anvil
 off_1B419C:     dc.w off_2700           ; DATA XREF: sub_256D82+56   o
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $EE8B
+                fa_call oksub_24951E
+                fa_hold 11
                 dc.w off_2700
                 dc.w off_274C
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $F700
+                fa_call oksub_249526
+                fa_face_jim
                 dc.w off_274C
 off_1B41B4:     dc.w off_2750           ; DATA XREF: ROM:001B41C2   o
                 dc.w off_2750
@@ -20549,29 +18202,19 @@ off_1B41B4:     dc.w off_2750           ; DATA XREF: ROM:001B41C2   o
                 dc.w off_2758
                 dc.w off_2758
                 dc.w off_275C
-                dc.w $EA00
-                dc.l off_1B41B4
+                fa_goto off_1B41B4
 anim_pete:      dc.w off_272C           ; DATA XREF: ROM:001B42E2   o
                                         ; ROM:001B43C6   o ...
-word_1B41C8:    dc.w $ED01              ; DATA XREF: ROM:001B4352   o
-                dc.w $FE08
-                dc.w 0
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A4660
-                dc.w $ED11
-                dc.w 0
-                dc.w $16
+word_1B41C8:                            ; DATA XREF: ROM:001B4352   o
+                fa_set_b pete_state, $0
+                fa_set_obj_l $A, byte_1A4660
+                fa_set_obj_b $0, $16
 off_1B41DC:     dc.w off_2700           ; DATA XREF: ROM:001B423E   o
                 dc.w off_2700
                 dc.w off_2700
                 dc.w off_2700
-                dc.w $F280
-                dc.w 6
-                dc.l off_1B41F4
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B42A6
+                fa_if_obj_bit_clr $6, 0, off_1B41F4
+                fa_if_obj_bit_clr $7, 4, off_1B42A6
 off_1B41F4:     dc.w off_2704           ; DATA XREF: ROM:001B41E8   o
                 dc.w off_2704
                 dc.w off_2704
@@ -20584,12 +18227,8 @@ off_1B41F4:     dc.w off_2704           ; DATA XREF: ROM:001B41E8   o
                 dc.w off_2714
                 dc.w off_2714
                 dc.w off_2714
-                dc.w $F280
-                dc.w 6
-                dc.l off_1B421C
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B42A6
+                fa_if_obj_bit_clr $6, 0, off_1B421C
+                fa_if_obj_bit_clr $7, 4, off_1B42A6
 off_1B421C:     dc.w off_2718           ; DATA XREF: ROM:001B4210   o
                 dc.w off_2718
                 dc.w off_2718
@@ -20606,42 +18245,29 @@ off_1B421C:     dc.w off_2718           ; DATA XREF: ROM:001B4210   o
                 dc.w off_272C
                 dc.w off_272C
                 dc.w off_272C
-                dc.w $EA00
-                dc.l off_1B41DC
+                fa_goto off_1B41DC
 off_1B4242:     dc.w off_2698           ; DATA XREF: whip_to_puppy+28   o
-                dc.w $F364
-                dc.w $ED01
-                dc.w $FE08
-                dc.w 1
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
-                dc.w $ED11
-                dc.l $16
+                fa_sound $64
+                fa_set_b pete_state, $1
+                fa_set_obj_l $A, 0
+                fa_set_obj_b $0, $16
                 dc.w off_269C
                 dc.w off_26A0
-                dc.w $FB00
-                dc.l oksub_2495DE
-                dc.w $ED12
-                dc.w $1A
-                dc.w $F800
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A4668
+                fa_call oksub_2495DE
+                fa_set_obj_w $1A, $F800
+                fa_set_obj_l $A, byte_1A4668
                 dc.w off_26A0
                 dc.w off_26A4
                 dc.w off_26A4
                 dc.w off_26A8
-                dc.w $F3E4
+                fa_sound_stop $64
                 dc.w off_26AC
                 dc.w off_26AC
                 dc.w off_26B0
                 dc.w off_26B4
                 dc.w off_26B4
-                dc.w $ED01
-                dc.w $FE08
-                dc.w 2
-                dc.w $EE01
+                fa_set_b pete_state, $2
+                fa_loop 1
                 dc.w off_26A4
                 dc.w off_26A4
                 dc.w off_26A8
@@ -20650,43 +18276,27 @@ off_1B4242:     dc.w off_2698           ; DATA XREF: whip_to_puppy+28   o
                 dc.w off_26B0
                 dc.w off_26B4
                 dc.w off_26B4
-                dc.w $EF00
-                dc.w $FB00
-                dc.l oksub_2495B0
+                fa_next
+                fa_call oksub_2495B0
 off_1B42A6:     dc.w off_26B8           ; DATA XREF: ROM:001B41F0   o
                                         ; ROM:001B4218   o ...
-                dc.w $F411
-                dc.w $FE08
-                dc.w 3
-                dc.l word_1B42C2
-                dc.w $F280
-                dc.w 6
-                dc.l word_1B42C2
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B42A6
-word_1B42C2:    dc.w $ED14              ; DATA XREF: ROM:001B42AE   o
+                fa_if_b FM_EQ, pete_state, $3, word_1B42C2
+                fa_if_obj_bit_clr $6, 0, word_1B42C2
+                fa_if_obj_bit_clr $7, 4, off_1B42A6
+word_1B42C2:                            ; DATA XREF: ROM:001B42AE   o
+                fa_set_obj_l $A, 0
                                         ; ROM:001B42B6   o
-                dc.w $A
-                dc.w 0
-                dc.w 0
-                dc.w $F347
-                dc.w $ED01
-                dc.w $FE08
-                dc.w 3
+                fa_sound $47
+                fa_set_b pete_state, $3
                 dc.w off_2698
                 dc.w off_2698
                 dc.w off_269C
                 dc.w off_269C
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EA00
-                dc.l anim_pete
+                fa_set_obj_b $9, $0
+                fa_goto anim_pete
 off_1B42E6:     dc.w off_2668           ; DATA XREF: fire_to_puppy+8A   o
-                dc.w $F32B
-                dc.w $FB00
-                dc.l oksub_2495DE
+                fa_sound $2B
+                fa_call oksub_2495DE
                 dc.w off_2668
                 dc.w off_2668
                 dc.w off_266C
@@ -20713,26 +18323,17 @@ off_1B4308:     dc.w off_2680           ; DATA XREF: ROM:001B432A   o
                 dc.w off_2690
                 dc.w off_2694
                 dc.w off_2694
-                dc.w $F411
-                dc.w $FE08
-                dc.w 6
-                dc.l off_1B4308
-                dc.w $FB00
-                dc.l oksub_2495B0
+                fa_if_b FM_EQ, pete_state, $6, off_1B4308
+                fa_call oksub_2495B0
 off_1B4334:     dc.w off_2700           ; DATA XREF: ROM:001B4342   o
-                dc.w $F280
-                dc.w 6
-                dc.l off_1B4346
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B4334
+                fa_if_obj_bit_clr $6, 0, off_1B4346
+                fa_if_obj_bit_clr $7, 4, off_1B4334
 off_1B4346:     dc.w off_2698           ; DATA XREF: ROM:001B433A   o
-                dc.w $F347
+                fa_sound $47
                 dc.w off_2698
                 dc.w off_269C
                 dc.w off_269C
-                dc.w $EA00
-                dc.l word_1B41C8
+                fa_goto word_1B41C8
 off_1B4356:     dc.w off_2700           ; DATA XREF: ROM:001B4398   o
                                         ; fire_to_puppy+124   o
                 dc.w off_2700
@@ -20766,114 +18367,83 @@ off_1B4356:     dc.w off_2700           ; DATA XREF: ROM:001B4398   o
                 dc.w off_272C
                 dc.w off_272C
                 dc.w off_272C
-                dc.w $EA00
-                dc.l off_1B4356
+                fa_goto off_1B4356
                 dc.w off_272C
-                dc.w $EC01
+                fa_end
 off_1B43A0:     dc.w off_2654           ; DATA XREF: fire_to_puppy+32   o
-                dc.w $ED14
-                dc.w $A
-                dc.w 0
-                dc.w 0
-                dc.w $ED01
-                dc.w $FE08
-                dc.w 4
-                dc.w $F31F
+                fa_set_obj_l $A, 0
+                fa_set_b pete_state, $4
+                fa_sound $1F
                 dc.w off_2654
                 dc.w off_2658
                 dc.w off_265C
                 dc.w off_265C
                 dc.w off_2660
-                dc.w $F33B
+                fa_sound $3B
                 dc.w off_2660
-                dc.w $EE97
+                fa_hold 23
                 dc.w off_2664
-                dc.w $EA00
-                dc.l anim_pete
+                fa_goto anim_pete
 off_1B43CA:     dc.w off_2698           ; DATA XREF: sub_256D82:loc_25702E   o
-                dc.w $ED14
-                dc.w $A
-                dc.l 0
-                dc.w $ED01
-                dc.w $FE08
-                dc.w $A
+                fa_set_obj_l $A, 0
+                fa_set_b pete_state, $A
                 dc.w off_2698
                 dc.w off_269C
                 dc.w off_269C
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26C4
                 dc.w off_26C4
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26C8
                 dc.w off_26C8
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26CC
                 dc.w off_26CC
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $F343
-                dc.w $EE82
+                fa_move_y -1
+                fa_sound $43
+                fa_hold 2
                 dc.w off_26D0
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $EE82
+                fa_move_y -1
+                fa_hold 2
                 dc.w off_26D0
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $F343
+                fa_move_y -1
+                fa_sound $43
                 dc.w off_26D4
                 dc.w off_26D4
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26D8
                 dc.w off_26D8
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26DC
                 dc.w off_26DC
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $F343
+                fa_move_y -1
+                fa_sound $43
                 dc.w off_26E0
                 dc.w off_26E0
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26E4
                 dc.w off_26E4
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $F343
+                fa_move_y -1
+                fa_sound $43
                 dc.w off_26E8
                 dc.w off_26E8
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $F343
+                fa_move_y -1
+                fa_sound $43
                 dc.w off_26EC
                 dc.w off_26EC
-                dc.w $F101
-                dc.w $FFFF
-                dc.w $F343
+                fa_move_y -1
+                fa_sound $43
                 dc.w off_26F0
                 dc.w off_26F0
-                dc.w $F101
-                dc.w $FFFF
+                fa_move_y -1
                 dc.w off_26F4
-                dc.w $ED01
-                dc.w $FE08
-                dc.w $B
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A4670
-                dc.w $ED11
-                dc.w 0
-                dc.w $6A
-word_1B446E:    dc.w $F700              ; DATA XREF: ROM:001B4490   o
-                dc.w $F09A
-                dc.l off_1B4478
-                dc.w $F334
+                fa_set_b pete_state, $B
+                fa_set_obj_l $A, byte_1A4670
+                fa_set_obj_b $0, $6A
+word_1B446E:                            ; DATA XREF: ROM:001B4490   o
+                fa_face_jim
+                fa_rand_goto 154, off_1B4478
+                fa_sound $34
 off_1B4478:     dc.w off_26F4           ; DATA XREF: ROM:001B4472   o
                 dc.w off_26F4
                 dc.w off_26F4
@@ -20882,21 +18452,14 @@ off_1B4478:     dc.w off_26F4           ; DATA XREF: ROM:001B4472   o
                 dc.w off_26FC
                 dc.w off_26FC
                 dc.w off_26FC
-                dc.w $FD64
-                dc.l off_1B4494
-                dc.w $EA00
-                dc.l word_1B446E
+                fa_if_jim_near_x 100, off_1B4494
+                fa_goto word_1B446E
 off_1B4494:     dc.w off_2618           ; DATA XREF: ROM:001B448A   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $6A
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A4686
-                dc.w $ED01
-                dc.w $FE08
-                dc.w $C
-word_1B44AA:    dc.w $F700              ; DATA XREF: ROM:001B44DE   o
+                fa_set_obj_b $0, $6A
+                fa_set_obj_l $A, byte_1A4686
+                fa_set_b pete_state, $C
+word_1B44AA:                            ; DATA XREF: ROM:001B44DE   o
+                fa_face_jim
                 dc.w off_2618
                 dc.w off_2618
                 dc.w off_261C
@@ -20908,7 +18471,7 @@ word_1B44AA:    dc.w $F700              ; DATA XREF: ROM:001B44DE   o
                 dc.w off_2624
                 dc.w off_2624
                 dc.w off_2628
-                dc.w $F31A
+                fa_sound $1A
                 dc.w off_2628
                 dc.w off_262C
                 dc.w off_262C
@@ -20917,202 +18480,137 @@ word_1B44AA:    dc.w $F700              ; DATA XREF: ROM:001B44DE   o
                 dc.w off_2630
                 dc.w off_2630
                 dc.w off_2630
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1A4670
-                dc.w $EA00
-                dc.l word_1B44AA
+                fa_set_obj_l $A, byte_1A4670
+                fa_goto word_1B44AA
 off_1B44E2:     dc.w off_2634           ; DATA XREF: collision_with_puppy_evil+2C   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $4F
-                dc.w $ED01
-                dc.w $FE08
-                dc.w $E
-                dc.w $ED12
-                dc.w $1A
-                dc.w 0
-                dc.w $ED04
-                dc.w $A6F2
-                dc.l off_1B015A
-                dc.w $ED14
-                dc.w $A
-                dc.w 0
-                dc.w 0
-                dc.w $F33E
+                fa_set_b jim_state, $4F
+                fa_set_b pete_state, $E
+                fa_set_obj_w $1A, $0
+                fa_set_l jim_anim_offset, off_1B015A
+                fa_set_obj_l $A, 0
+                fa_sound $3E
                 dc.w off_2634
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
+                fa_set_obj_b $9, $FF
                 dc.w off_2638
                 dc.w off_2638
                 dc.w off_263C
-                dc.w $F421
-                dc.w $FE08
-                dc.w $E
-                dc.l word_1B4562
+                fa_if_b FM_NE, pete_state, $E, word_1B4562
                 dc.w off_263C
                 dc.w off_2640
                 dc.w off_2640
                 dc.w off_2644
                 dc.w off_2648
-                dc.w $F09A
-                dc.l word_1B4538
-                dc.w $F361
-                dc.w $EA00
-                dc.l off_1B453A
-word_1B4538:    dc.w $F36F              ; DATA XREF: ROM:001B452C   o
+                fa_rand_goto 154, word_1B4538
+                fa_sound $61
+                fa_goto off_1B453A
+word_1B4538:                            ; DATA XREF: ROM:001B452C   o
+                fa_sound $6F
 off_1B453A:     dc.w off_2634           ; DATA XREF: ROM:001B4534   o
                                         ; ROM:001B455E   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
+                fa_set_obj_b $9, $FF
                 dc.w off_2638
                 dc.w off_2638
                 dc.w off_263C
-                dc.w $F421
-                dc.w $FE08
-                dc.w $E
-                dc.l word_1B4562
+                fa_if_b FM_NE, pete_state, $E, word_1B4562
                 dc.w off_263C
                 dc.w off_2640
                 dc.w off_2640
                 dc.w off_2644
                 dc.w off_2648
-                dc.w $EA00
-                dc.l off_1B453A
-word_1B4562:    dc.w $ED04              ; DATA XREF: ROM:001B451C   o
+                fa_goto off_1B453A
+word_1B4562:                            ; DATA XREF: ROM:001B451C   o
+                fa_set_l jim_anim_offset, off_1B0182
                                         ; ROM:001B454E   o
-                dc.w $A6F2
-                dc.l off_1B0182
                 dc.w off_2738
                 dc.w off_2738
                 dc.w off_2738
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_2738
                 dc.w off_273C
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_273C
                 dc.w off_2740
-                dc.w $F357
+                fa_sound $57
                 dc.w off_2740
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_2740
                 dc.w off_2744
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_2744
                 dc.w off_2748
                 dc.w off_2748
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_2748
                 dc.w off_26FC
                 dc.w off_26FC
-                dc.w $ED01
-                dc.w $FD23
-                dc.w 0
+                fa_set_b is_jim_blocked_by_enemy, $0
                 dc.w off_26F0
-                dc.w $ED11
-                dc.w 0
-                dc.w $16
-                dc.w $ED14
-                dc.w $A
-                dc.w 0
-                dc.w 0
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $ED12
-                dc.w $18
-                dc.w 0
-                dc.w $ED12
-                dc.w $1A
-                dc.w 0
-                dc.w $FB00
-                dc.l oksub_2495B0
-                dc.w $ED01
-                dc.w $FE08
-                dc.w $10
+                fa_set_obj_b $0, $16
+                fa_set_obj_l $A, 0
+                fa_set_obj_b $9, $0
+                fa_set_obj_w $18, $0
+                fa_set_obj_w $1A, $0
+                fa_call oksub_2495B0
+                fa_set_b pete_state, $10
                 dc.w off_26F0
-                dc.w $F343
+                fa_sound $43
                 dc.w off_26EC
                 dc.w off_26EC
                 dc.w off_26E8
                 dc.w off_26E8
-                dc.w $F343
+                fa_sound $43
                 dc.w off_26E4
                 dc.w off_26E4
                 dc.w off_26E0
                 dc.w off_26E0
 off_1B45E0:     dc.w off_26C0           ; DATA XREF: ROM:001B45E6   o
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B45E0
-                dc.w $ED01
-                dc.w $FE08
-                dc.w 3
-                dc.w $F347
+                fa_if_obj_bit_clr $7, 4, off_1B45E0
+                fa_set_b pete_state, $3
+                fa_sound $47
                 dc.w off_2698
                 dc.w off_2698
                 dc.w off_269C
                 dc.w off_269C
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $EA00
-                dc.l anim_pete
-                dc.w $EA00
-                dc.l off_1B42A6
+                fa_set_obj_b $9, $0
+                fa_goto anim_pete
+                fa_goto off_1B42A6
 anim_unknown_14:dc.w off_ED8            ; DATA XREF: ROM:object_sphere_electro   o
-                dc.w $EC01
+                fa_end
 off_1B4610:     dc.w off_ED8            ; DATA XREF: collision_with_sphere_electro+14   o
-                dc.w $EEBB
+                fa_hold 59
                 dc.w off_ED8
-                dc.w $ED11
-                dc.w 0
-                dc.w $63
-                dc.w $EC01
+                fa_set_obj_b $0, $63
+                fa_end
 anim_electro_up_down:dc.w off_EA4       ; DATA XREF: ROM:001B46E6   o
                                         ; ROM:object_electro_up_down   o
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $F09A
-                dc.l word_1B4632
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-word_1B4632:    dc.w $ED11              ; DATA XREF: ROM:001B4628   o
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $0
+                fa_rand_goto 154, word_1B4632
+                fa_set_obj_b $9, $FF
+word_1B4632:                            ; DATA XREF: ROM:001B4628   o
+                fa_set_obj_b $35, $0
                 dc.w off_EA4
                 dc.w off_EA8
                 dc.w off_EA8
                 dc.w off_EAC
                 dc.w off_EAC
                 dc.w off_EB0
-word_1B4644:    dc.w $EE03              ; DATA XREF: ROM:001B4658   o
+word_1B4644:                            ; DATA XREF: ROM:001B4658   o
+                fa_loop 3
                 dc.w off_EB4
                 dc.w off_EB8
                 dc.w off_EBC
                 dc.w off_EC0
                 dc.w off_EC4
-                dc.w $EF00
-                dc.w $F411
-                dc.w $FD11
-                dc.w $60
-                dc.l word_1B4644
+                fa_next
+                fa_if_b FM_EQ, jim_ride_obj_id, $60, word_1B4644
                 dc.w off_EC8
                 dc.w off_ECC
                 dc.w off_ED0
                 dc.w off_ED4
                 dc.w off_ED4
-                dc.w $EB01
-                dc.w $FAC2
-                dc.w 4
-                dc.w 8
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_flip_y
+                fa_sub_obj_w $4, $8
+                fa_set_obj_b $0, $86
                 dc.w off_ED0
                 dc.w off_ECC
                 dc.w off_EC8
@@ -21135,25 +18633,21 @@ word_1B4644:    dc.w $EE03              ; DATA XREF: ROM:001B4658   o
                 dc.w off_EAC
                 dc.w off_EAC
                 dc.w off_EB0
-                dc.w $EE04
+                fa_loop 4
                 dc.w off_EB4
                 dc.w off_EB8
                 dc.w off_EBC
                 dc.w off_EC0
                 dc.w off_EC4
-                dc.w $EF00
+                fa_next
                 dc.w off_EC8
                 dc.w off_ECC
                 dc.w off_ED0
                 dc.w off_ED4
-                dc.w $ED11
-                dc.w 0
-                dc.w $65
+                fa_set_obj_b $0, $65
                 dc.w off_ED4
-                dc.w $EB01
-                dc.w $FA42
-                dc.w 4
-                dc.w 8
+                fa_flip_y
+                fa_add_obj_w $4, $8
                 dc.w off_ED0
                 dc.w off_ECC
                 dc.w off_EC8
@@ -21169,8 +18663,7 @@ word_1B4644:    dc.w $EE03              ; DATA XREF: ROM:001B4658   o
                 dc.w off_EA8
                 dc.w off_EA4
                 dc.w off_EA4
-                dc.w $EA00
-                dc.l anim_electro_up_down
+                fa_goto anim_electro_up_down
 off_1B46EA:     dc.w off_29EC           ; DATA XREF: sub_24BEDC+1FA   o
                                         ; sub_24BEDC+22C   o
                 dc.w off_29F0
@@ -21178,46 +18671,35 @@ off_1B46EE:     dc.w off_29F4           ; DATA XREF: ROM:001B46F8   o
                 dc.w off_29F8
                 dc.w off_29FC
                 dc.w off_2A00
-                dc.w $EA00
-                dc.l off_1B46EE
+                fa_goto off_1B46EE
 anim_psyq_boss:     dc.w off_2A04           ; DATA XREF: ROM:off_C9D6   o
                                         ; ROM:001B4702   o ...
                 dc.w off_2A08
-                dc.w $EA00
-                dc.l anim_psyq_boss
+                fa_goto anim_psyq_boss
 off_1B4706:     dc.w off_2A0C           ; DATA XREF: ROM:0000C9DA   o
                                         ; ROM:001B470C   o ...
                 dc.w off_2A10
-                dc.w $EA00
-                dc.l off_1B4706
+                fa_goto off_1B4706
 off_1B4710:     dc.w off_2A18           ; DATA XREF: ROM:0000C9DE   o
                                         ; ROM:001B4716   o ...
                 dc.w off_2A1C
-                dc.w $EA00
-                dc.l off_1B4710
+                fa_goto off_1B4710
 off_1B471A:     dc.w off_2A24           ; DATA XREF: ROM:0000C9E2   o
                                         ; ROM:001B4720   o ...
                 dc.w off_2A28
-                dc.w $EA00
-                dc.l off_1B471A
+                fa_goto off_1B471A
 off_1B4724:     dc.w off_2A38           ; DATA XREF: sub_2592EC+AE   o
                 dc.w off_2A38
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_2A38
                 dc.w off_2A38
-                dc.w $ED01
-                dc.w $FD8B
-                dc.w 0
-                dc.w $EC01
+                fa_set_b psycrow_anim_lock_timer, $0
+                fa_end
 off_1B4736:     dc.w off_2A10           ; DATA XREF: ROM:0000C9EE   o
                                         ; ROM:0000C9F2   o
                 dc.w off_2A10
-                dc.w $F345
-                dc.w $F500
-                dc.l object_psyq_hook
-                dc.w $1600
-                dc.l anim_psyq_hook
-                dc.l 0
+                fa_sound $45
+                fa_spawn 0, object_psyq_hook, 22, 0, anim_psyq_hook, 0
                 dc.w off_2A30
                 dc.w off_2A30
                 dc.w off_2A34
@@ -21225,20 +18707,13 @@ off_1B4736:     dc.w off_2A10           ; DATA XREF: ROM:0000C9EE   o
                 dc.w off_2A34
                 dc.w off_2A14
                 dc.w off_2A14
-                dc.w $ED01
-                dc.w $FD88
-                dc.w 1
-                dc.w $EA00
-                dc.l off_1B4706
+                fa_set_b psycrow_state, $1
+                fa_goto off_1B4706
 off_1B4766:     dc.w off_2A1C           ; DATA XREF: ROM:0000C9EA   o
                                         ; ROM:0000C9F6   o
                 dc.w off_2A1C
-                dc.w $F345
-                dc.w $F500
-                dc.l object_psyq_hook
-                dc.w off_20F0
-                dc.l off_1B48EC
-                dc.l 0
+                fa_sound $45
+                fa_spawn 0, object_psyq_hook, 32, -16, off_1B48EC, 0
                 dc.w off_2A30
                 dc.w off_2A30
                 dc.w off_2A34
@@ -21246,20 +18721,13 @@ off_1B4766:     dc.w off_2A1C           ; DATA XREF: ROM:0000C9EA   o
                 dc.w off_2A34
                 dc.w off_2A20
                 dc.w off_2A20
-                dc.w $ED01
-                dc.w $FD88
-                dc.w 2
-                dc.w $EA00
-                dc.l off_1B4710
+                fa_set_b psycrow_state, $2
+                fa_goto off_1B4710
 off_1B4796:     dc.w off_2A28           ; DATA XREF: ROM:off_C9E6   o
                                         ; ROM:0000C9FA   o
                 dc.w off_2A28
-                dc.w $F345
-                dc.w $F500
-                dc.l object_psyq_hook
-                dc.w off_28D8
-                dc.l off_1B48A0
-                dc.l 0
+                fa_sound $45
+                fa_spawn 0, object_psyq_hook, 40, -40, off_1B48A0, 0
                 dc.w off_2A30
                 dc.w off_2A30
                 dc.w off_2A34
@@ -21267,18 +18735,15 @@ off_1B4796:     dc.w off_2A28           ; DATA XREF: ROM:off_C9E6   o
                 dc.w off_2A34
                 dc.w off_2A2C
                 dc.w off_2A2C
-                dc.w $ED01
-                dc.w $FD88
-                dc.w 3
-                dc.w $EA00
-                dc.l off_1B471A
+                fa_set_b psycrow_state, $3
+                fa_goto off_1B471A
 off_1B47C6:     dc.w off_29EC           ; DATA XREF: fire_to_psycrow+16   o
-                dc.w $F353
+                fa_sound $53
                 dc.w off_29EC
                 dc.w off_2A3C
                 dc.w off_2A3C
                 dc.w off_2A3C
-                dc.w $EE05
+                fa_loop 5
                 dc.w off_2A40
                 dc.w off_2A40
                 dc.w off_2A40
@@ -21287,42 +18752,26 @@ off_1B47C6:     dc.w off_29EC           ; DATA XREF: fire_to_psycrow+16   o
                 dc.w off_2A44
                 dc.w off_2A48
                 dc.w off_2A48
-                dc.w $EF00
-                dc.w $ED01
-                dc.w $FD8A
-                dc.w $3C
-                dc.w $ED01
-                dc.w $FD88
-                dc.w 0
-                dc.w $EA00
-                dc.l anim_psyq_boss
+                fa_next
+                fa_set_b psycrow_invul_timer, $3C
+                fa_set_b psycrow_state, $0
+                fa_goto anim_psyq_boss
 off_1B47F8:     dc.w off_29EC           ; DATA XREF: whip_to_psycrow:loc_259556   o
                 dc.w off_29F0
-                dc.w $EE0A
+                fa_loop 10
                 dc.w off_29F4
                 dc.w off_29F8
                 dc.w off_29FC
                 dc.w off_2A00
-                dc.w $EF00
-                dc.w $F491
-                dc.w 1
-                dc.w 0
-                dc.l word_1B4824
-                dc.w $ED01
-                dc.w $FD8A
-                dc.w $3C
-                dc.w $ED01
-                dc.w $FD88
-                dc.w 0
-                dc.w $EA00
-                dc.l anim_psyq_boss
-word_1B4824:    dc.w $ED01              ; DATA XREF: ROM:001B480E   o
-                dc.w $FD88
-                dc.w 9
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AC59A
-                dc.w $F362
+                fa_next
+                fa_if_obj_b FM_EQ, $1, $0, word_1B4824
+                fa_set_b psycrow_invul_timer, $3C
+                fa_set_b psycrow_state, $0
+                fa_goto anim_psyq_boss
+word_1B4824:                            ; DATA XREF: ROM:001B480E   o
+                fa_set_b psycrow_state, $9
+                fa_set_obj_l $A, byte_1AC59A
+                fa_sound $62
                 dc.w off_28C0
                 dc.w off_28C4
                 dc.w off_28C8
@@ -21373,20 +18822,12 @@ word_1B4824:    dc.w $ED01              ; DATA XREF: ROM:001B480E   o
                 dc.w off_297C
                 dc.w off_2980
                 dc.w off_2984
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $EC01
+                fa_call oksub_24951E
+                fa_end
 off_1B48A0:     dc.w off_34D0           ; DATA XREF: ROM:001B47A4   o
-                dc.w $ED12
-                dc.w $18
-                dc.w $900
-                dc.w $F491
-                dc.w 9
-                dc.w 0
-                dc.l off_1B48B8
-                dc.w $ED12
-                dc.w $18
-                dc.w $F700
+                fa_set_obj_w $18, $900
+                fa_if_obj_b FM_EQ, $9, $0, off_1B48B8
+                fa_set_obj_w $18, $F700
 off_1B48B8:     dc.w off_34D0           ; DATA XREF: ROM:001B48AE   o
                                         ; ROM:001B48CA   o
                 dc.w off_34D0
@@ -21396,13 +18837,10 @@ off_1B48B8:     dc.w off_34D0           ; DATA XREF: ROM:001B48AE   o
                 dc.w off_34D8
                 dc.w off_34DC
                 dc.w off_34DC
-                dc.w $EA00
-                dc.l off_1B48B8
+                fa_goto off_1B48B8
 anim_psyq_hook:     dc.w off_34F0           ; DATA XREF: ROM:001B4744   o
                                         ; ROM:object_psyq_hook   o
-                dc.w $ED12
-                dc.w $1A
-                dc.w $300
+                fa_set_obj_w $1A, $300
 off_1B48D6:     dc.w off_34F0           ; DATA XREF: ROM:001B48E8   o
                 dc.w off_34F0
                 dc.w off_34F4
@@ -21411,22 +18849,12 @@ off_1B48D6:     dc.w off_34F0           ; DATA XREF: ROM:001B48E8   o
                 dc.w off_34F8
                 dc.w off_34FC
                 dc.w off_34FC
-                dc.w $EA00
-                dc.l off_1B48D6
+                fa_goto off_1B48D6
 off_1B48EC:     dc.w off_34E0           ; DATA XREF: ROM:001B4774   o
-                dc.w $ED12
-                dc.w $1A
-                dc.w $300
-                dc.w $ED12
-                dc.w $18
-                dc.w $700
-                dc.w $F491
-                dc.w 9
-                dc.w 0
-                dc.l off_1B490A
-                dc.w $ED12
-                dc.w $18
-                dc.w $F900
+                fa_set_obj_w $1A, $300
+                fa_set_obj_w $18, $700
+                fa_if_obj_b FM_EQ, $9, $0, off_1B490A
+                fa_set_obj_w $18, $F900
 off_1B490A:     dc.w off_34E0           ; DATA XREF: ROM:001B4900   o
                                         ; ROM:001B491C   o
                 dc.w off_34E0
@@ -21436,13 +18864,12 @@ off_1B490A:     dc.w off_34E0           ; DATA XREF: ROM:001B4900   o
                 dc.w off_34E8
                 dc.w off_34EC
                 dc.w off_34EC
-                dc.w $EA00
-                dc.l off_1B490A
+                fa_goto off_1B490A
 anim_run_here:  dc.w off_994            ; DATA XREF: ROM:object_run_here   o
-                dc.w $EC01
+                fa_end
 anim_brain:     dc.w off_214C           ; DATA XREF: ROM:001B497A   o
                                         ; ROM:object_brain   o
-                dc.w $EE8D
+                fa_hold 13
                 dc.w off_214C
                 dc.w off_2150
                 dc.w off_2150
@@ -21451,825 +18878,799 @@ anim_brain:     dc.w off_214C           ; DATA XREF: ROM:001B497A   o
                 dc.w off_2154
                 dc.w off_2158
                 dc.w off_215C
-                dc.w $F100
-                dc.w $18
+                fa_move_x 24
                 dc.w off_215C
                 dc.w off_2160
-                dc.w $F100
-                dc.w $10
+                fa_move_x 16
                 dc.w off_2160
                 dc.w off_2164
-                dc.w $F100
-                dc.w $10
+                fa_move_x 16
                 dc.w off_2164
                 dc.w off_2168
-                dc.w $F100
-                dc.w $10
+                fa_move_x 16
                 dc.w off_2168
                 dc.w off_216C
-                dc.w $F100
-                dc.w $10
+                fa_move_x 16
 off_1B495C:     dc.w off_216C           ; DATA XREF: ROM:001B4962   o
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B495C
+                fa_if_obj_bit_clr $7, 4, off_1B495C
                 dc.w off_2170
-                dc.w $F100
-                dc.w 8
+                fa_move_x 8
                 dc.w off_2174
                 dc.w off_2178
                 dc.w off_2178
                 dc.w off_217C
                 dc.w off_217C
-                dc.w $EB00
-                dc.w $EA00
-                dc.l anim_brain
+                fa_flip_x
+                fa_goto anim_brain
 off_1B497E:     dc.w off_2128           ; DATA XREF: ROM:0000C19C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B498E:     dc.w off_2124           ; DATA XREF: ROM:0000C198   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B499E:     dc.w off_2120           ; DATA XREF: ROM:0000C194   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B49AE:     dc.w off_211C           ; DATA XREF: ROM:0000C190   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B49BE:     dc.w off_2118           ; DATA XREF: ROM:0000C18C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B49CE:     dc.w off_2114           ; DATA XREF: ROM:0000C188   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B49DE:     dc.w off_2110           ; DATA XREF: ROM:0000C184   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B49EE:     dc.w off_210C           ; DATA XREF: ROM:0000C180   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B49FE:     dc.w off_2108           ; DATA XREF: ROM:0000C17C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A0E:     dc.w off_2104           ; DATA XREF: ROM:0000C178   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A1E:     dc.w off_2100           ; DATA XREF: ROM:0000C174   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A2E:     dc.w off_20FC           ; DATA XREF: ROM:0000C170   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A3E:     dc.w off_20F8           ; DATA XREF: ROM:0000C16C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A4E:     dc.w off_20F4           ; DATA XREF: ROM:0000C168   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A5E:     dc.w off_20F0           ; DATA XREF: ROM:0000C164   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
-                dc.w $EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A6E:     dc.w off_20EC           ; DATA XREF: ROM:0000C160   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
+                fa_end
 anim_unknown_9: dc.w off_20EC           ; DATA XREF: ROM:0000C15C   o
                                         ; ROM:stru_25B1BC   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A8E:     dc.w off_20F0           ; DATA XREF: ROM:0000C158   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4A9E:     dc.w off_20F4           ; DATA XREF: ROM:0000C154   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4AAE:     dc.w off_20F8           ; DATA XREF: ROM:0000C150   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4ABE:     dc.w off_20FC           ; DATA XREF: ROM:0000C14C   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4ACE:     dc.w off_2100           ; DATA XREF: ROM:0000C148   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4ADE:     dc.w off_2104           ; DATA XREF: ROM:0000C144   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4AEE:     dc.w off_2108           ; DATA XREF: ROM:0000C140   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4AFE:     dc.w off_210C           ; DATA XREF: ROM:0000C13C   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B0E:     dc.w off_2110           ; DATA XREF: ROM:0000C138   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B1E:     dc.w off_2114           ; DATA XREF: ROM:0000C134   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B2E:     dc.w off_2118           ; DATA XREF: ROM:0000C130   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B3E:     dc.w off_211C           ; DATA XREF: ROM:0000C12C   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B4E:     dc.w off_2120           ; DATA XREF: ROM:0000C128   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B5E:     dc.w off_2124           ; DATA XREF: ROM:0000C124   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B6E:     dc.w off_2128           ; DATA XREF: ROM:off_C120   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
+                fa_end
 off_1B4B7E:     dc.w off_2128           ; DATA XREF: ROM:0000C1A0   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4B8E:     dc.w off_2124           ; DATA XREF: ROM:0000C1A4   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4B9E:     dc.w off_2120           ; DATA XREF: ROM:0000C1A8   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4BAE:     dc.w off_211C           ; DATA XREF: ROM:0000C1AC   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4BBE:     dc.w off_2118           ; DATA XREF: ROM:0000C1B0   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4BCE:     dc.w off_2114           ; DATA XREF: ROM:0000C1B4   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4BDE:     dc.w off_2110           ; DATA XREF: ROM:0000C1B8   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4BEE:     dc.w off_210C           ; DATA XREF: ROM:0000C1BC   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4BFE:     dc.w off_2108           ; DATA XREF: ROM:0000C1C0   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C0E:     dc.w off_2104           ; DATA XREF: ROM:0000C1C4   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C1E:     dc.w off_2100           ; DATA XREF: ROM:0000C1C8   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C2E:     dc.w off_20FC           ; DATA XREF: ROM:0000C1CC   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C3E:     dc.w off_20F8           ; DATA XREF: ROM:0000C1D0   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C4E:     dc.w off_20F4           ; DATA XREF: ROM:0000C1D4   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C5E:     dc.w off_20F0           ; DATA XREF: ROM:0000C1D8   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C6E:     dc.w off_20EC           ; DATA XREF: ROM:0000C1DC   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C7E:     dc.w off_20EC           ; DATA XREF: ROM:0000C1E0   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C8E:     dc.w off_20F0           ; DATA XREF: ROM:0000C1E4   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4C9E:     dc.w off_20F4           ; DATA XREF: ROM:0000C1E8   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4CAE:     dc.w off_20F8           ; DATA XREF: ROM:0000C1EC   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4CBE:     dc.w off_20FC           ; DATA XREF: ROM:0000C1F0   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4CCE:     dc.w off_2100           ; DATA XREF: ROM:0000C1F4   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4CDE:     dc.w off_2104           ; DATA XREF: ROM:0000C1F8   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4CEE:     dc.w off_2108           ; DATA XREF: ROM:0000C1FC   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4CFE:     dc.w off_210C           ; DATA XREF: ROM:0000C200   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D0E:     dc.w off_2110           ; DATA XREF: ROM:0000C204   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D1E:     dc.w off_2114           ; DATA XREF: ROM:0000C208   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D2E:     dc.w off_2118           ; DATA XREF: ROM:0000C20C   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D3E:     dc.w off_211C           ; DATA XREF: ROM:0000C210   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D4E:     dc.w off_2120           ; DATA XREF: ROM:0000C214   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D5E:     dc.w off_2124           ; DATA XREF: ROM:0000C218   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D6E:     dc.w off_2128           ; DATA XREF: ROM:0000C21C   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF,$EC01
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
+                fa_end
 off_1B4D7E:     dc.w off_3090           ; DATA XREF: ROM:0000C2DC   o
                                         ; ROM:001B4D94   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_3090
                 dc.w off_3094
                 dc.w off_3094
-                dc.w $EA00
-                dc.l off_1B4D7E
+                fa_goto off_1B4D7E
 off_1B4D98:     dc.w off_3098           ; DATA XREF: ROM:0000C2D8   o
                                         ; ROM:001B4DAE   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_3098
                 dc.w off_309C
                 dc.w off_309C
-                dc.w $EA00
-                dc.l off_1B4D98
+                fa_goto off_1B4D98
 off_1B4DB2:     dc.w off_30A0           ; DATA XREF: ROM:0000C2D4   o
                                         ; ROM:001B4DC8   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30A0
                 dc.w off_30A4
                 dc.w off_30A4
-                dc.w $EA00
-                dc.l off_1B4DB2
+                fa_goto off_1B4DB2
 off_1B4DCC:     dc.w off_30A8           ; DATA XREF: ROM:0000C2D0   o
                                         ; ROM:001B4DE2   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30A8
                 dc.w off_30AC
                 dc.w off_30AC
-                dc.w $EA00
-                dc.l off_1B4DCC
+                fa_goto off_1B4DCC
 off_1B4DE6:     dc.w off_30B0           ; DATA XREF: ROM:0000C2CC   o
                                         ; ROM:001B4DFC   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30B0
                 dc.w off_30B4
                 dc.w off_30B4
-                dc.w $EA00
-                dc.l off_1B4DE6
+                fa_goto off_1B4DE6
 off_1B4E00:     dc.w off_30B8           ; DATA XREF: ROM:0000C2C8   o
                                         ; ROM:001B4E16   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30B8
                 dc.w off_30BC
                 dc.w off_30BC
-                dc.w $EA00
-                dc.l off_1B4E00
+                fa_goto off_1B4E00
 off_1B4E1A:     dc.w off_30C0           ; DATA XREF: ROM:0000C2C4   o
                                         ; ROM:001B4E30   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30C0
                 dc.w off_30C4
                 dc.w off_30C4
-                dc.w $EA00
-                dc.l off_1B4E1A
+                fa_goto off_1B4E1A
 off_1B4E34:     dc.w off_30C8           ; DATA XREF: ROM:0000C2C0   o
                                         ; ROM:001B4E4A   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30C8
                 dc.w off_30CC
                 dc.w off_30CC
-                dc.w $EA00
-                dc.l off_1B4E34
+                fa_goto off_1B4E34
 off_1B4E4E:     dc.w off_30D0           ; DATA XREF: ROM:0000C2BC   o
                                         ; ROM:001B4E64   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30D0
                 dc.w off_30D4
                 dc.w off_30D4
-                dc.w $EA00
-                dc.l off_1B4E4E
+                fa_goto off_1B4E4E
 off_1B4E68:     dc.w off_30D8           ; DATA XREF: ROM:0000C2B8   o
                                         ; ROM:001B4E7E   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30D8
                 dc.w off_30DC
                 dc.w off_30DC
-                dc.w $EA00
-                dc.l off_1B4E68
+                fa_goto off_1B4E68
 off_1B4E82:     dc.w off_30E0           ; DATA XREF: ROM:0000C2B4   o
                                         ; ROM:001B4E98   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30E0
                 dc.w off_30E4
                 dc.w off_30E4
-                dc.w $EA00
-                dc.l off_1B4E82
+                fa_goto off_1B4E82
 off_1B4E9C:     dc.w off_30E8           ; DATA XREF: ROM:0000C2B0   o
                                         ; ROM:001B4EB2   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30E8
                 dc.w off_30EC
                 dc.w off_30EC
-                dc.w $EA00
-                dc.l off_1B4E9C
+                fa_goto off_1B4E9C
 off_1B4EB6:     dc.w off_30F0           ; DATA XREF: ROM:0000C2AC   o
                                         ; ROM:001B4ECC   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30F0
                 dc.w off_30F4
                 dc.w off_30F4
-                dc.w $EA00
-                dc.l off_1B4EB6
+                fa_goto off_1B4EB6
 off_1B4ED0:     dc.w off_30F8           ; DATA XREF: ROM:0000C2A8   o
                                         ; ROM:001B4EE6   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_30F8
                 dc.w off_30FC
                 dc.w off_30FC
-                dc.w $EA00
-                dc.l off_1B4ED0
+                fa_goto off_1B4ED0
 off_1B4EEA:     dc.w off_3100           ; DATA XREF: ROM:0000C2A4   o
                                         ; ROM:001B4F00   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_3100
                 dc.w off_3104
                 dc.w off_3104
-                dc.w $EA00
-                dc.l off_1B4EEA
+                fa_goto off_1B4EEA
 off_1B4F04:     dc.w off_3108           ; DATA XREF: ROM:0000C2A0   o
                                         ; ROM:001B4F1A   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $FF
                 dc.w off_3108
                 dc.w off_310C
                 dc.w off_310C
-                dc.w $EA00
-                dc.l off_1B4F04
+                fa_goto off_1B4F04
 off_1B4F1E:     dc.w off_3108           ; DATA XREF: ROM:0000C31C   o
                                         ; ROM:001B4F34   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_3108
                 dc.w off_310C
                 dc.w off_310C
-                dc.w $EA00
-                dc.l off_1B4F1E
+                fa_goto off_1B4F1E
 off_1B4F38:     dc.w off_3100           ; DATA XREF: ROM:0000C318   o
                                         ; ROM:001B4F4E   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_3100
                 dc.w off_3104
                 dc.w off_3104
-                dc.w $EA00
-                dc.l off_1B4F38
+                fa_goto off_1B4F38
 off_1B4F52:     dc.w off_30F8           ; DATA XREF: ROM:0000C314   o
                                         ; ROM:001B4F68   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30F8
                 dc.w off_30FC
                 dc.w off_30FC
-                dc.w $EA00
-                dc.l off_1B4F52
+                fa_goto off_1B4F52
 off_1B4F6C:     dc.w off_30F0           ; DATA XREF: ROM:0000C310   o
                                         ; ROM:001B4F82   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30F0
                 dc.w off_30F4
                 dc.w off_30F4
-                dc.w $EA00
-                dc.l off_1B4F6C
+                fa_goto off_1B4F6C
 off_1B4F86:     dc.w off_30E8           ; DATA XREF: ROM:0000C30C   o
                                         ; ROM:001B4F9C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $ED11
-                dc.w $35
-                dc.w $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30E8
                 dc.w off_30EC
                 dc.w off_30EC
-                dc.w $EA00
-                dc.l off_1B4F86
+                fa_goto off_1B4F86
 off_1B4FA0:     dc.w off_30E0           ; DATA XREF: ROM:0000C308   o
                                         ; ROM:001B4FB6   o
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $ED11
-                dc.w $35
-                dc.w $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30E0
                 dc.w off_30E4
                 dc.w off_30E4
-                dc.w $EA00
-                dc.l off_1B4FA0
+                fa_goto off_1B4FA0
 off_1B4FBA:     dc.w off_30D8           ; DATA XREF: ROM:0000C304   o
                                         ; ROM:001B4FD0   o
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
-                dc.w $ED11
-                dc.w $35
-                dc.w $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30D8
                 dc.w off_30DC
                 dc.w off_30DC
-                dc.w $EA00
-                dc.l off_1B4FBA
+                fa_goto off_1B4FBA
 off_1B4FD4:     dc.w off_30D0           ; DATA XREF: ROM:0000C300   o
                                         ; ROM:001B4FEA   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30D0
                 dc.w off_30D4
                 dc.w off_30D4
-                dc.w $EA00
-                dc.l off_1B4FD4
+                fa_goto off_1B4FD4
 off_1B4FEE:     dc.w off_30C8           ; DATA XREF: ROM:0000C2FC   o
                                         ; ROM:001B5004   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30C8
                 dc.w off_30CC
                 dc.w off_30CC
-                dc.w $EA00
-                dc.l off_1B4FEE
+                fa_goto off_1B4FEE
 off_1B5008:     dc.w off_30C0           ; DATA XREF: ROM:0000C2F8   o
                                         ; ROM:001B501E   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30C0
                 dc.w off_30C4
                 dc.w off_30C4
-                dc.w $EA00
-                dc.l off_1B5008
+                fa_goto off_1B5008
 off_1B5022:     dc.w off_30B8           ; DATA XREF: ROM:0000C2F4   o
                                         ; ROM:001B5038   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30B8
                 dc.w off_30BC
                 dc.w off_30BC
-                dc.w $EA00
-                dc.l off_1B5022
+                fa_goto off_1B5022
 off_1B503C:     dc.w off_30B0           ; DATA XREF: ROM:0000C2F0   o
                                         ; ROM:001B5052   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30B0
                 dc.w off_30B4
                 dc.w off_30B4
-                dc.w $EA00
-                dc.l off_1B503C
+                fa_goto off_1B503C
 off_1B5056:     dc.w off_30A8           ; DATA XREF: ROM:0000C2EC   o
                                         ; ROM:001B506C   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30A8
                 dc.w off_30AC
                 dc.w off_30AC
-                dc.w $EA00
-                dc.l off_1B5056
+                fa_goto off_1B5056
 off_1B5070:     dc.w off_30A0           ; DATA XREF: ROM:0000C2E8   o
                                         ; ROM:001B5086   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_30A0
                 dc.w off_30A4
                 dc.w off_30A4
-                dc.w $EA00
-                dc.l off_1B5070
+                fa_goto off_1B5070
 off_1B508A:     dc.w off_3098           ; DATA XREF: ROM:0000C2E4   o
                                         ; ROM:001B50A0   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_3098
                 dc.w off_309C
                 dc.w off_309C
-                dc.w $EA00
-                dc.l off_1B508A
+                fa_goto off_1B508A
 off_1B50A4:     dc.w off_3090           ; DATA XREF: ROM:0000C2E0   o
                                         ; ROM:001B50BA   o
-                dc.w $ED11,    9,    0,$ED11,  $35,  $FF
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $FF
                 dc.w off_3090
                 dc.w off_3094
                 dc.w off_3094
-                dc.w $EA00
-                dc.l off_1B50A4
+                fa_goto off_1B50A4
 off_1B50BE:     dc.w off_3090           ; DATA XREF: ROM:0000C260   o
                                         ; ROM:001B50D4   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_3090
                 dc.w off_3094
                 dc.w off_3094
-                dc.w $EA00
-                dc.l off_1B50BE
+                fa_goto off_1B50BE
 off_1B50D8:     dc.w off_3098           ; DATA XREF: ROM:0000C264   o
                                         ; ROM:001B50EE   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_3098
                 dc.w off_309C
                 dc.w off_309C
-                dc.w $EA00
-                dc.l off_1B50D8
+                fa_goto off_1B50D8
 off_1B50F2:     dc.w off_30A0           ; DATA XREF: ROM:0000C268   o
                                         ; ROM:001B5108   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30A0
                 dc.w off_30A4
                 dc.w off_30A4
-                dc.w $EA00
-                dc.l off_1B50F2
+                fa_goto off_1B50F2
 off_1B510C:     dc.w off_30A8           ; DATA XREF: ROM:0000C26C   o
                                         ; ROM:001B5122   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30A8
                 dc.w off_30AC
                 dc.w off_30AC
-                dc.w $EA00
-                dc.l off_1B510C
+                fa_goto off_1B510C
 off_1B5126:     dc.w off_30B0           ; DATA XREF: ROM:0000C270   o
                                         ; ROM:001B513C   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30B0
                 dc.w off_30B4
                 dc.w off_30B4
-                dc.w $EA00
-                dc.l off_1B5126
+                fa_goto off_1B5126
 off_1B5140:     dc.w off_30B8           ; DATA XREF: ROM:0000C274   o
                                         ; ROM:001B5156   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30B8
                 dc.w off_30BC
                 dc.w off_30BC
-                dc.w $EA00
-                dc.l off_1B5140
+                fa_goto off_1B5140
 off_1B515A:     dc.w off_30C0           ; DATA XREF: ROM:0000C278   o
                                         ; ROM:001B5170   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30C0
                 dc.w off_30C4
                 dc.w off_30C4
-                dc.w $EA00
-                dc.l off_1B515A
+                fa_goto off_1B515A
 off_1B5174:     dc.w off_30C8           ; DATA XREF: ROM:0000C27C   o
                                         ; ROM:001B518A   o
-                dc.w $ED11,    9,  $FF,$ED11,  $35,    0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30C8
                 dc.w off_30CC
                 dc.w off_30CC
-                dc.w $EA00
-                dc.l off_1B5174
+                fa_goto off_1B5174
 off_1B518E:     dc.w off_30D0           ; DATA XREF: ROM:0000C280   o
                                         ; ROM:001B51A4   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30D0
                 dc.w off_30D4
                 dc.w off_30D4
-                dc.w $EA00
-                dc.l off_1B518E
+                fa_goto off_1B518E
 off_1B51A8:     dc.w off_30D8           ; DATA XREF: ROM:0000C284   o
                                         ; ROM:001B51BE   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30D8
                 dc.w off_30DC
                 dc.w off_30DC
-                dc.w $EA00
-                dc.l off_1B51A8
+                fa_goto off_1B51A8
 off_1B51C2:     dc.w off_30E0           ; DATA XREF: ROM:0000C288   o
                                         ; ROM:001B51D8   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30E0
                 dc.w off_30E4
                 dc.w off_30E4
-                dc.w $EA00
-                dc.l off_1B51C2
+                fa_goto off_1B51C2
 off_1B51DC:     dc.w off_30E8           ; DATA XREF: ROM:0000C28C   o
                                         ; ROM:001B51F2   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30E8
                 dc.w off_30EC
                 dc.w off_30EC
-                dc.w $EA00
-                dc.l off_1B51DC
+                fa_goto off_1B51DC
 off_1B51F6:     dc.w off_30F0           ; DATA XREF: ROM:0000C290   o
                                         ; ROM:001B520C   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30F0
                 dc.w off_30F4
                 dc.w off_30F4
-                dc.w $EA00
-                dc.l off_1B51F6
+                fa_goto off_1B51F6
 off_1B5210:     dc.w off_30F8           ; DATA XREF: ROM:0000C294   o
                                         ; ROM:001B5226   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_30F8
                 dc.w off_30FC
                 dc.w off_30FC
-                dc.w $EA00
-                dc.l off_1B5210
+                fa_goto off_1B5210
 off_1B522A:     dc.w off_3100           ; DATA XREF: ROM:0000C298   o
                                         ; ROM:001B5240   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_3100
                 dc.w off_3104
                 dc.w off_3104
-                dc.w $EA00
-                dc.l off_1B522A
+                fa_goto off_1B522A
 off_1B5244:     dc.w off_3108           ; DATA XREF: ROM:0000C29C   o
                                         ; ROM:001B525A   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $ED11
-                dc.w $35
-                dc.w 0
+                fa_set_obj_b $9, $FF
+                fa_set_obj_b $35, $0
                 dc.w off_3108
                 dc.w off_310C
                 dc.w off_310C
-                dc.w $EA00
-                dc.l off_1B5244
+                fa_goto off_1B5244
 anim_submarine_air:dc.w off_3108        ; DATA XREF: ROM:off_C220   o
                                         ; ROM:001B5274   o ...
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_3108
                 dc.w off_310C
                 dc.w off_310C
-                dc.w $EA00
-                dc.l anim_submarine_air
+                fa_goto anim_submarine_air
 off_1B5278:     dc.w off_3100           ; DATA XREF: ROM:0000C224   o
                                         ; ROM:001B528E   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_3100
                 dc.w off_3104
                 dc.w off_3104
-                dc.w $EA00
-                dc.l off_1B5278
+                fa_goto off_1B5278
 off_1B5292:     dc.w off_30F8           ; DATA XREF: ROM:0000C228   o
                                         ; ROM:001B52A8   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30F8
                 dc.w off_30FC
                 dc.w off_30FC
-                dc.w $EA00
-                dc.l off_1B5292
+                fa_goto off_1B5292
 off_1B52AC:     dc.w off_30F0           ; DATA XREF: ROM:0000C22C   o
                                         ; ROM:001B52C2   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30F0
                 dc.w off_30F4
                 dc.w off_30F4
-                dc.w $EA00
-                dc.l off_1B52AC
+                fa_goto off_1B52AC
 off_1B52C6:     dc.w off_30E8           ; DATA XREF: ROM:0000C230   o
                                         ; ROM:001B52DC   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30E8
                 dc.w off_30EC
                 dc.w off_30EC
-                dc.w $EA00
-                dc.l off_1B52C6
+                fa_goto off_1B52C6
 off_1B52E0:     dc.w off_30E0           ; DATA XREF: ROM:0000C234   o
                                         ; ROM:001B52F6   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30E0
                 dc.w off_30E4
                 dc.w off_30E4
-                dc.w $EA00
-                dc.l off_1B52E0
+                fa_goto off_1B52E0
 off_1B52FA:     dc.w off_30D8           ; DATA XREF: ROM:0000C238   o
                                         ; ROM:001B5310   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30D8
                 dc.w off_30DC
                 dc.w off_30DC
-                dc.w $EA00
-                dc.l off_1B52FA
+                fa_goto off_1B52FA
 off_1B5314:     dc.w off_30D0           ; DATA XREF: ROM:0000C23C   o
                                         ; ROM:001B532A   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30D0
                 dc.w off_30D4
                 dc.w off_30D4
-                dc.w $EA00
-                dc.l off_1B5314
+                fa_goto off_1B5314
 off_1B532E:     dc.w off_30C8           ; DATA XREF: ROM:0000C240   o
                                         ; ROM:001B5344   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30C8
                 dc.w off_30CC
                 dc.w off_30CC
-                dc.w $EA00
-                dc.l off_1B532E
+                fa_goto off_1B532E
 off_1B5348:     dc.w off_30C0           ; DATA XREF: ROM:0000C244   o
                                         ; ROM:001B535E   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30C0
                 dc.w off_30C4
                 dc.w off_30C4
-                dc.w $EA00
-                dc.l off_1B5348
+                fa_goto off_1B5348
 off_1B5362:     dc.w off_30B8           ; DATA XREF: ROM:0000C248   o
                                         ; ROM:001B5378   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30B8
                 dc.w off_30BC
                 dc.w off_30BC
-                dc.w $EA00
-                dc.l off_1B5362
+                fa_goto off_1B5362
 off_1B537C:     dc.w off_30B0           ; DATA XREF: ROM:0000C24C   o
                                         ; ROM:001B5392   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30B0
                 dc.w off_30B4
                 dc.w off_30B4
-                dc.w $EA00
-                dc.l off_1B537C
+                fa_goto off_1B537C
 off_1B5396:     dc.w off_30A8           ; DATA XREF: ROM:0000C250   o
                                         ; ROM:001B53AC   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30A8
                 dc.w off_30AC
                 dc.w off_30AC
-                dc.w $EA00
-                dc.l off_1B5396
+                fa_goto off_1B5396
 off_1B53B0:     dc.w off_30A0           ; DATA XREF: ROM:0000C254   o
                                         ; ROM:001B53C6   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_30A0
                 dc.w off_30A4
                 dc.w off_30A4
-                dc.w $EA00
-                dc.l off_1B53B0
+                fa_goto off_1B53B0
 off_1B53CA:     dc.w off_3098           ; DATA XREF: ROM:0000C258   o
                                         ; ROM:001B53E0   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_3098
                 dc.w off_309C
                 dc.w off_309C
-                dc.w $EA00
-                dc.l off_1B53CA
+                fa_goto off_1B53CA
 off_1B53E4:     dc.w off_3090           ; DATA XREF: ROM:0000C25C   o
                                         ; ROM:001B53FA   o
-                dc.w $ED11,    9,    0,$ED11,  $35,    0
+                fa_set_obj_b $9, $0
+                fa_set_obj_b $35, $0
                 dc.w off_3090
                 dc.w off_3094
                 dc.w off_3094
-                dc.w $EA00
-                dc.l off_1B53E4
+                fa_goto off_1B53E4
 anim_groovy:    dc.w groovy_frame_1     ; DATA XREF: ROM:object_groovy   o
                 dc.w groovy_frame_1
                 dc.w groovy_frame_1
@@ -22289,7 +19690,7 @@ anim_groovy:    dc.w groovy_frame_1     ; DATA XREF: ROM:object_groovy   o
                 dc.w groovy_frame_1
                 dc.w groovy_frame_1
                 dc.w groovy_frame_1
-                dc.w $F358
+                fa_sound $58
                 dc.w groovy_frame_2
                 dc.w groovy_frame_2
                 dc.w groovy_frame_2
@@ -22311,16 +19712,15 @@ anim_groovy:    dc.w groovy_frame_1     ; DATA XREF: ROM:object_groovy   o
                 dc.w groovy_frame_2
                 dc.w groovy_frame_2
                 dc.w groovy_frame_1
-                dc.w $EC01
+                fa_end
 off_1B5452:     dc.w off_D90            ; DATA XREF: fire_to_fox+2A   o
                                         ; whip_to_fox+4   o
-                dc.w $F34F
+                fa_sound $4F
                 dc.w off_D98
                 dc.w off_DA0
                 dc.w off_DA8
-                dc.w $F3CF
-                dc.w $EA00
-                dc.l anim_fox
+                fa_sound_stop $4F
+                fa_goto anim_fox
 off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448   o
                 dc.w off_D90
                 dc.w off_D94
@@ -22335,7 +19735,7 @@ off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448 
                 dc.w off_DA4
                 dc.w off_DA8
                 dc.w off_D90
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_D90
                 dc.w off_D94
                 dc.w off_D94
@@ -22349,7 +19749,7 @@ off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448 
                 dc.w off_DA4
                 dc.w off_DA8
                 dc.w off_D90
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_D90
                 dc.w off_D94
                 dc.w off_D94
@@ -22363,7 +19763,7 @@ off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448 
                 dc.w off_DA4
                 dc.w off_DA8
                 dc.w off_D90
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_D90
                 dc.w off_D94
                 dc.w off_D94
@@ -22377,7 +19777,7 @@ off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448 
                 dc.w off_DA4
                 dc.w off_DA8
                 dc.w off_D90
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_D90
                 dc.w off_D94
                 dc.w off_D94
@@ -22388,16 +19788,14 @@ off_1B5464:     dc.w off_D90            ; DATA XREF: collision_with_diamond+448 
                 dc.w off_D9C
                 dc.w off_DA0
                 dc.w off_DA0
-                dc.w $EE8F
+                fa_hold 15
                 dc.w off_DA4
 anim_fox:       dc.w off_DB0            ; DATA XREF: ROM:001B5460   o
                                         ; ROM:object_fox   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $33
+                fa_set_obj_b $0, $33
 off_1B54F6:     dc.w off_DB0            ; DATA XREF: ROM:001B5512   o
-                dc.w $EB00
-                dc.w $EE8E
+                fa_flip_x
+                fa_hold 14
                 dc.w off_DB0
                 dc.w off_DB4
                 dc.w off_DB4
@@ -22408,28 +19806,20 @@ off_1B54F6:     dc.w off_DB0            ; DATA XREF: ROM:001B5512   o
                 dc.w off_DBC
                 dc.w off_DC0
                 dc.w off_DC0
-                dc.w $EA00
-                dc.l off_1B54F6
+                fa_goto off_1B54F6
 anim_tree_trampoline:dc.w off_2254      ; DATA XREF: ROM:001B551E   o
                                         ; ROM:stru_25AB44   o
-                dc.w $F431
-                dc.w $FBEF
-                dc.w 2
-                dc.l anim_tree_trampoline
-                dc.w $EE81
+                fa_if_b FM_LE, cow_scene_state, $2, anim_tree_trampoline
+                fa_hold 1
                 dc.w off_2258
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AC870
-                dc.w $EE90
+                fa_set_obj_l $A, byte_1AC870
+                fa_hold 16
                 dc.w off_225C
-                dc.w $ED01
-                dc.w $FBEF
-                dc.w 4
+                fa_set_b cow_scene_state, $4
 off_1B5538:     dc.w off_2260           ; DATA XREF: spawn_tree_trampoline+22   o
-                dc.w $EC01
+                fa_end
 anim_unknown_4: dc.w off_35D4           ; DATA XREF: ROM:stru_25AFF4   o
-                dc.w $EC01
+                fa_end
 anim_pete_plant:dc.w off_32D4           ; DATA XREF: ROM:stru_25B00C   o
                 dc.w off_32D8
 off_1B5544:     dc.w off_32DC           ; DATA XREF: ROM:001B56C6   o
@@ -22457,12 +19847,8 @@ off_1B5550:     dc.w off_32E8           ; DATA XREF: ROM:001B55D0   o
                 dc.w off_3308
                 dc.w off_3308
 off_1B5574:     dc.w off_32FC           ; DATA XREF: ROM:001B559A   o
-                dc.w $ED11
-                dc.w 0
-                dc.w $34
-                dc.w $ED11
-                dc.w $47
-                dc.w 1
+                fa_set_obj_b $0, $34
+                fa_set_obj_b $47, $1
                 dc.w off_32FC
                 dc.w off_32FC
                 dc.w off_3300
@@ -22474,22 +19860,15 @@ off_1B5574:     dc.w off_32FC           ; DATA XREF: ROM:001B559A   o
                 dc.w off_3308
                 dc.w off_3308
                 dc.w off_3308
-                dc.w $EA00
-                dc.l off_1B5574
+                fa_goto off_1B5574
 off_1B559E:     dc.w off_330C           ; DATA XREF: collision_with_diamond+3BC   o
-                dc.w $ED11
-                dc.w $47
-                dc.w 2
+                fa_set_obj_b $47, $2
                 dc.w off_3310
                 dc.w off_3314
                 dc.w off_3318
-                dc.w $F32A
-                dc.w $ED02
-                dc.w $A6EA
-                dc.w $F900
-                dc.w $ED02
-                dc.w $A6EC
-                dc.w $FD00
+                fa_sound $2A
+                fa_set_w jim_delta_x_speed, $F900
+                fa_set_w jim_y_speed, $FD00
                 dc.w off_331C
                 dc.w off_3320
                 dc.w off_3324
@@ -22500,41 +19879,35 @@ off_1B559E:     dc.w off_330C           ; DATA XREF: collision_with_diamond+3BC 
                 dc.w off_3360
                 dc.w off_3364
                 dc.w off_3364
-                dc.w $EA00
-                dc.l off_1B5550
+                fa_goto off_1B5550
 off_1B55D4:     dc.w off_332C           ; DATA XREF: fire_to_puppy+1AE   o
-                dc.w $ED11
-                dc.w $47
-                dc.w 3
-                dc.w $FB00
-                dc.l oksub_2494FE
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
+                fa_set_obj_b $47, $3
+                fa_call oksub_2494FE
+                fa_set_obj_b $0, $86
                 dc.w off_3330
                 dc.w off_3334
                 dc.w off_3338
                 dc.w off_333C
                 dc.w off_333C
-                dc.w $F31F
+                fa_sound $1F
                 dc.w off_3340
                 dc.w off_3340
                 dc.w off_3344
                 dc.w off_3344
                 dc.w off_3348
                 dc.w off_3348
-                dc.w $F31F
+                fa_sound $1F
                 dc.w off_334C
                 dc.w off_334C
-                dc.w $EE02
-                dc.w $EE89
+                fa_loop 2
+                fa_hold 9
                 dc.w off_3348
                 dc.w off_334C
                 dc.w off_334C
                 dc.w off_3350
                 dc.w off_3354
-                dc.w $F342
-                dc.w $EE86
+                fa_sound $42
+                fa_hold 6
                 dc.w off_3358
                 dc.w off_3354
                 dc.w off_3354
@@ -22544,56 +19917,25 @@ off_1B55D4:     dc.w off_332C           ; DATA XREF: fire_to_puppy+1AE   o
                 dc.w off_334C
                 dc.w off_334C
                 dc.w off_334C
-                dc.w $EF00
-                dc.w $ED01
-                dc.w $FE08
-                dc.w 9
-                dc.w $ED11
-                dc.w 0
-                dc.w $99
-                dc.w $ED11
-                dc.w $34
-                dc.w $C3
-                dc.w $FB00
-                dc.l oksub_249506
+                fa_next
+                fa_set_b pete_state, $9
+                fa_set_obj_b $0, $99
+                fa_set_obj_b $34, $C3
+                fa_call oksub_249506
                 dc.w off_3288
-                dc.w $F34A
-                dc.w $F500
-                dc.l stru_25B024
-                dc.w 0
-                dc.w 0
-                dc.w 0
-                dc.w 0
-                dc.w 0
-                dc.w $F500
-                dc.l stru_25B024
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25B03C
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25B03C
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25B03C
-                dc.w 0
-                dc.l 0
-                dc.l 0
+                fa_sound $4A
+                fa_spawn 0, stru_25B024, 0, 0, 0, 0
+                fa_spawn 0, stru_25B024, 0, 0, 0, 0
+                fa_spawn 0, stru_25B03C, 0, 0, 0, 0
+                fa_spawn 0, stru_25B03C, 0, 0, 0, 0
+                fa_spawn 0, stru_25B03C, 0, 0, 0, 0
                 dc.w off_3288
 off_1B569A:     dc.w off_328C           ; DATA XREF: spawn_plant_dead+10   o
-                dc.w $EC01
+                fa_end
 off_1B569E:     dc.w off_32E0           ; DATA XREF: fire_to_plant:loc_25500C   o
-                dc.w $ED11
-                dc.w $47
-                dc.w 0
+                fa_set_obj_b $47, $0
                 dc.w off_32DC
-                dc.w $EE05
+                fa_loop 5
                 dc.w off_32C4
                 dc.w off_32C4
                 dc.w off_32C4
@@ -22606,12 +19948,10 @@ off_1B569E:     dc.w off_32E0           ; DATA XREF: fire_to_plant:loc_25500C   
                 dc.w off_32D0
                 dc.w off_32D0
                 dc.w off_32D0
-                dc.w $EF00
-                dc.w $EA00
-                dc.l off_1B5544
+                fa_next
+                fa_goto off_1B5544
 anim_fish_jumps:dc.w off_3290           ; DATA XREF: ROM:stru_25B024   o
-                dc.w $FB00
-                dc.l sub_258D9E
+                fa_call sub_258D9E
 off_1B56D2:     dc.w off_3290           ; DATA XREF: ROM:001B56F4   o
                 dc.w off_3294
                 dc.w off_3294
@@ -22628,51 +19968,31 @@ off_1B56D2:     dc.w off_3290           ; DATA XREF: ROM:001B56F4   o
                 dc.w off_32AC
                 dc.w off_32AC
                 dc.w off_3290
-                dc.w $EA00
-                dc.l off_1B56D2
+                fa_goto off_1B56D2
 anim_fish_jumps_2:dc.w off_32B0         ; DATA XREF: ROM:stru_25B03C   o
-                dc.w $FB00
-                dc.l sub_258D9E
+                fa_call sub_258D9E
 off_1B5700:     dc.w off_32B4           ; DATA XREF: ROM:001B570C   o
                 dc.w off_32B8
                 dc.w off_32BC
                 dc.w off_32C0
                 dc.w off_32B0
-                dc.w $EA00
-                dc.l off_1B5700
+                fa_goto off_1B5700
 anim_lawyer_papers:dc.w off_350C        ; DATA XREF: ROM:001B5732   o
                                         ; ROM:001B5748   o ...
                 dc.w off_3510
-                dc.w $F05E
-                dc.l off_1B572A
-                dc.w $F500
-                dc.l stru_25AD0C
-                dc.w off_808
-                dc.l 0
-                dc.l 0
+                fa_rand_goto 94, off_1B572A
+                fa_spawn 0, stru_25AD0C, 8, 8, 0, 0
 off_1B572A:     dc.w off_3514           ; DATA XREF: ROM:001B5716   o
                 dc.w off_3518
                 dc.w off_351C
-                dc.w $F05E
-                dc.l anim_lawyer_papers
-                dc.w $F500
-                dc.l stru_25AD0C
-                dc.w $F0
-                dc.l 0
-                dc.l 0
-                dc.w $EA00
-                dc.l anim_lawyer_papers
+                fa_rand_goto 94, anim_lawyer_papers
+                fa_spawn 0, stru_25AD0C, 0, -16, 0, 0
+                fa_goto anim_lawyer_papers
 anim_lawyer_papers_2:dc.w off_3524      ; DATA XREF: ROM:stru_25AD0C   o
-                dc.w $F500
-                dc.l stru_25AD0C
-                dc.w 0
-                dc.l off_1B575E
-                dc.l 0
+                fa_spawn 0, stru_25AD0C, 0, 0, off_1B575E, 0
 off_1B575E:     dc.w off_3520           ; DATA XREF: ROM:001B5756   o
-                dc.w $FB00
-                dc.l oksub_254E06
-                dc.w $F09A
-                dc.l off_1B578E
+                fa_call oksub_254E06
+                fa_rand_goto 154, off_1B578E
 off_1B576C:     dc.w off_3520           ; DATA XREF: ROM:001B578A   o
                 dc.w off_3520
                 dc.w off_3520
@@ -22687,8 +20007,7 @@ off_1B576C:     dc.w off_3520           ; DATA XREF: ROM:001B578A   o
                 dc.w off_3528
                 dc.w off_3524
                 dc.w off_3524
-                dc.w $EA00
-                dc.l off_1B576C
+                fa_goto off_1B576C
 off_1B578E:     dc.w off_3530           ; DATA XREF: ROM:001B5768   o
                                         ; ROM:001B57A0   o
                 dc.w off_3530
@@ -22698,8 +20017,7 @@ off_1B578E:     dc.w off_3530           ; DATA XREF: ROM:001B5768   o
                 dc.w off_3538
                 dc.w off_353C
                 dc.w off_353C
-                dc.w $EA00
-                dc.l off_1B578E
+                fa_goto off_1B578E
 anim_lawyer_suitcase:dc.w off_24B0      ; DATA XREF: ROM:001B57BE   o
                                         ; ROM:stru_25AD24   o
                 dc.w off_24B0
@@ -22713,8 +20031,7 @@ anim_lawyer_suitcase:dc.w off_24B0      ; DATA XREF: ROM:001B57BE   o
                 dc.w off_24C0
                 dc.w off_24C4
                 dc.w off_24C4
-                dc.w $EA00
-                dc.l anim_lawyer_suitcase
+                fa_goto anim_lawyer_suitcase
 anim_snowman_hat:dc.w off_2DA0          ; DATA XREF: ROM:001B57D4   o
                                         ; ROM:stru_25ACC4   o
                 dc.w off_2DA0
@@ -22722,33 +20039,28 @@ anim_snowman_hat:dc.w off_2DA0          ; DATA XREF: ROM:001B57D4   o
                 dc.w off_2DA4
                 dc.w off_2DA8
                 dc.w off_2DA8
-                dc.w $EB00
-                dc.w $EB01
-                dc.w $EA00
-                dc.l anim_snowman_hat
+                fa_flip_x
+                fa_flip_y
+                fa_goto anim_snowman_hat
 anim_boss_snowman:dc.w off_2DAC         ; DATA XREF: ROM:stru_25AC64   o
-word_1B57DA:    dc.w $FB00              ; DATA XREF: ROM:001B5902   o
+word_1B57DA:                            ; DATA XREF: ROM:001B5902   o
+                fa_call oksub_24951E
                                         ; ROM:001B5928   o
-                dc.l oksub_24951E
-                dc.w $ED11
-                dc.w 0
-                dc.w $86
-                dc.w $EE8B
+                fa_set_obj_b $0, $86
+                fa_hold 11
                 dc.w off_2DAC
 off_1B57EA:     dc.w off_2DAC           ; DATA XREF: ROM:001B57EE   o
-                dc.w $F0EA
-                dc.l off_1B57EA
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $F700
-                dc.w $F333
+                fa_rand_goto 234, off_1B57EA
+                fa_call oksub_249526
+                fa_face_jim
+                fa_sound $33
                 dc.w off_2DAC
                 dc.w off_2DAC
                 dc.w off_2DB0
                 dc.w off_2DB0
                 dc.w off_2DB4
                 dc.w off_2DB4
-                dc.w $F333
+                fa_sound $33
                 dc.w off_2DB0
                 dc.w off_2DB0
                 dc.w off_2DAC
@@ -22756,26 +20068,20 @@ off_1B57EA:     dc.w off_2DAC           ; DATA XREF: ROM:001B57EE   o
                 dc.w off_2DB0
                 dc.w off_2DB0
                 dc.w off_2DB8
-                dc.w $F333
+                fa_sound $33
                 dc.w off_2DBC
                 dc.w off_2DC0
                 dc.w off_2DC4
-                dc.w $F333
+                fa_sound $33
                 dc.w off_2DC8
                 dc.w off_2DCC
                 dc.w off_2DD0
-                dc.w $F333
-                dc.w $ED11
-                dc.w 0
-                dc.w $2D
-                dc.w $F4B1
-                dc.w 1
-                dc.w $32
-                dc.l off_1B584A
+                fa_sound $33
+                fa_set_obj_b $0, $2D
+                fa_if_obj_b FM_LE, $1, $32, off_1B584A
                 dc.w off_2DD4
-                dc.w $FC00
-                dc.l word_1B592C
-                dc.w $F700
+                fa_gosub word_1B592C
+                fa_face_jim
                 dc.w off_2DEC
                 dc.w off_2DEC
                 dc.w off_2DF0
@@ -22795,36 +20101,18 @@ off_1B584A:     dc.w off_2DF4           ; DATA XREF: ROM:001B5836   o
                 dc.w off_2E0C
                 dc.w off_2E0C
                 dc.w off_2E10
-                dc.w $F336
-                dc.w $F500
-                dc.l stru_25AC7C
-                dc.w $26FA
-                dc.l 0
-                dc.l 0
+                fa_sound $36
+                fa_spawn 0, stru_25AC7C, 38, -6, 0, 0
                 dc.w off_2E14
                 dc.w off_2E18
                 dc.w off_2E1C
-                dc.w $F4C1
-                dc.w 1
-                dc.w $64
-                dc.l off_1B589C
-                dc.w $F500
-                dc.l stru_25AC7C
-                dc.w $26EE
-                dc.l 0
-                dc.l 0
+                fa_if_obj_b FM_GT, $1, $64, off_1B589C
+                fa_spawn 0, stru_25AC7C, 38, -18, 0, 0
 off_1B589C:     dc.w off_2E20           ; DATA XREF: ROM:001B5888   o
                 dc.w off_2E24
                 dc.w off_2E28
-                dc.w $F4C1
-                dc.w 1
-                dc.w $32
-                dc.l off_1B58BC
-                dc.w $F500
-                dc.l stru_25AC7C
-                dc.w $2600
-                dc.l 0
-                dc.l 0
+                fa_if_obj_b FM_GT, $1, $32, off_1B58BC
+                fa_spawn 0, stru_25AC7C, 38, 0, 0, 0
 off_1B58BC:     dc.w off_2E2C           ; DATA XREF: ROM:001B58A8   o
                 dc.w off_2E2C
                 dc.w off_2E30
@@ -22835,48 +20123,41 @@ off_1B58BC:     dc.w off_2E2C           ; DATA XREF: ROM:001B58A8   o
                 dc.w off_2E38
                 dc.w off_2E3C
                 dc.w off_2E3C
-                dc.w $F4B1
-                dc.w 1
-                dc.w $64
-                dc.l off_1B58EA
-                dc.w $FC00
-                dc.l word_1B592C
+                fa_if_obj_b FM_LE, $1, $64, off_1B58EA
+                fa_gosub word_1B592C
                 dc.w off_2DD0
                 dc.w off_2DD0
-                dc.w $F343
+                fa_sound $43
                 dc.w off_2DCC
                 dc.w off_2DC8
 off_1B58EA:     dc.w off_2DC4           ; DATA XREF: ROM:001B58D6   o
                 dc.w off_2DC0
-                dc.w $F343
+                fa_sound $43
                 dc.w off_2DBC
                 dc.w off_2DB8
                 dc.w off_2DB4
                 dc.w off_2DB0
                 dc.w off_2DAC
-                dc.w $FB00
-                dc.l oksub_258504
-                dc.w $EA00
-                dc.l word_1B57DA
+                fa_call oksub_258504
+                fa_goto word_1B57DA
 off_1B5906:     dc.w off_2DD0           ; DATA XREF: fire_to_snowman_boss+C   o
                                         ; whip_to_snowman_boss+4   o
                 dc.w off_2DD0
-                dc.w $F343
+                fa_sound $43
                 dc.w off_2DCC
                 dc.w off_2DC8
                 dc.w off_2DC4
                 dc.w off_2DC0
-                dc.w $F343
+                fa_sound $43
                 dc.w off_2DBC
                 dc.w off_2DB8
                 dc.w off_2DB4
                 dc.w off_2DB0
                 dc.w off_2DAC
-                dc.w $FB00
-                dc.l oksub_258504
-                dc.w $EA00
-                dc.l word_1B57DA
-word_1B592C:    dc.w $EE01              ; DATA XREF: ROM:001B583E   o
+                fa_call oksub_258504
+                fa_goto word_1B57DA
+word_1B592C:                            ; DATA XREF: ROM:001B583E   o
+                fa_loop 1
                                         ; ROM:001B58DC   o
                 dc.w off_2DD8
                 dc.w off_2DD8
@@ -22888,11 +20169,11 @@ word_1B592C:    dc.w $EE01              ; DATA XREF: ROM:001B583E   o
                 dc.w off_2DE4
                 dc.w off_2DE8
                 dc.w off_2DE8
-                dc.w $EF00
-                dc.w $FC80
+                fa_next
+                fa_return
 anim_snowman_bullet:dc.w off_33FC       ; DATA XREF: ROM:stru_25AC7C   o
                                         ; ROM:stru_25AEBC   o
-                dc.w $F34B
+                fa_sound $4B
 off_1B594A:     dc.w off_3400           ; DATA XREF: ROM:001B5964   o
                 dc.w off_3400
                 dc.w off_3404
@@ -22905,8 +20186,7 @@ off_1B594A:     dc.w off_3400           ; DATA XREF: ROM:001B5964   o
                 dc.w off_3410
                 dc.w off_3414
                 dc.w off_3414
-                dc.w $EA00
-                dc.l off_1B594A
+                fa_goto off_1B594A
 anim_snowman_burp:dc.w off_2D70         ; DATA XREF: ROM:stru_25AC94   o
                 dc.w off_2D74
                 dc.w off_2D78
@@ -22919,66 +20199,52 @@ anim_snowman_burp:dc.w off_2D70         ; DATA XREF: ROM:stru_25AC94   o
                 dc.w off_2D84
                 dc.w off_2D84
                 dc.w off_2D84
-                dc.w $F600
+                fa_delete
 anim_snowman_parts:dc.w off_2D88        ; DATA XREF: ROM:stru_25ACAC   o
-                dc.w $F05E
-                dc.l off_1B598C
+                fa_rand_goto 94, off_1B598C
                 dc.w off_2D88
 off_1B598C:     dc.w off_2D8C           ; DATA XREF: ROM:001B5986   o
-                dc.w $F05E
-                dc.l off_1B5996
+                fa_rand_goto 94, off_1B5996
                 dc.w off_2D8C
 off_1B5996:     dc.w off_2D90           ; DATA XREF: ROM:001B5990   o
-                dc.w $F05E
-                dc.l off_1B59A2
+                fa_rand_goto 94, off_1B59A2
                 dc.w off_2D90
                 dc.w off_2D90
 off_1B59A2:     dc.w off_2D94           ; DATA XREF: ROM:001B599A   o
-                dc.w $F05E
-                dc.l off_1B59AE
+                fa_rand_goto 94, off_1B59AE
                 dc.w off_2D94
                 dc.w off_2D94
 off_1B59AE:     dc.w off_2D98           ; DATA XREF: ROM:001B59A6   o
-                dc.w $F05E
-                dc.l off_1B59BA
+                fa_rand_goto 94, off_1B59BA
                 dc.w off_2D98
                 dc.w off_2D98
 off_1B59BA:     dc.w off_2D9C           ; DATA XREF: ROM:001B59B2   o
-                dc.w $F05E
-                dc.l off_1B59C6
+                fa_rand_goto 94, off_1B59C6
                 dc.w off_2D9C
                 dc.w off_2D9C
 off_1B59C6:     dc.w off_2D9C           ; DATA XREF: ROM:001B59BE   o
-                dc.w $F600
+                fa_delete
 anim_sea_gate:     dc.w off_E94            ; DATA XREF: ROM:001B59D2   o
                                         ; ROM:object_sea_gate   o
-                dc.w $F411
-                dc.w $FE03
-                dc.w 0
-                dc.l anim_sea_gate
-                dc.w $FB00
-                dc.l oksub_24950E
-                dc.w $EC01
+                fa_if_b FM_EQ, byte_FFFE03, $0, anim_sea_gate
+                fa_call oksub_24950E
+                fa_end
 off_1B59DE:     dc.w off_E94            ; DATA XREF: ROM:001B59E6   o
                                         ; spawn_sea_gate_2+18   o
-                dc.w $F411
-                dc.w $FE04
-                dc.w 0
-                dc.l off_1B59DE
-                dc.w $FB00
-                dc.l oksub_24950E
-                dc.w $EC01
+                fa_if_b FM_EQ, byte_FFFE04, $0, off_1B59DE
+                fa_call oksub_24950E
+                fa_end
 anim_open_handler:     dc.w off_E98            ; DATA XREF: spawn_open_handler_2+10   o
                                         ; ROM:object_open_handler   o
-                dc.w $EC01
+                fa_end
 off_1B59F6:     dc.w off_E9C            ; DATA XREF: spawn_open_handler+18   o
                                         ; spawn_open_handler_2+24   o ...
-word_1B59F8:    dc.w $EE83              ; DATA XREF: ROM:001B5A02   o
+word_1B59F8:                            ; DATA XREF: ROM:001B5A02   o
+                fa_hold 3
                 dc.w off_E9C
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_EA0
-                dc.w $EA00
-                dc.l word_1B59F8
+                fa_goto word_1B59F8
 anim_gears:     dc.w off_2CB4           ; DATA XREF: ROM:001B5A18   o
                                         ; ROM:object_gears   o
                 dc.w off_2CB4
@@ -22988,118 +20254,68 @@ anim_gears:     dc.w off_2CB4           ; DATA XREF: ROM:001B5A18   o
                 dc.w off_2CAC
                 dc.w off_2CA8
                 dc.w off_2CA8
-                dc.w $EA00
-                dc.l anim_gears
+                fa_goto anim_gears
 off_1B5A1C:     dc.w off_3388           ; DATA XREF: ROM:funchars_0_9   o
                                         ; ROM:001B5A24   o ...
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A1C
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A1C
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5A30:     dc.w off_338C           ; DATA XREF: ROM:0000C5F8   o
                                         ; ROM:001B5A38   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A30
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A30
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5A44:     dc.w off_3390           ; DATA XREF: ROM:0000C5FC   o
                                         ; ROM:001B5A4C   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A44
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A44
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5A58:     dc.w off_3394           ; DATA XREF: ROM:0000C600   o
                                         ; ROM:001B5A60   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A58
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A58
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5A6C:     dc.w off_3398           ; DATA XREF: ROM:0000C604   o
                                         ; ROM:001B5A74   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A6C
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A6C
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5A80:     dc.w off_339C           ; DATA XREF: ROM:0000C608   o
                                         ; ROM:001B5A88   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A80
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A80
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5A94:     dc.w off_33A0           ; DATA XREF: ROM:0000C60C   o
                                         ; ROM:001B5A9C   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5A94
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5A94
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5AA8:     dc.w off_33A4           ; DATA XREF: ROM:0000C610   o
                                         ; ROM:001B5AB0   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5AA8
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5AA8
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5ABC:     dc.w off_33A8           ; DATA XREF: ROM:0000C614   o
                                         ; ROM:001B5AC4   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5ABC
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5ABC
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 off_1B5AD0:     dc.w off_33AC           ; DATA XREF: ROM:0000C618   o
                                         ; ROM:001B5AD8   o
-                dc.w $F411
-                dc.w $FD11
-                dc.w $40
-                dc.l off_1B5AD0
-                dc.w $ED01
-                dc.w $FD4F
-                dc.w 0
-                dc.w $F600
+                fa_if_b FM_EQ, jim_ride_obj_id, $40, off_1B5AD0
+                fa_set_b byte_FFFD4F, $0
+                fa_delete
 anim_princess:     dc.w off_2B04           ; DATA XREF: ROM:object_princess   o
-word_1B5AE6:    dc.w $F35B              ; DATA XREF: ROM:001B5B14   o
-                dc.w $EE03
-                dc.w $EE88
+word_1B5AE6:                            ; DATA XREF: ROM:001B5B14   o
+                fa_sound $5B
+                fa_loop 3
+                fa_hold 8
                 dc.w off_2B04
                 dc.w off_2B08
                 dc.w off_2B08
                 dc.w off_2B0C
                 dc.w off_2B0C
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_2B10
                 dc.w off_2B0C
                 dc.w off_2B0C
@@ -23107,33 +20323,23 @@ word_1B5AE6:    dc.w $F35B              ; DATA XREF: ROM:001B5B14   o
                 dc.w off_2B08
                 dc.w off_2B04
                 dc.w off_2B04
-                dc.w $F441
-                dc.w $FD77
-                dc.w 1
-                dc.l off_1B5B18
-                dc.w $EF00
-                dc.w $EA00
-                dc.l word_1B5AE6
+                fa_if_b FM_GT, ure_the_best_state, $1, off_1B5B18
+                fa_next
+                fa_goto word_1B5AE6
 off_1B5B18:     dc.w off_2AB8           ; DATA XREF: ROM:001B5B0C   o
                 dc.w off_2AB8
                 dc.w off_2ABC
                 dc.w off_2ABC
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_2AC0
-                dc.w $FC00
-                dc.l off_1B5B48
-                dc.w $FC00
-                dc.l off_1B5B48
-                dc.w $FC00
-                dc.l off_1B5B48
-                dc.w $ED01
-                dc.w $FD77
-                dc.w 3
-                dc.w $EEBB
+                fa_gosub off_1B5B48
+                fa_gosub off_1B5B48
+                fa_gosub off_1B5B48
+                fa_set_b ure_the_best_state, $3
+                fa_hold 59
                 dc.w off_2AC0
 off_1B5B40:     dc.w off_2AC0           ; DATA XREF: ROM:001B5B44   o
-                dc.w $EA00
-                dc.l off_1B5B40
+                fa_goto off_1B5B40
 off_1B5B48:     dc.w off_2AC0           ; DATA XREF: ROM:001B5B26   o
                                         ; ROM:001B5B2C   o ...
                 dc.w off_2AC0
@@ -23146,78 +20352,60 @@ off_1B5B48:     dc.w off_2AC0           ; DATA XREF: ROM:001B5B26   o
                 dc.w off_2AC4
                 dc.w off_2AC4
                 dc.w off_2AC4
-                dc.w $F376
+                fa_sound $76
                 dc.w off_2AC8
                 dc.w off_2AC8
                 dc.w off_2AC4
                 dc.w off_2AC4
-                dc.w $FC80
+                fa_return
 off_1B5B6A:     dc.w off_2AF0           ; DATA XREF: ROM:001ACB44   o
-                dc.w $F502
-                dc.l object_crown
-                dc.w $F6F6
-                dc.l 0
-                dc.l 0
+                fa_spawn 2, object_crown, -10, -10, 0, 0
                 dc.w off_2AF4
                 dc.w off_2AF4
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_2AF8
 off_1B5B84:     dc.w off_2AFC           ; DATA XREF: ROM:001B5B92   o
                                         ; ROM:001B5BA0   o
                 dc.w off_2B00
                 dc.w off_2B00
                 dc.w off_2AFC
-                dc.w $EE8E
+                fa_hold 14
                 dc.w off_2AF8
-                dc.w $F068
-                dc.l off_1B5B84
-                dc.w $EED9
+                fa_rand_goto 104, off_1B5B84
+                fa_hold 89
                 dc.w off_2AF8
-                dc.w $EEAC
+                fa_hold 44
                 dc.w off_2AF8
-                dc.w $EA00
-                dc.l off_1B5B84
+                fa_goto off_1B5B84
 off_1B5BA4:     dc.w off_2A80           ; DATA XREF: ROM:001B5BEC   o
                                         ; ROM:object_crown   o
                 dc.w off_2A80
                 dc.w off_2A84
-                dc.w $F441
-                dc.w $FD77
-                dc.w 4
-                dc.l off_1B5BF0
+                fa_if_b FM_GT, ure_the_best_state, $4, off_1B5BF0
                 dc.w off_2A84
                 dc.w off_2A88
                 dc.w off_2A88
                 dc.w off_2A8C
-                dc.w $F441
-                dc.w $FD77
-                dc.w 4
-                dc.l off_1B5BF0
+                fa_if_b FM_GT, ure_the_best_state, $4, off_1B5BF0
                 dc.w off_2A8C
                 dc.w off_2A90
                 dc.w off_2A90
                 dc.w off_2A94
                 dc.w off_2A94
-                dc.w $F441
-                dc.w $FD77
-                dc.w 4
-                dc.l off_1B5BF0
+                fa_if_b FM_GT, ure_the_best_state, $4, off_1B5BF0
                 dc.w off_2A98
                 dc.w off_2A9C
                 dc.w off_2AA0
                 dc.w off_2AA4
                 dc.w off_2AA8
                 dc.w off_2AAC
-                dc.w $F431
-                dc.w $FD77
-                dc.w 4
-                dc.l off_1B5BA4
+                fa_if_b FM_LE, ure_the_best_state, $4, off_1B5BA4
 off_1B5BF0:     dc.w off_2AB0           ; DATA XREF: ROM:001B5BB0   o
                                         ; ROM:001B5BC2   o ...
                 dc.w off_2AB0
                 dc.w off_2AB0
                 dc.w off_2AB4
-                dc.w $EC01
+                fa_end
 off_1B5BFA:     dc.w off_AB4            ; DATA XREF: ROM:001B5C30   o
                                         ; ROM:object_gleam   o
                 dc.w off_AB8
@@ -23227,97 +20415,78 @@ off_1B5BFA:     dc.w off_AB4            ; DATA XREF: ROM:001B5C30   o
                 dc.w off_AC0
                 dc.w off_AC4
                 dc.w off_AC4
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_AC0
                 dc.w off_AC0
                 dc.w off_AB8
                 dc.w off_AB8
                 dc.w off_AB4
                 dc.w off_AB4
-                dc.w $EB00
-                dc.w $FB00
-                dc.l oksub_24951E
+                fa_flip_x
+                fa_call oksub_24951E
 off_1B5C20:     dc.w off_AB4            ; DATA XREF: ROM:001B5C24   o
-                dc.w $F0F4
-                dc.l off_1B5C20
-                dc.w $FB00
-                dc.l oksub_249526
-                dc.w $EA00
-                dc.l off_1B5BFA
+                fa_rand_goto 244, off_1B5C20
+                fa_call oksub_249526
+                fa_goto off_1B5BFA
 off_1B5C34:     dc.w off_AB4            ; DATA XREF: ROM:object_gleam_2   o
                 dc.w off_AB8
                 dc.w off_ABC
                 dc.w off_ABC
                 dc.w off_AC0
                 dc.w off_AC0
-                dc.w $F377
+                fa_sound $77
                 dc.w off_AC4
                 dc.w off_AC4
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_AC0
                 dc.w off_AC0
                 dc.w off_AB8
                 dc.w off_AB8
                 dc.w off_AB4
                 dc.w off_AB4
-                dc.w $F600
+                fa_delete
 off_1B5C56:     dc.w off_E24            ; DATA XREF: ROM:001B5C5E   o
                                         ; ROM:object_cow_end_screen   o
-                dc.w $F431
-                dc.w $FD77
-                dc.w 6
-                dc.l off_1B5C56
-word_1B5C62:    dc.w $EE59              ; DATA XREF: ROM:001B5C94   o
+                fa_if_b FM_LE, ure_the_best_state, $6, off_1B5C56
+word_1B5C62:                            ; DATA XREF: ROM:001B5C94   o
+                fa_loop 89
                 dc.w off_E24
                 dc.w off_E24
                 dc.w off_E24
-                dc.w $F441
-                dc.w $FD77
-                dc.w 8
-                dc.l off_1B5C98
-                dc.w $EF00
+                fa_if_b FM_GT, ure_the_best_state, $8, off_1B5C98
+                fa_next
 off_1B5C76:     dc.w off_E24            ; DATA XREF: ROM:001B5C84   o
-                dc.w $F441
-                dc.w $FD77
-                dc.w 8
-                dc.l off_1B5C98
-                dc.w $F0F4
-                dc.l off_1B5C76
-                dc.w $F319
-                dc.w $EE8D
+                fa_if_b FM_GT, ure_the_best_state, $8, off_1B5C98
+                fa_rand_goto 244, off_1B5C76
+                fa_sound $19
+                fa_hold 13
                 dc.w off_E38
-                dc.w $EEA3
+                fa_hold 35
                 dc.w off_E3C
-                dc.w $EA00
-                dc.l word_1B5C62
+                fa_goto word_1B5C62
 off_1B5C98:     dc.w off_E40            ; DATA XREF: ROM:001B5C70   o
                                         ; ROM:001B5C7E   o
-                dc.w $EC01
+                fa_end
 off_1B5C9C:     dc.w off_17E0           ; DATA XREF: ROM:object_jim_end_screen   o
-word_1B5C9E:    dc.w $FC00              ; DATA XREF: ROM:001B5CB0   o
-                dc.l off_1B5E44
-                dc.w $FC00
-                dc.l off_1B5E64
-                dc.w $F431
-                dc.w $FD77
-                dc.w 0
-                dc.l word_1B5C9E
-                dc.w $FC00
-                dc.l off_1B5E98
+word_1B5C9E:                            ; DATA XREF: ROM:001B5CB0   o
+                fa_gosub off_1B5E44
+                fa_gosub off_1B5E64
+                fa_if_b FM_LE, ure_the_best_state, $0, word_1B5C9E
+                fa_gosub off_1B5E98
                 dc.w off_1B28
                 dc.w off_1B28
                 dc.w off_1B2C
-                dc.w $F31A
+                fa_sound $1A
                 dc.w off_1B30
                 dc.w off_1B30
                 dc.w off_1B30
                 dc.w off_1B30
-                dc.w $EE04
+                fa_loop 4
                 dc.w off_1B30
                 dc.w off_1B30
                 dc.w off_1B34
                 dc.w off_1B34
-                dc.w $F333
+                fa_sound $33
                 dc.w off_1B38
                 dc.w off_1B38
                 dc.w off_1B38
@@ -23327,7 +20496,7 @@ word_1B5C9E:    dc.w $FC00              ; DATA XREF: ROM:001B5CB0   o
                 dc.w off_1B30
                 dc.w off_1B34
                 dc.w off_1B34
-                dc.w $F333
+                fa_sound $33
                 dc.w off_1B40
                 dc.w off_1B40
                 dc.w off_1B40
@@ -23337,167 +20506,127 @@ word_1B5C9E:    dc.w $FC00              ; DATA XREF: ROM:001B5CB0   o
                 dc.w off_1B38
                 dc.w off_1B34
                 dc.w off_1B34
-                dc.w $EF00
-                dc.w $EE8E
+                fa_next
+                fa_hold 14
                 dc.w off_1818
-                dc.w $F501
-                dc.l object_gleam_2
-                dc.w off_1CEC
-                dc.l 0
-                dc.l 0
-                dc.w $EE8E
+                fa_spawn 1, object_gleam_2, 28, -20, 0, 0
+                fa_hold 14
                 dc.w off_1818
-                dc.w $ED01
-                dc.w $FD77
-                dc.w 2
+                fa_set_b ure_the_best_state, $2
 off_1B5D1C:     dc.w off_1818           ; DATA XREF: ROM:001B5D24   o
-                dc.w $F431
-                dc.w $FD77
-                dc.w 3
-                dc.l off_1B5D1C
-                dc.w $EEBB
+                fa_if_b FM_LE, ure_the_best_state, $3, off_1B5D1C
+                fa_hold 59
                 dc.w off_1818
                 dc.w off_181C
                 dc.w off_181C
                 dc.w off_1820
                 dc.w off_1820
                 dc.w off_1824
-                dc.w $F338
-                dc.w $EEBB
+                fa_sound $38
+                fa_hold 59
                 dc.w off_1824
                 dc.w off_181C
                 dc.w off_181C
                 dc.w off_181C
                 dc.w off_1C98
                 dc.w off_1C98
-                dc.w $ED01
-                dc.w $FD77
-                dc.w 6
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
+                fa_set_b ure_the_best_state, $6
+                fa_set_obj_b $9, $FF
 off_1B5D52:     dc.w off_1AC0           ; DATA XREF: ROM:001B5DD0   o
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AC0
                 dc.w off_1AC4
-                dc.w $F100
-                dc.w 1
-                dc.w $EE82
+                fa_move_x 1
+                fa_hold 2
                 dc.w off_1AC4
                 dc.w off_1AC8
-                dc.w $F100
-                dc.w 4
-                dc.w $EE82
+                fa_move_x 4
+                fa_hold 2
                 dc.w off_1AC8
                 dc.w off_1ACC
-                dc.w $F100
-                dc.w 3
-                dc.w $EE82
+                fa_move_x 3
+                fa_hold 2
                 dc.w off_1ACC
                 dc.w off_1AD0
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AD0
                 dc.w off_1AD4
-                dc.w $F100
-                dc.w 4
-                dc.w $EE82
+                fa_move_x 4
+                fa_hold 2
                 dc.w off_1AD4
                 dc.w off_1AD8
-                dc.w $F100
-                dc.w 2
-                dc.w $EE82
+                fa_move_x 2
+                fa_hold 2
                 dc.w off_1AD8
                 dc.w off_1ADC
-                dc.w $F100
-                dc.w 8
-                dc.w $EE82
+                fa_move_x 8
+                fa_hold 2
                 dc.w off_1ADC
                 dc.w off_1AE0
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AE0
                 dc.w off_1AE4
-                dc.w $F100
-                dc.w 6
-                dc.w $EE82
+                fa_move_x 6
+                fa_hold 2
                 dc.w off_1AE4
                 dc.w off_1AE8
-                dc.w $F100
-                dc.w 5
-                dc.w $EE82
+                fa_move_x 5
+                fa_hold 2
                 dc.w off_1AE8
                 dc.w off_1AEC
-                dc.w $F100
-                dc.w 1
-                dc.w $EE82
+                fa_move_x 1
+                fa_hold 2
                 dc.w off_1AEC
-                dc.w $F4C2
-                dc.w 2
-                dc.w $70
-                dc.l off_1B5D52
-                dc.w $ED01
-                dc.w $FD77
-                dc.w 7
+                fa_if_obj_w FM_GT, $2, $70, off_1B5D52
+                fa_set_b ure_the_best_state, $7
 off_1B5DDA:     dc.w off_1A20           ; DATA XREF: ROM:001B5DE2   o
-                dc.w $F431
-                dc.w $FD77
-                dc.w $A
-                dc.l off_1B5DDA
-                dc.w $EE82
+                fa_if_b FM_LE, ure_the_best_state, $A, off_1B5DDA
+                fa_hold 2
                 dc.w off_1A20
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_1A24
                 dc.w off_1A28
-                dc.w $EE9D
+                fa_hold 29
                 dc.w off_1A2C
                 dc.w off_1A28
-                dc.w $EE93
+                fa_hold 19
                 dc.w off_1A24
                 dc.w off_1A28
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_1A2C
                 dc.w off_1A30
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_1A34
                 dc.w off_1A38
-                dc.w $F32B
-                dc.w $EE9D
+                fa_sound $2B
+                fa_hold 29
                 dc.w off_1A3C
                 dc.w off_1A40
-                dc.w $EE93
+                fa_hold 19
                 dc.w off_1A44
                 dc.w off_1A48
                 dc.w off_1A4C
                 dc.w off_1A4C
                 dc.w off_1A48
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_1A44
-                dc.w $ED01
-                dc.w $FD77
-                dc.w $C
-                dc.w $F3AB
-                dc.w $F339
+                fa_set_b ure_the_best_state, $C
+                fa_sound_stop $2B
+                fa_sound $39
                 dc.w off_1A50
                 dc.w off_1A50
                 dc.w off_1A50
                 dc.w off_1A50
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $EEBB
+                fa_call oksub_24951E
+                fa_hold 59
                 dc.w off_1A50
-                dc.w $ED01
-                dc.w $FD77
-                dc.w $D
-                dc.w $F600
+                fa_set_b ure_the_best_state, $D
+                fa_delete
 off_1B5E44:     dc.w off_17E0           ; DATA XREF: ROM:001B5CA0   o
-                dc.w $ED01
-                dc.w $FDEA
-                dc.w $3D
+                fa_set_b jim_state, $3D
                 dc.w off_17E0
                 dc.w off_17E4
                 dc.w off_17E4
@@ -23509,7 +20638,7 @@ off_1B5E44:     dc.w off_17E0           ; DATA XREF: ROM:001B5CA0   o
                 dc.w off_17F4
                 dc.w off_17F8
                 dc.w off_17F8
-                dc.w $FC80
+                fa_return
 off_1B5E64:     dc.w off_17FC           ; DATA XREF: ROM:001B5CA6   o
                 dc.w off_17FC
                 dc.w off_1800
@@ -23522,7 +20651,7 @@ off_1B5E64:     dc.w off_17FC           ; DATA XREF: ROM:001B5CA6   o
                 dc.w off_1810
                 dc.w off_1814
                 dc.w off_1814
-                dc.w $FC80
+                fa_return
                 dc.w off_17A4
                 dc.w off_17A4
                 dc.w off_17A8
@@ -23535,66 +20664,53 @@ off_1B5E64:     dc.w off_17FC           ; DATA XREF: ROM:001B5CA6   o
                 dc.w off_17B4
                 dc.w off_17B8
                 dc.w off_17B8
-                dc.w $FC80
+                fa_return
 off_1B5E98:     dc.w off_17A4           ; DATA XREF: ROM:001B5CB6   o
-                dc.w $EE81
+                fa_hold 1
                 dc.w off_17A4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17A8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17AC
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B0
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B4
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17A4
-                dc.w $EE81
+                fa_hold 1
                 dc.w off_17A8
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17AC
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_17B0
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_17B4
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_17B8
-                dc.w $FC80
+                fa_return
 off_1B5ECC:     dc.w off_2ACC           ; DATA XREF: ROM:object_princess_land   o
-                dc.w $EC01
+                fa_end
 off_1B5ED0:     dc.w off_2A4C           ; DATA XREF: ROM:001B5ED8   o
                                         ; ROM:object_destruction_land   o
-                dc.w $F431
-                dc.w $FD77
-                dc.w 7
-                dc.l off_1B5ED0
-                dc.w $EE84
+                fa_if_b FM_LE, ure_the_best_state, $7, off_1B5ED0
+                fa_hold 4
                 dc.w off_2A50
-                dc.w $EE8E
+                fa_hold 14
                 dc.w off_2A54
-                dc.w $ED01
-                dc.w $FD77
-                dc.w 9
-                dc.w $EE84
+                fa_set_b ure_the_best_state, $9
+                fa_hold 4
                 dc.w off_2A58
-                dc.w $EE84
+                fa_hold 4
                 dc.w off_2A5C
-                dc.w $F500
-                dc.l stru_25B9B4
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $EE84
+                fa_spawn 0, stru_25B9B4, 0, 0, 0, 0
+                fa_hold 4
                 dc.w off_2A60
-                dc.w $F500
-                dc.l stru_25B9CC
-                dc.w 0
-                dc.l 0
-                dc.l 0
-                dc.w $F354
-                dc.w $EE82
+                fa_spawn 0, stru_25B9CC, 0, 0, 0, 0
+                fa_sound $54
+                fa_hold 2
                 dc.w off_2A64
                 dc.w off_2A68
                 dc.w off_2A68
@@ -23602,19 +20718,17 @@ off_1B5ED0:     dc.w off_2A4C           ; DATA XREF: ROM:001B5ED8   o
                 dc.w off_2A6C
                 dc.w off_2A70
                 dc.w off_2A70
-                dc.w $F355
+                fa_sound $55
                 dc.w off_2A74
                 dc.w off_2A74
-                dc.w $EE89
+                fa_hold 9
                 dc.w off_2A74
-                dc.w $ED01
-                dc.w $FD77
-                dc.w $A
-                dc.w $EC01
+                fa_set_b ure_the_best_state, $A
+                fa_end
 off_1B5F3A:     dc.w off_2A78           ; DATA XREF: ROM:stru_25B9B4   o
-                dc.w $EC01
+                fa_end
 off_1B5F3E:     dc.w off_2A7C           ; DATA XREF: ROM:stru_25B9CC   o
-                dc.w $EC01
+                fa_end
 off_1B5F42:     dc.w off_2AD0           ; DATA XREF: ROM:001B5F6C   o
                                         ; ROM:object_water_washes_rock   o
                 dc.w off_2AD0
@@ -23636,22 +20750,19 @@ off_1B5F56:     dc.w off_2AE0           ; DATA XREF: ure_the_best_screen+1C0   o
                 dc.w off_2AE8
                 dc.w off_2AEC
                 dc.w off_2AEC
-                dc.w $EA00
-                dc.l off_1B5F42
+                fa_goto off_1B5F42
 off_1B5F70:     dc.w off_C9C            ; DATA XREF: sub_24C526+A8   o
-                dc.w $FB00
-                dc.l oksub_24951E
-                dc.w $EE93
+                fa_call oksub_24951E
+                fa_hold 19
                 dc.w off_C9C
-                dc.w $FB00
-                dc.l oksub_249526
+                fa_call oksub_249526
                 dc.w off_C9C
                 dc.w off_C9C
                 dc.w off_CA0
                 dc.w off_CA0
                 dc.w off_CA4
                 dc.w off_CA4
-                dc.w $F33B
+                fa_sound $3B
                 dc.w off_CA8
                 dc.w off_CA8
                 dc.w off_CAC
@@ -23669,9 +20780,9 @@ off_1B5F70:     dc.w off_C9C            ; DATA XREF: sub_24C526+A8   o
                 dc.w off_CC4
                 dc.w off_CC4
                 dc.w off_CC8
-                dc.w $EC01
+                fa_end
 off_1B5FB4:     dc.w off_CC8            ; DATA XREF: ROM:object_continue_tin_can   o
-                dc.w $EC01
+                fa_end
 off_1B5FB8:     dc.w off_CCC            ; DATA XREF: sub_24B638:loc_24B7D4   o
                 dc.w off_CCC
                 dc.w off_CD0
@@ -23689,7 +20800,7 @@ off_1B5FB8:     dc.w off_CCC            ; DATA XREF: sub_24B638:loc_24B7D4   o
                 dc.w off_CE8
                 dc.w off_CEC
                 dc.w off_CEC
-                dc.w $F32B
+                fa_sound $2B
                 dc.w off_CF0
                 dc.w off_CF4
                 dc.w off_CF4
@@ -23705,18 +20816,18 @@ off_1B5FB8:     dc.w off_CCC            ; DATA XREF: sub_24B638:loc_24B7D4   o
                 dc.w off_D08
                 dc.w off_D0C
                 dc.w off_D0C
-word_1B5FFA:    dc.w $EE82              ; DATA XREF: ROM:001B6010   o
+word_1B5FFA:                            ; DATA XREF: ROM:001B6010   o
+                fa_hold 2
                 dc.w off_D10
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_D14
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_D18
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_D1C
-                dc.w $EE82
+                fa_hold 2
                 dc.w off_D20
-                dc.w $EA00
-                dc.l word_1B5FFA
+                fa_goto word_1B5FFA
 anim_lever:     dc.w off_864            ; DATA XREF: ROM:stru_25B2DC   o
 off_1B6016:     dc.w off_864            ; DATA XREF: whip_to_chicken_boss_lever:loc_254EB6   o
                 dc.w off_868
@@ -23743,48 +20854,45 @@ off_1B6016:     dc.w off_864            ; DATA XREF: whip_to_chicken_boss_lever:
                 dc.w off_868
                 dc.w off_868
                 dc.w off_864
-                dc.w $EC01
+                fa_end
 off_1B604A:     dc.w off_864            ; DATA XREF: sub_254E48:loc_254E7A   o
-                dc.w $EC01
+                fa_end
 anim_bomb_2:     dc.w off_34B8           ; DATA XREF: ROM:object_bomb   o
-                dc.w $EE86
+                fa_hold 6
                 dc.w off_34B8
-                dc.w $ED11
-                dc.w 0
-                dc.w $28
-                dc.w $EE87
+                fa_set_obj_b $0, $28
+                fa_hold 7
                 dc.w off_34BC
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_34C0
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_34C4
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_34C8
-                dc.w $EE87
+                fa_hold 7
                 dc.w off_34CC
-                dc.w $F348
-                dc.w $FB00
-                dc.l oksub_2548E8
+                fa_sound $48
+                fa_call oksub_2548E8
                 dc.w off_34CC
-                dc.w $F600
+                fa_delete
 off_1B607A:     dc.w off_2CFC           ; DATA XREF: sub_24E764+80   o
                                         ; ROM:0025BABC   o
-                dc.w $EC01
+                fa_end
 anim_aquarium_breaking:     dc.w off_788            ; DATA XREF: ROM:object_fish_boss_aquarium   o
-                dc.w $F700
-word_1B6082:    dc.w $EE83              ; DATA XREF: ROM:001B6094   o
+                fa_face_jim
+word_1B6082:                            ; DATA XREF: ROM:001B6094   o
+                fa_hold 3
                 dc.w off_788
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_78C
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_790
-                dc.w $EE83
+                fa_hold 3
                 dc.w off_78C
-                dc.w $EA00
-                dc.l word_1B6082
+                fa_goto word_1B6082
 anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                                         ; ROM:object_bob_goldfish   o
-                dc.w $EE01
+                fa_loop 1
                 dc.w off_794
                 dc.w off_798
                 dc.w off_798
@@ -23807,38 +20915,12 @@ anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                 dc.w off_7BC
                 dc.w off_7BC
                 dc.w off_7B0
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_794
-                dc.w $EB00
-                dc.w $EF00
+                fa_flip_x
+                fa_next
                 dc.w off_794
-                dc.w $EB00
-                dc.w off_794
-                dc.w off_798
-                dc.w off_798
-                dc.w off_79C
-                dc.w off_79C
-                dc.w off_7A0
-                dc.w off_7A0
-                dc.w off_7A4
-                dc.w off_7A4
-                dc.w off_7A8
-                dc.w $EB00
-                dc.w off_7A8
-                dc.w off_7AC
-                dc.w off_7AC
-                dc.w off_7B0
-                dc.w off_7B0
-                dc.w off_7B4
-                dc.w off_7B4
-                dc.w off_7B8
-                dc.w off_7B8
-                dc.w off_7BC
-                dc.w off_7BC
-                dc.w off_7B0
-                dc.w $EB00
-                dc.w off_794
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_794
                 dc.w off_798
                 dc.w off_798
@@ -23849,7 +20931,7 @@ anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                 dc.w off_7A4
                 dc.w off_7A4
                 dc.w off_7A8
-                dc.w $EB00
+                fa_flip_x
                 dc.w off_7A8
                 dc.w off_7AC
                 dc.w off_7AC
@@ -23862,15 +20944,41 @@ anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                 dc.w off_7BC
                 dc.w off_7BC
                 dc.w off_7B0
+                fa_flip_x
+                dc.w off_794
+                fa_flip_x
+                dc.w off_794
+                dc.w off_798
+                dc.w off_798
+                dc.w off_79C
+                dc.w off_79C
+                dc.w off_7A0
+                dc.w off_7A0
+                dc.w off_7A4
+                dc.w off_7A4
+                dc.w off_7A8
+                fa_flip_x
+                dc.w off_7A8
+                dc.w off_7AC
+                dc.w off_7AC
+                dc.w off_7B0
+                dc.w off_7B0
                 dc.w off_7B4
-                dc.w $EB00
                 dc.w off_7B4
                 dc.w off_7B8
                 dc.w off_7B8
                 dc.w off_7BC
                 dc.w off_7BC
                 dc.w off_7B0
-                dc.w $EB00
+                dc.w off_7B4
+                fa_flip_x
+                dc.w off_7B4
+                dc.w off_7B8
+                dc.w off_7B8
+                dc.w off_7BC
+                dc.w off_7BC
+                dc.w off_7B0
+                fa_flip_x
                 dc.w off_7B0
                 dc.w off_7B4
                 dc.w off_7B4
@@ -23879,8 +20987,7 @@ anim_bob_goldfish:     dc.w off_794            ; DATA XREF: ROM:001B615A   o
                 dc.w off_7BC
                 dc.w off_7BC
                 dc.w off_7B0
-                dc.w $EA00
-                dc.l anim_bob_goldfish
+                fa_goto anim_bob_goldfish
 off_1B615E:     dc.w off_7C0            ; DATA XREF: collision_with_fish_boss+4   o
                 dc.w off_7C0
                 dc.w off_7C4
@@ -23894,23 +21001,18 @@ off_1B615E:     dc.w off_7C0            ; DATA XREF: collision_with_fish_boss+4 
                 dc.w off_7D4
                 dc.w off_7D4
 off_1B6176:     dc.w off_7D8            ; DATA XREF: ROM:001B617A   o
-                dc.w $EA00
-                dc.l off_1B6176
+                fa_goto off_1B6176
 off_1B617E:     dc.w off_7DC            ; DATA XREF: ROM:001ACE84   o
-                dc.w $F31E
+                fa_sound $1E
                 dc.w off_7E0
                 dc.w off_7E4
-                dc.w $F500
-                dc.l object_bob_goldfish
-                dc.w 0
-                dc.l 0
-                dc.l 0
+                fa_spawn 0, object_bob_goldfish, 0, 0, 0, 0
                 dc.w off_7E8
                 dc.w off_7EC
                 dc.w off_7F0
-                dc.w $F600
+                fa_delete
 anim_aquarium_column:     dc.w off_7F4            ; DATA XREF: ROM:object_aquarium_column   o
-                dc.w $EC01
+                fa_end
 anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                                         ; ROM:object_moving_platform   o
                 dc.w off_2C4C
@@ -23924,104 +21026,68 @@ anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                 dc.w off_2C5C
                 dc.w off_2C60
                 dc.w off_2C60
-                dc.w $EA00
-                dc.l anim_moving_platform
+                fa_goto anim_moving_platform
 off_1B61C0:     dc.w off_2CF8           ; DATA XREF: ROM:object_platform_queen_butt   o
-                dc.w $EC01
+                fa_end
 off_1B61C4:     dc.w off_2EA0           ; DATA XREF: ROM:stru_25B78C   o
-                dc.w $F072
-                dc.l off_1B61D6
-                dc.w $F09A
-                dc.l off_1B61DA
+                fa_rand_goto 114, off_1B61D6
+                fa_rand_goto 154, off_1B61DA
                 dc.w off_2F44
-                dc.w $EC01
+                fa_end
 off_1B61D6:     dc.w off_2F30           ; DATA XREF: ROM:001B61C8   o
-                dc.w $EC01
+                fa_end
 off_1B61DA:     dc.w off_2F38           ; DATA XREF: ROM:001B61CE   o
-                dc.w $EC01
+                fa_end
 anim_advanced_home:     dc.w off_974            ; DATA XREF: ROM:object_advanced_home   o
-                dc.w $EC01
+                fa_end
 anim_petes_home_door:     dc.w off_264C           ; DATA XREF: ROM:001B61F2   o
                                         ; ROM:object_petes_home_door   o
-                dc.w $ED11
-                dc.w 9
-                dc.w $FF
-                dc.w $F424
-                dc.w $A76A
-                dc.l 0
-                dc.l anim_petes_home_door
+                fa_set_obj_b $9, $FF
+                fa_if_l FM_NE, obj_01_handler_ptr, 0, anim_petes_home_door
                 dc.w off_2650
                 dc.w off_2650
-                dc.w $ED11
-                dc.w 9
-                dc.w 0
+                fa_set_obj_b $9, $0
                 dc.w off_264C
-                dc.w $F32E
-                dc.w $EC01
+                fa_sound $2E
+                fa_end
 off_1B6206:     dc.w off_20C0           ; DATA XREF: ROM:001AD684   o
                 dc.w off_20C0
-                dc.w $F287
-                dc.w 9
-                dc.l word_1B621E
-                dc.w $ED12
-                dc.w $18
-                dc.w $FC00
-                dc.w $EA00
-                dc.l anim_intestinal_wheel
-word_1B621E:    dc.w $ED12              ; DATA XREF: ROM:001B620E   o
-                dc.w $18
-                dc.w $400
+                fa_if_obj_bit_clr $9, 7, word_1B621E
+                fa_set_obj_w $18, $FC00
+                fa_goto anim_intestinal_wheel
+word_1B621E:                            ; DATA XREF: ROM:001B620E   o
+                fa_set_obj_w $18, $400
 anim_intestinal_wheel:     dc.w off_20B4           ; DATA XREF: ROM:001B621A   o
                                         ; ROM:00259654   o ...
-                dc.w $EC01
+                fa_end
 off_1B6228:     dc.w off_20B8           ; DATA XREF: ROM:0025964C   o
                                         ; ROM:00259650   o
-                dc.w $EC01
+                fa_end
 off_1B622C:     dc.w off_20BC           ; DATA XREF: ROM:off_259648   o
-                dc.w $EC01
+                fa_end
 anim_intestinal_ball:     dc.w off_20AC           ; DATA XREF: ROM:object_intestinal_ball   o
-                dc.w $EA00
-                dc.l off_1B625C
-word_1B6238:    dc.w $FB00              ; DATA XREF: ROM:001B629A   o
-                dc.l oksub_2495DE
-                dc.w $FB00
-                dc.l sub_2595F4
-                dc.w $ED14
-                dc.w $A
-                dc.l byte_1AD1CA
+                fa_goto off_1B625C
+word_1B6238:                            ; DATA XREF: ROM:001B629A   o
+                fa_call oksub_2495DE
+                fa_call sub_2595F4
+                fa_set_obj_l $A, byte_1AD1CA
                 dc.w off_20AC
                 dc.w off_20AC
                 dc.w off_20AC
                 dc.w off_20AC
                 dc.w off_20AC
-                dc.w $FB00
-                dc.l oksub_2495B0
+                fa_call oksub_2495B0
 off_1B625C:     dc.w off_20A8           ; DATA XREF: ROM:001B6234   o
                                         ; ROM:001B6262   o
-                dc.w $F284
-                dc.w 7
-                dc.l off_1B625C
-                dc.w $F500
-                dc.l stru_25A88C
-                dc.w 0
-                dc.l anim_dust_2
-                dc.l 0
-                dc.w $F500
-                dc.l stru_25A88C
-                dc.w 0
-                dc.l off_1B0420
-                dc.l 0
+                fa_if_obj_bit_clr $7, 4, off_1B625C
+                fa_spawn 0, stru_25A88C, 0, 0, anim_dust_2, 0
+                fa_spawn 0, stru_25A88C, 0, 0, off_1B0420, 0
                 dc.w off_20B0
-                dc.w $ED12
-                dc.w $18
-                dc.w 0
-                dc.w $ED12
-                dc.w $1A
-                dc.w 0
-                dc.w $EC00
+                fa_set_obj_w $18, $0
+                fa_set_obj_w $1A, $0
+                fa_stop_move
                 dc.w off_20B0
-                dc.w $EA00
-                dc.l word_1B6238
+                fa_goto word_1B6238
 off_1B629E:     dc.w off_1244           ; DATA XREF: collision_with_snot+6C   o
                 dc.w off_1244
                 dc.w off_1248
@@ -24030,8 +21096,7 @@ off_1B629E:     dc.w off_1244           ; DATA XREF: collision_with_snot+6C   o
                 dc.w off_124C
                 dc.w off_1250
                 dc.w off_1250
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_call oksub_258254
 off_1B62B4:     dc.w off_1254           ; DATA XREF: collision_with_snot:loc_2577C0   o
                 dc.w off_1254
                 dc.w off_1258
@@ -24040,8 +21105,7 @@ off_1B62B4:     dc.w off_1254           ; DATA XREF: collision_with_snot:loc_257
                 dc.w off_125C
                 dc.w off_1260
                 dc.w off_1260
-                dc.w $FB00
-                dc.l oksub_258254
+                fa_call oksub_258254
                 align 2,0
                 include "jiminc/cheat_menu_texts.inc"
                 include "jiminc/license_text.inc"
@@ -26172,7 +23236,7 @@ loc_246BFA:                             ; CODE XREF: sub_246B08+D6   j
                 movem.l (sp)+,d0-d1/a0-a1/a6
 loc_246C1C:                             ; CODE XREF: sub_246B08+F8   j
                 clr.b   (is_jim_jumping).l
-                bsr.w   sub_249772
+                bsr.w   scmd_0E_jim_default_anim
                 move.l  a2,(jim_anim_offset).l
                 clr.b   (jim_idle_anim_delay).l
 loc_246C32:                             ; CODE XREF: sub_246B08+AC   j
@@ -26670,7 +23734,7 @@ loc_24722E:                             ; CODE XREF: sub_247022+200   j
                 bne.s   loc_2472A8
                 cmpi.b  #$A,(jim_timer_in_air).l
                 bcs.s   loc_2472A8
-                bsr.w   sub_249772
+                bsr.w   scmd_0E_jim_default_anim
                 move.l  a2,(jim_anim_offset).l
 loc_2472A8:                             ; CODE XREF: sub_247022+260   j
                                         ; sub_247022+268   j ...
@@ -29092,7 +26156,7 @@ sub_249178:                             ; CODE XREF: oksub_2456C8+16A   p
                 move.l  #loc_249228,(dword_FFA65E).l
                 clr.b   ($FFFBE3).l
                 lea     (unk_FF9F52).l,a3
-                lea     (off_5978).w,a4
+                lea     (obj_script_cmd_table).w,a4
                 lea     (jim_obj_id).l,a1
                 move.w  #$25,d4 ; '%'
 loc_2491B8:                             ; CODE XREF: sub_249178+B4   j
@@ -29150,27 +26214,27 @@ loc_249228:                             ; CODE XREF: sub_249178+48   j
 ; End of function sub_249178
 
 
-sub_249232:                             ; DATA XREF: ROM:off_5978   o
+scmd_00_goto:                             ; DATA XREF: ROM:obj_script_cmd_table   o
                 addq.l  #2,a2
                 movea.l (a2),a2         ; Zadampil
                 rts
-; End of function sub_249232
+; End of function scmd_00_goto
 
 
-sub_249238:                             ; DATA XREF: ROM:0000597C   o
+scmd_01_toggle_flip:                             ; DATA XREF: ROM:0000597C   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 beq.s   loc_249246
                 eori.b  #$FF,$35(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_249246:                             ; CODE XREF: sub_249238+4   j
+loc_249246:                             ; CODE XREF: scmd_01_toggle_flip+4   j
                 eori.b  #$FF,9(a1)
                 rts
-; End of function sub_249238
+; End of function scmd_01_toggle_flip
 
 
-sub_24924E:                             ; DATA XREF: ROM:00005980   o
+scmd_02_end:                             ; DATA XREF: ROM:00005980   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 beq.s   loc_249268
@@ -29178,20 +26242,20 @@ sub_24924E:                             ; DATA XREF: ROM:00005980   o
                 tst.b   (is_move_script).l
                 bne.s   locret_249266
                 move.l  (dword_FFA65E).l,(sp)
-locret_249266:                          ; CODE XREF: sub_24924E+10   j
-                                        ; sub_24924E+24   j
+locret_249266:                          ; CODE XREF: scmd_02_end+10   j
+                                        ; scmd_02_end+24   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_249268:                             ; CODE XREF: sub_24924E+4   j
+loc_249268:                             ; CODE XREF: scmd_02_end+4   j
                 clr.l   $A(a1)
                 tst.b   (is_move_script).l
                 beq.s   locret_249266
                 move.l  (dword_FFA65E).l,(sp)
                 rts
-; End of function sub_24924E
+; End of function scmd_02_end
 
 
-sub_24927C:                             ; DATA XREF: ROM:00005984   o
+scmd_03_set_var:                             ; DATA XREF: ROM:00005984   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 move.w  (a2)+,d3
@@ -29205,7 +26269,7 @@ sub_24927C:                             ; DATA XREF: ROM:00005984   o
                 beq.s   loc_2492B6
                 bra.s   loc_2492B0
 ; ---------------------------------------------------------------------------
-loc_24929A:                             ; CODE XREF: sub_24927C+A   j
+loc_24929A:                             ; CODE XREF: scmd_03_set_var+A   j
                 move.l  #M68K_RAM,d7
                 move.w  d3,d7
                 movea.l d7,a6
@@ -29213,26 +26277,26 @@ loc_24929A:                             ; CODE XREF: sub_24927C+A   j
                 beq.s   loc_2492BC
                 cmpi.b  #2,d0
                 beq.s   loc_2492B6
-loc_2492B0:                             ; CODE XREF: sub_24927C+1C   j
+loc_2492B0:                             ; CODE XREF: scmd_03_set_var+1C   j
                 move.l  (a2)+,d0
                 move.l  d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2492B6:                             ; CODE XREF: sub_24927C+1A   j
-                                        ; sub_24927C+32   j
+loc_2492B6:                             ; CODE XREF: scmd_03_set_var+1A   j
+                                        ; scmd_03_set_var+32   j
                 move.w  (a2)+,d0
                 move.w  d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2492BC:                             ; CODE XREF: sub_24927C+14   j
-                                        ; sub_24927C+2C   j
+loc_2492BC:                             ; CODE XREF: scmd_03_set_var+14   j
+                                        ; scmd_03_set_var+2C   j
                 move.w  (a2)+,d0
                 move.b  d0,(a6)
                 rts
-; End of function sub_24927C
+; End of function scmd_03_set_var
 
                 align 2,0
-sub_2492C2:                             ; DATA XREF: ROM:00005988   o
+scmd_04_loop_or_hold:                             ; DATA XREF: ROM:00005988   o
                 addq.l  #1,a2
                 move.b  (a2)+,d3
                 bclr    #7,d3
@@ -29244,26 +26308,26 @@ sub_2492C2:                             ; DATA XREF: ROM:00005988   o
                 rts
 ; ---------------------------------------------------------------------------
                 align 2,0
-loc_2492E0:                             ; CODE XREF: sub_2492C2+10   j
+loc_2492E0:                             ; CODE XREF: scmd_04_loop_or_hold+10   j
                 move.b  d3,$36(a1)
                 move.l  (dword_FFA65A).l,(sp)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2492EC:                             ; CODE XREF: sub_2492C2+8   j
+loc_2492EC:                             ; CODE XREF: scmd_04_loop_or_hold+8   j
                 tst.b   (is_move_script).l
                 bne.s   loc_2492FE
                 move.b  d3,$28(a1)
                 move.l  a2,$24(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_2492FE:                             ; CODE XREF: sub_2492C2+30   j
+loc_2492FE:                             ; CODE XREF: scmd_04_loop_or_hold+30   j
                 move.b  d3,$12(a1)
                 move.l  a2,$E(a1)
                 rts
-; End of function sub_2492C2
+; End of function scmd_04_loop_or_hold
 
 
-sub_249308:                             ; DATA XREF: ROM:0000598C   o
+scmd_05_next:                             ; DATA XREF: ROM:0000598C   o
                 addq.l  #2,a2
                 tst.b   (is_move_script).l
                 bne.s   loc_249322
@@ -29271,20 +26335,20 @@ sub_249308:                             ; DATA XREF: ROM:0000598C   o
                 beq.s   locret_249320
                 subq.b  #1,$28(a1)
                 movea.l $24(a1),a2
-locret_249320:                          ; CODE XREF: sub_249308+E   j
-                                        ; sub_249308+1E   j
+locret_249320:                          ; CODE XREF: scmd_05_next+E   j
+                                        ; scmd_05_next+1E   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_249322:                             ; CODE XREF: sub_249308+8   j
+loc_249322:                             ; CODE XREF: scmd_05_next+8   j
                 tst.b   $12(a1)
                 beq.s   locret_249320
                 subq.b  #1,$12(a1)
                 movea.l $E(a1),a2
                 rts
-; End of function sub_249308
+; End of function scmd_05_next
 
 
-sub_249332:                             ; DATA XREF: ROM:00005990   o
+scmd_06_rand_goto:                             ; DATA XREF: ROM:00005990   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 bsr.w   random_function
@@ -29293,13 +26357,13 @@ sub_249332:                             ; DATA XREF: ROM:00005990   o
                 movea.l (a2),a2         ; Zadampil
                 rts
 ; ---------------------------------------------------------------------------
-loc_249342:                             ; CODE XREF: sub_249332+A   j
+loc_249342:                             ; CODE XREF: scmd_06_rand_goto+A   j
                 addq.l  #4,a2
                 rts
-; End of function sub_249332
+; End of function scmd_06_rand_goto
 
 
-sub_249346:                             ; DATA XREF: ROM:00005994   o
+scmd_07_add_pos:                             ; DATA XREF: ROM:00005994   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 bne.s   loc_24935C
@@ -29307,22 +26371,22 @@ sub_249346:                             ; DATA XREF: ROM:00005994   o
                 tst.b   9(a1)
                 beq.s   loc_249356
                 neg.w   d0
-loc_249356:                             ; CODE XREF: sub_249346+C   j
+loc_249356:                             ; CODE XREF: scmd_07_add_pos+C   j
                 add.w   d0,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
-loc_24935C:                             ; CODE XREF: sub_249346+4   j
+loc_24935C:                             ; CODE XREF: scmd_07_add_pos+4   j
                 move.w  (a2)+,d0
                 tst.b   $35(a1)
                 beq.s   loc_249366
                 neg.w   d0
-loc_249366:                             ; CODE XREF: sub_249346+1C   j
+loc_249366:                             ; CODE XREF: scmd_07_add_pos+1C   j
                 add.w   d0,4(a1)
                 rts
-; End of function sub_249346
+; End of function scmd_07_add_pos
 
 
-sub_24936C:                             ; DATA XREF: ROM:00005998   o
+scmd_08_if_bit:                             ; DATA XREF: ROM:00005998   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 move.b  d0,d3
@@ -29333,11 +26397,11 @@ sub_24936C:                             ; DATA XREF: ROM:00005998   o
                 adda.w  (a2)+,a6
                 bra.s   loc_24938C
 ; ---------------------------------------------------------------------------
-loc_249382:                             ; CODE XREF: sub_24936C+E   j
+loc_249382:                             ; CODE XREF: scmd_08_if_bit+E   j
                 move.l  #M68K_RAM,d7
                 move.w  (a2)+,d7
                 movea.l d7,a6
-loc_24938C:                             ; CODE XREF: sub_24936C+14   j
+loc_24938C:                             ; CODE XREF: scmd_08_if_bit+14   j
                 move.b  (a6),d7
                 bclr    #6,d0
                 beq.s   loc_24939C
@@ -29346,20 +26410,20 @@ loc_24938C:                             ; CODE XREF: sub_24936C+14   j
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_24939C:                             ; CODE XREF: sub_24936C+26   j
+loc_24939C:                             ; CODE XREF: scmd_08_if_bit+26   j
                 btst    d3,d7
                 beq.s   loc_2493A4      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2493A4:                             ; CODE XREF: sub_24936C+2A   j
-                                        ; sub_24936C+32   j
+loc_2493A4:                             ; CODE XREF: scmd_08_if_bit+2A   j
+                                        ; scmd_08_if_bit+32   j
                 movea.l (a2),a2         ; Zadampil
                 rts
-; End of function sub_24936C
+; End of function scmd_08_if_bit
 
 
-sub_2493A8:                             ; DATA XREF: ROM:0000599C   o
+scmd_09_sound:                             ; DATA XREF: ROM:0000599C   o
                 addq.l  #1,a2
                 clr.l   d0
                 move.b  (a2)+,d0
@@ -29373,20 +26437,20 @@ sub_2493A8:                             ; DATA XREF: ROM:0000599C   o
                 jsr     (gems_start_song).l
                 move.l  (sp)+,d0
                 movem.l (sp)+,d1/a0-a1/a6
-locret_2493D4:                          ; CODE XREF: sub_2493A8+C   j
+locret_2493D4:                          ; CODE XREF: scmd_09_sound+C   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2493D6:                             ; CODE XREF: sub_2493A8+12   j
+loc_2493D6:                             ; CODE XREF: scmd_09_sound+12   j
                 movem.l d1/a0-a1/a6,-(sp)
                 move.l  d0,-(sp)
                 jsr     (gems_stop_song).l
                 move.l  (sp)+,d0
                 movem.l (sp)+,d1/a0-a1/a6
                 rts
-; End of function sub_2493A8
+; End of function scmd_09_sound
 
 
-sub_2493EA:                             ; DATA XREF: ROM:000059A0   o
+scmd_0A_if_cmp:                             ; DATA XREF: ROM:000059A0   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 move.b  d0,d3
@@ -29398,11 +26462,11 @@ sub_2493EA:                             ; DATA XREF: ROM:000059A0   o
                 adda.w  (a2)+,a6
                 bra.s   loc_24940E
 ; ---------------------------------------------------------------------------
-loc_249404:                             ; CODE XREF: sub_2493EA+12   j
+loc_249404:                             ; CODE XREF: scmd_0A_if_cmp+12   j
                 move.l  #M68K_RAM,d7
                 move.w  (a2)+,d7
                 movea.l d7,a6
-loc_24940E:                             ; CODE XREF: sub_2493EA+18   j
+loc_24940E:                             ; CODE XREF: scmd_0A_if_cmp+18   j
                 cmpi.b  #1,d0
                 beq.w   loc_249488
                 cmpi.b  #2,d0
@@ -29419,30 +26483,30 @@ loc_24940E:                             ; CODE XREF: sub_2493EA+18   j
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249438:                             ; CODE XREF: sub_2493EA+44   j
+loc_249438:                             ; CODE XREF: scmd_0A_if_cmp+44   j
                 cmp.l   (a6),d0
                 bcc.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249440:                             ; CODE XREF: sub_2493EA+3E   j
+loc_249440:                             ; CODE XREF: scmd_0A_if_cmp+3E   j
                 cmp.l   (a6),d0
                 bne.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249448:                             ; CODE XREF: sub_2493EA+38   j
+loc_249448:                             ; CODE XREF: scmd_0A_if_cmp+38   j
                 cmp.l   (a6),d0
                 beq.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249450:                             ; CODE XREF: sub_2493EA+48   j
-                                        ; sub_2493EA+50   j ...
+loc_249450:                             ; CODE XREF: scmd_0A_if_cmp+48   j
+                                        ; scmd_0A_if_cmp+50   j ...
                 movea.l (a2),a2         ; Zadampil
                 rts
 ; ---------------------------------------------------------------------------
-loc_249454:                             ; CODE XREF: sub_2493EA+30   j
+loc_249454:                             ; CODE XREF: scmd_0A_if_cmp+30   j
                 move.w  (a2)+,d0
                 cmpi.b  #$10,d3
                 beq.s   loc_249480
@@ -29455,25 +26519,25 @@ loc_249454:                             ; CODE XREF: sub_2493EA+30   j
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249470:                             ; CODE XREF: sub_2493EA+7C   j
+loc_249470:                             ; CODE XREF: scmd_0A_if_cmp+7C   j
                 cmp.w   (a6),d0
                 bcc.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249478:                             ; CODE XREF: sub_2493EA+76   j
+loc_249478:                             ; CODE XREF: scmd_0A_if_cmp+76   j
                 cmp.w   (a6),d0
                 bne.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249480:                             ; CODE XREF: sub_2493EA+70   j
+loc_249480:                             ; CODE XREF: scmd_0A_if_cmp+70   j
                 cmp.w   (a6),d0
                 beq.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249488:                             ; CODE XREF: sub_2493EA+28   j
+loc_249488:                             ; CODE XREF: scmd_0A_if_cmp+28   j
                 move.w  (a2)+,d0
                 cmpi.b  #$10,d3
                 beq.s   loc_2494B4
@@ -29486,24 +26550,24 @@ loc_249488:                             ; CODE XREF: sub_2493EA+28   j
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2494A4:                             ; CODE XREF: sub_2493EA+B0   j
+loc_2494A4:                             ; CODE XREF: scmd_0A_if_cmp+B0   j
                 cmp.b   (a6),d0
                 bcc.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2494AC:                             ; CODE XREF: sub_2493EA+AA   j
+loc_2494AC:                             ; CODE XREF: scmd_0A_if_cmp+AA   j
                 cmp.b   (a6),d0
                 bne.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2494B4:                             ; CODE XREF: sub_2493EA+A4   j
+loc_2494B4:                             ; CODE XREF: scmd_0A_if_cmp+A4   j
                 cmp.b   (a6),d0
                 beq.s   loc_249450      ; Zadampil
                 addq.l  #4,a2
                 rts
-; End of function sub_2493EA
+; End of function scmd_0A_if_cmp
 
 
 sub_2494BC:
@@ -29746,7 +26810,7 @@ oksub_249664:                           ; DATA XREF: ROM:001AD35A   o
 ; End of function oksub_249664
 
 
-sub_249692:                             ; DATA XREF: ROM:000059A4   o
+scmd_0B_spawn_obj:                             ; DATA XREF: ROM:000059A4   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 beq.w   loc_2496EC
@@ -29760,39 +26824,39 @@ sub_249692:                             ; DATA XREF: ROM:000059A4   o
                 beq.s   loc_2496BC
                 bra.w   loc_249742
 ; ---------------------------------------------------------------------------
-loc_2496BC:                             ; CODE XREF: sub_249692+24   j
+loc_2496BC:                             ; CODE XREF: scmd_0B_spawn_obj+24   j
                 tst.b   (jim_obj_id).l
                 bne.w   loc_249742
                 lea     (jim_obj_id).l,a5
                 bra.s   loc_2496F4      ; Zadampil
 ; ---------------------------------------------------------------------------
-loc_2496CE:                             ; CODE XREF: sub_249692+1C   j
+loc_2496CE:                             ; CODE XREF: scmd_0B_spawn_obj+1C   j
                 bsr.w   find_free_obj_slot_ad96
                 bne.w   loc_249742
                 bra.s   loc_2496F4      ; Zadampil
 ; ---------------------------------------------------------------------------
-loc_2496D8:                             ; CODE XREF: sub_249692+C   j
+loc_2496D8:                             ; CODE XREF: scmd_0B_spawn_obj+C   j
                 bsr.w   find_free_obj_slot_ad36      ; При отключении не рисует огонь, и нет звука стрельбы
                 bne.w   loc_249742
                 bra.s   loc_2496F4      ; Zadampil
 ; ---------------------------------------------------------------------------
-loc_2496E2:                             ; CODE XREF: sub_249692+14   j
+loc_2496E2:                             ; CODE XREF: scmd_0B_spawn_obj+14   j
                 bsr.w   find_free_obj_slot_ad66
                 bne.w   loc_249742
                 bra.s   loc_2496F4      ; Zadampil
 ; ---------------------------------------------------------------------------
-loc_2496EC:                             ; CODE XREF: sub_249692+4   j
+loc_2496EC:                             ; CODE XREF: scmd_0B_spawn_obj+4   j
                 bsr.w   find_free_obj_slot_ad06
                 bne.w   loc_249742
-loc_2496F4:                             ; CODE XREF: sub_249692+3A   j
-                                        ; sub_249692+44   j ...
+loc_2496F4:                             ; CODE XREF: scmd_0B_spawn_obj+3A   j
+                                        ; scmd_0B_spawn_obj+44   j ...
                 movea.l (a2)+,a6        ; Zadampil
                 bsr.w   load_sprite_struct ; При отключении нет спрайтов и объектов на уровнях
                 move.b  (a2)+,d0
                 tst.b   9(a1)
                 beq.s   loc_249704
                 neg.b   d0
-loc_249704:                             ; CODE XREF: sub_249692+6E   j
+loc_249704:                             ; CODE XREF: scmd_0B_spawn_obj+6E   j
                 ext.w   d0
                 add.w   2(a1),d0
                 move.w  d0,2(a5)
@@ -29800,7 +26864,7 @@ loc_249704:                             ; CODE XREF: sub_249692+6E   j
                 tst.b   $35(a1)
                 beq.s   loc_249718
                 neg.b   d0
-loc_249718:                             ; CODE XREF: sub_249692+82   j
+loc_249718:                             ; CODE XREF: scmd_0B_spawn_obj+82   j
                 ext.w   d0
                 add.w   4(a1),d0
                 move.w  d0,4(a5)
@@ -29809,42 +26873,42 @@ loc_249718:                             ; CODE XREF: sub_249692+82   j
                 move.l  (a2)+,d0
                 beq.s   loc_249736
                 move.l  d0,$20(a5)
-loc_249736:                             ; CODE XREF: sub_249692+9E   j
+loc_249736:                             ; CODE XREF: scmd_0B_spawn_obj+9E   j
                 move.l  (a2)+,d0
                 beq.w   locret_249740
                 move.l  d0,$A(a5)
-locret_249740:                          ; CODE XREF: sub_249692+A6   j
+locret_249740:                          ; CODE XREF: scmd_0B_spawn_obj+A6   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_249742:                             ; CODE XREF: sub_249692+26   j
-                                        ; sub_249692+30   j ...
+loc_249742:                             ; CODE XREF: scmd_0B_spawn_obj+26   j
+                                        ; scmd_0B_spawn_obj+30   j ...
                 adda.l  #$E,a2
                 rts
-; End of function sub_249692
+; End of function scmd_0B_spawn_obj
 
 
-sub_24974A:                             ; DATA XREF: ROM:000059A8   o
+scmd_0C_delete:                             ; DATA XREF: ROM:000059A8   o
                 addq.l  #2,a2
                 clr.b   (a1)
                 bsr.w   free_obj_vram_a1
                 move.l  (dword_FFA65E).l,(sp)
                 rts
-; End of function sub_24974A
+; End of function scmd_0C_delete
 
 
-sub_24975A:                             ; DATA XREF: ROM:000059AC   o
+scmd_0D_face_jim:                             ; DATA XREF: ROM:000059AC   o
                 addq.l  #2,a2
                 clr.b   9(a1)
                 move.w  (jim_x).l,d0
                 cmp.w   2(a1),d0
                 bcc.s   locret_249770
                 st      9(a1)
-locret_249770:                          ; CODE XREF: sub_24975A+10   j
+locret_249770:                          ; CODE XREF: scmd_0D_face_jim+10   j
                 rts
-; End of function sub_24975A
+; End of function scmd_0D_face_jim
 
 
-sub_249772:                             ; CODE XREF: sub_246B08+11A   p
+scmd_0E_jim_default_anim:                             ; CODE XREF: sub_246B08+11A   p
                                         ; sub_247022+27C   p
                                         ; DATA XREF: ...
                 clr.b   (jim_state).l
@@ -29855,7 +26919,7 @@ sub_249772:                             ; CODE XREF: sub_246B08+11A   p
                 move.b  #4,(jim_state).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_249796:                             ; CODE XREF: sub_249772+12   j
+loc_249796:                             ; CODE XREF: scmd_0E_jim_default_anim+12   j
                 tst.b   (is_jim_sliding).l
                 beq.s   loc_2497C4
                 lea     (off_1AF026).l,a2
@@ -29864,27 +26928,27 @@ loc_249796:                             ; CODE XREF: sub_249772+12   j
                 beq.s   locret_2497C2
                 lea     (off_1AF0AC).l,a2
                 move.b  #$A,(jim_state).l
-locret_2497C2:                          ; CODE XREF: sub_249772+40   j
+locret_2497C2:                          ; CODE XREF: scmd_0E_jim_default_anim+40   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_2497C4:                             ; CODE XREF: sub_249772+2A   j
+loc_2497C4:                             ; CODE XREF: scmd_0E_jim_default_anim+2A   j
                 cmpi.b  #$5F,(jim_ride_obj_id).l ; '_'
                 beq.s   loc_2497D8
                 cmpi.b  #$5E,(jim_ride_obj_id).l ; '^'
                 bne.s   loc_2497E8
-loc_2497D8:                             ; CODE XREF: sub_249772+5A   j
+loc_2497D8:                             ; CODE XREF: scmd_0E_jim_default_anim+5A   j
                 lea     (off_1AEFDC).l,a2
                 move.b  #$21,(jim_state).l ; '!'
                 rts
 ; ---------------------------------------------------------------------------
-loc_2497E8:                             ; CODE XREF: sub_249772+64   j
+loc_2497E8:                             ; CODE XREF: scmd_0E_jim_default_anim+64   j
                 tst.b   (is_jim_on_chain).l
                 beq.s   loc_249800
                 lea     (off_1ADD54).l,a2
                 move.b  #1,(jim_state).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_249800:                             ; CODE XREF: sub_249772+7C   j
+loc_249800:                             ; CODE XREF: scmd_0E_jim_default_anim+7C   j
                 tst.b   (platform_type_under_jim).l
                 beq.w   loc_249892
                 tst.b   (jim_walking_direction).l
@@ -29893,7 +26957,7 @@ loc_249800:                             ; CODE XREF: sub_249772+7C   j
                 move.b  #8,(jim_state).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_249822:                             ; CODE XREF: sub_249772+9E   j
+loc_249822:                             ; CODE XREF: scmd_0E_jim_default_anim+9E   j
                 tst.b   (byte_FFFD1E).l
                 beq.w   loc_249854
                 tst.b   (naked_worm_enable).l
@@ -29902,48 +26966,48 @@ loc_249822:                             ; CODE XREF: sub_249772+9E   j
                 move.b  #$23,(jim_state).l ; '#'
                 rts
 ; ---------------------------------------------------------------------------
-loc_249844:                             ; CODE XREF: sub_249772+C0   j
+loc_249844:                             ; CODE XREF: scmd_0E_jim_default_anim+C0   j
                 lea     (off_1AE788).l,a2
                 move.b  #$23,(jim_state).l ; '#'
                 rts
 ; ---------------------------------------------------------------------------
-loc_249854:                             ; CODE XREF: sub_249772+B6   j
+loc_249854:                             ; CODE XREF: scmd_0E_jim_default_anim+B6   j
                 tst.b   (is_jim_ropejumper).l
                 beq.s   loc_24986C
                 lea     (anim_jim_ropejumper).l,a2
                 move.b  #0,(jim_state).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24986C:                             ; CODE XREF: sub_249772+E8   j
+loc_24986C:                             ; CODE XREF: scmd_0E_jim_default_anim+E8   j
                 lea     (anim_jim_idle).l,a2
                 move.b  #4,(jim_state).l
                 tst.b   (naked_worm_enable).l
                 beq.s   locret_249890
                 lea     (off_1AF4D2).l,a2
                 move.b  #4,(jim_state).l
-locret_249890:                          ; CODE XREF: sub_249772+10E   j
+locret_249890:                          ; CODE XREF: scmd_0E_jim_default_anim+10E   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_249892:                             ; CODE XREF: sub_249772+94   j
+loc_249892:                             ; CODE XREF: scmd_0E_jim_default_anim+94   j
                 cmpi.b  #$B,(selectedLevelOption).l
                 bne.s   loc_2498AC
                 lea     (off_1AF2E6).l,a2
                 move.b  #$10,(jim_state).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_2498AC:                             ; CODE XREF: sub_249772+128   j
+loc_2498AC:                             ; CODE XREF: scmd_0E_jim_default_anim+128   j
                 lea     (off_1ADE50).l,a2
                 move.b  #3,(jim_state).l
                 tst.b   (naked_worm_enable).l
                 beq.s   locret_2498D0
                 lea     (off_1AF5D0).l,a2
                 move.b  #3,(jim_state).l
-locret_2498D0:                          ; CODE XREF: sub_249772+14E   j
+locret_2498D0:                          ; CODE XREF: scmd_0E_jim_default_anim+14E   j
                 rts
-; End of function sub_249772
+; End of function scmd_0E_jim_default_anim
 
 
-sub_2498D2:                             ; CODE XREF: sub_2592EC+11E   p
+scmd_0F_chase_jim:                             ; CODE XREF: sub_2592EC+11E   p
                                         ; DATA XREF: ROM:000059B4   o
                 addq.w  #1,a2
                 move.b  (a2)+,d0
@@ -29962,14 +27026,14 @@ sub_2498D2:                             ; CODE XREF: sub_2592EC+11E   p
                 neg.b   d0
                 bra.s   loc_249904
 ; ---------------------------------------------------------------------------
-loc_2498FC:                             ; CODE XREF: sub_2498D2+14   j
-                                        ; sub_2498D2+1C   j
+loc_2498FC:                             ; CODE XREF: scmd_0F_chase_jim+14   j
+                                        ; scmd_0F_chase_jim+1C   j
                 cmpi.b  #$10,$1A(a1)
                 bgt.s   loc_249908
-loc_249904:                             ; CODE XREF: sub_2498D2+28   j
+loc_249904:                             ; CODE XREF: scmd_0F_chase_jim+28   j
                 add.b   d0,$1A(a1)
-loc_249908:                             ; CODE XREF: sub_2498D2+24   j
-                                        ; sub_2498D2+30   j
+loc_249908:                             ; CODE XREF: scmd_0F_chase_jim+24   j
+                                        ; scmd_0F_chase_jim+30   j
                 move.b  (a2)+,d1
                 neg.b   d1
                 ext.w   d1
@@ -29982,19 +27046,19 @@ loc_249908:                             ; CODE XREF: sub_2498D2+24   j
                 neg.b   d3
                 bra.s   loc_249930
 ; ---------------------------------------------------------------------------
-loc_249928:                             ; CODE XREF: sub_2498D2+40   j
-                                        ; sub_2498D2+48   j
+loc_249928:                             ; CODE XREF: scmd_0F_chase_jim+40   j
+                                        ; scmd_0F_chase_jim+48   j
                 cmpi.b  #6,$18(a1)
                 bgt.s   locret_249934
-loc_249930:                             ; CODE XREF: sub_2498D2+54   j
+loc_249930:                             ; CODE XREF: scmd_0F_chase_jim+54   j
                 add.b   d3,$18(a1)
-locret_249934:                          ; CODE XREF: sub_2498D2+50   j
-                                        ; sub_2498D2+5C   j
+locret_249934:                          ; CODE XREF: scmd_0F_chase_jim+50   j
+                                        ; scmd_0F_chase_jim+5C   j
                 rts
-; End of function sub_2498D2
+; End of function scmd_0F_chase_jim
 
 
-sub_249936:                             ; DATA XREF: ROM:000059B8   o
+scmd_10_add_var:                             ; DATA XREF: ROM:000059B8   o
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 move.w  (a2)+,d3
@@ -30004,11 +27068,11 @@ sub_249936:                             ; DATA XREF: ROM:000059B8   o
                 adda.w  d3,a6
                 bra.s   loc_249952
 ; ---------------------------------------------------------------------------
-loc_249948:                             ; CODE XREF: sub_249936+A   j
+loc_249948:                             ; CODE XREF: scmd_10_add_var+A   j
                 move.l  #M68K_RAM,d7
                 move.w  d3,d7
                 movea.l d7,a6
-loc_249952:                             ; CODE XREF: sub_249936+10   j
+loc_249952:                             ; CODE XREF: scmd_10_add_var+10   j
                 bclr    #7,d0
                 bne.s   loc_249976
                 cmpi.b  #1,d0
@@ -30019,17 +27083,17 @@ loc_249952:                             ; CODE XREF: sub_249936+10   j
                 add.l   d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_24996A:                             ; CODE XREF: sub_249936+2C   j
+loc_24996A:                             ; CODE XREF: scmd_10_add_var+2C   j
                 move.w  (a2)+,d0
                 add.w   d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_249970:                             ; CODE XREF: sub_249936+26   j
+loc_249970:                             ; CODE XREF: scmd_10_add_var+26   j
                 move.w  (a2)+,d0
                 add.b   d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_249976:                             ; CODE XREF: sub_249936+20   j
+loc_249976:                             ; CODE XREF: scmd_10_add_var+20   j
                 cmpi.b  #1,d0
                 beq.s   loc_24998E
                 cmpi.b  #2,d0
@@ -30038,26 +27102,26 @@ loc_249976:                             ; CODE XREF: sub_249936+20   j
                 sub.l   d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_249988:                             ; CODE XREF: sub_249936+4A   j
+loc_249988:                             ; CODE XREF: scmd_10_add_var+4A   j
                 move.w  (a2)+,d0
                 sub.w   d0,(a6)
                 rts
 ; ---------------------------------------------------------------------------
-loc_24998E:                             ; CODE XREF: sub_249936+44   j
+loc_24998E:                             ; CODE XREF: scmd_10_add_var+44   j
                 move.w  (a2)+,d0
                 sub.b   d0,(a6)
                 rts
-; End of function sub_249936
+; End of function scmd_10_add_var
 
 
-oksub_249994:                           ; DATA XREF: ROM:000059BC   o
+scmd_11_call:                           ; DATA XREF: ROM:000059BC   o
                 addq.l  #2,a2
                 move.l  (a2)+,-(sp)     ; zadampil
                 rts
-; End of function oksub_249994
+; End of function scmd_11_call
 
 
-oksub_24999A:                           ; DATA XREF: ROM:000059C0   o
+scmd_12_gosub_return:                           ; DATA XREF: ROM:000059C0   o
                 tst.b   (is_move_script).l
                 bne.s   loc_2499BC
                 addq.l  #1,a2
@@ -30067,13 +27131,13 @@ oksub_24999A:                           ; DATA XREF: ROM:000059C0   o
                 movea.l $38(a1),a2      ; addr from ram to a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2499B2:                             ; CODE XREF: oksub_24999A+10   j
+loc_2499B2:                             ; CODE XREF: scmd_12_gosub_return+10   j
                 move.l  (a2)+,d0        ; zadampil
                 move.l  a2,$38(a1)
                 movea.l d0,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2499BC:                             ; CODE XREF: oksub_24999A+6   j
+loc_2499BC:                             ; CODE XREF: scmd_12_gosub_return+6   j
                 addq.l  #1,a2
                 move.b  (a2)+,d0
                 bclr    #7,d0
@@ -30081,39 +27145,39 @@ loc_2499BC:                             ; CODE XREF: oksub_24999A+6   j
                 movea.l $4C(a1),a2      ; addr from ram to a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2499CC:                             ; CODE XREF: oksub_24999A+2A   j
+loc_2499CC:                             ; CODE XREF: scmd_12_gosub_return+2A   j
                 move.l  (a2)+,d0        ; zadampil
                 move.l  a2,$4C(a1)
                 movea.l d0,a2
                 rts
-; End of function oksub_24999A
+; End of function scmd_12_gosub_return
 
 
-sub_2499D6:                             ; DATA XREF: ROM:000059C4   o
+scmd_13_if_jim_near_x:                             ; DATA XREF: ROM:000059C4   o
                 addq.l  #1,a2
                 clr.w   d0
                 move.b  (a2)+,d0
                 cmpi.b  #$FF,d0
                 bne.s   loc_2499E6
                 move.w  #$140,d0
-loc_2499E6:                             ; CODE XREF: sub_2499D6+A   j
+loc_2499E6:                             ; CODE XREF: scmd_13_if_jim_near_x+A   j
                 move.w  (jim_x).l,d3
                 sub.w   2(a1),d3
                 bcc.w   loc_2499F6
                 neg.w   d3
-loc_2499F6:                             ; CODE XREF: sub_2499D6+1A   j
+loc_2499F6:                             ; CODE XREF: scmd_13_if_jim_near_x+1A   j
                 cmp.w   d3,d0
                 bcc.s   loc_2499FE      ; Zadampil
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_2499FE:                             ; CODE XREF: sub_2499D6+22   j
+loc_2499FE:                             ; CODE XREF: scmd_13_if_jim_near_x+22   j
                 movea.l (a2),a2         ; Zadampil
                 rts
-; End of function sub_2499D6
+; End of function scmd_13_if_jim_near_x
 
 
-sub_249A02:                             ; DATA XREF: ROM:000059C8   o
+scmd_14_if_jim_near_y:                             ; DATA XREF: ROM:000059C8   o
                 addq.l  #1,a2
                 clr.w   d0
                 move.b  (a2)+,d0
@@ -30121,16 +27185,16 @@ sub_249A02:                             ; DATA XREF: ROM:000059C8   o
                 sub.w   4(a1),d3
                 bcc.w   loc_249A18
                 neg.w   d3
-loc_249A18:                             ; CODE XREF: sub_249A02+10   j
+loc_249A18:                             ; CODE XREF: scmd_14_if_jim_near_y+10   j
                 cmp.w   d3,d0
                 bcc.s   loc_249A20
                 addq.l  #4,a2
                 rts
 ; ---------------------------------------------------------------------------
-loc_249A20:                             ; CODE XREF: sub_249A02+18   j
+loc_249A20:                             ; CODE XREF: scmd_14_if_jim_near_y+18   j
                 movea.l (a2),a2
                 rts
-; End of function sub_249A02
+; End of function scmd_14_if_jim_near_y
 
 
 sub_249A24:                             ; CODE XREF: sub_249178+50   p
@@ -31193,7 +28257,7 @@ sub_24A766:                             ; CODE XREF: oksub_2456C8+1F0   p
                 st      (is_move_script).l
                 move.l  #loc_24AAEC,(dword_FFA65A).l
                 move.l  #loc_24AAF0,(dword_FFA65E).l
-                lea     (off_5978).w,a4
+                lea     (obj_script_cmd_table).w,a4
                 lea     (jim_obj_id).l,a1
                 move.w  #$25,d4 ; '%'
 loc_24A794:                             ; CODE XREF: sub_24A766+3AA   j
@@ -31723,7 +28787,7 @@ loc_24ACFC:                             ; CODE XREF: destroy_objects_except_jim+
 
 
 find_free_obj_slot_ad06:                             ; CODE XREF: sub_247022+4C   p
-                                        ; sub_249692:loc_2496EC   p ...
+                                        ; scmd_0B_spawn_obj:loc_2496EC   p ...
                 lea     (obj_pool_ad06).l,a5
                 move.w  #$15,d0
 loc_24AD10:                             ; CODE XREF: find_free_obj_slot_ad06+12   j
@@ -31754,7 +28818,7 @@ locret_24AD34:                          ; CODE XREF: find_free_obj_slot_ad1e+C  
 
 ; При отключении не рисует огонь, и нет звука стрельбы
 find_free_obj_slot_ad36:                             ; CODE XREF: jim_fire+25A   p
-                                        ; sub_249692:loc_2496D8   p ...
+                                        ; scmd_0B_spawn_obj:loc_2496D8   p ...
                 lea     (obj_01).l,a5
                 move.w  #$19,d0
 loc_24AD40:                             ; CODE XREF: find_free_obj_slot_ad36+12   j
@@ -31781,7 +28845,7 @@ locret_24AD64:                          ; CODE XREF: find_free_obj_slot_ad4e+C  
 ; End of function find_free_obj_slot_ad4e
 
 
-find_free_obj_slot_ad66:                             ; CODE XREF: sub_249692:loc_2496E2   p
+find_free_obj_slot_ad66:                             ; CODE XREF: scmd_0B_spawn_obj:loc_2496E2   p
                                         ; spawn_object:loc_24DB10   p ...
                 lea     (obj_pool_ad66).l,a5
                 move.w  #$15,d0
@@ -31808,7 +28872,7 @@ locret_24AD94:                          ; CODE XREF: find_free_obj_slot_ad7e+C  
 ; End of function find_free_obj_slot_ad7e
 
 
-find_free_obj_slot_ad96:                             ; CODE XREF: sub_249692:loc_2496CE   p
+find_free_obj_slot_ad96:                             ; CODE XREF: scmd_0B_spawn_obj:loc_2496CE   p
                 lea     (obj_pool_ad96).l,a5
                 move.w  #7,d0
 loc_24ADA0:                             ; CODE XREF: find_free_obj_slot_ad96+12   j
@@ -35172,7 +32236,7 @@ random_in_range:                             ; CODE XREF: sub_24F5A2+30   p
 
 
 random_function:                             ; CODE XREF: oksub_1A4702   p
-                                        ; sub_249332+4   p ...
+                                        ; scmd_06_rand_goto+4   p ...
                 movem.l d1-d3,-(sp)
                 move.l  (random_seed).l,d1
                 move.l  d1,d2
@@ -50948,7 +48012,7 @@ loc_2593EA:                             ; CODE XREF: sub_2592EC+D4   j
                 move.b  (psycrow_target_slot).l,d0
                 lsl.l   #2,d0
                 adda.l  d0,a2
-                jsr     (sub_2498D2).l
+                jsr     (scmd_0F_chase_jim).l
                 subq.l  #2,a2
                 move.b  1(a2),d3
                 ext.w   d3

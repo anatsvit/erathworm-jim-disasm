@@ -312,7 +312,7 @@ evil_cat_phase1_active equ $FFFFFD78 ;Evil the Cat: 1 при старте пер
 evil_cat_phase2_state equ $FFFFFD79 ;Evil the Cat, начало второй фазы (sub_24F336): 0 - ещё не было реплики (funchar_text_id=$27), 1 - после реплики, 2 - после таймера word_FFFD92 (palette2_index=4), дальше спавн огня
 evil_cat_souls_killed equ $FFFFFD7A ;Evil the Cat: число убитых кошачьих душ во второй фазе, 0..9. +1 в whip_to_evil_cat_soul, индекс в off_C902. При 9 - конец боя (sub_24F336)
 evil_cat_invul_timer equ $FFFFFD7B ;Evil the Cat: кулдаун после попадания, $1E кадров. Пока не 0, evil_cat_hit_pending обнуляется (sub_24F336)
-evil_cat_hit_pending equ $FFFFFD7C ;Evil the Cat: попадание. +1 делает скрипт byte_1ACEB6 объекта stru_25AE8C (anim_fireburn_5) командой $90 (sub_249936/loc_249970). Если не 0 и нет кулдауна - evil_cat_hp -1
+evil_cat_hit_pending equ $FFFFFD7C ;Evil the Cat: попадание. +1 делает скрипт byte_1ACEB6 объекта stru_25AE8C (anim_fireburn_5) командой $90 (scmd_10_add_var/loc_249970). Если не 0 и нет кулдауна - evil_cat_hp -1
 evil_cat_hp equ $FFFFFD7D ;Evil the Cat: здоровье первой фазы, $14 в sub_24FDB8. -1 за попадание в sub_24F336. При 0 - вторая фаза (sub_2590A2)
 evil_cat_hp_shown equ $FFFFFD7E ;Evil the Cat: последнее отображённое evil_cat_hp. sub_2590A2 при изменении выбирает анимацию off_C926[hp/4], при 0 ставит byte_FFFDE1/byte_FFFDFB/byte_FFFD5C
 stalactite_spawn_vel_y equ $FFFFFD80 ;Сталактиты: начальная скорость Y (8.8) для следующего сталактита, пишется в $1A объекта в spawn_stalactite. Старт серии $FE00 (подскок вверх), каждый спавн +$80; в режиме 2 сброс в 0 при смене направления. Дальше падение гравитацией ($3C/кадр)
@@ -335,7 +335,7 @@ secret_hp_atom_enabled equ $FFFFFD96 ;Флаг тайника атома здо�
 secret_hp_molecule_enabled equ $FFFFFD97 ;Флаг тайника молекулы здоровья. Ставится один раз в sub_24DC3E (вызов из скрипта объекта). Пока не 0, spawn_hp_molecule_conditionally создаёт молекулу
 secret_gun_enabled equ $FFFFFD98 ;Флаг тайника патронов. Ставится один раз в sub_24DC4E (вызов из скрипта объекта). Пока не 0, spawn_gun_conditionally создаёт патроны
 secret_plasma_enabled equ $FFFFFD99 ;Флаг тайника плазмы. Ставится один раз в sub_24DC60 (вызов из скрипта объекта). Пока не 0, spawn_plasma_gun_conditionally создаёт плазму (если plasma_count_ammo < 9)
-is_continue_screen equ $FFFFFD9A ;Флаг экрана континью (sub_24B638). $FF на время экрана, сбрасывается при выходе. Пока не 0, sub_249772 держит Джима в anim_jim_idle (jim_state = 4)
+is_continue_screen equ $FFFFFD9A ;Флаг экрана континью (sub_24B638). $FF на время экрана, сбрасывается при выходе. Пока не 0, scmd_0E_jim_default_anim держит Джима в anim_jim_idle (jim_state = 4)
 queen_boss_damage equ $FFFFFD9B ;Урон боссу-королеве, 0..$3C. Плазма +5, обычный выстрел +1 (раз в 8 кадров), jim_win_queen +3. При $3C - победа (loc_254308)
 palette2_index equ $FFFFFD9C
 palette2_index_loaded equ $FFFFFD9D

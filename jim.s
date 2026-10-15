@@ -55090,9 +55090,30 @@ PATCH_7C:       gems_fm $07, $00, 5, 2, 3, 2, 0                             ; lf
                 gems_op   3,   1,  16,   2,  31,   0,   8,   2,  10,   5   ; +$C
                 gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
                 gems_keyon $F, 0
-ENVELOPE_TBL_Z80:dc.b   8,  0, $E,  0,$1A,  0,$29,  0,$D8,$FF,  1,$37,  0,  0,  0,  0,  2,$DB,  1,$18,$A8,$FD,$64,  0,  0,  0,  0,  0,$C0,$18,  0,$C0
-                                        ; DATA XREF: sub_247576+C   o
-                dc.b $18,  0,$C0,$18,  0,$C0,$18,  0,  0,  0,  0, $F,$B8,$FF,$18,$2B,  0,  0
+ENVELOPE_TBL_Z80:                       ; DATA XREF: sub_247576+C   o
+                                        ; огибающие высоты тона: смещения (LE) огибающих
+                gems_env_ofs ENV_00
+                gems_env_ofs ENV_01
+                gems_env_ofs ENV_02
+                gems_env_ofs ENV_03
+ENV_00:         gems_env_start -40
+                gems_env_seg 1, 55
+                gems_env_end
+ENV_01:         gems_env_start 0
+                gems_env_seg 2, 475
+                gems_env_seg 24, -600
+                gems_env_seg 100, 0
+                gems_env_end
+ENV_02:         gems_env_start 0
+                gems_env_seg 192, 24
+                gems_env_seg 192, 24
+                gems_env_seg 192, 24
+                gems_env_seg 192, 24
+                gems_env_end
+ENV_03:         gems_env_start 0
+                gems_env_seg 15, -72
+                gems_env_seg 24, 43
+                gems_env_end
 SEQUENCE_TBL_Z80:                       ; DATA XREF: sub_247576+6   o
                                         ; sequence table: смещения (LE) заголовков секвенций
                 gems_seq_ofs SEQH_PETER_PUPPY               ;   0 $00
@@ -56949,712 +56970,406 @@ SEQ_PSYQ_HIT_2: dc.b $C0, $6A, $4B, $6D, $61, $0, $6E, $6, $98, $D8, $3F, $60
 SEQ_PSYQ_HIT_3: dc.b $C0, $6A, $4B, $6D, $61, $0, $6E, $8, $98, $D8, $3F, $60
 SEQ_PSYQ_HIT_4: dc.b $C0, $6A, $4B, $6D, $61, $0, $6E, $9, $98, $D8, $3F, $60
 SEQ_PSYQ_HIT_5: dc.b $C0, $6A, $4B, $6D, $61, $0, $6E, $A, $98, $D8, $3F, $60
-DIGITAL_TBL_Z80:dc.b 5                  ; SAMPFLAGS
-                                        ; DATA XREF: sub_247576   o
-                dc.b $44, 4, 0          ; SAMPPTR ; digital sample table
-                dc.w 0                  ; SAMPSKIP
-                dc.w $7E0B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $C2, $F, 0         ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $690A              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $2B, $1A, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $520B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $7D, $25, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $DB12              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $58, $38, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $AB07              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b 3, $40, 0          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $6908              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $6C, $48, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $7402              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $E0, $4A, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $1409              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $F4, $53, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $9F0D              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $93, $61, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $4F0A              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $E2, $6B, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $8308              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $65, $74, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F716              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $5C, $8B, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $ED12              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $49, $9E, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $8A1A              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $D3, $B8, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $5515              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $28, $CE, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $EF16              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $17, $E5, 0        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $B923              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $D0, 8, 1          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $270D              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $F7, $15, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $4706              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $3E, $1C, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $BD04              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $FB, $20, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $A13               ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b 5, $34, 1          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $CF06              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $D4, $3A, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $6D05              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $41, $40, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $9E03              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $DF, $43, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $9919              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $78, $5D, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $5209              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $CA, $66, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $1419              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS ; sheiger cheater щейгер
-                dc.b $DE, $7F, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $D415              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $B2, $95, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $AE07              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $60, $9D, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $A80F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b 8, $AD, 1          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $BE0B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $C6, $B8, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F108              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $B7, $C1, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $3B10              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $F2, $D1, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $E713              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $D9, $E5, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F20F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $CB, $F5, 1        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $9A11              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $65, 7, 2          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $6514              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $CA, $1B, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $5B0B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $25, $27, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $B60D              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $DB, $34, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $5F13              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $3A, $48, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $8007              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $BA, $4F, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $4F33              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b 9, $83, 2          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $490B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.w 0
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $52, $8E, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F11A              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $43, $A9, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $AE03              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $F1, $AC, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $5C07              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $4D, $B4, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $860B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $D3, $BF, 2        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $9F47              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b $A                 ; SAMPFLAGS
-                dc.b $72, 7, 3          ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $7B0E              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $ED, $15, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $4C07              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 9                  ; SAMPFLAGS
-                dc.b $39, $1D, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F2A               ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $48, $47, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $FB0F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $43, $57, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $5610              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $99, $67, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $3515              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $CE, $7C, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $3E1D              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $C, $9A, 3         ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $BF20              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $CB, $BA, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $2111              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 8                  ; SAMPFLAGS
-                dc.b $EC, $CB, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F509              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $E1, $D5, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $9317              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $74, $ED, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $EB0F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b $16                ; SAMPFLAGS
-                dc.b $5F, $FD, 3        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $CB2A              ; SAMPLENGTH
-                dc.w $CB2A              ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $2A, $28, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $8C1F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $B6, $47, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F909              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $AF, $51, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $AC3F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $5B, $91, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $662F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $C1, $C0, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $950C              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $56, $CD, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $E818              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $3E, $E6, 4        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $C2F               ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $4A, $15, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $2812              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $72, $27, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $E42A              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $56, $52, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $C216              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $18, $69, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $1D19              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $35, $82, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $DF0B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 5                  ; SAMPFLAGS
-                dc.b $14, $8E, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $C01A              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $D4, $A8, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $900B              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b 6                  ; SAMPFLAGS
-                dc.b $64, $B4, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $F02F              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b 7                  ; SAMPFLAGS
-                dc.b $54, $E4, 5        ; SAMPPTR
-                dc.w 0                  ; SAMPSKIP
-                dc.w $8B29              ; SAMPLENGTH
-                dc.w 0                  ; SAMPLOOP
-                dc.w 0                  ; SAMPEND
-snd_for_26ad68:
+DIGITAL_TBL_Z80:                        ; DATA XREF: sub_247576   o
+                                        ; digital sample table: 12 байт на сэмпл, номер сэмпла = (нота - $30) mod $60
+                gems_sample $05, SAMPLE_00, SAMPLE_00_END       ;   0 $00
+                gems_sample $05, SAMPLE_01, SAMPLE_01_END       ;   1 $01
+                gems_sample $05, SAMPLE_02, SAMPLE_02_END       ;   2 $02
+                gems_sample $06, SAMPLE_03, SAMPLE_03_END       ;   3 $03
+                gems_sample $05, SAMPLE_04, SAMPLE_04_END       ;   4 $04
+                gems_sample $05, SAMPLE_05, SAMPLE_05_END       ;   5 $05
+                gems_sample $05, SAMPLE_06, SAMPLE_06_END       ;   6 $06
+                gems_sample $05, SAMPLE_07, SAMPLE_07_END       ;   7 $07
+                gems_sample $05, SAMPLE_08, SAMPLE_08_END       ;   8 $08
+                gems_sample $09, SAMPLE_09, SAMPLE_09_END       ;   9 $09
+                gems_sample $08, SAMPLE_0A, SAMPLE_0A_END       ;  10 $0A
+                gems_sample $07, SAMPLE_0B, SAMPLE_0B_END       ;  11 $0B
+                gems_sample $07, SAMPLE_0C, SAMPLE_0C_END       ;  12 $0C
+                gems_sample $06, SAMPLE_0D, SAMPLE_0D_END       ;  13 $0D
+                gems_sample $05, SAMPLE_0E, SAMPLE_0E_END       ;  14 $0E
+                gems_sample $07, SAMPLE_0F, SAMPLE_0F_END       ;  15 $0F
+                gems_sample $0A, SAMPLE_10, SAMPLE_10_END       ;  16 $10
+                gems_sample $0A, SAMPLE_11, SAMPLE_11_END       ;  17 $11
+                gems_sample $08, SAMPLE_12, SAMPLE_12_END       ;  18 $12
+                gems_sample $0A, SAMPLE_13, SAMPLE_13_END       ;  19 $13
+                gems_sample $05, SAMPLE_14, SAMPLE_14_END       ;  20 $14
+                gems_sample $07, SAMPLE_15, SAMPLE_15_END       ;  21 $15
+                gems_sample $09, SAMPLE_16, SAMPLE_16_END       ;  22 $16
+                gems_sample $05, SAMPLE_17, SAMPLE_17_END       ;  23 $17
+                gems_sample $06, SAMPLE_18, SAMPLE_18_END       ;  24 $18
+                gems_sample $0A, SAMPLE_19, SAMPLE_19_END       ;  25 $19
+                gems_sample $08, SAMPLE_1A, SAMPLE_1A_END       ;  26 $1A
+                gems_sample $05, SAMPLE_1B, SAMPLE_1B_END       ;  27 $1B
+                gems_sample $0A, SAMPLE_1C, SAMPLE_1C_END       ;  28 $1C
+                gems_sample $0A, SAMPLE_1D, SAMPLE_1D_END       ;  29 $1D
+                gems_sample $08, SAMPLE_1E, SAMPLE_1E_END       ;  30 $1E
+                gems_sample $08, SAMPLE_1F, SAMPLE_1F_END       ;  31 $1F
+                gems_sample $09, SAMPLE_20, SAMPLE_20_END       ;  32 $20
+                gems_sample $08, SAMPLE_21, SAMPLE_21_END       ;  33 $21
+                gems_sample $07, SAMPLE_22, SAMPLE_22_END       ;  34 $22
+                gems_sample $08, SAMPLE_23, SAMPLE_23_END       ;  35 $23
+                gems_sample $09, SAMPLE_24, SAMPLE_24_END       ;  36 $24
+                gems_sample $08, SAMPLE_25, SAMPLE_25_END       ;  37 $25
+                gems_sample $08, SAMPLE_26, SAMPLE_26_END       ;  38 $26
+                gems_sample $07, SAMPLE_27, SAMPLE_27_END       ;  39 $27
+                gems_sample $09, SAMPLE_28, SAMPLE_28_END       ;  40 $28
+                gems_sample $05, SAMPLE_29, SAMPLE_29_END       ;  41 $29
+                gems_sample $07, SAMPLE_2A, SAMPLE_2A_END       ;  42 $2A
+                gems_sample_none                                ;  43 $2B
+                gems_sample $09, SAMPLE_2C, SAMPLE_2C_END       ;  44 $2C
+                gems_sample $05, SAMPLE_2D, SAMPLE_2D_END       ;  45 $2D
+                gems_sample_none                                ;  46 $2E
+                gems_sample $08, SAMPLE_2F, SAMPLE_2F_END       ;  47 $2F
+                gems_sample $07, SAMPLE_30, SAMPLE_30_END       ;  48 $30
+                gems_sample $05, SAMPLE_31, SAMPLE_31_END       ;  49 $31
+                gems_sample_none                                ;  50 $32
+                gems_sample $0A, SAMPLE_33, SAMPLE_33_END       ;  51 $33
+                gems_sample $06, SAMPLE_34, SAMPLE_34_END       ;  52 $34
+                gems_sample $09, SAMPLE_35, SAMPLE_35_END       ;  53 $35
+                gems_sample $08, SAMPLE_36, SAMPLE_36_END       ;  54 $36
+                gems_sample $07, SAMPLE_37, SAMPLE_37_END       ;  55 $37
+                gems_sample $07, SAMPLE_38, SAMPLE_38_END       ;  56 $38
+                gems_sample_none                                ;  57 $39
+                gems_sample $05, SAMPLE_3A, SAMPLE_3A_END       ;  58 $3A
+                gems_sample_none                                ;  59 $3B
+                gems_sample $07, SAMPLE_3C, SAMPLE_3C_END       ;  60 $3C
+                gems_sample $08, SAMPLE_3D, SAMPLE_3D_END       ;  61 $3D
+                gems_sample $08, SAMPLE_3E, SAMPLE_3E_END       ;  62 $3E
+                gems_sample $06, SAMPLE_3F, SAMPLE_3F_END       ;  63 $3F
+                gems_sample $05, SAMPLE_40, SAMPLE_40_END       ;  64 $40
+                gems_sample_none                                ;  65 $41
+                gems_sample_none                                ;  66 $42
+                gems_sample_ex $16, SAMPLE_43, SAMPLE_43_END, 0, SAMPLE_43_END-SAMPLE_43, 0;  67 $43
+                gems_sample $05, SAMPLE_44, SAMPLE_44_END       ;  68 $44
+                gems_sample_none                                ;  69 $45
+                gems_sample $05, SAMPLE_46, SAMPLE_46_END       ;  70 $46
+                gems_sample_none                                ;  71 $47
+                gems_sample $05, SAMPLE_48, SAMPLE_48_END       ;  72 $48
+                gems_sample $05, SAMPLE_49, SAMPLE_49_END       ;  73 $49
+                gems_sample $05, SAMPLE_4A, SAMPLE_4A_END       ;  74 $4A
+                gems_sample $05, SAMPLE_4B, SAMPLE_4B_END       ;  75 $4B
+                gems_sample_none                                ;  76 $4C
+                gems_sample $05, SAMPLE_4D, SAMPLE_4D_END       ;  77 $4D
+                gems_sample_none                                ;  78 $4E
+                gems_sample $05, SAMPLE_4F, SAMPLE_4F_END       ;  79 $4F
+                gems_sample_none                                ;  80 $50
+                gems_sample $05, SAMPLE_51, SAMPLE_51_END       ;  81 $51
+                gems_sample $05, SAMPLE_52, SAMPLE_52_END       ;  82 $52
+                gems_sample $05, SAMPLE_53, SAMPLE_53_END       ;  83 $53
+                gems_sample $06, SAMPLE_54, SAMPLE_54_END       ;  84 $54
+                gems_sample $05, SAMPLE_55, SAMPLE_55_END       ;  85 $55
+                gems_sample $06, SAMPLE_56, SAMPLE_56_END       ;  86 $56
+                gems_sample $06, SAMPLE_57, SAMPLE_57_END       ;  87 $57
+                gems_sample_none                                ;  88 $58
+                gems_sample_none                                ;  89 $59
+                gems_sample $07, SAMPLE_5A, SAMPLE_5A_END       ;  90 $5A
+SAMPLE_00:
     binclude "binaries/sounds/snd_26B1AC.bin"
+SAMPLE_00_END:
     
-snd_for_26ad74:
+SAMPLE_01:
     binclude "binaries/sounds/snd_26BD2A.bin"
+SAMPLE_01_END:
     
-snd_for_26ad80:
+SAMPLE_02:
     binclude "binaries/sounds/snd_26C793.bin"
+SAMPLE_02_END:
     
-snd_for_26ad8c:
+SAMPLE_03:
     binclude "binaries/sounds/snd_26D2E5.bin"
+SAMPLE_03_END:
     
-snd_for_26ad98:
+SAMPLE_04:
     binclude "binaries/sounds/snd_26E5C0.bin"
+SAMPLE_04_END:
     
-snd_for_26ada4:
+SAMPLE_05:
     binclude "binaries/sounds/snd_26ED6B.bin"
+SAMPLE_05_END:
     
-snd_for_26adb0:
+SAMPLE_06:
     binclude "binaries/sounds/snd_26F5D4.bin"
+SAMPLE_06_END:
     
-snd_for_26adbc:
+SAMPLE_07:
     binclude "binaries/sounds/snd_26F848.bin"
+SAMPLE_07_END:
     
-snd_for_26adc8:
+SAMPLE_08:
     binclude "binaries/sounds/snd_27015C.bin"
+SAMPLE_08_END:
     
-snd_for_26add4:
+SAMPLE_09:
     binclude "binaries/sounds/snd_270EFB.bin"
+SAMPLE_09_END:
     
-snd_for_26ade0:
+SAMPLE_0A:
     binclude "binaries/sounds/snd_27194A.bin"
+SAMPLE_0A_END:
     
-snd_for_26adec:
+SAMPLE_0B:
     binclude "binaries/sounds/snd_2721CD.bin"
+SAMPLE_0B_END:
     
-snd_for_26adf8:
+SAMPLE_0C:
     binclude "binaries/sounds/snd_2738C4.bin"
+SAMPLE_0C_END:
     
-snd_for_26ae04:
+SAMPLE_0D:
     binclude "binaries/sounds/snd_274BB1.bin"
+SAMPLE_0D_END:
     
-snd_for_26ae10:
+SAMPLE_0E:
     binclude "binaries/sounds/snd_27663B.bin"
+SAMPLE_0E_END:
     
-snd_for_26ae1c:
+SAMPLE_0F:
     binclude "binaries/sounds/snd_277B90.bin"
+SAMPLE_0F_END:
     
-snd_for_26ae28:
+SAMPLE_10:
     binclude "binaries/sounds/snd_27927F.bin"
+SAMPLE_10_END:
     
-snd_for_26ae34:
+SAMPLE_11:
     binclude "binaries/sounds/snd_27B638.bin"
+SAMPLE_11_END:
     
-snd_for_26ae40:
+SAMPLE_12:
     binclude "binaries/sounds/snd_27C35F.bin"
+SAMPLE_12_END:
     
-snd_for_26ae4c:
+SAMPLE_13:
     binclude "binaries/sounds/snd_27C9A6.bin"
+SAMPLE_13_END:
     
-snd_for_26ae58:
+SAMPLE_14:
     binclude "binaries/sounds/snd_27CE63.bin"
+SAMPLE_14_END:
     
-snd_for_26ae64:
+SAMPLE_15:
     binclude "binaries/sounds/snd_27E16D.bin"
+SAMPLE_15_END:
     
-snd_for_26ae70:
+SAMPLE_16:
     binclude "binaries/sounds/snd_27E83C.bin"
+SAMPLE_16_END:
     
-snd_for_26ae7c:
+SAMPLE_17:
     binclude "binaries/sounds/snd_27EDA9.bin"
+SAMPLE_17_END:
     
-snd_for_26ae88:
+SAMPLE_18:
     binclude "binaries/sounds/snd_27F147.bin"
+SAMPLE_18_END:
     
-snd_for_26ae94:
+SAMPLE_19:
     binclude "binaries/sounds/snd_280AE0.bin"
+SAMPLE_19_END:
     
-snd_for_26aea0:
+SAMPLE_1A:
     binclude "binaries/sounds/snd_281432.bin"
+SAMPLE_1A_END:
     
-snd_for_26aeac:
+SAMPLE_1B:
     binclude "binaries/sounds/snd_282D46.bin"
+SAMPLE_1B_END:
     
-snd_for_26aeb8:
+SAMPLE_1C:
     binclude "binaries/sounds/snd_28431A.bin"
+SAMPLE_1C_END:
     
-snd_for_26aec4:
+SAMPLE_1D:
     binclude "binaries/sounds/snd_284AC8.bin"
+SAMPLE_1D_END:
     
-snd_for_26aed0:
+SAMPLE_1E:
     binclude "binaries/sounds/snd_285A70.bin"
+SAMPLE_1E_END:
     
-snd_for_26aedc:
+SAMPLE_1F:
     binclude "binaries/sounds/snd_28662E.bin"
+SAMPLE_1F_END:
     
-snd_for_26aee8:
+SAMPLE_20:
     binclude "binaries/sounds/snd_286F1F.bin"
+SAMPLE_20_END:
     
-snd_for_26aef4:
+SAMPLE_21:
     binclude "binaries/sounds/snd_287F5A.bin"
+SAMPLE_21_END:
     
-snd_for_26af00:
+SAMPLE_22:
     binclude "binaries/sounds/snd_289341.bin"
+SAMPLE_22_END:
     
-snd_for_26af0c:
+SAMPLE_23:
     binclude "binaries/sounds/snd_28A333.bin"
+SAMPLE_23_END:
     
-snd_for_26af18:
+SAMPLE_24:
     binclude "binaries/sounds/snd_28B4CD.bin"
+SAMPLE_24_END:
     
-snd_for_26af24:
+SAMPLE_25:
     binclude "binaries/sounds/snd_28C932.bin"
+SAMPLE_25_END:
     
-snd_for_26af30:
+SAMPLE_26:
     binclude "binaries/sounds/snd_28D48D.bin"
+SAMPLE_26_END:
     
-snd_for_26af3c:
+SAMPLE_27:
     binclude "binaries/sounds/snd_28E243.bin"
+SAMPLE_27_END:
     
-snd_for_26af48:
+SAMPLE_28:
     binclude "binaries/sounds/snd_28F5A2.bin"
+SAMPLE_28_END:
     
-snd_for_26af54:
+SAMPLE_29:
     binclude "binaries/sounds/snd_28FD22.bin"
+SAMPLE_29_END:
     
-snd_for_26af60:
+SAMPLE_2A:
     binclude "binaries/sounds/snd_293071.bin"
+SAMPLE_2A_END:
     
-snd_for_26af78:
+SAMPLE_2C:
     binclude "binaries/sounds/snd_293BBA.bin"
+SAMPLE_2C_END:
     
-snd_for_26af84:
+SAMPLE_2D:
     binclude "binaries/sounds/snd_2956AB.bin"
+SAMPLE_2D_END:
     
-snd_for_26af9c:
+SAMPLE_2F:
     binclude "binaries/sounds/snd_295A59.bin"
+SAMPLE_2F_END:
     
-snd_for_26afa8:
+SAMPLE_30:
     binclude "binaries/sounds/snd_2961B5.bin"
+SAMPLE_30_END:
     
-snd_for_26afb4:
+SAMPLE_31:
     binclude "binaries/sounds/snd_296D3B.bin"
+SAMPLE_31_END:
     
-snd_for_26afcc:
+SAMPLE_33:
     binclude "binaries/sounds/snd_29B4DA.bin"
+SAMPLE_33_END:
     
-snd_for_26afd8:
+SAMPLE_34:
     binclude "binaries/sounds/snd_29C355.bin"
+SAMPLE_34_END:
     
-snd_for_26afe4:
+SAMPLE_35:
     binclude "binaries/sounds/snd_29CAA1.bin"
+SAMPLE_35_END:
     
-snd_for_26aff0:
+SAMPLE_36:
     binclude "binaries/sounds/snd_29F4B0.bin"
+SAMPLE_36_END:
     
-snd_for_26affc:
+SAMPLE_37:
     binclude "binaries/sounds/snd_2A04AB.bin"
+SAMPLE_37_END:
     
-snd_for_26b008:
+SAMPLE_38:
     binclude "binaries/sounds/snd_2A1501.bin"
+SAMPLE_38_END:
     
-snd_for_26b020:
+SAMPLE_3A:
     binclude "binaries/sounds/snd_2A2A36.bin"
+SAMPLE_3A_END:
     
-snd_for_26b038:
+SAMPLE_3C:
     binclude "binaries/sounds/snd_2A4774.bin"
+SAMPLE_3C_END:
     
-snd_for_26b044:
+SAMPLE_3D:
     binclude "binaries/sounds/snd_2A6833.bin"
+SAMPLE_3D_END:
     
-snd_for_26b050:
+SAMPLE_3E:
     binclude "binaries/sounds/snd_2A7954.bin"
+SAMPLE_3E_END:
     
-snd_for_26b05c:
+SAMPLE_3F:
     binclude "binaries/sounds/snd_2A8349.bin"
+SAMPLE_3F_END:
     
-snd_for_26b068:
+SAMPLE_40:
     binclude "binaries/sounds/snd_2A9ADC.bin"
+SAMPLE_40_END:
     
-snd_for_26b08c:
+SAMPLE_43:
     binclude "binaries/sounds/snd_2AAAC7.bin"
+SAMPLE_43_END:
     
-snd_for_26b098:
+SAMPLE_44:
     binclude "binaries/sounds/snd_2AD592.bin"
+SAMPLE_44_END:
     
-snd_for_26b0b0:
+SAMPLE_46:
     binclude "binaries/sounds/snd_2AF51E.bin"
+SAMPLE_46_END:
     
-snd_for_26b0c8:
+SAMPLE_48:
     binclude "binaries/sounds/snd_2AFF17.bin"
+SAMPLE_48_END:
     
-snd_for_26b0d4:
+SAMPLE_49:
     binclude "binaries/sounds/snd_2B3EC3.bin"
+SAMPLE_49_END:
     
-snd_for_26b0e0:
+SAMPLE_4A:
     binclude "binaries/sounds/snd_2B6E29.bin"
+SAMPLE_4A_END:
     
-snd_for_26b0ec:
+SAMPLE_4B:
     binclude "binaries/sounds/snd_2B7ABE.bin"
+SAMPLE_4B_END:
     
-snd_for_26b104:
+SAMPLE_4D:
     binclude "binaries/sounds/snd_2B93A6.bin"
+SAMPLE_4D_END:
     
-snd_for_26b11c:
+SAMPLE_4F:
     binclude "binaries/sounds/snd_2BC2B2.bin"
+SAMPLE_4F_END:
     
-snd_for_26b134:
+SAMPLE_51:
     binclude "binaries/sounds/snd_2BD4DA.bin"
+SAMPLE_51_END:
     
-snd_for_26b140:
+SAMPLE_52:
     binclude "binaries/sounds/snd_2BFFBE.bin"
+SAMPLE_52_END:
     
-snd_for_26b14c:
+SAMPLE_53:
     binclude "binaries/sounds/snd_2C1680.bin"
+SAMPLE_53_END:
     
-snd_for_26b158:
+SAMPLE_54:
     binclude "binaries/sounds/snd_2C2F9D.bin"
+SAMPLE_54_END:
     
-snd_for_26b164:
+SAMPLE_55:
     binclude "binaries/sounds/snd_2C3B7C.bin"
+SAMPLE_55_END:
     
-snd_for_26b170:
+SAMPLE_56:
     binclude "binaries/sounds/snd_2C563C.bin"
+SAMPLE_56_END:
     
-snd_for_26b17c:
+SAMPLE_57:
     binclude "binaries/sounds/snd_2C61CC.bin"
+SAMPLE_57_END:
     
-snd_for_26b1a0:
+SAMPLE_5A:
     binclude "binaries/sounds/snd_2C91BC.bin"
+SAMPLE_5A_END:
     
                 dc.b 0
 

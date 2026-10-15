@@ -61,3 +61,55 @@ gems_psg_tone macro ar, sl, al, dr, rr
 gems_psg_noise macro noise, ar, sl, al, dr, rr
         dc.b 3, noise, ar, sl, al, dr, rr
         endm
+
+; ---------------------------------------------------------------------------
+; Огибающие высоты тона (ENVELOPE_TBL_Z80), обработчик в драйвере $0EC8.
+; Огибающая: начальное смещение высоты, затем сегменты, в конце gems_env_end.
+; Значения - 16-битные со знаком, little-endian; смещение складывается с высотой ноты канала
+; (единицы по коду драйвера не уточнены).
+
+; смещение метки target от ENVELOPE_TBL_Z80, little-endian
+gems_env_ofs macro target
+        dc.b ((target)-ENVELOPE_TBL_Z80)&$FF, (((target)-ENVELOPE_TBL_Z80)>>8)&$FF
+        endm
+
+; начальное смещение высоты при старте огибающей
+gems_env_start macro pitch
+        dc.b (pitch)&$FF, ((pitch)>>8)&$FF
+        endm
+
+; сегмент: ticks тиков подряд к высоте прибавляется delta (ticks = 1..255)
+gems_env_seg macro ticks, delta
+        dc.b ticks, (delta)&$FF, ((delta)>>8)&$FF
+        endm
+
+; конец огибающей: смещение высоты сбрасывается в 0
+gems_env_end macro
+        dc.b 0
+        endm
+
+; ---------------------------------------------------------------------------
+; Таблица сэмплов (DIGITAL_TBL_Z80), 12 байт на сэмпл; загрузка в драйвере $1336.
+; Номер сэмпла = (нота - $30) mod $60. Адрес сэмпла - 24-битное смещение (LE) от DIGITAL_TBL_Z80.
+;   flags - младшая тетрада: частота воспроизведения (если патч не задаёт свою, см. gems_digital),
+;           бит 4: петля - по достижении конца сэмпл повторяет последние loop байт
+;   start, stop - метки начала и конца данных сэмпла (длина = stop - start)
+;   skip  - сколько байт пропустить от начала при старте
+;   loop  - длина петли (только при бите 4)
+;   tail  - последнее поле записи, драйвером не читается
+gems_sample_ex macro flags, start, stop, skip, loop, tail
+        dc.b flags
+        dc.b ((start)-DIGITAL_TBL_Z80)&$FF, (((start)-DIGITAL_TBL_Z80)>>8)&$FF, (((start)-DIGITAL_TBL_Z80)>>16)&$FF
+        dc.b (skip)&$FF, (skip)>>8, ((stop)-(start))&$FF, ((stop)-(start))>>8
+        dc.b (loop)&$FF, (loop)>>8, (tail)&$FF, (tail)>>8
+        endm
+
+; обычный сэмпл без пропуска и петли
+gems_sample macro flags, start, stop
+        gems_sample_ex flags, start, stop, 0, 0, 0
+        endm
+
+; пустая запись (сэмпла нет, длина 0)
+gems_sample_none macro
+        dc.b 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        endm

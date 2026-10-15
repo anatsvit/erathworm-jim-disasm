@@ -54053,641 +54053,1529 @@ screen_shake_table:    dc.b   0,  3,  2,  2,  1,  1,  0,  0,$FF,$FE,$FE,$FF,$FF,
                 dc.b   2,  4,  5,  6,  4,  3,  2,  1,$FE,$FC,$FA,$FB,$FC,$FD,$FF,  0,  4,  8, $F,  5,$FD,$F7,$F1,$F6,$FA,  1,  9, $D,  4,$FB,$F7,$FA
 z80_driver:
     binclude "binaries/z80_driver.bin"
-PATCH_TBL_Z80:  dc.b $FA,  0,$FC,  0,$23,  1,$4A,  1,$71,  1,$98,  1,$BF,  1,$E6,  1, $D,  2,$34,  2,$5B,  2,$82,  2,$A9,  2,$D0,  2,$F7,  2,$FE,  2
-                                        ; DATA XREF: sub_247576+12   o
+PATCH_TBL_Z80:                          ; DATA XREF: sub_247576+12   o
                                         ; load_z80_driver+1A   o
-                dc.b $25,  3,$4C,  3,$73,  3,$9A,  3,$C1,  3,$E8,  3, $F,  4,$36,  4,$5D,  4,$84,  4,$AB,  4,$D2,  4,$F9,  4,$20,  5,$47,  5,$6E,  5
-                dc.b $95,  5,$BC,  5,$E3,  5, $A,  6,$31,  6,$58,  6,$7F,  6,$86,  6,$AD,  6,$D4,  6,$FB,  6,$22,  7,$49,  7,$70,  7,$97,  7,$BE,  7
-                dc.b $E5,  7, $C,  8,$33,  8,$5A,  8,$81,  8,$88,  8,$AF,  8,$B6,  8,$DD,  8,$E4,  8, $B,  9,$32,  9,$39,  9,$60,  9,$87,  9,$AE,  9
-                dc.b $B5,  9,$DC,  9,$E3,  9, $A, $A,$31, $A,$58, $A,$7F, $A,$A6, $A,$A8, $A,$CF, $A,$F6, $A,$1D, $B,$44, $B,$6B, $B,$92, $B,$B9, $B
-                dc.b $E0, $B,  7, $C,$2E, $C,$55, $C,$7C, $C,$A3, $C,$CA, $C,$F1, $C,$18, $D,$3F, $D,$66, $D,$8D, $D,$B4, $D,$DB, $D,  2, $E,$29, $E
-                dc.b $50, $E,$77, $E,$9E, $E,$C5, $E,$EC, $E,$13, $F,$3A, $F,$61, $F,$88, $F,$AF, $F,$D6, $F,$FD, $F,$24,$10,$4B,$10,$72,$10,$99,$10
-                dc.b $C0,$10,$C7,$10,$EE,$10,$15,$11,$3C,$11,$63,$11,$6A,$11,$91,$11,$98,$11,$BF,$11,$E6,$11, $D,$12,$34,$12,  1,  4,  0, $B,  0,$1A
-                dc.b $C5,$30,  9,$9F,$18,$11,$5B,  1,$12,$5F,$11,  5,$BB,$30,$1B,$5F,$13,  6,$AB,  0, $A,$5F,  1,  6,$2A,$1F,$FF,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF, $F,  0,  0,  9,  0,  4,$C1,  1, $D,$5C,$8D,  9,$E9,  4,  3,$9D,$93,  2,$C8,$73,  7,$1E,$85,  0,$4F,$64,$11,$1C,  7,  0, $F
-                dc.b $31,$3B,$2B,$78,  8,$4E,$33,  0, $F,  0,  0,  0,  0,$13,$D2,$10,$14,$DF, $A, $F,$C0,$10,$15,$19,$80,$1F,$12,  3,  7,$1D,$80,$18
-                dc.b   0,  0,  9,$1C,  0,  0, $D,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,  0,$3B,$C0,$74,  0,$18,$8E,$1F, $F,  0,  0,$1F,$19
-                dc.b  $B,$5F,$33,$31,$17,  0,$18, $C,  0,  4,$17,$19,  8, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $E,  0,  0,  9,  0,  0,$F0,$72,  8,$53
-                dc.b   7,$1F,$40,$35,$17,$1D,$12,$1F,$FF,$70,$11,$5B, $D,$1F,  3,$71,  5,$1F,$80,$12, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0
-                dc.b  $F,  0,  4,$D1,  1,  1,$94,  3, $F,  8,  2,  0,$56,$86, $B,  8,  0,  0,$1E,  6,  5,  8,  0,  0,$1F, $C,$12, $C,  0,  0,  0,  0
-                dc.b   0,  0,  0,  0, $F,  0,  0, $B,  0,$2A,$C4,  0, $F,$1F, $F, $E,$8C,$50,$19,$5B, $F,$13,$F8,  0, $E,$5B,  4, $A,$F8,$61,  0,$5F
-                dc.b   9,  0,$3A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,  0,$34,$C0,$13, $C,$DF,  6,$11,$BA,  0,  8,$DF,  8,$14, $A,  0,  7
-                dc.b $9F, $E,$1F,$FA,  0,  0,$1F,$10,$10,$69,$1F,$35,$3F,$B7,$3F,$B6,$3F,$70, $F,  0,  0,  8,$40,$32,$C3,  1,$2A,$50,$85,  2,$11,  2
-                dc.b $26,$5F,$85,  2,$11,$72,$1B,$99,$85,  2,$11,$31,  7,$95, $F,  2,$F9,$38,$AB,$34,$64,$3D,$11,$33,$36, $F,  0,  0, $A,  0,$3D,$F2
-                dc.b   0,  6,$1F, $B,  9,$FC,  1, $A,$1F,$11,$19,$9C,  1,  0,$DF,$13,$19,$FC,  1, $E,$1D,$11,$1F,$7F,$1F,$E0,$1F,$EF,$20,  2,$1F,$FF
-                dc.b  $F,  0,  0,  9,  0,$31,$E3,$70,$10,$D9,$13,  1,  8,$11,$1E,$19,$1C,  1,  4,$31,$19,$18,$1F,  1,  8,$11,  7,$1B,  0,  2,  6,$1F
-                dc.b $FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  3,  0,$33,$C3, $D,$1A,$9F, $E,  0,$DF,  0,$1A,$1F,  9,  0,$DA,  1,$19,$1F, $D,  0,$DF
-                dc.b   0,  0,$1F,$89,  0,$DB,  0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0, $A,  0,$35,$D2,$21,$17,$8E,  0,  1,$47,$20,$13,$95,  0,  2
-                dc.b $17,$31, $B,$9B,  5,  2,$36,$14, $D,$94,$80,  2,  8,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  3,  7,$1F,$36,$F6,$1F,  6,  0, $B
-                dc.b   0,$1B,$E3,$33,  2,  3,$84,  9,$28,$30, $C,$1B, $A,  5,$94,$72,$19,$13,$8B,  6,$28,  0,$10, $F,  1,$1F,$A6,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF,$1F,$FF, $F,  0,  0,  0,  0,$12,$C0,$31,$1D,$D8, $B, $B,$50,$12,$28,$D3,  0,$14,$B0,$37,$15,$D6,  5,  0,$20,  2,  7,$96,$87
-                dc.b   6,$27,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C,  0,$27,$D5,  0, $E,$14,$84,  0,$A7,  1,$18,$54,$84,  4,$D7,  3, $F,$5A
-                dc.b   9,  2,$97,  1,$19,$5F,  9,  6,$97,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  1,  0,  3,  0,$2A,$A0,  0,$1B,$5F,  1,  2,$81,  4,$23
-                dc.b $5F,  5,  2,$51,$7B,$1F,$9F, $B,  2,$31,$30,$12,$94,  1,  2,$67,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $F,  0,  0,$D0,$70
-                dc.b   0,$40,$9D,$1F,$90,$63,$1F,$5D, $F,$1F,$F3,$70,  0,$5F,$80,$18,  3,$70, $A,$1F,  0, $C, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $C
-                dc.b   0,  0, $B,  0,$38,$D2,  1,$27,$18,$97,  0,  6,  1,$24,$16,$1F,  0,  7,  1,$23,$10,$9F,  0,  1,  4, $B,$18,$1F,  0,  9,$1F,$FF
-                dc.b $1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0,$1D,$C3,$20,$14,$15,  1,  0, $F,$61,$10, $E,  9,  0, $F,$31,$12, $F,$85,  2, $F,  4
-                dc.b $19, $F,$95,  3, $F,$20,  5, $C,  3,$1F,$CB,$1F,$DA, $F,  0,  0, $B,  0,$2A,$C5,$10,  3,$9F,$19,  8,$CB,  0, $C,$5F,$13,  5,$BB
-                dc.b $31, $A,$5F,$19,  6,$AB,  2,  5,$5F, $E,$11,$2B,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,  0,$24,$C0,$38,  1,$5F, $F,$1C
-                dc.b $B4,$1C,  0,$DC,$8E,  0,$F4,$77,  0,$DF,$8D,$10,$B9,$70,  0,$DF, $E,$10,$D9,$20,$75,$20,$5F,$20,$5E,$20,  0, $F,  0,  0, $C,  0
-                dc.b $2A,$C1,$30,$18,$8C,  5,  0, $B,$10,$22,$CC,  9,$12,$5B,$30,$21,$CC, $A,  0,$FB,  0, $A,$9F,  7, $C,$5B,$1F,$FF,$1F,$FF,$1F,$FF
-                dc.b $1F,$FF, $F,  0,  0,  0,  0,$3C,$C0,$33,  3,$DF,  3,$11,$F5,  3,  4,$DF,$14,$14,$D8,  0,  6,$9F, $C,$1F,$F8,  0,  5,$9F,  5,$10
-                dc.b $68,$1F,$35,$3F,$B7,$3F,$B6,$3F,$70, $F,  0,  0,  3,$40,$38,$C0,  6,$27,$5F,  7,  0,$95,  3,  0,$DF,$12,  9,$46,$32,  0,$9F,$11
-                dc.b   7,  6, $F,  0,$DF,$1E,$10,$19,  7,  8,  7,$C2,  7,$D0,  0,$64, $F,  0,  0, $C,  0,$2A,$C1,$30,$15,$8E,  5,  0,  9,$12,$26,$CD
-                dc.b   9,$12,$50,$33,$25,$CD, $A,  0,$FF,  0,$11,$8D,  7, $C,$5F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0,$3A,$E3,$31,$1E
-                dc.b  $E,  4,  0,$18,$70,$37,  8,  9,  3,  8,$37,$1F, $C,$10,  0,  8,  2,$17,$8A, $A,  0,$18,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0
-                dc.b   0,  0,  0,$3C,$40,$32, $A,$D8,$1C, $D,$3F,  1,$1D,$55,$94,$17,$CB,$72,  6,$DA, $B, $C,$4B,$21,  8,$5B,$87,$13,$AF,$1F,$FF,$1F
-                dc.b $FF,$1F,$FF,$1F,$FF, $F,  0,  0, $B,  0,  4,$D0,$31,$29,$1F,$8A,  0, $F,  7,$25,$9D,  0,$18,$47,$73, $F, $E,  0,  0,$DB,  1,$11
-                dc.b $1A,$18,  9, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,  0,$12,$C0,$31,$1D,$D8, $B, $B,$50,$12,$28,$D3,  0,$14,$B0,$37
-                dc.b $15,$D6,  5,  0,$20,  2,$10,$96,$87,  6,$27,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0, $D,$D1,  0,  0,$1F,$91,$1F,$8F
-                dc.b   1,  0,$5F,$15,$16,$2B,  0,  0,$1F, $D,$1F,$5F,$70,  0,$9F, $F,$1F,$4F,  0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0, $B,  0,$12
-                dc.b $C3,$64,$18,$16,$85,  0, $C,  2,$15,$14,$88,  3,$5B,  0,  0,$12,$8B,  7,$2B,  0,  0,$DF,$89,  9,$F8,$1F,$FF,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF, $F,  0,  0,  3,  0,  0,$C5,  0,$18,$1F,  0,  0,$95,  1,  7,$1F,$1F, $C,  8,  0,$12,$DF,$11,$10,$28,  5,  0,$9F,$94,$11,$8C
-                dc.b $20,$19,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $B,  0,$3B,$E3,$33,$17,$1E,$18, $C,$68,  0,$11,$14,$1C,  5,$24,$72,$19,$13,$1F,  6
-                dc.b $38,  0,  8, $F,  1,$1F,$A6,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $E,  0,  0,  3,  0,$39,$C3,  1,$18,$1F,$10,  7,$C9,  0,$20,$5F,  9
-                dc.b   0,$F9,$31,$1E,$5F,$11,  0,$F9,  0,  0,$5F,$89,  0,$F9,  0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0, $B,  0, $C,$C0,  0,  4,$87
-                dc.b  $B,  9,$14,$50,  6,$9A,$1D,  6, $B,$12,  7,$9E,$16,  2,$1B,  2,  6,$9C,  2, $A,$1C,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  3
-                dc.b   4,$FF, $B,  7,$FF, $F,  0,  9,  0,$1C,$C3,$20,$17, $F,  1,  0,$2F,$11,$1E, $A,  9,  0, $F,$11,$12, $E,$85,  2, $F,  4,$11,  8
-                dc.b $95,  3, $F,$20,  5, $C,  3,$1F,$CB,$1F,$DA, $F,  0,  0, $C,  0,$1C,$C4,$31,$3C,$C0,  6,  0,$48,$70,  4, $C, $E,  5,$48,  2,$12
-                dc.b  $D,  5,  3,$28,  3, $D,  6, $B,  5,$58,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  3,  0,$2A,$C5,$10,  5,$5F,$19,  8,$CB,  0
-                dc.b  $F,$1E,$13,  5,$BB,$31, $A,$1F,$19,  6,$AB,  1,  5,$1F, $E,$11,$2B,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  3,  0,$3C,$C0
-                dc.b $1F,  2,$DF,  3,$14,$FC,  0,$3B,$9F, $E,$13, $F,  2,  5,$DF, $C, $E,$FE,  1,$42,$1F, $E,$11, $E,$1F,$35,$3F,$B7,$3F,$B6,$3F,$70
-                dc.b  $F,  0,  0, $B,$40,  2,$D0,$1F,  6,$DF,$8D,$1B,$F4, $C,  0,$1E,$83,  1,$65, $F,$21,$1F,$8B,  1,$47, $E,  0,$DE,  9,  2,$F5,$25
-                dc.b $11,$23,$28,$20,$5E,$23,$28, $E,  0,  0,  5,  0,$3C,$D0,$31,  0,$9F,$8B, $A,$23,$33,  0,$57,  3,$10,  3,  0,  1,$1F,  4, $C,  8
-                dc.b $70,  0,$5F,  6,  5,  9,  0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0,  8,  0,  2,$C3,  0,  4,  2,  2, $A,$14,  0,  6,  4,$80,  1
-                dc.b $43,  0, $E,  4,  1,  8,  2,  0,  7,  6,$82,  0,$74,  0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0, $B,  0,$12,$C0,$51,$18,$D2,  5
-                dc.b   0,$20,$13,$3B,$D5,  6,  0,$50, $A,$16,$D4,  8,  0,$20,  1,  1,$94,  8,  6,$24,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $B
-                dc.b   0,$12,$C0,$51,$23,$D8,  5,  0,$2C,$13,$3B,$DD,  6,  0,$5C, $A,$16,$DD,  8,  0,$2F,  1,  1,$9F,  8,  6,$2C,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF,$1F,$FF, $F,  0,  0, $C,  0,$3D,$D5,  0,$1C,$8A,  6,  1,$67,  1,  9,$88, $D, $A,$27,  0, $B,$94,$87,  2,$17,$51,$16,$8B,$87
-                dc.b   0,$17,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C,  0,$3D,$D5,  0,$1B,$8C,  6,  1,$6A,  0,$11,$8F, $D, $A,$2A,  1,$11,$8F
-                dc.b $87,  2,$1A,$51,$11,$8F,$80,  0,$1A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  7,  0,$3C,$F7,$10, $B,$D5,$11,$1F,$F4,$61, $D
-                dc.b $DF,$11,$1F,$FF,$30,  6,$1D,  3, $E, $F,$70,  4,$1D,  3, $F, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  3,  0,$3C,$C0,$1F
-                dc.b   2,$DF,  3,$14,$F5,  0,$3B,$9F, $E,$13, $F,  2,  5,$DF, $C, $E,$FE,  1,$42,$1F, $E,$11, $E,$1F,$35,$3F,$B7,$3F,$B6,$3F,$70, $F
-                dc.b   0,  3, $F,$FF,$34,$E5,  3,  3,  0,  7,$40,  2,$D0,$1F, $B,$5F,$85,$1B,$F4, $F, $A,$1E,$80,$16,$45, $E,$27,$1F,$82,  1,$F7, $F
-                dc.b   3,$9E,  9,$1F,$A5,$25,$2F,$23,$43,$20,$FC,$23,$37, $F,  0,  3,  5,$FF, $F,  3,  4,$1F,  0,  8,  0,$1B,$C1,  1,$1E,$1C,$11,$1F
-                dc.b $6F,  0,$19,$DE,  2, $B,$FF,  4,$1C,$9D, $D,$18,$63,  1,  9,$DF,  1,  1,$3F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  2,  0,$FF
-                dc.b $37,$C7,  7,  7,  0, $B,$40,  2,$D0,$1F,$17,$DF,$88,$1B,$F4,  9,  1,$1E,$84,  1,$65, $F,$26,$1F,$8B,  1,$47, $E,  0,$DE,  7,  2
-                dc.b $45,$25,$1C,$23,$28,$20,$5E,$23,$28, $E,  0,  0, $B,  0,$3C,$C0,$21,$1D,$19, $A,  0,$BA,$56,$19,$59,  9, $C,$AF,$25,$11,$18,  0
-                dc.b   6,$AB,$5C,$14,$5C,  7,$19,$AF,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  3, $F,$FF,$22,$D2,  5,  5,  0, $B,  0,$1A,$D4,$61,$27
-                dc.b $DF,$89,  7, $A,$50,$13,$1B,$12,  5,$BA,$10,$17,$5A,  9,  0,$FA,  1,  0,$1F,  9,  0,$3A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0
-                dc.b   0,  8,$40,$3A,$C0, $F,$2A,$5F,$85,  2,$11, $F,$26,$5F,$85,  2,$11,$7F,$1B,$9F,$85,  2,$11,$3D,  1,$9F, $F,  2,$F9,$38,$AB,$34
-                dc.b $64,$3D,$11,$33,$36, $F,  0,  0,  7,  0,$2A,$E0,  1,$19,$5F, $A,  2,$82,  3,$26,$5F,  5,  2,$52,$7C,$1E,$9F, $B,  2,$32,$32,$19
-                dc.b $94,  8,  2,$A7,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  3,  7,$1E, $F,  1,  1,  2,  0,  0,$40,$10,$C0,  2,  0, $C,  0,  8, $C
-                dc.b   0,  0,$1C, $F,  4, $C,  0,  5, $C,  0, $A, $C,  0,  0,$1F,  7, $E,$1C,  2,$EE,  1,$F4,  0, $A,  0,$64, $F,  0,  2,  0,$FF,  9
-                dc.b   6,$1B,$FF,  0, $F,  0,$2E,$C0,$17,$15,$1F,  0,  2, $F,  6,$19, $A,  0, $F,$1F,$58,$19, $A,  0, $F,$1F, $C,$19, $A,  0, $F,$1F
-                dc.b   0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0,  3,  0,$2A,$E0,  0,$19,$5F,  1,  2,$81,  3,$23,$5F,  5,  2,$51,$7C,$1F,$9F, $B,  2
-                dc.b $31,$32,$12,$94,  1,  2,$67,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $E,  0,$2B,$D5,$71,$29,$15, $F,  0,$88,$20,  7,$10,$18
-                dc.b   0,$2B,  0,  3, $C,$97,  0,$3C,$24,  0, $F,$99,  2,$FD,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  8,  0,$33,$E2,$70,$1B,$9F
-                dc.b $86,  6,  4,$30,  8,$1F, $C,  6,  6,$70,  1,$1B, $C,  3,$8A,$71,  0,$1A,$8D,  0, $A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0
-                dc.b  $B,  0,$1E,$E5,$57,$13,$58,$8B,  0,$7F,$61,  0,$5E,  9,  4,$4F,$21, $A,$5F, $D,  2,$6F,$11,  1,$5F, $B,  6,$6F,$1F,$FF,$1F,$FF
-                dc.b $1F,$FF,$1F,$FF, $F,  1,  1,  4,  0,  0,  0,  5,$C0,  0,  0,$9F,  4, $D,$7C,$3C,$14,$DF,  7,$1F,$BF,$7F,$19,$55,  2,  5,$4C,  6
-                dc.b $19,$5F,  9,  0,$1F,$3F,$FF,$3F,$FF,$3F,$FF,  0,  0, $F,  0,  0,  0,  0,$1E,$C0,$54,$15,$58,$8B,  0,$76,$61,  0,$5E,  9,  4,$46
-                dc.b $23,$1A,$5F, $D,  2,$66,$13,$1A,$5F, $B,  6,$66,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  1,  0,  3,  0,$3A,$D2,  1,$22,$55,$82,  3
-                dc.b $68,$71,$19,$5B, $F,  0,$15,$32,  5,$5D,$8F,  3,$15,  3,  7,$1D,  4,$10,$58,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  9,  0
-                dc.b $13,$C2,$52,$14,  2,$87,  0, $C,$51,$17,$86, $C,  0,$1C,$14,$2C,$12,$82,  0,$1C,$11,$19, $C,$10,  0, $C,$1F,$FF,$1F,$FF,$1F,$FF
-                dc.b $1F,$FF, $F,  0,  0, $A,  0,$32,$C2,$31,$1E,$1C,  4,  0,$16,$72,$34, $C,  9,  3,$24,$37,$16,$11,$10,  0,$6B,  2,$1C,$8B, $A,  0
-                dc.b $18,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $F,  0,  2,$C0,$30,  0,$1F,$1F, $F,$9C,$70,  0,$1F,$12,  0,$FC,$70,  9,$5F,$1F
-                dc.b   2,$BC,$70,  0,$1E,  0,  0, $C,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C,  0,$3D,$D5,  0,$1B,$8A,  6,  1,$6A,  1,  9,$8F
-                dc.b  $D, $A,$2F,  0, $B,$97,$87,  2,$1F,$51,$16,$99,$87,  0,$1F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  8,  0,  4,$C0,$45,$1B
-                dc.b $1F,$93,  7,$7E,$22,$25,$9F,$92,  4,$82,$31,$10,$1E, $F,  7,$FF,  1,$1B,$1F, $F,  2,$FF,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0
-                dc.b   0,  0,  0,$32,$D3,  0,$12,$DF,  5,  0,$25,  2,$24,$DF,  6,$12,$55,  5, $F,$DF,  9,  0,$85,  0, $C,$9F,  7,  0,  5,$1F,$FF,$1F
-                dc.b $FF,$1F,$FF,$1F,$FF, $F,  0,  0,  9,  0,$2D,$E2,  0,$1A,$8C, $D,  1,$2A,  0,$1B,$8A,  8,  0,$2A,  0,$12,$97,$87,  2,$1A,$51, $E
-                dc.b $97,$87,  0,$1A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0,$24,$D4,  0, $A,$9F,  4, $D,$78,$31, $C,$DF,  7,$1F,$BF,$71
-                dc.b   7,$5F,  2,  5,$48,  0, $A,$5F,  9,  0,$1F,$3F,$FF,$3F,$FF,$3F,$FF,  0,  0, $F,  0,  0, $A,  0,$32,$C2,$31,$1E,$1C,  4,  0,$16
-                dc.b $72,$34, $C,  9,  3,$24,$37,$15,$11,$10,  0,$6B,  2,  6,$8B, $A,  0,$18,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,  0,  6
-                dc.b $C0,$32,  0,$99,$1F,$1E,$34,$30,$10,$54,  0, $F,$B6,$70, $D,$58,  0, $F,$A6,$30,$16,$58,  0,  6,$2A,$1F,$FF,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF, $F,  0,  0, $F,  0,$3D,$D2,  1,$17,$96,$10,  4,  4,  3,$17,$1A,  0,  0,$28,$12,  9,$D8,  0,  0,  5,$61, $F,$15,$80,  0,  7
-                dc.b $1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $B,  0,$3E,$D4,  9,$33,$1E, $B,  6,$AB,  0, $E,$1F,  6,  6,$4B,$72,$11,$13, $A,  6
-                dc.b $7B,  1,$16,$13, $A,  6,$7B,$1F,$FF,$1F,$FF,$1F,$FF,  0,  0, $F,  0,  0, $A,  0,$34,$D4,  5,$12,$9A,$82, $B,  3,$24,$21,$99,$87
-                dc.b $13,$B3,  1,$1B,$56,  0,  0,$15,  8,$20,$5F,$19,$14,$93,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,  0,  4,$C0,$21, $A,$84
-                dc.b $14,  0,$6F,  1,  9,$86, $F,  0,$7F,  3,  4,$10,$1F,  0,$1F,  1,  5,$11,$1F,  0,$1F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0
-                dc.b  $F,  0,$38,$F7,$70,  0,$80,$1D,$1F,$90,$70,  0,$9F,  0,$18,  0,  0,  0,$DD,$8F,$1F,$F0,$70,  0,$1F,  0, $C, $F,$1F,$FF,$1F,$FF
-                dc.b $1F,$FF,$1F,$FF, $C,  0,  0,  0,  0,  4,$C0,$30,$14,$99,$1F,$1E,$37,$31,$19,$54,  0, $F,$B7,$70,$10,$58,  0,  2,$A7,$30,$19,$58
-                dc.b   0,  6,$27,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,$54,$1C,$C0,  9,  0, $A,$10,  0, $F,  0,  0,$DF,$1F,$1F, $F,$12,  0
-                dc.b $1F,  0, $E, $F,$30,  0,$DF,$14,  0, $F,$12,$F2,$14,$82,  0,$32,$1D,$B0, $F,  0,  0,  0,  0,  5,$C0,  0,  0,$1F,$17,$1D,  9,  7
-                dc.b   0,$1F,  0,$12, $A,$7B,  0,$1F,$14,$12,$3A,$3B,  0,$1F,$17,$12, $A,  0,  0,  0,  0,  0,  0,  0,  0, $F,  0,  0,  0,  0,  1,$C0
-                dc.b $20,$13,$10,  0,  0,  7,$12,  8,$14,  0,  0, $F,$62,$13,$10,  9,  0, $F,$5F,$19, $E,$12,  0,$2F,  0,  0,  0,  0,  0,  0,  0,  0
-                dc.b  $F,  0,  0,  0,  0,$3A,$C2,$73,$16,$12,$8A,  2,$13,$62,$1E,$12, $B,  0,$13,$51,$13,$11, $B,  0,  3,$44,  0,$12,  5,  3,$27,$1F
-                dc.b $FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $B,  0,$2A,$E3,$10, $D,$DF,  7, $F,$C0,$10,$1E,  7,  4,  6,  9,  3,$14,$41,  0,$12,  9
-                dc.b   0, $C,$19,  0,  6,  7,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0,$35,$92,$21,$1A,$8E,  0,  1,  7,$21,$16,$8C,  0,  2
-                dc.b $17,$32,$1A,$9B,  5,  2,$36,$33,$10,$94,$80,  2,  8,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C,  0,  2,$C0,  0,$10,$D3,  5
-                dc.b   0,$25,  6,$27,$DF,  6,$12,$50,  6,$13,$DF, $A,  0,$85,  0, $A,$9F,  7,  0,  7,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C
-                dc.b   0,  9,$C4,  0,$27,$1F,  9,  7,  8,$50,$1D,$5B,$11,  0,$F8,  0,$11,$5A,  9,  0,$F8,$61,  0,$5F,  9,  0,$3A,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF,$1F,$FF, $F,  0,  0, $A,  0,$1D,$D0,  1,$12,$1F,$8A,  0,$9F,$22,  9,$14,  1,  0,$1F,$33,  9,$50, $D, $C,$3D,  0,  8,$11,$1B
-                dc.b   0,$2D,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  8,  0,$32,$D3,  0,$15,$DF,  5,  0,$25,  0,$24,$1F,  9,  0,$55,  3, $F,$DF
-                dc.b  $B,  0,$85,  1, $C,$9F,  7,  0,  6,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C,  0,$2E,$C5,  1, $F,$9F,$88,$1F,$FF,$21,$14
-                dc.b $DF,$85,  5,$FF,$72,$14,$5F,$88,  0,$FF,$5F,$16,$DF, $F,$15,$FF,$31,$3B,$2B,$78,  8,$4F,$33,  0, $F,  0,  0, $F,  0,$3D,$D2,  1
-                dc.b $17,$94, $F,  4, $A,  3,$17,$16,  0,  0,$2A,$12,$16,$D6,  0,  0, $A,$61,$15,$16,$80,  0, $A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F
-                dc.b   0,  0,  9,  0,$3A,$D1,$31,$1C, $F,  4,  0,$17,$72,$34, $C,  9,  3,  7,$37,$1C, $C,$10,  0,  7,  2, $C,$8C, $A,  0,$17,$1F,$FF
-                dc.b $1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $C,  0,$2A,$C1,$30,$1C,$8C,  5,  0, $A,$11,$28,$CD,  9,$12,$6A,$31,$23,$CC, $A,  0,$FF,  0
-                dc.b   3,$8E,  8, $C,$5A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0,$3A,$E3,$31,$1E, $F,  4,  0,$17,$72,$37, $F,  9,  3,  7
-                dc.b $37,$1F, $F,$10,  0,  7,  2, $D,$8F, $A,  0,$17,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $B,  0,$1A,$C4,$30, $B,$9F,$17,$11
-                dc.b $5F,  0,$16,$55,$91,  5,$4F,$70,$13,$58,$13,  6,$AF,  1,  0,$19,$15,  6,$2F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $F,  0
-                dc.b $3D,$D2,  1,$17,$90,$10,  4,  4,  0,$17,$10,  0,  0,$28,$12,  9,$D2,  0,  0,  5,$60, $F, $E,$80,  0,  7,$1F,$FF,$1F,$FF,$1F,$FF
-                dc.b $1F,$FF, $F,  0,  0,  3,  0,$2A,$E0,  0,$19,$5F,  1,  2,$81,  3,$23,$5F,  5,  2,$51,$7C,$1F,$9F, $B,  2,$31,$32,$10,$94,  1,  2
-                dc.b $67,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,$40,$35,$C0,$7F, $A,$50,  8,$12,$AF,$3F,  0,$D1,$94,$10,$AB,$36,  0,$14, $B
-                dc.b $12,$6F,$3E, $F,$CA,$1F,$18,$4C,  7,$54,$11,$19,  2,$73,$3F,$BB, $F,  0,  0,  0,$40,$34,$C0,$3E,  7,$4C,  8,  2,$AF,$39,  2,$CC
-                dc.b $93,  2,$BF,$3B,  0,$1F,  9, $E,$7F,$37,  0,$11,$1F,$12,$4F,  7,$54,$11,$19,  2,$73,$3F,$BB, $F,  0,  0,  8,  0,$34,$C0,$73,  7
-                dc.b $11,$84,  5,$4F,$70,  9,$D0,$8A, $E,$AF,  2,  5,$10,$8C,  9,$BF,$77,$23,$10,$89, $E,$3F,  7,$54,$11,$19,  2,$71,$3F,$BB, $F,  0
-                dc.b   3,  4,$FF,  2,  2,  0,$FF,  0, $B,  0,$3A,$C5,$3F,  7,$1F,$18,$1F,$5F,  1,$12,$53,$11,$1F,$BF,$30,$1B,$58,$13,$1F,$AF,  1,  8
-                dc.b $5F, $E,$1F,$2F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $F,  0,  2,$C0,$31,  0,$13,$1F, $F,$9F,$70,  0,$18,$12,  0,$FF,$70
-                dc.b   9,$51,$1F,  2,$BF,$70, $E,$12,  0,  0, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  0,$40,$25,$C0, $B,  3,$4B, $C,  2,$9E
-                dc.b  $F, $F,$8C,  7,  2,$9E,$7C,$1A,$8B, $B,$12,$BE,$37, $F,$96, $A,  0,$8E,  7,$54,$11,$19,  2,$71,$20,$BB, $F,  0,  0, $F,  0,$2F
-                dc.b $F0,$6B,  0,$1F,$81,$1B,$8F,$2F,  0,$DF,$8F,$1F,$FF,$7F,  5,$5F,  3,$1D, $F,$71,  0,$1F,  0, $D, $F,$1F,$FF,$1F,$FF,$1F,$FF,$1F
-                dc.b $FF,  1,  0,  2,  0,$FF,  1,  1, $F, $F,  0,  0,$40,$34,$C0,$31,  8,$5F,  8,  2,$AF,$30,$14,$CC,$93,  2,$BF,$38,  0,$1F,  9, $E
-                dc.b $7F,$30,$1A,$11,$1F,$12,$FF,  7,$54,$11,$19,  2,$73,$3F,$BB, $F,  0,  3,  7, $F,  0,  0, $A, $A,  0,  0,$40,$10,$C0,  2,  0, $C
-                dc.b   0,  8,  1,  0,  0,$1A, $F,  4,  2,  0,  5, $C,  0, $A,  1,  0,  0,$10,  2, $E,$12,  2,$EE,  1,$F4,  0, $A,  0,$64, $F,  0,  0
-                dc.b  $F,  0,  4,$D1,  1,  3,$9D,$1F, $F, $F,  2,  0, $F,$99, $B, $F,  0,  3, $F,$1F,  5, $F,  4,  0, $F,$14,$13, $F,  0,  0,  0,  0
-                dc.b   0,  0,  0,  0, $F,  0,  0, $B,  0,$12,$C0,$51,$23,$D8,  5,  0,$2A,$13,$3B,$DD,  6,  0,$5A, $A,$16,$DD,  8,  0,$2A,  1,  0,$9F
-                dc.b $88,  6,$2A,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0, $A,  0,$34,$D4,  5,$12,$9A,$82, $B,  9,$24,$20,$99,$87,$13,$B9,  1,  5
-                dc.b $56,  0,  0,$18,  8,  0,$5F,$19,$14,$99,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0,  0,  7,  0,$2A,$E0,  1,$1D,$5F, $A,  2,$85,  1
-                dc.b $23,$5F,  5,  2,$55,$78,$1B,$9F, $B,  2,$35,$31,$10,$9F,  8,  2,$A5,$1F,$FF,$1F,$FF,$1F,$FF,$1F,$FF, $F,  0
+                                        ; patch bank: смещения (LE) патчей, номер = аргумент команды $61 в секвенциях
+                gems_patch_ofs PATCH_00
+                gems_patch_ofs PATCH_01
+                gems_patch_ofs PATCH_02
+                gems_patch_ofs PATCH_03
+                gems_patch_ofs PATCH_04
+                gems_patch_ofs PATCH_05
+                gems_patch_ofs PATCH_06
+                gems_patch_ofs PATCH_07
+                gems_patch_ofs PATCH_08
+                gems_patch_ofs PATCH_09
+                gems_patch_ofs PATCH_0A
+                gems_patch_ofs PATCH_0B
+                gems_patch_ofs PATCH_0C
+                gems_patch_ofs PATCH_0D
+                gems_patch_ofs PATCH_0E
+                gems_patch_ofs PATCH_0F
+                gems_patch_ofs PATCH_10
+                gems_patch_ofs PATCH_11
+                gems_patch_ofs PATCH_12
+                gems_patch_ofs PATCH_13
+                gems_patch_ofs PATCH_14
+                gems_patch_ofs PATCH_15
+                gems_patch_ofs PATCH_16
+                gems_patch_ofs PATCH_17
+                gems_patch_ofs PATCH_18
+                gems_patch_ofs PATCH_19
+                gems_patch_ofs PATCH_1A
+                gems_patch_ofs PATCH_1B
+                gems_patch_ofs PATCH_1C
+                gems_patch_ofs PATCH_1D
+                gems_patch_ofs PATCH_1E
+                gems_patch_ofs PATCH_1F
+                gems_patch_ofs PATCH_20
+                gems_patch_ofs PATCH_21
+                gems_patch_ofs PATCH_22
+                gems_patch_ofs PATCH_23
+                gems_patch_ofs PATCH_24
+                gems_patch_ofs PATCH_25
+                gems_patch_ofs PATCH_26
+                gems_patch_ofs PATCH_27
+                gems_patch_ofs PATCH_28
+                gems_patch_ofs PATCH_29
+                gems_patch_ofs PATCH_2A
+                gems_patch_ofs PATCH_2B
+                gems_patch_ofs PATCH_2C
+                gems_patch_ofs PATCH_2D
+                gems_patch_ofs PATCH_2E
+                gems_patch_ofs PATCH_2F
+                gems_patch_ofs PATCH_30
+                gems_patch_ofs PATCH_31
+                gems_patch_ofs PATCH_32
+                gems_patch_ofs PATCH_33
+                gems_patch_ofs PATCH_34
+                gems_patch_ofs PATCH_35
+                gems_patch_ofs PATCH_36
+                gems_patch_ofs PATCH_37
+                gems_patch_ofs PATCH_38
+                gems_patch_ofs PATCH_39
+                gems_patch_ofs PATCH_3A
+                gems_patch_ofs PATCH_3B
+                gems_patch_ofs PATCH_3C
+                gems_patch_ofs PATCH_3D
+                gems_patch_ofs PATCH_3E
+                gems_patch_ofs PATCH_3F
+                gems_patch_ofs PATCH_40
+                gems_patch_ofs PATCH_41
+                gems_patch_ofs PATCH_42
+                gems_patch_ofs PATCH_43
+                gems_patch_ofs PATCH_44
+                gems_patch_ofs PATCH_45
+                gems_patch_ofs PATCH_46
+                gems_patch_ofs PATCH_47
+                gems_patch_ofs PATCH_48
+                gems_patch_ofs PATCH_49
+                gems_patch_ofs PATCH_4A
+                gems_patch_ofs PATCH_4B
+                gems_patch_ofs PATCH_4C
+                gems_patch_ofs PATCH_4D
+                gems_patch_ofs PATCH_4E
+                gems_patch_ofs PATCH_4F
+                gems_patch_ofs PATCH_50
+                gems_patch_ofs PATCH_51
+                gems_patch_ofs PATCH_52
+                gems_patch_ofs PATCH_53
+                gems_patch_ofs PATCH_54
+                gems_patch_ofs PATCH_55
+                gems_patch_ofs PATCH_56
+                gems_patch_ofs PATCH_57
+                gems_patch_ofs PATCH_58
+                gems_patch_ofs PATCH_59
+                gems_patch_ofs PATCH_5A
+                gems_patch_ofs PATCH_5B
+                gems_patch_ofs PATCH_5C
+                gems_patch_ofs PATCH_5D
+                gems_patch_ofs PATCH_5E
+                gems_patch_ofs PATCH_5F
+                gems_patch_ofs PATCH_60
+                gems_patch_ofs PATCH_61
+                gems_patch_ofs PATCH_62
+                gems_patch_ofs PATCH_63
+                gems_patch_ofs PATCH_64
+                gems_patch_ofs PATCH_65
+                gems_patch_ofs PATCH_66
+                gems_patch_ofs PATCH_67
+                gems_patch_ofs PATCH_68
+                gems_patch_ofs PATCH_69
+                gems_patch_ofs PATCH_6A
+                gems_patch_ofs PATCH_6B
+                gems_patch_ofs PATCH_6C
+                gems_patch_ofs PATCH_6D
+                gems_patch_ofs PATCH_6E
+                gems_patch_ofs PATCH_6F
+                gems_patch_ofs PATCH_70
+                gems_patch_ofs PATCH_71
+                gems_patch_ofs PATCH_72
+                gems_patch_ofs PATCH_73
+                gems_patch_ofs PATCH_74
+                gems_patch_ofs PATCH_75
+                gems_patch_ofs PATCH_76
+                gems_patch_ofs PATCH_77
+                gems_patch_ofs PATCH_78
+                gems_patch_ofs PATCH_79
+                gems_patch_ofs PATCH_7A
+                gems_patch_ofs PATCH_7B
+                gems_patch_ofs PATCH_7C
+PATCH_00:       gems_digital 4
+PATCH_01:       gems_fm $0B, $00, 3, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,   9,   2,  31,   0,  24,  17,   5,  11   ; +$0
+                gems_op   0,   1,  18,   1,  31,   0,  17,   5,  11,  11   ; +$4
+                gems_op   3,   0,  27,   1,  31,   0,  19,   6,  10,  11   ; +$8
+                gems_op   0,   0,  10,   1,  31,   0,   1,   6,   2,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_02:       gems_fm $09, $00, 0, 4, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  13,   1,  28,   1,  13,   9,  14,   9   ; +$0
+                gems_op   0,   4,   3,   2,  29,   1,  19,   2,  12,   8   ; +$4
+                gems_op   7,   3,   7,   0,  30,   1,   5,   0,   4,  15   ; +$8
+                gems_op   6,   4,  17,   0,  28,   0,   7,   0,   0,  15   ; +$C
+                gems_ch3 $313B, $2B78, $084E, $3300
+                gems_keyon $F, 0
+PATCH_03:       gems_fm $00, $00, 2, 3, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   0,  20,   3,  31,   0,  10,  15,  12,   0   ; +$0
+                gems_op   1,   0,  21,   0,  25,   1,   0,  31,   1,   2   ; +$4
+                gems_op   0,   3,   7,   0,  29,   1,   0,  24,   0,   0   ; +$8
+                gems_op   0,   0,   9,   0,  28,   0,   0,   0,   0,  13   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_04:       gems_fm $00, $00, 7, 3, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   4,   0,   0,  24,   1,  14,  31,   0,  15   ; +$0
+                gems_op   0,   0,   0,   0,  31,   0,  25,  11,   5,  15   ; +$4
+                gems_op   3,   3,  49,   0,  23,   0,   0,  24,   0,  12   ; +$8
+                gems_op   0,   0,   4,   0,  23,   0,  25,   8,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $E, 0
+PATCH_05:       gems_fm $09, $00, 0, 0, 3, 3, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   2,   8,   1,  19,   0,   7,  31,   4,   0   ; +$0
+                gems_op   3,   5,  23,   0,  29,   0,  18,  31,  15,  15   ; +$4
+                gems_op   7,   0,  17,   1,  27,   0,  13,  31,   0,   3   ; +$8
+                gems_op   7,   1,   5,   0,  31,   1,   0,  18,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_06:       gems_fm $0F, $00, 0, 4, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,   1,   2,  20,   0,   3,  15,   0,   8   ; +$0
+                gems_op   0,   2,   0,   1,  22,   1,   6,  11,   0,   8   ; +$4
+                gems_op   0,   0,   0,   0,  30,   0,   6,   5,   0,   8   ; +$8
+                gems_op   0,   0,   0,   0,  31,   0,  12,  18,   0,  12   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_07:       gems_fm $0B, $00, 5, 2, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  15,   0,  31,   0,  15,  14,   8,  12   ; +$0
+                gems_op   5,   0,  25,   1,  27,   0,  15,  19,  15,   8   ; +$4
+                gems_op   0,   0,  14,   1,  27,   0,   4,  10,  15,   8   ; +$8
+                gems_op   6,   1,   0,   1,  31,   0,   9,   0,   3,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_08:       gems_fm $00, $00, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   3,  12,   3,  31,   0,   6,  17,  11,  10   ; +$0
+                gems_op   0,   0,   8,   3,  31,   0,   8,  20,   0,  10   ; +$4
+                gems_op   0,   0,   7,   2,  31,   0,  14,  31,  15,  10   ; +$8
+                gems_op   0,   0,   0,   0,  31,   0,  16,  16,   6,   9   ; +$C
+                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
+                gems_keyon $F, 0
+PATCH_09:       gems_fm $08, $40, 6, 2, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  42,   1,  16,   1,   5,   2,   1,   1   ; +$0
+                gems_op   0,   2,  38,   1,  31,   1,   5,   2,   1,   1   ; +$4
+                gems_op   7,   2,  27,   2,  25,   1,   5,   2,   1,   1   ; +$8
+                gems_op   3,   1,   7,   2,  21,   0,  15,   2,  15,   9   ; +$C
+                gems_ch3 $38AB, $3464, $3D11, $3336
+                gems_keyon $F, 0
+PATCH_0A:       gems_fm $0A, $00, 7, 5, 3, 3, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,   6,   0,  31,   0,  11,   9,  15,  12   ; +$0
+                gems_op   0,   1,  10,   0,  31,   0,  17,  25,   9,  12   ; +$4
+                gems_op   0,   1,   0,   3,  31,   0,  19,  25,  15,  12   ; +$8
+                gems_op   0,   1,  14,   0,  29,   0,  17,  31,   7,  15   ; +$C
+                gems_ch3 $1FE0, $1FEF, $2002, $1FFF
+                gems_keyon $F, 0
+PATCH_0B:       gems_fm $09, $00, 6, 1, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   0,  16,   3,  25,   0,  19,   1,   0,   8   ; +$0
+                gems_op   1,   1,  30,   0,  25,   0,  28,   1,   0,   4   ; +$4
+                gems_op   3,   1,  25,   0,  24,   0,  31,   1,   0,   8   ; +$8
+                gems_op   1,   1,   7,   0,  27,   0,   0,   2,   0,   6   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_0C:       gems_fm $03, $00, 6, 3, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,  13,  26,   2,  31,   0,  14,   0,  13,  15   ; +$0
+                gems_op   0,   0,  26,   0,  31,   0,   9,   0,  13,  10   ; +$4
+                gems_op   0,   1,  25,   0,  31,   0,  13,   0,  13,  15   ; +$8
+                gems_op   0,   0,   0,   0,  31,   1,   9,   0,  13,  11   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_0D:       gems_fm $0A, $00, 6, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   1,  23,   2,  14,   0,   0,   1,   4,   7   ; +$0
+                gems_op   2,   0,  19,   2,  21,   0,   0,   2,   1,   7   ; +$4
+                gems_op   3,   1,  11,   2,  27,   0,   5,   2,   3,   6   ; +$8
+                gems_op   1,   4,  13,   2,  20,   1,   0,   2,   0,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_0E:       gems_psg_noise $7, $1F, $36, $F6, $1F, $6
+PATCH_0F:       gems_fm $0B, $00, 3, 3, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   3,   2,   0,   3,   1,   4,   9,   2,   8   ; +$0
+                gems_op   3,   0,  12,   0,  27,   0,  10,   5,   9,   4   ; +$4
+                gems_op   7,   2,  25,   0,  19,   1,  11,   6,   2,   8   ; +$8
+                gems_op   0,   0,  16,   0,  15,   0,   1,  31,  10,   6   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_10:       gems_fm $00, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  29,   3,  24,   0,  11,  11,   5,   0   ; +$0
+                gems_op   1,   2,  40,   3,  19,   0,   0,  20,  11,   0   ; +$4
+                gems_op   3,   7,  21,   3,  22,   0,   5,   0,   2,   0   ; +$8
+                gems_op   0,   2,   7,   2,  22,   1,   7,   6,   2,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_11:       gems_fm $0C, $00, 4, 7, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  14,   0,  20,   1,   4,   0,  10,   7   ; +$0
+                gems_op   0,   1,  24,   1,  20,   1,   4,   4,  13,   7   ; +$4
+                gems_op   0,   3,  15,   1,  26,   0,   9,   2,   9,   7   ; +$8
+                gems_op   0,   1,  25,   1,  31,   0,   9,   6,   9,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 1
+PATCH_12:       gems_fm $03, $00, 5, 2, 2, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  27,   1,  31,   0,   1,   2,   8,   1   ; +$0
+                gems_op   0,   4,  35,   1,  31,   0,   5,   2,   5,   1   ; +$4
+                gems_op   7,  11,  31,   2,  31,   0,  11,   2,   3,   1   ; +$8
+                gems_op   3,   0,  18,   2,  20,   0,   1,   2,   6,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_13:       gems_fm $0F, $00, 0, 0, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   0,   0,   1,   0,   1,  29,  31,   9,   0   ; +$0
+                gems_op   6,   3,  31,   1,  29,   0,  15,  31,  15,   3   ; +$4
+                gems_op   7,   0,   0,   1,  31,   1,   0,  24,   0,   3   ; +$8
+                gems_op   7,   0,  10,   0,  31,   0,   0,  12,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $C, 0
+PATCH_14:       gems_fm $0B, $00, 7, 0, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  39,   0,  24,   1,  23,   0,   0,   6   ; +$0
+                gems_op   0,   1,  36,   0,  22,   0,  31,   0,   0,   7   ; +$4
+                gems_op   0,   1,  35,   0,  16,   1,  31,   0,   0,   1   ; +$8
+                gems_op   0,   4,  11,   0,  24,   0,  31,   0,   0,   9   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_15:       gems_fm $0A, $00, 3, 5, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   0,  20,   0,  21,   0,   1,   0,   0,  15   ; +$0
+                gems_op   6,   1,  16,   0,  14,   0,   9,   0,   0,  15   ; +$4
+                gems_op   3,   1,  18,   0,  15,   1,   5,   2,   0,  15   ; +$8
+                gems_op   0,   4,  25,   0,  15,   1,  21,   3,   0,  15   ; +$C
+                gems_ch3 $2005, $0C03, $1FCB, $1FDA
+                gems_keyon $F, 0
+PATCH_16:       gems_fm $0B, $00, 5, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   0,   3,   2,  31,   0,  25,   8,  12,  11   ; +$0
+                gems_op   0,   0,  12,   1,  31,   0,  19,   5,  11,  11   ; +$4
+                gems_op   3,   1,  10,   1,  31,   0,  25,   6,  10,  11   ; +$8
+                gems_op   0,   2,   5,   1,  31,   0,  14,  17,   2,  11   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_17:       gems_fm $00, $00, 4, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   8,   1,   1,  31,   0,  15,  28,  11,   4   ; +$0
+                gems_op   1,  12,   0,   3,  28,   1,  14,   0,  15,   4   ; +$4
+                gems_op   7,   7,   0,   3,  31,   1,  13,  16,  11,   9   ; +$8
+                gems_op   7,   0,   0,   3,  31,   0,  14,  16,  13,   9   ; +$C
+                gems_ch3 $2075, $205F, $205E, $2000
+                gems_keyon $F, 0
+PATCH_18:       gems_fm $0C, $00, 5, 2, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,  24,   2,  12,   0,   5,   0,   0,  11   ; +$0
+                gems_op   1,   0,  34,   3,  12,   0,   9,  18,   5,  11   ; +$4
+                gems_op   3,   0,  33,   3,  12,   0,  10,   0,  15,  11   ; +$8
+                gems_op   0,   0,  10,   2,  31,   0,   7,  12,   5,  11   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_19:       gems_fm $00, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   3,   3,   3,  31,   0,   3,  17,  15,   5   ; +$0
+                gems_op   0,   3,   4,   3,  31,   0,  20,  20,  13,   8   ; +$4
+                gems_op   0,   0,   6,   2,  31,   0,  12,  31,  15,   8   ; +$8
+                gems_op   0,   0,   5,   2,  31,   0,   5,  16,   6,   8   ; +$C
+                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
+                gems_keyon $F, 0
+PATCH_1A:       gems_fm $03, $40, 7, 0, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   6,  39,   1,  31,   0,   7,   0,   9,   5   ; +$0
+                gems_op   0,   3,   0,   3,  31,   0,  18,   9,   4,   6   ; +$4
+                gems_op   3,   2,   0,   2,  31,   0,  17,   7,   0,   6   ; +$8
+                gems_op   0,  15,   0,   3,  31,   0,  30,  16,   1,   9   ; +$C
+                gems_ch3 $0708, $07C2, $07D0, $0064
+                gems_keyon $F, 0
+PATCH_1B:       gems_fm $0C, $00, 5, 2, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,  21,   2,  14,   0,   5,   0,   0,   9   ; +$0
+                gems_op   1,   2,  38,   3,  13,   0,   9,  18,   5,   0   ; +$4
+                gems_op   3,   3,  37,   3,  13,   0,  10,   0,  15,  15   ; +$8
+                gems_op   0,   0,  17,   2,  13,   0,   7,  12,   5,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_1C:       gems_fm $0A, $00, 7, 2, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  30,   0,  14,   0,   4,   0,   1,   8   ; +$0
+                gems_op   7,   0,  55,   0,   8,   0,   9,   3,   0,   8   ; +$4
+                gems_op   3,   7,  31,   0,  12,   0,  16,   0,   0,   8   ; +$8
+                gems_op   0,   2,  23,   2,  10,   0,  10,   0,   1,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_1D:       gems_fm $00, $00, 7, 4, 1, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   2,  10,   3,  24,   0,  28,  13,   3,  15   ; +$0
+                gems_op   0,   1,  29,   1,  21,   1,  20,  23,  12,  11   ; +$4
+                gems_op   7,   2,   6,   3,  26,   0,  11,  12,   4,  11   ; +$8
+                gems_op   2,   1,   8,   1,  27,   1,   7,  19,  10,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_1E:       gems_fm $0B, $00, 0, 4, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  41,   0,  31,   1,  10,   0,   0,  15   ; +$0
+                gems_op   0,   7,  37,   2,  29,   0,   0,  24,   4,   7   ; +$4
+                gems_op   7,   3,  15,   0,  14,   0,   0,   0,  13,  11   ; +$8
+                gems_op   0,   1,  17,   0,  26,   0,  24,   9,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_1F:       gems_fm $00, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  29,   3,  24,   0,  11,  11,   5,   0   ; +$0
+                gems_op   1,   2,  40,   3,  19,   0,   0,  20,  11,   0   ; +$4
+                gems_op   3,   7,  21,   3,  22,   0,   5,   0,   2,   0   ; +$8
+                gems_op   0,   2,  16,   2,  22,   1,   7,   6,   2,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_20:       gems_fm $0A, $00, 1, 5, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,   0,   0,  31,   1,  17,  31,   8,  15   ; +$0
+                gems_op   0,   1,   0,   1,  31,   0,  21,  22,   2,  11   ; +$4
+                gems_op   0,   0,   0,   0,  31,   0,  13,  31,   5,  15   ; +$8
+                gems_op   7,   0,   0,   2,  31,   0,  15,  31,   4,  15   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_21:       gems_fm $0B, $00, 2, 2, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   6,   4,  24,   0,  22,   1,   5,   0,   0,  12   ; +$0
+                gems_op   0,   2,  21,   0,  20,   1,   8,   3,   5,  11   ; +$4
+                gems_op   0,   0,   0,   0,  18,   1,  11,   7,   2,  11   ; +$8
+                gems_op   0,   0,   0,   3,  31,   1,   9,   9,  15,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_22:       gems_fm $03, $00, 0, 0, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  24,   0,  31,   0,   0,   0,   9,   5   ; +$0
+                gems_op   0,   1,   7,   0,  31,   0,  31,  12,   0,   8   ; +$4
+                gems_op   0,   0,  18,   3,  31,   0,  17,  16,   2,   8   ; +$8
+                gems_op   0,   5,   0,   2,  31,   1,  20,  17,   8,  12   ; +$C
+                gems_ch3 $2019, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_23:       gems_fm $0B, $00, 7, 3, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   3,  23,   0,  30,   0,  24,  12,   6,   8   ; +$0
+                gems_op   0,   0,  17,   0,  20,   0,  28,   5,   2,   4   ; +$4
+                gems_op   7,   2,  25,   0,  19,   0,  31,   6,   3,   8   ; +$8
+                gems_op   0,   0,   8,   0,  15,   0,   1,  31,  10,   6   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $E, 0
+PATCH_24:       gems_fm $03, $00, 7, 1, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  24,   0,  31,   0,  16,   7,  12,   9   ; +$0
+                gems_op   0,   0,  32,   1,  31,   0,   9,   0,  15,   9   ; +$4
+                gems_op   3,   1,  30,   1,  31,   0,  17,   0,  15,   9   ; +$8
+                gems_op   0,   0,   0,   1,  31,   1,   9,   0,  15,   9   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_25:       gems_fm $0B, $00, 1, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,   4,   2,   7,   0,  11,   9,   1,   4   ; +$0
+                gems_op   5,   0,   6,   2,  26,   0,  29,   6,   0,  11   ; +$4
+                gems_op   1,   2,   7,   2,  30,   0,  22,   2,   1,  11   ; +$8
+                gems_op   0,   2,   6,   2,  28,   0,   2,  10,   1,  12   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_26:       gems_psg_noise $4, $FF, $B, $7, $FF, $F
+PATCH_27:       gems_fm $09, $00, 3, 4, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   0,  23,   0,  15,   0,   1,   0,   2,  15   ; +$0
+                gems_op   1,   1,  30,   0,  10,   0,   9,   0,   0,  15   ; +$4
+                gems_op   1,   1,  18,   0,  14,   1,   5,   2,   0,  15   ; +$8
+                gems_op   0,   4,  17,   0,   8,   1,  21,   3,   0,  15   ; +$C
+                gems_ch3 $2005, $0C03, $1FCB, $1FDA
+                gems_keyon $F, 0
+PATCH_28:       gems_fm $0C, $00, 3, 4, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  60,   3,   0,   0,   6,   0,   4,   8   ; +$0
+                gems_op   7,   0,   4,   0,  12,   0,  14,   5,   4,   8   ; +$4
+                gems_op   0,   2,  18,   0,  13,   0,   5,   3,   2,   8   ; +$8
+                gems_op   0,   3,  13,   0,   6,   0,  11,   5,   5,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_29:       gems_fm $03, $00, 5, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   0,   5,   1,  31,   0,  25,   8,  12,  11   ; +$0
+                gems_op   0,   0,  15,   0,  30,   0,  19,   5,  11,  11   ; +$4
+                gems_op   3,   1,  10,   0,  31,   0,  25,   6,  10,  11   ; +$8
+                gems_op   0,   1,   5,   0,  31,   0,  14,  17,   2,  11   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_2A:       gems_fm $03, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,  15,   2,   3,  31,   0,   3,  20,  15,  12   ; +$0
+                gems_op   0,   0,  59,   2,  31,   0,  14,  19,   0,  15   ; +$4
+                gems_op   0,   2,   5,   3,  31,   0,  12,  14,  15,  14   ; +$8
+                gems_op   0,   1,  66,   0,  31,   0,  14,  17,   0,  14   ; +$C
+                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
+                gems_keyon $F, 0
+PATCH_2B:       gems_fm $0B, $40, 0, 2, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,  15,   6,   3,  31,   1,  13,  27,  15,   4   ; +$0
+                gems_op   0,  12,   0,   0,  30,   1,   3,   1,   6,   5   ; +$4
+                gems_op   0,  15,  33,   0,  31,   1,  11,   1,   4,   7   ; +$8
+                gems_op   0,  14,   0,   3,  30,   0,   9,   2,  15,   5   ; +$C
+                gems_ch3 $2511, $2328, $205E, $2328
+                gems_keyon $E, 0
+PATCH_2C:       gems_fm $05, $00, 7, 4, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,   0,   2,  31,   1,  11,  10,   2,   3   ; +$0
+                gems_op   3,   3,   0,   1,  23,   0,   3,  16,   0,   3   ; +$4
+                gems_op   0,   0,   1,   0,  31,   0,   4,  12,   0,   8   ; +$8
+                gems_op   7,   0,   0,   1,  31,   0,   6,   5,   0,   9   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_2D:       gems_fm $08, $00, 0, 2, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,   4,   0,   2,   0,   2,  10,   1,   4   ; +$0
+                gems_op   0,   0,   6,   0,   4,   1,   0,   1,   4,   3   ; +$4
+                gems_op   0,   0,  14,   0,   4,   0,   1,   8,   0,   2   ; +$8
+                gems_op   0,   0,   7,   0,   6,   1,   2,   0,   7,   4   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_2E:       gems_fm $0B, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   5,   1,  24,   3,  18,   0,   5,   0,   2,   0   ; +$0
+                gems_op   1,   3,  59,   3,  21,   0,   6,   0,   5,   0   ; +$4
+                gems_op   0,  10,  22,   3,  20,   0,   8,   0,   2,   0   ; +$8
+                gems_op   0,   1,   1,   2,  20,   0,   8,   6,   2,   4   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_2F:       gems_fm $0B, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   5,   1,  35,   3,  24,   0,   5,   0,   2,  12   ; +$0
+                gems_op   1,   3,  59,   3,  29,   0,   6,   0,   5,  12   ; +$4
+                gems_op   0,  10,  22,   3,  29,   0,   8,   0,   2,  15   ; +$8
+                gems_op   0,   1,   1,   2,  31,   0,   8,   6,   2,  12   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_30:       gems_fm $0C, $00, 7, 5, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  28,   2,  10,   0,   6,   1,   6,   7   ; +$0
+                gems_op   0,   1,   9,   2,   8,   0,  13,  10,   2,   7   ; +$4
+                gems_op   0,   0,  11,   2,  20,   1,   7,   2,   1,   7   ; +$8
+                gems_op   5,   1,  22,   2,  11,   1,   7,   0,   1,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_31:       gems_fm $0C, $00, 7, 5, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  27,   2,  12,   0,   6,   1,   6,  10   ; +$0
+                gems_op   0,   0,  17,   2,  15,   0,  13,  10,   2,  10   ; +$4
+                gems_op   0,   1,  17,   2,  15,   1,   7,   2,   1,  10   ; +$8
+                gems_op   5,   1,  17,   2,  15,   1,   0,   0,   1,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_32:       gems_fm $07, $00, 7, 4, 3, 3, 7                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   0,  11,   3,  21,   0,  17,  31,  15,   4   ; +$0
+                gems_op   6,   1,  13,   3,  31,   0,  17,  31,  15,  15   ; +$4
+                gems_op   3,   0,   6,   0,  29,   0,   3,  14,   0,  15   ; +$8
+                gems_op   7,   0,   4,   0,  29,   0,   3,  15,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_33:       gems_fm $03, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,  15,   2,   3,  31,   0,   3,  20,  15,   5   ; +$0
+                gems_op   0,   0,  59,   2,  31,   0,  14,  19,   0,  15   ; +$4
+                gems_op   0,   2,   5,   3,  31,   0,  12,  14,  15,  14   ; +$8
+                gems_op   0,   1,  66,   0,  31,   0,  14,  17,   0,  14   ; +$C
+                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
+                gems_keyon $F, 0
+PATCH_34:       gems_psg_noise $F, $FF, $34, $E5, $3, $3
+PATCH_35:       gems_fm $07, $40, 0, 2, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,  15,  11,   1,  31,   1,   5,  27,  15,   4   ; +$0
+                gems_op   0,  15,  10,   0,  30,   1,   0,  22,   4,   5   ; +$4
+                gems_op   0,  14,  39,   0,  31,   1,   2,   1,  15,   7   ; +$8
+                gems_op   0,  15,   3,   2,  30,   0,   9,  31,  10,   5   ; +$C
+                gems_ch3 $252F, $2343, $20FC, $2337
+                gems_keyon $F, 0
+PATCH_36:       gems_psg_noise $5, $FF, $F, $3, $4, $1F
+PATCH_37:       gems_fm $08, $00, 3, 3, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  30,   0,  28,   0,  17,  31,   6,  15   ; +$0
+                gems_op   0,   0,  25,   3,  30,   0,   2,  11,  15,  15   ; +$4
+                gems_op   0,   4,  28,   2,  29,   0,  13,  24,   6,   3   ; +$8
+                gems_op   0,   1,   9,   3,  31,   0,   1,   1,   3,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_38:       gems_psg_tone $FF, $37, $C7, $7, $7
+PATCH_39:       gems_fm $0B, $40, 0, 2, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,  15,  23,   3,  31,   1,   8,  27,  15,   4   ; +$0
+                gems_op   0,   9,   1,   0,  30,   1,   4,   1,   6,   5   ; +$4
+                gems_op   0,  15,  38,   0,  31,   1,  11,   1,   4,   7   ; +$8
+                gems_op   0,  14,   0,   3,  30,   0,   7,   2,   4,   5   ; +$C
+                gems_ch3 $251C, $2328, $205E, $2328
+                gems_keyon $E, 0
+PATCH_3A:       gems_fm $0B, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   1,  29,   0,  25,   0,  10,   0,  11,  10   ; +$0
+                gems_op   5,   6,  25,   1,  25,   0,   9,  12,  10,  15   ; +$4
+                gems_op   2,   5,  17,   0,  24,   0,   0,   6,  10,  11   ; +$8
+                gems_op   5,  12,  20,   1,  28,   0,   7,  25,  10,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_3B:       gems_psg_noise $F, $FF, $22, $D2, $5, $5
+PATCH_3C:       gems_fm $0B, $00, 3, 2, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   6,   1,  39,   3,  31,   1,   9,   7,   0,  10   ; +$0
+                gems_op   5,   0,  19,   0,  27,   0,  18,   5,  11,  10   ; +$4
+                gems_op   1,   0,  23,   1,  26,   0,   9,   0,  15,  10   ; +$8
+                gems_op   0,   1,   0,   0,  31,   0,   9,   0,   3,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_3D:       gems_fm $08, $40, 7, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,  15,  42,   1,  31,   1,   5,   2,   1,   1   ; +$0
+                gems_op   0,  15,  38,   1,  31,   1,   5,   2,   1,   1   ; +$4
+                gems_op   7,  15,  27,   2,  31,   1,   5,   2,   1,   1   ; +$8
+                gems_op   3,  13,   1,   2,  31,   0,  15,   2,  15,   9   ; +$C
+                gems_ch3 $38AB, $3464, $3D11, $3336
+                gems_keyon $F, 0
+PATCH_3E:       gems_fm $07, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  25,   1,  31,   0,  10,   2,   8,   2   ; +$0
+                gems_op   0,   3,  38,   1,  31,   0,   5,   2,   5,   2   ; +$4
+                gems_op   7,  12,  30,   2,  31,   0,  11,   2,   3,   2   ; +$8
+                gems_op   3,   2,  25,   2,  20,   0,   8,   2,  10,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_3F:       gems_psg_noise $7, $1E, $F, $1, $1, $2
+PATCH_40:       gems_fm $00, $40, 2, 0, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   2,   0,   0,  12,   0,   0,   8,   0,  12   ; +$0
+                gems_op   0,   0,   0,   0,  28,   0,  15,   4,   0,  12   ; +$4
+                gems_op   0,   0,   5,   0,  12,   0,   0,  10,   0,  12   ; +$8
+                gems_op   0,   0,   0,   0,  31,   0,   7,  14,   1,  12   ; +$C
+                gems_ch3 $02EE, $01F4, $000A, $0064
+                gems_keyon $F, 0
+PATCH_41:       gems_psg_tone $FF, $9, $6, $1B, $FF
+PATCH_42:       gems_fm $0F, $00, 5, 6, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   7,  21,   0,  31,   0,   0,   2,   0,  15   ; +$0
+                gems_op   0,   6,  25,   0,  10,   0,   0,  15,   1,  15   ; +$4
+                gems_op   5,   8,  25,   0,  10,   0,   0,  15,   1,  15   ; +$8
+                gems_op   0,  12,  25,   0,  10,   0,   0,  15,   1,  15   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_43:       gems_fm $03, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  25,   1,  31,   0,   1,   2,   8,   1   ; +$0
+                gems_op   0,   3,  35,   1,  31,   0,   5,   2,   5,   1   ; +$4
+                gems_op   7,  12,  31,   2,  31,   0,  11,   2,   3,   1   ; +$8
+                gems_op   3,   2,  18,   2,  20,   0,   1,   2,   6,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_44:       gems_fm $0E, $00, 5, 3, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   1,  41,   0,  21,   0,  15,   0,   8,   8   ; +$0
+                gems_op   2,   0,   7,   0,  16,   0,  24,   0,   2,  11   ; +$4
+                gems_op   0,   0,   3,   0,  12,   1,  23,   0,   3,  12   ; +$8
+                gems_op   2,   4,   0,   0,  15,   1,  25,   2,  15,  13   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_45:       gems_fm $08, $00, 6, 3, 3, 2, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   0,  27,   2,  31,   1,   6,   6,   0,   4   ; +$0
+                gems_op   3,   0,   8,   0,  31,   0,  12,   6,   0,   6   ; +$4
+                gems_op   7,   0,   1,   0,  27,   0,  12,   3,   8,  10   ; +$8
+                gems_op   7,   1,   0,   0,  26,   1,  13,   0,   0,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_46:       gems_fm $0B, $00, 3, 6, 3, 2, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   5,   7,  19,   1,  24,   1,  11,   0,   7,  15   ; +$0
+                gems_op   6,   1,   0,   1,  30,   0,   9,   4,   4,  15   ; +$4
+                gems_op   2,   1,  10,   1,  31,   0,  13,   2,   6,  15   ; +$8
+                gems_op   1,   1,   1,   1,  31,   0,  11,   6,   6,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 1
+PATCH_47:       gems_digital 4
+PATCH_48:       gems_fm $00, $00, 0, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,   0,   2,  31,   0,   4,  13,   7,  12   ; +$0
+                gems_op   3,  12,  20,   3,  31,   0,   7,  31,  11,  15   ; +$4
+                gems_op   7,  15,  25,   1,  21,   0,   2,   5,   4,  12   ; +$8
+                gems_op   0,   6,  25,   1,  31,   0,   9,   0,   1,  15   ; +$C
+                gems_ch3 $3FFF, $3FFF, $3FFF, $0000
+                gems_keyon $F, 0
+PATCH_49:       gems_fm $00, $00, 3, 6, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   5,   4,  21,   1,  24,   1,  11,   0,   7,   6   ; +$0
+                gems_op   6,   1,   0,   1,  30,   0,   9,   4,   4,   6   ; +$4
+                gems_op   2,   3,  26,   1,  31,   0,  13,   2,   6,   6   ; +$8
+                gems_op   1,   3,  26,   1,  31,   0,  11,   6,   6,   6   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 1
+PATCH_4A:       gems_fm $03, $00, 7, 2, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  34,   1,  21,   1,   2,   3,   6,   8   ; +$0
+                gems_op   7,   1,  25,   1,  27,   0,  15,   0,   1,   5   ; +$4
+                gems_op   3,   2,   5,   1,  29,   1,  15,   3,   1,   5   ; +$8
+                gems_op   0,   3,   7,   0,  29,   0,   4,  16,   5,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_4B:       gems_fm $09, $00, 2, 3, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   5,   2,  20,   0,   2,   1,   7,   0,   0,  12   ; +$0
+                gems_op   5,   1,  23,   2,   6,   0,  12,   0,   1,  12   ; +$4
+                gems_op   1,   4,  44,   0,  18,   1,   2,   0,   1,  12   ; +$8
+                gems_op   1,   1,  25,   0,  12,   0,  16,   0,   0,  12   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_4C:       gems_fm $0A, $00, 6, 2, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  30,   0,  28,   0,   4,   0,   1,   6   ; +$0
+                gems_op   7,   2,  52,   0,  12,   0,   9,   3,   2,   4   ; +$4
+                gems_op   3,   7,  22,   0,  17,   0,  16,   0,   6,  11   ; +$8
+                gems_op   0,   2,  28,   2,  11,   0,  10,   0,   1,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_4D:       gems_fm $0F, $00, 0, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,   0,   0,  31,   0,  31,  15,   9,  12   ; +$0
+                gems_op   7,   0,   0,   0,  31,   0,  18,   0,  15,  12   ; +$4
+                gems_op   7,   0,   9,   1,  31,   0,  31,   2,  11,  12   ; +$8
+                gems_op   7,   0,   0,   0,  30,   0,   0,   0,   0,  12   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_4E:       gems_fm $0C, $00, 7, 5, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  27,   2,  10,   0,   6,   1,   6,  10   ; +$0
+                gems_op   0,   1,   9,   2,  15,   0,  13,  10,   2,  15   ; +$4
+                gems_op   0,   0,  11,   2,  23,   1,   7,   2,   1,  15   ; +$8
+                gems_op   5,   1,  22,   2,  25,   1,   7,   0,   1,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_4F:       gems_fm $08, $00, 0, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   4,   5,  27,   0,  31,   1,  19,   7,   7,  14   ; +$0
+                gems_op   2,   2,  37,   2,  31,   1,  18,   4,   8,   2   ; +$4
+                gems_op   3,   1,  16,   0,  30,   0,  15,   7,  15,  15   ; +$8
+                gems_op   0,   1,  27,   0,  31,   0,  15,   2,  15,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_50:       gems_fm $00, $00, 6, 2, 3, 1, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  18,   3,  31,   0,   5,   0,   2,   5   ; +$0
+                gems_op   0,   2,  36,   3,  31,   0,   6,  18,   5,   5   ; +$4
+                gems_op   0,   5,  15,   3,  31,   0,   9,   0,   8,   5   ; +$8
+                gems_op   0,   0,  12,   2,  31,   0,   7,   0,   0,   5   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_51:       gems_fm $09, $00, 5, 5, 3, 2, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  26,   2,  12,   0,  13,   1,   2,  10   ; +$0
+                gems_op   0,   0,  27,   2,  10,   0,   8,   0,   2,  10   ; +$4
+                gems_op   0,   0,  18,   2,  23,   1,   7,   2,   1,  10   ; +$8
+                gems_op   5,   1,  14,   2,  23,   1,   7,   0,   1,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_52:       gems_fm $0A, $00, 4, 4, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  10,   2,  31,   0,   4,  13,   7,   8   ; +$0
+                gems_op   3,   1,  12,   3,  31,   0,   7,  31,  11,  15   ; +$4
+                gems_op   7,   1,   7,   1,  31,   0,   2,   5,   4,   8   ; +$8
+                gems_op   0,   0,  10,   1,  31,   0,   9,   0,   1,  15   ; +$C
+                gems_ch3 $3FFF, $3FFF, $3FFF, $0000
+                gems_keyon $F, 0
+PATCH_53:       gems_fm $0A, $00, 6, 2, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  30,   0,  28,   0,   4,   0,   1,   6   ; +$0
+                gems_op   7,   2,  52,   0,  12,   0,   9,   3,   2,   4   ; +$4
+                gems_op   3,   7,  21,   0,  17,   0,  16,   0,   6,  11   ; +$8
+                gems_op   0,   2,   6,   2,  11,   0,  10,   0,   1,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_54:       gems_fm $00, $00, 0, 6, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   2,   0,   2,  25,   0,  31,  30,   3,   4   ; +$0
+                gems_op   3,   0,  16,   1,  20,   0,   0,  15,  11,   6   ; +$4
+                gems_op   7,   0,  13,   1,  24,   0,   0,  15,  10,   6   ; +$8
+                gems_op   3,   0,  22,   1,  24,   0,   0,   6,   2,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_55:       gems_fm $0F, $00, 7, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  23,   2,  22,   0,  16,   4,   0,   4   ; +$0
+                gems_op   0,   3,  23,   0,  26,   0,   0,   0,   2,   8   ; +$4
+                gems_op   1,   2,   9,   3,  24,   0,   0,   0,   0,   5   ; +$8
+                gems_op   6,   1,  15,   0,  21,   1,   0,   0,   0,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_56:       gems_fm $0B, $00, 7, 6, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   9,  51,   0,  30,   0,  11,   6,  10,  11   ; +$0
+                gems_op   0,   0,  14,   0,  31,   0,   6,   6,   4,  11   ; +$4
+                gems_op   7,   2,  17,   0,  19,   0,  10,   6,   7,  11   ; +$8
+                gems_op   0,   1,  22,   0,  19,   0,  10,   6,   7,  11   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $0000
+                gems_keyon $F, 0
+PATCH_57:       gems_fm $0A, $00, 6, 4, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   5,  18,   2,  26,   1,   2,  11,   0,   3   ; +$0
+                gems_op   2,   4,  33,   2,  25,   1,   7,  19,  11,   3   ; +$4
+                gems_op   0,   1,  27,   1,  22,   0,   0,   0,   1,   5   ; +$8
+                gems_op   0,   8,  32,   1,  31,   0,  25,  20,   9,   3   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_58:       gems_fm $00, $00, 0, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   1,  10,   2,   4,   0,  20,   0,   6,  15   ; +$0
+                gems_op   0,   1,   9,   2,   6,   0,  15,   0,   7,  15   ; +$4
+                gems_op   0,   3,   4,   0,  16,   0,  31,   0,   1,  15   ; +$8
+                gems_op   0,   1,   5,   0,  17,   0,  31,   0,   1,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_59:       gems_fm $0F, $00, 7, 0, 3, 3, 7                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   0,   0,   2,   0,   0,  29,  31,   9,   0   ; +$0
+                gems_op   7,   0,   0,   2,  31,   0,   0,  24,   0,   0   ; +$4
+                gems_op   0,   0,   0,   3,  29,   1,  15,  31,  15,   0   ; +$8
+                gems_op   7,   0,   0,   0,  31,   0,   0,  12,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $C, 0
+PATCH_5A:       gems_fm $00, $00, 0, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,  20,   2,  25,   0,  31,  30,   3,   7   ; +$0
+                gems_op   3,   1,  25,   1,  20,   0,   0,  15,  11,   7   ; +$4
+                gems_op   7,   0,  16,   1,  24,   0,   0,   2,  10,   7   ; +$8
+                gems_op   3,   0,  25,   1,  24,   0,   0,   6,   2,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_5B:       gems_fm $00, $54, 3, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   9,   0,   0,  10,   0,  16,   0,   0,  15   ; +$0
+                gems_op   0,   0,   0,   3,  31,   0,  31,  31,   0,  15   ; +$4
+                gems_op   1,   2,   0,   0,  31,   0,   0,  14,   0,  15   ; +$8
+                gems_op   3,   0,   0,   3,  31,   0,  20,   0,   0,  15   ; +$C
+                gems_ch3 $12F2, $1482, $0032, $1DB0
+                gems_keyon $F, 0
+PATCH_5C:       gems_fm $00, $00, 0, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,   0,   0,  31,   0,  23,  29,   0,   9   ; +$0
+                gems_op   0,   7,   0,   0,  31,   0,   0,  18,   0,  10   ; +$4
+                gems_op   7,  11,   0,   0,  31,   0,  20,  18,   3,  10   ; +$8
+                gems_op   3,  11,   0,   0,  31,   0,  23,  18,   0,  10   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_5D:       gems_fm $00, $00, 0, 1, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   0,  19,   0,  16,   0,   0,   0,   0,   7   ; +$0
+                gems_op   1,   2,   8,   0,  20,   0,   0,   0,   0,  15   ; +$4
+                gems_op   6,   2,  19,   0,  16,   0,   9,   0,   0,  15   ; +$8
+                gems_op   5,  15,  25,   0,  14,   0,  18,   0,   2,  15   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_5E:       gems_fm $00, $00, 7, 2, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   3,  22,   0,  18,   1,  10,   2,   1,   3   ; +$0
+                gems_op   6,   2,  30,   0,  18,   0,  11,   0,   1,   3   ; +$4
+                gems_op   5,   1,  19,   0,  17,   0,  11,   0,   0,   3   ; +$8
+                gems_op   4,   4,   0,   0,  18,   0,   5,   3,   2,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_5F:       gems_fm $0B, $00, 5, 2, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   1,   0,  13,   3,  31,   0,   7,  15,  12,   0   ; +$0
+                gems_op   1,   0,  30,   0,   7,   0,   4,   6,   0,   9   ; +$4
+                gems_op   0,   3,  20,   1,   1,   0,   0,  18,   0,   9   ; +$8
+                gems_op   0,   0,  12,   0,  25,   0,   0,   6,   0,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_60:       gems_fm $0A, $00, 6, 5, 2, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   2,   1,  26,   2,  14,   0,   0,   1,   0,   7   ; +$0
+                gems_op   2,   1,  22,   2,  12,   0,   0,   2,   1,   7   ; +$4
+                gems_op   3,   2,  26,   2,  27,   0,   5,   2,   3,   6   ; +$8
+                gems_op   3,   3,  16,   2,  20,   1,   0,   2,   0,   8   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_61:       gems_fm $0C, $00, 0, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  16,   3,  19,   0,   5,   0,   2,   5   ; +$0
+                gems_op   0,   6,  39,   3,  31,   0,   6,  18,   5,   0   ; +$4
+                gems_op   0,   6,  19,   3,  31,   0,  10,   0,   8,   5   ; +$8
+                gems_op   0,   0,  10,   2,  31,   0,   7,   0,   0,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_62:       gems_fm $0C, $00, 1, 1, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  39,   0,  31,   0,   9,   7,   0,   8   ; +$0
+                gems_op   5,   0,  29,   1,  27,   0,  17,   0,  15,   8   ; +$4
+                gems_op   0,   0,  17,   1,  26,   0,   9,   0,  15,   8   ; +$8
+                gems_op   6,   1,   0,   1,  31,   0,   9,   0,   3,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_63:       gems_fm $0A, $00, 3, 5, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  18,   0,  31,   1,  10,   0,   9,  15   ; +$0
+                gems_op   2,   2,   9,   0,  20,   0,   1,   0,   1,  15   ; +$4
+                gems_op   3,   3,   9,   1,  16,   0,  13,  12,   3,  13   ; +$8
+                gems_op   0,   0,   8,   0,  17,   0,  27,   0,   2,  13   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_64:       gems_fm $08, $00, 6, 2, 3, 1, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  21,   3,  31,   0,   5,   0,   2,   5   ; +$0
+                gems_op   0,   0,  36,   0,  31,   0,   9,   0,   5,   5   ; +$4
+                gems_op   0,   3,  15,   3,  31,   0,  11,   0,   8,   5   ; +$8
+                gems_op   0,   1,  12,   2,  31,   0,   7,   0,   0,   6   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_65:       gems_fm $0C, $00, 5, 6, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  15,   2,  31,   1,   8,  31,  15,  15   ; +$0
+                gems_op   2,   1,  20,   3,  31,   1,   5,   5,  15,  15   ; +$4
+                gems_op   7,   2,  20,   1,  31,   1,   8,   0,  15,  15   ; +$8
+                gems_op   5,  15,  22,   3,  31,   0,  15,  21,  15,  15   ; +$C
+                gems_ch3 $313B, $2B78, $084F, $3300
+                gems_keyon $F, 0
+PATCH_66:       gems_fm $0F, $00, 7, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  23,   2,  20,   0,  15,   4,   0,  10   ; +$0
+                gems_op   0,   3,  23,   0,  22,   0,   0,   0,   2,  10   ; +$4
+                gems_op   1,   2,  22,   3,  22,   0,   0,   0,   0,  10   ; +$8
+                gems_op   6,   1,  21,   0,  22,   1,   0,   0,   0,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_67:       gems_fm $09, $00, 7, 2, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  28,   0,  15,   0,   4,   0,   1,   7   ; +$0
+                gems_op   7,   2,  52,   0,  12,   0,   9,   3,   0,   7   ; +$4
+                gems_op   3,   7,  28,   0,  12,   0,  16,   0,   0,   7   ; +$8
+                gems_op   0,   2,  12,   2,  12,   0,  10,   0,   1,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_68:       gems_fm $0C, $00, 5, 2, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,  28,   2,  12,   0,   5,   0,   0,  10   ; +$0
+                gems_op   1,   1,  40,   3,  13,   0,   9,  18,   6,  10   ; +$4
+                gems_op   3,   1,  35,   3,  12,   0,  10,   0,  15,  15   ; +$8
+                gems_op   0,   0,   3,   2,  14,   0,   8,  12,   5,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_69:       gems_fm $0A, $00, 7, 2, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,  30,   0,  15,   0,   4,   0,   1,   7   ; +$0
+                gems_op   7,   2,  55,   0,  15,   0,   9,   3,   0,   7   ; +$4
+                gems_op   3,   7,  31,   0,  15,   0,  16,   0,   0,   7   ; +$8
+                gems_op   0,   2,  13,   2,  15,   0,  10,   0,   1,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_6A:       gems_fm $0B, $00, 3, 2, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   0,  11,   2,  31,   0,  23,  17,   5,  15   ; +$0
+                gems_op   0,   0,  22,   1,  21,   1,  17,   5,   4,  15   ; +$4
+                gems_op   7,   0,  19,   1,  24,   0,  19,   6,  10,  15   ; +$8
+                gems_op   0,   1,   0,   0,  25,   0,  21,   6,   2,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_6B:       gems_fm $0F, $00, 7, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  23,   2,  16,   0,  16,   4,   0,   4   ; +$0
+                gems_op   0,   0,  23,   0,  16,   0,   0,   0,   2,   8   ; +$4
+                gems_op   1,   2,   9,   3,  18,   0,   0,   0,   0,   5   ; +$8
+                gems_op   6,   0,  15,   0,  14,   1,   0,   0,   0,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_6C:       gems_fm $03, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   0,  25,   1,  31,   0,   1,   2,   8,   1   ; +$0
+                gems_op   0,   3,  35,   1,  31,   0,   5,   2,   5,   1   ; +$4
+                gems_op   7,  12,  31,   2,  31,   0,  11,   2,   3,   1   ; +$8
+                gems_op   3,   2,  16,   2,  20,   0,   1,   2,   6,   7   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_6D:       gems_fm $00, $40, 6, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,  15,  10,   1,  16,   0,   8,  18,  10,  15   ; +$0
+                gems_op   3,  15,   0,   3,  17,   1,  20,  16,  10,  11   ; +$4
+                gems_op   3,   6,   0,   0,  20,   0,  11,  18,   6,  15   ; +$8
+                gems_op   3,  14,  15,   3,  10,   0,  31,  24,   4,  12   ; +$C
+                gems_ch3 $0754, $1119, $0273, $3FBB
+                gems_keyon $F, 0
+PATCH_6E:       gems_fm $00, $40, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,  14,   7,   1,  12,   0,   8,   2,  10,  15   ; +$0
+                gems_op   3,   9,   2,   3,  12,   1,  19,   2,  11,  15   ; +$4
+                gems_op   3,  11,   0,   0,  31,   0,   9,  14,   7,  15   ; +$8
+                gems_op   3,   7,   0,   0,  17,   0,  31,  18,   4,  15   ; +$C
+                gems_ch3 $0754, $1119, $0273, $3FBB
+                gems_keyon $F, 0
+PATCH_6F:       gems_fm $08, $00, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   7,   3,   7,   0,  17,   1,   4,   5,   4,  15   ; +$0
+                gems_op   7,   0,   9,   3,  16,   1,  10,  14,  10,  15   ; +$4
+                gems_op   0,   2,   5,   0,  16,   1,  12,   9,  11,  15   ; +$8
+                gems_op   7,   7,  35,   0,  16,   1,   9,  14,   3,  15   ; +$C
+                gems_ch3 $0754, $1119, $0271, $3FBB
+                gems_keyon $F, 0
+PATCH_70:       gems_psg_noise $4, $FF, $2, $2, $0, $FF
+PATCH_71:       gems_fm $0B, $00, 7, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,  15,   7,   0,  31,   0,  24,  31,   5,  15   ; +$0
+                gems_op   0,   1,  18,   1,  19,   0,  17,  31,  11,  15   ; +$4
+                gems_op   3,   0,  27,   1,  24,   0,  19,  31,  10,  15   ; +$8
+                gems_op   0,   1,   8,   1,  31,   0,  14,  31,   2,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_72:       gems_fm $0F, $00, 0, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,   0,   0,  19,   0,  31,  15,   9,  15   ; +$0
+                gems_op   7,   0,   0,   0,  24,   0,  18,   0,  15,  15   ; +$4
+                gems_op   7,   0,   9,   1,  17,   0,  31,   2,  11,  15   ; +$8
+                gems_op   7,   0,  14,   0,  18,   0,   0,   0,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_73:       gems_fm $00, $40, 4, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,  11,   3,   1,  11,   0,  12,   2,   9,  14   ; +$0
+                gems_op   0,  15,  15,   2,  12,   0,   7,   2,   9,  14   ; +$4
+                gems_op   7,  12,  26,   2,  11,   0,  11,  18,  11,  14   ; +$8
+                gems_op   3,   7,  15,   2,  22,   0,  10,   0,   8,  14   ; +$C
+                gems_ch3 $0754, $1119, $0271, $20BB
+                gems_keyon $F, 0
+PATCH_74:       gems_fm $0F, $00, 5, 7, 3, 3, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   6,  11,   0,   0,  31,   1,   1,  27,   8,  15   ; +$0
+                gems_op   2,  15,   0,   3,  31,   1,  15,  31,  15,  15   ; +$4
+                gems_op   7,  15,   5,   1,  31,   0,   3,  29,   0,  15   ; +$8
+                gems_op   7,   1,   0,   0,  31,   0,   0,  13,   0,  15   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $1, 0
+PATCH_75:       gems_psg_tone $FF, $1, $1, $F, $F
+PATCH_76:       gems_fm $00, $40, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   3,   1,   8,   1,  31,   0,   8,   2,  10,  15   ; +$0
+                gems_op   3,   0,  20,   3,  12,   1,  19,   2,  11,  15   ; +$4
+                gems_op   3,   8,   0,   0,  31,   0,   9,  14,   7,  15   ; +$8
+                gems_op   3,   0,  26,   0,  17,   0,  31,  18,  15,  15   ; +$C
+                gems_ch3 $0754, $1119, $0273, $3FBB
+                gems_keyon $F, 0
+PATCH_77:       gems_psg_noise $7, $F, $0, $0, $A, $A
+PATCH_78:       gems_fm $00, $40, 2, 0, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   2,   0,   0,  12,   0,   0,   8,   0,   1   ; +$0
+                gems_op   0,   0,   0,   0,  26,   0,  15,   4,   0,   2   ; +$4
+                gems_op   0,   0,   5,   0,  12,   0,   0,  10,   0,   1   ; +$8
+                gems_op   0,   0,   0,   0,  16,   0,   2,  14,   1,   2   ; +$C
+                gems_ch3 $02EE, $01F4, $000A, $0064
+                gems_keyon $F, 0
+PATCH_79:       gems_fm $0F, $00, 0, 4, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,   3,   2,  29,   0,  31,  15,   0,  15   ; +$0
+                gems_op   0,   2,   0,   0,  15,   1,  25,  11,   0,  15   ; +$4
+                gems_op   0,   0,   3,   0,  15,   0,  31,   5,   0,  15   ; +$8
+                gems_op   0,   4,   0,   0,  15,   0,  20,  19,   0,  15   ; +$C
+                gems_ch3 $0000, $0000, $0000, $0000
+                gems_keyon $F, 0
+PATCH_7A:       gems_fm $0B, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   5,   1,  35,   3,  24,   0,   5,   0,   2,  10   ; +$0
+                gems_op   1,   3,  59,   3,  29,   0,   6,   0,   5,  10   ; +$4
+                gems_op   0,  10,  22,   3,  29,   0,   8,   0,   2,  10   ; +$8
+                gems_op   0,   1,   0,   2,  31,   1,   8,   6,   2,  10   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_7B:       gems_fm $0A, $00, 6, 4, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   5,  18,   2,  26,   1,   2,  11,   0,   9   ; +$0
+                gems_op   2,   4,  32,   2,  25,   1,   7,  19,  11,   9   ; +$4
+                gems_op   0,   1,   5,   1,  22,   0,   0,   0,   1,   8   ; +$8
+                gems_op   0,   8,   0,   1,  31,   0,  25,  20,   9,   9   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
+PATCH_7C:       gems_fm $07, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
+                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
+                gems_op   0,   1,  29,   1,  31,   0,  10,   2,   8,   5   ; +$0
+                gems_op   0,   1,  35,   1,  31,   0,   5,   2,   5,   5   ; +$4
+                gems_op   7,   8,  27,   2,  31,   0,  11,   2,   3,   5   ; +$8
+                gems_op   3,   1,  16,   2,  31,   0,   8,   2,  10,   5   ; +$C
+                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
+                gems_keyon $F, 0
 ENVELOPE_TBL_Z80:dc.b   8,  0, $E,  0,$1A,  0,$29,  0,$D8,$FF,  1,$37,  0,  0,  0,  0,  2,$DB,  1,$18,$A8,$FD,$64,  0,  0,  0,  0,  0,$C0,$18,  0,$C0
                                         ; DATA XREF: sub_247576+C   o
                 dc.b $18,  0,$C0,$18,  0,$C0,$18,  0,  0,  0,  0, $F,$B8,$FF,$18,$2B,  0,  0
 SEQUENCE_TBL_Z80:                       ; DATA XREF: sub_247576+6   o
                                         ; sequence table: смещения (LE) заголовков секвенций
-                gems_ofs SEQH_PETER_PUPPY               ;   0 $00
-                gems_ofs SEQH_BUNGEE123                 ;   1 $01
-                gems_ofs SEQH_BTVILLES                  ;   2 $02
-                gems_ofs SEQH_DOWN_TUBES                ;   3 $03
-                gems_ofs SEQH_INTESTINAL                ;   4 $04
-                gems_ofs SEQH_NJ_CITY                   ;   5 $05
-                gems_ofs SEQH_ANDYASTR                  ;   6 $06
-                gems_ofs SEQH_ANDYASTR_2                ;   7 $07
-                gems_ofs SEQH_ANDYASTR_8                ;   8 $08
-                gems_ofs SEQH_WHECK                     ;   9 $09
-                gems_ofs SEQH_WHECK_9                   ;  10 $0A
-                gems_ofs SEQH_WHECK_10                  ;  11 $0B
-                gems_ofs SEQH_WHECK_16                  ;  12 $0C
-                gems_ofs SEQH_DARKNESS                  ;  13 $0D
-                gems_ofs SEQH_ANDY_WIN                  ;  14 $0E
-                gems_ofs SEQH_END_1                     ;  15 $0F
-                gems_ofs SEQH_END_6                     ;  16 $10
-                gems_ofs SEQH_GAME_OVER                 ;  17 $11
-                gems_ofs SEQH_BTVILLEH                  ;  18 $12
-                gems_ofs SEQH_EMPTY                     ;  19 $13
-                gems_ofs SEQH_PSYCROW                   ;  20 $14
-                gems_ofs SEQH_THORNS                    ;  21 $15
-                gems_ofs SEQH_CROW                      ;  22 $16 карканье вороны
-                gems_ofs SEQH_WHIP                      ;  23 $17 перевернутый указатель на звук кнута (209)
-                gems_ofs SEQH_PIM                       ;  24 $18
-                gems_ofs SEQH_COW                       ;  25 $19
-                gems_ofs SEQH_DOG                       ;  26 $1A
-                gems_ofs SEQH_PETE_LIFT                 ;  27 $1B
-                gems_ofs SEQH_JIM_HIT                   ;  28 $1C
-                gems_ofs SEQH_HAMSTER                   ;  29 $1D
-                gems_ofs SEQH_GLASS                     ;  30 $1E
-                gems_ofs SEQH_PETE_WOOF                 ;  31 $1F
-                gems_ofs SEQH_UFO                       ;  32 $20
-                gems_ofs SEQH_CAT_MEOW                  ;  33 $21
-                gems_ofs SEQH_SNOT                      ;  34 $22
-                gems_ofs SEQH_RUMBLE                    ;  35 $23
-                gems_ofs SEQH_MONKEY                    ;  36 $24
-                gems_ofs SEQH_CHEATER                   ;  37 $25 Cheater sheiger щейгер
-                gems_ofs SEQH_LIVEUP                    ;  38 $26
-                gems_ofs SEQH_HEADGUN                   ;  39 $27
-                gems_ofs SEQH_EJIM_TITLE                ;  40 $28
-                gems_ofs SEQH_REFREGER                  ;  41 $29
-                gems_ofs SEQH_RUMBLE_2                  ;  42 $2A
-                gems_ofs SEQH_SPRING                    ;  43 $2B
-                gems_ofs SEQH_ROCKET                    ;  44 $2C
-                gems_ofs SEQH_TICK                      ;  45 $2D
-                gems_ofs SEQH_DOOR                      ;  46 $2E
-                gems_ofs SEQH_DOOR_CREAK                ;  47 $2F
-                gems_ofs SEQH_BURST                     ;  48 $30
-                gems_ofs SEQH_TIRE_JUMP                 ;  49 $31
-                gems_ofs SEQH_LEVER                     ;  50 $32
-                gems_ofs SEQH_HEART                     ;  51 $33
-                gems_ofs SEQH_MONSTER                   ;  52 $34
-                gems_ofs SEQH_DOG_2                     ;  53 $35
-                gems_ofs SEQH_CHUCK                     ;  54 $36
-                gems_ofs SEQH_CHUCK_2                   ;  55 $37
-                gems_ofs SEQH_SNOT_2                    ;  56 $38
-                gems_ofs SEQH_UFO_2                     ;  57 $39
-                gems_ofs SEQH_CHUCK_3                   ;  58 $3A
-                gems_ofs SEQH_JIM_GROUND                ;  59 $3B
-                gems_ofs SEQH_BONUS                     ;  60 $3C
-                gems_ofs SEQH_SCREAM                    ;  61 $3D
-                gems_ofs SEQH_DOG_3                     ;  62 $3E
-                gems_ofs SEQH_RICOCHET                  ;  63 $3F
-                gems_ofs SEQH_DOG_4                     ;  64 $40
-                gems_ofs SEQH_ROCKET_2                  ;  65 $41
-                gems_ofs SEQH_QUEEN_1                   ;  66 $42
-                gems_ofs SEQH_QUEEN_2                   ;  67 $43
-                gems_ofs SEQH_TUBE_OUT                  ;  68 $44
-                gems_ofs SEQH_PSYQ_FIRE                 ;  69 $45
-                gems_ofs SEQH_JIM_FIRE                  ;  70 $46
-                gems_ofs SEQH_HELI_PART                 ;  71 $47
-                gems_ofs SEQH_PLASMA_FIRE               ;  72 $48
-                gems_ofs SEQH_HP_UP                     ;  73 $49
-                gems_ofs SEQH_DESTROY                   ;  74 $4A
-                gems_ofs SEQH_FIRE                      ;  75 $4B
-                gems_ofs SEQH_FIRE_2                    ;  76 $4C
-                gems_ofs SEQH_FIRE_3                    ;  77 $4D
-                gems_ofs SEQH_SCREAM_2                  ;  78 $4E
-                gems_ofs SEQH_CHICKEN                   ;  79 $4F
-                gems_ofs SEQH_CHICKEN_2                 ;  80 $50
-                gems_ofs SEQH_CH_TELEPRT                ;  81 $51
-                gems_ofs SEQH_TELEPORT                  ;  82 $52
-                gems_ofs SEQH_EFFECT                    ;  83 $53
-                gems_ofs SEQH_WTR_PLOP                  ;  84 $54
-                gems_ofs SEQH_WTR_PLOP_2                ;  85 $55
-                gems_ofs SEQH_WTR_PLOP_3                ;  86 $56
-                gems_ofs SEQH_WTR_PLOP_4                ;  87 $57
-                gems_ofs SEQH_GROOVY                    ;  88 $58
-                gems_ofs SEQH_JIM_MUSCLE                ;  89 $59
-                gems_ofs SEQH_JIM_HEY                   ;  90 $5A
-                gems_ofs SEQH_PRINCESS                  ;  91 $5B
-                gems_ofs SEQH_SCREAM_3                  ;  92 $5C
-                gems_ofs SEQH_JIM_SWEARS                ;  93 $5D
-                gems_ofs SEQH_SCREAM_4                  ;  94 $5E
-                gems_ofs SEQH_JIM_HIT_2                 ;  95 $5F
-                gems_ofs SEQH_SCREAM_5                  ;  96 $60
-                gems_ofs SEQH_JIM_SPEED                 ;  97 $61
-                gems_ofs SEQH_JIM_YEHOO                 ;  98 $62
-                gems_ofs SEQH_JIM_WUUH                  ;  99 $63
-                gems_ofs SEQH_JIM_AMMO                  ; 100 $64
-                gems_ofs SEQH_SCREAM_6                  ; 101 $65
-                gems_ofs SEQH_JIM_LALALA                ; 102 $66
-                gems_ofs SEQH_HOUL                      ; 103 $67
-                gems_ofs SEQH_COW_2                     ; 104 $68
-                gems_ofs SEQH_HOUL_2                    ; 105 $69
-                gems_ofs SEQH_JIM_HOUYEAH               ; 106 $6A
-                gems_ofs SEQH_JIM_OUCH                  ; 107 $6B
-                gems_ofs SEQH_JIM_AYAU                  ; 108 $6C
-                gems_ofs SEQH_JIM_DAU                   ; 109 $6D
-                gems_ofs SEQH_JIM_PLASMA                ; 110 $6E
-                gems_ofs SEQH_JIM_AAAH                  ; 111 $6F
-                gems_ofs SEQH_SCRATCH                   ; 112 $70
-                gems_ofs SEQH_SCRATCH_2                 ; 113 $71
-                gems_ofs SEQH_PRISONER                  ; 114 $72
-                gems_ofs SEQH_SCREAM_7                  ; 115 $73
-                gems_ofs SEQH_DEMON                     ; 116 $74
-                gems_ofs SEQH_DEMON_2                   ; 117 $75
-                gems_ofs SEQH_EFFECT_2                  ; 118 $76
-                gems_ofs SEQH_EFFECT_3                  ; 119 $77
-                gems_ofs SEQH_PSYQ_HIT                  ; 120 $78
-                gems_ofs SEQH_PSYQ_HIT_2                ; 121 $79
-                gems_ofs SEQH_PSYQ_HIT_3                ; 122 $7A
-                gems_ofs SEQH_PSYQ_HIT_4                ; 123 $7B
-                gems_ofs SEQH_PSYQ_HIT_5                ; 124 $7C
+                gems_seq_ofs SEQH_PETER_PUPPY               ;   0 $00
+                gems_seq_ofs SEQH_BUNGEE123                 ;   1 $01
+                gems_seq_ofs SEQH_BTVILLES                  ;   2 $02
+                gems_seq_ofs SEQH_DOWN_TUBES                ;   3 $03
+                gems_seq_ofs SEQH_INTESTINAL                ;   4 $04
+                gems_seq_ofs SEQH_NJ_CITY                   ;   5 $05
+                gems_seq_ofs SEQH_ANDYASTR                  ;   6 $06
+                gems_seq_ofs SEQH_ANDYASTR_2                ;   7 $07
+                gems_seq_ofs SEQH_ANDYASTR_8                ;   8 $08
+                gems_seq_ofs SEQH_WHECK                     ;   9 $09
+                gems_seq_ofs SEQH_WHECK_9                   ;  10 $0A
+                gems_seq_ofs SEQH_WHECK_10                  ;  11 $0B
+                gems_seq_ofs SEQH_WHECK_16                  ;  12 $0C
+                gems_seq_ofs SEQH_DARKNESS                  ;  13 $0D
+                gems_seq_ofs SEQH_ANDY_WIN                  ;  14 $0E
+                gems_seq_ofs SEQH_END_1                     ;  15 $0F
+                gems_seq_ofs SEQH_END_6                     ;  16 $10
+                gems_seq_ofs SEQH_GAME_OVER                 ;  17 $11
+                gems_seq_ofs SEQH_BTVILLEH                  ;  18 $12
+                gems_seq_ofs SEQH_EMPTY                     ;  19 $13
+                gems_seq_ofs SEQH_PSYCROW                   ;  20 $14
+                gems_seq_ofs SEQH_THORNS                    ;  21 $15
+                gems_seq_ofs SEQH_CROW                      ;  22 $16 карканье вороны
+                gems_seq_ofs SEQH_WHIP                      ;  23 $17 перевернутый указатель на звук кнута (209)
+                gems_seq_ofs SEQH_PIM                       ;  24 $18
+                gems_seq_ofs SEQH_COW                       ;  25 $19
+                gems_seq_ofs SEQH_DOG                       ;  26 $1A
+                gems_seq_ofs SEQH_PETE_LIFT                 ;  27 $1B
+                gems_seq_ofs SEQH_JIM_HIT                   ;  28 $1C
+                gems_seq_ofs SEQH_HAMSTER                   ;  29 $1D
+                gems_seq_ofs SEQH_GLASS                     ;  30 $1E
+                gems_seq_ofs SEQH_PETE_WOOF                 ;  31 $1F
+                gems_seq_ofs SEQH_UFO                       ;  32 $20
+                gems_seq_ofs SEQH_CAT_MEOW                  ;  33 $21
+                gems_seq_ofs SEQH_SNOT                      ;  34 $22
+                gems_seq_ofs SEQH_RUMBLE                    ;  35 $23
+                gems_seq_ofs SEQH_MONKEY                    ;  36 $24
+                gems_seq_ofs SEQH_CHEATER                   ;  37 $25 Cheater sheiger щейгер
+                gems_seq_ofs SEQH_LIVEUP                    ;  38 $26
+                gems_seq_ofs SEQH_HEADGUN                   ;  39 $27
+                gems_seq_ofs SEQH_EJIM_TITLE                ;  40 $28
+                gems_seq_ofs SEQH_REFREGER                  ;  41 $29
+                gems_seq_ofs SEQH_RUMBLE_2                  ;  42 $2A
+                gems_seq_ofs SEQH_SPRING                    ;  43 $2B
+                gems_seq_ofs SEQH_ROCKET                    ;  44 $2C
+                gems_seq_ofs SEQH_TICK                      ;  45 $2D
+                gems_seq_ofs SEQH_DOOR                      ;  46 $2E
+                gems_seq_ofs SEQH_DOOR_CREAK                ;  47 $2F
+                gems_seq_ofs SEQH_BURST                     ;  48 $30
+                gems_seq_ofs SEQH_TIRE_JUMP                 ;  49 $31
+                gems_seq_ofs SEQH_LEVER                     ;  50 $32
+                gems_seq_ofs SEQH_HEART                     ;  51 $33
+                gems_seq_ofs SEQH_MONSTER                   ;  52 $34
+                gems_seq_ofs SEQH_DOG_2                     ;  53 $35
+                gems_seq_ofs SEQH_CHUCK                     ;  54 $36
+                gems_seq_ofs SEQH_CHUCK_2                   ;  55 $37
+                gems_seq_ofs SEQH_SNOT_2                    ;  56 $38
+                gems_seq_ofs SEQH_UFO_2                     ;  57 $39
+                gems_seq_ofs SEQH_CHUCK_3                   ;  58 $3A
+                gems_seq_ofs SEQH_JIM_GROUND                ;  59 $3B
+                gems_seq_ofs SEQH_BONUS                     ;  60 $3C
+                gems_seq_ofs SEQH_SCREAM                    ;  61 $3D
+                gems_seq_ofs SEQH_DOG_3                     ;  62 $3E
+                gems_seq_ofs SEQH_RICOCHET                  ;  63 $3F
+                gems_seq_ofs SEQH_DOG_4                     ;  64 $40
+                gems_seq_ofs SEQH_ROCKET_2                  ;  65 $41
+                gems_seq_ofs SEQH_QUEEN_1                   ;  66 $42
+                gems_seq_ofs SEQH_QUEEN_2                   ;  67 $43
+                gems_seq_ofs SEQH_TUBE_OUT                  ;  68 $44
+                gems_seq_ofs SEQH_PSYQ_FIRE                 ;  69 $45
+                gems_seq_ofs SEQH_JIM_FIRE                  ;  70 $46
+                gems_seq_ofs SEQH_HELI_PART                 ;  71 $47
+                gems_seq_ofs SEQH_PLASMA_FIRE               ;  72 $48
+                gems_seq_ofs SEQH_HP_UP                     ;  73 $49
+                gems_seq_ofs SEQH_DESTROY                   ;  74 $4A
+                gems_seq_ofs SEQH_FIRE                      ;  75 $4B
+                gems_seq_ofs SEQH_FIRE_2                    ;  76 $4C
+                gems_seq_ofs SEQH_FIRE_3                    ;  77 $4D
+                gems_seq_ofs SEQH_SCREAM_2                  ;  78 $4E
+                gems_seq_ofs SEQH_CHICKEN                   ;  79 $4F
+                gems_seq_ofs SEQH_CHICKEN_2                 ;  80 $50
+                gems_seq_ofs SEQH_CH_TELEPRT                ;  81 $51
+                gems_seq_ofs SEQH_TELEPORT                  ;  82 $52
+                gems_seq_ofs SEQH_EFFECT                    ;  83 $53
+                gems_seq_ofs SEQH_WTR_PLOP                  ;  84 $54
+                gems_seq_ofs SEQH_WTR_PLOP_2                ;  85 $55
+                gems_seq_ofs SEQH_WTR_PLOP_3                ;  86 $56
+                gems_seq_ofs SEQH_WTR_PLOP_4                ;  87 $57
+                gems_seq_ofs SEQH_GROOVY                    ;  88 $58
+                gems_seq_ofs SEQH_JIM_MUSCLE                ;  89 $59
+                gems_seq_ofs SEQH_JIM_HEY                   ;  90 $5A
+                gems_seq_ofs SEQH_PRINCESS                  ;  91 $5B
+                gems_seq_ofs SEQH_SCREAM_3                  ;  92 $5C
+                gems_seq_ofs SEQH_JIM_SWEARS                ;  93 $5D
+                gems_seq_ofs SEQH_SCREAM_4                  ;  94 $5E
+                gems_seq_ofs SEQH_JIM_HIT_2                 ;  95 $5F
+                gems_seq_ofs SEQH_SCREAM_5                  ;  96 $60
+                gems_seq_ofs SEQH_JIM_SPEED                 ;  97 $61
+                gems_seq_ofs SEQH_JIM_YEHOO                 ;  98 $62
+                gems_seq_ofs SEQH_JIM_WUUH                  ;  99 $63
+                gems_seq_ofs SEQH_JIM_AMMO                  ; 100 $64
+                gems_seq_ofs SEQH_SCREAM_6                  ; 101 $65
+                gems_seq_ofs SEQH_JIM_LALALA                ; 102 $66
+                gems_seq_ofs SEQH_HOUL                      ; 103 $67
+                gems_seq_ofs SEQH_COW_2                     ; 104 $68
+                gems_seq_ofs SEQH_HOUL_2                    ; 105 $69
+                gems_seq_ofs SEQH_JIM_HOUYEAH               ; 106 $6A
+                gems_seq_ofs SEQH_JIM_OUCH                  ; 107 $6B
+                gems_seq_ofs SEQH_JIM_AYAU                  ; 108 $6C
+                gems_seq_ofs SEQH_JIM_DAU                   ; 109 $6D
+                gems_seq_ofs SEQH_JIM_PLASMA                ; 110 $6E
+                gems_seq_ofs SEQH_JIM_AAAH                  ; 111 $6F
+                gems_seq_ofs SEQH_SCRATCH                   ; 112 $70
+                gems_seq_ofs SEQH_SCRATCH_2                 ; 113 $71
+                gems_seq_ofs SEQH_PRISONER                  ; 114 $72
+                gems_seq_ofs SEQH_SCREAM_7                  ; 115 $73
+                gems_seq_ofs SEQH_DEMON                     ; 116 $74
+                gems_seq_ofs SEQH_DEMON_2                   ; 117 $75
+                gems_seq_ofs SEQH_EFFECT_2                  ; 118 $76
+                gems_seq_ofs SEQH_EFFECT_3                  ; 119 $77
+                gems_seq_ofs SEQH_PSYQ_HIT                  ; 120 $78
+                gems_seq_ofs SEQH_PSYQ_HIT_2                ; 121 $79
+                gems_seq_ofs SEQH_PSYQ_HIT_3                ; 122 $7A
+                gems_seq_ofs SEQH_PSYQ_HIT_4                ; 123 $7B
+                gems_seq_ofs SEQH_PSYQ_HIT_5                ; 124 $7C
 ; заголовки секвенций: число каналов, затем смещения (LE) данных каналов
 SEQH_PETER_PUPPY:dc.b 12                                ; seq 0
-                gems_ofs SEQ_PETER_PUPPY
-                gems_ofs SEQ_PETER_PUPPY_2
-                gems_ofs SEQ_PETER_PUPPY_3
-                gems_ofs SEQ_PETER_PUPPY_4
-                gems_ofs SEQ_PETER_PUPPY_5
-                gems_ofs SEQ_PETER_PUPPY_6
-                gems_ofs SEQ_PETER_PUPPY_7
-                gems_ofs SEQ_PETER_PUPPY_8
-                gems_ofs SEQ_PETER_PUPPY_9
-                gems_ofs SEQ_PETER_PUPPY_10
-                gems_ofs SEQ_PETER_PUPPY_11
-                gems_ofs SEQ_PETER_PUPPY_12
+                gems_seq_ofs SEQ_PETER_PUPPY
+                gems_seq_ofs SEQ_PETER_PUPPY_2
+                gems_seq_ofs SEQ_PETER_PUPPY_3
+                gems_seq_ofs SEQ_PETER_PUPPY_4
+                gems_seq_ofs SEQ_PETER_PUPPY_5
+                gems_seq_ofs SEQ_PETER_PUPPY_6
+                gems_seq_ofs SEQ_PETER_PUPPY_7
+                gems_seq_ofs SEQ_PETER_PUPPY_8
+                gems_seq_ofs SEQ_PETER_PUPPY_9
+                gems_seq_ofs SEQ_PETER_PUPPY_10
+                gems_seq_ofs SEQ_PETER_PUPPY_11
+                gems_seq_ofs SEQ_PETER_PUPPY_12
 SEQH_BUNGEE123: dc.b 10                                 ; seq 1
-                gems_ofs SEQ_BUNGEE123
-                gems_ofs SEQ_BUNGEE123_2
-                gems_ofs SEQ_BUNGEE123_3
-                gems_ofs SEQ_BUNGEE123_4
-                gems_ofs SEQ_BUNGEE123_5
-                gems_ofs SEQ_BUNGEE123_6
-                gems_ofs SEQ_BUNGEE123_7
-                gems_ofs SEQ_BUNGEE123_8
-                gems_ofs SEQ_BUNGEE123_9
-                gems_ofs SEQ_BUNGEE123_10
+                gems_seq_ofs SEQ_BUNGEE123
+                gems_seq_ofs SEQ_BUNGEE123_2
+                gems_seq_ofs SEQ_BUNGEE123_3
+                gems_seq_ofs SEQ_BUNGEE123_4
+                gems_seq_ofs SEQ_BUNGEE123_5
+                gems_seq_ofs SEQ_BUNGEE123_6
+                gems_seq_ofs SEQ_BUNGEE123_7
+                gems_seq_ofs SEQ_BUNGEE123_8
+                gems_seq_ofs SEQ_BUNGEE123_9
+                gems_seq_ofs SEQ_BUNGEE123_10
 SEQH_BTVILLES:  dc.b 12                                 ; seq 2
-                gems_ofs SEQ_BTVILLES
-                gems_ofs SEQ_BTVILLES_2
-                gems_ofs SEQ_BTVILLES_3
-                gems_ofs SEQ_BTVILLES_4
-                gems_ofs SEQ_BTVILLES_5
-                gems_ofs SEQ_BTVILLES_6
-                gems_ofs SEQ_BTVILLES_7
-                gems_ofs SEQ_BTVILLES_8
-                gems_ofs SEQ_BTVILLES_9
-                gems_ofs SEQ_BTVILLES_10
-                gems_ofs SEQ_BTVILLES_11
-                gems_ofs SEQ_BTVILLES_12
+                gems_seq_ofs SEQ_BTVILLES
+                gems_seq_ofs SEQ_BTVILLES_2
+                gems_seq_ofs SEQ_BTVILLES_3
+                gems_seq_ofs SEQ_BTVILLES_4
+                gems_seq_ofs SEQ_BTVILLES_5
+                gems_seq_ofs SEQ_BTVILLES_6
+                gems_seq_ofs SEQ_BTVILLES_7
+                gems_seq_ofs SEQ_BTVILLES_8
+                gems_seq_ofs SEQ_BTVILLES_9
+                gems_seq_ofs SEQ_BTVILLES_10
+                gems_seq_ofs SEQ_BTVILLES_11
+                gems_seq_ofs SEQ_BTVILLES_12
 SEQH_DOWN_TUBES:dc.b 12                                 ; seq 3
-                gems_ofs SEQ_DOWN_TUBES
-                gems_ofs SEQ_DOWN_TUBES_2
-                gems_ofs SEQ_DOWN_TUBES_3
-                gems_ofs SEQ_DOWN_TUBES_4
-                gems_ofs SEQ_DOWN_TUBES_5
-                gems_ofs SEQ_DOWN_TUBES_6
-                gems_ofs SEQ_DOWN_TUBES_7
-                gems_ofs SEQ_DOWN_TUBES_8
-                gems_ofs SEQ_DOWN_TUBES_9
-                gems_ofs SEQ_DOWN_TUBES_10
-                gems_ofs SEQ_DOWN_TUBES_11
-                gems_ofs SEQ_DOWN_TUBES_12
+                gems_seq_ofs SEQ_DOWN_TUBES
+                gems_seq_ofs SEQ_DOWN_TUBES_2
+                gems_seq_ofs SEQ_DOWN_TUBES_3
+                gems_seq_ofs SEQ_DOWN_TUBES_4
+                gems_seq_ofs SEQ_DOWN_TUBES_5
+                gems_seq_ofs SEQ_DOWN_TUBES_6
+                gems_seq_ofs SEQ_DOWN_TUBES_7
+                gems_seq_ofs SEQ_DOWN_TUBES_8
+                gems_seq_ofs SEQ_DOWN_TUBES_9
+                gems_seq_ofs SEQ_DOWN_TUBES_10
+                gems_seq_ofs SEQ_DOWN_TUBES_11
+                gems_seq_ofs SEQ_DOWN_TUBES_12
 SEQH_INTESTINAL:dc.b 5                                  ; seq 4
-                gems_ofs SEQ_INTESTINAL
-                gems_ofs SEQ_INTESTINAL_2
-                gems_ofs SEQ_INTESTINAL_3
-                gems_ofs SEQ_INTESTINAL_4
-                gems_ofs SEQ_INTESTINAL_5
+                gems_seq_ofs SEQ_INTESTINAL
+                gems_seq_ofs SEQ_INTESTINAL_2
+                gems_seq_ofs SEQ_INTESTINAL_3
+                gems_seq_ofs SEQ_INTESTINAL_4
+                gems_seq_ofs SEQ_INTESTINAL_5
 SEQH_NJ_CITY:   dc.b 13                                 ; seq 5
-                gems_ofs SEQ_NJ_CITY
-                gems_ofs SEQ_NJ_CITY_2
-                gems_ofs SEQ_NJ_CITY_3
-                gems_ofs SEQ_NJ_CITY_4
-                gems_ofs SEQ_NJ_CITY_5
-                gems_ofs SEQ_NJ_CITY_6
-                gems_ofs SEQ_NJ_CITY_7
-                gems_ofs SEQ_NJ_CITY_8
-                gems_ofs SEQ_NJ_CITY_9
-                gems_ofs SEQ_NJ_CITY_10
-                gems_ofs SEQ_NJ_CITY_11
-                gems_ofs SEQ_NJ_CITY_12
-                gems_ofs SEQ_NJ_CITY_13
+                gems_seq_ofs SEQ_NJ_CITY
+                gems_seq_ofs SEQ_NJ_CITY_2
+                gems_seq_ofs SEQ_NJ_CITY_3
+                gems_seq_ofs SEQ_NJ_CITY_4
+                gems_seq_ofs SEQ_NJ_CITY_5
+                gems_seq_ofs SEQ_NJ_CITY_6
+                gems_seq_ofs SEQ_NJ_CITY_7
+                gems_seq_ofs SEQ_NJ_CITY_8
+                gems_seq_ofs SEQ_NJ_CITY_9
+                gems_seq_ofs SEQ_NJ_CITY_10
+                gems_seq_ofs SEQ_NJ_CITY_11
+                gems_seq_ofs SEQ_NJ_CITY_12
+                gems_seq_ofs SEQ_NJ_CITY_13
 SEQH_ANDYASTR:  dc.b 2                                  ; seq 6
-                gems_ofs SEQ_ANDYASTR
-                gems_ofs SEQ_ANDYASTR_1
+                gems_seq_ofs SEQ_ANDYASTR
+                gems_seq_ofs SEQ_ANDYASTR_1
 SEQH_ANDYASTR_2:dc.b 6                                  ; seq 7
-                gems_ofs SEQ_ANDYASTR_2
-                gems_ofs SEQ_ANDYASTR_3
-                gems_ofs SEQ_ANDYASTR_4
-                gems_ofs SEQ_ANDYASTR_5
-                gems_ofs SEQ_ANDYASTR_6
-                gems_ofs SEQ_ANDYASTR_7
+                gems_seq_ofs SEQ_ANDYASTR_2
+                gems_seq_ofs SEQ_ANDYASTR_3
+                gems_seq_ofs SEQ_ANDYASTR_4
+                gems_seq_ofs SEQ_ANDYASTR_5
+                gems_seq_ofs SEQ_ANDYASTR_6
+                gems_seq_ofs SEQ_ANDYASTR_7
 SEQH_ANDYASTR_8:dc.b 5                                  ; seq 8
-                gems_ofs SEQ_ANDYASTR_8
-                gems_ofs SEQ_ANDYASTR_9
-                gems_ofs SEQ_ANDYASTR_10
-                gems_ofs SEQ_ANDYASTR_11
-                gems_ofs SEQ_ANDYASTR_12
+                gems_seq_ofs SEQ_ANDYASTR_8
+                gems_seq_ofs SEQ_ANDYASTR_9
+                gems_seq_ofs SEQ_ANDYASTR_10
+                gems_seq_ofs SEQ_ANDYASTR_11
+                gems_seq_ofs SEQ_ANDYASTR_12
 SEQH_WHECK:     dc.b 8                                  ; seq 9
-                gems_ofs SEQ_WHECK
-                gems_ofs SEQ_WHECK_2
-                gems_ofs SEQ_WHECK_3
-                gems_ofs SEQ_WHECK_4
-                gems_ofs SEQ_WHECK_5
-                gems_ofs SEQ_WHECK_6
-                gems_ofs SEQ_WHECK_7
-                gems_ofs SEQ_WHECK_8
+                gems_seq_ofs SEQ_WHECK
+                gems_seq_ofs SEQ_WHECK_2
+                gems_seq_ofs SEQ_WHECK_3
+                gems_seq_ofs SEQ_WHECK_4
+                gems_seq_ofs SEQ_WHECK_5
+                gems_seq_ofs SEQ_WHECK_6
+                gems_seq_ofs SEQ_WHECK_7
+                gems_seq_ofs SEQ_WHECK_8
 SEQH_WHECK_9:   dc.b 1                                  ; seq 10
-                gems_ofs SEQ_WHECK_9
+                gems_seq_ofs SEQ_WHECK_9
 SEQH_WHECK_10:  dc.b 6                                  ; seq 11
-                gems_ofs SEQ_WHECK_10
-                gems_ofs SEQ_WHECK_11
-                gems_ofs SEQ_WHECK_12
-                gems_ofs SEQ_WHECK_13
-                gems_ofs SEQ_WHECK_14
-                gems_ofs SEQ_WHECK_15
+                gems_seq_ofs SEQ_WHECK_10
+                gems_seq_ofs SEQ_WHECK_11
+                gems_seq_ofs SEQ_WHECK_12
+                gems_seq_ofs SEQ_WHECK_13
+                gems_seq_ofs SEQ_WHECK_14
+                gems_seq_ofs SEQ_WHECK_15
 SEQH_WHECK_16:  dc.b 1                                  ; seq 12
-                gems_ofs SEQ_WHECK_16
+                gems_seq_ofs SEQ_WHECK_16
 SEQH_DARKNESS:  dc.b 3                                  ; seq 13
-                gems_ofs SEQ_DARKNESS
-                gems_ofs SEQ_DARKNESS_2
-                gems_ofs SEQ_DARKNESS_3
+                gems_seq_ofs SEQ_DARKNESS
+                gems_seq_ofs SEQ_DARKNESS_2
+                gems_seq_ofs SEQ_DARKNESS_3
 SEQH_ANDY_WIN:  dc.b 5                                  ; seq 14
-                gems_ofs SEQ_ANDY_WIN
-                gems_ofs SEQ_ANDY_WIN_1
-                gems_ofs SEQ_ANDY_WIN_2
-                gems_ofs SEQ_ANDY_WIN_3
-                gems_ofs SEQ_ANDY_WIN_4
+                gems_seq_ofs SEQ_ANDY_WIN
+                gems_seq_ofs SEQ_ANDY_WIN_1
+                gems_seq_ofs SEQ_ANDY_WIN_2
+                gems_seq_ofs SEQ_ANDY_WIN_3
+                gems_seq_ofs SEQ_ANDY_WIN_4
 SEQH_END_1:     dc.b 5                                  ; seq 15
-                gems_ofs SEQ_END_1
-                gems_ofs SEQ_END_2
-                gems_ofs SEQ_END_3
-                gems_ofs SEQ_END_4
-                gems_ofs SEQ_END_5
+                gems_seq_ofs SEQ_END_1
+                gems_seq_ofs SEQ_END_2
+                gems_seq_ofs SEQ_END_3
+                gems_seq_ofs SEQ_END_4
+                gems_seq_ofs SEQ_END_5
 SEQH_END_6:     dc.b 5                                  ; seq 16
-                gems_ofs SEQ_END_6
-                gems_ofs SEQ_END_7
-                gems_ofs SEQ_END_8
-                gems_ofs SEQ_END_9
-                gems_ofs SEQ_END_10
+                gems_seq_ofs SEQ_END_6
+                gems_seq_ofs SEQ_END_7
+                gems_seq_ofs SEQ_END_8
+                gems_seq_ofs SEQ_END_9
+                gems_seq_ofs SEQ_END_10
 SEQH_GAME_OVER: dc.b 1                                  ; seq 17
-                gems_ofs SEQ_GAME_OVER
+                gems_seq_ofs SEQ_GAME_OVER
 SEQH_BTVILLEH:  dc.b 5                                  ; seq 18
-                gems_ofs SEQ_BTVILLEH
-                gems_ofs SEQ_BTVILLEH_2
-                gems_ofs SEQ_BTVILLEH_3
-                gems_ofs SEQ_BTVILLEH_4
-                gems_ofs SEQ_BTVILLEH_5
+                gems_seq_ofs SEQ_BTVILLEH
+                gems_seq_ofs SEQ_BTVILLEH_2
+                gems_seq_ofs SEQ_BTVILLEH_3
+                gems_seq_ofs SEQ_BTVILLEH_4
+                gems_seq_ofs SEQ_BTVILLEH_5
 SEQH_EMPTY:     dc.b 0                                  ; seq 19
 SEQH_PSYCROW:   dc.b 5                                  ; seq 20
-                gems_ofs SEQ_PSYCROW
-                gems_ofs SEQ_PSYCROW_2
-                gems_ofs SEQ_PSYCROW_3
-                gems_ofs SEQ_PSYCROW_4
-                gems_ofs SEQ_PSYCROW_5
+                gems_seq_ofs SEQ_PSYCROW
+                gems_seq_ofs SEQ_PSYCROW_2
+                gems_seq_ofs SEQ_PSYCROW_3
+                gems_seq_ofs SEQ_PSYCROW_4
+                gems_seq_ofs SEQ_PSYCROW_5
 SEQH_THORNS:    dc.b 1                                  ; seq 21
-                gems_ofs SEQ_THORNS
+                gems_seq_ofs SEQ_THORNS
 SEQH_CROW:      dc.b 1                                  ; seq 22 vorona
-                gems_ofs SEQ_CROW
+                gems_seq_ofs SEQ_CROW
 SEQH_WHIP:      dc.b 1                                  ; seq 23
-                gems_ofs SEQ_WHIP
+                gems_seq_ofs SEQ_WHIP
 SEQH_PIM:       dc.b 1                                  ; seq 24
-                gems_ofs SEQ_PIM
+                gems_seq_ofs SEQ_PIM
 SEQH_COW:       dc.b 1                                  ; seq 25
-                gems_ofs SEQ_COW
+                gems_seq_ofs SEQ_COW
 SEQH_DOG:       dc.b 1                                  ; seq 26
-                gems_ofs SEQ_DOG
+                gems_seq_ofs SEQ_DOG
 SEQH_PETE_LIFT: dc.b 1                                  ; seq 27
-                gems_ofs SEQ_PETE_LIFT
+                gems_seq_ofs SEQ_PETE_LIFT
 SEQH_JIM_HIT:   dc.b 1                                  ; seq 28
-                gems_ofs SEQ_JIM_HIT
+                gems_seq_ofs SEQ_JIM_HIT
 SEQH_HAMSTER:   dc.b 1                                  ; seq 29
-                gems_ofs SEQ_HAMSTER
+                gems_seq_ofs SEQ_HAMSTER
 SEQH_GLASS:     dc.b 1                                  ; seq 30
-                gems_ofs SEQ_GLASS
+                gems_seq_ofs SEQ_GLASS
 SEQH_PETE_WOOF: dc.b 1                                  ; seq 31
-                gems_ofs SEQ_PETE_WOOF
+                gems_seq_ofs SEQ_PETE_WOOF
 SEQH_UFO:       dc.b 1                                  ; seq 32
-                gems_ofs SEQ_UFO
+                gems_seq_ofs SEQ_UFO
 SEQH_CAT_MEOW:  dc.b 1                                  ; seq 33
-                gems_ofs SEQ_CAT_MEOW
+                gems_seq_ofs SEQ_CAT_MEOW
 SEQH_SNOT:      dc.b 1                                  ; seq 34
-                gems_ofs SEQ_SNOT
+                gems_seq_ofs SEQ_SNOT
 SEQH_RUMBLE:    dc.b 1                                  ; seq 35
-                gems_ofs SEQ_RUMBLE
+                gems_seq_ofs SEQ_RUMBLE
 SEQH_MONKEY:    dc.b 1                                  ; seq 36
-                gems_ofs SEQ_MONKEY
+                gems_seq_ofs SEQ_MONKEY
 SEQH_CHEATER:   dc.b 1                                  ; seq 37
-                gems_ofs SEQ_CHEATER
+                gems_seq_ofs SEQ_CHEATER
 SEQH_LIVEUP:    dc.b 1                                  ; seq 38
-                gems_ofs SEQ_LIVEUP
+                gems_seq_ofs SEQ_LIVEUP
 SEQH_HEADGUN:   dc.b 1                                  ; seq 39
-                gems_ofs SEQ_HEADGUN
+                gems_seq_ofs SEQ_HEADGUN
 SEQH_EJIM_TITLE:dc.b 1                                  ; seq 40
-                gems_ofs SEQ_EJIM_TITLE
+                gems_seq_ofs SEQ_EJIM_TITLE
 SEQH_REFREGER:  dc.b 1                                  ; seq 41
-                gems_ofs SEQ_REFREGER
+                gems_seq_ofs SEQ_REFREGER
 SEQH_RUMBLE_2:  dc.b 1                                  ; seq 42
-                gems_ofs SEQ_RUMBLE_2
+                gems_seq_ofs SEQ_RUMBLE_2
 SEQH_SPRING:    dc.b 1                                  ; seq 43
-                gems_ofs SEQ_SPRING
+                gems_seq_ofs SEQ_SPRING
 SEQH_ROCKET:    dc.b 1                                  ; seq 44
-                gems_ofs SEQ_ROCKET
+                gems_seq_ofs SEQ_ROCKET
 SEQH_TICK:      dc.b 1                                  ; seq 45
-                gems_ofs SEQ_TICK
+                gems_seq_ofs SEQ_TICK
 SEQH_DOOR:      dc.b 1                                  ; seq 46
-                gems_ofs SEQ_DOOR
+                gems_seq_ofs SEQ_DOOR
 SEQH_DOOR_CREAK:dc.b 1                                  ; seq 47
-                gems_ofs SEQ_DOOR_CREAK
+                gems_seq_ofs SEQ_DOOR_CREAK
 SEQH_BURST:     dc.b 1                                  ; seq 48
-                gems_ofs SEQ_BURST
+                gems_seq_ofs SEQ_BURST
 SEQH_TIRE_JUMP: dc.b 1                                  ; seq 49
-                gems_ofs SEQ_TIRE_JUMP
+                gems_seq_ofs SEQ_TIRE_JUMP
 SEQH_LEVER:     dc.b 1                                  ; seq 50
-                gems_ofs SEQ_LEVER
+                gems_seq_ofs SEQ_LEVER
 SEQH_HEART:     dc.b 1                                  ; seq 51
-                gems_ofs SEQ_HEART
+                gems_seq_ofs SEQ_HEART
 SEQH_MONSTER:   dc.b 1                                  ; seq 52
-                gems_ofs SEQ_MONSTER
+                gems_seq_ofs SEQ_MONSTER
 SEQH_DOG_2:     dc.b 1                                  ; seq 53
-                gems_ofs SEQ_DOG_2
+                gems_seq_ofs SEQ_DOG_2
 SEQH_CHUCK:     dc.b 1                                  ; seq 54
-                gems_ofs SEQ_CHUCK
+                gems_seq_ofs SEQ_CHUCK
 SEQH_CHUCK_2:   dc.b 1                                  ; seq 55
-                gems_ofs SEQ_CHUCK_2
+                gems_seq_ofs SEQ_CHUCK_2
 SEQH_SNOT_2:    dc.b 1                                  ; seq 56
-                gems_ofs SEQ_SNOT_2
+                gems_seq_ofs SEQ_SNOT_2
 SEQH_UFO_2:     dc.b 1                                  ; seq 57
-                gems_ofs SEQ_UFO_2
+                gems_seq_ofs SEQ_UFO_2
 SEQH_CHUCK_3:   dc.b 1                                  ; seq 58
-                gems_ofs SEQ_CHUCK_3
+                gems_seq_ofs SEQ_CHUCK_3
 SEQH_JIM_GROUND:dc.b 1                                  ; seq 59
-                gems_ofs SEQ_JIM_GROUND
+                gems_seq_ofs SEQ_JIM_GROUND
 SEQH_BONUS:     dc.b 1                                  ; seq 60
-                gems_ofs SEQ_BONUS
+                gems_seq_ofs SEQ_BONUS
 SEQH_SCREAM:    dc.b 1                                  ; seq 61
-                gems_ofs SEQ_SCREAM
+                gems_seq_ofs SEQ_SCREAM
 SEQH_DOG_3:     dc.b 1                                  ; seq 62
-                gems_ofs SEQ_DOG_3
+                gems_seq_ofs SEQ_DOG_3
 SEQH_RICOCHET:  dc.b 1                                  ; seq 63
-                gems_ofs SEQ_RICOCHET
+                gems_seq_ofs SEQ_RICOCHET
 SEQH_DOG_4:     dc.b 1                                  ; seq 64
-                gems_ofs SEQ_DOG_4
+                gems_seq_ofs SEQ_DOG_4
 SEQH_ROCKET_2:  dc.b 2                                  ; seq 65
-                gems_ofs SEQ_ROCKET_2
-                gems_ofs SEQ_ROCKET_3
+                gems_seq_ofs SEQ_ROCKET_2
+                gems_seq_ofs SEQ_ROCKET_3
 SEQH_QUEEN_1:   dc.b 1                                  ; seq 66
-                gems_ofs SEQ_QUEEN_1
+                gems_seq_ofs SEQ_QUEEN_1
 SEQH_QUEEN_2:   dc.b 1                                  ; seq 67
-                gems_ofs SEQ_QUEEN_2
+                gems_seq_ofs SEQ_QUEEN_2
 SEQH_TUBE_OUT:  dc.b 1                                  ; seq 68
-                gems_ofs SEQ_TUBE_OUT
+                gems_seq_ofs SEQ_TUBE_OUT
 SEQH_PSYQ_FIRE: dc.b 3                                  ; seq 69
-                gems_ofs SEQ_PSYQ_FIRE
-                gems_ofs SEQ_EFFECT_4
-                gems_ofs SEQ_EFFECT_5
+                gems_seq_ofs SEQ_PSYQ_FIRE
+                gems_seq_ofs SEQ_EFFECT_4
+                gems_seq_ofs SEQ_EFFECT_5
 SEQH_JIM_FIRE:  dc.b 1                                  ; seq 70
-                gems_ofs SEQ_JIM_FIRE
+                gems_seq_ofs SEQ_JIM_FIRE
 SEQH_HELI_PART: dc.b 1                                  ; seq 71
-                gems_ofs SEQ_HELI_PART
+                gems_seq_ofs SEQ_HELI_PART
 SEQH_PLASMA_FIRE:dc.b 2                                 ; seq 72
-                gems_ofs SEQ_PLASMA_FIRE
-                gems_ofs SEQ_PLASMA_END
+                gems_seq_ofs SEQ_PLASMA_FIRE
+                gems_seq_ofs SEQ_PLASMA_END
 SEQH_HP_UP:     dc.b 1                                  ; seq 73
-                gems_ofs SEQ_HP_UP
+                gems_seq_ofs SEQ_HP_UP
 SEQH_DESTROY:   dc.b 1                                  ; seq 74
-                gems_ofs SEQ_DESTROY
+                gems_seq_ofs SEQ_DESTROY
 SEQH_FIRE:      dc.b 1                                  ; seq 75
-                gems_ofs SEQ_FIRE
+                gems_seq_ofs SEQ_FIRE
 SEQH_FIRE_2:    dc.b 1                                  ; seq 76
-                gems_ofs SEQ_FIRE_2
+                gems_seq_ofs SEQ_FIRE_2
 SEQH_FIRE_3:    dc.b 1                                  ; seq 77
-                gems_ofs SEQ_FIRE_3
+                gems_seq_ofs SEQ_FIRE_3
 SEQH_SCREAM_2:  dc.b 1                                  ; seq 78
-                gems_ofs SEQ_SCREAM_2
+                gems_seq_ofs SEQ_SCREAM_2
 SEQH_CHICKEN:   dc.b 1                                  ; seq 79
-                gems_ofs SEQ_CHICKEN
+                gems_seq_ofs SEQ_CHICKEN
 SEQH_CHICKEN_2: dc.b 1                                  ; seq 80
-                gems_ofs SEQ_CHICKEN_2
+                gems_seq_ofs SEQ_CHICKEN_2
 SEQH_CH_TELEPRT:dc.b 1                                  ; seq 81
-                gems_ofs SEQ_CH_TELEPRT
+                gems_seq_ofs SEQ_CH_TELEPRT
 SEQH_TELEPORT:  dc.b 1                                  ; seq 82
-                gems_ofs SEQ_TELEPORT
+                gems_seq_ofs SEQ_TELEPORT
 SEQH_EFFECT:    dc.b 1                                  ; seq 83
-                gems_ofs SEQ_EFFECT
+                gems_seq_ofs SEQ_EFFECT
 SEQH_WTR_PLOP:  dc.b 1                                  ; seq 84
-                gems_ofs SEQ_WTR_PLOP
+                gems_seq_ofs SEQ_WTR_PLOP
 SEQH_WTR_PLOP_2:dc.b 1                                  ; seq 85
-                gems_ofs SEQ_WTR_PLOP_2
+                gems_seq_ofs SEQ_WTR_PLOP_2
 SEQH_WTR_PLOP_3:dc.b 1                                  ; seq 86
-                gems_ofs SEQ_WTR_PLOP_3
+                gems_seq_ofs SEQ_WTR_PLOP_3
 SEQH_WTR_PLOP_4:dc.b 1                                  ; seq 87
-                gems_ofs SEQ_WTR_PLOP_4
+                gems_seq_ofs SEQ_WTR_PLOP_4
 SEQH_GROOVY:    dc.b 1                                  ; seq 88
-                gems_ofs SEQ_GROOVY
+                gems_seq_ofs SEQ_GROOVY
 SEQH_JIM_MUSCLE:dc.b 1                                  ; seq 89
-                gems_ofs SEQ_JIM_MUSCLE
+                gems_seq_ofs SEQ_JIM_MUSCLE
 SEQH_JIM_HEY:   dc.b 1                                  ; seq 90
-                gems_ofs SEQ_JIM_HEY
+                gems_seq_ofs SEQ_JIM_HEY
 SEQH_PRINCESS:  dc.b 1                                  ; seq 91
-                gems_ofs SEQ_PRINCESS
+                gems_seq_ofs SEQ_PRINCESS
 SEQH_SCREAM_3:  dc.b 1                                  ; seq 92
-                gems_ofs SEQ_SCREAM_3
+                gems_seq_ofs SEQ_SCREAM_3
 SEQH_JIM_SWEARS:dc.b 1                                  ; seq 93
-                gems_ofs SEQ_JIM_SWEARS
+                gems_seq_ofs SEQ_JIM_SWEARS
 SEQH_SCREAM_4:  dc.b 1                                  ; seq 94
-                gems_ofs SEQ_SCREAM_4
+                gems_seq_ofs SEQ_SCREAM_4
 SEQH_JIM_HIT_2: dc.b 1                                  ; seq 95
-                gems_ofs SEQ_JIM_HIT_2
+                gems_seq_ofs SEQ_JIM_HIT_2
 SEQH_SCREAM_5:  dc.b 1                                  ; seq 96
-                gems_ofs SEQ_SCREAM_5
+                gems_seq_ofs SEQ_SCREAM_5
 SEQH_JIM_SPEED: dc.b 1                                  ; seq 97
-                gems_ofs SEQ_JIM_SPEED
+                gems_seq_ofs SEQ_JIM_SPEED
 SEQH_JIM_YEHOO: dc.b 1                                  ; seq 98
-                gems_ofs SEQ_JIM_YEHOO
+                gems_seq_ofs SEQ_JIM_YEHOO
 SEQH_JIM_WUUH:  dc.b 1                                  ; seq 99
-                gems_ofs SEQ_JIM_WUUH
+                gems_seq_ofs SEQ_JIM_WUUH
 SEQH_JIM_AMMO:  dc.b 1                                  ; seq 100
-                gems_ofs SEQ_JIM_AMMO
+                gems_seq_ofs SEQ_JIM_AMMO
 SEQH_SCREAM_6:  dc.b 1                                  ; seq 101
-                gems_ofs SEQ_SCREAM_6
+                gems_seq_ofs SEQ_SCREAM_6
 SEQH_JIM_LALALA:dc.b 1                                  ; seq 102
-                gems_ofs SEQ_JIM_LALALA
+                gems_seq_ofs SEQ_JIM_LALALA
 SEQH_HOUL:      dc.b 1                                  ; seq 103
-                gems_ofs SEQ_HOUL
+                gems_seq_ofs SEQ_HOUL
 SEQH_COW_2:     dc.b 1                                  ; seq 104
-                gems_ofs SEQ_COW_2
+                gems_seq_ofs SEQ_COW_2
 SEQH_HOUL_2:    dc.b 1                                  ; seq 105
-                gems_ofs SEQ_HOUL_2
+                gems_seq_ofs SEQ_HOUL_2
 SEQH_JIM_HOUYEAH:dc.b 1                                 ; seq 106
-                gems_ofs SEQ_JIM_HOUYEAH
+                gems_seq_ofs SEQ_JIM_HOUYEAH
 SEQH_JIM_OUCH:  dc.b 1                                  ; seq 107
-                gems_ofs SEQ_JIM_OUCH
+                gems_seq_ofs SEQ_JIM_OUCH
 SEQH_JIM_AYAU:  dc.b 1                                  ; seq 108
-                gems_ofs SEQ_JIM_AYAU
+                gems_seq_ofs SEQ_JIM_AYAU
 SEQH_JIM_DAU:   dc.b 1                                  ; seq 109
-                gems_ofs SEQ_JIM_DAU
+                gems_seq_ofs SEQ_JIM_DAU
 SEQH_JIM_PLASMA:dc.b 1                                  ; seq 110
-                gems_ofs SEQ_JIM_PLASMA
+                gems_seq_ofs SEQ_JIM_PLASMA
 SEQH_JIM_AAAH:  dc.b 1                                  ; seq 111
-                gems_ofs SEQ_JIM_AAAH
+                gems_seq_ofs SEQ_JIM_AAAH
 SEQH_SCRATCH:   dc.b 1                                  ; seq 112
-                gems_ofs SEQ_SCRATCH
+                gems_seq_ofs SEQ_SCRATCH
 SEQH_SCRATCH_2: dc.b 1                                  ; seq 113
-                gems_ofs SEQ_SCRATCH_2
+                gems_seq_ofs SEQ_SCRATCH_2
 SEQH_PRISONER:  dc.b 1                                  ; seq 114
-                gems_ofs SEQ_PRISONER
+                gems_seq_ofs SEQ_PRISONER
 SEQH_SCREAM_7:  dc.b 1                                  ; seq 115
-                gems_ofs SEQ_SCREAM_7
+                gems_seq_ofs SEQ_SCREAM_7
 SEQH_DEMON:     dc.b 1                                  ; seq 116
-                gems_ofs SEQ_DEMON
+                gems_seq_ofs SEQ_DEMON
 SEQH_DEMON_2:   dc.b 1                                  ; seq 117
-                gems_ofs SEQ_DEMON_2
+                gems_seq_ofs SEQ_DEMON_2
 SEQH_EFFECT_2:  dc.b 1                                  ; seq 118
-                gems_ofs SEQ_EFFECT_2
+                gems_seq_ofs SEQ_EFFECT_2
 SEQH_EFFECT_3:  dc.b 1                                  ; seq 119
-                gems_ofs SEQ_EFFECT_3
+                gems_seq_ofs SEQ_EFFECT_3
 SEQH_PSYQ_HIT:  dc.b 1                                  ; seq 120
-                gems_ofs SEQ_PSYQ_HIT
+                gems_seq_ofs SEQ_PSYQ_HIT
 SEQH_PSYQ_HIT_2:dc.b 1                                  ; seq 121
-                gems_ofs SEQ_PSYQ_HIT_2
+                gems_seq_ofs SEQ_PSYQ_HIT_2
 SEQH_PSYQ_HIT_3:dc.b 1                                  ; seq 122
-                gems_ofs SEQ_PSYQ_HIT_3
+                gems_seq_ofs SEQ_PSYQ_HIT_3
 SEQH_PSYQ_HIT_4:dc.b 1                                  ; seq 123
-                gems_ofs SEQ_PSYQ_HIT_4
+                gems_seq_ofs SEQ_PSYQ_HIT_4
 SEQH_PSYQ_HIT_5:dc.b 1                                  ; seq 124
-                gems_ofs SEQ_PSYQ_HIT_5
+                gems_seq_ofs SEQ_PSYQ_HIT_5
 SEQ_PETER_PUPPY:dc.b $C0, $6A, $1E, $64, $7F, $C0, $63, $61, $47, $68, $28, $82, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6
                 dc.b $30, $30, $35, $30, $CC, $30, $35, $C6, $30, $30, $35, $37, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6
                 dc.b $30, $30, $35, $30, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6, $30, $30, $35, $30, $CC, $30, $35, $C6

@@ -1,5 +1,5 @@
 ; ------------- text control codes -------------
-; Управляющие байты (< $20) в строках write_text / sub_24C710 (fun_texts).
+; Управляющие байты (< $20) в строках write_text / draw_funchar_text (fun_texts).
 ; Обработчики: funchar_control_codes_table -> txtcode_XX_*
 
 TXT_END         equ $00 ; Конец строки

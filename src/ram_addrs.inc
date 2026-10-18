@@ -25,8 +25,8 @@ word_FF9B4A equ $FFFF9B4A
 dword_FF9B4C equ $FFFF9B4C
 unk_FF9B52 equ $FFFF9B52
 unk_FF9F52 equ $FFFF9F52
-dword_FFA65A equ $FFFFA65A
-dword_FFA65E equ $FFFFA65E
+script_yield_addr equ $FFFFA65A ; адрес возврата для команд скрипта "остановиться на этот кадр": сохраняет указатель скрипта a2 в объект (loc_249224 для анимации, loc_24AAEC для движения). Используют подменой (sp) перед rts
+script_abort_addr equ $FFFFA65E ; адрес возврата для команд скрипта "закончить с объектом": переход к следующему объекту без сохранения указателя (loc_249228 для анимации, loc_24AAF0 для движения)
 is_move_script equ $FFFFA662
 level_scroll_proc equ $FFFFA664
 teleport_data_offset equ $FFFFA668
@@ -131,7 +131,7 @@ objects_map_memory equ $FFFFB868
 unk_FFB86A equ $FFFFB86A
 unk_FFB86B equ $FFFFB86B
 unk_FFFBD8 equ $FFFFFBD8
-dword_FFFBDC equ $FFFFFBDC
+level_palette_ptr equ $FFFFFBDC ; указатель на палитру текущего уровня (4 линии, 64 цвета) из level_config+$20; пишет load_level_palette, обнуляет sub_24790A
 word_FFFBE0 equ $FFFFFBE0
 vdp_ctrl_counter equ $FFFFFBE2
 font_params equ $FFFFFBE4
@@ -155,11 +155,11 @@ is_jim_move_right equ $FFFFFC82
 is_jim_move_left equ $FFFFFC83
 is_jim_upping equ $FFFFFC84 ; Когда нажата вверх - true
 is_jim_downing equ $FFFFFC85 ; Когда нажата вниз - true
-dword_FFFC86 equ $FFFFFC86
-dword_FFFC8A equ $FFFFFC8A
-dword_FFFC8E equ $FFFFFC8E
-dword_FFFC92 equ $FFFFFC92
-dword_FFFC96 equ $FFFFFC96
+submarine_obj_ptr equ $FFFFFC86 ; указатель на объект подводной лодки (id $40); ставит spawn_submarine, при удалении лодки в update_objects_motion удаляются и все её части
+submarine_turbine_left_ptr equ $FFFFFC8A ; левая турбина лодки (id $96, stru_25B1BC), смещение -$2A,+$1B; кадр по submarine_turbines_angle (off_C120) в submarine_update_turbines
+submarine_turbine_right_ptr equ $FFFFFC8E ; правая турбина лодки (id $97, отзеркалена), смещение +$2A,+$1B
+submarine_air_left_ptr equ $FFFFFC92 ; левый выход воздуха с пузырями (stru_25B1D4, anim_submarine_air): скрывается каждый кадр в submarine_hide_air, показывается в submarine_show_air при нажатии whip/fire/jump; кадр по углу (off_C220)
+submarine_air_right_ptr equ $FFFFFC96 ; правый выход воздуха с пузырями (отзеркален), см. submarine_air_left_ptr
 word_FFFC9A equ $FFFFFC9A
 word_FFFC9C equ $FFFFFC9C
 word_FFFC9E equ $FFFFFC9E
@@ -174,8 +174,8 @@ word_FFFCB2 equ $FFFFFCB2
 word_FFFCB4 equ $FFFFFCB4
 word_FFFCB8 equ $FFFFFCB8
 word_FFFCBA equ $FFFFFCBA
-word_FFFCBC equ $FFFFFCBC
-word_FFFCBE equ $FFFFFCBE
+obj_prev_x equ $FFFFFCBC ; X объекта (2(a1)) до выполнения скрипта движения в update_objects_motion; в конце dX = X - obj_prev_x пишется в $1C(a1)
+obj_prev_y equ $FFFFFCBE ; Y объекта (4(a1)) до выполнения скрипта движения в update_objects_motion; в конце dY = Y - obj_prev_y пишется в $1D(a1)
 word_FFFCC4 equ $FFFFFCC4
 word_FFFCC6 equ $FFFFFCC6
 word_FFFCC8 equ $FFFFFCC8
@@ -231,8 +231,8 @@ is_jim_on_chain equ $FFFFFD14 ;Джим реально висит/лезет п�
 is_jim_on_rocket equ $FFFFFD15
 byte_FFFD16 equ $FFFFFD16
 byte_FFFD17 equ $FFFFFD17
-word_FFFD18 equ $FFFFFD18
-word_FFFD1A equ $FFFFFD1A
+submarine_x_frac equ $FFFFFD18 ; дробная часть X подлодки: в update_objects_motion младший байт скорости $18(a1) (8.8) копится сюда, при переносе X (2(a1)) ±1 пиксель
+submarine_y_frac equ $FFFFFD1A ; дробная часть Y подлодки: то же для скорости $1A(a1) и Y (4(a1))
 byte_FFFD1C equ $FFFFFD1C
 byte_FFFD1E equ $FFFFFD1E
 jim_dead_enable equ $FFFFFD21
@@ -257,7 +257,7 @@ magnet_box_spawned equ $FFFFFD37
 byte_FFFD38 equ $FFFFFD38
 byte_FFFD39 equ $FFFFFD39
 screen_shake_phase equ $FFFFFD3A
-active_objects_count equ $FFFFFD3D ; число занятых слотов объектов, считается в sub_24A766; скрипты проверяют $F441,$FD3D,$10 (лимит выстрелов)
+active_objects_count equ $FFFFFD3D ; число занятых слотов объектов, считается в update_objects_motion; скрипты проверяют $F441,$FD3D,$10 (лимит выстрелов)
 eyes_generator_valve_state equ $FFFFFD3E ; состояние вентиля Monkey Head / генератора глаз: spawn_eyes_generator_closed ставит 1, anim_monkey_head_2 пишет 1/5/6 через $ED01
 pal_flash_delay equ $FFFFFD3F ; счётчик кадров 0..2 между шагами вспышки палитры (sub_24F644)
 pal_flash_active equ $FFFFFD40 ; вспышка палитры активна: построчная загрузка word_1B7CAC/word_1B7E3C в CRAM, запуск случайный (шанс растёт с jim_x)
@@ -474,7 +474,7 @@ is_jim_off_gravity equ $FFFFFF78
 joypad_state equ $FFFFFF7A
 word_FFFF7C equ $FFFFFF7C
 byte_FFFF80 equ $FFFFFF80
-dword_FFFF82 equ $FFFFFF82
+level_order_ptr equ $FFFFFF82 ; указатель на следующую пару (тип, уровень) в level_order_table; сбрасывает sub_247652 при новой игре, двигает oksub_2459F0 после уровня, ставит cheat_menu, читает босс Psy-Crow (sub_25049A)
 demo_stream_ptr equ $FFFFFF86
 demo_index equ $FFFFFF8A
 word_FFFF8C equ $FFFFFF8C

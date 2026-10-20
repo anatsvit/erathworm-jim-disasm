@@ -17,9 +17,9 @@ cheat_cursor_position equ $FFFF993C
 map_view_mode equ $FFFF993D
 byte_FF993E equ $FFFF993E
 byte_FF993F equ $FFFF993F
-byte_FF9940 equ $FFFF9940
-byte_FF9941 equ $FFFF9941
-unk_FF9942 equ $FFFF9942
+cheat_input_timer equ $FFFF9940 ; ввод чит-кода: кадров до сброса ввода, $B4 (3 с) после каждого нажатия/шага, на 0 - cheat_input_reset
+cheat_input_pos equ $FFFF9941 ; ввод чит-кода: номер шага 0..7, на 8-м буфер сверяется с cheat_codes_buttons; $FF - ждать, пока отпустят все кнопки
+cheat_input_buf equ $FFFF9942 ; ввод чит-кода: 8 байт, кнопки каждого шага (OR всех нажатых, пока шаг держат)
 vram_block_addr_table equ $FFFF994A
 word_FF9B4A equ $FFFF9B4A
 dword_FF9B4C equ $FFFF9B4C
@@ -50,9 +50,9 @@ word_FFA68C equ $FFFFA68C
 word_FFA68E equ $FFFFA68E
 word_FFA690 equ $FFFFA690
 selectedLevelOption equ $FFFFA692
-dword_FFA694 equ $FFFFA694
-word_FFA698 equ $FFFFA698
-word_FFA69A equ $FFFFA69A
+scroll_edge_map_ptr equ $FFFFA694 ; указатель в карту уровня на первый блок только что открывшейся при скролле колонки/строки; пишут процедуры дорисовки края (draw_map_column_left, draw_map_column_right, draw_map_row_bottom, draw_map_row_top), читают спавнеры spawn_column_left/right, spawn_row_top/bottom
+spawn_block_x equ $FFFFA698 ; X блока карты (кратно 16), для которого вызван спавнер из object_spawners; к нему прибавляется spawn_offset_x
+spawn_block_y equ $FFFFA69A ; Y блока карты (кратно 16), для которого вызван спавнер из object_spawners; к нему прибавляется spawn_offset_y
 whip_button_proc equ $FFFFA69C
 fire_button_proc equ $FFFFA6A0
 jump_button_proc equ $FFFFA6A4
@@ -118,25 +118,25 @@ obj_pool_ad96 equ $FFFFAFE4
 obj_pool_ad1e equ $FFFFB23E
 unk_FFB2EA equ $FFFFB2EA
 unk_FFB340 equ $FFFFB340
-unk_FFB396 equ $FFFFB396
-unk_FFB416 equ $FFFFB416
+map_row_vram_cmd equ $FFFFB396 ; 32 swap-команды VDP VRAM-write на начало каждой строки тайлов plane с картой уровня ($C000 или $E000 при level_map_on_plane_b, шаг $80/$40 по ширине planes); строит build_row_addr_table, читают отрисовка карты sub_247940 и вывод символа write_char
+map_row_vram_cmd_copy equ $FFFFB416 ; копия map_row_vram_cmd (32 long), пишется в build_row_addr_table, нигде не читается
 unk_FFB496 equ $FFFFB496
 unk_FFB498 equ $FFFFB498
 unk_FFB4A4 equ $FFFFB4A4
-unk_FFB4C4 equ $FFFFB4C4
+cram_work_buf equ $FFFFB4C4 ; рабочая копия 64 цветов CRAM для плавных затемнений/переходов палитры (fade_cram_step и др.)
 dword_FFB544 equ $FFFFB544
 level_map_pointers equ $FFFFB548
 unk_FFB54C equ $FFFFB54C
 objects_map_memory equ $FFFFB868
 unk_FFB86A equ $FFFFB86A
-unk_FFB86B equ $FFFFB86B
+block_spawner_ids equ $FFFFB86B ; номер спавнера (индекс object_spawners) по номеру блока карты (слово карты/2), 0 - без объекта
 unk_FFFBD8 equ $FFFFFBD8
 level_palette_ptr equ $FFFFFBDC ; указатель на палитру текущего уровня (4 линии, 64 цвета) из level_config+$20; пишет load_level_palette, обнуляет sub_24790A
 word_FFFBE0 equ $FFFFFBE0
 vdp_ctrl_counter equ $FFFFFBE2
 font_params equ $FFFFFBE4
 word_FFFBE6 equ $FFFFFBE6
-byte_FFFBE8 equ $FFFFFBE8
+pause_screen_active equ $FFFFFBE8 ; ставится на время цикла паузы в pause_handler, по имени нигде не читается
 byte_FFFBEB equ $FFFFFBEB
 is_jim_fire equ $FFFFFBEC
 byte_FFFBED equ $FFFFFBED
@@ -150,7 +150,7 @@ bullets_count equ $FFFFFBF4
 unk_FFFBFB equ $FFFFFBFB
 jim_health equ $FFFFFBFC
 byte_FFFC01 equ $FFFFFC01
-vram_alloc_table equ $FFFFFC02
+vram_alloc_table equ $FFFFFC02 ; занятость VRAM под графику объектов, байт на блок (0/$FF), $80 блоков; выделяет alloc_obj_vram по obj+$29, адрес из vram_block_addr_table; чистит clear_vram_alloc_and_vars (вместе с переменными до $FFFD9F)
 is_jim_move_right equ $FFFFFC82
 is_jim_move_left equ $FFFFFC83
 is_jim_upping equ $FFFFFC84 ; Когда нажата вверх - true
@@ -166,8 +166,8 @@ word_FFFC9E equ $FFFFFC9E
 submarine_air_seconds_left equ $FFFFFCA0 ; запас воздуха в подлодке (Down the Tubes), старт 30, тик по submarine_air_tick_timer=$41 кадров, потолок заправки air_refiller_seconds
 screen_shake_sprite_offset equ $FFFFFCA2
 word_FFFCA4 equ $FFFFFCA4
-word_FFFCA6 equ $FFFFFCA6
-word_FFFCA8 equ $FFFFFCA8
+bg_b_auto_scroll equ $FFFFFCA6 ; авто-прокрутка фона plane B: в тоннеле Andy Asteroids = andy_tunnel_hscroll_acc>>2 (добавка к hscroll), в sub_251CB6 +1 за кадр (к hscroll и против camera_y во vscroll)
+andy_tunnel_vscroll equ $FFFFFCA8 ; Andy Asteroids, тоннель: вертикальный сдвиг plane B, вычитается из vscroll колонок в VSRAM в andy_asteroids_tunnel_bg
 word_FFFCAE equ $FFFFFCAE
 word_FFFCB0 equ $FFFFFCB0
 word_FFFCB2 equ $FFFFFCB2
@@ -196,10 +196,10 @@ word_FFFCEA equ $FFFFFCEA
 word_FFFCEC equ $FFFFFCEC
 word_FFFCEE equ $FFFFFCEE
 word_FFFCF0 equ $FFFFFCF0
-scroll_redraw_left equ $FFFFFCF3 ; камера сдвинулась влево (camera_x уменьшен), oksub_247FD2 вызывает sub_248024 и сбрасывает
-scroll_redraw_right equ $FFFFFCF4 ; камера сдвинулась вправо (camera_x увеличен), oksub_247FD2 вызывает sub_24811E и сбрасывает
-scroll_redraw_up equ $FFFFFCF5 ; камера сдвинулась вверх (camera_y уменьшен), oksub_247FD2 вызывает sub_248330 и сбрасывает
-scroll_redraw_down equ $FFFFFCF6 ; камера сдвинулась вниз (camera_y увеличен), oksub_247FD2 вызывает sub_248228 и сбрасывает
+scroll_redraw_left equ $FFFFFCF3 ; камера сдвинулась влево (camera_x уменьшен), redraw_scroll_edges вызывает draw_map_column_left и сбрасывает
+scroll_redraw_right equ $FFFFFCF4 ; камера сдвинулась вправо (camera_x увеличен), redraw_scroll_edges вызывает draw_map_column_right и сбрасывает
+scroll_redraw_up equ $FFFFFCF5 ; камера сдвинулась вверх (camera_y уменьшен), redraw_scroll_edges вызывает draw_map_row_top и сбрасывает
+scroll_redraw_down equ $FFFFFCF6 ; камера сдвинулась вниз (camera_y увеличен), redraw_scroll_edges вызывает draw_map_row_bottom и сбрасывает
 jim_platforms_disabled equ $FFFFFCF7 ; Джим проваливается сквозь платформы: jim_platform_collision не приземляет. Ставит activity sub_24E5EA (ROM:578C), сбрасывает sub_24E5F2 (ROM:5790); блокирует переключение word_FFFCC6 в sub_24E5FA
 is_jim_jumping equ $FFFFFCF8
 jump_hold_timer equ $FFFFFCF9
@@ -345,8 +345,8 @@ dword_FFFDA0 equ $FFFFFDA0
 dword_FFFDA8 equ $FFFFFDA8
 menu_selected_item equ $FFFFFDAC
 word_FFFDAE equ $FFFFFDAE
-word_FFFDB0 equ $FFFFFDB0
-word_FFFDB2 equ $FFFFFDB2
+andy_jim_progress_y equ $FFFFFDB0 ; Andy Asteroids: оставшийся путь Джима 0..$A0, Y-смещение значка Джима на HUD-индикаторе гонки (Y=$9C+знач, X=$A0), sub_246FFC
+andy_psycrow_progress_y equ $FFFFFDB2 ; Andy Asteroids: оставшийся путь Psy-Crow 0..$A0 (с поправкой на obj_01_tunnel_dist), Y-смещение его значка на HUD-индикаторе (X=$89), sub_246FB4
 word_FFFDB4 equ $FFFFFDB4
 chain_climb_anim_offset equ $FFFFFDB6 ; фаза лазания по цепи: смещение в stru_1ADC0C (24 записи по 6 байт - анимация + шаг по X), шаг +6, сброс на $90
 dword_FFFDB8 equ $FFFFFDB8
@@ -355,8 +355,8 @@ word_FFFDC4 equ $FFFFFDC4
 ammo_adding_buffer equ $FFFFFDC6
 health_buffer equ $FFFFFDC8
 word_FFFDCA equ $FFFFFDCA
-spawn_offset_x equ $FFFFFDCC ; смещение точки спавна по X от ячейки карты word_FFA698: $FFF0 - левый край экрана, $150 - правый
-spawn_offset_y equ $FFFFFDCE ; смещение точки спавна по Y от ячейки карты word_FFA69A: $F0 - верх экрана, $1E0 - низ
+spawn_offset_x equ $FFFFFDCC ; смещение точки спавна по X от ячейки карты spawn_block_x: $FFF0 - левый край экрана, $150 - правый
+spawn_offset_y equ $FFFFFDCE ; смещение точки спавна по Y от ячейки карты spawn_block_y: $F0 - верх экрана, $1E0 - низ
 word_FFFDD4 equ $FFFFFDD4
 word_FFFDD6 equ $FFFFFDD6
 shot_angle_target equ $FFFFFDD8
@@ -368,20 +368,20 @@ is_jim_ropejumper equ $FFFFFDDF
 byte_FFFDE0 equ $FFFFFDE0
 byte_FFFDE1 equ $FFFFFDE1
 byte_FFFDE2 equ $FFFFFDE2
-byte_FFFDE3 equ $FFFFFDE3
+game_paused equ $FFFFFDE3 ; != 0 - идёт цикл паузы в pause_handler; обнуление (чит карты в cheat_code, сброс уровня) выводит из паузы
 funchar_text_id equ $FFFFFDE4
-byte_FFFDE5 equ $FFFFFDE5
+level_map_on_plane_b equ $FFFFFDE5 ; из поля $3C описания уровня: != 0 - карта уровня на plane B ($E000), backmap на plane A ($C000); обычно наоборот
 byte_FFFDE6 equ $FFFFFDE6
-byte_FFFDE7 equ $FFFFFDE7
+start_btn_latch equ $FFFFFDE7 ; Start держат с последнего переключения паузы - новое нажатие не засчитывается; ставит pause_handler при входе и выходе, сбрасывается при отпускании Start
 byte_FFFDE9 equ $FFFFFDE9
 jim_state equ $FFFFFDEA
 byte_FFFDEB equ $FFFFFDEB
 byte_FFFDEC equ $FFFFFDEC
 plasma_count_ammo equ $FFFFFDED
 byte_FFFDEE equ $FFFFFDEE
-byte_FFFDF0 equ $FFFFFDF0
-byte_FFFDF1 equ $FFFFFDF1
-byte_FFFDF2 equ $FFFFFDF2
+level_transition_active equ $FFFFFDF0 ; ставится на время телепорта (activity_teleport_toilet) и перехода секции Level 5 (darkness_next_section), нигде не читается
+teleport_anim_sync equ $FFFFFDF1 ; телепорт: анимация off_1AD964 ставит 1 в конце дематериализации и ждёт, пока код загрузит точку назначения и обнулит; в конце материализации снова 1 - код ждёт её, чтобы вернуть управление
+exit_door_entered equ $FFFFFDF2 ; Level 5: anim_jim_exit_door в конце ставит 1, процедура уровня darkness_level_update переходит в следующую секцию (darkness_next_section, selectedLevelOption+1) и сбрасывает
 bucket_boss_phase equ $FFFFFDF3 ;Фаза босса-ведра на NJC (объект stru_25AB14, проц sub_2522D0). 0 - бой не начался, 1 - просто стоит и ждёт (HP $A), 2 - прикрывает голову, на Джима сверху падают саксофоны (HP $96), 5 - трансформация в ведро-мобиль, стоит (HP $FA, неуязвим), 4 - ведро-мобиль стреляет наковальнями стоя на месте, 3 - ведро-мобиль ездит туда-сюда, попадания засчитываются только с той стороны, куда он смотрит (HP $FA), 6 - босс дотронулся до Джима, по концу скрипта откат в фазу 1. Цепочка при расстреле: 1 -> 2 -> 5 -> 4 -> 3 -> уничтожен (is_bucket_boss_destroyed). Номер фазы пишут сами move-скрипты объекта командой $83,1,$FD,$F3,0,N
 chicken_boss_anim_id equ $FFFFFDF4
 is_bucket_boss_destroyed equ $FFFFFDF5 ;Босс-ведро на NJC добит (ставится в fire_to_bucket_boss, когда в фазе 3 кончился HP). Пока флаг взведён, sub_24F04A каждые 8 кадров подрывает объекты сцены (звук $4A), а когда взрывать больше нечего - снимает флаг, ставит byte_FFFBF0, отпускает камеру и запускает реплику $23. Cм. bucket_boss_phase
@@ -403,44 +403,44 @@ byte_FFFE04 equ $FFFFFE04
 pete_return_x equ $FFFFFE06
 pete_state equ $FFFFFE08
 byte_FFFE09 equ $FFFFFE09
-dword_FFFE0A equ $FFFFFE0A
-unk_FFFE0E equ $FFFFFE0E
+andy_track_ptr equ $FFFFFE0A ; Andy Asteroids: указатель на текущую команду трассы (andy_track_7 / andy_track_6), двигается по мере полёта
+psycrow_path_buf equ $FFFFFE0E ; Andy Asteroids: кольцевой буфер 64 слова ($80 байт) углов пути Psy-Crow по сегментам трассы (из psycrow_path_angle), голова psycrow_path_buf_head; sub_2585CA берёт угол по дистанции ворона в psycrow_target_angle
 andy_side_speed equ $FFFFFE8E
 super_bubble_timer equ $FFFFFE90
 word_FFFE92 equ $FFFFFE92
 word_FFFE94 equ $FFFFFE94
-psycrow_speed equ $FFFFFE96 ; текущая скорость Псай-Ворона в гонке Andy Asteroids, плавно подтягивается к цели word_FFFEA4
-psycrow_target_angle equ $FFFFFE98 ; Andy Asteroids: угол, к которому ворон доворачивает obj_01_tunnel_angle. Берётся из буфера unk_FFFE0E (символы 'P' в andy_map), при таране - текущий угол +-$1000
-word_FFFE9A equ $FFFFFE9A
-word_FFFE9C equ $FFFFFE9C
-word_FFFE9E equ $FFFFFE9E
+psycrow_speed equ $FFFFFE96 ; текущая скорость Псай-Ворона в гонке Andy Asteroids, плавно подтягивается к цели psycrow_cruise_speed
+psycrow_target_angle equ $FFFFFE98 ; Andy Asteroids: угол, к которому ворон доворачивает obj_01_tunnel_angle. Берётся из буфера psycrow_path_buf (символы 'P' в andy_map), при таране - текущий угол +-$1000
+psycrow_path_angle equ $FFFFFE9A ; Andy Asteroids: угол пути Psy-Crow в текущем сегменте трассы (символ 'P' в andy_map, (столбец+8)*$400), пишется в кольцевой буфер psycrow_path_buf
+andy_track_seg_passed equ $FFFFFE9C ; Andy Asteroids: число пройденных Джимом сегментов трассы (из andy_track_seg_total всего), для значков прогресса andy_jim_progress_y/andy_psycrow_progress_y
+psycrow_base_speeds equ $FFFFFE9E ; Andy Asteroids: таблица 4 слова (FE9E..FEA4) скоростей Psy-Crow по фазе frame_counter&3, сумма = байт $3E level_config; последнее слово = psycrow_cruise_speed
 word_FFFEA0 equ $FFFFFEA0
 word_FFFEA2 equ $FFFFFEA2
-word_FFFEA4 equ $FFFFFEA4
+psycrow_cruise_speed equ $FFFFFEA4 ; Andy Asteroids: крейсерская скорость Psy-Crow, к ней раз в 4 кадра возвращается psycrow_speed; 4-й (наибольший) элемент таблицы psycrow_base_speeds (байт $3E level_config, разбитый на 4 слова)
 word_FFFEA6 equ $FFFFFEA6
-word_FFFEA8 equ $FFFFFEA8
-word_FFFEAA equ $FFFFFEAA
-word_FFFEAC equ $FFFFFEAC
-word_FFFEAE equ $FFFFFEAE
-unk_FFFEB0 equ $FFFFFEB0
-word_FFFEF0 equ $FFFFFEF0
+psycrow_path_buf_head equ $FFFFFEA8 ; Andy Asteroids: смещение головы буфера psycrow_path_buf, -2 (маска $7F) на каждый новый сегмент трассы
+andy_track_subpos equ $FFFFFEAA ; Andy Asteroids: дробная позиция внутри шага трассы, +andy_flight_speed за кадр, на $80 читается следующая команда andy_track_ptr
+andy_tunnel_pal_target equ $FFFFFEAC ; Andy Asteroids, тоннель: смещение (n*32) целевой палитры в andy_tunnel_palettes, ставит команда 6 трека (atr_pal), к ней за tunnel_pal_fade_timer кадров плавно сводится andy_tunnel_pal_src
+andy_tunnel_pal_phase equ $FFFFFEAE ; Andy Asteroids, тоннель: фаза бегущей палитры, каждый кадр += max(andy_flight_speed,4), по модулю $F0; >>3 (чётное) = сдвиг в байтах по цветам 0-14 andy_tunnel_pal_src при заполнении andy_tunnel_pal_buf (8 единиц на цвет)
+andy_track_stack equ $FFFFFEB0 ; Andy Asteroids: стек адресов возврата для подпрограмм трассы (команды 2/3), $40 байт = 16 long, вершина в andy_track_stack_pos
+andy_track_stack_pos equ $FFFFFEF0 ; Andy Asteroids: смещение вершины стека возвратов трассы andy_track_stack (16 адресов), +4 на команде 2 (вызов), -4 на команде 3 (возврат)
 word_FFFEF2 equ $FFFFFEF2
 word_FFFEF4 equ $FFFFFEF4
 word_FFFEF6 equ $FFFFFEF6
 word_FFFEF8 equ $FFFFFEF8
-unk_FFFEFA equ $FFFFFEFA
-unk_FFFF1A equ $FFFFFF1A
-word_FFFF3A equ $FFFFFF3A
-word_FFFF3C equ $FFFFFF3C
-word_FFFF3E equ $FFFFFF3E
+andy_tunnel_pal_src equ $FFFFFEFA ; Andy Asteroids, тоннель: 16 цветов исходной палитры трубы; на старте копия палитры 0 из andy_tunnel_palettes (andy_level_init), при atr_pal плавно сводится к andy_tunnel_pal_target (andy_tunnel_pal_fade_step); из неё бегущей лентой заполняется andy_tunnel_pal_buf
+andy_tunnel_pal_buf equ $FFFFFF1A ; Andy Asteroids, тоннель: 15 цветов бегущей палитры (циклический сдвиг andy_tunnel_pal_src на andy_tunnel_pal_phase в andy_level_update), andy_asteroids_tunnel_bg грузит их в CRAM цвета 1-15 палитры 0
+andy_track_seg_total equ $FFFFFF3A ; Andy Asteroids: общее число сегментов трассы, считается заранее в andy_count_track_segs проходом по трассе от andy_track_ptr
+andy_tunnel_hscroll_acc equ $FFFFFF3C ; Andy Asteroids, тоннель: накопитель += andy_flight_speed каждый кадр (фикс. точка, 2 дробных бита), >>2 даёт bg_b_auto_scroll
+andy_tunnel_vscroll_acc equ $FFFFFF3E ; Andy Asteroids, тоннель: накопитель += andy_flight_speed каждый кадр (фикс. точка, 3 дробных бита), >>3 даёт andy_tunnel_vscroll
 vanish_point_x equ $FFFFFF40
 vanish_point_y equ $FFFFFF42
-word_FFFF44 equ $FFFFFF44
+jim_bungee_going_up equ $FFFFFF44 ; Snot a Problem: направление полёта Джима на тарзанке, 0 - падает вниз, 1 - тянется вверх; пишет move-скрипт byte_1A2F3E ($83,2,$FF44) в нижней и верхней точке, выбирает анимации Джима и сдвиг цели Y сопли ±$10
 word_FFFF46 equ $FFFFFF46
 snot_state_request equ $FFFFFF48 ; заявка на состояние сопли: 3 внизу и 1 вверху из move-скрипта byte_1A2F3E (команда $83,$02), 2 и 0 из скриптов анимаций-трансформаций
 snot_state equ $FFFFFF4A ; применённое состояние сопли: 0 - вверх ногами (тянет вниз), 2 - ногами вниз (тянет вверх), 1 и 3 - трансформации в 0 и 2, 4 - rage, $FF - сброс
 snot_rage_timer equ $FFFFFF4C ; Snot a Problem: 360 кадров бешеного режима сопли (состояние snot_state=4) после 12 таранов, хаотичная цель и тройной шаг, урона о стены не получает
-word_FFFF52 equ $FFFFFF52
+snot_target_x equ $FFFFFF52 ; Snot a Problem: X-цель сопли на верёвке, snot_step_to_target_x тянет к ней X сопли на 1 за вызов; раунд 1 - $180, раунды 2-3 - jim_obj_x раз в 128 кадров, в бешенстве - случайная $F2..$1C3 раз в 32 кадра
 word_FFFF54 equ $FFFFFF54
 word_FFFF56 equ $FFFFFF56
 word_FFFF58 equ $FFFFFF58
@@ -453,7 +453,7 @@ super_bubble_count equ $FFFFFF61
 psycrow_scale_index equ $FFFFFF62 ; индекс масштаба Psy-Crow по расстоянию (set_scale_anim_by_dist в sub_2585CA), sub_258518 берёт по нему кадр из off_6F38/off_6FF8
 psycrow_facing_front equ $FFFFFF63 ; Psy-Crow в угловой секции Джима (abs(jim_tunnel_angle-$50(a1))<$800): таблицы off_6BEC/off_6FF8 вместо off_6B2C/off_6F38
 bubble_count equ $FFFFFF64
-tunnel_pal_fade_timer equ $FFFFFF65 ; смена палитры туннеля: команда 6 трека (sub_24F99E) ставит $1F, пока >0 sub_24FBC0 смешивает byte_1B728C+word_FFFEAC в unk_FFFEFA
+tunnel_pal_fade_timer equ $FFFFFF65 ; смена палитры туннеля: команда 6 трека (andy_level_update) ставит $1F, пока >0 andy_tunnel_pal_fade_step смешивает andy_tunnel_palettes+andy_tunnel_pal_target в andy_tunnel_pal_src
 rocket_flame_anim_frame equ $FFFFFF66 ; кадр пламени ракеты 5..0 по кругу (sub_258C50), /2 -> off_665A
 frame_mod6_counter equ $FFFFFF67 ; счётчик 5..0 по кругу каждый кадр в главном цикле oksub_2456C8; sub_258518 по нему мигает пламенем Psy-Crow
 level_flag_bit1_off equ $FFFFFF68 ; инвертированный бит 1 байта $3D описателя уровня (sub_2476AC); в коде не читается

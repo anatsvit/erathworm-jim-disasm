@@ -61,7 +61,7 @@ cheat_mode equ $FFFFA6AA
 difficulty_level equ $FFFFA6AB
 dword_FFA6AC equ $FFFFA6AC
 dword_FFA6B0 equ $FFFFA6B0
-dword_FFA6B4 equ $FFFFA6B4
+level_events_proc equ $FFFFA6B4 ; поле $2C level_config: процедура скриптовых событий уровня, вызывается каждый кадр из главного цикла через call_level_events_proc (New Junk City - njc_level_events)
 level_pointer equ $FFFFA6B8
 random_seed equ $FFFFA6BC ; зерно ЛКГ seed = 13*seed + 7, общее для random_function и random_in_range. Инициализируется константой $BC614E (12345678)
 dword_FFA6C0 equ $FFFFA6C0
@@ -118,7 +118,7 @@ obj_pool_ad96 equ $FFFFAFE4
 obj_pool_ad1e equ $FFFFB23E
 unk_FFB2EA equ $FFFFB2EA
 unk_FFB340 equ $FFFFB340
-map_row_vram_cmd equ $FFFFB396 ; 32 swap-команды VDP VRAM-write на начало каждой строки тайлов plane с картой уровня ($C000 или $E000 при level_map_on_plane_b, шаг $80/$40 по ширине planes); строит build_row_addr_table, читают отрисовка карты sub_247940 и вывод символа write_char
+map_row_vram_cmd equ $FFFFB396 ; 32 swap-команды VDP VRAM-write на начало каждой строки тайлов plane с картой уровня ($C000 или $E000 при level_map_on_plane_b, шаг $80/$40 по ширине planes); строит build_row_addr_table, читают отрисовка карты prefill_level_view и вывод символа write_char
 map_row_vram_cmd_copy equ $FFFFB416 ; копия map_row_vram_cmd (32 long), пишется в build_row_addr_table, нигде не читается
 unk_FFB496 equ $FFFFB496
 unk_FFB498 equ $FFFFB498
@@ -349,9 +349,9 @@ andy_jim_progress_y equ $FFFFFDB0 ; Andy Asteroids: оставшийся пут�
 andy_psycrow_progress_y equ $FFFFFDB2 ; Andy Asteroids: оставшийся путь Psy-Crow 0..$A0 (с поправкой на obj_01_tunnel_dist), Y-смещение его значка на HUD-индикаторе (X=$89), sub_246FB4
 word_FFFDB4 equ $FFFFFDB4
 chain_climb_anim_offset equ $FFFFFDB6 ; фаза лазания по цепи: смещение в stru_1ADC0C (24 записи по 6 байт - анимация + шаг по X), шаг +6, сброс на $90
-dword_FFFDB8 equ $FFFFFDB8
-word_FFFDC0 equ $FFFFFDC0
-word_FFFDC4 equ $FFFFFDC4
+bg_anim_data_ptr equ $FFFFFDB8 ; поле $14 level_config: кадры фоновой анимации для background_anim (конвейер NJC, кот, эскалатор), 0 - нет анимации
+bg_anim_data_size equ $FFFFFDC0 ; поле $18 level_config: размер данных bg_anim_data_ptr (кадр 14 байт), при достижении bg_anim_offset сбрасывается в 0
+bg_anim_offset equ $FFFFFDC4 ; смещение текущего кадра в bg_anim_data_ptr, +14 каждый 2-й кадр в background_anim
 ammo_adding_buffer equ $FFFFFDC6
 health_buffer equ $FFFFFDC8
 word_FFFDCA equ $FFFFFDCA
@@ -362,8 +362,8 @@ word_FFFDD6 equ $FFFFFDD6
 shot_angle_target equ $FFFFFDD8
 shot_angle_current equ $FFFFFDDA
 air_refiller_seconds equ $FFFFFDDC
-byte_FFFDDD equ $FFFFFDDD
-byte_FFFDDE equ $FFFFFDDE
+level_attack_enabled equ $FFFFFDDD ; инвертированный бит 0 поля $3D level_config: 0 - на уровне нельзя стрелять (jim_fire) и бить хлыстом (oksub_2464C8)
+left_edge_mask_enabled equ $FFFFFDDE ; поле $1B level_config (For Pete's Sake): != 0 - build_sprite_table ставит колонку из 7 priority-спрайтов 16x32 (тайл $E6BC) на x=0, маска левых 16 px экрана
 is_jim_ropejumper equ $FFFFFDDF
 byte_FFFDE0 equ $FFFFFDE0
 byte_FFFDE1 equ $FFFFFDE1
@@ -371,9 +371,9 @@ byte_FFFDE2 equ $FFFFFDE2
 game_paused equ $FFFFFDE3 ; != 0 - идёт цикл паузы в pause_handler; обнуление (чит карты в cheat_code, сброс уровня) выводит из паузы
 funchar_text_id equ $FFFFFDE4
 level_map_on_plane_b equ $FFFFFDE5 ; из поля $3C описания уровня: != 0 - карта уровня на plane B ($E000), backmap на plane A ($C000); обычно наоборот
-byte_FFFDE6 equ $FFFFFDE6
+camera_freeze_timer equ $FFFFFDE6 ; != 0 - sub_247B2C пропускает обновление камеры и уменьшает счётчик на 1 за кадр; обнуляет prefill_level_view
 start_btn_latch equ $FFFFFDE7 ; Start держат с последнего переключения паузы - новое нажатие не засчитывается; ставит pause_handler при входе и выходе, сбрасывается при отпускании Start
-byte_FFFDE9 equ $FFFFFDE9
+is_map_prescrolling equ $FFFFFDE9 ; != 0 - идёт предпрокрутка карты в prefill_level_view; чтений в коде не найдено
 jim_state equ $FFFFFDEA
 byte_FFFDEB equ $FFFFFDEB
 byte_FFFDEC equ $FFFFFDEC
@@ -384,7 +384,7 @@ teleport_anim_sync equ $FFFFFDF1 ; телепорт: анимация off_1AD964
 exit_door_entered equ $FFFFFDF2 ; Level 5: anim_jim_exit_door в конце ставит 1, процедура уровня darkness_level_update переходит в следующую секцию (darkness_next_section, selectedLevelOption+1) и сбрасывает
 bucket_boss_phase equ $FFFFFDF3 ;Фаза босса-ведра на NJC (объект stru_25AB14, проц sub_2522D0). 0 - бой не начался, 1 - просто стоит и ждёт (HP $A), 2 - прикрывает голову, на Джима сверху падают саксофоны (HP $96), 5 - трансформация в ведро-мобиль, стоит (HP $FA, неуязвим), 4 - ведро-мобиль стреляет наковальнями стоя на месте, 3 - ведро-мобиль ездит туда-сюда, попадания засчитываются только с той стороны, куда он смотрит (HP $FA), 6 - босс дотронулся до Джима, по концу скрипта откат в фазу 1. Цепочка при расстреле: 1 -> 2 -> 5 -> 4 -> 3 -> уничтожен (is_bucket_boss_destroyed). Номер фазы пишут сами move-скрипты объекта командой $83,1,$FD,$F3,0,N
 chicken_boss_anim_id equ $FFFFFDF4
-is_bucket_boss_destroyed equ $FFFFFDF5 ;Босс-ведро на NJC добит (ставится в fire_to_bucket_boss, когда в фазе 3 кончился HP). Пока флаг взведён, sub_24F04A каждые 8 кадров подрывает объекты сцены (звук $4A), а когда взрывать больше нечего - снимает флаг, ставит byte_FFFBF0, отпускает камеру и запускает реплику $23. Cм. bucket_boss_phase
+is_bucket_boss_destroyed equ $FFFFFDF5 ;Босс-ведро на NJC добит (ставится в fire_to_bucket_boss, когда в фазе 3 кончился HP). Пока флаг взведён, njc_level_events каждые 8 кадров подрывает объекты сцены (звук $4A), а когда взрывать больше нечего - снимает флаг, ставит byte_FFFBF0, отпускает камеру и запускает реплику $23. Cм. bucket_boss_phase
 byte_FFFDF6 equ $FFFFFDF6
 byte_FFFDF7 equ $FFFFFDF7
 byte_FFFDF8 equ $FFFFFDF8
@@ -414,8 +414,8 @@ psycrow_target_angle equ $FFFFFE98 ; Andy Asteroids: угол, к котором
 psycrow_path_angle equ $FFFFFE9A ; Andy Asteroids: угол пути Psy-Crow в текущем сегменте трассы (символ 'P' в andy_map, (столбец+8)*$400), пишется в кольцевой буфер psycrow_path_buf
 andy_track_seg_passed equ $FFFFFE9C ; Andy Asteroids: число пройденных Джимом сегментов трассы (из andy_track_seg_total всего), для значков прогресса andy_jim_progress_y/andy_psycrow_progress_y
 psycrow_base_speeds equ $FFFFFE9E ; Andy Asteroids: таблица 4 слова (FE9E..FEA4) скоростей Psy-Crow по фазе frame_counter&3, сумма = байт $3E level_config; последнее слово = psycrow_cruise_speed
-word_FFFEA0 equ $FFFFFEA0
-word_FFFEA2 equ $FFFFFEA2
+psycrow_base_speed_1 equ $FFFFFEA0 ; 2-й элемент таблицы psycrow_base_speeds
+psycrow_base_speed_2 equ $FFFFFEA2 ; 3-й элемент таблицы psycrow_base_speeds
 psycrow_cruise_speed equ $FFFFFEA4 ; Andy Asteroids: крейсерская скорость Psy-Crow, к ней раз в 4 кадра возвращается psycrow_speed; 4-й (наибольший) элемент таблицы psycrow_base_speeds (байт $3E level_config, разбитый на 4 слова)
 word_FFFEA6 equ $FFFFFEA6
 psycrow_path_buf_head equ $FFFFFEA8 ; Andy Asteroids: смещение головы буфера psycrow_path_buf, -2 (маска $7F) на каждый новый сегмент трассы
@@ -456,11 +456,11 @@ bubble_count equ $FFFFFF64
 tunnel_pal_fade_timer equ $FFFFFF65 ; смена палитры туннеля: команда 6 трека (andy_level_update) ставит $1F, пока >0 andy_tunnel_pal_fade_step смешивает andy_tunnel_palettes+andy_tunnel_pal_target в andy_tunnel_pal_src
 rocket_flame_anim_frame equ $FFFFFF66 ; кадр пламени ракеты 5..0 по кругу (sub_258C50), /2 -> off_665A
 frame_mod6_counter equ $FFFFFF67 ; счётчик 5..0 по кругу каждый кадр в главном цикле oksub_2456C8; sub_258518 по нему мигает пламенем Psy-Crow
-level_flag_bit1_off equ $FFFFFF68 ; инвертированный бит 1 байта $3D описателя уровня (sub_2476AC); в коде не читается
-level_flag_bit2_off equ $FFFFFF69 ; инвертированный бит 2 байта $3D описателя уровня (sub_2476AC); в коде не читается
-level_flag_bit3_off equ $FFFFFF6A ; инвертированный бит 3 байта $3D описателя уровня (sub_2476AC); в коде не читается
-level_jump_enabled equ $FFFFFF6B ; инвертированный бит 5 байта $3D описателя уровня (sub_2476AC); при 0 sub_24669E (прыжок) и sub_246860 (зависание) не работают
-is_tunnel_level equ $FFFFFF6C ; бит 4 байта $3D описателя уровня (sub_2476AC); при !=0 sub_248C3A уходит в sub_24BEDC (логика Andy Asteroids)
+level_flag_bit1_off equ $FFFFFF68 ; инвертированный бит 1 байта $3D описателя уровня (load_level); в коде не читается
+level_flag_bit2_off equ $FFFFFF69 ; инвертированный бит 2 байта $3D описателя уровня (load_level); в коде не читается
+level_flag_bit3_off equ $FFFFFF6A ; инвертированный бит 3 байта $3D описателя уровня (load_level); в коде не читается
+level_jump_enabled equ $FFFFFF6B ; инвертированный бит 5 байта $3D описателя уровня (load_level); при 0 sub_24669E (прыжок) и sub_246860 (зависание) не работают
+is_tunnel_level equ $FFFFFF6C ; бит 4 байта $3D описателя уровня (load_level); при !=0 sub_248C3A уходит в sub_24BEDC (логика Andy Asteroids)
 psycrow_dodge_timer equ $FFFFFF6D ; Psy-Crow уходит вбок: sub_24BEDC ставит $5A вместе с andy_side_speed +-$1C0 и psycrow_target_angle; sub_2585CA -1 и копирует в word_FFFEA6
 is_queen_butt_defeated equ $FFFFFF6E ; Buttville: подбосс-зад добит - меняются спавны (нарывы, платформы вместо хвоста) и палитра фона
 bucket_boss_warning_shown equ $FFFFFF6F ; надпись WARNING (funchar $24, warning_txt) перед bucket boss на уровне 1 уже показана (sub_24DC8E, activity ROM:5750)
@@ -487,7 +487,7 @@ demo_mode equ $FFFFFF98
 demo_pad_state equ $FFFFFF99
 demo_repeat_count equ $FFFFFF9A
 sound_fx_enable equ $FFFFFF9C
-byte_FFFF9E equ $FFFFFF9E
+saved_sound_fx_enable equ $FFFFFF9E ; копия sound_fx_enable на время предпрокрутки карты в prefill_level_view (звуки объектов глушатся)
 music_enable equ $FFFFFF9F
 Z80_RAM equ $A00000
 CMDWPTR_Z80 equ $A00036

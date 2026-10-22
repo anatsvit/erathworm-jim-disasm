@@ -19,6 +19,8 @@ TXT_NOP         equ $0D ; Ничего не делает
 TXT_CLS         equ $0E ; Затемнение палитр, очистка plane A, палитра word_1B88A2 в линию 3
 TXT_SPAWN_OBJ   equ $0F ; +8 байт: dc.l struct, dc.w x, dc.w y - создать объект
 
+TITLES_END      equ $FD ; Конец финальных титров (end_titles), проверяет sub_24C44A в начале строки
+
 ; TXT_SET_MOTION + 24-битный адрес скрипта движения (fmove_*)
 txt_motion macro addr
         dc.b TXT_SET_MOTION, ((addr)>>16)&$FF, ((addr)>>8)&$FF, (addr)&$FF

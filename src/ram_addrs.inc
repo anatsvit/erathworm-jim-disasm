@@ -166,7 +166,7 @@ word_FFFC9E equ $FFFFFC9E
 submarine_air_seconds_left equ $FFFFFCA0 ; запас воздуха в подлодке (Down the Tubes), старт 30, тик по submarine_air_tick_timer=$41 кадров, потолок заправки air_refiller_seconds
 screen_shake_sprite_offset equ $FFFFFCA2
 word_FFFCA4 equ $FFFFFCA4
-bg_b_auto_scroll equ $FFFFFCA6 ; авто-прокрутка фона plane B: в тоннеле Andy Asteroids = andy_tunnel_hscroll_acc>>2 (добавка к hscroll), в sub_251CB6 +1 за кадр (к hscroll и против camera_y во vscroll)
+bg_b_auto_scroll equ $FFFFFCA6 ; авто-прокрутка фона plane B: в тоннеле Andy Asteroids = andy_tunnel_hscroll_acc>>2 (добавка к hscroll), в darkness_level_scroll +1 за кадр (к hscroll и против camera_y во vscroll)
 andy_tunnel_vscroll equ $FFFFFCA8 ; Andy Asteroids, тоннель: вертикальный сдвиг plane B, вычитается из vscroll колонок в VSRAM в andy_asteroids_tunnel_bg
 word_FFFCAE equ $FFFFFCAE
 word_FFFCB0 equ $FFFFFCB0
@@ -176,9 +176,9 @@ word_FFFCB8 equ $FFFFFCB8
 word_FFFCBA equ $FFFFFCBA
 obj_prev_x equ $FFFFFCBC ; X объекта (2(a1)) до выполнения скрипта движения в update_objects_motion; в конце dX = X - obj_prev_x пишется в $1C(a1)
 obj_prev_y equ $FFFFFCBE ; Y объекта (4(a1)) до выполнения скрипта движения в update_objects_motion; в конце dY = Y - obj_prev_y пишется в $1D(a1)
-wth_bg_drift_x equ $FFFFFCC4 ; What The Heck: автосдвиг фона, +1 каждый кадр в sub_2516E4 (hscroll), прибавляется к camera_x для части слоёв параллакса - фон плывёт сам
-collision_layer equ $FFFFFCC6 ; слой карты коллизий 0/1: в jim_platform_collision прибавляется к objects_map_memory (чётный/нечётный байт). 0 - sub_24E85C (ROM:5680), activity_teleport_return_to_darkroom; 1 - sub_24E866 (ROM:5684), sub_250182 (Level 5); переключает sub_24E5FA (ROM:5688) один раз через защёлку byte_FFFD00
-frog_anim_pos equ $FFFFFCC8 ; Buttville: общая фаза анимации лягушек object_frog, sub_24F644 раз в 2 кадра +4, до $108; sub_252440 берёт анимацию из off_C61C - все лягушки синхронны
+wth_bg_drift_x equ $FFFFFCC4 ; What The Heck: автосдвиг фона, +1 каждый кадр в wth_level_scroll (hscroll), прибавляется к camera_x для части слоёв параллакса - фон плывёт сам
+collision_layer equ $FFFFFCC6 ; слой карты коллизий 0/1: в jim_platform_collision прибавляется к objects_map_memory (чётный/нечётный байт). 0 - sub_24E85C (ROM:5680), activity_teleport_return_to_darkroom; 1 - sub_24E866 (ROM:5684), lvl5_lab_level_init (Level 5); переключает sub_24E5FA (ROM:5688) один раз через защёлку byte_FFFD00
+frog_anim_pos equ $FFFFFCC8 ; Buttville: общая фаза анимации лягушек object_frog, btv_sfb_level_events раз в 2 кадра +4, до $108; sub_252440 берёт анимацию из off_C61C - все лягушки синхронны
 frog2_anim_pos equ $FFFFFCCA ; Buttville: то же для лягушек spawn_frog_2, до $F8; sub_252456, таблица off_C724
 jim_walking_speed equ $FFFFFCCE
 scroll_debt_x equ $FFFFFCD0
@@ -206,7 +206,7 @@ jump_hold_timer equ $FFFFFCF9
 is_jump_apex_reached equ $FFFFFCFA ; восходящая фаза прыжка закончена: |jim_y_speed| упала ниже $3C либо удар головой о потолок. Пока сброшен, гравитация к Джиму не применяется и за цепь не зацепиться
 heli_hover_frames equ $FFFFFCFB ; зависание в падении (sub_246860): старт 8, пока >0 каждый кадр jim_y_speed=$200, jim_timer_in_air=$34, -1
 heli_hover_used equ $FFFFFCFC ; зависание уже использовано (sub_246860), взводится и при обычном прыжке; сбрасывается по is_jump_pressed
-conveyor_stop_timer equ $FFFFFCFD ; конвейер/фон остановлен: background_anim не анимирует, sub_24E8A8/sub_24E8CA не двигают Джима; -1 в sub_24F95C; пишет скрипт объекта ($8A,$21,$FCFD) у byte_1AC3A0
+conveyor_stop_timer equ $FFFFFCFD ; конвейер/фон остановлен: background_anim не анимирует, sub_24E8A8/sub_24E8CA не двигают Джима; -1 в lvl5_nkd_level_events; пишет скрипт объекта ($8A,$21,$FCFD) у byte_1AC3A0
 submarine_air_tick_timer equ $FFFFFCFE ; делитель воздуха в подлодке: -1 каждый кадр в collision_with_submarine, на 0 = $41 и submarine_air_seconds_left -1 (если не cheat_mode)
 platform_type_under_jim equ $FFFFFCFF
 byte_FFFD00 equ $FFFFFD00
@@ -259,27 +259,27 @@ byte_FFFD39 equ $FFFFFD39
 screen_shake_phase equ $FFFFFD3A
 active_objects_count equ $FFFFFD3D ; число занятых слотов объектов, считается в update_objects_motion; скрипты проверяют $F441,$FD3D,$10 (лимит выстрелов)
 eyes_generator_valve_state equ $FFFFFD3E ; состояние вентиля Monkey Head / генератора глаз: spawn_eyes_generator_closed ставит 1, anim_monkey_head_2 пишет 1/5/6 через $ED01
-pal_flash_delay equ $FFFFFD3F ; счётчик кадров 0..2 между шагами вспышки палитры (sub_24F644)
+pal_flash_delay equ $FFFFFD3F ; счётчик кадров 0..2 между шагами вспышки палитры (btv_sfb_level_events)
 pal_flash_active equ $FFFFFD40 ; вспышка палитры активна: построчная загрузка word_1B7CAC/word_1B7E3C в CRAM, запуск случайный (шанс растёт с jim_x)
 bucket_boss_started equ $FFFFFD41 ; бой с bucket boss запущен (sub_24DEF2), повторно не спавнить
 chuck_boss_started equ $FFFFFD42 ; бой с Chuck (уровень 1) запущен (sub_24DCB2), повторно не спавнить
 chicken_boss_started equ $FFFFFD43 ; арена chicken boss запущена (sub_24DD18), повторно не спавнить
 intestinal_boss_started equ $FFFFFD44 ; intestinal boss заспавнен (sub_24DEA6), повторно не спавнить
-chicken_fly_boss_invul_timer equ $FFFFFD45 ; неуязвимость летающего chicken boss после попадания, $3C кадров, уменьшается в sub_24F86E
-fall_long_wrap_flag equ $FFFFFD46 ; уровень с падением: следующий перескок камеры по порогу $8AF вместо $6CF, взводится случайно 1/9 (sub_24F86E)
+chicken_fly_boss_invul_timer equ $FFFFFD45 ; неуязвимость летающего chicken boss после попадания, $3C кадров, уменьшается в lvl5_chi_level_events
+fall_long_wrap_flag equ $FFFFFD46 ; уровень с падением: следующий перескок камеры по порогу $8AF вместо $6CF, взводится случайно 1/9 (lvl5_chi_level_events)
 chicken_fly_boss_death_timer equ $FFFFFD47 ; после победы над летающим chicken boss = $25, -1 каждые 8 кадров, на 0 -> level_end_timer; пока !=0 collision_with_flying_bomb игнорируется
-teleport_request_to_snowman equ $FFFFFD48 ; флаг от объекта $5B, обрабатывается в sub_24F1D8 (byte_25C3A4)
-teleport_request_from_snowman equ $FFFFFD49 ; флаг от объекта $5C, обрабатывается в sub_24F23E (byte_25C3AE)
-teleport_request_to_evilcat equ $FFFFFD4A ; флаг от объекта $5D, обрабатывается в sub_24F1D8 (byte_25C3B8)
+teleport_request_to_snowman equ $FFFFFD48 ; флаг от объекта $5B, обрабатывается в wth_level_events (byte_25C3A4)
+teleport_request_from_snowman equ $FFFFFD49 ; флаг от объекта $5C, обрабатывается в wth_snw_level_events (byte_25C3AE)
+teleport_request_to_evilcat equ $FFFFFD4A ; флаг от объекта $5D, обрабатывается в wth_level_events (byte_25C3B8)
 naked_worm_enable equ $FFFFFD4B
-rock_shower_active equ $FFFFFD4C ; For Pete's Sake: каменный дождь идёт (растёт rock_shower_intensity). Ставит sub_24DC72 (ROM:58B8) при pete_state<9 и intensity=0; сбрасывают sub_24F5A2 при intensity>=$B4 и collision_with_puppy_evil
+rock_shower_active equ $FFFFFD4C ; For Pete's Sake: каменный дождь идёт (растёт rock_shower_intensity). Ставит sub_24DC72 (ROM:58B8) при pete_state<9 и intensity=0; сбрасывают pete_level_events при intensity>=$B4 и collision_with_puppy_evil
 ufo_bump_cooldown equ $FFFFFD4D ; пауза после столкновения с НЛО: анимация off_1B144A (после удара) ставит $14, collision_with_ufo уменьшает и выходит, пока не 0
 jim_at_air_refiller equ $FFFFFD4E ; Джим у станции подкачки воздуха: сбрасывается каждый кадр в sub_248C3A, ставит sub_255DF8 (ROM:38CC) - примагничивает Джима, перезапускает submarine_air_tick_timer, раз в 8 кадров +1 submarine_air_seconds_left. Пока стоит - анимации подлодки не выпускают пузыри object_air_bubble
 submarine_hud_spawned equ $FFFFFD4F ; объекты табло подлодки созданы: collision_with_submarine при посадке создаёт два stru_25B69C (цифры off_1B5A1C, sub_258CC2/sub_258D18) в $1D7/$D3 и $1FA/$D3 - видимо счётчик воздуха; цифры при jim_ride_obj_id != $40 сбрасывают флаг и удаляются
-chicken_lever_cooldown equ $FFFFFD50 ; пауза после удара по рычагу у босса-курицы: whip_to_chicken_boss_lever ставит $12 (звук $32, анимация off_1B6016, патроны), пока не 0 - удар игнорируется; уменьшается каждый кадр в sub_24F808 (ROM:25BE70)
+chicken_lever_cooldown equ $FFFFFD50 ; пауза после удара по рычагу у босса-курицы: whip_to_chicken_boss_lever ставит $12 (звук $32, анимация off_1B6016, патроны), пока не 0 - удар игнорируется; уменьшается каждый кадр в lvl5_lab_level_events (ROM:25BE70)
 butt_boss_counterattack equ $FFFFFD51 ; запрос контратаки саб-босса задницы: fire_to_butt_sub_boss ставит при попадании обычным оружием под углом (shot_angle_current != 0, раз в 8 кадров). Анимация босса ждёт флаг, затем поворот к Джиму, снаряды stru_25B264/stru_25B294 (звук $43) и сброс
 monkey_head_variant equ $FFFFFD52 ; вариант головы Monkey-for-a-Head 0/1/2: ставят activity_monkey_head_variant_0/1/2 (ROM:56C4/56C8/56CC); spawn_monkey_head/_2/_3 срабатывает только свой - голова появляется в точке последнего триггера
-rock_shower_intensity equ $FFFFFD54 ; For Pete's Sake: интенсивность каменного дождя. sub_24F5A2 раз в 8 кадров: +1 пока стоит rock_shower_active, иначе -4 до 0; random_in_range+intensity >= $1E - камень снизу экрана (<$3C stru_25B054, <$5A stru_25B06C, иначе stru_25B084 big_skyrock), >= $B4 - дождь выключается. sub_24DC72 (ROM:58B8) включает дождь только при 0; collision_with_puppy_evil сбрасывает
+rock_shower_intensity equ $FFFFFD54 ; For Pete's Sake: интенсивность каменного дождя. pete_level_events раз в 8 кадров: +1 пока стоит rock_shower_active, иначе -4 до 0; random_in_range+intensity >= $1E - камень снизу экрана (<$3C stru_25B054, <$5A stru_25B06C, иначе stru_25B084 big_skyrock), >= $B4 - дождь выключается. sub_24DC72 (ROM:58B8) включает дождь только при 0; collision_with_puppy_evil сбрасывает
 camera_target_x equ $FFFFFD56
 camera_target_y equ $FFFFFD58
 camera_disable_value equ $FFFFFD5A
@@ -295,7 +295,7 @@ incubator_left_up_egg_chance equ $FFFFFD65
 snot_level_intro_delay equ $FFFFFD66 ; Snot a Problem: счётчик 1..$1E в начале раунда, блокирует ropejump_control и snot_on_rope, по истечении запускает move-скрипт byte_1A2F3E
 ropejump_button_latch equ $FFFFFD67 ;Snot a Problem: защёлка кнопок на тарзанке (sub_25734E). 0 когда отпущены кнут, огонь и прыжок; $FF при первом нажатии, тогда при ropejump_swing_pos<0 вызывается sub_25757E - срабатывание один раз на нажатие
 byte_FFFD68 equ $FFFFFD68
-ropejump_impact_timer equ $FFFFFD69 ;Snot a Problem: таймер удара. 2 при ударе о стену каньона (sub_257602) и при столкновении с соплёй (collision_with_snot), вместе с X точки удара в word_FFFCF0. В sub_24F4F0 -1 раз в 16 кадров (~32 кадра). Кроме этого декремента в коде не читается
+ropejump_impact_timer equ $FFFFFD69 ;Snot a Problem: таймер удара. 2 при ударе о стену каньона (sub_257602) и при столкновении с соплёй (collision_with_snot), вместе с X точки удара в word_FFFCF0. В snt_level_events -1 раз в 16 кадров (~32 кадра). Кроме этого декремента в коде не читается
 is_jim_bungee_snapped equ $FFFFFD6A ;Snot a Problem: Джим сорвался с тарзанки. 0 при старте (sub_24FF38), $FF в sub_257FE8 когда jim_bungee_health_shown дошло до 0 (Джим падает, звук $3D). В коде не читается
 byte_FFFD6B equ $FFFFFD6B
 snot_intro_bungee_phase equ $FFFFFD6C ;Snot a Problem: фаза спуска на тарзанке во вступлении. 2 при старте (sub_24FF38), move-скрипт byte_1A2F3E по ходу спуска пишет 1 -> 0 -> 1 -> 2 (команда $83,1). Читатель не найден
@@ -306,14 +306,14 @@ jim_bungee_health_shown equ $FFFFFD70 ;Snot a Problem: последнее ото
 snot_bungee_health_shown equ $FFFFFD71 ;Snot a Problem: последнее отображённое здоровье сопли (младший полубайт байта 1 объекта dword_FFFCE4) для индикатора stru_25AF34 (sub_2580D8). $A при старте (sub_24FF38). При изменении анимация из off_25813E
 rope_anim_index equ $FFFFFD72 ;Snot a Problem: анимация верёвки stru_25AF7C (anim_rope), читается в sub_257F62. Бит 7 - зеркалирование (байт 9 объекта), биты 0-6 - индекс в off_257FB0. Записи нет ни в коде, ни в скриптах - всегда 0 (off_1B0FDC)
 word_FFFD74 equ $FFFFFD74
-butt_boss_debris_timer equ $FFFFFD76 ;Таймер обломков после победы над саб-боссом Buttville. $1E в whip_to_butt_sub_boss, в sub_24F644 -1 за кадр, раз в 4 кадра спавнит обломок stru_25B294 около X=$17CC
+butt_boss_debris_timer equ $FFFFFD76 ;Таймер обломков после победы над саб-боссом Buttville. $1E в whip_to_butt_sub_boss, в btv_sfb_level_events -1 за кадр, раз в 4 кадра спавнит обломок stru_25B294 около X=$17CC
 ure_the_best_state equ $FFFFFD77 ;Фаза финального экрана ure_the_best_screen. Обнуляется при входе, промежуточные значения пишут анимационные скрипты. 7 + Start -> 8 (белая палитра, очистка plane A), $D - выход
-evil_cat_phase1_active equ $FFFFFD78 ;Evil the Cat: 1 при старте первой фазы (sub_24FDB8), 0 при переходе во вторую (sub_24F336, loc_24FE66). В коде не читается, видимо читается скриптами
-evil_cat_phase2_state equ $FFFFFD79 ;Evil the Cat, начало второй фазы (sub_24F336): 0 - ещё не было реплики (funchar_text_id=$27), 1 - после реплики, 2 - после таймера word_FFFD92 (palette2_index=4), дальше спавн огня
-evil_cat_souls_killed equ $FFFFFD7A ;Evil the Cat: число убитых кошачьих душ во второй фазе, 0..9. +1 в whip_to_evil_cat_soul, индекс в off_C902. При 9 - конец боя (sub_24F336)
-evil_cat_invul_timer equ $FFFFFD7B ;Evil the Cat: кулдаун после попадания, $1E кадров. Пока не 0, evil_cat_hit_pending обнуляется (sub_24F336)
+evil_cat_phase1_active equ $FFFFFD78 ;Evil the Cat: 1 при старте первой фазы (wth_evl_level_init), 0 при переходе во вторую (wth_evl_level_events, loc_24FE66). В коде не читается, видимо читается скриптами
+evil_cat_phase2_state equ $FFFFFD79 ;Evil the Cat, начало второй фазы (wth_evl_level_events): 0 - ещё не было реплики (funchar_text_id=$27), 1 - после реплики, 2 - после таймера word_FFFD92 (palette2_index=4), дальше спавн огня
+evil_cat_souls_killed equ $FFFFFD7A ;Evil the Cat: число убитых кошачьих душ во второй фазе, 0..9. +1 в whip_to_evil_cat_soul, индекс в off_C902. При 9 - конец боя (wth_evl_level_events)
+evil_cat_invul_timer equ $FFFFFD7B ;Evil the Cat: кулдаун после попадания, $1E кадров. Пока не 0, evil_cat_hit_pending обнуляется (wth_evl_level_events)
 evil_cat_hit_pending equ $FFFFFD7C ;Evil the Cat: попадание. +1 делает скрипт byte_1ACEB6 объекта stru_25AE8C (anim_fireburn_5) командой $90 (scmd_10_add_var/loc_249970). Если не 0 и нет кулдауна - evil_cat_hp -1
-evil_cat_hp equ $FFFFFD7D ;Evil the Cat: здоровье первой фазы, $14 в sub_24FDB8. -1 за попадание в sub_24F336. При 0 - вторая фаза (sub_2590A2)
+evil_cat_hp equ $FFFFFD7D ;Evil the Cat: здоровье первой фазы, $14 в wth_evl_level_init. -1 за попадание в wth_evl_level_events. При 0 - вторая фаза (sub_2590A2)
 evil_cat_hp_shown equ $FFFFFD7E ;Evil the Cat: последнее отображённое evil_cat_hp. sub_2590A2 при изменении выбирает анимацию off_C926[hp/4], при 0 ставит is_evil_cat_defeated/byte_FFFDFB/byte_FFFD5C
 stalactite_spawn_vel_y equ $FFFFFD80 ;Сталактиты: начальная скорость Y (8.8) для следующего сталактита, пишется в $1A объекта в spawn_stalactite. Старт серии $FE00 (подскок вверх), каждый спавн +$80; в режиме 2 сброс в 0 при смене направления. Дальше падение гравитацией ($3C/кадр)
 stalactite_spawn_x equ $FFFFFD82 ;Сталактиты: X следующего сталактита. В начале серии camera_x+$140 (режим 0, правый край) или camera_x-$14 (режим 1, левый край), затем каждый спавн -/+ stalactite_spawn_step_x
@@ -366,7 +366,7 @@ level_attack_enabled equ $FFFFFDDD ; инвертированный бит 0 п�
 left_edge_mask_enabled equ $FFFFFDDE ; поле $1B level_config (For Pete's Sake): != 0 - build_sprite_table ставит колонку из 7 priority-спрайтов 16x32 (тайл $E6BC) на x=0, маска левых 16 px экрана
 is_jim_ropejumper equ $FFFFFDDF
 continue_picked equ $FFFFFDE0 ; подобран continue: ставит pickup_continue (вместе с save_respawn_point, звук $6A), нигде не читается
-is_evil_cat_defeated equ $FFFFFDE1 ; Evil the Cat побеждён: ставит sub_2590A2 при evil_cat_hp=0 (анимация off_1B3BC6, byte_FFFDFB, byte_FFFD5C). sub_24F336 перестаёт считать попадания, sub_24FDB8 не создаёт босса, sub_258FE2/sub_259030/sub_259052 гасят объекты боя
+is_evil_cat_defeated equ $FFFFFDE1 ; Evil the Cat побеждён: ставит sub_2590A2 при evil_cat_hp=0 (анимация off_1B3BC6, byte_FFFDFB, byte_FFFD5C). wth_evl_level_events перестаёт считать попадания, wth_evl_level_init не создаёт босса, sub_258FE2/sub_259030/sub_259052 гасят объекты боя
 options_page equ $FFFFFDE2 ; страница меню опций в sub_259DFE: 0 - основной экран, 1 - настройка кнопок джойстика; нигде не читается
 game_paused equ $FFFFFDE3 ; != 0 - идёт цикл паузы в pause_handler; обнуление (чит карты в cheat_code, сброс уровня) выводит из паузы
 funchar_text_id equ $FFFFFDE4
@@ -474,7 +474,7 @@ is_jim_off_gravity equ $FFFFFF78
 joypad_state equ $FFFFFF7A
 word_FFFF7C equ $FFFFFF7C
 byte_FFFF80 equ $FFFFFF80
-level_order_ptr equ $FFFFFF82 ; указатель на следующую пару (тип, уровень) в level_order_table; сбрасывает sub_247652 при новой игре, двигает oksub_2459F0 после уровня, ставит cheat_menu, читает босс Psy-Crow (sub_25049A)
+level_order_ptr equ $FFFFFF82 ; указатель на следующую пару (тип, уровень) в level_order_table; сбрасывает sub_247652 при новой игре, двигает oksub_2459F0 после уровня, ставит cheat_menu, читает босс Psy-Crow (psy_level_init)
 demo_stream_ptr equ $FFFFFF86
 demo_index equ $FFFFFF8A
 word_FFFF8C equ $FFFFFF8C

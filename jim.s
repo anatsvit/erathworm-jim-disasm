@@ -13,6 +13,8 @@
     include "src/move_script.inc"
     include "src/anim_script.inc"
     include "src/andy_track.inc"
+    include "src/demo.inc"
+    include "src/level_config.inc"
     include "src/gems.inc"
     include "src/ram_addrs.inc"
 ;
@@ -47,7 +49,7 @@ dword_28:       dc.l $3F1456            ; DATA XREF: sub_259DFE+2B2   o
                 dc.l Trap15
 off_34:         dc.l Trap15             ; DATA XREF: whip_to_bobcat+20   o
                                         ; collision_with_butt_crab+14   w
-off_38:         dc.l Trap15             ; DATA XREF: sub_24F23E+C4   o
+off_38:         dc.l Trap15             ; DATA XREF: wth_snw_level_events+C4   o
                                         ; fire_to_sponge+46   o ...
 off_3C:         dc.l Trap15             ; DATA XREF: sub_24DBCC+1A   o
                 dc.l Trap15
@@ -1827,8 +1829,7 @@ funchar_sprites_table: dc.l 0           ; ' ' - пробел, обрабатыв
                 dc.l anim_funchar_X     ; X
                 dc.l anim_funchar_Y     ; Y
                 dc.l anim_funchar_Z     ; Z
-byte_5AF8:
-    binclude "binaries/byte_5AF8.bin"
+    include "jiminc/tile_slope_tbl.inc"
     align 2,0
 ; Andy Asteroids, тоннель: наклон картинки трубы сдвигом строк/колонок (имитация поворота) по jim_tunnel_angle.
 ; 39 пар (vscr, hscr), idx = (jim_tunnel_angle-$1C00)/$1E5. idx 18-19 ($4000) = p00, ровно; к idx 0 растёт p, к idx 38 растёт m.
@@ -3439,7 +3440,7 @@ off_C9E6:       dc.l off_1B4796         ; DATA XREF: sub_2592EC+188   o
                 dc.l off_1B4766
                 dc.l off_1B4796
 byte_C9FE:      dc.b   1,  2,  2,  2,  4,  4,  4,  6,  8,  8,  5,  5,  5,  7,  3,  3,  0,  0,  0,  0,  0,  0,  0,  5,  5,  5,  5,  5,  2,$FF
-                                        ; DATA XREF: sub_25049A+26   o
+                                        ; DATA XREF: psy_level_init+26   o
 byte_CA1C:
     binclude "binaries/ffbytes.bin"
     align 2,0
@@ -3763,7 +3764,7 @@ byte_1A2EF0:    dc.b $84,$57,  0,$FF,  0,$FF,  0,$FF,  0,$FF,$85,  0,$84,$99,  0
                 dc.b $FD,$FD,$84,$9D,$FD,$FD,$8C,  0,  3,$FD,$84,$9D,  3,$FD,$8C,  0,$FD,  3,$84,$9D,$FD,  3,$8C,  0,  3,  3,$84,$9D,  3,  3,$8C,  0
 byte_1A2F3E:    dc.b   0,  0,$83,  2,$FF,$44,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  2,  0,  0
                                         ; DATA XREF: ROM:001A31A0   o
-                                        ; sub_24F4F0+80   o
+                                        ; snt_level_events+80   o
                 dc.b $83,  2,$FF,$46,  0,  0,  0,  2,  0,  0,  0,  2,  0,  3,  0,  3,  0,  4,  0,  3,  0,  4,  0,  4,  0,  4,  0,  4,  0,  5,$83,  1
                 dc.b $FD,$6C,  0,  1,  0,  4,  0,  5,  0,  4,  0,  5,  0,  5,  0,  4,  0,  5,  0,  5,  0,  5,  0,  6,  0,  5,  0,  6,  0,  6,  0,  7
                 dc.b   0,  6,  0,  7,  0,  8,  0,  8,  0,  8,  0,  8,  0,  9,  0,  9,  0,  9,  0, $A,  0,  9,  0, $A,  0, $B,  0, $A,  0, $B,  0, $A
@@ -4707,7 +4708,7 @@ byte_1A43AE:    dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
                 dc.b   0,  0,$85,  0,$FB,$E4,$82,  0
 byte_1A4444:    dc.b   0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  1,  0,  1,  0,  0,  0,  1,  0,  1
                                         ; DATA XREF: ROM:001A44BE   o
-                                        ; sub_250194+1C   o ...
+                                        ; lvl5_chi_level_init+1C   o ...
                 dc.b   0,  0,  0,  1,  0,  0,  0,  1,  0,  1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,$FF,  0,  0
                 dc.b   0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,$FF,  0,  0,  0,$FF,  0,$FF,  0,  0,  0,$FF
                 dc.b   0,  0,  0,$FF,  0,$FF,  0,  0,  0,  0,  0,$FF,  0,  0,  0,$FF,  0,  0,  0,  0,  0,  0,  0,  0,$80,  0
@@ -16428,7 +16429,7 @@ off_1B30F0:     dc.w off_3280           ; DATA XREF: ROM:001B2FA0   o
 off_1B30F4:     dc.w off_3284           ; DATA XREF: ROM:001B2FA4   o
                 fa_end
 dword_1B30F8:   dc.l 0                  ; DATA XREF: sub_24DD18+E0   o
-                                        ; sub_250194+68   o ...
+                                        ; lvl5_chi_level_init+68   o ...
                 dc.l anim_eye_gate
                 dc.l off_1B3220
                 dc.l off_1B3224
@@ -21011,7 +21012,7 @@ jim_palette:    dc.w     0,  $AE,  $6E,  $2E,   $A, $88E, $66C, $448, $224, $ECC
                                         ; DATA XREF: sub_245AE4+8A   o
                                         ; restore_respawn_point+10A   o ...
 wth_palette:    dc.w $8E, $AE, 2, $80, $60, $EEE, $8E, $6E, $4C, $4A, $2A, $28, $26, $24, $22, $A4
-                                        ; DATA XREF: sub_24F23E+3C   o
+                                        ; DATA XREF: wth_snw_level_events+3C   o
                                         ; ROM:0025BC24   o
                 dc.w 0, $6CE, $448, $226, $AE, $6E, $4E, $2E, $2C, $2A, $28, $C, 6, 4, 2, 0
                 dc.w 0, $CCE, $88C, $668, $446, $EE, $A0, $8EE, $8AE, $68E, $64E, $C, $A, 8, 4, 0
@@ -21048,7 +21049,7 @@ btv_heli_palette:dc.w 0, 2, 0, $24, $46, $68, $2EE, $422, $202, $624, $A26, $440
                 dc.w 0, $E, $228, $28E, $4E, $2CE, $8C, $2C2, $80, $A82, $C20, $A2C, $808, $8A6, $EEE, 0
                 dc.w 0, $8E, $4E, $E, $A, $86E, $64C, $428, $204, $EAC, $C66, $A22, $600, $400, $ECE, 0
 word_1B7CAC:    dc.w     0,    0,    0,    0,    0, $600,    0, $A00,    0, $600,    0, $A00,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
-                                        ; DATA XREF: sub_24F644+14E   o
+                                        ; DATA XREF: btv_sfb_level_events+14E   o
                 dc.w     0,    0,    0,    0, $200, $A00,    0, $E40,    0,    0,    0, $200,    0, $A00, $A00, $A00,    0,    0,    0,    0,    0,    0,    0,    0, $200, $C20, $A00, $E40,    0,    0,    0,    0
                 dc.w     0,    0, $E40,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
                 dc.w     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, $200,    0,    0,    0, $200, $200, $C40, $A00, $E80, $200, $C20, $A00, $E40,    0,    0,    0,    0,    0, $600,    0, $A00
@@ -21056,7 +21057,7 @@ word_1B7CAC:    dc.w     0,    0,    0,    0,    0, $600,    0, $A00,    0, $600
                 dc.w     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, $600,    0, $A00,    0,    0,    0, $200,    0,    0,    0, $200,    0,    0,    0,    0,    0,    0,    0,    0
                 dc.w     0,    0,    0,    0,    0,    0,    0,    0
 word_1B7E3C:    dc.w     0,    0,    0,    0,    0,    6,    0,   $A,    0,    6,    0,   $A,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
-                                        ; DATA XREF: sub_24F644+15C   o
+                                        ; DATA XREF: btv_sfb_level_events+15C   o
                 dc.w     0,    0,    0,    0,    2,  $28,    0,  $4E,    0,    0,    0,    2,    0,   $A,   $A,   $A,    0,    0,    0,    0,    0,    0,    0,    0,    2,  $2C,   $A,  $4E,    0,    0,    0,    0
                 dc.w     0,    0,   $C,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
                 dc.w     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    2,    0,    0,    0,    2,    2,  $2C,   $A,  $4E,    2,  $2C,   $A,  $4E,    0,    0,    0,    0,    0,    6,    0,   $A
@@ -27666,7 +27667,7 @@ loc_24A20E:                             ; CODE XREF: jim_platform_collision+102 
                                         ; jim_platform_collision+140   j ...
                 clr.w   d6
                 move.b  (jim_slope_under).l,d6
-                lea     (byte_5AF8).w,a2
+                lea     (tile_slope_tbl).w,a2
                 move.b  (a2,d6.w),(jim_slope_under).l
                 tst.b   (jim_platforms_disabled).l
                 bne.w   loc_24A3CE
@@ -28463,8 +28464,8 @@ background_anim:                        ; CODE XREF: oksub_2456C8+17E   p
                 beq.w   locret_24AC2A
                 btst    #0,(frame_counter).l
                 bne.w   locret_24AC2A
-loc_24AB7E:                             ; CODE XREF: sub_250182   p
-                                        ; sub_250182+4   p ...
+loc_24AB7E:                             ; CODE XREF: lvl5_lab_level_init   p
+                                        ; lvl5_lab_level_init+4   p ...
                 movea.l (bg_anim_data_ptr).l,a0
                 cmpa.l  #0,a0
                 beq.w   locret_24AC2A
@@ -30048,7 +30049,7 @@ locret_24BDA6:                          ; CODE XREF: jim_activities_collision+8 
 
 
 ; стартовая анимация Джима при входе на уровень и респавне: Chicken boss ($B) - anim_jim_chicken_boss_start, Down the Tubes ($E) - anim_jim_falling_start,
-; ropejumper / ракета / голый червь, иначе anim_jim_level_start (jim_state $33); jim_timer_in_air = $38, на For Pete's Sake ($7) - anim_pete Питу
+; ropejumper / ракета / голый червь, иначе anim_jim_level_start (jim_state $33); jim_timer_in_air = $38, на For Petes Sake ($7) - anim_pete Питу
 set_jim_level_start_anim:                             ; CODE XREF: oksub_2456C8+164   p
                                         ; sub_245AE4+158   p ...
                 cmpi.b  #$B,(selectedLevelOption).l
@@ -32059,8 +32060,8 @@ loc_24D404:                             ; CODE XREF: sub_24D398+66   j
 ; End of function sub_24D398
 
 
-random_in_range:                             ; CODE XREF: sub_24F5A2+30   p
-                                        ; sub_24F86E+9A   p ...
+random_in_range:                             ; CODE XREF: pete_level_events+30   p
+                                        ; lvl5_chi_level_events+9A   p ...
                 movem.l d1-d3,-(sp)
                 addq.w  #1,d7
                 move.l  (random_seed).l,d1
@@ -34511,23 +34512,23 @@ locret_24F1D6:                          ; CODE XREF: njc_level_events+14A   j
 ; End of function njc_level_events
 
 
-sub_24F1D8:                             ; DATA XREF: ROM:0025BC30   o
+wth_level_events:                             ; DATA XREF: ROM:0025BC30   o
                 tst.b   (teleport_request_to_snowman).l
                 beq.s   loc_24F1F4
                 clr.b   (teleport_request_to_snowman).l
                 move.l  #byte_25C3A4,(teleport_data_offset).l
                 bra.w   teleport
 ; ---------------------------------------------------------------------------
-loc_24F1F4:                             ; CODE XREF: sub_24F1D8+6   j
+loc_24F1F4:                             ; CODE XREF: wth_level_events+6   j
                 tst.b   (teleport_request_to_evilcat).l
                 beq.s   locret_24F210
                 clr.b   (teleport_request_to_evilcat).l
                 move.l  #byte_25C3B8,(teleport_data_offset).l
                 bra.w   teleport
 ; ---------------------------------------------------------------------------
-locret_24F210:                          ; CODE XREF: sub_24F1D8+22   j
+locret_24F210:                          ; CODE XREF: wth_level_events+22   j
                 rts
-; End of function sub_24F1D8
+; End of function wth_level_events
 
 
 oksub_24F212:                           ; DATA XREF: ROM:001B07F2   o
@@ -34556,7 +34557,7 @@ nullsub_45:
 ; End of function nullsub_45
 
 
-sub_24F23E:                             ; DATA XREF: ROM:0025BC70   o
+wth_snw_level_events:                             ; DATA XREF: ROM:0025BC70   o
                 tst.w   (word_FFFCD8).l
                 beq.w   loc_24F318
                 jsr     find_free_obj_slot_ad4e(pc)
@@ -34573,7 +34574,7 @@ sub_24F23E:                             ; DATA XREF: ROM:0025BC70   o
                 lea     (wth_palette).l,a0
                 jsr     load_palette_line2(pc)
                 move.w  #$4000,$1E(a5)
-loc_24F28A:                             ; CODE XREF: sub_24F23E+18   j
+loc_24F28A:                             ; CODE XREF: wth_snw_level_events+18   j
                 move.w  (word_FFFCD8).l,d7
                 cmpi.w  #$20,d7 ; ' '
                 bcs.w   loc_24F318
@@ -34589,8 +34590,8 @@ loc_24F28A:                             ; CODE XREF: sub_24F23E+18   j
                 cmpi.b  #$A0,d7
                 bcs.s   loc_24F2C6
                 lea     (object_small_explode).l,a6
-loc_24F2C6:                             ; CODE XREF: sub_24F23E+74   j
-                                        ; sub_24F23E+80   j
+loc_24F2C6:                             ; CODE XREF: wth_snw_level_events+74   j
+                                        ; wth_snw_level_events+80   j
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 jsr     random_function(pc)
                 andi.w  #$1F,d7
@@ -34610,47 +34611,47 @@ loc_24F2C6:                             ; CODE XREF: sub_24F23E+74   j
                 jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24F318:                             ; CODE XREF: sub_24F23E+6   j
-                                        ; sub_24F23E+E   j ...
+loc_24F318:                             ; CODE XREF: wth_snw_level_events+6   j
+                                        ; wth_snw_level_events+E   j ...
                 tst.b   (teleport_request_from_snowman).l
                 beq.s   locret_24F334
                 clr.b   (teleport_request_from_snowman).l
                 move.l  #byte_25C3AE,(teleport_data_offset).l
                 bra.w   teleport
 ; ---------------------------------------------------------------------------
-locret_24F334:                          ; CODE XREF: sub_24F23E+E0   j
+locret_24F334:                          ; CODE XREF: wth_snw_level_events+E0   j
                 rts
-; End of function sub_24F23E
+; End of function wth_snw_level_events
 
 
-sub_24F336:                             ; DATA XREF: ROM:0025BCB0   o
+wth_evl_level_events:                             ; DATA XREF: ROM:0025BCB0   o
                 tst.b   (is_evil_cat_defeated).l
                 bne.w   loc_24F374
                 tst.b   (evil_cat_invul_timer).l
                 beq.s   loc_24F354
                 subq.b  #1,(evil_cat_invul_timer).l
                 clr.b   (evil_cat_hit_pending).l
-loc_24F354:                             ; CODE XREF: sub_24F336+10   j
+loc_24F354:                             ; CODE XREF: wth_evl_level_events+10   j
                 tst.b   (evil_cat_hit_pending).l
                 beq.s   locret_24F372
                 tst.b   (evil_cat_hp).l
                 beq.s   locret_24F372
                 subq.b  #1,(evil_cat_hp).l
                 move.b  #$1E,(evil_cat_invul_timer).l
-locret_24F372:                          ; CODE XREF: sub_24F336+24   j
-                                        ; sub_24F336+2C   j
+locret_24F372:                          ; CODE XREF: wth_evl_level_events+24   j
+                                        ; wth_evl_level_events+2C   j
                 rts
 ; ---------------------------------------------------------------------------
-loc_24F374:                             ; CODE XREF: sub_24F336+6   j
+loc_24F374:                             ; CODE XREF: wth_evl_level_events+6   j
                 tst.b   (byte_FFFDFB).l
                 beq.w   loc_24F3B0
                 lea     (unk_FF0640).l,a0
                 lea     (unk_FF0258).l,a1
                 move.w  #$32,d7 ; '2'
                 move.w  #9,d0
-loc_24F392:                             ; CODE XREF: sub_24F336+6A   j
+loc_24F392:                             ; CODE XREF: wth_evl_level_events+6A   j
                 move.w  #$18,d1
-loc_24F396:                             ; CODE XREF: sub_24F336+62   j
+loc_24F396:                             ; CODE XREF: wth_evl_level_events+62   j
                 move.w  (a0)+,(a1)+
                 dbf     d1,loc_24F396
                 adda.w  d7,a0
@@ -34658,7 +34659,7 @@ loc_24F396:                             ; CODE XREF: sub_24F336+62   j
                 dbf     d0,loc_24F392
                 clr.b   (byte_FFFDFB).l
                 clr.b   (evil_cat_phase1_active).l
-loc_24F3B0:                             ; CODE XREF: sub_24F336+44   j
+loc_24F3B0:                             ; CODE XREF: wth_evl_level_events+44   j
                 cmpi.b  #9,(evil_cat_souls_killed).l
                 beq.w   loc_24F4A0
                 tst.b   (camera_disable_value).l
@@ -34668,7 +34669,7 @@ loc_24F3B0:                             ; CODE XREF: sub_24F336+44   j
                 move.w  #$1A0,(camera_target_x).l
                 clr.w   (camera_target_y).l
                 st      (camera_disable_value).l
-loc_24F3E6:                             ; CODE XREF: sub_24F336+8C   j
+loc_24F3E6:                             ; CODE XREF: wth_evl_level_events+8C   j
                 tst.b   (evil_cat_phase2_state).l
                 bne.s   loc_24F410
                 tst.b   (naked_worm_enable).l
@@ -34678,18 +34679,18 @@ loc_24F3E6:                             ; CODE XREF: sub_24F336+8C   j
                 jsr     show_funchar_text(pc)
                 bra.w   locret_24F49E
 ; ---------------------------------------------------------------------------
-loc_24F410:                             ; CODE XREF: sub_24F336+B6   j
+loc_24F410:                             ; CODE XREF: wth_evl_level_events+B6   j
                 tst.w   (word_FFFD92).l
                 beq.s   loc_24F422
                 subq.w  #1,(word_FFFD92).l
                 bra.w   locret_24F49E
 ; ---------------------------------------------------------------------------
-loc_24F422:                             ; CODE XREF: sub_24F336+E0   j
+loc_24F422:                             ; CODE XREF: wth_evl_level_events+E0   j
                 cmpi.b  #1,(evil_cat_phase2_state).l
                 bne.s   loc_24F43C
                 move.b  #4,(palette2_index).l
                 move.b  #2,(evil_cat_phase2_state).l
-loc_24F43C:                             ; CODE XREF: sub_24F336+F4   j
+loc_24F43C:                             ; CODE XREF: wth_evl_level_events+F4   j
                 jsr     random_function(pc)
                 andi.w  #$7F,d7
                 addi.w  #$B4,d7
@@ -34712,18 +34713,18 @@ loc_24F43C:                             ; CODE XREF: sub_24F336+F4   j
                 subi.w  #$10,d0
                 move.w  d0,4(a5)
                 move.l  4(a4,d3.w),$20(a5)
-locret_24F49E:                          ; CODE XREF: sub_24F336+98   j
-                                        ; sub_24F336+BE   j ...
+locret_24F49E:                          ; CODE XREF: wth_evl_level_events+98   j
+                                        ; wth_evl_level_events+BE   j ...
                 rts
 ; ---------------------------------------------------------------------------
-loc_24F4A0:                             ; CODE XREF: sub_24F336+82   j
+loc_24F4A0:                             ; CODE XREF: wth_evl_level_events+82   j
                 tst.b   (level_finish_enable).l
                 bne.s   locret_24F49E
                 st      (level_finish_enable).l
                 rts
-; End of function sub_24F336
+; End of function wth_evl_level_events
 ; ---------------------------------------------------------------------------
-dword_24F4B0:   dc.l $FF80FFC8          ; DATA XREF: sub_24F336+124   o
+dword_24F4B0:   dc.l $FF80FFC8          ; DATA XREF: wth_evl_level_events+124   o
                 dc.l off_1B3C00
                 dc.l $FF98FFA8
                 dc.l off_1B3C22
@@ -34741,7 +34742,7 @@ dword_24F4B0:   dc.l $FF80FFC8          ; DATA XREF: sub_24F336+124   o
                 dc.l off_1B3D00
 
 
-sub_24F4F0:                             ; DATA XREF: ROM:0025BCF0   o
+snt_level_events:                             ; DATA XREF: ROM:0025BCF0   o
                                         ; ROM:0025BD30   o ...
                 move.b  (frame_counter).l,d7
                 andi.b  #3,d7
@@ -34751,22 +34752,22 @@ sub_24F4F0:                             ; DATA XREF: ROM:0025BCF0   o
                 lea     (unk_FFB498).l,a1
                 move.w  (a0),d1
                 move.w  #5,d0
-loc_24F518:                             ; CODE XREF: sub_24F4F0+32   j
+loc_24F518:                             ; CODE XREF: snt_level_events+32   j
                 move.w  (a1)+,d2
                 move.w  d2,(a0)+
                 move.w  d2,(VDP_DATA).l
                 dbf     d0,loc_24F518
                 move.w  d1,(a0)
                 move.w  d1,(VDP_DATA).l
-loc_24F52E:                             ; CODE XREF: sub_24F4F0+A   j
+loc_24F52E:                             ; CODE XREF: snt_level_events+A   j
                 tst.b   (byte_FFFD68).l
                 bne.s   loc_24F548
                 move.b  (frame_counter).l,d7
                 cmpi.b  #$70,d7 ; 'p'
                 bne.s   loc_24F548
                 st      (byte_FFFD68).l
-loc_24F548:                             ; CODE XREF: sub_24F4F0+44   j
-                                        ; sub_24F4F0+50   j
+loc_24F548:                             ; CODE XREF: snt_level_events+44   j
+                                        ; snt_level_events+50   j
                 tst.b   (snot_level_intro_delay).l
                 beq.s   loc_24F580
                 addq.b  #1,(snot_level_intro_delay).l
@@ -34777,8 +34778,8 @@ loc_24F548:                             ; CODE XREF: sub_24F4F0+44   j
                 clr.b   (snot_level_intro_delay).l
                 move.l  #byte_1A2F3E,(jim_move_script_ptr).l
                 clr.b   (jim_obj_script_delay).l
-loc_24F580:                             ; CODE XREF: sub_24F4F0+5E   j
-                                        ; sub_24F4F0+78   j
+loc_24F580:                             ; CODE XREF: snt_level_events+5E   j
+                                        ; snt_level_events+78   j
                 move.b  (frame_counter).l,d7
                 andi.b  #$F,d7
                 bne.w   locret_24F5A0
@@ -34787,13 +34788,13 @@ loc_24F580:                             ; CODE XREF: sub_24F4F0+5E   j
                 subq.b  #1,(ropejump_impact_timer).l
                 rts
 ; ---------------------------------------------------------------------------
-locret_24F5A0:                          ; CODE XREF: sub_24F4F0+9A   j
-                                        ; sub_24F4F0+A4   j
+locret_24F5A0:                          ; CODE XREF: snt_level_events+9A   j
+                                        ; snt_level_events+A4   j
                 rts
-; End of function sub_24F4F0
+; End of function snt_level_events
 
 
-sub_24F5A2:                             ; DATA XREF: ROM:0025BDB0   o
+pete_level_events:                             ; DATA XREF: ROM:0025BDB0   o
                 move.b  (frame_counter).l,d7
                 andi.b  #7,d7
                 bne.w   locret_24F642
@@ -34805,9 +34806,9 @@ sub_24F5A2:                             ; DATA XREF: ROM:0025BDB0   o
                 clr.w   (rock_shower_intensity).l
                 bra.s   locret_24F642
 ; ---------------------------------------------------------------------------
-loc_24F5CA:                             ; CODE XREF: sub_24F5A2+1A   j
+loc_24F5CA:                             ; CODE XREF: pete_level_events+1A   j
                 addq.w  #1,d7
-loc_24F5CC:                             ; CODE XREF: sub_24F5A2+1E   j
+loc_24F5CC:                             ; CODE XREF: pete_level_events+1E   j
                 move.w  d7,(rock_shower_intensity).l
                 jsr     random_in_range(pc)
                 add.w   (rock_shower_intensity).l,d7
@@ -34826,8 +34827,8 @@ loc_24F5CC:                             ; CODE XREF: sub_24F5A2+1E   j
                 cmpi.w  #$B4,d7
                 bcs.s   loc_24F61A
                 clr.b   (rock_shower_active).l
-loc_24F61A:                             ; CODE XREF: sub_24F5A2+58   j
-                                        ; sub_24F5A2+64   j ...
+loc_24F61A:                             ; CODE XREF: pete_level_events+58   j
+                                        ; pete_level_events+64   j ...
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  (camera_y).l,d7
                 addi.w  #$100,d7
@@ -34837,29 +34838,29 @@ loc_24F61A:                             ; CODE XREF: sub_24F5A2+58   j
                 add.w   (camera_x).l,d7
                 addi.w  #$80,d7
                 move.w  d7,2(a5)
-locret_24F642:                          ; CODE XREF: sub_24F5A2+A   j
-                                        ; sub_24F5A2+26   j ...
+locret_24F642:                          ; CODE XREF: pete_level_events+A   j
+                                        ; pete_level_events+26   j ...
                 rts
-; End of function sub_24F5A2
+; End of function pete_level_events
 
 
-sub_24F644:                             ; DATA XREF: ROM:0025BDF0   o
+btv_sfb_level_events:                             ; DATA XREF: ROM:0025BDF0   o
                 tst.b   (byte_FFFE00).l
                 beq.s   loc_24F678
                 lea     (unk_FF00F8).l,a0
                 lea     (unk_FF70D8).l,a1
                 move.w  #$2DE,d7
                 move.w  #6,d0
-loc_24F660:                             ; CODE XREF: sub_24F644+2A   j
+loc_24F660:                             ; CODE XREF: btv_sfb_level_events+2A   j
                 move.w  #$19,d1
-loc_24F664:                             ; CODE XREF: sub_24F644+22   j
+loc_24F664:                             ; CODE XREF: btv_sfb_level_events+22   j
                 move.w  (a0)+,(a1)+
                 dbf     d1,loc_24F664
                 adda.w  d7,a0
                 adda.w  d7,a1
                 dbf     d0,loc_24F660
                 clr.b   (byte_FFFE00).l
-loc_24F678:                             ; CODE XREF: sub_24F644+6   j
+loc_24F678:                             ; CODE XREF: btv_sfb_level_events+6   j
                 tst.b   (butt_boss_debris_timer).l
                 beq.s   loc_24F6D6
                 subq.b  #1,(butt_boss_debris_timer).l
@@ -34874,7 +34875,7 @@ loc_24F678:                             ; CODE XREF: sub_24F644+6   j
                 btst    #0,d0
                 beq.s   loc_24F6B2
                 move.b  #$FF,9(a5)
-loc_24F6B2:                             ; CODE XREF: sub_24F644+66   j
+loc_24F6B2:                             ; CODE XREF: btv_sfb_level_events+66   j
                 andi.w  #$3F,d7 ; '?'
                 subi.w  #$20,d7 ; ' '
                 addi.w  #$17CC,d7
@@ -34884,8 +34885,8 @@ loc_24F6B2:                             ; CODE XREF: sub_24F644+66   j
                 subi.w  #$20,d7 ; ' '
                 addi.w  #$2B5,d7
                 move.w  d7,4(a5)
-loc_24F6D6:                             ; CODE XREF: sub_24F644+3A   j
-                                        ; sub_24F644+4C   j ...
+loc_24F6D6:                             ; CODE XREF: btv_sfb_level_events+3A   j
+                                        ; btv_sfb_level_events+4C   j ...
                 tst.b   (byte_FFFD30).l
                 beq.s   loc_24F710
                 cmpi.b  #8,(byte_FFFD30).l
@@ -34898,24 +34899,24 @@ loc_24F6D6:                             ; CODE XREF: sub_24F644+3A   j
                 jsr     (gems_start_song).l
                 addq.l  #4,sp
                 movem.l (sp)+,d0-d1/a0-a1/a6
-loc_24F70A:                             ; CODE XREF: sub_24F644+A2   j
-                                        ; sub_24F644+AA   j
+loc_24F70A:                             ; CODE XREF: btv_sfb_level_events+A2   j
+                                        ; btv_sfb_level_events+AA   j
                 subq.b  #1,(byte_FFFD30).l
-loc_24F710:                             ; CODE XREF: sub_24F644+98   j
+loc_24F710:                             ; CODE XREF: btv_sfb_level_events+98   j
                 move.b  (frame_counter).l,d7
                 andi.b  #1,d7
-                bne.s   loc_24F748
+                bne.s   btv_heli_level_events
                 addq.w  #4,(frog_anim_pos).l
                 cmpi.w  #$108,(frog_anim_pos).l
                 bcs.s   loc_24F732
                 clr.w   (frog_anim_pos).l
-loc_24F732:                             ; CODE XREF: sub_24F644+E6   j
+loc_24F732:                             ; CODE XREF: btv_sfb_level_events+E6   j
                 addq.w  #4,(frog2_anim_pos).l
                 cmpi.w  #$F8,(frog2_anim_pos).l
-                bcs.s   loc_24F748
+                bcs.s   btv_heli_level_events
                 clr.w   (frog2_anim_pos).l
-loc_24F748:                             ; CODE XREF: sub_24F644+D6   j
-                                        ; sub_24F644+FC   j
+btv_heli_level_events:                             ; CODE XREF: btv_sfb_level_events+D6   j
+                                        ; btv_sfb_level_events+FC   j
                                         ; DATA XREF: ...
                 tst.b   (pal_flash_active).l
                 beq.w   loc_24F7DA
@@ -34930,14 +34931,14 @@ loc_24F748:                             ; CODE XREF: sub_24F644+D6   j
                 clr.b   (pal_flash_active).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24F780:                             ; CODE XREF: sub_24F644+132   j
+loc_24F780:                             ; CODE XREF: btv_sfb_level_events+132   j
                 addi.w  #$10,(word_FFFC9A).l
                 move.l  #$C0300000,(VDP_CTRL).l
                 lea     (word_1B7CAC).l,a0
                 tst.b   (is_queen_butt_defeated).l
                 beq.s   loc_24F7A6
                 lea     (word_1B7E3C).l,a0
-loc_24F7A6:                             ; CODE XREF: sub_24F644+15A   j
+loc_24F7A6:                             ; CODE XREF: btv_sfb_level_events+15A   j
                 adda.l  d0,a0
                 move.w  (a0)+,(VDP_DATA).l
                 move.w  (a0)+,(VDP_DATA).l
@@ -34949,7 +34950,7 @@ loc_24F7A6:                             ; CODE XREF: sub_24F644+15A   j
                 move.w  (a0),(VDP_DATA).l
                 rts
 ; ---------------------------------------------------------------------------
-loc_24F7DA:                             ; CODE XREF: sub_24F644+10A   j
+loc_24F7DA:                             ; CODE XREF: btv_sfb_level_events+10A   j
                 move.w  (jim_x).l,d6
                 lsr.w   #7,d6
                 addq.w  #1,d6
@@ -34961,17 +34962,17 @@ loc_24F7DA:                             ; CODE XREF: sub_24F644+10A   j
                 jsr     random_function(pc)
                 andi.w  #$1FF,d7
                 move.w  d7,(word_FFFC9C).l
-locret_24F806:                          ; CODE XREF: sub_24F644+11C   j
-                                        ; sub_24F644+1A6   j
+locret_24F806:                          ; CODE XREF: btv_sfb_level_events+11C   j
+                                        ; btv_sfb_level_events+1A6   j
                 rts
-; End of function sub_24F644
+; End of function btv_sfb_level_events
 
 
-sub_24F808:                             ; DATA XREF: ROM:0025BE70   o
+lvl5_lab_level_events:                             ; DATA XREF: ROM:0025BE70   o
                 tst.b   (chicken_lever_cooldown).l
                 beq.s   loc_24F816
                 subq.b  #1,(chicken_lever_cooldown).l
-loc_24F816:                             ; CODE XREF: sub_24F808+6   j
+loc_24F816:                             ; CODE XREF: lvl5_lab_level_events+6   j
                 tst.b   (byte_FFFDF6).l
                 beq.s   loc_24F838
                 clr.b   (byte_FFFDF6).l
@@ -34980,31 +34981,31 @@ loc_24F816:                             ; CODE XREF: sub_24F808+6   j
                 bsr.w   set_jim_level_start_anim
                 rts
 ; ---------------------------------------------------------------------------
-loc_24F838:                             ; CODE XREF: sub_24F808+14   j
+loc_24F838:                             ; CODE XREF: lvl5_lab_level_events+14   j
                 tst.b   (byte_FFFDFA).l
                 beq.s   locret_24F86C
                 lea     (unk_FF783A).l,a0
                 lea     (unk_FF5770).l,a1
                 move.w  #$246,d7
                 move.w  #8,d0
-loc_24F854:                             ; CODE XREF: sub_24F808+5A   j
+loc_24F854:                             ; CODE XREF: lvl5_lab_level_events+5A   j
                 move.w  #$A,d1
-loc_24F858:                             ; CODE XREF: sub_24F808+52   j
+loc_24F858:                             ; CODE XREF: lvl5_lab_level_events+52   j
                 move.w  (a0)+,(a1)+
                 dbf     d1,loc_24F858
                 adda.w  d7,a0
                 adda.w  d7,a1
                 dbf     d0,loc_24F854
                 clr.b   (byte_FFFDFA).l
-locret_24F86C:                          ; CODE XREF: sub_24F808+36   j
+locret_24F86C:                          ; CODE XREF: lvl5_lab_level_events+36   j
                 rts
-; End of function sub_24F808
+; End of function lvl5_lab_level_events
 
 
-sub_24F86E:                             ; DATA XREF: ROM:0025BEB0   o
+lvl5_chi_level_events:                             ; DATA XREF: ROM:0025BEB0   o
                 move.w  #$24,d4 ; '$'
                 lea     (obj_01).l,a5
-loc_24F878:                             ; CODE XREF: sub_24F86E+16   j
+loc_24F878:                             ; CODE XREF: lvl5_chi_level_events+16   j
                 addi.w  #$E,obj_01_y-obj_01(a5)
                 adda.l  #$56,a5 ; 'V'
                 dbf     d4,loc_24F878
@@ -35016,12 +35017,12 @@ loc_24F878:                             ; CODE XREF: sub_24F86E+16   j
                 subq.b  #1,(chicken_fly_boss_death_timer).l
                 bne.s   loc_24F8AC
                 st      (level_end_timer).l
-loc_24F8AC:                             ; CODE XREF: sub_24F86E+22   j
-                                        ; sub_24F86E+2E   j ...
+loc_24F8AC:                             ; CODE XREF: lvl5_chi_level_events+22   j
+                                        ; lvl5_chi_level_events+2E   j ...
                 tst.b   (chicken_fly_boss_invul_timer).l
                 beq.s   loc_24F8BA
                 subq.b  #1,(chicken_fly_boss_invul_timer).l
-loc_24F8BA:                             ; CODE XREF: sub_24F86E+44   j
+loc_24F8BA:                             ; CODE XREF: lvl5_chi_level_events+44   j
                 cmpi.b  #$B,(byte_FFAF8F).l
                 bcs.s   loc_24F8DC
                 cmpi.w  #$2BF,(camera_y).l
@@ -35030,18 +35031,18 @@ loc_24F8BA:                             ; CODE XREF: sub_24F86E+44   j
                 subi.w  #$40,d6 ; '@'
                 bra.s   loc_24F92A
 ; ---------------------------------------------------------------------------
-loc_24F8DC:                             ; CODE XREF: sub_24F86E+54   j
+loc_24F8DC:                             ; CODE XREF: lvl5_chi_level_events+54   j
                 tst.b   (fall_long_wrap_flag).l
                 bne.s   loc_24F8F2
                 cmpi.w  #$6CF,(camera_y).l
                 bcs.w   locret_24F95A
                 bra.s   loc_24F904
 ; ---------------------------------------------------------------------------
-loc_24F8F2:                             ; CODE XREF: sub_24F86E+74   j
+loc_24F8F2:                             ; CODE XREF: lvl5_chi_level_events+74   j
                 cmpi.w  #$8AF,(camera_y).l
                 bcs.w   locret_24F95A
                 clr.b   (fall_long_wrap_flag).l
-loc_24F904:                             ; CODE XREF: sub_24F86E+82   j
+loc_24F904:                             ; CODE XREF: lvl5_chi_level_events+82   j
                 move.w  #$2D0,d7
                 bsr.w   random_in_range
                 addi.w  #$40,d7 ; '@'
@@ -35052,58 +35053,58 @@ loc_24F904:                             ; CODE XREF: sub_24F86E+82   j
                 tst.w   d7
                 bne.s   loc_24F92A
                 st      (fall_long_wrap_flag).l
-loc_24F92A:                             ; CODE XREF: sub_24F86E+6C   j
-                                        ; sub_24F86E+B4   j
+loc_24F92A:                             ; CODE XREF: lvl5_chi_level_events+6C   j
+                                        ; lvl5_chi_level_events+B4   j
                 sub.w   d6,(jim_obj_y).l
                 sub.w   d6,(jim_y).l
                 sub.w   d6,(camera_y).l
                 sub.w   d6,(view_map_y).l
                 move.w  #$19,d4
                 lea     (obj_01).l,a5
-loc_24F94C:                             ; CODE XREF: sub_24F86E+E8   j
+loc_24F94C:                             ; CODE XREF: lvl5_chi_level_events+E8   j
                 sub.w   d6,obj_01_y-obj_01(a5)
                 adda.l  #$56,a5 ; 'V'
                 dbf     d4,loc_24F94C
-locret_24F95A:                          ; CODE XREF: sub_24F86E+5E   j
-                                        ; sub_24F86E+7E   j ...
+locret_24F95A:                          ; CODE XREF: lvl5_chi_level_events+5E   j
+                                        ; lvl5_chi_level_events+7E   j ...
                 rts
-; End of function sub_24F86E
+; End of function lvl5_chi_level_events
 
 
-sub_24F95C:                             ; DATA XREF: ROM:0025BEF0   o
+lvl5_nkd_level_events:                             ; DATA XREF: ROM:0025BEF0   o
                 tst.b   (conveyor_stop_timer).l
                 beq.s   locret_24F96A
                 subq.b  #1,(conveyor_stop_timer).l
-locret_24F96A:                          ; CODE XREF: sub_24F95C+6   j
+locret_24F96A:                          ; CODE XREF: lvl5_nkd_level_events+6   j
                 rts
-; End of function sub_24F95C
+; End of function lvl5_nkd_level_events
 
 
-sub_24F96C:                             ; DATA XREF: ROM:0025BF30   o
+ints_level_events:                             ; DATA XREF: ROM:0025BF30   o
                 move.w  #$F0,d7
                 tst.b   (is_jim_left_direction).l
                 bne.s   loc_24F97C
                 move.w  #$70,d7 ; 'p'
-loc_24F97C:                             ; CODE XREF: sub_24F96C+A   j
+loc_24F97C:                             ; CODE XREF: ints_level_events+A   j
                 cmp.w   (camera_anchor_x).l,d7
                 beq.s   loc_24F994
                 bcs.s   loc_24F98E
                 addq.w  #1,(camera_anchor_x).l
                 bra.s   loc_24F994
 ; ---------------------------------------------------------------------------
-loc_24F98E:                             ; CODE XREF: sub_24F96C+18   j
+loc_24F98E:                             ; CODE XREF: ints_level_events+18   j
                 subq.w  #1,(camera_anchor_x).l
-loc_24F994:                             ; CODE XREF: sub_24F96C+16   j
-                                        ; sub_24F96C+20   j
+loc_24F994:                             ; CODE XREF: ints_level_events+16   j
+                                        ; ints_level_events+20   j
                 jsr     (sub_259746).l
                 rts
-; End of function sub_24F96C
+; End of function ints_level_events
 
 
-nullsub_7:                              ; DATA XREF: ROM:0025BF70   o
+dwn_level_events:                              ; DATA XREF: ROM:0025BF70   o
                                         ; ROM:0025BFB0   o
                 rts
-; End of function nullsub_7
+; End of function dwn_level_events
 
 
 ; Andy Asteroids, процедура уровня на кадр: продвижение по трассе (команды atr_*, сегменты andy_map) + плавная смена и бег палитры тоннеля
@@ -35450,19 +35451,19 @@ locret_24FD26:                          ; CODE XREF: andy_spawn_speed_bubble+16 
 ; End of function andy_spawn_speed_bubble
 
 
-sub_24FD28:                             ; DATA XREF: ROM:0025C2F0   o
+psy_level_events:                             ; DATA XREF: ROM:0025C2F0   o
                 tst.b   (byte_FFFD9E).l
                 bne.s   loc_24FD42
                 st      (byte_FFFD9E).l
                 move.b  #$28,(funchar_text_id).l ; '('
                 jsr     show_funchar_text(pc)
-loc_24FD42:                             ; CODE XREF: sub_24FD28+6   j
+loc_24FD42:                             ; CODE XREF: psy_level_events+6   j
                 tst.b   (obj_01).l
                 bne.s   locret_24FD50
                 st      (level_end_timer).l
-locret_24FD50:                          ; CODE XREF: sub_24FD28+20   j
+locret_24FD50:                          ; CODE XREF: psy_level_events+20   j
                 rts
-; End of function sub_24FD28
+; End of function psy_level_events
 
 
 ; Darkness (Level 5), процедура уровня на кадр: по exit_door_entered переход в следующую секцию
@@ -35477,19 +35478,19 @@ locret_24FD66:                          ; CODE XREF: darkness_level_update+6   j
 ; End of function darkness_level_update
 
 
-nullsub_8:                              ; DATA XREF: ROM:0025BBEC   o
+njc_level_init:                              ; DATA XREF: ROM:0025BBEC   o
                 rts
-; End of function nullsub_8
+; End of function njc_level_init
 
 
-sub_24FD6A:                             ; DATA XREF: ROM:0025BC2C   o
+wth_level_init:                             ; DATA XREF: ROM:0025BC2C   o
                 move.w  #$8B02,(VDP_CTRL).l
                 jsr     set_planes_64x32(pc)
                 rts
-; End of function sub_24FD6A
+; End of function wth_level_init
 
 
-sub_24FD78:                             ; DATA XREF: ROM:0025BC6C   o
+wth_snw_level_init:                             ; DATA XREF: ROM:0025BC6C   o
                 move.w  #$80,(camera_target_x).l
                 move.w  #$20,(camera_target_y).l ; ' '
                 st      (camera_disable_value).l
@@ -35501,12 +35502,12 @@ sub_24FD78:                             ; DATA XREF: ROM:0025BC6C   o
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$120,2(a5)
                 move.w  #$1C6,4(a5)
-locret_24FDB6:                          ; CODE XREF: sub_24FD78+26   j
+locret_24FDB6:                          ; CODE XREF: wth_snw_level_init+26   j
                 rts
-; End of function sub_24FD78
+; End of function wth_snw_level_init
 
 
-sub_24FDB8:                             ; DATA XREF: ROM:0025BCAC   o
+wth_evl_level_init:                             ; DATA XREF: ROM:0025BCAC   o
                 tst.b   (is_evil_cat_defeated).l
                 bne.w   loc_24FE66
                 jsr     (oksub_2583D8).l
@@ -35541,7 +35542,7 @@ sub_24FDB8:                             ; DATA XREF: ROM:0025BCAC   o
                 move.b  #1,(evil_cat_phase1_active).l
                 bra.s   loc_24FEAC
 ; ---------------------------------------------------------------------------
-loc_24FE66:                             ; CODE XREF: sub_24FDB8+6   j
+loc_24FE66:                             ; CODE XREF: wth_evl_level_init+6   j
                 move.w  #$1A0,(camera_target_x).l
                 move.w  #0,(camera_target_y).l
                 st      (camera_disable_value).l
@@ -35554,46 +35555,46 @@ loc_24FE66:                             ; CODE XREF: sub_24FDB8+6   j
                 move.w  #$1B8,2(a5)
                 move.w  #$180,4(a5)
                 clr.b   (evil_cat_phase1_active).l
-loc_24FEAC:                             ; CODE XREF: sub_24FDB8+20   j
-                                        ; sub_24FDB8+4E   j ...
+loc_24FEAC:                             ; CODE XREF: wth_evl_level_init+20   j
+                                        ; wth_evl_level_init+4E   j ...
                 st      (naked_worm_enable).l
                 jsr     random_function(pc)
                 andi.w  #$7F,d7
                 addi.w  #$B4,d7
                 move.w  d7,(word_FFFD92).l
                 rts
-; End of function sub_24FDB8
+; End of function wth_evl_level_init
 
 
-sub_24FEC6:                             ; DATA XREF: ROM:0025BCEC   o
+snt1_level_init:                             ; DATA XREF: ROM:0025BCEC   o
                 jsr     (sub_24FF38).l
                 move.w  #1,(water_monster_speed_x).l
                 move.w  #$700,(snot_knockback_speed_x).l
                 jsr     (sub_24FF20).l
                 rts
-; End of function sub_24FEC6
+; End of function snt1_level_init
 
 
-sub_24FEE4:                             ; DATA XREF: ROM:0025BD2C   o
+snt2_level_init:                             ; DATA XREF: ROM:0025BD2C   o
                 jsr     (sub_24FF38).l
                 move.w  #1,(water_monster_speed_x).l
                 move.w  #$600,(snot_knockback_speed_x).l
                 jsr     (sub_24FF20).l
                 rts
-; End of function sub_24FEE4
+; End of function snt2_level_init
 
 
-sub_24FF02:                             ; DATA XREF: ROM:0025BD6C   o
+snt3_level_init:                             ; DATA XREF: ROM:0025BD6C   o
                 jsr     (sub_24FF38).l
                 move.w  #2,(water_monster_speed_x).l
                 move.w  #$580,(snot_knockback_speed_x).l
                 jsr     (sub_24FF20).l
                 rts
-; End of function sub_24FF02
+; End of function snt3_level_init
 
 
-sub_24FF20:                             ; CODE XREF: sub_24FEC6+16   p
-                                        ; sub_24FEE4+16   p ...
+sub_24FF20:                             ; CODE XREF: snt1_level_init+16   p
+                                        ; snt2_level_init+16   p ...
                 lea     ((snt_palette+$12)).l,a0
                 lea     (unk_FFB496).l,a1
                 move.w  #6,d0
@@ -35604,8 +35605,8 @@ loc_24FF30:                             ; CODE XREF: sub_24FF20+12   j
 ; End of function sub_24FF20
 
 
-sub_24FF38:                             ; CODE XREF: sub_24FEC6   p
-                                        ; sub_24FEE4   p ...
+sub_24FF38:                             ; CODE XREF: snt1_level_init   p
+                                        ; snt2_level_init   p ...
                 clr.b   (camera_disable_value).l
                 move.b  #1,(snot_level_intro_delay).l
                 move.w  #$170,(camera_anchor_y).l
@@ -35686,7 +35687,7 @@ loc_25009E:                             ; CODE XREF: sub_250082+C   j
 ; End of function sub_250082
 
 
-sub_2500A8:                             ; DATA XREF: ROM:0025BDAC   o
+pete_level_init:                             ; DATA XREF: ROM:0025BDAC   o
                 move.w  #$6A,(camera_anchor_x).l ; 'j'
                 move.w  #$8B06,(VDP_CTRL).l
                 move.l  #word_252142,(dword_FFA6C4).l
@@ -35695,7 +35696,7 @@ sub_2500A8:                             ; DATA XREF: ROM:0025BDAC   o
                 move.w  #$14,d0
                 move.w  #$1A,d1
                 lea     (word_25012E).l,a1
-loc_2500DE:                             ; CODE XREF: sub_2500A8+4A   j
+loc_2500DE:                             ; CODE XREF: pete_level_init+4A   j
                 move.w  d0,(VDP_DATA).l
                 move.w  d1,(VDP_DATA).l
                 addq.w  #1,d0
@@ -35709,21 +35710,21 @@ loc_2500DE:                             ; CODE XREF: sub_2500A8+4A   j
                 tst.w   (pete_return_x).l
                 bne.s   loc_25011E
                 move.w  #$A0,(pete_return_x).l
-loc_25011E:                             ; CODE XREF: sub_2500A8+6C   j
+loc_25011E:                             ; CODE XREF: pete_level_init+6C   j
                 move.w  (pete_return_x).l,2(a5)
                 move.w  #$1B0,4(a5)
                 rts
-; End of function sub_2500A8
+; End of function pete_level_init
 ; ---------------------------------------------------------------------------
 word_25012E:    dc.w $18, $17, $16, $15, $14, $15, $16, $17, $18, $1A
-                                        ; DATA XREF: sub_2500A8+30   o
-                                        ; sub_251F66+18E   o
+                                        ; DATA XREF: pete_level_init+30   o
+                                        ; pete_level_scroll+18E   o
                 dc.w $1A, $1A, $1A, $1A, $1A, $1A, $1A, $1A, $1A, $1A
 
 
-nullsub_9:                              ; DATA XREF: ROM:0025BDEC   o
+btv_sfb_level_init:                              ; DATA XREF: ROM:0025BDEC   o
                 rts
-; End of function nullsub_9
+; End of function btv_sfb_level_init
 
 
 set_view_shift_on_helicopter_buttville:                             ; DATA XREF: ROM:0025BE2C   o
@@ -35740,15 +35741,15 @@ locret_250180:                          ; CODE XREF: set_view_shift_on_helicopte
 ; End of function set_view_shift_on_helicopter_buttville
 
 
-sub_250182:                             ; DATA XREF: ROM:0025BE6C   o
+lvl5_lab_level_init:                             ; DATA XREF: ROM:0025BE6C   o
                 jsr     loc_24AB7E(pc)
                 jsr     loc_24AB7E(pc)
                 move.w  #1,(collision_layer).l
                 rts
-; End of function sub_250182
+; End of function lvl5_lab_level_init
 
 
-sub_250194:                             ; DATA XREF: ROM:0025BEAC   o
+lvl5_chi_level_init:                             ; DATA XREF: ROM:0025BEAC   o
                 st      (is_chicken_boss_fight).l
                 st      (is_jim_on_rocket).l
                 move.w  #$10,(shot_angle_current).l
@@ -35771,7 +35772,7 @@ sub_250194:                             ; DATA XREF: ROM:0025BEAC   o
                 move.b  (a0)+,d4
                 subq.b  #1,d4
                 lea     (obj_01).l,a5
-loc_25020E:                             ; CODE XREF: sub_250194+D8   j
+loc_25020E:                             ; CODE XREF: lvl5_chi_level_init+D8   j
                 lea     (stru_25B33C).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 clr.w   d7
@@ -35790,41 +35791,41 @@ loc_25020E:                             ; CODE XREF: sub_250194+D8   j
                 add.w   d7,d7
                 add.w   d7,d7
                 move.l  (a1,d7.w),$20(a5)
-loc_250248:                             ; CODE XREF: sub_250194+A8   j
+loc_250248:                             ; CODE XREF: lvl5_chi_level_init+A8   j
                 move.b  (a0)+,d7
                 clr.b   9(a5)
                 btst    #0,d7
                 beq.s   loc_250258
                 st      9(a5)
-loc_250258:                             ; CODE XREF: sub_250194+BE   j
+loc_250258:                             ; CODE XREF: lvl5_chi_level_init+BE   j
                 clr.b   $35(a5)
                 btst    #1,d7
                 beq.s   loc_250266
                 st      $35(a5)
-loc_250266:                             ; CODE XREF: sub_250194+CC   j
+loc_250266:                             ; CODE XREF: lvl5_chi_level_init+CC   j
                 adda.l  #$56,a5 ; 'V'
                 dbf     d4,loc_25020E
                 rts
-; End of function sub_250194
+; End of function lvl5_chi_level_init
 
 
-sub_250272:                             ; DATA XREF: ROM:0025BEEC   o
+lvl5_nkd_level_init:                             ; DATA XREF: ROM:0025BEEC   o
                 jsr     loc_24AB7E(pc)
                 jsr     loc_24AB7E(pc)
                 rts
-; End of function sub_250272
+; End of function lvl5_nkd_level_init
 
 
-nullsub_10:                             ; DATA XREF: ROM:0025BF2C   o
+ints_level_init:                             ; DATA XREF: ROM:0025BF2C   o
                 rts
-; End of function nullsub_10
+; End of function ints_level_init
 
 
-sub_25027E:                             ; DATA XREF: ROM:0025BF6C   o
+dwn_level_init:                             ; DATA XREF: ROM:0025BF6C   o
                                         ; ROM:0025BFAC   o
                 move.w  #$8B04,(VDP_CTRL).l
                 rts
-; End of function sub_25027E
+; End of function dwn_level_init
 
 
 andy_level_init:                             ; DATA XREF: ROM:0025BFEC   o
@@ -35992,7 +35993,7 @@ locret_250498:                          ; CODE XREF: andy_count_track_segs+56   
 ; End of function andy_count_track_segs
 
 
-sub_25049A:                             ; DATA XREF: ROM:0025C2EC   o
+psy_level_init:                             ; DATA XREF: ROM:0025C2EC   o
                 lea     (object_psyq_boss).l,a6
                 lea     (obj_01).l,a5
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
@@ -36008,10 +36009,10 @@ sub_25049A:                             ; DATA XREF: ROM:0025C2EC   o
                 move.b  d7,(psycrow_target_slot).l
                 move.b  #0,(psycrow_state).l
                 rts
-; End of function sub_25049A
+; End of function psy_level_init
 
 
-sub_2504E6:                             ; DATA XREF: ROM:0025C1AC   o
+darkness_level_init:                             ; DATA XREF: ROM:0025C1AC   o
                                         ; ROM:0025C1EC   o ...
                 st      (is_jim_blocked_by_enemy).l
                 move.w  #$4000,(jim_obj_sprite_attr).l
@@ -36024,7 +36025,7 @@ sub_2504E6:                             ; DATA XREF: ROM:0025C1AC   o
                 lea     (obj_01).l,a1
                 jsr     (sub_256D2E).l
                 rts
-; End of function sub_2504E6
+; End of function darkness_level_init
 
 
 nullsub_11:                             ; DATA XREF: ROM:off_35E4   o
@@ -37651,7 +37652,7 @@ loc_25150C:                             ; CODE XREF: sub_2513F8+EA   j
 ; End of function sub_2513F8
 
 
-sub_251512:                             ; DATA XREF: ROM:0025BF78   o
+dwn_level_scroll:                             ; DATA XREF: ROM:0025BF78   o
                                         ; ROM:0025BFB8   o
                 move.l  #$70020003,(VDP_CTRL).l
                 clr.w   d0
@@ -37684,7 +37685,7 @@ sub_251512:                             ; DATA XREF: ROM:0025BF78   o
                 move.w  #$13,d4
                 move.w  d0,d2
                 move.w  d1,d3
-loc_2515A2:                             ; CODE XREF: sub_251512+BC   j
+loc_2515A2:                             ; CODE XREF: dwn_level_scroll+BC   j
                 move.w  d2,d0
                 move.w  d3,d1
                 add.w   (a0,d7.w),d0
@@ -37699,14 +37700,14 @@ loc_2515A2:                             ; CODE XREF: sub_251512+BC   j
                 andi.w  #$1E,d6
                 dbf     d4,loc_2515A2
                 rts
-; End of function sub_251512
+; End of function dwn_level_scroll
 ; ---------------------------------------------------------------------------
 byte_2515D4:    dc.b 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3
-                                        ; DATA XREF: sub_251512+7C   o
+                                        ; DATA XREF: dwn_level_scroll+7C   o
                 dc.b 0, 4, 0, 4, 0, 3, 0, 3, 0, 2, 0, 2, 0, 1, 0, 1
 byte_2515F4:    dc.b 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 2, 0, 2, 0, 2
-                                        ; DATA XREF: sub_251512+18   o
-                                        ; sub_251512+82   o
+                                        ; DATA XREF: dwn_level_scroll+18   o
+                                        ; dwn_level_scroll+82   o
                 dc.b 0, 3, 0, 3, 0, 2, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1
 
 
@@ -37715,7 +37716,7 @@ nullsub_30:
 ; End of function nullsub_30
 
 
-sub_251616:                             ; DATA XREF: ROM:0025BCB8   o
+wth_evl_level_scroll:                             ; DATA XREF: ROM:0025BCB8   o
                 move.w  (camera_x).l,d0
                 addi.w  #$10,d0
                 neg.w   d0
@@ -37748,16 +37749,16 @@ sub_251616:                             ; DATA XREF: ROM:0025BCB8   o
                 beq.s   loc_2516A6
                 cmpi.b  #$20,d7 ; ' '
                 bne.s   loc_2516A8
-loc_2516A6:                             ; CODE XREF: sub_251616+82   j
-                                        ; sub_251616+88   j
+loc_2516A6:                             ; CODE XREF: wth_evl_level_scroll+82   j
+                                        ; wth_evl_level_scroll+88   j
                 clr.w   d7
-loc_2516A8:                             ; CODE XREF: sub_251616+8E   j
+loc_2516A8:                             ; CODE XREF: wth_evl_level_scroll+8E   j
                 move.b  d7,(screen_shake_phase).l
                 add.w   d1,d0
                 move.w  d1,(screen_shake_sprite_offset).l
                 neg.w   (screen_shake_sprite_offset).l
                 andi.w  #$FF,d0
-loc_2516C0:                             ; CODE XREF: sub_251616+66   j
+loc_2516C0:                             ; CODE XREF: wth_evl_level_scroll+66   j
                 move.w  d0,(VDP_DATA).l
                 move.w  #$140,d0
                 sub.w   (word_FFFD90).l,d0
@@ -37765,10 +37766,10 @@ loc_2516C0:                             ; CODE XREF: sub_251616+66   j
                 move.l  #$40020010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251616
+; End of function wth_evl_level_scroll
 
 
-sub_2516E4:                             ; DATA XREF: ROM:0025BC38   o
+wth_level_scroll:                             ; DATA XREF: ROM:0025BC38   o
                                         ; ROM:0025BC78   o
                 move.w  #$8F20,(VDP_CTRL).l
                 move.l  #$70020003,(VDP_CTRL).l
@@ -37880,10 +37881,10 @@ sub_2516E4:                             ; DATA XREF: ROM:0025BC38   o
                 jsr     (sub_25193C).l
                 move.w  #$8F02,(VDP_CTRL).l
                 rts
-; End of function sub_2516E4
+; End of function wth_level_scroll
 
 
-sub_2518FA:                             ; DATA XREF: ROM:0025BBF8   o
+njc_level_scroll:                             ; DATA XREF: ROM:0025BBF8   o
                 move.w  (camera_x).l,d0
                 addi.w  #$10,d0
                 lsr.w   #3,d0
@@ -37897,10 +37898,10 @@ sub_2518FA:                             ; DATA XREF: ROM:0025BBF8   o
                 andi.w  #$1FF,d0
                 move.l  #$70000003,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
-; End of function sub_2518FA
+; End of function njc_level_scroll
 
 
-sub_25193C:                             ; CODE XREF: sub_2516E4+206   p
+sub_25193C:                             ; CODE XREF: wth_level_scroll+206   p
                 clr.w   d0
                 move.l  #$40020010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
@@ -38030,7 +38031,7 @@ locret_251AE0:                          ; CODE XREF: andy_asteroids_tunnel_bg+68
 ; End of function andy_asteroids_tunnel_bg
 
 
-sub_251AE2:                             ; DATA XREF: ROM:0025C2F8   o
+psy_level_scroll:                             ; DATA XREF: ROM:0025C2F8   o
                 move.w  (camera_x).l,d0
                 addi.w  #$10,d0
                 lsr.w   #1,d0
@@ -38055,10 +38056,10 @@ sub_251AE2:                             ; DATA XREF: ROM:0025C2F8   o
                 move.l  #$40000010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251AE2
+; End of function psy_level_scroll
 
 
-sub_251B60:                             ; DATA XREF: ROM:0025BDF8   o
+btv_sfb_level_scroll:                             ; DATA XREF: ROM:0025BDF8   o
                 move.l  #$70020003,(VDP_CTRL).l
                 move.b  (frame_counter).l,d0
                 andi.w  #1,d0
@@ -38093,22 +38094,22 @@ sub_251B60:                             ; DATA XREF: ROM:0025BDF8   o
                 beq.s   loc_251C06
                 cmpi.b  #$20,d7 ; ' '
                 bne.s   loc_251C08
-loc_251C06:                             ; CODE XREF: sub_251B60+98   j
-                                        ; sub_251B60+9E   j
+loc_251C06:                             ; CODE XREF: btv_sfb_level_scroll+98   j
+                                        ; btv_sfb_level_scroll+9E   j
                 clr.w   d7
-loc_251C08:                             ; CODE XREF: sub_251B60+A4   j
+loc_251C08:                             ; CODE XREF: btv_sfb_level_scroll+A4   j
                 move.b  d7,(screen_shake_phase).l
                 add.w   d1,d0
                 neg.w   d1
                 move.w  d1,(screen_shake_sprite_offset).l
                 andi.w  #$FF,d0
-loc_251C1C:                             ; CODE XREF: sub_251B60+7C   j
+loc_251C1C:                             ; CODE XREF: btv_sfb_level_scroll+7C   j
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251B60
+; End of function btv_sfb_level_scroll
 
 
-sub_251C24:                             ; DATA XREF: ROM:0025BE38   o
+btv_heli_level_scroll:                             ; DATA XREF: ROM:0025BE38   o
                 move.w  (camera_x).l,d0
                 addi.w  #$10,d0
                 lsr.w   #1,d0
@@ -38139,10 +38140,10 @@ sub_251C24:                             ; DATA XREF: ROM:0025BE38   o
                 move.l  #$40000010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251C24
+; End of function btv_heli_level_scroll
 
 
-sub_251CB6:                             ; DATA XREF: ROM:0025C1B8   o
+darkness_level_scroll:                             ; DATA XREF: ROM:0025C1B8   o
                                         ; ROM:0025C1F8   o ...
                 move.w  (bg_b_auto_scroll).l,d2
                 addq.w  #1,d2
@@ -38171,10 +38172,10 @@ sub_251CB6:                             ; DATA XREF: ROM:0025C1B8   o
                 move.l  #$40000010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251CB6
+; End of function darkness_level_scroll
 
 
-sub_251D42:                             ; DATA XREF: ROM:0025BE78   o
+lvl5_level_scroll:                             ; DATA XREF: ROM:0025BE78   o
                                         ; ROM:0025BEF8   o
                 clr.w   d0
                 move.l  #$70020003,(VDP_CTRL).l
@@ -38194,10 +38195,10 @@ sub_251D42:                             ; DATA XREF: ROM:0025BE78   o
                 move.l  #$40000010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251D42
+; End of function lvl5_level_scroll
 
 
-sub_251DA6:                             ; DATA XREF: ROM:0025BEB8   o
+lvl5_chi_level_scroll:                             ; DATA XREF: ROM:0025BEB8   o
                 move.w  (camera_x).l,d0
                 addi.w  #$10,d0
                 lsr.w   #1,d0
@@ -38223,17 +38224,17 @@ sub_251DA6:                             ; DATA XREF: ROM:0025BEB8   o
                 move.l  #$40000010,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251DA6
+; End of function lvl5_chi_level_scroll
 
 
-sub_251E2C:                             ; DATA XREF: ROM:0025BF38   o
+ints_level_scroll:                             ; DATA XREF: ROM:0025BF38   o
                 move.b  (frame_counter).l,d0
                 andi.w  #1,d0
                 move.w  #0,d7
                 cmpi.b  #0,d0
                 beq.s   loc_251E44
                 move.w  #$80,d7
-loc_251E44:                             ; CODE XREF: sub_251E2C+12   j
+loc_251E44:                             ; CODE XREF: ints_level_scroll+12   j
                 move.l  #$70020003,(VDP_CTRL).l
                 move.w  d0,(VDP_DATA).l
                 move.w  (camera_x).l,d0
@@ -38262,21 +38263,21 @@ loc_251E44:                             ; CODE XREF: sub_251E2C+12   j
                 beq.s   loc_251ED2
                 cmpi.b  #$20,d7 ; ' '
                 bne.s   loc_251ED4
-loc_251ED2:                             ; CODE XREF: sub_251E2C+9E   j
+loc_251ED2:                             ; CODE XREF: ints_level_scroll+9E   j
                 clr.w   d7
-loc_251ED4:                             ; CODE XREF: sub_251E2C+A4   j
+loc_251ED4:                             ; CODE XREF: ints_level_scroll+A4   j
                 move.b  d7,(screen_shake_phase).l
                 add.w   d1,d0
                 neg.w   d1
                 move.w  d1,(screen_shake_sprite_offset).l
-loc_251EE4:                             ; CODE XREF: sub_251E2C+82   j
+loc_251EE4:                             ; CODE XREF: ints_level_scroll+82   j
                 andi.w  #$FF,d0
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251E2C
+; End of function ints_level_scroll
 
 
-sub_251EF0:                             ; DATA XREF: ROM:0025BCF8   o
+snt_level_scroll:                             ; DATA XREF: ROM:0025BCF8   o
                                         ; ROM:0025BD38   o ...
                 move.w  (camera_x).l,d0
                 addi.w  #$10,d0
@@ -38302,17 +38303,17 @@ sub_251EF0:                             ; DATA XREF: ROM:0025BCF8   o
                 andi.w  #$FF,d0
                 move.w  d0,(VDP_DATA).l
                 rts
-; End of function sub_251EF0
+; End of function snt_level_scroll
 
 
-sub_251F66:                             ; DATA XREF: ROM:0025BDB8   o
+pete_level_scroll:                             ; DATA XREF: ROM:0025BDB8   o
                 move.w  (word_FFFCAE).l,d0
                 addq.w  #1,d0
                 move.b  (frame_counter).l,d7
                 andi.b  #1,d7
                 bne.s   loc_251F7C
                 addq.w  #1,d0
-loc_251F7C:                             ; CODE XREF: sub_251F66+12   j
+loc_251F7C:                             ; CODE XREF: pete_level_scroll+12   j
                 move.w  d0,(word_FFFCAE).l
                 andi.w  #$1FF,d0
                 move.w  (word_FFFCB0).l,d1
@@ -38321,7 +38322,7 @@ loc_251F7C:                             ; CODE XREF: sub_251F66+12   j
                 andi.b  #3,d7
                 bne.s   loc_251F9C
                 addq.w  #1,d1
-loc_251F9C:                             ; CODE XREF: sub_251F66+32   j
+loc_251F9C:                             ; CODE XREF: pete_level_scroll+32   j
                 move.w  d1,(word_FFFCB0).l
                 andi.w  #$1FF,d1
                 move.w  (word_FFFCB2).l,d2
@@ -38330,7 +38331,7 @@ loc_251F9C:                             ; CODE XREF: sub_251F66+32   j
                 andi.b  #7,d7
                 bne.s   loc_251FBC
                 addq.w  #1,d2
-loc_251FBC:                             ; CODE XREF: sub_251F66+52   j
+loc_251FBC:                             ; CODE XREF: pete_level_scroll+52   j
                 move.w  d2,(word_FFFCB2).l
                 andi.w  #$1FF,d2
                 move.w  (word_FFFCB4).l,d3
@@ -38339,7 +38340,7 @@ loc_251FBC:                             ; CODE XREF: sub_251F66+52   j
                 andi.b  #$F,d7
                 bne.s   loc_251FDC
                 addq.w  #1,d3
-loc_251FDC:                             ; CODE XREF: sub_251F66+72   j
+loc_251FDC:                             ; CODE XREF: pete_level_scroll+72   j
                 move.w  d3,(word_FFFCB4).l
                 andi.w  #$1FF,d3
                 move.w  #$8F20,(VDP_CTRL).l
@@ -38380,11 +38381,11 @@ loc_251FDC:                             ; CODE XREF: sub_251F66+72   j
                 move.l  #$70000003,(VDP_CTRL).l
                 move.w  #$11,d4
                 clr.w   d1
-loc_2520C2:                             ; CODE XREF: sub_251F66+162   j
+loc_2520C2:                             ; CODE XREF: pete_level_scroll+162   j
                 move.w  d1,(VDP_DATA).l
                 dbf     d4,loc_2520C2
                 move.w  #9,d4
-loc_2520D0:                             ; CODE XREF: sub_251F66+170   j
+loc_2520D0:                             ; CODE XREF: pete_level_scroll+170   j
                 move.w  d0,(VDP_DATA).l
                 dbf     d4,loc_2520D0
                 move.w  #$8F02,(VDP_CTRL).l
@@ -38398,10 +38399,10 @@ loc_2520D0:                             ; CODE XREF: sub_251F66+170   j
                 beq.s   loc_25210E
                 move.w  (a2)+,d6
                 move.l  a2,(dword_FFA6C4).l
-loc_25210E:                             ; CODE XREF: sub_251F66+19E   j
+loc_25210E:                             ; CODE XREF: pete_level_scroll+19E   j
                 move.w  d6,(screen_shake_sprite_offset).l
                 add.w   d6,d0
-loc_252116:                             ; CODE XREF: sub_251F66+1C6   j
+loc_252116:                             ; CODE XREF: pete_level_scroll+1C6   j
                 andi.w  #$FF,d0
                 move.w  d0,(VDP_DATA).l
                 move.w  d1,(VDP_DATA).l
@@ -38410,11 +38411,11 @@ loc_252116:                             ; CODE XREF: sub_251F66+1C6   j
                 addq.w  #1,d1
                 dbf     d4,loc_252116
                 rts
-; End of function sub_251F66
+; End of function pete_level_scroll
 ; ---------------------------------------------------------------------------
                 dc.b 0, 2, 0, 3, 0, 3, 0, 2
                 dc.b 0, 1, 0, 0, $FF, $FF, 0, 0
-word_252142:    dc.w $80                ; DATA XREF: sub_2500A8+10   o
+word_252142:    dc.w $80                ; DATA XREF: pete_level_init+10   o
 
 
 funicular_end_falling:                             ; DATA XREF: ROM:stru_25AA6C   o
@@ -40334,7 +40335,7 @@ collision_with_balance_platform:                             ; DATA XREF: ROM:00
                 move.b  $47(a1),d6
                 subq.l  #1,d6
                 lsl.l   #5,d6
-                movea.l #byte_25E1E0,a2
+                movea.l #balance_platform_height_tbl,a2
                 adda.l  d6,a2
                 move.w  (jim_x).l,d7
                 sub.w   2(a1),d7
@@ -44211,7 +44212,7 @@ loc_2566CA:                             ; CODE XREF: sub_256672+4C   j
                 lsl.w   #4,d6
                 add.w   d7,d6
                 clr.w   d7
-                lea     (byte_256774).l,a0
+                lea     (bee_dir_frame_tbl).l,a0
                 move.b  (a0,d6.w),d7
                 add.w   d7,d7
                 add.w   d7,d7
@@ -44254,15 +44255,7 @@ dword_2566F8:   dc.l 0                  ; DATA XREF: sub_256672+72   o
                 dc.l off_1B1E9C
                 dc.l off_1B1EA0
                 dc.l off_1B1EA4
-byte_256774:    dc.b $1B,$1C,$1D,$1E,$1E,  1,  1,  1,  1,  1,  2,  2,  3,  4,  5,$1A,$1B,$1C,$1D,$1E,$1E,  1,  1,  1,  2,  2,  3,  4,  5,  6,$19,$1A
-                                        ; DATA XREF: sub_256672+64   o
-                dc.b $1B,$1C,$1D,$1E,$1E,  1,  2,  2,  3,  4,  5,  6,  7,$19,$19,$1A,$1B,$1C,$1D,$1E,  1,  2,  3,  4,  5,  6,  7,  7,$18,$19,$19,$1A
-                dc.b $1B,$1C,$1D,  1,  3,  4,  5,  6,  7,  7,  8,$18,$18,$19,$19,$1A,$1B,$1C,  1,  4,  5,  6,  7,  7,  8,  8,$18,$18,$18,$19,$19,$1A
-                dc.b $1B,  1,  5,  6,  7,  7,  8,  8,  8,$18,$18,$18,$18,$18,$18,$18,$18,  8,  8,  8,  8,  8,  8,  8,$18,$18,$18,$17,$16,$15,$14,$10
-                dc.b  $C, $B, $A,  9,  8,  8,  8,$18,$18,$17,$16,$15,$14,$13,$10, $D, $C, $B, $A,  9,  8,  8,$18,$17,$16,$15,$14,$13,$12,$10, $E, $D
-                dc.b  $C, $B, $A,  9,  8,$17,$16,$15,$14,$13,$12,$11,$10, $F, $E, $D, $C, $B, $A,  9,$16,$15,$14,$13,$12,$11,$11,$10, $F, $F, $E, $D
-                dc.b  $C, $B, $A,$15,$14,$13,$12,$11,$11,$10,$10,$10, $F, $F, $E, $D, $C, $B,$14,$13,$12,$11,$11,$10,$10,$10,$10,$10, $F, $F, $E, $D
-                dc.b  $C,  0
+    include "jiminc/bee_dir_frame_tbl.inc"
 
 
 sub_256856:                             ; DATA XREF: ROM:stru_25B354   o
@@ -44703,7 +44696,7 @@ loc_256D28:                             ; CODE XREF: incubator_left_try_egg+12  
 ; End of function incubator_left_try_egg
 
 
-sub_256D2E:                             ; CODE XREF: sub_2504E6+36   p
+sub_256D2E:                             ; CODE XREF: darkness_level_init+36   p
                                         ; sub_2564D4+3A   p
                                         ; DATA XREF: ...
                 tst.l   (jim_current_sprite_offset).l
@@ -45021,7 +45014,7 @@ sub_2570E2:                             ; CODE XREF: sub_257058+C   p
                 move.b  $47(a5),d6
                 subq.l  #1,d6
                 lsl.l   #5,d6
-                movea.l #byte_25E1E0,a2
+                movea.l #balance_platform_height_tbl,a2
                 adda.l  d6,a2
                 clr.w   d7
                 move.w  2(a1),d6
@@ -46572,7 +46565,7 @@ locret_2583D6:                          ; CODE XREF: oksub_25839E+E   j
 ; End of function oksub_25839E
 
 
-oksub_2583D8:                           ; CODE XREF: sub_24FDB8+A   p
+oksub_2583D8:                           ; CODE XREF: wth_evl_level_init+A   p
                                         ; DATA XREF: ROM:001AC6BC   o
                 move.w  (camera_x).l,(camera_target_x).l
                 move.w  (camera_y).l,(camera_target_y).l
@@ -47243,9 +47236,9 @@ project_tunnel_obj:                             ; CODE XREF: sub_247022+174   p
                 addi.w  #$4000,d0       ; +90 градусов
                 lsr.w   #5,d0
                 andi.w  #$3FE,d0        ; индекс в таблице (слова)
-                lea     (byte_25D1CC).l,a0
+                lea     (sin_tbl).l,a0
                 move.w  (a0,d0.w),d1    ; синус, амплитуда $7F
-                lea     (byte_25D2CC).l,a0
+                lea     (cos_tbl).l,a0
                 move.w  (a0,d0.w),d2    ; косинус (та же таблица, сдвиг на четверть)
                 move.w  $52(a1),d0      ; дистанция
                 bpl.s   loc_258BD2
@@ -47256,7 +47249,7 @@ loc_258BD2:                             ; CODE XREF: project_tunnel_obj+2A   j
                 move.w  #$7FF,d0        ; кламп сверху
 loc_258BDC:                             ; CODE XREF: project_tunnel_obj+32   j
                 andi.w  #$7FE,d0
-                lea     (byte_25D9CC).l,a0
+                lea     (tunnel_scale_tbl).l,a0
                 move.w  (a0,d0.w),d4    ; радиус/масштаб по дистанции (перспектива)
                 tst.w   d1
                 bpl.s   loc_258BF6
@@ -48037,7 +48030,7 @@ loc_2595CC:                             ; CODE XREF: sub_259586+42   j
 
 
 sub_2595F4:
-                lea     (byte_5AF8).w,a5
+                lea     (tile_slope_tbl).w,a5
                 clr.w   d7
                 move.b  8(a1),d7
                 move.b  (a5,d7.w),d6
@@ -48079,7 +48072,7 @@ sub_259658:                             ; DATA XREF: ROM:object_intestinal_wheel
                 andi.w  #$C,d7
                 lea     off_259648(pc),a5
                 move.l  (a5,d7.w),$20(a1)
-                lea     (byte_5AF8).w,a5
+                lea     (tile_slope_tbl).w,a5
                 clr.w   d7
                 clr.w   d6
                 move.b  8(a1),d7
@@ -48163,7 +48156,7 @@ locret_259744:                          ; CODE XREF: sub_259658+BC   j
 ; End of function sub_259658
 
 
-sub_259746:                             ; CODE XREF: sub_24F96C:loc_24F994   p
+sub_259746:                             ; CODE XREF: ints_level_events:loc_24F994   p
                 move.b  (frame_counter).l,d7
                 andi.b  #$7F,d7
                 bne.s   locret_2597A6
@@ -49367,4233 +49360,8 @@ loc_25A60A:                             ; CODE XREF: sub_25A4FE+BA   j
                 rts
 ; End of function sub_25A4FE
 ; ---------------------------------------------------------------------------
-stru_25A634:    dc.b $85                ; obj_id
-                                        ; DATA XREF: spawn_jim_object+6   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_idle      ; anim_address
-                dc.b $14                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A64C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_259DFE+AE   o
-                dc.b 0                  ; health ; on sega logo
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $E000              ; sprite_attr
-                dc.l anim_jim_strong    ; anim_address
-                dc.b $14                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A664:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AE01A   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $E000              ; sprite_attr
-                dc.l anim_explosion     ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A67C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001ADFC2   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $E000              ; sprite_attr
-                dc.l anim_sparks        ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_spacesuit:    dc.b $69                ; obj_id
-                                        ; DATA XREF: spawn_spacesuit   o
-                                        ; collision_with_fan+9E   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC396        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_spacesuit     ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_groovy:  dc.b $86                ; obj_id
-                                        ; DATA XREF: show_groovy_screen+86   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_groovy        ; anim_address
-                dc.b $A                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-                dc.b $86                ; obj_id
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_plasma_shot   ; anim_address
-                dc.b $B                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; update_proc
-object_plasma_shot:    dc.b $95                ; obj_id
-                                        ; DATA XREF: ROM:001AE1FE   o
-                                        ; ROM:001AE7B4   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_plasma_shot   ; anim_address
-                dc.b $B                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; update_proc
-object_gunfire:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AE7E8   o
-                                        ; ROM:001AE878   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_gunfire       ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; update_proc
-stru_25A70C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: jim_fire+260   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_gunfire_2     ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A724:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AE80A   o
-                                        ; ROM:001AE89A   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3A70        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_shell_casing  ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A73C:    dc.b $7B                ; obj_id
-                                        ; DATA XREF: jim_fire:loc_245FA6   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_air_part      ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; update_proc
-stru_25A754:    dc.b $7B                ; obj_id
-                                        ; DATA XREF: jim_fire+164   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_air_part_2    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2521C2         ; update_proc
-stru_25A76C:    dc.b $6D                ; obj_id
-                                        ; DATA XREF: sub_250842   o
-                                        ; sub_25084E   o ...
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A44C2        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_air_part_3    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A784:    dc.b $6D                ; obj_id
-                                        ; DATA XREF: sub_250836   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4520        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_air_part_4    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A79C:    dc.b $6D                ; obj_id
-                                        ; DATA XREF: ROM:001B0C66   o
-                dc.b 0                  ; health
-                dc.b $81                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4510        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fireburn      ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A7B4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_chain_fire_to_right   o
-                                        ; spawn_chain_fire_to_left   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fireburn_2    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_hook:    dc.b $A                 ; obj_id
-                                        ; DATA XREF: spawn_hook   o
-                                        ; spawn_hook_2   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_hook_briliance; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A7E4:    dc.b $B                 ; obj_id
-                                        ; DATA XREF: spawn_valve_gifter   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_hook_briliance; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_run_here:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_run_here   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_run_here      ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A814:    dc.b $87                ; obj_id
-                                        ; DATA XREF: draw_funchar_text:loc_24C79E   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $A000              ; sprite_attr
-                dc.l off_0              ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-                dc.b $86                ; obj_id
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_0              ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A844:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AE576   o
-                                        ; ROM:001AE59E   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_dust          ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_whip_air_fx:    dc.b $90                ; obj_id
-                                        ; DATA XREF: ROM:001AED20   o
-                                        ; ROM:001AED82   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_whip_air_fx   ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A874:    dc.b $91                ; obj_id
-                                        ; DATA XREF: ROM:001B1D98   o
-                                        ; ROM:001B1DB2   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_air_fx        ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A88C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001A4060   o
-                                        ; ROM:001A4070   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_dust_2        ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_small_explode:    dc.b $8A                ; obj_id
-                                        ; DATA XREF: ROM:001A3EDC   o
-                                        ; ROM:001A3EEC   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_bullet_explode; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_spiral_explode:    dc.b $8A                ; obj_id
-                                        ; DATA XREF: ROM:001A4FDE   o
-                                        ; ROM:001A5012   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_spiral_explode; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A8D4:    dc.b $4E                ; obj_id
-                                        ; DATA XREF: ROM:001A5614   o
-                                        ; ROM:001A563C   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_explosion_sparks; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A8EC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B3F8E   o
-                                        ; ROM:001B3F9E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_sparks_2      ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A904:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001A39B8   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_explosion_2   ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A91C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AF04A   o
-                                        ; ROM:001AF07A   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3FD4        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_rock          ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A934:    dc.b $4D                ; obj_id
-                                        ; DATA XREF: ROM:001A2B7A   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4616        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_anvil         ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_health_atom:    dc.b $86                ; obj_id
-                                        ; DATA XREF: drop_health_atom_from_a2+16   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3396        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_health_atom   ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A964:    dc.b $51                ; obj_id
-                                        ; DATA XREF: spawn_hp_atom_conditionally:spawn_hp_atom   o
-                                        ; ROM:prize_faucet_objects_table   o ...
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A33E4        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_health_atom   ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A97C:    dc.b $52                ; obj_id
-                                        ; DATA XREF: spawn_hp_molecule_conditionally:spawn_hp_molecule   o
-                                        ; ROM:0025562C   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_health_molecule; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A994:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24DBCC+36   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC8CA        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_stars         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A9AC:    dc.b $50                ; obj_id
-                                        ; DATA XREF: spawn_live+A   o
-                                        ; ROM:00255634   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_live          ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_gun:    dc.b $53                ; obj_id
-                                        ; DATA XREF: spawn_gun_conditionally:spawn_gun   o
-                                        ; fire_to_chicken_fly_boss+38   o ...
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_gun           ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A9DC:    dc.b $54                ; obj_id
-                                        ; DATA XREF: spawn_plasma_gun_conditionally+14   o
-                                        ; sub_254CB2+7C   o ...
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_plasma_gun    ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25A9F4:    dc.b $4F                ; obj_id
-                                        ; DATA XREF: spawn_continue_conditionally:spawn_continue   o
-                                        ; spawn_continue_actived   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_continue      ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_car_tire:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_flying_car_tire+10   o
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_car_tire      ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-                dc.b $8F                ; obj_id
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_car_tire_2    ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AA3C:    dc.b $29                ; obj_id
-                                        ; DATA XREF: spawn_cow+A   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_cow           ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l cow_launch         ; update_proc
-stru_25AA54:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_minicow_to_right+1A   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC804        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_cow_mini      ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AA6C:    dc.b $5E                ; obj_id
-                                        ; DATA XREF: spawn_funicular_to_left_down   o
-                                        ; spawn_funicular_to_right_down   o ...
-                dc.b 0                  ; health
-                dc.b $B1                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_funicular     ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l funicular_end_falling         ; update_proc
-stru_25AA84:    dc.b $19                ; obj_id
-                                        ; DATA XREF: chuck_boss_magnet:loc_25633A   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_box           ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l box_on_magnet         ; update_proc
-stru_25AA9C:    dc.b $15                ; obj_id
-                                        ; DATA XREF: chuck_boss_magnet+3C   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_saxophone     ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l saxophone_on_magnet         ; update_proc
-object_magnet:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24DCB2+4E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_magnet        ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l chuck_boss_magnet         ; update_proc
-object_chuck_boss:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24DCB2+26   o
-                dc.b 5                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC600        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_boss_chuck    ; anim_address
-                dc.b $E                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AAE4:    dc.b $6F                ; obj_id
-                                        ; DATA XREF: ROM:001ADB62   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4104        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_chuck_fish    ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AAFC:    dc.b $8D                ; obj_id
-                                        ; DATA XREF: sub_24DEF2:loc_24DF84   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_bucket        ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AB14:    dc.b $14                ; obj_id
-                                        ; DATA XREF: sub_24DEF2+54   o
-                dc.b $A                 ; health ; Что-то связанное с боссом ведром на NJC
-                dc.b $21                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A282A        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_unknown       ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2522D0         ; update_proc
-stru_25AB2C:    dc.b $2C                ; obj_id
-                                        ; DATA XREF: spawn_fridge+A   o
-                dc.b 2                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_fridge        ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l fridge_fall         ; update_proc
-stru_25AB44:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_tree_trampoline   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_tree_trampoline; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_dog:    dc.b 2                  ; obj_id
-                                        ; DATA XREF: spawn_dog   o
-                dc.b 3                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_dog           ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2521EA         ; update_proc
-stru_25AB74:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B35B6   o
-                                        ; ROM:001B35EC   o ...
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_rotate_egg    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AB8C:    dc.b $3F                ; obj_id
-                                        ; DATA XREF: njc_level_events+FC   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4006        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_faucet        ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ABA4:    dc.b $15                ; obj_id
-                                        ; DATA XREF: oksub_25655C+8   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4092        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_saxophone     ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ABBC:    dc.b $3E                ; obj_id
-                                        ; DATA XREF: spawn_crow   o
-                dc.b 1                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A41D0        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_crow          ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ABD4:    dc.b 5                  ; obj_id
-                                        ; DATA XREF: spawn_crow_dragging+E   o
-                dc.b 2                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A41D0        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_crow          ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ABEC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: crow_plumage_create+8   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4266        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_crow_plumage  ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AC04:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_256114+8   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3A70        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_crow_beak     ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AC1C:    dc.b $D                 ; obj_id
-                                        ; DATA XREF: spawn_gates_chain_mechanism   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_chain_mechanism; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AC34:    dc.b $E                 ; obj_id
-                                        ; DATA XREF: spawn_hell_gates   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_hell_gates    ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_257224         ; update_proc
-stru_25AC4C:    dc.b $7C                ; obj_id
-                                        ; DATA XREF: spawn_jump_spring   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_unknown_2     ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AC64:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FD78+28   o
-                dc.b $96                ; health
-                dc.b 1                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_boss_snowman  ; anim_address
-                dc.b $F                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AC7C:    dc.b $2E                ; obj_id
-                                        ; DATA XREF: ROM:001B586E   o
-                                        ; ROM:001B588E   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC7FC        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_snowman_bullet; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AC94:    dc.b $86                ; obj_id
-                                        ; DATA XREF: fire_to_snowman_boss+6C   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_snowman_burp  ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ACAC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24F23E+76   o
-                                        ; whip_to_snowman_boss+2A   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_snowman_parts ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ACC4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: fire_to_snowman_boss+D2   o
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_snowman_hat   ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ACDC:    dc.b $2F                ; obj_id
-                                        ; DATA XREF: spawn_lawyer   o
-                dc.b 3                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_lawyer        ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_259802         ; update_proc
-stru_25ACF4:    dc.b $35                ; obj_id
-                                        ; DATA XREF: ROM:001B0A46   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC742        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_lawyer_papers ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD0C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B571C   o
-                                        ; ROM:001B5738   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC760        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_lawyer_papers_2; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD24:    dc.b $9B                ; obj_id
-                                        ; DATA XREF: ROM:001B09E2   o
-                                        ; sub_254CB2+4C   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC790        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_lawyer_suitcase; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD3C:    dc.b $6E                ; obj_id
-                                        ; DATA XREF: ROM:001B2CD0   o
-                                        ; ROM:001B2D10   o ...
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fireburn_3    ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD54:    dc.b $6E                ; obj_id
-                                        ; DATA XREF: spawn_side_left_fire   o
-                                        ; spawn_side_right_fire   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_flame         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD6C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001ACEE2   o
-                                        ; ROM:001B0B9A   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_smoke         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD84:    dc.b $67                ; obj_id
-                                        ; DATA XREF: ROM:001B0BB4   o
-                                        ; ROM:001B0BEA   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fireburn_4    ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AD9C:    dc.b $56                ; obj_id
-                                        ; DATA XREF: spawn_run_emerald_lift_right   o
-                                        ; spawn_run_emerald_lift_left   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_diamond       ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ADB4:    dc.b $5A                ; obj_id
-                                        ; DATA XREF: spawn_emerald_lift   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A2EE4        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_diamond_waiting; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ADCC:    dc.b $5B                ; obj_id
-                                        ; DATA XREF: sub_24F23E+1A   o
-                                        ; spawn_run_emerald   o ...
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_diamond_2     ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25ADE4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B3A56   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AD1B8        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_bomb          ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_stalactite:    dc.b $76                ; obj_id
-                                        ; DATA XREF: spawn_stalactite+A   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AD194        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_stalactite    ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AE14:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_evil_cat_bomber+14   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_unknown_3     ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258E3C         ; update_proc
-stru_25AE2C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: fire_to_evil_cat_soul_boss+4E   o
-                                        ; fire_to_evil_cat_soul_boss+7C   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACF6A        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_evilcat_soul  ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_25929A         ; update_proc
-stru_25AE44:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FDB8+24   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_evilcat_pillar; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2590A2         ; update_proc
-stru_25AE5C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FDB8+52   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_evilcat       ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_259052         ; update_proc
-stru_25AE74:    dc.b $47                ; obj_id
-                                        ; DATA XREF: sub_24F336+132   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_evilcat       ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AE8C:    dc.b $6D                ; obj_id
-                                        ; DATA XREF: ROM:001ACEA0   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACEB6        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fireburn_5    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AEA4:    dc.b $6D                ; obj_id
-                                        ; DATA XREF: fire_to_evil_cat_soul_boss+CC   o
-                                        ; fire_to_evil_cat_soul_boss+EC   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACEF2        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fireburn_5    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AEBC:    dc.b $2E                ; obj_id
-                                        ; DATA XREF: ROM:001B3B64   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACE8A        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_snowman_bullet; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AED4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FDB8+70   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_evilcat_gun   ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258FE2         ; update_proc
-stru_25AEEC:    dc.b $69                ; obj_id
-                                        ; DATA XREF: sub_24FDB8+8E   o
-                                        ; sub_24FDB8+D8   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_spacesuit     ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_259030         ; update_proc
-object_ropejump:dc.b $85                ; obj_id
-                                        ; DATA XREF: sub_24FF38+34   o
-                dc.b 0                  ; health ; На уровне Snot a problem
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_ropejumper; anim_address
-                dc.b $14                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l ropejump_control   ; update_proc
-stru_25AF1C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FF38+64   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $E000              ; sprite_attr
-                dc.l anim_rope_health_bar; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_257FE8         ; update_proc
-stru_25AF34:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FF38+12C   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $A000              ; sprite_attr
-                dc.l anim_rope_health_bar_2; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2580D8         ; update_proc
-stru_25AF4C:    dc.b $93                ; obj_id
-                                        ; DATA XREF: sub_257320+16   o
-                                        ; sub_257B10+D8   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_water_after_fall; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AF64:    dc.b $86                ; obj_id
-                                        ; DATA XREF: collision_with_butt_crab_32+A6   o
-                                        ; collision_with_water_monster+A0   o
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_legs      ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258300         ; update_proc
-stru_25AF7C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FF38+3E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_rope          ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_257F62         ; update_proc
-stru_25AF94:    dc.b $71                ; obj_id
-                                        ; DATA XREF: sub_24FF38+DE   o
-                dc.b $A                 ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_snot_boss     ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_257B10         ; update_proc
-stru_25AFAC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24FF38+8A   o
-                                        ; sub_24FF38+9C   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_snot_rope     ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_257ED4         ; update_proc
-object_snot_part:    dc.b $94                ; obj_id
-                                        ; DATA XREF: ROM:001B10B4   o
-                                        ; ROM:001B10C6   o ...
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_snot_part     ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AFDC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_water_monster   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_water_monster ; anim_address
-                dc.b $D                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25AFF4:    dc.b $83                ; obj_id
-                                        ; DATA XREF: spawn_plant+8   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_unknown_4     ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B00C:    dc.b $34                ; obj_id
-                                        ; DATA XREF: spawn_plant+14   o
-                                        ; spawn_plant_dead   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_pete_plant    ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B024:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B564A   o
-                                        ; ROM:001B565A   o
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_fish_jumps    ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B03C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B566A   o
-                                        ; ROM:001B567A   o ...
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_fish_jumps_2  ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B054:    dc.b $6B                ; obj_id
-                                        ; DATA XREF: sub_24F5A2+3A   o
-                                        ; sub_24F5A2+4E   o
-                dc.b 0                  ; health
-                dc.b $81                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3262        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_unknown_5     ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B06C:    dc.b $36                ; obj_id
-                                        ; DATA XREF: sub_24F5A2+5A   o
-                dc.b 0                  ; health
-                dc.b $81                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A328C        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_rock_2        ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B084:    dc.b $37                ; obj_id
-                                        ; DATA XREF: sub_24F5A2+66   o
-                dc.b 0                  ; health
-                dc.b $81                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A32B8        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_big_skyrock   ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B09C:    dc.b $16                ; obj_id
-                                        ; DATA XREF: sub_246D12:loc_246D64   o
-                                        ; sub_2500A8+4E   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4660        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_pete          ; anim_address
-                dc.b $13                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_256D82         ; update_proc
-stru_25B0B4:    dc.b $2A                ; obj_id
-                                        ; DATA XREF: spawn_ufo+18   o
-                dc.b 4                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3212        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_ufo           ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_pete_hook:    dc.b $81                ; obj_id
-                                        ; DATA XREF: spawn_pete_hook   o
-                dc.b 0                  ; health
-                dc.b $A1                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_pete_hook     ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_machine:    dc.b $38                ; obj_id
-                                        ; DATA XREF: spawn_machine   o
-                dc.b $C                 ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A335E        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_machine       ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_fox:    dc.b $33                ; obj_id
-                                        ; DATA XREF: spawn_fox   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_fox           ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_bob_cat:    dc.b $2B                ; obj_id
-                                        ; DATA XREF: spawn_bob_cat   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC640        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_bob_cat       ; anim_address
-                dc.b $F                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_hamster:    dc.b $9A                ; obj_id
-                                        ; DATA XREF: spawn_hamster:loc_250C58   o
-                dc.b 0                  ; health
-                dc.b $31                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_hamster       ; anim_address
-                dc.b $15                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B144:    dc.b $59                ; obj_id
-                                        ; DATA XREF: spawn_counterpoise+36   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_counterpoise  ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B15C:    dc.b $80                ; obj_id
-                                        ; DATA XREF: spawn_counterpoise+2A   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_unknown_7     ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B174:    dc.b $57                ; obj_id
-                                        ; DATA XREF: spawn_spring_platform+36   o
-                                        ; spawn_spring_platform_2+34   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_spring_platform; anim_address
-                dc.b $10                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B18C:    dc.b $7F                ; obj_id
-                                        ; DATA XREF: spawn_spring_platform+2A   o
-                                        ; spawn_spring_platform_2+28   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_unknown_8     ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B1A4:    dc.b $40                ; obj_id
-                                        ; DATA XREF: spawn_submarine+2E   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_submarine     ; anim_address
-                dc.b $1C                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $C0                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B1BC:    dc.b $96                ; obj_id
-                                        ; DATA XREF: spawn_submarine+B6   o
-                                        ; spawn_submarine+EA   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_unknown_9     ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $C0                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B1D4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_submarine+52   o
-                                        ; spawn_submarine+82   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_submarine_air ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $C0                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B1EC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B13F0   o
-                                        ; ROM:001B1404   o
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A322A        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_unknown_10    ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B204:    dc.b $86                ; obj_id
-                                        ; DATA XREF: collision_with_diamond+590   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_ufo_signal    ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B21C:    dc.b $1E                ; obj_id
-                                        ; DATA XREF: spawn_abscess_down+8   o
-                                        ; spawn_abscess_left+8   o ...
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_bee_generator ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B234:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_queen_boss:loc_250AC0   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_queen_closed  ; anim_address
-                dc.b $1C                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B24C:    dc.b $24                ; obj_id
-                                        ; DATA XREF: spawn_queen_tail+8   o
-                dc.b $32                ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_queen_tail    ; anim_address
-                dc.b $1C                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B264:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B14D4   o
-                                        ; ROM:001B1764   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_egg_move      ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-                dc.b $86                ; obj_id
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_queen_abscess ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B294:    dc.b $74                ; obj_id
-                                        ; DATA XREF: ROM:001B14EA   o
-                                        ; ROM:001B1776   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3306        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_unknown_11    ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B2AC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AD202   o
-                dc.b 0                  ; health
-                dc.b $40                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_unknown_12    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B2C4:    dc.b $6C                ; obj_id
-                                        ; DATA XREF: spawn_butt_monster   o
-                dc.b 8                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_butt_monster  ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B2DC:    dc.b $39                ; obj_id
-                                        ; DATA XREF: sub_24DD18+66   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_lever         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b $FF                ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B2F4:    dc.b $7D                ; obj_id
-                                        ; DATA XREF: whip_to_chicken_boss_lever+9C   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3F24        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_egg_with_needles; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B30C:    dc.b $28                ; obj_id
-                                        ; DATA XREF: ROM:001A529E   o
-                                        ; ROM:001A532A   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A544A        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_chicken_egg   ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B324:    dc.b $28                ; obj_id
-                                        ; DATA XREF: ROM:001A53B0   o
-                                        ; fire_to_chicken_fly_boss+5E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A545E        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_egg_stay      ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258B50         ; update_proc
-stru_25B33C:    dc.b $8E                ; obj_id
-                                        ; DATA XREF: sub_24DD18:loc_24DE18   o
-                                        ; sub_250194:loc_25020E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_eye_gate      ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B354:    dc.b $1C                ; obj_id
-                                        ; DATA XREF: sub_24DD18+C2   o
-                dc.b 4                  ; health
-                dc.b $21                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4A0A        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_unknown_13    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_256856         ; update_proc
-object_sphere_electro:    dc.b $63                ; obj_id
-                                        ; DATA XREF: spawn_sphere_electro   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_unknown_14    ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B384:    dc.b $86                ; obj_id
-                                        ; DATA XREF: collision_with_sphere_electro+28   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_sphere_energy ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B39C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: oksub_258DC6+8   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_sphere_energy_2; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B3B4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: oksub_258DC6+34   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_sphere_parts  ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_electro_up_down:    dc.b $65                ; obj_id
-                                        ; DATA XREF: spawn_electro_up_down   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_electro_up_down; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_bee_home:    dc.b $32                ; obj_id
-                                        ; DATA XREF: spawn_bee_home   o
-                dc.b 5                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_bee_home      ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_bee:    dc.b $18                ; obj_id
-                                        ; DATA XREF: ROM:001B1592   o
-                                        ; ROM:001B15A4   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A47A4        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_bee           ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_256672         ; update_proc
-object_lever:    dc.b 6                  ; obj_id
-                                        ; DATA XREF: spawn_lever   o
-                                        ; spawn_lever_actived   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_lever_2       ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_eyes_generator:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_eyes_generator_closed+8   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_eyes_generator         ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_eyes_generator_active:    dc.b $48                ; obj_id
-                                        ; DATA XREF: spawn_eyes_generator_active   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_eyes_generator_2         ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_monkey_head:    dc.b 3                  ; obj_id
-                                        ; DATA XREF: spawn_monkey_head:loc_25104A   o
-                                        ; spawn_monkey_head_2:loc_25108C   o ...
-                dc.b 0                  ; health
-                dc.b $A1                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_monkey_head         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_monkey_head_rotating_valve:    dc.b 4                  ; obj_id
-                                        ; DATA XREF: spawn_monkey_head_rotating_valve   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_monkey_head_2         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b $FF                ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_valve:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_monkey_head_rotating_valve+2A   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_valve         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b $FF                ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_chemical_flask:    dc.b $4B                ; obj_id
-                                        ; DATA XREF: ROM:001B218A   o
-                                        ; ROM:001B21B0   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A39AA        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_chemical_flask         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_cage:    dc.b $60                ; obj_id
-                                        ; DATA XREF: spawn_cage   o
-                dc.b 0                  ; health
-                dc.b $30                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_cage         ; anim_address
-                dc.b $18                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_larva:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AD2C6   o
-                                        ; ROM:001AD2D8   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A3F3A        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_larva         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_green_goose:    dc.b $1A                ; obj_id
-                                        ; DATA XREF: spawn_green_goose   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A2E7E        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_green_goose         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_frog_trigger:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_frog_3   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_frog         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_frog_emerging_from_underground:    dc.b $98                ; obj_id
-                                        ; DATA XREF: sub_258D60+24   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_frog_2         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_frog:    dc.b $42                ; obj_id
-                                        ; DATA XREF: spawn_frog   o
-                                        ; spawn_frog_2   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_frog_3         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_252440         ; update_proc
-object_incubator:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_incubator_left   o
-                                        ; spawn_incubator_right   o ...
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l off_1B1C36         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_egg_with_needles:    dc.b 8                  ; obj_id
-                                        ; DATA XREF: spawn_egg_with_needles+C   o
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_egg_with_needles; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_eye:    dc.b 9                  ; obj_id
-                                        ; DATA XREF: oksub_25839E+18   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_eye         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_fan:    dc.b $68                ; obj_id
-                                        ; DATA XREF: spawn_fan   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_fan         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_brain:    dc.b $20                ; obj_id
-                                        ; DATA XREF: spawn_brain   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_brain         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_fan_fish:    dc.b $45                ; obj_id
-                                        ; DATA XREF: spawn_fan_fish   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC6E8        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_fan_fish         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_intestinal_boss:    dc.b $17                ; obj_id
-                                        ; DATA XREF: sub_24DEA6+2C   o
-                dc.b $14                ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_intestinal_boss         ; anim_address
-                dc.b $B                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2522C8         ; update_proc
-object_intestinal_boss_tear:    dc.b $79                ; obj_id
-                                        ; DATA XREF: ROM:001AD818   o
-                                        ; ROM:001AD828   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_intestinal_boss_tear         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_chips:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001AD7AA   o
-                                        ; ROM:001AD7BC   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_chips         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_daemon:    dc.b $44                ; obj_id
-                                        ; DATA XREF: spawn_daemon   o
-                                        ; whip_to_prize_faucet+96   o
-                dc.b 3                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACCFA        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_daemon         ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_bob_goldfish:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B6188   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_bob_goldfish         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_aquarium_column:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_fish_boss+16   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_aquarium_column         ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_fish_boss_aquarium:    dc.b $46                ; obj_id
-                                        ; DATA XREF: spawn_fish_boss+2   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_aquarium_breaking         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_sponge:    dc.b $43                ; obj_id
-                                        ; DATA XREF: spawn_sponge   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACD54        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_sponge         ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B69C:    dc.b $86                ; obj_id
-                                        ; DATA XREF: collision_with_submarine+8A   o
-                                        ; collision_with_submarine+B2   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACA96        ; move_script
-                dc.w $E000              ; sprite_attr
-                dc.l off_1B5A1C         ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_sea_gate:    dc.b $3A                ; obj_id
-                                        ; DATA XREF: spawn_sea_gate+8   o
-                                        ; spawn_sea_gate_2+8   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_sea_gate         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_air_refiller:    dc.b $82                ; obj_id
-                                        ; DATA XREF: spawn_air_refiller_99_sec+2C   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_air_refiller         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_air_bubble:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001ADA36   o
-                                        ; ROM:001ADA52   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC9AA        ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_air_bubble         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_open_handler:    dc.b $3C                ; obj_id
-                                        ; DATA XREF: spawn_open_handler   o
-                                        ; spawn_open_handler_2   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_open_handler         ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_planet:    dc.b $86                ; obj_id
-                                        ; DATA XREF: andy_level_update+136   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A45D0        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_planet         ; anim_address
-                dc.b $24                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_andy_super_bubble:    dc.b $10                ; obj_id
-                                        ; DATA XREF: andy_spawn_super_bubble+6   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B29E0         ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l update_andy_super_bubble         ; update_proc
-object_andy_speed_bubble:    dc.b $12                ; obj_id
-                                        ; DATA XREF: andy_spawn_speed_bubble+1E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B2980         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l update_andy_speed_bubble         ; update_proc
-object_andy_bubble:    dc.b $13                ; obj_id
-                                        ; DATA XREF: andy_spawn_bubble+1E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B2A02         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l update_andy_bubble         ; update_proc
-object_andy_asteroid:    dc.b 1                  ; obj_id
-                                        ; DATA XREF: andy_spawn_asteroid+6   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l off_1B2A02         ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l update_andy_asteroid         ; update_proc
-object_asteroid_shard:    dc.b $86                ; obj_id
-                                        ; DATA XREF: collision_with_asteroid+3E   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l off_1B61C4         ; anim_address
-                dc.b 8                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2592B6         ; update_proc
-object_protective_sphere:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_247022+52   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_sphere_energy_3         ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_psycrow:    dc.b $F                 ; obj_id
-                                        ; DATA XREF: andy_race_init+58   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_psyq         ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2585CA         ; update_proc
-object_rocket_flame:    dc.b $86                ; obj_id
-                                        ; DATA XREF: andy_race_init+BA   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B25D8         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258C50         ; update_proc
-object_psycrow_rocket_flame:    dc.b $86                ; obj_id
-                                        ; DATA XREF: andy_race_init+D0   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B2794         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258518         ; update_proc
-object_collision_explosion:    dc.b $86                ; obj_id
-                                        ; DATA XREF: collision_with_asteroid+1A   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_star         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_258A02         ; update_proc
-                dc.b $85                ; obj_id
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_on_rocket         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_jim_open_door:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_jim_entering_in_darkroom   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_open_door         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_exit_door:    dc.b $62                ; obj_id
-                                        ; DATA XREF: spawn_jim_exit_door   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_exit_door         ; anim_address
-                dc.b $B                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_dark_monster:    dc.b $66                ; obj_id
-                                        ; DATA XREF: spawn_dark_monster   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_dark_monster         ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_dark_enemy:    dc.b $1B                ; obj_id
-                                        ; DATA XREF: spawn_dark_mini_monster   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_dark_enemy         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_gears:    dc.b $73                ; obj_id
-                                        ; DATA XREF: spawn_gears   o
-                                        ; spawn_gears_down   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l anim_gears         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_dark_enemy_2:    dc.b $1B                ; obj_id
-                                        ; DATA XREF: spawn_dark_mini_monster_2   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A335E        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_dark_enemy_2         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2571B4         ; update_proc
-object_jim_eyes_in_dark:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_2504E6+26   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_eyes_in_dark         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_256D2E         ; update_proc
-object_jim_tosses_gun_up:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24B638+8C   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_jim_idle      ; anim_address
-                dc.b $14                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_jim_end_screen:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ure_the_best_screen+106   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACACC        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B5C9C         ; anim_address
-                dc.b $14                ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_princess:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ure_the_best_screen+122   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l byte_1ACBE4        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_princess         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_crown:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B5B6E   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l byte_1ACC2C        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B5BA4         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_gleam:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001ACC86   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l byte_1ACC2C        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B5BFA         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_gleam_2:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B5D04   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B5C34         ; anim_address
-                dc.b 9                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_cow_end_screen:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ure_the_best_screen+13E   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACB22        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B5C56         ; anim_address
-                dc.b $C                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_princess_land:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ure_the_best_screen+15A   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACBE4        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l off_1B5ECC         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_destruction_land:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ure_the_best_screen+176   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l off_1B5ED0         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B9B4:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B5EF4   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACBF6        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l off_1B5F3A         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25B9CC:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001B5F08   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACBF6        ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l off_1B5F3E         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_water_washes_rock:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ure_the_best_screen+190   o
-                                        ; ure_the_best_screen+1AA   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $2000              ; sprite_attr
-                dc.l off_1B5F42         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_water_after_fall:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001ACB8E   o
-                                        ; ROM:001ACB9E   o ...
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_water_after_fall; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_jim_on_rocket_win:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24BBE6+26   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l byte_1AC348        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1AF7E8         ; anim_address
-                dc.b $E                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_jim_on_rocket_fail:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24BBE6+34   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b $FF                ; flip_x
-                dc.l byte_1AC342        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l jim_on_rocket_fail         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_continue_tin_can:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_24C4E4+22   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B5FB4         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_explosion_with_spiral:    dc.b $84                ; obj_id
-                                        ; DATA XREF: oksub_2548E8+8   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B37A8         ; anim_address
-                dc.b 6                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_bomb:    dc.b $86                ; obj_id
-                                        ; DATA XREF: fire_to_chicken_fly_boss+78   o
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4444        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_bomb_2         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-stru_25BA8C:    dc.b $27                ; obj_id
-                                        ; DATA XREF: sub_250194+44   o
-                dc.b $13                ; health
-                dc.b 0                  ; obj_flags
-                dc.b $20                ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1A4F6A        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B3F46         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_256856         ; update_proc
-object_prize_stars:    dc.b $86                ; obj_id
-                                        ; DATA XREF: ROM:001A2DB8   o
-                                        ; ROM:001A2DD2   o ...
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACE4E        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l off_1B01BC         ; anim_address
-                dc.b 0                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-                dc.b $75                ; obj_id
-                dc.b 0                  ; health
-                dc.b 0                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l off_1B607A         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_24E764         ; update_proc
-object_platform_queen_butt:    dc.b $61                ; obj_id
-                                        ; DATA XREF: sub_24E6C8:loc_24E72A   o
-                dc.b 0                  ; health
-                dc.b $10                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l off_1B61C0         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_24E764         ; update_proc
-object_moving_platform:    dc.b $61                ; obj_id
-                                        ; DATA XREF: spawn_moving_platform+8   o
-                                        ; spawn_moving_platform_right+8   o
-                dc.b 0                  ; health
-                dc.b $10                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1ACFDA        ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_moving_platform         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_psyq_boss:    dc.b $25                ; obj_id
-                                        ; DATA XREF: sub_25049A   o
-                dc.b 5                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC454        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_psyq_boss         ; anim_address
-                dc.b $B                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $82                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_2592EC         ; update_proc
-object_psyq_hook:    dc.b $26                ; obj_id
-                                        ; DATA XREF: ROM:001B473E   o
-                                        ; ROM:001B476E   o ...
-                dc.b 0                  ; health
-                dc.b 1                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l byte_1AC5C8        ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_psyq_hook         ; anim_address
-                dc.b 1                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_advanced_home:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_advanced_home   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l anim_advanced_home         ; anim_address
-                dc.b $B                 ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b $80                ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_petes_home_door:    dc.b $86                ; obj_id
-                                        ; DATA XREF: spawn_petes_home_door   o
-                dc.b 0                  ; health
-                dc.b $20                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $6000              ; sprite_attr
-                dc.l anim_petes_home_door         ; anim_address
-                dc.b 2                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_intestinal_wheel:    dc.b $78                ; obj_id
-                                        ; DATA XREF: ROM:001AD67E   o
-                                        ; sub_259746+3A   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_intestinal_wheel         ; anim_address
-                dc.b 5                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l sub_259658         ; update_proc
-object_intestinal_ball:    dc.b $77                ; obj_id
-                                        ; DATA XREF: sub_259746+2E   o
-                dc.b 0                  ; health
-                dc.b $21                ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w $4000              ; sprite_attr
-                dc.l anim_intestinal_ball         ; anim_address
-                dc.b 3                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 2                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l loc_2596D6         ; update_proc
-object_joystick_buttons:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_259DFE+3DC   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l off_1ADC08         ; anim_address
-                dc.b 7                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-object_joystick_cable:    dc.b $86                ; obj_id
-                                        ; DATA XREF: sub_259DFE+3FA   o
-                dc.b 0                  ; health
-                dc.b 8                  ; obj_flags
-                dc.b 0                  ; draw_flags
-                dc.b 0                  ; skipped_1
-                dc.b 0                  ; flip_x
-                dc.l off_0              ; move_script
-                dc.w 0                  ; sprite_attr
-                dc.l off_1ADBE4         ; anim_address
-                dc.b 4                  ; vram_blocks
-                dc.b 0                  ; flip_y
-                dc.b 0                  ; behavior_flags
-                dc.b 0                  ; skipped_2
-                dc.l off_0              ; update_proc
-level_config:   dc.w 0                  ; DATA XREF: load_level+38   o
-                                        ; load_level_palette+C   o ...
-                                        ; Jim start X
-                dc.w $200               ; Jim start Y
-                dc.w $5E                ; Cam start X
-                dc.w $197               ; Cam start Y
-                dc.l njc_objects_rnc
-                dc.l njc_graphic_rnc
-                dc.l njc_map_rnc
-                dc.l dword_4E5A
-                dc.w $70
-                dc.b 5                  ; background music
-                dc.b 0
-                dc.l njc_backmap_rnc
-                dc.l njc_palette
-                dc.l njc_tilemap        ; New Junk City
-                dc.l nullsub_8
-                dc.l njc_level_events
-                dc.w $15E               ; Map width
-                dc.w $38                ; Map height
-                dc.l sub_2518FA
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-; What the heck
-                dc.w $10
-                dc.w $4A0
-                dc.w $6C
-                dc.w $190
-                dc.l wth_objects_rnc
-                dc.l wth_graphic_rnc
-                dc.l wth_map_rnc
-                dc.l dword_4ECA
-                dc.w $1A4
-                dc.b 9
-                dc.b 0
-                dc.l wth_backmap_rnc
-                dc.l wth_palette
-                dc.l wth_tilemap        ; What The heck
-                dc.l sub_24FD6A
-                dc.l sub_24F1D8
-                dc.w $94
-                dc.w $81
-                dc.l sub_2516E4
-                dc.l 0
-                dc.b   0,  0,$37,  0
-;What the heck (snowman boss)
-                dc.w $80
-                dc.w $20
-                dc.w $4E
-                dc.w $1A9
-                dc.l wth_objects_rnc
-                dc.l wth_graphic_rnc
-                dc.l wth_snw_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $F
-                dc.b 0
-                dc.l wth_snw_backmap_rnc
-                dc.l wth_snw_palette
-                dc.l wth_tilemap        ; What The heck (Snowman)
-                dc.l sub_24FD78
-                dc.l sub_24F23E
-                dc.w $32
-                dc.w $20
-                dc.l sub_2516E4
-                dc.l 0
-                dc.b   0,  0,$37,  0
-;What the heck (evil boss)
-                dc.w $30
-                dc.w 0
-                dc.w $B7
-                dc.w $1C3
-                dc.l wth_objects_rnc
-                dc.l wth_graphic_rnc
-                dc.l wth_evl_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 9
-                dc.b 0
-                dc.l wth_evl_backmap_rnc
-                dc.l wth_evl_palette
-                dc.l wth_tilemap        ; What The heck (Evil)
-                dc.l sub_24FDB8
-                dc.l sub_24F336
-                dc.w $32
-                dc.w $20
-                dc.l sub_251616
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $27
-                dc.b 0
-;Snot a problem (Round 1)
-                dc.w $90
-                dc.w $10
-                dc.w $85
-                dc.w $179
-                dc.l snt_objects_rnc
-                dc.l snt_graphic_rnc
-                dc.l snt_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 1
-                dc.b 0
-                dc.l snt_backmap_rnc
-                dc.l snt_palette
-                dc.l snt_tilemap        ; Snot a problem (Round 1)
-                dc.l sub_24FEC6
-                dc.l sub_24F4F0
-                dc.w $30
-                dc.w $C2
-                dc.l sub_251EF0
-                dc.l 0
-                dc.b 0
-                dc.b $27
-                dc.b $27
-                dc.b 0
-;Snot a problem (Round 2)
-                dc.w $90
-                dc.w $10
-                dc.w $85
-                dc.w $179
-                dc.l snt_objects_rnc
-                dc.l snt_graphic_rnc
-                dc.l snt_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 1
-                dc.b 0
-                dc.l snt_backmap_rnc
-                dc.l snt_palette
-                dc.l snt_tilemap        ; Snot a problem (Round 2)
-                dc.l sub_24FEE4
-                dc.l sub_24F4F0
-                dc.w $30
-                dc.w $C2
-                dc.l sub_251EF0
-                dc.l 0
-                dc.b   0,$27,$27,  0
-;Snot a problem (Round 3)
-                dc.w $90
-                dc.w $10
-                dc.w $85
-                dc.w $179
-                dc.l snt_objects_rnc
-                dc.l snt_graphic_rnc
-                dc.l snt_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 1
-                dc.b 0
-                dc.l snt_backmap_rnc
-                dc.l snt_palette
-                dc.l snt_tilemap        ; Snot a problem (Round 3)
-                dc.l sub_24FF02
-                dc.l sub_24F4F0
-                dc.w $30
-                dc.w $C2
-                dc.l sub_251EF0
-                dc.l 0
-                dc.b   0,$27,$27,  0
-;For petes sake
-                dc.w $10
-                dc.w 0
-                dc.w $8C
-                dc.w $1AC
-                dc.l pete_objects_rnc
-                dc.l pete_graphic_rnc
-                dc.l pete_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 0
-                dc.b 1
-                dc.l pete_backmap_rnc
-                dc.l pete_palette
-                dc.l pete_tilemap       ; For petes sake
-                dc.l sub_2500A8
-                dc.l sub_24F5A2
-                dc.w $4C9
-                dc.w $10
-                dc.l sub_251F66
-                dc.l 0
-                dc.b   0,  0,$37,  0
-;Buttville (slug ror butt)
-                dc.w $10
-                dc.w $1B0
-                dc.w $1A
-                dc.w $193
-                dc.l btv_objects_rnc
-                dc.l btv_graphic_rnc
-                dc.l btv_sfb_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 2
-                dc.b 0
-                dc.l btv_sfb_backmap_rnc
-                dc.l btv_sfb_palette
-                dc.l btv_tilemap        ; Buttville (Slug for butt)
-                dc.l nullsub_9
-                dc.l sub_24F644
-                dc.w $189
-                dc.w $30
-                dc.l sub_251B60
-                dc.l 0
-                dc.b   0,  0,$37,  0
-;Buttville (Helicopter)
-                dc.w $70
-                dc.w 0
-                dc.w $B0
-                dc.w $17F
-                dc.l btv_objects_rnc
-                dc.l btv_graphic_rnc
-                dc.l btv_heli_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $12
-                dc.b 0
-                dc.l btv_heli_backmap_rnc
-                dc.l btv_heli_palette
-                dc.l btv_tilemap        ; Buttville (Helicopter)
-                dc.l set_view_shift_on_helicopter_buttville
-                dc.l loc_24F748
-                dc.w $32
-                dc.w $C8
-                dc.l sub_251C24
-                dc.l 0
-                dc.b   0,  0,$37,  0
-;Level 5 (Profs lab)
-                dc.w 0
-                dc.w $2C0
-                dc.w $B6
-                dc.w $1AF
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l lvl5_lab_map_rnc
-                dc.l dword_506E
-                dc.w $70
-                dc.b 3
-                dc.b 0
-                dc.l lvl5_backmap_rnc
-                dc.l lvl5_palette
-                dc.l lvl5_tilemap       ; Level 5 (Prof lab)
-                dc.l sub_250182
-                dc.l sub_24F808
-                dc.w $12E
-                dc.w $3C
-                dc.l sub_251D42
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Level 5 (Chicken boss)
-                dc.w 0
-                dc.w 0
-                dc.w $B0
-                dc.w $170
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l lvl5_chi_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $12
-                dc.b 0
-                dc.l lvl5_chi_backmap_rnc
-                dc.l lvl5_palette
-                dc.l lvl5_tilemap       ; Level 5 (Chiken fly boss)
-                dc.l sub_250194
-                dc.l sub_24F86E
-                dc.w $32
-                dc.w $9C
-                dc.l sub_251DA6
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Level 5 (Naked worm)
-                dc.w $10
-                dc.w 0
-                dc.w $67
-                dc.w $19C
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l lvl5_nkd_map_rnc
-                dc.l dword_506E
-                dc.w $70
-                dc.b 3
-                dc.b 0
-                dc.l lvl5_backmap_rnc
-                dc.l lvl5_palette
-                dc.l lvl5_tilemap       ; Level 5 (Naked worm)
-                dc.l sub_250272
-                dc.l sub_24F95C
-                dc.w $15E
-                dc.w $28
-                dc.l sub_251D42
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Intestinal distress
-                dc.w $10
-                dc.w $B20
-                dc.w $70
-                dc.w $1A6
-                dc.l ints_objects_rnc
-                dc.l ints_graphic_rnc
-                dc.l ints_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 4
-                dc.b 0
-                dc.l ints_backmap_rnc
-                dc.l ints_palette
-                dc.l ints_tilemap       ; Intestines distress
-                dc.l nullsub_10
-                dc.l sub_24F96C
-                dc.w $4B
-                dc.w $C2
-                dc.l sub_251E2C
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Down the tubes (Sea tunnels)
-                dc.w $20
-                dc.w 0
-                dc.w $BC
-                dc.w $120
-                dc.l dwn_objects_rnc
-                dc.l dwn_graphic_rnc
-                dc.l dwn_sea_map_rnc
-                dc.l dword_50DE
-                dc.w $9A
-                dc.b 3
-                dc.b 1
-                dc.l dwn_backmap_rnc
-                dc.l dwn_palette
-                dc.l dwn_tilemap        ; Down the tubes (Sea tunnels)
-                dc.l sub_25027E
-                dc.l nullsub_7
-                dc.w $12C
-                dc.w $41
-                dc.l sub_251512
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Down the tubes (Pod races)
-                dc.w 0
-                dc.w 0
-                dc.w $79
-                dc.w $16F
-                dc.l dwn_objects_rnc
-                dc.l dwn_graphic_rnc
-                dc.l dwn_pod_map_rnc
-                dc.l dword_50DE
-                dc.w $9A
-                dc.b 3
-                dc.b 1
-                dc.l dwn_backmap_rnc
-                dc.l dwn_palette
-                dc.l dwn_tilemap        ; Down the tubes (Pod races)
-                dc.l sub_25027E
-                dc.l nullsub_7
-                dc.w $FF
-                dc.w $4B
-                dc.l sub_251512
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Andy asteroids 1
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 1
-                dc.l andy_level_init
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Andy asteroids 2
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 2
-                dc.l andy_level_init_2
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Andy asteroids 3
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 3
-                dc.l andy_level_init_3
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Andy asteroids 4
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 4
-                dc.l andy_level_init_4
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Andy asteroids 5
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 5
-                dc.l andy_level_init_5
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Andy asteroids 6
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 6
-                dc.l andy_level_init_6
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Andy asteroids 7
-                dc.w $10
-                dc.w 0
-                dc.w $A0
-                dc.w $1D3
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l andy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b 6
-                dc.b 1
-                dc.l andy_backmap_rnc
-                dc.l andy_palette
-                dc.l andy_tilemap       ; Andy asteroids 7
-                dc.l andy_level_init_7
-                dc.l andy_level_update
-                dc.w $20
-                dc.w $20
-                dc.l andy_asteroids_tunnel_bg
-                dc.l 0
-                dc.b 0
-                dc.b $3F
-                dc.b $37
-                dc.b 0
-;Darkness 1
-                dc.w 0
-                dc.w $100
-                dc.w $4D
-                dc.w $1A0
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l drk1_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $D
-                dc.b 0
-                dc.l drk_backmap_rnc
-                dc.l drk_palette
-                dc.l lvl5_tilemap       ; Darkness (of Level 5) 1
-                dc.l sub_2504E6
-                dc.l darkness_level_update
-                dc.w $64
-                dc.w $20
-                dc.l sub_251CB6
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Darkness 2
-                dc.w $10
-                dc.w $180
-                dc.w $33
-                dc.w $190
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l drk2_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $D
-                dc.b 0
-                dc.l drk_backmap_rnc
-                dc.l drk_palette
-                dc.l lvl5_tilemap       ; Darkness (of Level 5) 2
-                dc.l sub_2504E6
-                dc.l darkness_level_update
-                dc.w $46
-                dc.w $28
-                dc.l sub_251CB6
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Darkness 3
-                dc.w 0
-                dc.w $100
-                dc.w $4F
-                dc.w $19D
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l drk3_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $D
-                dc.b 0
-                dc.l drk_backmap_rnc
-                dc.l drk_palette
-                dc.l lvl5_tilemap       ; Darkness (of Level 5) 3
-                dc.l sub_2504E6
-                dc.l darkness_level_update
-                dc.w $32
-                dc.w $20
-                dc.l sub_251CB6
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Darkness 4
-                dc.w $10
-                dc.w $110
-                dc.w $26
-                dc.w $190
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l drk4_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $D
-                dc.b 0
-                dc.l drk_backmap_rnc
-                dc.l drk_palette
-                dc.l lvl5_tilemap       ; Darkness (of Level 5) 4
-                dc.l sub_2504E6
-                dc.l darkness_level_update
-                dc.w $32
-                dc.w $23
-                dc.l sub_251CB6
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Darkness 5
-                dc.w $10
-                dc.w $40
-                dc.w $2A
-                dc.w $196
-                dc.l lvl5_objects_rnc
-                dc.l lvl5_graphic_rnc
-                dc.l drk5_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $D
-                dc.b 0
-                dc.l drk_backmap_rnc
-                dc.l drk_palette
-                dc.l lvl5_tilemap       ; Darkness (of Level 5) 5
-                dc.l sub_2504E6
-                dc.l darkness_level_update
-                dc.w $91
-                dc.w $20
-                dc.l sub_251CB6
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
-;Psycrow
-                dc.w 0
-                dc.w 0
-                dc.w $B0
-                dc.w $190
-                dc.l andy_objects_rnc
-                dc.l andy_graphic_rnc
-                dc.l psy_map_rnc
-                dc.l 0
-                dc.w 0
-                dc.b $14
-                dc.b 0
-                dc.l andy_backmap_rnc
-                dc.l psy_palette
-                dc.l andy_tilemap       ; Psycrow
-                dc.l sub_25049A
-                dc.l sub_24FD28
-                dc.w $32
-                dc.w $10
-                dc.l sub_251AE2
-                dc.l 0
-                dc.b 0
-                dc.b 0
-                dc.b $37
-                dc.b 0
+    include "jiminc/objects.inc"
+    include "jiminc/level_config.inc"
 teleport_toilet_data:    dc.b   0,  0,$13,$30,  2,$60,  0,$BB,  1,$92
                                         ; DATA XREF: activity_teleport_toilet   o
 byte_25C30E:    dc.b   0,  1,  3,$60,  6,  0,  0,$B0,  1,$A7
@@ -53627,2245 +49395,24 @@ byte_25C390:    dc.b   0, $A, $B,$B0,  0,  0,  0,$B4,  1,$4F
 teleport_to_slug_for_butt_data:    dc.b   0,  8,  0,$10,  1,$B0,  0,$1A,  1,$93
                                         ; DATA XREF: activity_teleport_toilet:activity_teleport_to_slug_for_butt   o
 byte_25C3A4:    dc.b   0,  2,  0,  0,  0,$20,  0,$94,  1,$9B
-                                        ; DATA XREF: sub_24F1D8+E   o
+                                        ; DATA XREF: wth_level_events+E   o
 byte_25C3AE:    dc.b   0,  1,  2,$C0,  3,$C0,  0,$B7,  1,$9C
-                                        ; DATA XREF: sub_24F23E+E8   o
+                                        ; DATA XREF: wth_snw_level_events+E8   o
 byte_25C3B8:    dc.b   0,  3,  0,$30,  0,  0,  0,$B7,  1,$C3
-                                        ; DATA XREF: sub_24F1D8+2A   o
+                                        ; DATA XREF: wth_level_events+2A   o
 byte_25C3C2:    dc.b   0, $B,  0,  0,  0,  0,  0,$B0,  1,$70
-                                        ; DATA XREF: sub_24F808+1C   o
-demo_table:     dc.l demo_new_junk_city        ; DATA XREF: sub_24D5C0+7C   o
-                                        ; sub_259DFE+622   o
-                dc.w 0
-                dc.l demo_what_the_heck
-                dc.w $100
-                dc.l demo_snot_a_problem
-                dc.w $600
-                dc.l demo_for_petes_sake
-                dc.w $700
-                dc.l demo_buttville
-                dc.w $900
-                dc.l demo_level_5
-                dc.w $B00
-                dc.l demo_down_the_tubes
-                dc.w $F00
-                dc.l demo_andy_asteroids
-                dc.w $1000
-demo_new_junk_city:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  7,$F7,$16,$D7,$18,$F7,  8,$FF,  0,$FE,  0,$F6,  1,$FE,$1B,$BE, $A,$B6,$20,$BE,  7,$FE
-                                        ; DATA XREF: ROM:demo_table   o
-                dc.b   6,$FA,  1,$BA,  3,$BB,  8,$B9,  1,$BD,  4,$B5,$1F,$F5,  6,$D5,$1E,$F5,$9A,$F7,$24,$FF,$12,$FD,$6C,$BD,  5,$FD,$29,$FF,$17,$F7
-                dc.b $13,$D7,$5D,$F7,$15,$FF,  1,$F7,  9,$D7,  4,$F7,  5,$D7,  3,$F7,  5,$D7,  8,$F7,  1,$D7,$2A,$F7,$11,$FF,$12,$FB,$15,$FF,  6,$DF
-                dc.b   3,$FF,  6,$EF,  2,$EB,  4,$FA,  0,$FB,$38,$FF,$29,$F7,$16,$FF,  5,$F7,  8,$D7,  5,$F7,  5,$D7,  3,$F7,  6,$D7,  3,$F7,  6,$D7
-                dc.b   4,$F7,  4,$D7,  4,$F7,$13,$D7,$17,$F7,$62,$D7,  4,$DF,$10,$DB,  4,$FB,  6,$DB,$1B,$FB,  4,$FF,  4,$BE, $B,$B6, $C,$BE,  9,$B6
-                dc.b   2,$BE,  2,$BA,  4,$FA,  0,$FB,  4,$FF,  0,$DF,  9,$DB,$12,$FB,$10,$FF,  1,$FB,  6,$DB, $E,$FB,$13,$FF, $E,$F7,$15,$FF,$18,$F7
-                dc.b   4,$B7,  0,$B6,  0,$BE,$10,$BA,  6,$BE,$16,$BA,  2,$BE,  8,$B6,  5,$BE,  0,$BA,  6,$BE,  1,$B6,$16,$BE,  2,$FE,  9,$FF,  3,$DB
-                dc.b $12,$FB,$34,$FF, $E,$F7,  4,$F5, $D,$BD,  7,$B9,  1,$BD,  7,$F5,  5,$D5, $A,$F7,  7,$FF,  1,$F7,  2,$B7,  1,$BF,  6,$BB,  9,$BA
-                dc.b   4,$BE,  8,$B6,  4,$B7,  8,$B5,  2,$BD, $B,$B9,  1,$BD,  0,$B5,  3,$F5,  2,$F7,  2,$B7,  7,$B5,  1,$BD, $E,$B9,  0,$BD,  0,$FD
-                dc.b $1E,$F5,  0,$FD,  4,$FF,  1,$DF,  5,$FF,  9,$FB,  9,$FF,  9,$FB,  1,$FF,  4,$DF,$41,$D7,  3,$D6,  3,$DE,  7,$DA,$18,$DB,  9,$DA
-                dc.b   1,$DE,  1,$D6, $D,$D7,  4,$F7,$20,$FF,  2,$DF,$10,$D7, $F,$F7,  2,$D6,  6,$DE,  9,$DF,$15,$FF,$13,$DF,  6,$FB,$19,$FF,  4,$DF
-                dc.b   4,$DB,  3,$FB,$2A,$F9,  6,$FB,  1,$FE, $C,$F6,$17,$FE,$1D,$BE,$15,$FE,$16,$F6,$3B,$F7,  4,$D7, $C,$F7,$16,$FF, $E,$F7,  2,$D7
-                dc.b  $C,$F7,$12,$FF,  6,$FB,  4,$FF, $D,$F7,  0,  0,  0,  0
-demo_what_the_heck:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$28,$FF, $B,$DF,  5,$FF,$64,$F7, $F,$FF, $F,$F7,  4,$F6, $C,$E6,  9,$F6,  7,$E6,  1,$F6,  5,$FE
-                                        ; DATA XREF: ROM:0025C3D2   o
-                dc.b   6,$EE,  8,$FE,  7,$EE, $B,$FE,$16,$BE,$12,$B6,  7,$BE, $D,$B6,$15,$F6,$58,$F7,$1E,$FF,$20,$FB,$14,$FA,  0,$BA,  0,$BE,  2,$B7
-                dc.b $16,$B6,  1,$BE, $E,$BA,  0,$BE,  0,$B6,  5,$B7,  2,$B6,  1,$BE,$27,$BA,  1,$BE,  5,$B6,  2,$BE,  7,$BA,  5,$BE,  0,$B6,  2,$BE
-                dc.b $10,$BA,  1,$BE,  0,$BF,  3,$B7,  6,$F7, $A,$D7,  6,$F7,  4,$D7,$1F,$F7,  8,$F6,  2,$FE, $F,$BE, $F,$BA,  9,$BE,$B4,$FA,  3,$FE
-                dc.b $29,$FF,$D6,$F7,  0,$B7,$17,$B6, $F,$BE, $D,$B6,$1A,$BE,$12,$B6,  3,$BE,  7,$F6,$40,$F7,  1,$D7,  3,$D6,  7,$DE,  2,$D6,  0,$D7
-                dc.b  $F,$F7,  4,$D7,  4,$F7,  3,$D7,  0,$F7, $F,$FF,  8,$FA,$12,$DA,$2B,$FA, $D,$DA,  1,$DE,  3,$D6,  4,$D7,$47,$F7,  0,$F6,  1,$D6
-                dc.b   2,$DE, $C,$DA, $E,$FA,  1,$FE,  4,$FF,  6,$F7, $E,$D7,$1B,$F7,  9,$FF, $C,$F7, $C,$D7,$5D,$F7,  5,$D7,$FF,$F7,$20,$F7,  0,$FD
-                dc.b   2,$FB,  1,$BB,$14,$BA,  7,$FA,  1,$FE,  1,$F6,  2,$F7, $F,$D7,  3,$D6,  0,$DE,  3,$DA,  4,$FA,  2,$DE,  3,$D7,  4,$F7,  5,$D7
-                dc.b   4,$F7,  6,$D7,$4A,$F7,$25,$FF,  2,$FB, $A,$DB,$13,$FB,  7,$DB,  4,$FB,  6,$DA,  6,$FA,  0,$FB,  2,$DB,$1B,$FB,  7,$FA,  4,$FB
-                dc.b $18,$FF,$5C,$F7,  5,$D6,  2,$DE,  9,$DA,  5,$CA,  9,$EA,$1B,$FA,  7,$FE, $A,$F6,  8,$F7,  0,  0,  0,  0
-demo_snot_a_problem:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$21,$FF,  4,$F7,$19,$B7,  6,$F7,  5,$B7,  7,$B5,  3,$F5,  0,$F7,  0,$FF,  0,$FE,$19,$FA,  1,$FE
-                                        ; DATA XREF: ROM:0025C3D8   o
-                dc.b   0,$FF,$16,$F7, $A,$FF,  4,$F7, $F,$FF,  5,$FB,$13,$FF,$13,$FB,  8,$BB,  1,$FB,$12,$FF,  6,$F7,$4B,$FF,  6,$F7,$36,$FF, $E,$FB
-                dc.b $16,$FF,$1B,$FD,$58,$FF, $F,$F7,  7,$FF, $B,$FB, $E,$F9,  7,$B9, $C,$F9,  2,$B9,  2,$BB,  1,$BA,  1,$FA, $A,$BA,$16,$FA,  1,$FE
-                dc.b $10,$F6, $B,$BE,$26,$FA,  6,$BA,  3,$BB, $E,$FB,  1,$FA,  1,$FE,  0,$F6, $A,$F7,  4,$FF, $B,$FD, $D,$FF, $C,$F7,$48,$FF, $D,$F9
-                dc.b  $F,$FF,  5,$FD,  0,$F5,  0,$F7,  9,$FF, $B,$F5,  9,$FF,$15,$F9,  4,$FB,  8,$BB,$10,$FB,  1,$F9, $F,$FD,$3F,$FF,$1A,$FD,  4,$FF
-                dc.b $4A,$FE,$19,$FF,  3,$FE,$17,$FA,  0,$FB,$1D,$FF,  5,$F7,$14,$FF, $F,$F7,  4,$FF,  7,$F7,$1E,$FF,  9,$F7,$CD,$FF,  5,$F7,  1,$F5
-                dc.b   1,$B5,  7,$B7,$10,$F7,  2,$B7,  3,$B5,  4,$F5,  0,$F7,  6,$B7,  4,$F7,  3,$B7,  5,$F7,  4,$B7,  3,$F7,  2,$B7,  4,$F7,  0,$F6
-                dc.b   0,$FE,$10,$FA,  2,$FB, $D,$FF,  3,$FB,$19,$FA,  4,$FE,  0,$F6,  7,$F7,  6,$FF,  6,$F7, $D,$FF,  9,$F7,$11,$FF,  6,$F7,$16,$FF
-                dc.b   0,$BF,  3,$B7,  0,$BE,  0,$FE,  8,$FA,  0,$FB,  4,$FF,  7,$F7,$35,$FF,  8,$F7,$36,$FF,$6E,$FD,  5,$F5,  1,$FD, $B,$F9, $E,$FB
-                dc.b   8,$BB, $B,$FB,  2,$FF,$12,$F7,  0,$B7,  5,$B5,  5,$F5,  0,$B5,  2,$B7,  2,$F7,  2,$F6,  4,$FE,$14,$FA, $A,$FB,  3,$BB,  1,$BA
-                dc.b   0,$BB,  2,$FB,  7,$FA,  7,$BA,  0,$FA,  3,$FE,$25,$F6,  5,$B6, $F,$F6,  5,$B6,$10,$F6,  2,$FE,  0,$FA,  0,$FB, $D,$FF,$15,$FE
-                dc.b $4C,$FF,  5,$F7,$17,$FF,  5,$FB,  6,$FF,$26,$F7,  7,$FF,  9,$FB,$2D,$FF,$15,$FB,$2B,$FA,  0,$FB,$27,$FF,  0,  0,  0,  0
-demo_for_petes_sake:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$1E,$FF,  6,$F7, $D,$FF,$22,$FB,  5,$FF,$41,$F7, $A,$FF,$3A,$F7, $B,$FF,  5,$BF,$14,$FF,$17,$FB
-                                        ; DATA XREF: ROM:0025C3DE   o
-                dc.b   2,$FF,  3,$F7,  5,$E7,  1,$F7, $A,$FF,$1F,$F7,$13,$D7,$77,$F7,  4,$FF,$1B,$B6,  7,$F6,$13,$F7,  0,$B7, $B,$B6,  9,$B7,  0,$B6
-                dc.b   9,$F6,$36,$F7, $C,$F6,  0,$F7, $F,$FF,  8,$F7,  6,$FF,$39,$FB,$12,$FF, $A,$F7,  7,$FF,  8,$F7,$11,$FF,  6,$F7,$1A,$FF,  7,$F7
-                dc.b   3,$E7,  3,$EF, $E,$FF,$21,$F7,  9,$D7,$6A,$F7,$18,$FF, $F,$FB, $D,$FA,  0,$FE,  4,$FF,  8,$F7,$16,$FF,  5,$EF,  6,$FF,$2A,$F7
-                dc.b   5,$D7,$27,$F7,  0,$B7,$11,$BF,  5,$FF,  9,$F7,$30,$FF,  8,$EF,  1,$FF,$1D,$F7,$1E,$D7,$46,$F7,$10,$D7,$1D,$F7,$22,$FF,  2,$F7
-                dc.b  $F,$B6, $A,$B7,  2,$B6, $F,$F6,$37,$F7, $C,$FF,$10,$F7,  3,$FF,  2,$BF,  2,$BE, $B,$B6,  5,$F6, $B,$FF,  8,$F7,  2,$B7,  9,$B6
-                dc.b   2,$F6,$34,$F7, $A,$FF,$3E,$F7,$12,$FF, $A,$F7,  6,$D7,$10,$F7,$10,$FF,  8,$F7,  5,$FF, $C,$F7,  3,$FF,  9,$F7, $D,$FF,$18,$F7
-                dc.b  $A,$FF,  6,$F7,  6,$FF,  3,$FE,$3C,$FA,  1,$FE, $B,$F6,  2,$B6,  4,$BE, $D,$B6,  6,$BE,  0,$B6,  9,$B7,  1,$B6,  7,$BE,  2,$B6
-                dc.b   7,$B7,  0,$B6,  8,$BE,  2,$B6,  6,$B7,  4,$B6,  1,$BE,  3,$B6,  7,$B7,  1,$B6,  4,$BE,  2,$B6,  7,$B7,  1,$B6,  5,$BE,  2,$B6
-                dc.b   6,$B7,  1,$B6,  5,$BE,  0,$B6,  3,$B7,  2,$B5,  1,$B7,  0,$B6,  6,$BE,  1,$B6,  7,$B7,  7,$B6,  7,$B7, $A,$B6,  5,$B7,  7,$B6
-                dc.b   6,$B7, $B,$B6,  7,$B7,  9,$B6,  9,$B7,  7,$B6,  2,$B7,  5,$B5,  1,$B7,$1A,$B6,  6,$B7,  9,$B6,$13,$B7,  3,$B6,$13,$B7, $A,$B6
-                dc.b   7,$B7,  7,$B6,  8,$B7, $A,$B6,  9,$B7,  5,$B6,  7,$B7,  5,$B6,  8,$B7,  6,$B6,  2,$B7,  2,$B5,  1,$B7,  6,$B6,  2,$B7,  2,$B5
-                dc.b   2,$B7,  5,$B6,  5,$B7,$17,$B6, $A,$B7,  6,$B6,  7,$B7,  6,$B6,  1,$B7,  3,$B5,  2,$B7, $B,$B6,  1,$B7,  9,$B6,  1,$B7,  0,  0
-                dc.b   0,  0
-demo_buttville:    dc.b   0,$70,  0,  0,  0,$B0,  1,$7F,$17,$FF, $E,$F7,  6,$D7,$11,$F7,  5,$D7,  0,$DF,  2,$FF,  2,$DF,  2,$D7,  4,$F7,  3,$D7,  1,$DF
-                                        ; DATA XREF: ROM:0025C3E4   o
-                dc.b   3,$FF,  5,$DF,  3,$FF,  1,$DF,  2,$DB,  3,$FB,  4,$DB,  0,$DA,  4,$FA,  1,$DB,  2,$DA,  4,$FA,  1,$DA,  2,$DF,  3,$FF,  5,$DF
-                dc.b   3,$F7,  1,$D7,  3,$DF,  0,$FF,  2,$F7,  1,$D7,  2,$DF,  3,$FF,  5,$DF,  3,$FF,  6,$DF,  2,$FF,  5,$DF,  3,$FF,  4,$DF,  1,$FF
-                dc.b   1,$FB,  5,$DB,  1,$FB,  0,$FF,  5,$DF,  2,$FF,  0,$FB,  5,$DB,  3,$FB,  2,$DB,  2,$DF,  4,$FF,  5,$DF,  0,$FF,  2,$F7,  3,$D7
-                dc.b   1,$DF,  3,$FF,  6,$DF,  3,$FF,  6,$DF,  0,$FF,  2,$F7,  5,$D7,  3,$F7,  5,$D7,  3,$F7,  5,$D7,  3,$F7,  5,$D7,  1,$F7,  2,$FF
-                dc.b   4,$DF,  4,$FF,  1,$DF,  4,$D7,  1,$F7,  1,$FF,  6,$DF,  3,$FF,  1,$DF,  4,$DB,  4,$FB,  0,$DB,  2,$DF,  4,$FF,  2,$DF,  2,$D7
-                dc.b   1,$F7,  1,$FF,  5,$DF,  4,$FF,  5,$DF,  3,$FF,  5,$DF,  3,$FF,  5,$DF,  3,$FF,  5,$DF,  3,$FF,  5,$DF,  4,$F7,  5,$DF,  3,$FF
-                dc.b   5,$DF,  0,$FF,  3,$FB,  5,$DB,  3,$FB,  3,$DB,  1,$DF,  2,$FF,  1,$F7,  4,$D7,  4,$F7,  5,$D7,  4,$F7,  4,$D7,  0,$DF,  4,$FF
-                dc.b   0,$DF,  4,$DB,  4,$FB,  5,$DB,  4,$FB,  5,$DB,  4,$FB,  5,$DB,  3,$FB,  7,$DB,  2,$FB,  5,$DB,  3,$FB,  6,$DB,  3,$FF,  6,$DB
-                dc.b   3,$FB,  0,$DB,  5,$DF,  2,$FF,  1,$F7,  5,$D7,  3,$F7,  0,$FF,  3,$DF,  1,$D7,  3,$F7,  1,$FF,  5,$DF,  0,$FF,  4,$F7,  5,$DF
-                dc.b   4,$FF,  2,$DF,  2,$D7,  4,$F7,  6,$D7,  3,$F7,  2,$D7,  3,$DF,  1,$FF,  1,$FB,  2,$DB,  2,$DA,  3,$FA,  0,$FF,  3,$DF,  1,$D7
-                dc.b   3,$F7,  5,$D7,  0,$F7,  4,$FF,  5,$DF,  4,$FF,  5,$DF,  0,$FF,  2,$F7,  2,$D7,  2,$DF,  4,$FF,  5,$DF,  4,$FF,  6,$DF,  3,$FF
-                dc.b   2,$DF,  3,$DB,  1,$FB,  2,$FF,  5,$DF,  3,$FF,  6,$DF,  4,$FF,  6,$DF,  4,$FF,  5,$DF,  4,$FF,  0,$DF,  1,$DB,  2,$DA,  4,$FB
-                dc.b   0,$DB,  3,$DF,  1,$DB,  2,$FB,  1,$FA,  1,$DA,  1,$DB,  2,$DF,  4,$FF,  5,$DF,  0,$D7,  3,$F7,  5,$D7,  0,$DF,  3,$FF,  5,$DF
-                dc.b   0,$DB,  4,$FB,  4,$DB,  1,$DA,  3,$FA,  6,$DA,  4,$FA,  0,$DE,  1,$DF,  3,$D7,  3,$F7,  7,$D7,  3,$F7,  2,$D7,  2,$DF,  3,$FF
-                dc.b   5,$DF,  3,$F7,  4,$D7,  1,$DF,  3,$FF,  5,$DF,  3,$FF,  6,$DF,  3,$FF,  6,$DF,  1,$FF,  1,$F7,  6,$D7,  0,$F7,  2,$FF,  3,$DF
-                dc.b   3,$D7,  3,$F7,  7,$D7, $A,$F7,  8,$FF,  9,$F7,  5,$FF, $B,$F7,$12,$D7,  0,$D6,  2,$F6,  6,$D6,  2,$F6,  5,$D6, $D,$F6,  4,$F7
-                dc.b $15,$FF,$2C,$F7,  5,$F6,$25,$F7,$18,$FF,  3,$FE,  0,$D6, $B,$D7,  4,$F7,$15,$FF,  7,$F7,  5,$FF,  5,$DF,  6,$FF,$13,$F7,$12,$FF
-                dc.b   9,$F7,  6,$FF,  3,$F7,  7,$D7,$30,$F7, $D,$FF,  7,$F7, $C,$B7,  8,$F7, $A,$D7,  0,$F7,  0,$F6,  6,$D6,  3,$F6,  7,$D6,  1,$F6
-                dc.b   6,$D6,  2,$F6,  7,$D6,  2,$F6,  9,$D6,  2,$F6,  5,$D6,  4,$F6,  1,$D6,  4,$D7,  3,$F7,$18,$FF,  3,$DF,  1,$DE,  0,$DA,  9,$FA
-                dc.b   2,$FB,  0,$FF,  2,$EF,  8,$E7,$24,$F6,  7,$FE, $E,$EA,  4,$FA,  4,$EA,$16,$FA,  2,$FE, $C,$F6,$12,$E6,$16,$F6,  8,$FE, $A,$FA
-                dc.b  $C,$EA,$57,$FA,  0,$FE,  8,$F6,  4,$FE,$3C,$F6,$15,$D6,  0,$DE,  1,$CE,  2,$EE, $A,$EA,$1C,$FA,  3,$FE, $A,$F6,$14,$E6,$1C,$F6
-                dc.b   2,$FE, $C,$FA, $F,$EA,$1A,$FA,  3,$FE, $B,$F6,$17,$E6,$1F,$F6,  3,$FE, $C,$FA,$12,$EA,$79,$FA, $F,$BA,$2F,$FA,$1C,$FB,$40,$FA
-                dc.b  $C,$BA, $B,$FA,  1,$FE,  4,$F6,  1,$B6,  0,$BF,  0,$BB,  9,$B9,  0,$BB,$11,$BA,  7,$BB,$28,$FA,  0,  0,  0,  0
-demo_level_5:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$15,$FF,$32,$F7, $D,$F6,  5,$FE,  9,$BA,  0,$FA,  0,$FE,  0,$FF,  3,$F7,$17,$F5,  1,$FD,$1A,$F9
-                                        ; DATA XREF: ROM:0025C3EA   o
-                dc.b  $D,$FB,$14,$FA,  1,$BA, $A,$BE,  1,$B6,  6,$B7,  0,$BF,  0,$BE,  0,$BA,  7,$BB,  2,$B9,  4,$F9,  3,$FD,$17,$F5,  6,$FD,$13,$F5
-                dc.b   0,$B5,  0,$BF, $A,$BB,  1,$B9,  1,$BD, $A,$B5,$10,$F5,  3,$F7, $A,$F6,  2,$BE, $C,$BA,  1,$BB,  3,$FB,$19,$F9,  1,$B9,  0,$BD
-                dc.b  $F,$B5,  5,$BF,  5,$BB,  5,$B9,  6,$F9, $B,$FB,  0,$BB,  0,$BD,  9,$B5,  0,$B7,  0,$BF,  0,$BE,  2,$BA,$19,$FA,  3,$FE,$1E,$F6
-                dc.b   1,$FE,  3,$FA,  4,$FB,  5,$F9,  4,$FD,$1E,$F5,$21,$F7,$17,$F6,  2,$BE,  5,$BA,  1,$BE,  3,$BF,  2,$B7,  6,$B5, $D,$F5,  2,$FD
-                dc.b $47,$F9, $E,$FB, $B,$FA,  2,$FE,  1,$F7, $B,$B7,  7,$B6,  7,$BE,  1,$FE, $E,$F6,$25,$F7,$13,$F5,  2,$F7,  0,$B7,  1,$BF,  4,$BE
-                dc.b   1,$BF,  1,$B7,$11,$F5,  2,$FD, $B,$F9,$20,$FB,$15,$FA,  1,$FE,  0,$F6,  3,$B7,$10,$BF,  4,$BD,  4,$B9,  5,$F9,  6,$FD,$24,$F5
-                dc.b   0,$FD,  0,$FF, $B,$BB,  2,$BA, $D,$FA, $E,$FE, $B,$FA,$12,$FB,$12,$F9,  0,$B9,  1,$BD,  8,$B5, $E,$F5,  5,$F7,  8,$F6,$1B,$F7
-                dc.b   0,$B7,  1,$B5,  1,$BD,  0,$BF, $B,$BB,  2,$BA,  2,$FA,  0,$FF,  7,$F7,$1C,$F5,  2,$F7,  2,$F6,  7,$FE,$15,$FA,$24,$FB,$10,$F9
-                dc.b   3,$FB,  0,$FF, $F,$B7,  4,$B5,$12,$F5,$1A,$F7,  0,$F5,  0,$B5,  1,$BD, $D,$B9,  2,$BB,  6,$FA,  4,$FE,  4,$F6,  3,$FE, $C,$FA
-                dc.b $19,$FB, $C,$F9,  3,$FD,  7,$F5,  1,$F7,  5,$E7,  2,$F7, $A,$F6, $C,$FE,$18,$F6,  9,$F7,$1D,$F5,  0,$B5,  0,$BF,  9,$BB,  5,$B9
-                dc.b   8,$BD,  0,$B9,  9,$F9,$17,$FB,  1,$EB,  1,$EF,  1,$E7,  1,$E6, $C,$F6,  2,$FE,$15,$FA,  1,$FB,  0,$FF,  0,$FD,$11,$F5,  2,$FD
-                dc.b  $D,$F9,  2,$FD,  0,$F5, $F,$B5,  3,$B7,  0,$B6, $E,$BE,$2E,$B7, $B,$B5,  4,$BD,  2,$B9,  1,$BB, $B,$BF,  9,$B9,  8,$BB,  4,$BA
-                dc.b   8,$BE,  0,$B6,  0,$B7, $F,$BF,$10,$BD,  9,$B5,  2,$BD,  0,$B9, $C,$BB,  5,$FB,  6,$BB,  5,$BA,  0,$BE,  7,$B7,  0,$BF,  1,$B7
-                dc.b $2E,$BF,  0,$BB,  8,$BA,  6,$FA,  5,$FE,$29,$F6,$1D,$F7,  0,$FF,  5,$FD,$1A,$F5,  1,$FD, $C,$BB,  1,$B9,$16,$F9, $E,$FB,$1C,$FA
-                dc.b   0,$FB,  0,$FF,$17,$BF,  9,$BD,  0,$BF,  8,$FF,$11,$F5, $A,$F7, $D,$F5,$25,$F7, $B,$F6,  0,$FE, $C,$BF,  0,$BE,  1,$BA,$3F,$FA
-                dc.b $14,$FB,  3,$F9,  7,$FD,$34,$F5,  2,$F7,  0,$FF,$15,$FA,  1,$FE,  9,$F6,  3,$F7,  6,$F6,  5,$FE,  4,$F6,  0,  0,  0,  0
-demo_down_the_tubes:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$13,$FF,$1E,$F7, $C,$B7,  5,$B5,  3,$B7,$3C,$F7, $A,$B7,$46,$F7,$1D,$B7,  9,$B6,  6,$B7,  9,$B5
-                                        ; DATA XREF: ROM:0025C3F0   o
-                dc.b   5,$F5,$3E,$F7,$8F,$FF, $E,$F7, $D,$B7,  2,$B5,  0,$B7,  0,$BF,$16,$BA,  1,$BB,  0,$BA,  1,$BB,  5,$B5,  1,$BD,  8,$B9,  0,$BD
-                dc.b  $C,$B5,  1,$BD,  7,$B9,  6,$BB,  8,$B9,  0,$BD,$10,$B5,  1,$BF,  1,$BB,  5,$BA,  2,$B5,  0,$B7,  0,$B5,  1,$B7,  0,$BF,  0,$BB
-                dc.b   2,$BA,  7,$BB,  0,$BF,  7,$B5,  0,$F5,$70,$F7,  4,$B7,  0,$B6, $A,$B7,  6,$B6,  6,$BE, $C,$B7,  6,$B6,  3,$B7, $C,$B5,  3,$B7
-                dc.b $5C,$F7,  5,$FF,$13,$F7, $B,$FF,$48,$F7, $A,$E7,$2B,$F7,  1,$FE,  5,$FA,$11,$FF,$19,$F7, $D,$FF, $E,$FB,$28,$FF, $B,$FB,  4,$DB
-                dc.b $2D,$FB, $E,$FF,  1,$FB,  4,$DB,  0,$FB,  2,$FF,$12,$F7,$3C,$FF,  7,$BF,$26,$FF, $F,$BF,  5,$FF,  5,$BF,$1C,$FF, $C,$BF,  6,$FF
-                dc.b   6,$BF,$29,$FF,$86,$FB,  8,$DB,  7,$DF, $B,$FF,  3,$FB,$1C,$FF,$13,$DF,  9,$DB, $A,$DF,  4,$DB,  6,$FB,  0,$DB,$19,$DF,  4,$FF
-                dc.b   0,$F7,  5,$D7,  0,$F7,  3,$FF,  5,$DF, $F,$DB,  4,$FB,  2,$DB,$19,$DF,  2,$D7,  2,$F7,  5,$D7,  8,$DF,  3,$D7,  4,$F7,  0,$D7
-                dc.b   6,$DF, $A,$FF,  3,$DB,  3,$FB,  2,$FF,  2,$DF,  5,$FF,  8,$F7,  5,$FF,  8,$F7,  6,$DF,  5,$FF,  6,$FB,  4,$DB,  3,$FB,  2,$FF
-                dc.b   5,$FB,  4,$DF,  8,$FF, $A,$DF,  4,$FF, $A,$F7, $A,$FF,  4,$DF,  8,$FF,  4,$DF,$30,$FF,$12,$FB, $C,$FF,  7,$F7,$FF,$FF,$61,$FF
-                dc.b $2C,$DF,$1E,$FF,  7,$DF, $B,$FF,  8,$DF,  7,$FF,  5,$DF,  9,$FF,  4,$DF,  0,  0,  0,  0
-demo_andy_asteroids:    dc.b   0,  0,  2,  0,  0,$5E,  1,$97,$2D,$BF,$10,$BB,  5,$BF,$1F,$B7,  8,$BF,$1B,$BB,  2,$BF,$1A,$B7,  0,$B6,  0,$BE,  7,$BA,  6,$BB
-                                        ; DATA XREF: ROM:0025C3F6   o
-                dc.b   9,$BA,  2,$BF,$10,$B7, $D,$BF, $A,$BB,$12,$BF,  2,$BB,$14,$BF,  4,$BB,$2B,$BF,  6,$BB, $E,$BF,$20,$B7,$21,$BF,  2,$BB, $F,$BF
-                dc.b $11,$BB, $B,$BF,  2,$BB,$19,$BF,  5,$BB, $A,$BF,$14,$B7,$20,$BF,  8,$BB,  9,$BF,  4,$BB,$1B,$BF,$11,$B5,  0,$B7,  5,$BF, $E,$BB
-                dc.b   4,$BF,  0,$B7, $B,$B5,  1,$B7,  4,$BF,  6,$B7,  6,$BF,  6,$B7,$15,$BF,  5,$B7,$14,$BF,  6,$BB, $F,$BF,  7,$B7, $C,$BF,  7,$BB
-                dc.b  $F,$BF, $F,$BB,$12,$BF,  7,$BB,  8,$BF,  5,$B5,  8,$BF,  5,$B7,$41,$BF,  4,$B7,$11,$BF,  4,$B7,$1A,$BF, $B,$BB, $C,$BF,  3,$BB
-                dc.b  $E,$BF,  9,$BB,$1C,$BF,  6,$B7,$19,$BF,  5,$B7,$2E,$BF,  4,$BB, $D,$BF,  4,$BB,  9,$BF, $D,$B7, $C,$BF, $E,$BB,$22,$BF,  3,$BB
-                dc.b $19,$BF, $C,$B7,$75,$BF,  4,$BB,$29,$BF,  2,$BB,$16,$BF,  0,$BB, $A,$BF,  5,$B5,  3,$B7,$16,$BF,  6,$B7, $D,$BF,$17,$BB,$2F,$BF
-                dc.b  $C,$B7,  8,$BF,  8,$B7,  5,$BF,  8,$BB,$1F,$BF,  4,$BB,$11,$BF,  5,$B7,$11,$BF,  6,$BB,$11,$BF,  9,$B7, $D,$BF,$17,$BB,$20,$BF
-                dc.b   4,$B7,$17,$BF,  5,$B7,$1B,$BF,  7,$B7, $D,$BF,  5,$BB,$30,$BF,$10,$B7,$1F,$BF,  4,$BB,$10,$BF,$11,$BB,  6,$BF,  8,$BB, $F,$BF
-                dc.b   7,$B7,$11,$BF,  8,$BB,$10,$BF,  7,$B7, $C,$BF,  2,$B7, $F,$BF,  5,$B7,  9,$BF,  5,$B7, $A,$BF,$13,$BB,$11,$BF,  0,$B7,  3,$B5
-                dc.b   0,$B7,  4,$BF, $A,$BB,$1C,$BF, $B,$B7,$16,$BF,  6,$B7,$1F,$BF,  6,$B7, $E,$BF,  8,$BB,$11,$BF,  4,$B7,$2A,$BF,  3,$B7,$1B,$BF
-                dc.b   3,$B7,$21,$BF,  1,$B7,  7,$BF,  8,$BB, $F,$BF, $E,$BB,  9,$BF, $F,$B7, $F,$BF,  0,  0,  0,  0
-byte_25D1CC:    dc.b   0,  0,  0,  2,  0,  3,  0,  5,  0,  6,  0,  8,  0,  9,  0, $B,  0, $C,  0, $E,  0,$10,  0,$11,  0,$13,  0,$14,  0,$16,  0,$17
-                                        ; DATA XREF: project_tunnel_obj+12   o
-                dc.b   0,$19,  0,$1A,  0,$1C,  0,$1D,  0,$1F,  0,$20,  0,$22,  0,$23,  0,$25,  0,$26,  0,$28,  0,$29,  0,$2B,  0,$2C,  0,$2E,  0,$2F
-                dc.b   0,$31,  0,$32,  0,$33,  0,$35,  0,$36,  0,$38,  0,$39,  0,$3A,  0,$3C,  0,$3D,  0,$3F,  0,$40,  0,$41,  0,$43,  0,$44,  0,$45
-                dc.b   0,$47,  0,$48,  0,$49,  0,$4A,  0,$4C,  0,$4D,  0,$4E,  0,$4F,  0,$51,  0,$52,  0,$53,  0,$54,  0,$55,  0,$56,  0,$58,  0,$59
-                dc.b   0,$5A,  0,$5B,  0,$5C,  0,$5D,  0,$5E,  0,$5F,  0,$60,  0,$61,  0,$62,  0,$63,  0,$64,  0,$65,  0,$66,  0,$67,  0,$68,  0,$69
-                dc.b   0,$6A,  0,$6A,  0,$6B,  0,$6C,  0,$6D,  0,$6E,  0,$6F,  0,$6F,  0,$70,  0,$71,  0,$71,  0,$72,  0,$73,  0,$73,  0,$74,  0,$75
-                dc.b   0,$75,  0,$76,  0,$76,  0,$77,  0,$78,  0,$78,  0,$79,  0,$79,  0,$7A,  0,$7A,  0,$7A,  0,$7B,  0,$7B,  0,$7C,  0,$7C,  0,$7C
-                dc.b   0,$7D,  0,$7D,  0,$7D,  0,$7D,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F
-byte_25D2CC:    dc.b   0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7D,  0,$7D,  0,$7D
-                                        ; DATA XREF: project_tunnel_obj+1C   o
-                dc.b   0,$7D,  0,$7C,  0,$7C,  0,$7C,  0,$7B,  0,$7B,  0,$7A,  0,$7A,  0,$7A,  0,$79,  0,$79,  0,$78,  0,$78,  0,$77,  0,$76,  0,$76
-                dc.b   0,$75,  0,$75,  0,$74,  0,$73,  0,$73,  0,$72,  0,$71,  0,$71,  0,$70,  0,$6F,  0,$6F,  0,$6E,  0,$6D,  0,$6C,  0,$6B,  0,$6A
-                dc.b   0,$6A,  0,$69,  0,$68,  0,$67,  0,$66,  0,$65,  0,$64,  0,$63,  0,$62,  0,$61,  0,$60,  0,$5F,  0,$5E,  0,$5D,  0,$5C,  0,$5B
-                dc.b   0,$5A,  0,$59,  0,$58,  0,$56,  0,$55,  0,$54,  0,$53,  0,$52,  0,$51,  0,$4F,  0,$4E,  0,$4D,  0,$4C,  0,$4A,  0,$49,  0,$48
-                dc.b   0,$47,  0,$45,  0,$44,  0,$43,  0,$41,  0,$40,  0,$3F,  0,$3D,  0,$3C,  0,$3A,  0,$39,  0,$38,  0,$36,  0,$35,  0,$33,  0,$32
-                dc.b   0,$31,  0,$2F,  0,$2E,  0,$2C,  0,$2B,  0,$29,  0,$28,  0,$26,  0,$25,  0,$23,  0,$22,  0,$20,  0,$1F,  0,$1D,  0,$1C,  0,$1A
-                dc.b   0,$19,  0,$17,  0,$16,  0,$14,  0,$13,  0,$11,  0,$10,  0, $E,  0, $C,  0, $B,  0,  9,  0,  8,  0,  6,  0,  5,  0,  3,  0,  2
-                dc.b   0,  0,$FF,$FE,$FF,$FD,$FF,$FB,$FF,$FA,$FF,$F8,$FF,$F7,$FF,$F5,$FF,$F4,$FF,$F2,$FF,$F0,$FF,$EF,$FF,$ED,$FF,$EC,$FF,$EA,$FF,$E9
-                dc.b $FF,$E7,$FF,$E6,$FF,$E4,$FF,$E3,$FF,$E1,$FF,$E0,$FF,$DE,$FF,$DD,$FF,$DB,$FF,$DA,$FF,$D8,$FF,$D7,$FF,$D5,$FF,$D4,$FF,$D2,$FF,$D1
-                dc.b $FF,$CF,$FF,$CE,$FF,$CD,$FF,$CB,$FF,$CA,$FF,$C8,$FF,$C7,$FF,$C6,$FF,$C4,$FF,$C3,$FF,$C1,$FF,$C0,$FF,$BF,$FF,$BD,$FF,$BC,$FF,$BB
-                dc.b $FF,$B9,$FF,$B8,$FF,$B7,$FF,$B6,$FF,$B4,$FF,$B3,$FF,$B2,$FF,$B1,$FF,$AF,$FF,$AE,$FF,$AD,$FF,$AC,$FF,$AB,$FF,$AA,$FF,$A8,$FF,$A7
-                dc.b $FF,$A6,$FF,$A5,$FF,$A4,$FF,$A3,$FF,$A2,$FF,$A1,$FF,$A0,$FF,$9F,$FF,$9E,$FF,$9D,$FF,$9C,$FF,$9B,$FF,$9A,$FF,$99,$FF,$98,$FF,$97
-                dc.b $FF,$96,$FF,$96,$FF,$95,$FF,$94,$FF,$93,$FF,$92,$FF,$91,$FF,$91,$FF,$90,$FF,$8F,$FF,$8F,$FF,$8E,$FF,$8D,$FF,$8D,$FF,$8C,$FF,$8B
-                dc.b $FF,$8B,$FF,$8A,$FF,$8A,$FF,$89,$FF,$88,$FF,$88,$FF,$87,$FF,$87,$FF,$86,$FF,$86,$FF,$86,$FF,$85,$FF,$85,$FF,$84,$FF,$84,$FF,$84
-                dc.b $FF,$83,$FF,$83,$FF,$83,$FF,$83,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81
-                dc.b $FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$83,$FF,$83,$FF,$83
-                dc.b $FF,$83,$FF,$84,$FF,$84,$FF,$84,$FF,$85,$FF,$85,$FF,$86,$FF,$86,$FF,$86,$FF,$87,$FF,$87,$FF,$88,$FF,$88,$FF,$89,$FF,$8A,$FF,$8A
-                dc.b $FF,$8B,$FF,$8B,$FF,$8C,$FF,$8D,$FF,$8D,$FF,$8E,$FF,$8F,$FF,$8F,$FF,$90,$FF,$91,$FF,$91,$FF,$92,$FF,$93,$FF,$94,$FF,$95,$FF,$96
-                dc.b $FF,$96,$FF,$97,$FF,$98,$FF,$99,$FF,$9A,$FF,$9B,$FF,$9C,$FF,$9D,$FF,$9E,$FF,$9F,$FF,$A0,$FF,$A1,$FF,$A2,$FF,$A3,$FF,$A4,$FF,$A5
-                dc.b $FF,$A6,$FF,$A7,$FF,$A8,$FF,$AA,$FF,$AB,$FF,$AC,$FF,$AD,$FF,$AE,$FF,$AF,$FF,$B1,$FF,$B2,$FF,$B3,$FF,$B4,$FF,$B6,$FF,$B7,$FF,$B8
-                dc.b $FF,$B9,$FF,$BB,$FF,$BC,$FF,$BD,$FF,$BF,$FF,$C0,$FF,$C1,$FF,$C3,$FF,$C4,$FF,$C6,$FF,$C7,$FF,$C8,$FF,$CA,$FF,$CB,$FF,$CD,$FF,$CE
-                dc.b $FF,$CF,$FF,$D1,$FF,$D2,$FF,$D4,$FF,$D5,$FF,$D7,$FF,$D8,$FF,$DA,$FF,$DB,$FF,$DD,$FF,$DE,$FF,$E0,$FF,$E1,$FF,$E3,$FF,$E4,$FF,$E6
-                dc.b $FF,$E7,$FF,$E9,$FF,$EA,$FF,$EC,$FF,$ED,$FF,$EF,$FF,$F0,$FF,$F2,$FF,$F4,$FF,$F5,$FF,$F7,$FF,$F8,$FF,$FA,$FF,$FB,$FF,$FD,$FF,$FE
-                dc.b   0,  0,  0,  2,  0,  3,  0,  5,  0,  6,  0,  8,  0,  9,  0, $B,  0, $C,  0, $E,  0,$10,  0,$11,  0,$13,  0,$14,  0,$16,  0,$17
-                dc.b   0,$19,  0,$1A,  0,$1C,  0,$1D,  0,$1F,  0,$20,  0,$22,  0,$23,  0,$25,  0,$26,  0,$28,  0,$29,  0,$2B,  0,$2C,  0,$2E,  0,$2F
-                dc.b   0,$31,  0,$32,  0,$33,  0,$35,  0,$36,  0,$38,  0,$39,  0,$3A,  0,$3C,  0,$3D,  0,$3F,  0,$40,  0,$41,  0,$43,  0,$44,  0,$45
-                dc.b   0,$47,  0,$48,  0,$49,  0,$4A,  0,$4C,  0,$4D,  0,$4E,  0,$4F,  0,$51,  0,$52,  0,$53,  0,$54,  0,$55,  0,$56,  0,$58,  0,$59
-                dc.b   0,$5A,  0,$5B,  0,$5C,  0,$5D,  0,$5E,  0,$5F,  0,$60,  0,$61,  0,$62,  0,$63,  0,$64,  0,$65,  0,$66,  0,$67,  0,$68,  0,$69
-                dc.b   0,$6A,  0,$6A,  0,$6B,  0,$6C,  0,$6D,  0,$6E,  0,$6F,  0,$6F,  0,$70,  0,$71,  0,$71,  0,$72,  0,$73,  0,$73,  0,$74,  0,$75
-                dc.b   0,$75,  0,$76,  0,$76,  0,$77,  0,$78,  0,$78,  0,$79,  0,$79,  0,$7A,  0,$7A,  0,$7A,  0,$7B,  0,$7B,  0,$7C,  0,$7C,  0,$7C
-                dc.b   0,$7D,  0,$7D,  0,$7D,  0,$7D,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F
-                dc.b   0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7F,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7E,  0,$7D,  0,$7D,  0,$7D
-                dc.b   0,$7D,  0,$7C,  0,$7C,  0,$7C,  0,$7B,  0,$7B,  0,$7A,  0,$7A,  0,$7A,  0,$79,  0,$79,  0,$78,  0,$78,  0,$77,  0,$76,  0,$76
-                dc.b   0,$75,  0,$75,  0,$74,  0,$73,  0,$73,  0,$72,  0,$71,  0,$71,  0,$70,  0,$6F,  0,$6F,  0,$6E,  0,$6D,  0,$6C,  0,$6B,  0,$6A
-                dc.b   0,$6A,  0,$69,  0,$68,  0,$67,  0,$66,  0,$65,  0,$64,  0,$63,  0,$62,  0,$61,  0,$60,  0,$5F,  0,$5E,  0,$5D,  0,$5C,  0,$5B
-                dc.b   0,$5A,  0,$59,  0,$58,  0,$56,  0,$55,  0,$54,  0,$53,  0,$52,  0,$51,  0,$4F,  0,$4E,  0,$4D,  0,$4C,  0,$4A,  0,$49,  0,$48
-                dc.b   0,$47,  0,$45,  0,$44,  0,$43,  0,$41,  0,$40,  0,$3F,  0,$3D,  0,$3C,  0,$3A,  0,$39,  0,$38,  0,$36,  0,$35,  0,$33,  0,$32
-                dc.b   0,$31,  0,$2F,  0,$2E,  0,$2C,  0,$2B,  0,$29,  0,$28,  0,$26,  0,$25,  0,$23,  0,$22,  0,$20,  0,$1F,  0,$1D,  0,$1C,  0,$1A
-                dc.b   0,$19,  0,$17,  0,$16,  0,$14,  0,$13,  0,$11,  0,$10,  0, $E,  0, $C,  0, $B,  0,  9,  0,  8,  0,  6,  0,  5,  0,  3,  0,  2
-                dc.b   0,  0,$FF,$FE,$FF,$FD,$FF,$FB,$FF,$FA,$FF,$F8,$FF,$F7,$FF,$F5,$FF,$F4,$FF,$F2,$FF,$F0,$FF,$EF,$FF,$ED,$FF,$EC,$FF,$EA,$FF,$E9
-                dc.b $FF,$E7,$FF,$E6,$FF,$E4,$FF,$E3,$FF,$E1,$FF,$E0,$FF,$DE,$FF,$DD,$FF,$DB,$FF,$DA,$FF,$D8,$FF,$D7,$FF,$D5,$FF,$D4,$FF,$D2,$FF,$D1
-                dc.b $FF,$CF,$FF,$CE,$FF,$CD,$FF,$CB,$FF,$CA,$FF,$C8,$FF,$C7,$FF,$C6,$FF,$C4,$FF,$C3,$FF,$C1,$FF,$C0,$FF,$BF,$FF,$BD,$FF,$BC,$FF,$BB
-                dc.b $FF,$B9,$FF,$B8,$FF,$B7,$FF,$B6,$FF,$B4,$FF,$B3,$FF,$B2,$FF,$B1,$FF,$AF,$FF,$AE,$FF,$AD,$FF,$AC,$FF,$AB,$FF,$AA,$FF,$A8,$FF,$A7
-                dc.b $FF,$A6,$FF,$A5,$FF,$A4,$FF,$A3,$FF,$A2,$FF,$A1,$FF,$A0,$FF,$9F,$FF,$9E,$FF,$9D,$FF,$9C,$FF,$9B,$FF,$9A,$FF,$99,$FF,$98,$FF,$97
-                dc.b $FF,$96,$FF,$96,$FF,$95,$FF,$94,$FF,$93,$FF,$92,$FF,$91,$FF,$91,$FF,$90,$FF,$8F,$FF,$8F,$FF,$8E,$FF,$8D,$FF,$8D,$FF,$8C,$FF,$8B
-                dc.b $FF,$8B,$FF,$8A,$FF,$8A,$FF,$89,$FF,$88,$FF,$88,$FF,$87,$FF,$87,$FF,$86,$FF,$86,$FF,$86,$FF,$85,$FF,$85,$FF,$84,$FF,$84,$FF,$84
-                dc.b $FF,$83,$FF,$83,$FF,$83,$FF,$83,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81
-                dc.b $FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$81,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$82,$FF,$83,$FF,$83,$FF,$83
-                dc.b $FF,$83,$FF,$84,$FF,$84,$FF,$84,$FF,$85,$FF,$85,$FF,$86,$FF,$86,$FF,$86,$FF,$87,$FF,$87,$FF,$88,$FF,$88,$FF,$89,$FF,$8A,$FF,$8A
-                dc.b $FF,$8B,$FF,$8B,$FF,$8C,$FF,$8D,$FF,$8D,$FF,$8E,$FF,$8F,$FF,$8F,$FF,$90,$FF,$91,$FF,$91,$FF,$92,$FF,$93,$FF,$94,$FF,$95,$FF,$96
-                dc.b $FF,$96,$FF,$97,$FF,$98,$FF,$99,$FF,$9A,$FF,$9B,$FF,$9C,$FF,$9D,$FF,$9E,$FF,$9F,$FF,$A0,$FF,$A1,$FF,$A2,$FF,$A3,$FF,$A4,$FF,$A5
-                dc.b $FF,$A6,$FF,$A7,$FF,$A8,$FF,$AA,$FF,$AB,$FF,$AC,$FF,$AD,$FF,$AE,$FF,$AF,$FF,$B1,$FF,$B2,$FF,$B3,$FF,$B4,$FF,$B6,$FF,$B7,$FF,$B8
-                dc.b $FF,$B9,$FF,$BB,$FF,$BC,$FF,$BD,$FF,$BF,$FF,$C0,$FF,$C1,$FF,$C3,$FF,$C4,$FF,$C6,$FF,$C7,$FF,$C8,$FF,$CA,$FF,$CB,$FF,$CD,$FF,$CE
-                dc.b $FF,$CF,$FF,$D1,$FF,$D2,$FF,$D4,$FF,$D5,$FF,$D7,$FF,$D8,$FF,$DA,$FF,$DB,$FF,$DD,$FF,$DE,$FF,$E0,$FF,$E1,$FF,$E3,$FF,$E4,$FF,$E6
-                dc.b $FF,$E7,$FF,$E9,$FF,$EA,$FF,$EC,$FF,$ED,$FF,$EF,$FF,$F0,$FF,$F2,$FF,$F4,$FF,$F5,$FF,$F7,$FF,$F8,$FF,$FA,$FF,$FB,$FF,$FD,$FF,$FE
-byte_25D9CC:    dc.b   0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1
-                                        ; DATA XREF: project_tunnel_obj+3C   o
-                dc.b   0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1
-                dc.b   0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1
-                dc.b   0,  1,  0,  1,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2
-                dc.b   0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2,  0,  2
-                dc.b   0,  2,  0,  2,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3
-                dc.b   0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  3,  0,  4,  0,  4,  0,  4,  0,  4
-                dc.b   0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4,  0,  4
-                dc.b   0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5,  0,  5
-                dc.b   0,  5,  0,  5,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6,  0,  6
-                dc.b   0,  6,  0,  6,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7,  0,  7
-                dc.b   0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  8,  0,  9,  0,  9,  0,  9,  0,  9
-                dc.b   0,  9,  0,  9,  0,  9,  0,  9,  0,  9,  0,  9,  0,  9,  0,  9,  0, $A,  0, $A,  0, $A,  0, $A,  0, $A,  0, $A,  0, $A,  0, $A
-                dc.b   0, $A,  0, $A,  0, $A,  0, $A,  0, $B,  0, $B,  0, $B,  0, $B,  0, $B,  0, $B,  0, $B,  0, $B,  0, $B,  0, $B,  0, $C,  0, $C
-                dc.b   0, $C,  0, $C,  0, $C,  0, $C,  0, $C,  0, $C,  0, $C,  0, $C,  0, $D,  0, $D,  0, $D,  0, $D,  0, $D,  0, $D,  0, $D,  0, $D
-                dc.b   0, $E,  0, $E,  0, $E,  0, $E,  0, $E,  0, $E,  0, $E,  0, $E,  0, $F,  0, $F,  0, $F,  0, $F,  0, $F,  0, $F,  0, $F,  0, $F
-                dc.b   0,$10,  0,$10,  0,$10,  0,$10,  0,$10,  0,$10,  0,$10,  0,$10,  0,$11,  0,$11,  0,$11,  0,$11,  0,$11,  0,$11,  0,$11,  0,$11
-                dc.b   0,$12,  0,$12,  0,$12,  0,$12,  0,$12,  0,$12,  0,$12,  0,$12,  0,$13,  0,$13,  0,$13,  0,$13,  0,$13,  0,$13,  0,$14,  0,$14
-                dc.b   0,$14,  0,$14,  0,$14,  0,$14,  0,$14,  0,$14,  0,$15,  0,$15,  0,$15,  0,$15,  0,$15,  0,$15,  0,$16,  0,$16,  0,$16,  0,$16
-                dc.b   0,$16,  0,$16,  0,$17,  0,$17,  0,$17,  0,$17,  0,$17,  0,$17,  0,$18,  0,$18,  0,$18,  0,$18,  0,$18,  0,$18,  0,$19,  0,$19
-                dc.b   0,$19,  0,$19,  0,$19,  0,$19,  0,$1A,  0,$1A,  0,$1A,  0,$1A,  0,$1B,  0,$1B,  0,$1B,  0,$1B,  0,$1B,  0,$1B,  0,$1C,  0,$1C
-                dc.b   0,$1C,  0,$1C,  0,$1C,  0,$1C,  0,$1D,  0,$1D,  0,$1D,  0,$1D,  0,$1E,  0,$1E,  0,$1E,  0,$1E,  0,$1E,  0,$1E,  0,$1F,  0,$1F
-                dc.b   0,$1F,  0,$1F,  0,$20,  0,$20,  0,$20,  0,$20,  0,$21,  0,$21,  0,$21,  0,$21,  0,$21,  0,$21,  0,$22,  0,$22,  0,$22,  0,$22
-                dc.b   0,$23,  0,$23,  0,$23,  0,$23,  0,$24,  0,$24,  0,$24,  0,$24,  0,$25,  0,$25,  0,$25,  0,$25,  0,$26,  0,$26,  0,$26,  0,$26
-                dc.b   0,$27,  0,$27,  0,$27,  0,$27,  0,$28,  0,$28,  0,$28,  0,$28,  0,$29,  0,$29,  0,$29,  0,$29,  0,$2A,  0,$2A,  0,$2A,  0,$2A
-                dc.b   0,$2B,  0,$2B,  0,$2B,  0,$2B,  0,$2C,  0,$2C,  0,$2C,  0,$2C,  0,$2D,  0,$2D,  0,$2D,  0,$2D,  0,$2E,  0,$2E,  0,$2E,  0,$2E
-                dc.b   0,$2F,  0,$2F,  0,$30,  0,$30,  0,$30,  0,$30,  0,$31,  0,$31,  0,$31,  0,$31,  0,$32,  0,$32,  0,$32,  0,$32,  0,$33,  0,$33
-                dc.b   0,$34,  0,$34,  0,$34,  0,$34,  0,$35,  0,$35,  0,$36,  0,$36,  0,$36,  0,$36,  0,$37,  0,$37,  0,$37,  0,$37,  0,$38,  0,$38
-                dc.b   0,$39,  0,$39,  0,$39,  0,$39,  0,$3A,  0,$3A,  0,$3B,  0,$3B,  0,$3B,  0,$3B,  0,$3C,  0,$3C,  0,$3D,  0,$3D,  0,$3D,  0,$3D
-                dc.b   0,$3E,  0,$3E,  0,$3F,  0,$3F,  0,$3F,  0,$3F,  0,$40,  0,$40,  0,$41,  0,$41,  0,$42,  0,$42,  0,$42,  0,$42,  0,$43,  0,$43
-                dc.b   0,$44,  0,$44,  0,$45,  0,$45,  0,$45,  0,$45,  0,$46,  0,$46,  0,$47,  0,$47,  0,$48,  0,$48,  0,$48,  0,$48,  0,$49,  0,$49
-                dc.b   0,$4A,  0,$4A,  0,$4B,  0,$4B,  0,$4C,  0,$4C,  0,$4C,  0,$4C,  0,$4D,  0,$4D,  0,$4E,  0,$4E,  0,$4F,  0,$4F,  0,$50,  0,$50
-                dc.b   0,$51,  0,$51,  0,$51,  0,$51,  0,$52,  0,$52,  0,$53,  0,$53,  0,$54,  0,$54,  0,$55,  0,$55,  0,$56,  0,$56,  0,$57,  0,$57
-                dc.b   0,$57,  0,$57,  0,$58,  0,$58,  0,$59,  0,$59,  0,$5A,  0,$5A,  0,$5B,  0,$5B,  0,$5C,  0,$5C,  0,$5D,  0,$5D,  0,$5E,  0,$5E
-                dc.b   0,$5F,  0,$5F,  0,$60,  0,$60,  0,$61,  0,$61,  0,$62,  0,$62,  0,$63,  0,$63,  0,$64,  0,$64,  0,$65,  0,$65,  0,$66,  0,$66
-                dc.b   0,$67,  0,$67,  0,$68,  0,$68,  0,$69,  0,$69,  0,$6A,  0,$6A,  0,$6B,  0,$6B,  0,$6C,  0,$6C,  0,$6D,  0,$6D,  0,$6E,  0,$6E
-                dc.b   0,$6F,  0,$6F,  0,$70,  0,$70,  0,$71,  0,$71,  0,$72,  0,$72,  0,$73,  0,$73,  0,$75,  0,$75,  0,$76,  0,$76,  0,$77,  0,$77
-                dc.b   0,$78,  0,$78,  0,$79,  0,$79,  0,$7A,  0,$7A,  0,$7B,  0,$7B,  0,$7D,  0,$7D,  0,$7E,  0,$7E,  0,$7F,  0,$7F,  0,$80,  0,$80
-                dc.b   0,$81,  0,$81,  0,$82,  0,$82,  0,$84,  0,$84,  0,$85,  0,$85,  0,$86,  0,$86,  0,$87,  0,$87,  0,$89,  0,$89,  0,$8A,  0,$8A
-                dc.b   0,$8B,  0,$8B,  0,$8C,  0,$8C,  0,$8E,  0,$8E,  0,$8F,  0,$8F,  0,$90,  0,$90,  0,$92,  0,$92,  0,$93,  0,$93,  0,$94,  0,$94
-                dc.b   0,$96,  0,$96,  0,$97,  0,$97,  0,$98,  0,$98,  0,$9A,  0,$9A,  0,$9B,  0,$9B,  0,$9C,  0,$9C,  0,$9E,  0,$9E,  0,$9F,  0,$9F
-                dc.b   0,$A1,  0,$A1,  0,$A2,  0,$A2,  0,$A3,  0,$A3,  0,$A5,  0,$A5,  0,$A6,  0,$A6,  0,$A8,  0,$A8,  0,$A9,  0,$A9,  0,$AB,  0,$AB
-                dc.b   0,$AC,  0,$AC,  0,$AE,  0,$AE,  0,$AF,  0,$AF,  0,$B1,  0,$B1,  0,$B2,  0,$B2,  0,$B4,  0,$B4,  0,$B5,  0,$B5,  0,$B7,  0,$B7
-                dc.b   0,$B8,  0,$B8,  0,$BA,  0,$BA,  0,$BC,  0,$BC,  0,$BD,  0,$BD,  0,$BF,  0,$BF,  0,$C0,  0,$C0,  0,$C2,  0,$C2,  0,$C4,  0,$C4
-                dc.b   0,$C5,  0,$C5,  0,$C7,  0,$C7,  0,$C9,  0,$C9,  0,$CA,  0,$CA,  0,$CC,  0,$CC,  0,$CE,  0,$CE,  0,$CF,  0,$CF,  0,$D1,  0,$D1
-                dc.b   0,$D3,  0,$D3,  0,$D5,  0,$D5,  0,$D6,  0,$D6,  0,$D8,  0,$D8,  0,$DA,  0,$DA,  0,$DC,  0,$DC,  0,$DD,  0,$DD,  0,$DF,  0,$DF
-                dc.b   0,$E1,  0,$E1,  0,$E3,  0,$E3,  0,$E5,  0,$E5,  0,$E6,  0,$E6,  0,$E8,  0,$E8,  0,$EA,  0,$EA,  0,$EC,  0,$EC,  0,$EE,  0,$EE
-                dc.b   0,$F0,  0,$F0,  0,$F2,  0,$F2,  0,$F4,  0,$F4,  0,$F6,  0,$F6,  0,$F8,  0,$F8,  0,$FA,  0,$FA,  0,$FC,  0,$FC,  0,$FE,  0,$FE
-                dc.b   1,  0,  1,  0,  1,  2,  1,  2,  1,  4,  1,  4,  1,  6,  1,  6,  1,  8,  1,  8,  1, $A,  1, $A,  1, $C,  1, $C,  1, $E,  1, $E
-                dc.b   1,$10,  1,$10,  1,$12,  1,$12,  1,$14,  1,$14,  1,$16,  1,$16,  1,$18,  1,$18,  1,$1B,  1,$1B,  1,$1D,  1,$1D,  1,$1F,  1,$1F
-                dc.b   1,$21,  1,$21,  1,$23,  1,$23,  1,$25,  1,$25,  1,$28,  1,$28,  1,$2A,  1,$2A,  1,$2C,  1,$2C,  1,$2E,  1,$2E,  1,$31,  1,$31
-                dc.b   1,$33,  1,$33,  1,$35,  1,$35,  1,$38,  1,$38,  1,$3A,  1,$3A,  1,$3C,  1,$3C,  1,$3F,  1,$3F,  1,$41,  1,$41,  1,$43,  1,$43
-                dc.b   1,$46,  1,$46,  1,$48,  1,$48,  1,$4B,  1,$4B,  1,$4D,  1,$4D,  1,$4F,  1,$4F,  1,$52,  1,$52,  1,$54,  1,$54,  1,$57,  1,$57
-                dc.b   1,$59,  1,$59,  1,$5C,  1,$5C,  1,$5E,  1,$5E,  1,$61,  1,$61,  1,$64,  1,$64,  1,$66,  1,$66,  1,$69,  1,$69,  1,$6B,  1,$6B
-                dc.b   1,$6E,  1,$6E,  1,$70,  1,$70,  1,$73,  1,$73,  1,$76,  1,$76,  1,$78,  1,$78,  1,$7B,  1,$7B,  1,$7E,  1,$7E,  1,$81,  1,$81
-                dc.b   1,$83,  1,$83,  1,$86,  1,$86,  1,$89,  1,$89,  1,$8C,  1,$8C,  1,$8E,  1,$8E,  1,$91,  1,$91,  1,$94,  1,$94,  1,$97,  1,$97
-                dc.b   1,$9A,  1,$9A,  1,$9C,  1,$9C,  1,$9F,  1,$9F,  1,$A2,  1,$A2,  1,$A5,  1,$A5,  1,$A8,  1,$A8,  1,$AB,  1,$AB,  1,$AE,  1,$AE
-                dc.b   1,$B1,  1,$B1,  1,$B4,  1,$B4,  1,$B7,  1,$B7,  1,$BA,  1,$BA,  1,$BD,  1,$BD,  1,$C0,  1,$C0,  1,$C3,  1,$C3,  1,$C6,  1,$C6
-                dc.b   1,$C9,  1,$C9,  1,$CC,  1,$CC,  1,$CF,  1,$CF,  1,$D2,  1,$D2,  1,$D6,  1,$D6,  1,$D9,  1,$D9,  1,$DC,  1,$DC,  1,$DF,  1,$DF
-                dc.b   1,$E2,  1,$E2,  1,$E6,  1,$E6,  1,$E9,  1,$E9,  1,$EC,  1,$EC,  1,$EF,  1,$EF,  1,$F3,  1,$F3,  1,$F6,  1,$F6,  1,$F9,  1,$F9
-                dc.b   1,$FD,  1,$FD,  2,  0,  2,  0,  2,  3,  2,  3,  2,  7,  2,  7,  2, $A,  2, $A,  2, $E,  2, $E,  2,$11,  2,$11,  2,$14,  2,$14
-                dc.b   2,$18,  2,$18,  2,$1B,  2,$1B,  2,$1F,  2,$1F,  2,$22,  2,$22,  2,$26,  2,$26,  2,$2A,  2,$2A,  2,$2D,  2,$2D,  2,$31,  2,$31
-                dc.b   2,$34,  2,$34,  2,$38,  2,$38,  2,$3C,  2,$3C,  2,$3F,  2,$3F,  2,$43,  2,$43,  2,$47,  2,$47,  2,$4A,  2,$4A,  2,$4E,  2,$4E
-                dc.b   2,$52,  2,$52,  2,$56,  2,$56,  2,$59,  2,$59,  2,$5D,  2,$5D,  2,$61,  2,$61,  2,$65,  2,$65,  2,$69,  2,$69,  2,$6D,  2,$6D
-                dc.b   2,$71,  2,$71,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58,  2,$58
-byte_25E1E0:    dc.b $64,$66,$68,$6A,$6B,$6D,$6F,$71,$73,$75,$76,$78,$7A,$7C,$7E,$80,$81,$83,$85,$87,$89,$8B,$8C,$8E,$90,$92,$94,$96,$97,$99,$9B,$9D
-                                        ; DATA XREF: collision_with_diamond+11C   o
-                                        ; sub_2570E2+E   o
-                dc.b $69,$6B,$6C,$6E,$6F,$71,$72,$74,$75,$77,$78,$7A,$7B,$7D,$7E,$80,$81,$83,$84,$86,$87,$89,$8A,$8C,$8D,$8F,$90,$92,$93,$95,$96,$98
-                dc.b $6F,$70,$71,$72,$74,$75,$76,$77,$78,$79,$7A,$7B,$7D,$7E,$7F,$80,$81,$82,$83,$84,$86,$87,$88,$89,$8A,$8B,$8C,$8D,$8F,$90,$91,$92
-                dc.b $76,$77,$77,$78,$79,$79,$7A,$7B,$7B,$7C,$7D,$7D,$7E,$7F,$7F,$80,$81,$82,$82,$83,$84,$84,$85,$86,$86,$87,$88,$88,$89,$8A,$8A,$8B
-                dc.b $80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80
-                dc.b $87,$87,$86,$86,$85,$85,$84,$84,$84,$83,$83,$82,$82,$82,$81,$81,$80,$80,$7F,$7F,$7F,$7E,$7E,$7D,$7D,$7D,$7C,$7C,$7B,$7B,$7A,$7A
-                dc.b $92,$91,$90,$8F,$8D,$8C,$8B,$8A,$89,$88,$86,$85,$84,$83,$82,$81,$7F,$7E,$7D,$7C,$7B,$7A,$78,$77,$76,$75,$74,$73,$71,$70,$6F,$6E
-                dc.b $98,$96,$95,$93,$92,$90,$8F,$8D,$8C,$8A,$89,$87,$86,$84,$83,$81,$80,$7E,$7D,$7B,$7A,$78,$77,$75,$74,$72,$71,$6F,$6E,$6C,$6B,$69
-                dc.b $9D,$9B,$99,$97,$96,$94,$92,$90,$8E,$8C,$8A,$88,$87,$85,$83,$81,$7F,$7D,$7B,$79,$78,$76,$74,$72,$70,$6E,$6C,$6A,$69,$67,$65,$63
+                                        ; DATA XREF: lvl5_lab_level_events+1C   o
+    include "jiminc/demo_table.inc"
+    include "jiminc/sin_tbl.inc"
+    include "jiminc/tunnel_scale_tbl.inc"
+    include "jiminc/balance_platform_height_tbl.inc"
 screen_shake_table:    dc.b   0,  3,  2,  2,  1,  1,  0,  0,$FF,$FE,$FE,$FF,$FF,  0,$FF,  0,  0,  2,  1,  1,  0,  1,  0,  0,$FF,$FE,$FF,$FF,  0,$FF,  0,  0
                                         ; DATA XREF: sub_24C3AC+20   o
-                                        ; sub_251616+70   o ...
+                                        ; wth_evl_level_scroll+70   o ...
                 dc.b   2,  4,  5,  6,  4,  3,  2,  1,$FE,$FC,$FA,$FB,$FC,$FD,$FF,  0,  4,  8, $F,  5,$FD,$F7,$F1,$F6,$FA,  1,  9, $D,  4,$FB,$F7,$FA
 z80_driver:
     binclude "binaries/z80_driver.bin"
-PATCH_TBL_Z80:                          ; DATA XREF: sub_247576+12   o
-                                        ; load_z80_driver+1A   o
-                                        ; patch bank: смещения (LE) патчей, номер = аргумент команды $61 в секвенциях
-                gems_patch_ofs PATCH_00
-                gems_patch_ofs PATCH_01
-                gems_patch_ofs PATCH_02
-                gems_patch_ofs PATCH_03
-                gems_patch_ofs PATCH_04
-                gems_patch_ofs PATCH_05
-                gems_patch_ofs PATCH_06
-                gems_patch_ofs PATCH_07
-                gems_patch_ofs PATCH_08
-                gems_patch_ofs PATCH_09
-                gems_patch_ofs PATCH_0A
-                gems_patch_ofs PATCH_0B
-                gems_patch_ofs PATCH_0C
-                gems_patch_ofs PATCH_0D
-                gems_patch_ofs PATCH_0E
-                gems_patch_ofs PATCH_0F
-                gems_patch_ofs PATCH_10
-                gems_patch_ofs PATCH_11
-                gems_patch_ofs PATCH_12
-                gems_patch_ofs PATCH_13
-                gems_patch_ofs PATCH_14
-                gems_patch_ofs PATCH_15
-                gems_patch_ofs PATCH_16
-                gems_patch_ofs PATCH_17
-                gems_patch_ofs PATCH_18
-                gems_patch_ofs PATCH_19
-                gems_patch_ofs PATCH_1A
-                gems_patch_ofs PATCH_1B
-                gems_patch_ofs PATCH_1C
-                gems_patch_ofs PATCH_1D
-                gems_patch_ofs PATCH_1E
-                gems_patch_ofs PATCH_1F
-                gems_patch_ofs PATCH_20
-                gems_patch_ofs PATCH_21
-                gems_patch_ofs PATCH_22
-                gems_patch_ofs PATCH_23
-                gems_patch_ofs PATCH_24
-                gems_patch_ofs PATCH_25
-                gems_patch_ofs PATCH_26
-                gems_patch_ofs PATCH_27
-                gems_patch_ofs PATCH_28
-                gems_patch_ofs PATCH_29
-                gems_patch_ofs PATCH_2A
-                gems_patch_ofs PATCH_2B
-                gems_patch_ofs PATCH_2C
-                gems_patch_ofs PATCH_2D
-                gems_patch_ofs PATCH_2E
-                gems_patch_ofs PATCH_2F
-                gems_patch_ofs PATCH_30
-                gems_patch_ofs PATCH_31
-                gems_patch_ofs PATCH_32
-                gems_patch_ofs PATCH_33
-                gems_patch_ofs PATCH_34
-                gems_patch_ofs PATCH_35
-                gems_patch_ofs PATCH_36
-                gems_patch_ofs PATCH_37
-                gems_patch_ofs PATCH_38
-                gems_patch_ofs PATCH_39
-                gems_patch_ofs PATCH_3A
-                gems_patch_ofs PATCH_3B
-                gems_patch_ofs PATCH_3C
-                gems_patch_ofs PATCH_3D
-                gems_patch_ofs PATCH_3E
-                gems_patch_ofs PATCH_3F
-                gems_patch_ofs PATCH_40
-                gems_patch_ofs PATCH_41
-                gems_patch_ofs PATCH_42
-                gems_patch_ofs PATCH_43
-                gems_patch_ofs PATCH_44
-                gems_patch_ofs PATCH_45
-                gems_patch_ofs PATCH_46
-                gems_patch_ofs PATCH_47
-                gems_patch_ofs PATCH_48
-                gems_patch_ofs PATCH_49
-                gems_patch_ofs PATCH_4A
-                gems_patch_ofs PATCH_4B
-                gems_patch_ofs PATCH_4C
-                gems_patch_ofs PATCH_4D
-                gems_patch_ofs PATCH_4E
-                gems_patch_ofs PATCH_4F
-                gems_patch_ofs PATCH_50
-                gems_patch_ofs PATCH_51
-                gems_patch_ofs PATCH_52
-                gems_patch_ofs PATCH_53
-                gems_patch_ofs PATCH_54
-                gems_patch_ofs PATCH_55
-                gems_patch_ofs PATCH_56
-                gems_patch_ofs PATCH_57
-                gems_patch_ofs PATCH_58
-                gems_patch_ofs PATCH_59
-                gems_patch_ofs PATCH_5A
-                gems_patch_ofs PATCH_5B
-                gems_patch_ofs PATCH_5C
-                gems_patch_ofs PATCH_5D
-                gems_patch_ofs PATCH_5E
-                gems_patch_ofs PATCH_5F
-                gems_patch_ofs PATCH_60
-                gems_patch_ofs PATCH_61
-                gems_patch_ofs PATCH_62
-                gems_patch_ofs PATCH_63
-                gems_patch_ofs PATCH_64
-                gems_patch_ofs PATCH_65
-                gems_patch_ofs PATCH_66
-                gems_patch_ofs PATCH_67
-                gems_patch_ofs PATCH_68
-                gems_patch_ofs PATCH_69
-                gems_patch_ofs PATCH_6A
-                gems_patch_ofs PATCH_6B
-                gems_patch_ofs PATCH_6C
-                gems_patch_ofs PATCH_6D
-                gems_patch_ofs PATCH_6E
-                gems_patch_ofs PATCH_6F
-                gems_patch_ofs PATCH_70
-                gems_patch_ofs PATCH_71
-                gems_patch_ofs PATCH_72
-                gems_patch_ofs PATCH_73
-                gems_patch_ofs PATCH_74
-                gems_patch_ofs PATCH_75
-                gems_patch_ofs PATCH_76
-                gems_patch_ofs PATCH_77
-                gems_patch_ofs PATCH_78
-                gems_patch_ofs PATCH_79
-                gems_patch_ofs PATCH_7A
-                gems_patch_ofs PATCH_7B
-                gems_patch_ofs PATCH_7C
-PATCH_00:       gems_digital 4
-PATCH_01:       gems_fm $0B, $00, 3, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,   9,   2,  31,   0,  24,  17,   5,  11   ; +$0
-                gems_op   0,   1,  18,   1,  31,   0,  17,   5,  11,  11   ; +$4
-                gems_op   3,   0,  27,   1,  31,   0,  19,   6,  10,  11   ; +$8
-                gems_op   0,   0,  10,   1,  31,   0,   1,   6,   2,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_02:       gems_fm $09, $00, 0, 4, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  13,   1,  28,   1,  13,   9,  14,   9   ; +$0
-                gems_op   0,   4,   3,   2,  29,   1,  19,   2,  12,   8   ; +$4
-                gems_op   7,   3,   7,   0,  30,   1,   5,   0,   4,  15   ; +$8
-                gems_op   6,   4,  17,   0,  28,   0,   7,   0,   0,  15   ; +$C
-                gems_ch3 $313B, $2B78, $084E, $3300
-                gems_keyon $F, 0
-PATCH_03:       gems_fm $00, $00, 2, 3, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   0,  20,   3,  31,   0,  10,  15,  12,   0   ; +$0
-                gems_op   1,   0,  21,   0,  25,   1,   0,  31,   1,   2   ; +$4
-                gems_op   0,   3,   7,   0,  29,   1,   0,  24,   0,   0   ; +$8
-                gems_op   0,   0,   9,   0,  28,   0,   0,   0,   0,  13   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_04:       gems_fm $00, $00, 7, 3, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   4,   0,   0,  24,   1,  14,  31,   0,  15   ; +$0
-                gems_op   0,   0,   0,   0,  31,   0,  25,  11,   5,  15   ; +$4
-                gems_op   3,   3,  49,   0,  23,   0,   0,  24,   0,  12   ; +$8
-                gems_op   0,   0,   4,   0,  23,   0,  25,   8,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $E, 0
-PATCH_05:       gems_fm $09, $00, 0, 0, 3, 3, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   2,   8,   1,  19,   0,   7,  31,   4,   0   ; +$0
-                gems_op   3,   5,  23,   0,  29,   0,  18,  31,  15,  15   ; +$4
-                gems_op   7,   0,  17,   1,  27,   0,  13,  31,   0,   3   ; +$8
-                gems_op   7,   1,   5,   0,  31,   1,   0,  18,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_06:       gems_fm $0F, $00, 0, 4, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,   1,   2,  20,   0,   3,  15,   0,   8   ; +$0
-                gems_op   0,   2,   0,   1,  22,   1,   6,  11,   0,   8   ; +$4
-                gems_op   0,   0,   0,   0,  30,   0,   6,   5,   0,   8   ; +$8
-                gems_op   0,   0,   0,   0,  31,   0,  12,  18,   0,  12   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_07:       gems_fm $0B, $00, 5, 2, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  15,   0,  31,   0,  15,  14,   8,  12   ; +$0
-                gems_op   5,   0,  25,   1,  27,   0,  15,  19,  15,   8   ; +$4
-                gems_op   0,   0,  14,   1,  27,   0,   4,  10,  15,   8   ; +$8
-                gems_op   6,   1,   0,   1,  31,   0,   9,   0,   3,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_08:       gems_fm $00, $00, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   3,  12,   3,  31,   0,   6,  17,  11,  10   ; +$0
-                gems_op   0,   0,   8,   3,  31,   0,   8,  20,   0,  10   ; +$4
-                gems_op   0,   0,   7,   2,  31,   0,  14,  31,  15,  10   ; +$8
-                gems_op   0,   0,   0,   0,  31,   0,  16,  16,   6,   9   ; +$C
-                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
-                gems_keyon $F, 0
-PATCH_09:       gems_fm $08, $40, 6, 2, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  42,   1,  16,   1,   5,   2,   1,   1   ; +$0
-                gems_op   0,   2,  38,   1,  31,   1,   5,   2,   1,   1   ; +$4
-                gems_op   7,   2,  27,   2,  25,   1,   5,   2,   1,   1   ; +$8
-                gems_op   3,   1,   7,   2,  21,   0,  15,   2,  15,   9   ; +$C
-                gems_ch3 $38AB, $3464, $3D11, $3336
-                gems_keyon $F, 0
-PATCH_0A:       gems_fm $0A, $00, 7, 5, 3, 3, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,   6,   0,  31,   0,  11,   9,  15,  12   ; +$0
-                gems_op   0,   1,  10,   0,  31,   0,  17,  25,   9,  12   ; +$4
-                gems_op   0,   1,   0,   3,  31,   0,  19,  25,  15,  12   ; +$8
-                gems_op   0,   1,  14,   0,  29,   0,  17,  31,   7,  15   ; +$C
-                gems_ch3 $1FE0, $1FEF, $2002, $1FFF
-                gems_keyon $F, 0
-PATCH_0B:       gems_fm $09, $00, 6, 1, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   0,  16,   3,  25,   0,  19,   1,   0,   8   ; +$0
-                gems_op   1,   1,  30,   0,  25,   0,  28,   1,   0,   4   ; +$4
-                gems_op   3,   1,  25,   0,  24,   0,  31,   1,   0,   8   ; +$8
-                gems_op   1,   1,   7,   0,  27,   0,   0,   2,   0,   6   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_0C:       gems_fm $03, $00, 6, 3, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,  13,  26,   2,  31,   0,  14,   0,  13,  15   ; +$0
-                gems_op   0,   0,  26,   0,  31,   0,   9,   0,  13,  10   ; +$4
-                gems_op   0,   1,  25,   0,  31,   0,  13,   0,  13,  15   ; +$8
-                gems_op   0,   0,   0,   0,  31,   1,   9,   0,  13,  11   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_0D:       gems_fm $0A, $00, 6, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   1,  23,   2,  14,   0,   0,   1,   4,   7   ; +$0
-                gems_op   2,   0,  19,   2,  21,   0,   0,   2,   1,   7   ; +$4
-                gems_op   3,   1,  11,   2,  27,   0,   5,   2,   3,   6   ; +$8
-                gems_op   1,   4,  13,   2,  20,   1,   0,   2,   0,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_0E:       gems_psg_noise $7, $1F, $36, $F6, $1F, $6
-PATCH_0F:       gems_fm $0B, $00, 3, 3, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   3,   2,   0,   3,   1,   4,   9,   2,   8   ; +$0
-                gems_op   3,   0,  12,   0,  27,   0,  10,   5,   9,   4   ; +$4
-                gems_op   7,   2,  25,   0,  19,   1,  11,   6,   2,   8   ; +$8
-                gems_op   0,   0,  16,   0,  15,   0,   1,  31,  10,   6   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_10:       gems_fm $00, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  29,   3,  24,   0,  11,  11,   5,   0   ; +$0
-                gems_op   1,   2,  40,   3,  19,   0,   0,  20,  11,   0   ; +$4
-                gems_op   3,   7,  21,   3,  22,   0,   5,   0,   2,   0   ; +$8
-                gems_op   0,   2,   7,   2,  22,   1,   7,   6,   2,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_11:       gems_fm $0C, $00, 4, 7, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  14,   0,  20,   1,   4,   0,  10,   7   ; +$0
-                gems_op   0,   1,  24,   1,  20,   1,   4,   4,  13,   7   ; +$4
-                gems_op   0,   3,  15,   1,  26,   0,   9,   2,   9,   7   ; +$8
-                gems_op   0,   1,  25,   1,  31,   0,   9,   6,   9,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 1
-PATCH_12:       gems_fm $03, $00, 5, 2, 2, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  27,   1,  31,   0,   1,   2,   8,   1   ; +$0
-                gems_op   0,   4,  35,   1,  31,   0,   5,   2,   5,   1   ; +$4
-                gems_op   7,  11,  31,   2,  31,   0,  11,   2,   3,   1   ; +$8
-                gems_op   3,   0,  18,   2,  20,   0,   1,   2,   6,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_13:       gems_fm $0F, $00, 0, 0, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   0,   0,   1,   0,   1,  29,  31,   9,   0   ; +$0
-                gems_op   6,   3,  31,   1,  29,   0,  15,  31,  15,   3   ; +$4
-                gems_op   7,   0,   0,   1,  31,   1,   0,  24,   0,   3   ; +$8
-                gems_op   7,   0,  10,   0,  31,   0,   0,  12,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $C, 0
-PATCH_14:       gems_fm $0B, $00, 7, 0, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  39,   0,  24,   1,  23,   0,   0,   6   ; +$0
-                gems_op   0,   1,  36,   0,  22,   0,  31,   0,   0,   7   ; +$4
-                gems_op   0,   1,  35,   0,  16,   1,  31,   0,   0,   1   ; +$8
-                gems_op   0,   4,  11,   0,  24,   0,  31,   0,   0,   9   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_15:       gems_fm $0A, $00, 3, 5, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   0,  20,   0,  21,   0,   1,   0,   0,  15   ; +$0
-                gems_op   6,   1,  16,   0,  14,   0,   9,   0,   0,  15   ; +$4
-                gems_op   3,   1,  18,   0,  15,   1,   5,   2,   0,  15   ; +$8
-                gems_op   0,   4,  25,   0,  15,   1,  21,   3,   0,  15   ; +$C
-                gems_ch3 $2005, $0C03, $1FCB, $1FDA
-                gems_keyon $F, 0
-PATCH_16:       gems_fm $0B, $00, 5, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   0,   3,   2,  31,   0,  25,   8,  12,  11   ; +$0
-                gems_op   0,   0,  12,   1,  31,   0,  19,   5,  11,  11   ; +$4
-                gems_op   3,   1,  10,   1,  31,   0,  25,   6,  10,  11   ; +$8
-                gems_op   0,   2,   5,   1,  31,   0,  14,  17,   2,  11   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_17:       gems_fm $00, $00, 4, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   8,   1,   1,  31,   0,  15,  28,  11,   4   ; +$0
-                gems_op   1,  12,   0,   3,  28,   1,  14,   0,  15,   4   ; +$4
-                gems_op   7,   7,   0,   3,  31,   1,  13,  16,  11,   9   ; +$8
-                gems_op   7,   0,   0,   3,  31,   0,  14,  16,  13,   9   ; +$C
-                gems_ch3 $2075, $205F, $205E, $2000
-                gems_keyon $F, 0
-PATCH_18:       gems_fm $0C, $00, 5, 2, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,  24,   2,  12,   0,   5,   0,   0,  11   ; +$0
-                gems_op   1,   0,  34,   3,  12,   0,   9,  18,   5,  11   ; +$4
-                gems_op   3,   0,  33,   3,  12,   0,  10,   0,  15,  11   ; +$8
-                gems_op   0,   0,  10,   2,  31,   0,   7,  12,   5,  11   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_19:       gems_fm $00, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   3,   3,   3,  31,   0,   3,  17,  15,   5   ; +$0
-                gems_op   0,   3,   4,   3,  31,   0,  20,  20,  13,   8   ; +$4
-                gems_op   0,   0,   6,   2,  31,   0,  12,  31,  15,   8   ; +$8
-                gems_op   0,   0,   5,   2,  31,   0,   5,  16,   6,   8   ; +$C
-                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
-                gems_keyon $F, 0
-PATCH_1A:       gems_fm $03, $40, 7, 0, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   6,  39,   1,  31,   0,   7,   0,   9,   5   ; +$0
-                gems_op   0,   3,   0,   3,  31,   0,  18,   9,   4,   6   ; +$4
-                gems_op   3,   2,   0,   2,  31,   0,  17,   7,   0,   6   ; +$8
-                gems_op   0,  15,   0,   3,  31,   0,  30,  16,   1,   9   ; +$C
-                gems_ch3 $0708, $07C2, $07D0, $0064
-                gems_keyon $F, 0
-PATCH_1B:       gems_fm $0C, $00, 5, 2, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,  21,   2,  14,   0,   5,   0,   0,   9   ; +$0
-                gems_op   1,   2,  38,   3,  13,   0,   9,  18,   5,   0   ; +$4
-                gems_op   3,   3,  37,   3,  13,   0,  10,   0,  15,  15   ; +$8
-                gems_op   0,   0,  17,   2,  13,   0,   7,  12,   5,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_1C:       gems_fm $0A, $00, 7, 2, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  30,   0,  14,   0,   4,   0,   1,   8   ; +$0
-                gems_op   7,   0,  55,   0,   8,   0,   9,   3,   0,   8   ; +$4
-                gems_op   3,   7,  31,   0,  12,   0,  16,   0,   0,   8   ; +$8
-                gems_op   0,   2,  23,   2,  10,   0,  10,   0,   1,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_1D:       gems_fm $00, $00, 7, 4, 1, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   2,  10,   3,  24,   0,  28,  13,   3,  15   ; +$0
-                gems_op   0,   1,  29,   1,  21,   1,  20,  23,  12,  11   ; +$4
-                gems_op   7,   2,   6,   3,  26,   0,  11,  12,   4,  11   ; +$8
-                gems_op   2,   1,   8,   1,  27,   1,   7,  19,  10,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_1E:       gems_fm $0B, $00, 0, 4, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  41,   0,  31,   1,  10,   0,   0,  15   ; +$0
-                gems_op   0,   7,  37,   2,  29,   0,   0,  24,   4,   7   ; +$4
-                gems_op   7,   3,  15,   0,  14,   0,   0,   0,  13,  11   ; +$8
-                gems_op   0,   1,  17,   0,  26,   0,  24,   9,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_1F:       gems_fm $00, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  29,   3,  24,   0,  11,  11,   5,   0   ; +$0
-                gems_op   1,   2,  40,   3,  19,   0,   0,  20,  11,   0   ; +$4
-                gems_op   3,   7,  21,   3,  22,   0,   5,   0,   2,   0   ; +$8
-                gems_op   0,   2,  16,   2,  22,   1,   7,   6,   2,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_20:       gems_fm $0A, $00, 1, 5, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,   0,   0,  31,   1,  17,  31,   8,  15   ; +$0
-                gems_op   0,   1,   0,   1,  31,   0,  21,  22,   2,  11   ; +$4
-                gems_op   0,   0,   0,   0,  31,   0,  13,  31,   5,  15   ; +$8
-                gems_op   7,   0,   0,   2,  31,   0,  15,  31,   4,  15   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_21:       gems_fm $0B, $00, 2, 2, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   6,   4,  24,   0,  22,   1,   5,   0,   0,  12   ; +$0
-                gems_op   0,   2,  21,   0,  20,   1,   8,   3,   5,  11   ; +$4
-                gems_op   0,   0,   0,   0,  18,   1,  11,   7,   2,  11   ; +$8
-                gems_op   0,   0,   0,   3,  31,   1,   9,   9,  15,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_22:       gems_fm $03, $00, 0, 0, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  24,   0,  31,   0,   0,   0,   9,   5   ; +$0
-                gems_op   0,   1,   7,   0,  31,   0,  31,  12,   0,   8   ; +$4
-                gems_op   0,   0,  18,   3,  31,   0,  17,  16,   2,   8   ; +$8
-                gems_op   0,   5,   0,   2,  31,   1,  20,  17,   8,  12   ; +$C
-                gems_ch3 $2019, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_23:       gems_fm $0B, $00, 7, 3, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   3,  23,   0,  30,   0,  24,  12,   6,   8   ; +$0
-                gems_op   0,   0,  17,   0,  20,   0,  28,   5,   2,   4   ; +$4
-                gems_op   7,   2,  25,   0,  19,   0,  31,   6,   3,   8   ; +$8
-                gems_op   0,   0,   8,   0,  15,   0,   1,  31,  10,   6   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $E, 0
-PATCH_24:       gems_fm $03, $00, 7, 1, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  24,   0,  31,   0,  16,   7,  12,   9   ; +$0
-                gems_op   0,   0,  32,   1,  31,   0,   9,   0,  15,   9   ; +$4
-                gems_op   3,   1,  30,   1,  31,   0,  17,   0,  15,   9   ; +$8
-                gems_op   0,   0,   0,   1,  31,   1,   9,   0,  15,   9   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_25:       gems_fm $0B, $00, 1, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,   4,   2,   7,   0,  11,   9,   1,   4   ; +$0
-                gems_op   5,   0,   6,   2,  26,   0,  29,   6,   0,  11   ; +$4
-                gems_op   1,   2,   7,   2,  30,   0,  22,   2,   1,  11   ; +$8
-                gems_op   0,   2,   6,   2,  28,   0,   2,  10,   1,  12   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_26:       gems_psg_noise $4, $FF, $B, $7, $FF, $F
-PATCH_27:       gems_fm $09, $00, 3, 4, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   0,  23,   0,  15,   0,   1,   0,   2,  15   ; +$0
-                gems_op   1,   1,  30,   0,  10,   0,   9,   0,   0,  15   ; +$4
-                gems_op   1,   1,  18,   0,  14,   1,   5,   2,   0,  15   ; +$8
-                gems_op   0,   4,  17,   0,   8,   1,  21,   3,   0,  15   ; +$C
-                gems_ch3 $2005, $0C03, $1FCB, $1FDA
-                gems_keyon $F, 0
-PATCH_28:       gems_fm $0C, $00, 3, 4, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  60,   3,   0,   0,   6,   0,   4,   8   ; +$0
-                gems_op   7,   0,   4,   0,  12,   0,  14,   5,   4,   8   ; +$4
-                gems_op   0,   2,  18,   0,  13,   0,   5,   3,   2,   8   ; +$8
-                gems_op   0,   3,  13,   0,   6,   0,  11,   5,   5,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_29:       gems_fm $03, $00, 5, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   0,   5,   1,  31,   0,  25,   8,  12,  11   ; +$0
-                gems_op   0,   0,  15,   0,  30,   0,  19,   5,  11,  11   ; +$4
-                gems_op   3,   1,  10,   0,  31,   0,  25,   6,  10,  11   ; +$8
-                gems_op   0,   1,   5,   0,  31,   0,  14,  17,   2,  11   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_2A:       gems_fm $03, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,  15,   2,   3,  31,   0,   3,  20,  15,  12   ; +$0
-                gems_op   0,   0,  59,   2,  31,   0,  14,  19,   0,  15   ; +$4
-                gems_op   0,   2,   5,   3,  31,   0,  12,  14,  15,  14   ; +$8
-                gems_op   0,   1,  66,   0,  31,   0,  14,  17,   0,  14   ; +$C
-                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
-                gems_keyon $F, 0
-PATCH_2B:       gems_fm $0B, $40, 0, 2, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,  15,   6,   3,  31,   1,  13,  27,  15,   4   ; +$0
-                gems_op   0,  12,   0,   0,  30,   1,   3,   1,   6,   5   ; +$4
-                gems_op   0,  15,  33,   0,  31,   1,  11,   1,   4,   7   ; +$8
-                gems_op   0,  14,   0,   3,  30,   0,   9,   2,  15,   5   ; +$C
-                gems_ch3 $2511, $2328, $205E, $2328
-                gems_keyon $E, 0
-PATCH_2C:       gems_fm $05, $00, 7, 4, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,   0,   2,  31,   1,  11,  10,   2,   3   ; +$0
-                gems_op   3,   3,   0,   1,  23,   0,   3,  16,   0,   3   ; +$4
-                gems_op   0,   0,   1,   0,  31,   0,   4,  12,   0,   8   ; +$8
-                gems_op   7,   0,   0,   1,  31,   0,   6,   5,   0,   9   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_2D:       gems_fm $08, $00, 0, 2, 3, 0, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,   4,   0,   2,   0,   2,  10,   1,   4   ; +$0
-                gems_op   0,   0,   6,   0,   4,   1,   0,   1,   4,   3   ; +$4
-                gems_op   0,   0,  14,   0,   4,   0,   1,   8,   0,   2   ; +$8
-                gems_op   0,   0,   7,   0,   6,   1,   2,   0,   7,   4   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_2E:       gems_fm $0B, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   5,   1,  24,   3,  18,   0,   5,   0,   2,   0   ; +$0
-                gems_op   1,   3,  59,   3,  21,   0,   6,   0,   5,   0   ; +$4
-                gems_op   0,  10,  22,   3,  20,   0,   8,   0,   2,   0   ; +$8
-                gems_op   0,   1,   1,   2,  20,   0,   8,   6,   2,   4   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_2F:       gems_fm $0B, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   5,   1,  35,   3,  24,   0,   5,   0,   2,  12   ; +$0
-                gems_op   1,   3,  59,   3,  29,   0,   6,   0,   5,  12   ; +$4
-                gems_op   0,  10,  22,   3,  29,   0,   8,   0,   2,  15   ; +$8
-                gems_op   0,   1,   1,   2,  31,   0,   8,   6,   2,  12   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_30:       gems_fm $0C, $00, 7, 5, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  28,   2,  10,   0,   6,   1,   6,   7   ; +$0
-                gems_op   0,   1,   9,   2,   8,   0,  13,  10,   2,   7   ; +$4
-                gems_op   0,   0,  11,   2,  20,   1,   7,   2,   1,   7   ; +$8
-                gems_op   5,   1,  22,   2,  11,   1,   7,   0,   1,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_31:       gems_fm $0C, $00, 7, 5, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  27,   2,  12,   0,   6,   1,   6,  10   ; +$0
-                gems_op   0,   0,  17,   2,  15,   0,  13,  10,   2,  10   ; +$4
-                gems_op   0,   1,  17,   2,  15,   1,   7,   2,   1,  10   ; +$8
-                gems_op   5,   1,  17,   2,  15,   1,   0,   0,   1,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_32:       gems_fm $07, $00, 7, 4, 3, 3, 7                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   0,  11,   3,  21,   0,  17,  31,  15,   4   ; +$0
-                gems_op   6,   1,  13,   3,  31,   0,  17,  31,  15,  15   ; +$4
-                gems_op   3,   0,   6,   0,  29,   0,   3,  14,   0,  15   ; +$8
-                gems_op   7,   0,   4,   0,  29,   0,   3,  15,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_33:       gems_fm $03, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,  15,   2,   3,  31,   0,   3,  20,  15,   5   ; +$0
-                gems_op   0,   0,  59,   2,  31,   0,  14,  19,   0,  15   ; +$4
-                gems_op   0,   2,   5,   3,  31,   0,  12,  14,  15,  14   ; +$8
-                gems_op   0,   1,  66,   0,  31,   0,  14,  17,   0,  14   ; +$C
-                gems_ch3 $1F35, $3FB7, $3FB6, $3F70
-                gems_keyon $F, 0
-PATCH_34:       gems_psg_noise $F, $FF, $34, $E5, $3, $3
-PATCH_35:       gems_fm $07, $40, 0, 2, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,  15,  11,   1,  31,   1,   5,  27,  15,   4   ; +$0
-                gems_op   0,  15,  10,   0,  30,   1,   0,  22,   4,   5   ; +$4
-                gems_op   0,  14,  39,   0,  31,   1,   2,   1,  15,   7   ; +$8
-                gems_op   0,  15,   3,   2,  30,   0,   9,  31,  10,   5   ; +$C
-                gems_ch3 $252F, $2343, $20FC, $2337
-                gems_keyon $F, 0
-PATCH_36:       gems_psg_noise $5, $FF, $F, $3, $4, $1F
-PATCH_37:       gems_fm $08, $00, 3, 3, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  30,   0,  28,   0,  17,  31,   6,  15   ; +$0
-                gems_op   0,   0,  25,   3,  30,   0,   2,  11,  15,  15   ; +$4
-                gems_op   0,   4,  28,   2,  29,   0,  13,  24,   6,   3   ; +$8
-                gems_op   0,   1,   9,   3,  31,   0,   1,   1,   3,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_38:       gems_psg_tone $FF, $37, $C7, $7, $7
-PATCH_39:       gems_fm $0B, $40, 0, 2, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,  15,  23,   3,  31,   1,   8,  27,  15,   4   ; +$0
-                gems_op   0,   9,   1,   0,  30,   1,   4,   1,   6,   5   ; +$4
-                gems_op   0,  15,  38,   0,  31,   1,  11,   1,   4,   7   ; +$8
-                gems_op   0,  14,   0,   3,  30,   0,   7,   2,   4,   5   ; +$C
-                gems_ch3 $251C, $2328, $205E, $2328
-                gems_keyon $E, 0
-PATCH_3A:       gems_fm $0B, $00, 7, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   1,  29,   0,  25,   0,  10,   0,  11,  10   ; +$0
-                gems_op   5,   6,  25,   1,  25,   0,   9,  12,  10,  15   ; +$4
-                gems_op   2,   5,  17,   0,  24,   0,   0,   6,  10,  11   ; +$8
-                gems_op   5,  12,  20,   1,  28,   0,   7,  25,  10,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_3B:       gems_psg_noise $F, $FF, $22, $D2, $5, $5
-PATCH_3C:       gems_fm $0B, $00, 3, 2, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   6,   1,  39,   3,  31,   1,   9,   7,   0,  10   ; +$0
-                gems_op   5,   0,  19,   0,  27,   0,  18,   5,  11,  10   ; +$4
-                gems_op   1,   0,  23,   1,  26,   0,   9,   0,  15,  10   ; +$8
-                gems_op   0,   1,   0,   0,  31,   0,   9,   0,   3,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_3D:       gems_fm $08, $40, 7, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,  15,  42,   1,  31,   1,   5,   2,   1,   1   ; +$0
-                gems_op   0,  15,  38,   1,  31,   1,   5,   2,   1,   1   ; +$4
-                gems_op   7,  15,  27,   2,  31,   1,   5,   2,   1,   1   ; +$8
-                gems_op   3,  13,   1,   2,  31,   0,  15,   2,  15,   9   ; +$C
-                gems_ch3 $38AB, $3464, $3D11, $3336
-                gems_keyon $F, 0
-PATCH_3E:       gems_fm $07, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  25,   1,  31,   0,  10,   2,   8,   2   ; +$0
-                gems_op   0,   3,  38,   1,  31,   0,   5,   2,   5,   2   ; +$4
-                gems_op   7,  12,  30,   2,  31,   0,  11,   2,   3,   2   ; +$8
-                gems_op   3,   2,  25,   2,  20,   0,   8,   2,  10,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_3F:       gems_psg_noise $7, $1E, $F, $1, $1, $2
-PATCH_40:       gems_fm $00, $40, 2, 0, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   2,   0,   0,  12,   0,   0,   8,   0,  12   ; +$0
-                gems_op   0,   0,   0,   0,  28,   0,  15,   4,   0,  12   ; +$4
-                gems_op   0,   0,   5,   0,  12,   0,   0,  10,   0,  12   ; +$8
-                gems_op   0,   0,   0,   0,  31,   0,   7,  14,   1,  12   ; +$C
-                gems_ch3 $02EE, $01F4, $000A, $0064
-                gems_keyon $F, 0
-PATCH_41:       gems_psg_tone $FF, $9, $6, $1B, $FF
-PATCH_42:       gems_fm $0F, $00, 5, 6, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   7,  21,   0,  31,   0,   0,   2,   0,  15   ; +$0
-                gems_op   0,   6,  25,   0,  10,   0,   0,  15,   1,  15   ; +$4
-                gems_op   5,   8,  25,   0,  10,   0,   0,  15,   1,  15   ; +$8
-                gems_op   0,  12,  25,   0,  10,   0,   0,  15,   1,  15   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_43:       gems_fm $03, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  25,   1,  31,   0,   1,   2,   8,   1   ; +$0
-                gems_op   0,   3,  35,   1,  31,   0,   5,   2,   5,   1   ; +$4
-                gems_op   7,  12,  31,   2,  31,   0,  11,   2,   3,   1   ; +$8
-                gems_op   3,   2,  18,   2,  20,   0,   1,   2,   6,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_44:       gems_fm $0E, $00, 5, 3, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   1,  41,   0,  21,   0,  15,   0,   8,   8   ; +$0
-                gems_op   2,   0,   7,   0,  16,   0,  24,   0,   2,  11   ; +$4
-                gems_op   0,   0,   3,   0,  12,   1,  23,   0,   3,  12   ; +$8
-                gems_op   2,   4,   0,   0,  15,   1,  25,   2,  15,  13   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_45:       gems_fm $08, $00, 6, 3, 3, 2, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   0,  27,   2,  31,   1,   6,   6,   0,   4   ; +$0
-                gems_op   3,   0,   8,   0,  31,   0,  12,   6,   0,   6   ; +$4
-                gems_op   7,   0,   1,   0,  27,   0,  12,   3,   8,  10   ; +$8
-                gems_op   7,   1,   0,   0,  26,   1,  13,   0,   0,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_46:       gems_fm $0B, $00, 3, 6, 3, 2, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   5,   7,  19,   1,  24,   1,  11,   0,   7,  15   ; +$0
-                gems_op   6,   1,   0,   1,  30,   0,   9,   4,   4,  15   ; +$4
-                gems_op   2,   1,  10,   1,  31,   0,  13,   2,   6,  15   ; +$8
-                gems_op   1,   1,   1,   1,  31,   0,  11,   6,   6,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 1
-PATCH_47:       gems_digital 4
-PATCH_48:       gems_fm $00, $00, 0, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,   0,   2,  31,   0,   4,  13,   7,  12   ; +$0
-                gems_op   3,  12,  20,   3,  31,   0,   7,  31,  11,  15   ; +$4
-                gems_op   7,  15,  25,   1,  21,   0,   2,   5,   4,  12   ; +$8
-                gems_op   0,   6,  25,   1,  31,   0,   9,   0,   1,  15   ; +$C
-                gems_ch3 $3FFF, $3FFF, $3FFF, $0000
-                gems_keyon $F, 0
-PATCH_49:       gems_fm $00, $00, 3, 6, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   5,   4,  21,   1,  24,   1,  11,   0,   7,   6   ; +$0
-                gems_op   6,   1,   0,   1,  30,   0,   9,   4,   4,   6   ; +$4
-                gems_op   2,   3,  26,   1,  31,   0,  13,   2,   6,   6   ; +$8
-                gems_op   1,   3,  26,   1,  31,   0,  11,   6,   6,   6   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 1
-PATCH_4A:       gems_fm $03, $00, 7, 2, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  34,   1,  21,   1,   2,   3,   6,   8   ; +$0
-                gems_op   7,   1,  25,   1,  27,   0,  15,   0,   1,   5   ; +$4
-                gems_op   3,   2,   5,   1,  29,   1,  15,   3,   1,   5   ; +$8
-                gems_op   0,   3,   7,   0,  29,   0,   4,  16,   5,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_4B:       gems_fm $09, $00, 2, 3, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   5,   2,  20,   0,   2,   1,   7,   0,   0,  12   ; +$0
-                gems_op   5,   1,  23,   2,   6,   0,  12,   0,   1,  12   ; +$4
-                gems_op   1,   4,  44,   0,  18,   1,   2,   0,   1,  12   ; +$8
-                gems_op   1,   1,  25,   0,  12,   0,  16,   0,   0,  12   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_4C:       gems_fm $0A, $00, 6, 2, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  30,   0,  28,   0,   4,   0,   1,   6   ; +$0
-                gems_op   7,   2,  52,   0,  12,   0,   9,   3,   2,   4   ; +$4
-                gems_op   3,   7,  22,   0,  17,   0,  16,   0,   6,  11   ; +$8
-                gems_op   0,   2,  28,   2,  11,   0,  10,   0,   1,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_4D:       gems_fm $0F, $00, 0, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,   0,   0,  31,   0,  31,  15,   9,  12   ; +$0
-                gems_op   7,   0,   0,   0,  31,   0,  18,   0,  15,  12   ; +$4
-                gems_op   7,   0,   9,   1,  31,   0,  31,   2,  11,  12   ; +$8
-                gems_op   7,   0,   0,   0,  30,   0,   0,   0,   0,  12   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_4E:       gems_fm $0C, $00, 7, 5, 3, 1, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  27,   2,  10,   0,   6,   1,   6,  10   ; +$0
-                gems_op   0,   1,   9,   2,  15,   0,  13,  10,   2,  15   ; +$4
-                gems_op   0,   0,  11,   2,  23,   1,   7,   2,   1,  15   ; +$8
-                gems_op   5,   1,  22,   2,  25,   1,   7,   0,   1,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_4F:       gems_fm $08, $00, 0, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   4,   5,  27,   0,  31,   1,  19,   7,   7,  14   ; +$0
-                gems_op   2,   2,  37,   2,  31,   1,  18,   4,   8,   2   ; +$4
-                gems_op   3,   1,  16,   0,  30,   0,  15,   7,  15,  15   ; +$8
-                gems_op   0,   1,  27,   0,  31,   0,  15,   2,  15,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_50:       gems_fm $00, $00, 6, 2, 3, 1, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  18,   3,  31,   0,   5,   0,   2,   5   ; +$0
-                gems_op   0,   2,  36,   3,  31,   0,   6,  18,   5,   5   ; +$4
-                gems_op   0,   5,  15,   3,  31,   0,   9,   0,   8,   5   ; +$8
-                gems_op   0,   0,  12,   2,  31,   0,   7,   0,   0,   5   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_51:       gems_fm $09, $00, 5, 5, 3, 2, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  26,   2,  12,   0,  13,   1,   2,  10   ; +$0
-                gems_op   0,   0,  27,   2,  10,   0,   8,   0,   2,  10   ; +$4
-                gems_op   0,   0,  18,   2,  23,   1,   7,   2,   1,  10   ; +$8
-                gems_op   5,   1,  14,   2,  23,   1,   7,   0,   1,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_52:       gems_fm $0A, $00, 4, 4, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  10,   2,  31,   0,   4,  13,   7,   8   ; +$0
-                gems_op   3,   1,  12,   3,  31,   0,   7,  31,  11,  15   ; +$4
-                gems_op   7,   1,   7,   1,  31,   0,   2,   5,   4,   8   ; +$8
-                gems_op   0,   0,  10,   1,  31,   0,   9,   0,   1,  15   ; +$C
-                gems_ch3 $3FFF, $3FFF, $3FFF, $0000
-                gems_keyon $F, 0
-PATCH_53:       gems_fm $0A, $00, 6, 2, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  30,   0,  28,   0,   4,   0,   1,   6   ; +$0
-                gems_op   7,   2,  52,   0,  12,   0,   9,   3,   2,   4   ; +$4
-                gems_op   3,   7,  21,   0,  17,   0,  16,   0,   6,  11   ; +$8
-                gems_op   0,   2,   6,   2,  11,   0,  10,   0,   1,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_54:       gems_fm $00, $00, 0, 6, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   2,   0,   2,  25,   0,  31,  30,   3,   4   ; +$0
-                gems_op   3,   0,  16,   1,  20,   0,   0,  15,  11,   6   ; +$4
-                gems_op   7,   0,  13,   1,  24,   0,   0,  15,  10,   6   ; +$8
-                gems_op   3,   0,  22,   1,  24,   0,   0,   6,   2,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_55:       gems_fm $0F, $00, 7, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  23,   2,  22,   0,  16,   4,   0,   4   ; +$0
-                gems_op   0,   3,  23,   0,  26,   0,   0,   0,   2,   8   ; +$4
-                gems_op   1,   2,   9,   3,  24,   0,   0,   0,   0,   5   ; +$8
-                gems_op   6,   1,  15,   0,  21,   1,   0,   0,   0,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_56:       gems_fm $0B, $00, 7, 6, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   9,  51,   0,  30,   0,  11,   6,  10,  11   ; +$0
-                gems_op   0,   0,  14,   0,  31,   0,   6,   6,   4,  11   ; +$4
-                gems_op   7,   2,  17,   0,  19,   0,  10,   6,   7,  11   ; +$8
-                gems_op   0,   1,  22,   0,  19,   0,  10,   6,   7,  11   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $0000
-                gems_keyon $F, 0
-PATCH_57:       gems_fm $0A, $00, 6, 4, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   5,  18,   2,  26,   1,   2,  11,   0,   3   ; +$0
-                gems_op   2,   4,  33,   2,  25,   1,   7,  19,  11,   3   ; +$4
-                gems_op   0,   1,  27,   1,  22,   0,   0,   0,   1,   5   ; +$8
-                gems_op   0,   8,  32,   1,  31,   0,  25,  20,   9,   3   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_58:       gems_fm $00, $00, 0, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   1,  10,   2,   4,   0,  20,   0,   6,  15   ; +$0
-                gems_op   0,   1,   9,   2,   6,   0,  15,   0,   7,  15   ; +$4
-                gems_op   0,   3,   4,   0,  16,   0,  31,   0,   1,  15   ; +$8
-                gems_op   0,   1,   5,   0,  17,   0,  31,   0,   1,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_59:       gems_fm $0F, $00, 7, 0, 3, 3, 7                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   0,   0,   2,   0,   0,  29,  31,   9,   0   ; +$0
-                gems_op   7,   0,   0,   2,  31,   0,   0,  24,   0,   0   ; +$4
-                gems_op   0,   0,   0,   3,  29,   1,  15,  31,  15,   0   ; +$8
-                gems_op   7,   0,   0,   0,  31,   0,   0,  12,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $C, 0
-PATCH_5A:       gems_fm $00, $00, 0, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,  20,   2,  25,   0,  31,  30,   3,   7   ; +$0
-                gems_op   3,   1,  25,   1,  20,   0,   0,  15,  11,   7   ; +$4
-                gems_op   7,   0,  16,   1,  24,   0,   0,   2,  10,   7   ; +$8
-                gems_op   3,   0,  25,   1,  24,   0,   0,   6,   2,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_5B:       gems_fm $00, $54, 3, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   9,   0,   0,  10,   0,  16,   0,   0,  15   ; +$0
-                gems_op   0,   0,   0,   3,  31,   0,  31,  31,   0,  15   ; +$4
-                gems_op   1,   2,   0,   0,  31,   0,   0,  14,   0,  15   ; +$8
-                gems_op   3,   0,   0,   3,  31,   0,  20,   0,   0,  15   ; +$C
-                gems_ch3 $12F2, $1482, $0032, $1DB0
-                gems_keyon $F, 0
-PATCH_5C:       gems_fm $00, $00, 0, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,   0,   0,  31,   0,  23,  29,   0,   9   ; +$0
-                gems_op   0,   7,   0,   0,  31,   0,   0,  18,   0,  10   ; +$4
-                gems_op   7,  11,   0,   0,  31,   0,  20,  18,   3,  10   ; +$8
-                gems_op   3,  11,   0,   0,  31,   0,  23,  18,   0,  10   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_5D:       gems_fm $00, $00, 0, 1, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   0,  19,   0,  16,   0,   0,   0,   0,   7   ; +$0
-                gems_op   1,   2,   8,   0,  20,   0,   0,   0,   0,  15   ; +$4
-                gems_op   6,   2,  19,   0,  16,   0,   9,   0,   0,  15   ; +$8
-                gems_op   5,  15,  25,   0,  14,   0,  18,   0,   2,  15   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_5E:       gems_fm $00, $00, 7, 2, 3, 0, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   3,  22,   0,  18,   1,  10,   2,   1,   3   ; +$0
-                gems_op   6,   2,  30,   0,  18,   0,  11,   0,   1,   3   ; +$4
-                gems_op   5,   1,  19,   0,  17,   0,  11,   0,   0,   3   ; +$8
-                gems_op   4,   4,   0,   0,  18,   0,   5,   3,   2,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_5F:       gems_fm $0B, $00, 5, 2, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   1,   0,  13,   3,  31,   0,   7,  15,  12,   0   ; +$0
-                gems_op   1,   0,  30,   0,   7,   0,   4,   6,   0,   9   ; +$4
-                gems_op   0,   3,  20,   1,   1,   0,   0,  18,   0,   9   ; +$8
-                gems_op   0,   0,  12,   0,  25,   0,   0,   6,   0,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_60:       gems_fm $0A, $00, 6, 5, 2, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   2,   1,  26,   2,  14,   0,   0,   1,   0,   7   ; +$0
-                gems_op   2,   1,  22,   2,  12,   0,   0,   2,   1,   7   ; +$4
-                gems_op   3,   2,  26,   2,  27,   0,   5,   2,   3,   6   ; +$8
-                gems_op   3,   3,  16,   2,  20,   1,   0,   2,   0,   8   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_61:       gems_fm $0C, $00, 0, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  16,   3,  19,   0,   5,   0,   2,   5   ; +$0
-                gems_op   0,   6,  39,   3,  31,   0,   6,  18,   5,   0   ; +$4
-                gems_op   0,   6,  19,   3,  31,   0,  10,   0,   8,   5   ; +$8
-                gems_op   0,   0,  10,   2,  31,   0,   7,   0,   0,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_62:       gems_fm $0C, $00, 1, 1, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  39,   0,  31,   0,   9,   7,   0,   8   ; +$0
-                gems_op   5,   0,  29,   1,  27,   0,  17,   0,  15,   8   ; +$4
-                gems_op   0,   0,  17,   1,  26,   0,   9,   0,  15,   8   ; +$8
-                gems_op   6,   1,   0,   1,  31,   0,   9,   0,   3,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_63:       gems_fm $0A, $00, 3, 5, 3, 1, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  18,   0,  31,   1,  10,   0,   9,  15   ; +$0
-                gems_op   2,   2,   9,   0,  20,   0,   1,   0,   1,  15   ; +$4
-                gems_op   3,   3,   9,   1,  16,   0,  13,  12,   3,  13   ; +$8
-                gems_op   0,   0,   8,   0,  17,   0,  27,   0,   2,  13   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_64:       gems_fm $08, $00, 6, 2, 3, 1, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  21,   3,  31,   0,   5,   0,   2,   5   ; +$0
-                gems_op   0,   0,  36,   0,  31,   0,   9,   0,   5,   5   ; +$4
-                gems_op   0,   3,  15,   3,  31,   0,  11,   0,   8,   5   ; +$8
-                gems_op   0,   1,  12,   2,  31,   0,   7,   0,   0,   6   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_65:       gems_fm $0C, $00, 5, 6, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  15,   2,  31,   1,   8,  31,  15,  15   ; +$0
-                gems_op   2,   1,  20,   3,  31,   1,   5,   5,  15,  15   ; +$4
-                gems_op   7,   2,  20,   1,  31,   1,   8,   0,  15,  15   ; +$8
-                gems_op   5,  15,  22,   3,  31,   0,  15,  21,  15,  15   ; +$C
-                gems_ch3 $313B, $2B78, $084F, $3300
-                gems_keyon $F, 0
-PATCH_66:       gems_fm $0F, $00, 7, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  23,   2,  20,   0,  15,   4,   0,  10   ; +$0
-                gems_op   0,   3,  23,   0,  22,   0,   0,   0,   2,  10   ; +$4
-                gems_op   1,   2,  22,   3,  22,   0,   0,   0,   0,  10   ; +$8
-                gems_op   6,   1,  21,   0,  22,   1,   0,   0,   0,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_67:       gems_fm $09, $00, 7, 2, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  28,   0,  15,   0,   4,   0,   1,   7   ; +$0
-                gems_op   7,   2,  52,   0,  12,   0,   9,   3,   0,   7   ; +$4
-                gems_op   3,   7,  28,   0,  12,   0,  16,   0,   0,   7   ; +$8
-                gems_op   0,   2,  12,   2,  12,   0,  10,   0,   1,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_68:       gems_fm $0C, $00, 5, 2, 3, 0, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,  28,   2,  12,   0,   5,   0,   0,  10   ; +$0
-                gems_op   1,   1,  40,   3,  13,   0,   9,  18,   6,  10   ; +$4
-                gems_op   3,   1,  35,   3,  12,   0,  10,   0,  15,  15   ; +$8
-                gems_op   0,   0,   3,   2,  14,   0,   8,  12,   5,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_69:       gems_fm $0A, $00, 7, 2, 3, 2, 3                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,  30,   0,  15,   0,   4,   0,   1,   7   ; +$0
-                gems_op   7,   2,  55,   0,  15,   0,   9,   3,   0,   7   ; +$4
-                gems_op   3,   7,  31,   0,  15,   0,  16,   0,   0,   7   ; +$8
-                gems_op   0,   2,  13,   2,  15,   0,  10,   0,   1,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_6A:       gems_fm $0B, $00, 3, 2, 3, 0, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   0,  11,   2,  31,   0,  23,  17,   5,  15   ; +$0
-                gems_op   0,   0,  22,   1,  21,   1,  17,   5,   4,  15   ; +$4
-                gems_op   7,   0,  19,   1,  24,   0,  19,   6,  10,  15   ; +$8
-                gems_op   0,   1,   0,   0,  25,   0,  21,   6,   2,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_6B:       gems_fm $0F, $00, 7, 5, 3, 1, 2                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  23,   2,  16,   0,  16,   4,   0,   4   ; +$0
-                gems_op   0,   0,  23,   0,  16,   0,   0,   0,   2,   8   ; +$4
-                gems_op   1,   2,   9,   3,  18,   0,   0,   0,   0,   5   ; +$8
-                gems_op   6,   0,  15,   0,  14,   1,   0,   0,   0,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_6C:       gems_fm $03, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   0,  25,   1,  31,   0,   1,   2,   8,   1   ; +$0
-                gems_op   0,   3,  35,   1,  31,   0,   5,   2,   5,   1   ; +$4
-                gems_op   7,  12,  31,   2,  31,   0,  11,   2,   3,   1   ; +$8
-                gems_op   3,   2,  16,   2,  20,   0,   1,   2,   6,   7   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_6D:       gems_fm $00, $40, 6, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,  15,  10,   1,  16,   0,   8,  18,  10,  15   ; +$0
-                gems_op   3,  15,   0,   3,  17,   1,  20,  16,  10,  11   ; +$4
-                gems_op   3,   6,   0,   0,  20,   0,  11,  18,   6,  15   ; +$8
-                gems_op   3,  14,  15,   3,  10,   0,  31,  24,   4,  12   ; +$C
-                gems_ch3 $0754, $1119, $0273, $3FBB
-                gems_keyon $F, 0
-PATCH_6E:       gems_fm $00, $40, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,  14,   7,   1,  12,   0,   8,   2,  10,  15   ; +$0
-                gems_op   3,   9,   2,   3,  12,   1,  19,   2,  11,  15   ; +$4
-                gems_op   3,  11,   0,   0,  31,   0,   9,  14,   7,  15   ; +$8
-                gems_op   3,   7,   0,   0,  17,   0,  31,  18,   4,  15   ; +$C
-                gems_ch3 $0754, $1119, $0273, $3FBB
-                gems_keyon $F, 0
-PATCH_6F:       gems_fm $08, $00, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   7,   3,   7,   0,  17,   1,   4,   5,   4,  15   ; +$0
-                gems_op   7,   0,   9,   3,  16,   1,  10,  14,  10,  15   ; +$4
-                gems_op   0,   2,   5,   0,  16,   1,  12,   9,  11,  15   ; +$8
-                gems_op   7,   7,  35,   0,  16,   1,   9,  14,   3,  15   ; +$C
-                gems_ch3 $0754, $1119, $0271, $3FBB
-                gems_keyon $F, 0
-PATCH_70:       gems_psg_noise $4, $FF, $2, $2, $0, $FF
-PATCH_71:       gems_fm $0B, $00, 7, 2, 3, 0, 5                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,  15,   7,   0,  31,   0,  24,  31,   5,  15   ; +$0
-                gems_op   0,   1,  18,   1,  19,   0,  17,  31,  11,  15   ; +$4
-                gems_op   3,   0,  27,   1,  24,   0,  19,  31,  10,  15   ; +$8
-                gems_op   0,   1,   8,   1,  31,   0,  14,  31,   2,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_72:       gems_fm $0F, $00, 0, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,   0,   0,  19,   0,  31,  15,   9,  15   ; +$0
-                gems_op   7,   0,   0,   0,  24,   0,  18,   0,  15,  15   ; +$4
-                gems_op   7,   0,   9,   1,  17,   0,  31,   2,  11,  15   ; +$8
-                gems_op   7,   0,  14,   0,  18,   0,   0,   0,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_73:       gems_fm $00, $40, 4, 5, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,  11,   3,   1,  11,   0,  12,   2,   9,  14   ; +$0
-                gems_op   0,  15,  15,   2,  12,   0,   7,   2,   9,  14   ; +$4
-                gems_op   7,  12,  26,   2,  11,   0,  11,  18,  11,  14   ; +$8
-                gems_op   3,   7,  15,   2,  22,   0,  10,   0,   8,  14   ; +$C
-                gems_ch3 $0754, $1119, $0271, $20BB
-                gems_keyon $F, 0
-PATCH_74:       gems_fm $0F, $00, 5, 7, 3, 3, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   6,  11,   0,   0,  31,   1,   1,  27,   8,  15   ; +$0
-                gems_op   2,  15,   0,   3,  31,   1,  15,  31,  15,  15   ; +$4
-                gems_op   7,  15,   5,   1,  31,   0,   3,  29,   0,  15   ; +$8
-                gems_op   7,   1,   0,   0,  31,   0,   0,  13,   0,  15   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $1, 0
-PATCH_75:       gems_psg_tone $FF, $1, $1, $F, $F
-PATCH_76:       gems_fm $00, $40, 6, 4, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   3,   1,   8,   1,  31,   0,   8,   2,  10,  15   ; +$0
-                gems_op   3,   0,  20,   3,  12,   1,  19,   2,  11,  15   ; +$4
-                gems_op   3,   8,   0,   0,  31,   0,   9,  14,   7,  15   ; +$8
-                gems_op   3,   0,  26,   0,  17,   0,  31,  18,  15,  15   ; +$C
-                gems_ch3 $0754, $1119, $0273, $3FBB
-                gems_keyon $F, 0
-PATCH_77:       gems_psg_noise $7, $F, $0, $0, $A, $A
-PATCH_78:       gems_fm $00, $40, 2, 0, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   2,   0,   0,  12,   0,   0,   8,   0,   1   ; +$0
-                gems_op   0,   0,   0,   0,  26,   0,  15,   4,   0,   2   ; +$4
-                gems_op   0,   0,   5,   0,  12,   0,   0,  10,   0,   1   ; +$8
-                gems_op   0,   0,   0,   0,  16,   0,   2,  14,   1,   2   ; +$C
-                gems_ch3 $02EE, $01F4, $000A, $0064
-                gems_keyon $F, 0
-PATCH_79:       gems_fm $0F, $00, 0, 4, 3, 1, 1                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,   3,   2,  29,   0,  31,  15,   0,  15   ; +$0
-                gems_op   0,   2,   0,   0,  15,   1,  25,  11,   0,  15   ; +$4
-                gems_op   0,   0,   3,   0,  15,   0,  31,   5,   0,  15   ; +$8
-                gems_op   0,   4,   0,   0,  15,   0,  20,  19,   0,  15   ; +$C
-                gems_ch3 $0000, $0000, $0000, $0000
-                gems_keyon $F, 0
-PATCH_7A:       gems_fm $0B, $00, 2, 2, 3, 0, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   5,   1,  35,   3,  24,   0,   5,   0,   2,  10   ; +$0
-                gems_op   1,   3,  59,   3,  29,   0,   6,   0,   5,  10   ; +$4
-                gems_op   0,  10,  22,   3,  29,   0,   8,   0,   2,  10   ; +$8
-                gems_op   0,   1,   0,   2,  31,   1,   8,   6,   2,  10   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_7B:       gems_fm $0A, $00, 6, 4, 3, 1, 4                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   5,  18,   2,  26,   1,   2,  11,   0,   9   ; +$0
-                gems_op   2,   4,  32,   2,  25,   1,   7,  19,  11,   9   ; +$4
-                gems_op   0,   1,   5,   1,  22,   0,   0,   0,   1,   8   ; +$8
-                gems_op   0,   8,   0,   1,  31,   0,  25,  20,   9,   9   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-PATCH_7C:       gems_fm $07, $00, 5, 2, 3, 2, 0                             ; lfo, ch3, fb, alg, pan, ams, fms
-                ;        dt mul  tl  rs  ar  am d1r d2r d1l  rr
-                gems_op   0,   1,  29,   1,  31,   0,  10,   2,   8,   5   ; +$0
-                gems_op   0,   1,  35,   1,  31,   0,   5,   2,   5,   5   ; +$4
-                gems_op   7,   8,  27,   2,  31,   0,  11,   2,   3,   5   ; +$8
-                gems_op   3,   1,  16,   2,  31,   0,   8,   2,  10,   5   ; +$C
-                gems_ch3 $1FFF, $1FFF, $1FFF, $1FFF
-                gems_keyon $F, 0
-ENVELOPE_TBL_Z80:                       ; DATA XREF: sub_247576+C   o
-                                        ; огибающие высоты тона: смещения (LE) огибающих
-                gems_env_ofs ENV_00
-                gems_env_ofs ENV_01
-                gems_env_ofs ENV_02
-                gems_env_ofs ENV_03
-ENV_00:         gems_env_start -40
-                gems_env_seg 1, 55
-                gems_env_end
-ENV_01:         gems_env_start 0
-                gems_env_seg 2, 475
-                gems_env_seg 24, -600
-                gems_env_seg 100, 0
-                gems_env_end
-ENV_02:         gems_env_start 0
-                gems_env_seg 192, 24
-                gems_env_seg 192, 24
-                gems_env_seg 192, 24
-                gems_env_seg 192, 24
-                gems_env_end
-ENV_03:         gems_env_start 0
-                gems_env_seg 15, -72
-                gems_env_seg 24, 43
-                gems_env_end
-SEQUENCE_TBL_Z80:                       ; DATA XREF: sub_247576+6   o
-                                        ; sequence table: смещения (LE) заголовков секвенций
-                gems_seq_ofs SEQH_PETER_PUPPY               ;   0 $00
-                gems_seq_ofs SEQH_BUNGEE123                 ;   1 $01
-                gems_seq_ofs SEQH_BTVILLES                  ;   2 $02
-                gems_seq_ofs SEQH_DOWN_TUBES                ;   3 $03
-                gems_seq_ofs SEQH_INTESTINAL                ;   4 $04
-                gems_seq_ofs SEQH_NJ_CITY                   ;   5 $05
-                gems_seq_ofs SEQH_ANDYASTR                  ;   6 $06
-                gems_seq_ofs SEQH_ANDYASTR_2                ;   7 $07
-                gems_seq_ofs SEQH_ANDYASTR_8                ;   8 $08
-                gems_seq_ofs SEQH_WHECK                     ;   9 $09
-                gems_seq_ofs SEQH_WHECK_9                   ;  10 $0A
-                gems_seq_ofs SEQH_WHECK_10                  ;  11 $0B
-                gems_seq_ofs SEQH_WHECK_16                  ;  12 $0C
-                gems_seq_ofs SEQH_DARKNESS                  ;  13 $0D
-                gems_seq_ofs SEQH_ANDY_WIN                  ;  14 $0E
-                gems_seq_ofs SEQH_END_1                     ;  15 $0F
-                gems_seq_ofs SEQH_END_6                     ;  16 $10
-                gems_seq_ofs SEQH_GAME_OVER                 ;  17 $11
-                gems_seq_ofs SEQH_BTVILLEH                  ;  18 $12
-                gems_seq_ofs SEQH_EMPTY                     ;  19 $13
-                gems_seq_ofs SEQH_PSYCROW                   ;  20 $14
-                gems_seq_ofs SEQH_THORNS                    ;  21 $15
-                gems_seq_ofs SEQH_CROW                      ;  22 $16 карканье вороны
-                gems_seq_ofs SEQH_WHIP                      ;  23 $17 перевернутый указатель на звук кнута (209)
-                gems_seq_ofs SEQH_PIM                       ;  24 $18
-                gems_seq_ofs SEQH_COW                       ;  25 $19
-                gems_seq_ofs SEQH_DOG                       ;  26 $1A
-                gems_seq_ofs SEQH_PETE_LIFT                 ;  27 $1B
-                gems_seq_ofs SEQH_JIM_HIT                   ;  28 $1C
-                gems_seq_ofs SEQH_HAMSTER                   ;  29 $1D
-                gems_seq_ofs SEQH_GLASS                     ;  30 $1E
-                gems_seq_ofs SEQH_PETE_WOOF                 ;  31 $1F
-                gems_seq_ofs SEQH_UFO                       ;  32 $20
-                gems_seq_ofs SEQH_CAT_MEOW                  ;  33 $21
-                gems_seq_ofs SEQH_SNOT                      ;  34 $22
-                gems_seq_ofs SEQH_RUMBLE                    ;  35 $23
-                gems_seq_ofs SEQH_MONKEY                    ;  36 $24
-                gems_seq_ofs SEQH_CHEATER                   ;  37 $25 Cheater sheiger щейгер
-                gems_seq_ofs SEQH_LIVEUP                    ;  38 $26
-                gems_seq_ofs SEQH_HEADGUN                   ;  39 $27
-                gems_seq_ofs SEQH_EJIM_TITLE                ;  40 $28
-                gems_seq_ofs SEQH_REFREGER                  ;  41 $29
-                gems_seq_ofs SEQH_RUMBLE_2                  ;  42 $2A
-                gems_seq_ofs SEQH_SPRING                    ;  43 $2B
-                gems_seq_ofs SEQH_ROCKET                    ;  44 $2C
-                gems_seq_ofs SEQH_TICK                      ;  45 $2D
-                gems_seq_ofs SEQH_DOOR                      ;  46 $2E
-                gems_seq_ofs SEQH_DOOR_CREAK                ;  47 $2F
-                gems_seq_ofs SEQH_BURST                     ;  48 $30
-                gems_seq_ofs SEQH_TIRE_JUMP                 ;  49 $31
-                gems_seq_ofs SEQH_LEVER                     ;  50 $32
-                gems_seq_ofs SEQH_HEART                     ;  51 $33
-                gems_seq_ofs SEQH_MONSTER                   ;  52 $34
-                gems_seq_ofs SEQH_DOG_2                     ;  53 $35
-                gems_seq_ofs SEQH_CHUCK                     ;  54 $36
-                gems_seq_ofs SEQH_CHUCK_2                   ;  55 $37
-                gems_seq_ofs SEQH_SNOT_2                    ;  56 $38
-                gems_seq_ofs SEQH_UFO_2                     ;  57 $39
-                gems_seq_ofs SEQH_CHUCK_3                   ;  58 $3A
-                gems_seq_ofs SEQH_JIM_GROUND                ;  59 $3B
-                gems_seq_ofs SEQH_BONUS                     ;  60 $3C
-                gems_seq_ofs SEQH_SCREAM                    ;  61 $3D
-                gems_seq_ofs SEQH_DOG_3                     ;  62 $3E
-                gems_seq_ofs SEQH_RICOCHET                  ;  63 $3F
-                gems_seq_ofs SEQH_DOG_4                     ;  64 $40
-                gems_seq_ofs SEQH_ROCKET_2                  ;  65 $41
-                gems_seq_ofs SEQH_QUEEN_1                   ;  66 $42
-                gems_seq_ofs SEQH_QUEEN_2                   ;  67 $43
-                gems_seq_ofs SEQH_TUBE_OUT                  ;  68 $44
-                gems_seq_ofs SEQH_PSYQ_FIRE                 ;  69 $45
-                gems_seq_ofs SEQH_JIM_FIRE                  ;  70 $46
-                gems_seq_ofs SEQH_HELI_PART                 ;  71 $47
-                gems_seq_ofs SEQH_PLASMA_FIRE               ;  72 $48
-                gems_seq_ofs SEQH_HP_UP                     ;  73 $49
-                gems_seq_ofs SEQH_DESTROY                   ;  74 $4A
-                gems_seq_ofs SEQH_FIRE                      ;  75 $4B
-                gems_seq_ofs SEQH_FIRE_2                    ;  76 $4C
-                gems_seq_ofs SEQH_FIRE_3                    ;  77 $4D
-                gems_seq_ofs SEQH_SCREAM_2                  ;  78 $4E
-                gems_seq_ofs SEQH_CHICKEN                   ;  79 $4F
-                gems_seq_ofs SEQH_CHICKEN_2                 ;  80 $50
-                gems_seq_ofs SEQH_CH_TELEPRT                ;  81 $51
-                gems_seq_ofs SEQH_TELEPORT                  ;  82 $52
-                gems_seq_ofs SEQH_EFFECT                    ;  83 $53
-                gems_seq_ofs SEQH_WTR_PLOP                  ;  84 $54
-                gems_seq_ofs SEQH_WTR_PLOP_2                ;  85 $55
-                gems_seq_ofs SEQH_WTR_PLOP_3                ;  86 $56
-                gems_seq_ofs SEQH_WTR_PLOP_4                ;  87 $57
-                gems_seq_ofs SEQH_GROOVY                    ;  88 $58
-                gems_seq_ofs SEQH_JIM_MUSCLE                ;  89 $59
-                gems_seq_ofs SEQH_JIM_HEY                   ;  90 $5A
-                gems_seq_ofs SEQH_PRINCESS                  ;  91 $5B
-                gems_seq_ofs SEQH_SCREAM_3                  ;  92 $5C
-                gems_seq_ofs SEQH_JIM_SWEARS                ;  93 $5D
-                gems_seq_ofs SEQH_SCREAM_4                  ;  94 $5E
-                gems_seq_ofs SEQH_JIM_HIT_2                 ;  95 $5F
-                gems_seq_ofs SEQH_SCREAM_5                  ;  96 $60
-                gems_seq_ofs SEQH_JIM_SPEED                 ;  97 $61
-                gems_seq_ofs SEQH_JIM_YEHOO                 ;  98 $62
-                gems_seq_ofs SEQH_JIM_WUUH                  ;  99 $63
-                gems_seq_ofs SEQH_JIM_AMMO                  ; 100 $64
-                gems_seq_ofs SEQH_SCREAM_6                  ; 101 $65
-                gems_seq_ofs SEQH_JIM_LALALA                ; 102 $66
-                gems_seq_ofs SEQH_HOUL                      ; 103 $67
-                gems_seq_ofs SEQH_COW_2                     ; 104 $68
-                gems_seq_ofs SEQH_HOUL_2                    ; 105 $69
-                gems_seq_ofs SEQH_JIM_HOUYEAH               ; 106 $6A
-                gems_seq_ofs SEQH_JIM_OUCH                  ; 107 $6B
-                gems_seq_ofs SEQH_JIM_AYAU                  ; 108 $6C
-                gems_seq_ofs SEQH_JIM_DAU                   ; 109 $6D
-                gems_seq_ofs SEQH_JIM_PLASMA                ; 110 $6E
-                gems_seq_ofs SEQH_JIM_AAAH                  ; 111 $6F
-                gems_seq_ofs SEQH_SCRATCH                   ; 112 $70
-                gems_seq_ofs SEQH_SCRATCH_2                 ; 113 $71
-                gems_seq_ofs SEQH_PRISONER                  ; 114 $72
-                gems_seq_ofs SEQH_SCREAM_7                  ; 115 $73
-                gems_seq_ofs SEQH_DEMON                     ; 116 $74
-                gems_seq_ofs SEQH_DEMON_2                   ; 117 $75
-                gems_seq_ofs SEQH_EFFECT_2                  ; 118 $76
-                gems_seq_ofs SEQH_EFFECT_3                  ; 119 $77
-                gems_seq_ofs SEQH_PSYQ_HIT                  ; 120 $78
-                gems_seq_ofs SEQH_PSYQ_HIT_2                ; 121 $79
-                gems_seq_ofs SEQH_PSYQ_HIT_3                ; 122 $7A
-                gems_seq_ofs SEQH_PSYQ_HIT_4                ; 123 $7B
-                gems_seq_ofs SEQH_PSYQ_HIT_5                ; 124 $7C
-; заголовки секвенций: число каналов, затем смещения (LE) данных каналов
-SEQH_PETER_PUPPY:dc.b 12                                ; seq 0
-                gems_seq_ofs SEQ_PETER_PUPPY
-                gems_seq_ofs SEQ_PETER_PUPPY_2
-                gems_seq_ofs SEQ_PETER_PUPPY_3
-                gems_seq_ofs SEQ_PETER_PUPPY_4
-                gems_seq_ofs SEQ_PETER_PUPPY_5
-                gems_seq_ofs SEQ_PETER_PUPPY_6
-                gems_seq_ofs SEQ_PETER_PUPPY_7
-                gems_seq_ofs SEQ_PETER_PUPPY_8
-                gems_seq_ofs SEQ_PETER_PUPPY_9
-                gems_seq_ofs SEQ_PETER_PUPPY_10
-                gems_seq_ofs SEQ_PETER_PUPPY_11
-                gems_seq_ofs SEQ_PETER_PUPPY_12
-SEQH_BUNGEE123: dc.b 10                                 ; seq 1
-                gems_seq_ofs SEQ_BUNGEE123
-                gems_seq_ofs SEQ_BUNGEE123_2
-                gems_seq_ofs SEQ_BUNGEE123_3
-                gems_seq_ofs SEQ_BUNGEE123_4
-                gems_seq_ofs SEQ_BUNGEE123_5
-                gems_seq_ofs SEQ_BUNGEE123_6
-                gems_seq_ofs SEQ_BUNGEE123_7
-                gems_seq_ofs SEQ_BUNGEE123_8
-                gems_seq_ofs SEQ_BUNGEE123_9
-                gems_seq_ofs SEQ_BUNGEE123_10
-SEQH_BTVILLES:  dc.b 12                                 ; seq 2
-                gems_seq_ofs SEQ_BTVILLES
-                gems_seq_ofs SEQ_BTVILLES_2
-                gems_seq_ofs SEQ_BTVILLES_3
-                gems_seq_ofs SEQ_BTVILLES_4
-                gems_seq_ofs SEQ_BTVILLES_5
-                gems_seq_ofs SEQ_BTVILLES_6
-                gems_seq_ofs SEQ_BTVILLES_7
-                gems_seq_ofs SEQ_BTVILLES_8
-                gems_seq_ofs SEQ_BTVILLES_9
-                gems_seq_ofs SEQ_BTVILLES_10
-                gems_seq_ofs SEQ_BTVILLES_11
-                gems_seq_ofs SEQ_BTVILLES_12
-SEQH_DOWN_TUBES:dc.b 12                                 ; seq 3
-                gems_seq_ofs SEQ_DOWN_TUBES
-                gems_seq_ofs SEQ_DOWN_TUBES_2
-                gems_seq_ofs SEQ_DOWN_TUBES_3
-                gems_seq_ofs SEQ_DOWN_TUBES_4
-                gems_seq_ofs SEQ_DOWN_TUBES_5
-                gems_seq_ofs SEQ_DOWN_TUBES_6
-                gems_seq_ofs SEQ_DOWN_TUBES_7
-                gems_seq_ofs SEQ_DOWN_TUBES_8
-                gems_seq_ofs SEQ_DOWN_TUBES_9
-                gems_seq_ofs SEQ_DOWN_TUBES_10
-                gems_seq_ofs SEQ_DOWN_TUBES_11
-                gems_seq_ofs SEQ_DOWN_TUBES_12
-SEQH_INTESTINAL:dc.b 5                                  ; seq 4
-                gems_seq_ofs SEQ_INTESTINAL
-                gems_seq_ofs SEQ_INTESTINAL_2
-                gems_seq_ofs SEQ_INTESTINAL_3
-                gems_seq_ofs SEQ_INTESTINAL_4
-                gems_seq_ofs SEQ_INTESTINAL_5
-SEQH_NJ_CITY:   dc.b 13                                 ; seq 5
-                gems_seq_ofs SEQ_NJ_CITY
-                gems_seq_ofs SEQ_NJ_CITY_2
-                gems_seq_ofs SEQ_NJ_CITY_3
-                gems_seq_ofs SEQ_NJ_CITY_4
-                gems_seq_ofs SEQ_NJ_CITY_5
-                gems_seq_ofs SEQ_NJ_CITY_6
-                gems_seq_ofs SEQ_NJ_CITY_7
-                gems_seq_ofs SEQ_NJ_CITY_8
-                gems_seq_ofs SEQ_NJ_CITY_9
-                gems_seq_ofs SEQ_NJ_CITY_10
-                gems_seq_ofs SEQ_NJ_CITY_11
-                gems_seq_ofs SEQ_NJ_CITY_12
-                gems_seq_ofs SEQ_NJ_CITY_13
-SEQH_ANDYASTR:  dc.b 2                                  ; seq 6
-                gems_seq_ofs SEQ_ANDYASTR
-                gems_seq_ofs SEQ_ANDYASTR_1
-SEQH_ANDYASTR_2:dc.b 6                                  ; seq 7
-                gems_seq_ofs SEQ_ANDYASTR_2
-                gems_seq_ofs SEQ_ANDYASTR_3
-                gems_seq_ofs SEQ_ANDYASTR_4
-                gems_seq_ofs SEQ_ANDYASTR_5
-                gems_seq_ofs SEQ_ANDYASTR_6
-                gems_seq_ofs SEQ_ANDYASTR_7
-SEQH_ANDYASTR_8:dc.b 5                                  ; seq 8
-                gems_seq_ofs SEQ_ANDYASTR_8
-                gems_seq_ofs SEQ_ANDYASTR_9
-                gems_seq_ofs SEQ_ANDYASTR_10
-                gems_seq_ofs SEQ_ANDYASTR_11
-                gems_seq_ofs SEQ_ANDYASTR_12
-SEQH_WHECK:     dc.b 8                                  ; seq 9
-                gems_seq_ofs SEQ_WHECK
-                gems_seq_ofs SEQ_WHECK_2
-                gems_seq_ofs SEQ_WHECK_3
-                gems_seq_ofs SEQ_WHECK_4
-                gems_seq_ofs SEQ_WHECK_5
-                gems_seq_ofs SEQ_WHECK_6
-                gems_seq_ofs SEQ_WHECK_7
-                gems_seq_ofs SEQ_WHECK_8
-SEQH_WHECK_9:   dc.b 1                                  ; seq 10
-                gems_seq_ofs SEQ_WHECK_9
-SEQH_WHECK_10:  dc.b 6                                  ; seq 11
-                gems_seq_ofs SEQ_WHECK_10
-                gems_seq_ofs SEQ_WHECK_11
-                gems_seq_ofs SEQ_WHECK_12
-                gems_seq_ofs SEQ_WHECK_13
-                gems_seq_ofs SEQ_WHECK_14
-                gems_seq_ofs SEQ_WHECK_15
-SEQH_WHECK_16:  dc.b 1                                  ; seq 12
-                gems_seq_ofs SEQ_WHECK_16
-SEQH_DARKNESS:  dc.b 3                                  ; seq 13
-                gems_seq_ofs SEQ_DARKNESS
-                gems_seq_ofs SEQ_DARKNESS_2
-                gems_seq_ofs SEQ_DARKNESS_3
-SEQH_ANDY_WIN:  dc.b 5                                  ; seq 14
-                gems_seq_ofs SEQ_ANDY_WIN
-                gems_seq_ofs SEQ_ANDY_WIN_1
-                gems_seq_ofs SEQ_ANDY_WIN_2
-                gems_seq_ofs SEQ_ANDY_WIN_3
-                gems_seq_ofs SEQ_ANDY_WIN_4
-SEQH_END_1:     dc.b 5                                  ; seq 15
-                gems_seq_ofs SEQ_END_1
-                gems_seq_ofs SEQ_END_2
-                gems_seq_ofs SEQ_END_3
-                gems_seq_ofs SEQ_END_4
-                gems_seq_ofs SEQ_END_5
-SEQH_END_6:     dc.b 5                                  ; seq 16
-                gems_seq_ofs SEQ_END_6
-                gems_seq_ofs SEQ_END_7
-                gems_seq_ofs SEQ_END_8
-                gems_seq_ofs SEQ_END_9
-                gems_seq_ofs SEQ_END_10
-SEQH_GAME_OVER: dc.b 1                                  ; seq 17
-                gems_seq_ofs SEQ_GAME_OVER
-SEQH_BTVILLEH:  dc.b 5                                  ; seq 18
-                gems_seq_ofs SEQ_BTVILLEH
-                gems_seq_ofs SEQ_BTVILLEH_2
-                gems_seq_ofs SEQ_BTVILLEH_3
-                gems_seq_ofs SEQ_BTVILLEH_4
-                gems_seq_ofs SEQ_BTVILLEH_5
-SEQH_EMPTY:     dc.b 0                                  ; seq 19
-SEQH_PSYCROW:   dc.b 5                                  ; seq 20
-                gems_seq_ofs SEQ_PSYCROW
-                gems_seq_ofs SEQ_PSYCROW_2
-                gems_seq_ofs SEQ_PSYCROW_3
-                gems_seq_ofs SEQ_PSYCROW_4
-                gems_seq_ofs SEQ_PSYCROW_5
-SEQH_THORNS:    dc.b 1                                  ; seq 21
-                gems_seq_ofs SEQ_THORNS
-SEQH_CROW:      dc.b 1                                  ; seq 22 vorona
-                gems_seq_ofs SEQ_CROW
-SEQH_WHIP:      dc.b 1                                  ; seq 23
-                gems_seq_ofs SEQ_WHIP
-SEQH_PIM:       dc.b 1                                  ; seq 24
-                gems_seq_ofs SEQ_PIM
-SEQH_COW:       dc.b 1                                  ; seq 25
-                gems_seq_ofs SEQ_COW
-SEQH_DOG:       dc.b 1                                  ; seq 26
-                gems_seq_ofs SEQ_DOG
-SEQH_PETE_LIFT: dc.b 1                                  ; seq 27
-                gems_seq_ofs SEQ_PETE_LIFT
-SEQH_JIM_HIT:   dc.b 1                                  ; seq 28
-                gems_seq_ofs SEQ_JIM_HIT
-SEQH_HAMSTER:   dc.b 1                                  ; seq 29
-                gems_seq_ofs SEQ_HAMSTER
-SEQH_GLASS:     dc.b 1                                  ; seq 30
-                gems_seq_ofs SEQ_GLASS
-SEQH_PETE_WOOF: dc.b 1                                  ; seq 31
-                gems_seq_ofs SEQ_PETE_WOOF
-SEQH_UFO:       dc.b 1                                  ; seq 32
-                gems_seq_ofs SEQ_UFO
-SEQH_CAT_MEOW:  dc.b 1                                  ; seq 33
-                gems_seq_ofs SEQ_CAT_MEOW
-SEQH_SNOT:      dc.b 1                                  ; seq 34
-                gems_seq_ofs SEQ_SNOT
-SEQH_RUMBLE:    dc.b 1                                  ; seq 35
-                gems_seq_ofs SEQ_RUMBLE
-SEQH_MONKEY:    dc.b 1                                  ; seq 36
-                gems_seq_ofs SEQ_MONKEY
-SEQH_CHEATER:   dc.b 1                                  ; seq 37
-                gems_seq_ofs SEQ_CHEATER
-SEQH_LIVEUP:    dc.b 1                                  ; seq 38
-                gems_seq_ofs SEQ_LIVEUP
-SEQH_HEADGUN:   dc.b 1                                  ; seq 39
-                gems_seq_ofs SEQ_HEADGUN
-SEQH_EJIM_TITLE:dc.b 1                                  ; seq 40
-                gems_seq_ofs SEQ_EJIM_TITLE
-SEQH_REFREGER:  dc.b 1                                  ; seq 41
-                gems_seq_ofs SEQ_REFREGER
-SEQH_RUMBLE_2:  dc.b 1                                  ; seq 42
-                gems_seq_ofs SEQ_RUMBLE_2
-SEQH_SPRING:    dc.b 1                                  ; seq 43
-                gems_seq_ofs SEQ_SPRING
-SEQH_ROCKET:    dc.b 1                                  ; seq 44
-                gems_seq_ofs SEQ_ROCKET
-SEQH_TICK:      dc.b 1                                  ; seq 45
-                gems_seq_ofs SEQ_TICK
-SEQH_DOOR:      dc.b 1                                  ; seq 46
-                gems_seq_ofs SEQ_DOOR
-SEQH_DOOR_CREAK:dc.b 1                                  ; seq 47
-                gems_seq_ofs SEQ_DOOR_CREAK
-SEQH_BURST:     dc.b 1                                  ; seq 48
-                gems_seq_ofs SEQ_BURST
-SEQH_TIRE_JUMP: dc.b 1                                  ; seq 49
-                gems_seq_ofs SEQ_TIRE_JUMP
-SEQH_LEVER:     dc.b 1                                  ; seq 50
-                gems_seq_ofs SEQ_LEVER
-SEQH_HEART:     dc.b 1                                  ; seq 51
-                gems_seq_ofs SEQ_HEART
-SEQH_MONSTER:   dc.b 1                                  ; seq 52
-                gems_seq_ofs SEQ_MONSTER
-SEQH_DOG_2:     dc.b 1                                  ; seq 53
-                gems_seq_ofs SEQ_DOG_2
-SEQH_CHUCK:     dc.b 1                                  ; seq 54
-                gems_seq_ofs SEQ_CHUCK
-SEQH_CHUCK_2:   dc.b 1                                  ; seq 55
-                gems_seq_ofs SEQ_CHUCK_2
-SEQH_SNOT_2:    dc.b 1                                  ; seq 56
-                gems_seq_ofs SEQ_SNOT_2
-SEQH_UFO_2:     dc.b 1                                  ; seq 57
-                gems_seq_ofs SEQ_UFO_2
-SEQH_CHUCK_3:   dc.b 1                                  ; seq 58
-                gems_seq_ofs SEQ_CHUCK_3
-SEQH_JIM_GROUND:dc.b 1                                  ; seq 59
-                gems_seq_ofs SEQ_JIM_GROUND
-SEQH_BONUS:     dc.b 1                                  ; seq 60
-                gems_seq_ofs SEQ_BONUS
-SEQH_SCREAM:    dc.b 1                                  ; seq 61
-                gems_seq_ofs SEQ_SCREAM
-SEQH_DOG_3:     dc.b 1                                  ; seq 62
-                gems_seq_ofs SEQ_DOG_3
-SEQH_RICOCHET:  dc.b 1                                  ; seq 63
-                gems_seq_ofs SEQ_RICOCHET
-SEQH_DOG_4:     dc.b 1                                  ; seq 64
-                gems_seq_ofs SEQ_DOG_4
-SEQH_ROCKET_2:  dc.b 2                                  ; seq 65
-                gems_seq_ofs SEQ_ROCKET_2
-                gems_seq_ofs SEQ_ROCKET_3
-SEQH_QUEEN_1:   dc.b 1                                  ; seq 66
-                gems_seq_ofs SEQ_QUEEN_1
-SEQH_QUEEN_2:   dc.b 1                                  ; seq 67
-                gems_seq_ofs SEQ_QUEEN_2
-SEQH_TUBE_OUT:  dc.b 1                                  ; seq 68
-                gems_seq_ofs SEQ_TUBE_OUT
-SEQH_PSYQ_FIRE: dc.b 3                                  ; seq 69
-                gems_seq_ofs SEQ_PSYQ_FIRE
-                gems_seq_ofs SEQ_EFFECT_4
-                gems_seq_ofs SEQ_EFFECT_5
-SEQH_JIM_FIRE:  dc.b 1                                  ; seq 70
-                gems_seq_ofs SEQ_JIM_FIRE
-SEQH_HELI_PART: dc.b 1                                  ; seq 71
-                gems_seq_ofs SEQ_HELI_PART
-SEQH_PLASMA_FIRE:dc.b 2                                 ; seq 72
-                gems_seq_ofs SEQ_PLASMA_FIRE
-                gems_seq_ofs SEQ_PLASMA_END
-SEQH_HP_UP:     dc.b 1                                  ; seq 73
-                gems_seq_ofs SEQ_HP_UP
-SEQH_DESTROY:   dc.b 1                                  ; seq 74
-                gems_seq_ofs SEQ_DESTROY
-SEQH_FIRE:      dc.b 1                                  ; seq 75
-                gems_seq_ofs SEQ_FIRE
-SEQH_FIRE_2:    dc.b 1                                  ; seq 76
-                gems_seq_ofs SEQ_FIRE_2
-SEQH_FIRE_3:    dc.b 1                                  ; seq 77
-                gems_seq_ofs SEQ_FIRE_3
-SEQH_SCREAM_2:  dc.b 1                                  ; seq 78
-                gems_seq_ofs SEQ_SCREAM_2
-SEQH_CHICKEN:   dc.b 1                                  ; seq 79
-                gems_seq_ofs SEQ_CHICKEN
-SEQH_CHICKEN_2: dc.b 1                                  ; seq 80
-                gems_seq_ofs SEQ_CHICKEN_2
-SEQH_CH_TELEPRT:dc.b 1                                  ; seq 81
-                gems_seq_ofs SEQ_CH_TELEPRT
-SEQH_TELEPORT:  dc.b 1                                  ; seq 82
-                gems_seq_ofs SEQ_TELEPORT
-SEQH_EFFECT:    dc.b 1                                  ; seq 83
-                gems_seq_ofs SEQ_EFFECT
-SEQH_WTR_PLOP:  dc.b 1                                  ; seq 84
-                gems_seq_ofs SEQ_WTR_PLOP
-SEQH_WTR_PLOP_2:dc.b 1                                  ; seq 85
-                gems_seq_ofs SEQ_WTR_PLOP_2
-SEQH_WTR_PLOP_3:dc.b 1                                  ; seq 86
-                gems_seq_ofs SEQ_WTR_PLOP_3
-SEQH_WTR_PLOP_4:dc.b 1                                  ; seq 87
-                gems_seq_ofs SEQ_WTR_PLOP_4
-SEQH_GROOVY:    dc.b 1                                  ; seq 88
-                gems_seq_ofs SEQ_GROOVY
-SEQH_JIM_MUSCLE:dc.b 1                                  ; seq 89
-                gems_seq_ofs SEQ_JIM_MUSCLE
-SEQH_JIM_HEY:   dc.b 1                                  ; seq 90
-                gems_seq_ofs SEQ_JIM_HEY
-SEQH_PRINCESS:  dc.b 1                                  ; seq 91
-                gems_seq_ofs SEQ_PRINCESS
-SEQH_SCREAM_3:  dc.b 1                                  ; seq 92
-                gems_seq_ofs SEQ_SCREAM_3
-SEQH_JIM_SWEARS:dc.b 1                                  ; seq 93
-                gems_seq_ofs SEQ_JIM_SWEARS
-SEQH_SCREAM_4:  dc.b 1                                  ; seq 94
-                gems_seq_ofs SEQ_SCREAM_4
-SEQH_JIM_HIT_2: dc.b 1                                  ; seq 95
-                gems_seq_ofs SEQ_JIM_HIT_2
-SEQH_SCREAM_5:  dc.b 1                                  ; seq 96
-                gems_seq_ofs SEQ_SCREAM_5
-SEQH_JIM_SPEED: dc.b 1                                  ; seq 97
-                gems_seq_ofs SEQ_JIM_SPEED
-SEQH_JIM_YEHOO: dc.b 1                                  ; seq 98
-                gems_seq_ofs SEQ_JIM_YEHOO
-SEQH_JIM_WUUH:  dc.b 1                                  ; seq 99
-                gems_seq_ofs SEQ_JIM_WUUH
-SEQH_JIM_AMMO:  dc.b 1                                  ; seq 100
-                gems_seq_ofs SEQ_JIM_AMMO
-SEQH_SCREAM_6:  dc.b 1                                  ; seq 101
-                gems_seq_ofs SEQ_SCREAM_6
-SEQH_JIM_LALALA:dc.b 1                                  ; seq 102
-                gems_seq_ofs SEQ_JIM_LALALA
-SEQH_HOUL:      dc.b 1                                  ; seq 103
-                gems_seq_ofs SEQ_HOUL
-SEQH_COW_2:     dc.b 1                                  ; seq 104
-                gems_seq_ofs SEQ_COW_2
-SEQH_HOUL_2:    dc.b 1                                  ; seq 105
-                gems_seq_ofs SEQ_HOUL_2
-SEQH_JIM_HOUYEAH:dc.b 1                                 ; seq 106
-                gems_seq_ofs SEQ_JIM_HOUYEAH
-SEQH_JIM_OUCH:  dc.b 1                                  ; seq 107
-                gems_seq_ofs SEQ_JIM_OUCH
-SEQH_JIM_AYAU:  dc.b 1                                  ; seq 108
-                gems_seq_ofs SEQ_JIM_AYAU
-SEQH_JIM_DAU:   dc.b 1                                  ; seq 109
-                gems_seq_ofs SEQ_JIM_DAU
-SEQH_JIM_PLASMA:dc.b 1                                  ; seq 110
-                gems_seq_ofs SEQ_JIM_PLASMA
-SEQH_JIM_AAAH:  dc.b 1                                  ; seq 111
-                gems_seq_ofs SEQ_JIM_AAAH
-SEQH_SCRATCH:   dc.b 1                                  ; seq 112
-                gems_seq_ofs SEQ_SCRATCH
-SEQH_SCRATCH_2: dc.b 1                                  ; seq 113
-                gems_seq_ofs SEQ_SCRATCH_2
-SEQH_PRISONER:  dc.b 1                                  ; seq 114
-                gems_seq_ofs SEQ_PRISONER
-SEQH_SCREAM_7:  dc.b 1                                  ; seq 115
-                gems_seq_ofs SEQ_SCREAM_7
-SEQH_DEMON:     dc.b 1                                  ; seq 116
-                gems_seq_ofs SEQ_DEMON
-SEQH_DEMON_2:   dc.b 1                                  ; seq 117
-                gems_seq_ofs SEQ_DEMON_2
-SEQH_EFFECT_2:  dc.b 1                                  ; seq 118
-                gems_seq_ofs SEQ_EFFECT_2
-SEQH_EFFECT_3:  dc.b 1                                  ; seq 119
-                gems_seq_ofs SEQ_EFFECT_3
-SEQH_PSYQ_HIT:  dc.b 1                                  ; seq 120
-                gems_seq_ofs SEQ_PSYQ_HIT
-SEQH_PSYQ_HIT_2:dc.b 1                                  ; seq 121
-                gems_seq_ofs SEQ_PSYQ_HIT_2
-SEQH_PSYQ_HIT_3:dc.b 1                                  ; seq 122
-                gems_seq_ofs SEQ_PSYQ_HIT_3
-SEQH_PSYQ_HIT_4:dc.b 1                                  ; seq 123
-                gems_seq_ofs SEQ_PSYQ_HIT_4
-SEQH_PSYQ_HIT_5:dc.b 1                                  ; seq 124
-                gems_seq_ofs SEQ_PSYQ_HIT_5
-    include "src/gems_seq.inc"
-DIGITAL_TBL_Z80:                        ; DATA XREF: sub_247576   o
-                                        ; digital sample table: 12 байт на сэмпл, номер сэмпла = (нота - $30) mod $60
-SMP_DRUM_00:    gems_sample $05, SMP_DRUM_00_DAT, SMP_DRUM_00_END       ;   0 $00
-SMP_DRUM_01:    gems_sample $05, SMP_DRUM_01_DAT, SMP_DRUM_01_END       ;   1 $01
-SMP_DRUM_02:    gems_sample $05, SMP_DRUM_02_DAT, SMP_DRUM_02_END       ;   2 $02
-SMP_DRUM_03:    gems_sample $06, SMP_DRUM_03_DAT, SMP_DRUM_03_END       ;   3 $03
-SMP_DRUM_04:    gems_sample $05, SMP_DRUM_04_DAT, SMP_DRUM_04_END       ;   4 $04
-SMP_DRUM_05:    gems_sample $05, SMP_DRUM_05_DAT, SMP_DRUM_05_END       ;   5 $05
-SMP_DRUM_06:    gems_sample $05, SMP_DRUM_06_DAT, SMP_DRUM_06_END       ;   6 $06
-SMP_DRUM_07:    gems_sample $05, SMP_DRUM_07_DAT, SMP_DRUM_07_END       ;   7 $07
-SMP_DRUM_08:    gems_sample $05, SMP_DRUM_08_DAT, SMP_DRUM_08_END       ;   8 $08
-SMP_HOUL:       gems_sample $09, SMP_HOUL_DAT, SMP_HOUL_END             ;   9 $09
-SMP_DRUM_0A:    gems_sample $08, SMP_DRUM_0A_DAT, SMP_DRUM_0A_END       ;  10 $0A
-SMP_CAT_MEOW:   gems_sample $07, SMP_CAT_MEOW_DAT, SMP_CAT_MEOW_END     ;  11 $0B
-SMP_THORNS:     gems_sample $07, SMP_THORNS_DAT, SMP_THORNS_END         ;  12 $0C
-SMP_PRINCESS:   gems_sample $06, SMP_PRINCESS_DAT, SMP_PRINCESS_END     ;  13 $0D
-SMP_WHIP:       gems_sample $05, SMP_WHIP_DAT, SMP_WHIP_END             ;  14 $0E
-SMP_CROW:       gems_sample $07, SMP_CROW_DAT, SMP_CROW_END             ;  15 $0F
-SMP_COW:        gems_sample $0A, SMP_COW_DAT, SMP_COW_END               ;  16 $10
-SMP_DOG:        gems_sample $0A, SMP_DOG_DAT, SMP_DOG_END               ;  17 $11
-SMP_HAMSTER:    gems_sample $08, SMP_HAMSTER_DAT, SMP_HAMSTER_END       ;  18 $12
-SMP_JIM_HIT:    gems_sample $0A, SMP_JIM_HIT_DAT, SMP_JIM_HIT_END       ;  19 $13
-SMP_GLASS:      gems_sample $05, SMP_GLASS_DAT, SMP_GLASS_END           ;  20 $14
-SMP_SPRING:     gems_sample $07, SMP_SPRING_DAT, SMP_SPRING_END         ;  21 $15
-SMP_PETE_WOOF:  gems_sample $09, SMP_PETE_WOOF_DAT, SMP_PETE_WOOF_END   ;  22 $16
-SMP_EFFECT:     gems_sample $05, SMP_EFFECT_DAT, SMP_EFFECT_END         ;  23 $17
-SMP_MONKEY:     gems_sample $06, SMP_MONKEY_DAT, SMP_MONKEY_END         ;  24 $18
-SMP_SNOT:       gems_sample $0A, SMP_SNOT_DAT, SMP_SNOT_END             ;  25 $19
-SMP_RUMBLE:     gems_sample $08, SMP_RUMBLE_DAT, SMP_RUMBLE_END         ;  26 $1A
-SMP_CHEATER:    gems_sample $05, SMP_CHEATER_DAT, SMP_CHEATER_END       ;  27 $1B
-SMP_DOOR:       gems_sample $0A, SMP_DOOR_DAT, SMP_DOOR_END             ;  28 $1C
-SMP_DOOR_CREAK: gems_sample $0A, SMP_DOOR_CREAK_DAT, SMP_DOOR_CREAK_END ;  29 $1D
-SMP_HEADGUN:    gems_sample $08, SMP_HEADGUN_DAT, SMP_HEADGUN_END       ;  30 $1E
-SMP_BURST:      gems_sample $08, SMP_BURST_DAT, SMP_BURST_END           ;  31 $1F
-SMP_REFREGER:   gems_sample $09, SMP_REFREGER_DAT, SMP_REFREGER_END     ;  32 $20
-SMP_RUMBLE_2:   gems_sample $08, SMP_RUMBLE_2_DAT, SMP_RUMBLE_2_END     ;  33 $21
-SMP_LEVER:      gems_sample $07, SMP_LEVER_DAT, SMP_LEVER_END           ;  34 $22
-SMP_CHICKEN:    gems_sample $08, SMP_CHICKEN_DAT, SMP_CHICKEN_END       ;  35 $23
-SMP_MONSTER:    gems_sample $09, SMP_MONSTER_DAT, SMP_MONSTER_END       ;  36 $24
-SMP_CHICKEN_2:  gems_sample $08, SMP_CHICKEN_2_DAT, SMP_CHICKEN_2_END   ;  37 $25
-SMP_CHUCK:      gems_sample $08, SMP_CHUCK_DAT, SMP_CHUCK_END           ;  38 $26
-SMP_CHUCK_2:    gems_sample $07, SMP_CHUCK_2_DAT, SMP_CHUCK_2_END       ;  39 $27
-SMP_TIRE_JUMP:  gems_sample $09, SMP_TIRE_JUMP_DAT, SMP_TIRE_JUMP_END   ;  40 $28
-SMP_LIVEUP:     gems_sample $05, SMP_LIVEUP_DAT, SMP_LIVEUP_END         ;  41 $29
-SMP_JIM_GROUND: gems_sample $07, SMP_JIM_GROUND_DAT, SMP_JIM_GROUND_END ;  42 $2A
-                gems_sample_none                                        ;  43 $2B
-SMP_DOG_2:      gems_sample $09, SMP_DOG_2_DAT, SMP_DOG_2_END           ;  44 $2C
-SMP_WTR_PLOP:   gems_sample $05, SMP_WTR_PLOP_DAT, SMP_WTR_PLOP_END     ;  45 $2D
-                gems_sample_none                                        ;  46 $2E
-SMP_SNOT_2:     gems_sample $08, SMP_SNOT_2_DAT, SMP_SNOT_2_END         ;  47 $2F
-SMP_UFO:        gems_sample $07, SMP_UFO_DAT, SMP_UFO_END               ;  48 $30
-SMP_EJIM_TITLE: gems_sample $05, SMP_EJIM_TITLE_DAT, SMP_EJIM_TITLE_END ;  49 $31
-                gems_sample_none                                        ;  50 $32
-SMP_BONUS:      gems_sample $0A, SMP_BONUS_DAT, SMP_BONUS_END           ;  51 $33
-SMP_QUEEN:      gems_sample $06, SMP_QUEEN_DAT, SMP_QUEEN_END           ;  52 $34
-SMP_DOG_3:      gems_sample $09, SMP_DOG_3_DAT, SMP_DOG_3_END           ;  53 $35
-SMP_RICOCHET:   gems_sample $08, SMP_RICOCHET_DAT, SMP_RICOCHET_END     ;  54 $36
-SMP_DOG_4:      gems_sample $07, SMP_DOG_4_DAT, SMP_DOG_4_END           ;  55 $37
-SMP_CHUCK_3:    gems_sample $07, SMP_CHUCK_3_DAT, SMP_CHUCK_3_END       ;  56 $38
-                gems_sample_none                                        ;  57 $39
-SMP_GROOVY:     gems_sample $05, SMP_GROOVY_DAT, SMP_GROOVY_END         ;  58 $3A
-                gems_sample_none                                        ;  59 $3B
-SMP_SCREAM:     gems_sample $07, SMP_SCREAM_DAT, SMP_SCREAM_END         ;  60 $3C
-SMP_SCREAM_4:   gems_sample $08, SMP_SCREAM_4_DAT, SMP_SCREAM_4_END     ;  61 $3D
-SMP_SCRATCH:    gems_sample $08, SMP_SCRATCH_DAT, SMP_SCRATCH_END       ;  62 $3E
-SMP_JIM_MUSCLE: gems_sample $06, SMP_JIM_MUSCLE_DAT, SMP_JIM_MUSCLE_END ;  63 $3F
-SMP_JIM_HEY:    gems_sample $05, SMP_JIM_HEY_DAT, SMP_JIM_HEY_END       ;  64 $40
-                gems_sample_none                                        ;  65 $41
-                gems_sample_none                                        ;  66 $42
-SMP_JIM_SWEARS: gems_sample_ex $16, SMP_JIM_SWEARS_DAT, SMP_JIM_SWEARS_END, 0, SMP_JIM_SWEARS_END-SMP_JIM_SWEARS_DAT, 0;  67 $43
-SMP_SCREAM_7:   gems_sample $05, SMP_SCREAM_7_DAT, SMP_SCREAM_7_END     ;  68 $44
-                gems_sample_none                                        ;  69 $45
-SMP_JIM_HIT_2:  gems_sample $05, SMP_JIM_HIT_2_DAT, SMP_JIM_HIT_2_END   ;  70 $46
-                gems_sample_none                                        ;  71 $47
-SMP_JIM_SPEED:  gems_sample $05, SMP_JIM_SPEED_DAT, SMP_JIM_SPEED_END   ;  72 $48
-SMP_JIM_YEHOO:  gems_sample $05, SMP_JIM_YEHOO_DAT, SMP_JIM_YEHOO_END   ;  73 $49
-SMP_JIM_WUUH:   gems_sample $05, SMP_JIM_WUUH_DAT, SMP_JIM_WUUH_END     ;  74 $4A
-SMP_JIM_AMMO:   gems_sample $05, SMP_JIM_AMMO_DAT, SMP_JIM_AMMO_END     ;  75 $4B
-                gems_sample_none                                        ;  76 $4C
-SMP_JIM_LALALA: gems_sample $05, SMP_JIM_LALALA_DAT, SMP_JIM_LALALA_END ;  77 $4D
-                gems_sample_none                                        ;  78 $4E
-SMP_COW_2:      gems_sample $05, SMP_COW_2_DAT, SMP_COW_2_END           ;  79 $4F
-                gems_sample_none                                        ;  80 $50
-SMP_JIM_HOUYEAH:gems_sample $05, SMP_JIM_HOUYEAH_DAT, SMP_JIM_HOUYEAH_END;  81 $51
-SMP_JIM_OUCH:   gems_sample $05, SMP_JIM_OUCH_DAT, SMP_JIM_OUCH_END     ;  82 $52
-SMP_JIM_AYAU:   gems_sample $05, SMP_JIM_AYAU_DAT, SMP_JIM_AYAU_END     ;  83 $53
-SMP_JIM_DAU:    gems_sample $06, SMP_JIM_DAU_DAT, SMP_JIM_DAU_END       ;  84 $54
-SMP_JIM_PLASMA: gems_sample $05, SMP_JIM_PLASMA_DAT, SMP_JIM_PLASMA_END ;  85 $55
-SMP_JIM_AAAH:   gems_sample $06, SMP_JIM_AAAH_DAT, SMP_JIM_AAAH_END     ;  86 $56
-SMP_JIM_AAAH_2: gems_sample $06, SMP_JIM_AAAH_2_DAT, SMP_JIM_AAAH_2_END ;  87 $57
-                gems_sample_none                                        ;  88 $58
-                gems_sample_none                                        ;  89 $59
-SMP_PRISONER:   gems_sample $07, SMP_PRISONER_DAT, SMP_PRISONER_END     ;  90 $5A
-SMP_DRUM_00_DAT:
-    binclude "binaries/sounds/snd_26B1AC.bin"
-SMP_DRUM_00_END:
-    
-SMP_DRUM_01_DAT:
-    binclude "binaries/sounds/snd_26BD2A.bin"
-SMP_DRUM_01_END:
-    
-SMP_DRUM_02_DAT:
-    binclude "binaries/sounds/snd_26C793.bin"
-SMP_DRUM_02_END:
-    
-SMP_DRUM_03_DAT:
-    binclude "binaries/sounds/snd_26D2E5.bin"
-SMP_DRUM_03_END:
-    
-SMP_DRUM_04_DAT:
-    binclude "binaries/sounds/snd_26E5C0.bin"
-SMP_DRUM_04_END:
-    
-SMP_DRUM_05_DAT:
-    binclude "binaries/sounds/snd_26ED6B.bin"
-SMP_DRUM_05_END:
-    
-SMP_DRUM_06_DAT:
-    binclude "binaries/sounds/snd_26F5D4.bin"
-SMP_DRUM_06_END:
-    
-SMP_DRUM_07_DAT:
-    binclude "binaries/sounds/snd_26F848.bin"
-SMP_DRUM_07_END:
-    
-SMP_DRUM_08_DAT:
-    binclude "binaries/sounds/snd_27015C.bin"
-SMP_DRUM_08_END:
-    
-SMP_HOUL_DAT:
-    binclude "binaries/sounds/snd_270EFB.bin"
-SMP_HOUL_END:
-    
-SMP_DRUM_0A_DAT:
-    binclude "binaries/sounds/snd_27194A.bin"
-SMP_DRUM_0A_END:
-    
-SMP_CAT_MEOW_DAT:
-    binclude "binaries/sounds/snd_2721CD.bin"
-SMP_CAT_MEOW_END:
-    
-SMP_THORNS_DAT:
-    binclude "binaries/sounds/snd_2738C4.bin"
-SMP_THORNS_END:
-    
-SMP_PRINCESS_DAT:
-    binclude "binaries/sounds/snd_274BB1.bin"
-SMP_PRINCESS_END:
-    
-SMP_WHIP_DAT:
-    binclude "binaries/sounds/snd_27663B.bin"
-SMP_WHIP_END:
-    
-SMP_CROW_DAT:
-    binclude "binaries/sounds/snd_277B90.bin"
-SMP_CROW_END:
-    
-SMP_COW_DAT:
-    binclude "binaries/sounds/snd_27927F.bin"
-SMP_COW_END:
-    
-SMP_DOG_DAT:
-    binclude "binaries/sounds/snd_27B638.bin"
-SMP_DOG_END:
-    
-SMP_HAMSTER_DAT:
-    binclude "binaries/sounds/snd_27C35F.bin"
-SMP_HAMSTER_END:
-    
-SMP_JIM_HIT_DAT:
-    binclude "binaries/sounds/snd_27C9A6.bin"
-SMP_JIM_HIT_END:
-    
-SMP_GLASS_DAT:
-    binclude "binaries/sounds/snd_27CE63.bin"
-SMP_GLASS_END:
-    
-SMP_SPRING_DAT:
-    binclude "binaries/sounds/snd_27E16D.bin"
-SMP_SPRING_END:
-    
-SMP_PETE_WOOF_DAT:
-    binclude "binaries/sounds/snd_27E83C.bin"
-SMP_PETE_WOOF_END:
-    
-SMP_EFFECT_DAT:
-    binclude "binaries/sounds/snd_27EDA9.bin"
-SMP_EFFECT_END:
-    
-SMP_MONKEY_DAT:
-    binclude "binaries/sounds/snd_27F147.bin"
-SMP_MONKEY_END:
-    
-SMP_SNOT_DAT:
-    binclude "binaries/sounds/snd_280AE0.bin"
-SMP_SNOT_END:
-    
-SMP_RUMBLE_DAT:
-    binclude "binaries/sounds/snd_281432.bin"
-SMP_RUMBLE_END:
-    
-SMP_CHEATER_DAT:
-    binclude "binaries/sounds/snd_282D46.bin"
-SMP_CHEATER_END:
-    
-SMP_DOOR_DAT:
-    binclude "binaries/sounds/snd_28431A.bin"
-SMP_DOOR_END:
-    
-SMP_DOOR_CREAK_DAT:
-    binclude "binaries/sounds/snd_284AC8.bin"
-SMP_DOOR_CREAK_END:
-    
-SMP_HEADGUN_DAT:
-    binclude "binaries/sounds/snd_285A70.bin"
-SMP_HEADGUN_END:
-    
-SMP_BURST_DAT:
-    binclude "binaries/sounds/snd_28662E.bin"
-SMP_BURST_END:
-    
-SMP_REFREGER_DAT:
-    binclude "binaries/sounds/snd_286F1F.bin"
-SMP_REFREGER_END:
-    
-SMP_RUMBLE_2_DAT:
-    binclude "binaries/sounds/snd_287F5A.bin"
-SMP_RUMBLE_2_END:
-    
-SMP_LEVER_DAT:
-    binclude "binaries/sounds/snd_289341.bin"
-SMP_LEVER_END:
-    
-SMP_CHICKEN_DAT:
-    binclude "binaries/sounds/snd_28A333.bin"
-SMP_CHICKEN_END:
-    
-SMP_MONSTER_DAT:
-    binclude "binaries/sounds/snd_28B4CD.bin"
-SMP_MONSTER_END:
-    
-SMP_CHICKEN_2_DAT:
-    binclude "binaries/sounds/snd_28C932.bin"
-SMP_CHICKEN_2_END:
-    
-SMP_CHUCK_DAT:
-    binclude "binaries/sounds/snd_28D48D.bin"
-SMP_CHUCK_END:
-    
-SMP_CHUCK_2_DAT:
-    binclude "binaries/sounds/snd_28E243.bin"
-SMP_CHUCK_2_END:
-    
-SMP_TIRE_JUMP_DAT:
-    binclude "binaries/sounds/snd_28F5A2.bin"
-SMP_TIRE_JUMP_END:
-    
-SMP_LIVEUP_DAT:
-    binclude "binaries/sounds/snd_28FD22.bin"
-SMP_LIVEUP_END:
-    
-SMP_JIM_GROUND_DAT:
-    binclude "binaries/sounds/snd_293071.bin"
-SMP_JIM_GROUND_END:
-    
-SMP_DOG_2_DAT:
-    binclude "binaries/sounds/snd_293BBA.bin"
-SMP_DOG_2_END:
-    
-SMP_WTR_PLOP_DAT:
-    binclude "binaries/sounds/snd_2956AB.bin"
-SMP_WTR_PLOP_END:
-    
-SMP_SNOT_2_DAT:
-    binclude "binaries/sounds/snd_295A59.bin"
-SMP_SNOT_2_END:
-    
-SMP_UFO_DAT:
-    binclude "binaries/sounds/snd_2961B5.bin"
-SMP_UFO_END:
-    
-SMP_EJIM_TITLE_DAT:
-    binclude "binaries/sounds/snd_296D3B.bin"
-SMP_EJIM_TITLE_END:
-    
-SMP_BONUS_DAT:
-    binclude "binaries/sounds/snd_29B4DA.bin"
-SMP_BONUS_END:
-    
-SMP_QUEEN_DAT:
-    binclude "binaries/sounds/snd_29C355.bin"
-SMP_QUEEN_END:
-    
-SMP_DOG_3_DAT:
-    binclude "binaries/sounds/snd_29CAA1.bin"
-SMP_DOG_3_END:
-    
-SMP_RICOCHET_DAT:
-    binclude "binaries/sounds/snd_29F4B0.bin"
-SMP_RICOCHET_END:
-    
-SMP_DOG_4_DAT:
-    binclude "binaries/sounds/snd_2A04AB.bin"
-SMP_DOG_4_END:
-    
-SMP_CHUCK_3_DAT:
-    binclude "binaries/sounds/snd_2A1501.bin"
-SMP_CHUCK_3_END:
-    
-SMP_GROOVY_DAT:
-    binclude "binaries/sounds/snd_2A2A36.bin"
-SMP_GROOVY_END:
-    
-SMP_SCREAM_DAT:
-    binclude "binaries/sounds/snd_2A4774.bin"
-SMP_SCREAM_END:
-    
-SMP_SCREAM_4_DAT:
-    binclude "binaries/sounds/snd_2A6833.bin"
-SMP_SCREAM_4_END:
-    
-SMP_SCRATCH_DAT:
-    binclude "binaries/sounds/snd_2A7954.bin"
-SMP_SCRATCH_END:
-    
-SMP_JIM_MUSCLE_DAT:
-    binclude "binaries/sounds/snd_2A8349.bin"
-SMP_JIM_MUSCLE_END:
-    
-SMP_JIM_HEY_DAT:
-    binclude "binaries/sounds/snd_2A9ADC.bin"
-SMP_JIM_HEY_END:
-    
-SMP_JIM_SWEARS_DAT:
-    binclude "binaries/sounds/snd_2AAAC7.bin"
-SMP_JIM_SWEARS_END:
-    
-SMP_SCREAM_7_DAT:
-    binclude "binaries/sounds/snd_2AD592.bin"
-SMP_SCREAM_7_END:
-    
-SMP_JIM_HIT_2_DAT:
-    binclude "binaries/sounds/snd_2AF51E.bin"
-SMP_JIM_HIT_2_END:
-    
-SMP_JIM_SPEED_DAT:
-    binclude "binaries/sounds/snd_2AFF17.bin"
-SMP_JIM_SPEED_END:
-    
-SMP_JIM_YEHOO_DAT:
-    binclude "binaries/sounds/snd_2B3EC3.bin"
-SMP_JIM_YEHOO_END:
-    
-SMP_JIM_WUUH_DAT:
-    binclude "binaries/sounds/snd_2B6E29.bin"
-SMP_JIM_WUUH_END:
-    
-SMP_JIM_AMMO_DAT:
-    binclude "binaries/sounds/snd_2B7ABE.bin"
-SMP_JIM_AMMO_END:
-    
-SMP_JIM_LALALA_DAT:
-    binclude "binaries/sounds/snd_2B93A6.bin"
-SMP_JIM_LALALA_END:
-    
-SMP_COW_2_DAT:
-    binclude "binaries/sounds/snd_2BC2B2.bin"
-SMP_COW_2_END:
-    
-SMP_JIM_HOUYEAH_DAT:
-    binclude "binaries/sounds/snd_2BD4DA.bin"
-SMP_JIM_HOUYEAH_END:
-    
-SMP_JIM_OUCH_DAT:
-    binclude "binaries/sounds/snd_2BFFBE.bin"
-SMP_JIM_OUCH_END:
-    
-SMP_JIM_AYAU_DAT:
-    binclude "binaries/sounds/snd_2C1680.bin"
-SMP_JIM_AYAU_END:
-    
-SMP_JIM_DAU_DAT:
-    binclude "binaries/sounds/snd_2C2F9D.bin"
-SMP_JIM_DAU_END:
-    
-SMP_JIM_PLASMA_DAT:
-    binclude "binaries/sounds/snd_2C3B7C.bin"
-SMP_JIM_PLASMA_END:
-    
-SMP_JIM_AAAH_DAT:
-    binclude "binaries/sounds/snd_2C563C.bin"
-SMP_JIM_AAAH_END:
-    
-SMP_JIM_AAAH_2_DAT:
-    binclude "binaries/sounds/snd_2C61CC.bin"
-SMP_JIM_AAAH_2_END:
-    
-SMP_PRISONER_DAT:
-    binclude "binaries/sounds/snd_2C91BC.bin"
-SMP_PRISONER_END:
+    include "jiminc/gems_bank.inc"
     
                 dc.b 0
 

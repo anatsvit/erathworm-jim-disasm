@@ -1,5 +1,5 @@
-byte_2FCF34:    dc.b   0,  1,$7D,$65,$9A,$6F,$8B,$6A,$8C,$6A
-                                        ; DATA XREF: ROM:off_3268   o
+spr_bucket_boss_part_77:    dc.b   0,  1,$7D,$65,$9A,$6F,$8B,$6A,$8C,$6A
+                                        ; DATA XREF: ROM:frame_bucket_boss_part_77   o
                 dc.w sprite_32_16
                 dc.w $7B63
                 dc.w $9500 ! ((grp_59300 / 2) & $00FF)

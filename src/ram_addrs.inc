@@ -357,8 +357,8 @@ health_buffer equ $FFFFFDC8
 word_FFFDCA equ $FFFFFDCA
 spawn_offset_x equ $FFFFFDCC ; смещение точки спавна по X от ячейки карты spawn_block_x: $FFF0 - левый край экрана, $150 - правый
 spawn_offset_y equ $FFFFFDCE ; смещение точки спавна по Y от ячейки карты spawn_block_y: $F0 - верх экрана, $1E0 - низ
-word_FFFDD4 equ $FFFFFDD4
-word_FFFDD6 equ $FFFFFDD6
+bucket_boss_pose equ $FFFFFDD4 ; поза босса-ведра: скрипты движения пишут номер в младший байт ($83,1,$FD,$D5,0,N), update_bucket_boss раскладывает 21 часть по bucket_boss_pose_tbl[поза] и обнуляет
+chicken_boss_pose equ $FFFFFDD6 ; поза курицы-босса: скрипты движения пишут номер в младший байт ($83,1,$FD,$D7,0,N), update_chicken_boss раскладывает 17 частей по chicken_boss_pose_tbl[поза] и обнуляет
 shot_angle_target equ $FFFFFDD8
 shot_angle_current equ $FFFFFDDA
 air_refiller_seconds equ $FFFFFDDC
@@ -382,7 +382,7 @@ byte_FFFDEE equ $FFFFFDEE
 level_transition_active equ $FFFFFDF0 ; ставится на время телепорта (activity_teleport_toilet) и перехода секции Level 5 (darkness_next_section), нигде не читается
 teleport_anim_sync equ $FFFFFDF1 ; телепорт: анимация off_1AD964 ставит 1 в конце дематериализации и ждёт, пока код загрузит точку назначения и обнулит; в конце материализации снова 1 - код ждёт её, чтобы вернуть управление
 exit_door_entered equ $FFFFFDF2 ; Level 5: anim_jim_exit_door в конце ставит 1, процедура уровня darkness_level_update переходит в следующую секцию (darkness_next_section, selectedLevelOption+1) и сбрасывает
-bucket_boss_phase equ $FFFFFDF3 ;Фаза босса-ведра на NJC (объект stru_25AB14, проц sub_2522D0). 0 - бой не начался, 1 - просто стоит и ждёт (HP $A), 2 - прикрывает голову, на Джима сверху падают саксофоны (HP $96), 5 - трансформация в ведро-мобиль, стоит (HP $FA, неуязвим), 4 - ведро-мобиль стреляет наковальнями стоя на месте, 3 - ведро-мобиль ездит туда-сюда, попадания засчитываются только с той стороны, куда он смотрит (HP $FA), 6 - босс дотронулся до Джима, по концу скрипта откат в фазу 1. Цепочка при расстреле: 1 -> 2 -> 5 -> 4 -> 3 -> уничтожен (is_bucket_boss_destroyed). Номер фазы пишут сами move-скрипты объекта командой $83,1,$FD,$F3,0,N
+bucket_boss_phase equ $FFFFFDF3 ;Фаза босса-ведра на NJC (объект object_bucket_boss, проц update_bucket_boss). 0 - бой не начался, 1 - просто стоит и ждёт (HP $A), 2 - прикрывает голову, на Джима сверху падают саксофоны (HP $96), 5 - трансформация в ведро-мобиль, стоит (HP $FA, неуязвим), 4 - ведро-мобиль стреляет наковальнями стоя на месте, 3 - ведро-мобиль ездит туда-сюда, попадания засчитываются только с той стороны, куда он смотрит (HP $FA), 6 - босс дотронулся до Джима, по концу скрипта откат в фазу 1. Цепочка при расстреле: 1 -> 2 -> 5 -> 4 -> 3 -> уничтожен (is_bucket_boss_destroyed). Номер фазы пишут сами move-скрипты объекта командой $83,1,$FD,$F3,0,N
 chicken_boss_anim_id equ $FFFFFDF4
 is_bucket_boss_destroyed equ $FFFFFDF5 ;Босс-ведро на NJC добит (ставится в fire_to_bucket_boss, когда в фазе 3 кончился HP). Пока флаг взведён, njc_level_events каждые 8 кадров подрывает объекты сцены (звук $4A), а когда взрывать больше нечего - снимает флаг, ставит byte_FFFBF0, отпускает камеру и запускает реплику $23. Cм. bucket_boss_phase
 byte_FFFDF6 equ $FFFFFDF6

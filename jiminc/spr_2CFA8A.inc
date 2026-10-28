@@ -1,5 +1,5 @@
-byte_2CFA8A:    dc.b   0,  1,$7B,$7D,$84,$8D,$7F,$85,$80,$85
-                                        ; DATA XREF: ROM:off_BEC   o
+spr_chicken_boss_part_30:    dc.b   0,  1,$7B,$7D,$84,$8D,$7F,$85,$80,$85
+                                        ; DATA XREF: ROM:frame_chicken_boss_part_30   o
                 dc.w sprite_16_16
                 dc.w $797B
                 dc.w $9500 ! ((grp_74F80 / 2) & $00FF)

@@ -792,13 +792,13 @@ stru_25AAFC:    dc.b $8D                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $4000              ; sprite_attr
-                dc.l anim_bucket        ; anim_address
+                dc.l bucket_boss_part_anim_01        ; anim_address
                 dc.b 2                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25AB14:    dc.b $14                ; obj_id
+object_bucket_boss:    dc.b $14                ; obj_id
                                         ; DATA XREF: sub_24DEF2+54   o
                 dc.b $A                 ; health ; Что-то связанное с боссом ведром на NJC
                 dc.b $21                ; obj_flags
@@ -812,7 +812,7 @@ stru_25AB14:    dc.b $14                ; obj_id
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_2522D0         ; update_proc
+                dc.l update_bucket_boss         ; update_proc
 stru_25AB2C:    dc.b $2C                ; obj_id
                                         ; DATA XREF: spawn_fridge+A   o
                 dc.b 2                  ; health
@@ -2145,13 +2145,13 @@ stru_25B33C:    dc.b $8E                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $4000              ; sprite_attr
-                dc.l anim_eye_gate      ; anim_address
+                dc.l chicken_boss_part_anim_01      ; anim_address
                 dc.b 2                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B354:    dc.b $1C                ; obj_id
+object_chicken_boss:    dc.b $1C                ; obj_id
                                         ; DATA XREF: sub_24DD18+C2   o
                 dc.b 4                  ; health
                 dc.b $21                ; obj_flags
@@ -2165,7 +2165,7 @@ stru_25B354:    dc.b $1C                ; obj_id
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256856         ; update_proc
+                dc.l update_chicken_boss         ; update_proc
 object_sphere_electro:    dc.b $63                ; obj_id
                                         ; DATA XREF: spawn_sphere_electro   o
                 dc.b 0                  ; health
@@ -3336,7 +3336,7 @@ stru_25BA8C:    dc.b $27                ; obj_id
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
                 dc.b 0                  ; skipped_2
-                dc.l sub_256856         ; update_proc
+                dc.l update_chicken_boss         ; update_proc
 object_prize_stars:    dc.b $86                ; obj_id
                                         ; DATA XREF: ROM:001A2DB8   o
                                         ; ROM:001A2DD2   o ...

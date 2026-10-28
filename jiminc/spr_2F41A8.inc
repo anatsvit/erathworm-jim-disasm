@@ -1,5 +1,5 @@
-byte_2F41A8:    dc.b   0,  1,$7B,$7A,$86,$87,$7C,$80,$7C,$7E
-                                        ; DATA XREF: ROM:off_28E8   o
+spr_psycrow_side_32:    dc.b   0,  1,$7B,$7A,$86,$87,$7C,$80,$7C,$7E
+                                        ; DATA XREF: ROM:frame_psycrow_side_32   o
                 dc.w sprite_16_16
                 dc.w $7978
                 dc.w $9500 ! ((grp_8DA00 / 2) & $00FF)

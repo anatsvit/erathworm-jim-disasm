@@ -1,5 +1,5 @@
-byte_2FB292:    dc.b   0,  2,$6F,$76,$8A,$85,$7C,$7D,$7D,$7D
-                                        ; DATA XREF: ROM:off_2F4C   o
+spr_andy_asteroid_43:    dc.b   0,  2,$6F,$76,$8A,$85,$7C,$7D,$7D,$7D
+                                        ; DATA XREF: ROM:frame_andy_asteroid_43   o
                 dc.w sprite_24_16
                 dc.w $6D74
                 dc.w $9500 ! ((grp_16B100 / 2) & $00FF)

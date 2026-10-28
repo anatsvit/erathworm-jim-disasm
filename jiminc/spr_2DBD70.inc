@@ -1,5 +1,5 @@
-byte_2DBD70:    dc.b   0,  3,$6B,$6E,$88,$8A,$79,$7C,$70,$6F
-                                        ; DATA XREF: ROM:off_15C8   o
+spr_jim_rocket_5_2:    dc.b   0,  3,$6B,$6E,$88,$8A,$79,$7C,$70,$6F
+                                        ; DATA XREF: ROM:frame_jim_rocket_5_2   o
                 dc.w sprite_24_24
                 dc.w $7079
                 dc.w $9500 ! ((grp_144DC0 / 2) & $00FF)

@@ -2073,7 +2073,7 @@ stru_25B2C4:    dc.b $6C                ; obj_id
                 dc.b 0                  ; behavior_flags
                 dc.b 0                  ; skipped_2
                 dc.l off_0              ; update_proc
-stru_25B2DC:    dc.b $39                ; obj_id
+object_lever_chicken_boss:    dc.b $39                ; obj_id
                                         ; DATA XREF: sub_24DD18+66   o
                 dc.b 0                  ; health
                 dc.b $20                ; obj_flags
@@ -2789,7 +2789,7 @@ object_andy_super_bubble:    dc.b $10                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $6000              ; sprite_attr
-                dc.l off_1B29E0         ; anim_address
+                dc.l anim_andy_super_bubble_00         ; anim_address
                 dc.b 3                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
@@ -2804,7 +2804,7 @@ object_andy_speed_bubble:    dc.b $12                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $6000              ; sprite_attr
-                dc.l off_1B2980         ; anim_address
+                dc.l anim_andy_speed_bubble_00         ; anim_address
                 dc.b 6                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
@@ -2819,7 +2819,7 @@ object_andy_bubble:    dc.b $13                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $6000              ; sprite_attr
-                dc.l off_1B2A02         ; anim_address
+                dc.l anim_andy_asteroid_00         ; anim_address
                 dc.b 5                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
@@ -2834,7 +2834,7 @@ object_andy_asteroid:    dc.b 1                  ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $4000              ; sprite_attr
-                dc.l off_1B2A02         ; anim_address
+                dc.l anim_andy_asteroid_00         ; anim_address
                 dc.b 8                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b 2                  ; behavior_flags
@@ -2894,7 +2894,7 @@ object_rocket_flame:    dc.b $86                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $6000              ; sprite_attr
-                dc.l off_1B25D8         ; anim_address
+                dc.l anim_rocket_flame_0_0         ; anim_address
                 dc.b 0                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b $82                ; behavior_flags
@@ -2909,7 +2909,7 @@ object_psycrow_rocket_flame:    dc.b $86                ; obj_id
                 dc.b 0                  ; flip_x
                 dc.l off_0              ; move_script
                 dc.w $6000              ; sprite_attr
-                dc.l off_1B2794         ; anim_address
+                dc.l anim_psycrow_flame_side_32         ; anim_address
                 dc.b 0                  ; vram_blocks
                 dc.b 0                  ; flip_y
                 dc.b $82                ; behavior_flags

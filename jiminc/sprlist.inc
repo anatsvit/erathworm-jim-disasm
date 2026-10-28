@@ -366,27 +366,27 @@ off_A08:        dc.l byte_2CE19C
 
 off_A0C:        dc.l byte_2CE1D6
 
-off_A10:        dc.l byte_2CE204
-off_A14:        dc.l byte_2CE226
-off_A18:        dc.l byte_2CE23C
-off_A1C:        dc.l byte_2CE25E
-off_A20:        dc.l byte_2CE280
-off_A24:        dc.l byte_2CE296
-off_A28:        dc.l byte_2CE2AC
-off_A2C:        dc.l byte_2CE2CE
-off_A30:        dc.l byte_2CE2E4
-off_A34:        dc.l byte_2CE2FA
-off_A38:        dc.l byte_2CE31C
-off_A3C:        dc.l byte_2CE332
-off_A40:        dc.l byte_2CE348
-off_A44:        dc.l byte_2CE35E
-off_A48:        dc.l byte_2CE374
-off_A4C:        dc.l byte_2CE396
-off_A50:        dc.l byte_2CE3AC
-off_A54:        dc.l byte_2CE3C2
-off_A58:        dc.l byte_2CE3E4
-off_A5C:        dc.l byte_2CE406
-off_A60:        dc.l byte_2CE41C
+frame_rocket_flame_0_0:        dc.l spr_rocket_flame_0_0
+frame_rocket_flame_0_1:        dc.l spr_rocket_flame_0_1
+frame_rocket_flame_0_2:        dc.l spr_rocket_flame_0_2
+frame_rocket_flame_1_0:        dc.l spr_rocket_flame_1_0
+frame_rocket_flame_1_1:        dc.l spr_rocket_flame_1_1
+frame_rocket_flame_1_2:        dc.l spr_rocket_flame_1_2
+frame_rocket_flame_2_0:        dc.l spr_rocket_flame_2_0
+frame_rocket_flame_2_1:        dc.l spr_rocket_flame_2_1
+frame_rocket_flame_2_2:        dc.l spr_rocket_flame_2_2
+frame_rocket_flame_3_0:        dc.l spr_rocket_flame_3_0
+frame_rocket_flame_3_1:        dc.l spr_rocket_flame_3_1
+frame_rocket_flame_3_2:        dc.l spr_rocket_flame_3_2
+frame_rocket_flame_4_0:        dc.l spr_rocket_flame_4_0
+frame_rocket_flame_4_1:        dc.l spr_rocket_flame_4_1
+frame_rocket_flame_4_2:        dc.l spr_rocket_flame_4_2
+frame_rocket_flame_5_0:        dc.l spr_rocket_flame_5_0
+frame_rocket_flame_5_1:        dc.l spr_rocket_flame_5_1
+frame_rocket_flame_5_2:        dc.l spr_rocket_flame_5_2
+frame_rocket_flame_6_0:        dc.l spr_rocket_flame_6_0
+frame_rocket_flame_6_1:        dc.l spr_rocket_flame_6_1
+frame_rocket_flame_6_2:        dc.l spr_rocket_flame_6_2
 off_A64:        dc.l byte_2CE432
 
 off_A68:        dc.l byte_2CE448
@@ -1662,34 +1662,34 @@ off_1568:       dc.l byte_2DB740
 
 off_156C:       dc.l byte_2DB7AA
 
-off_1570:       dc.l byte_2DB820
-off_1574:       dc.l byte_2DB85A
-off_1578:       dc.l byte_2DB894
-off_157C:       dc.l byte_2DB8CE
-off_1580:       dc.l byte_2DB908
-off_1584:       dc.l byte_2DB94E
-off_1588:       dc.l byte_2DB994
-off_158C:       dc.l byte_2DB9CE
-off_1590:       dc.l byte_2DBA08
-off_1594:       dc.l byte_2DBA4E
-off_1598:       dc.l byte_2DBA94
-off_159C:       dc.l byte_2DBADA
-off_15A0:       dc.l byte_2DBB20
-off_15A4:       dc.l byte_2DBB66
-off_15A8:       dc.l byte_2DBBAC
-off_15AC:       dc.l byte_2DBBF2
-off_15B0:       dc.l byte_2DBC38
-off_15B4:       dc.l byte_2DBC72
-off_15B8:       dc.l byte_2DBCA0
-off_15BC:       dc.l byte_2DBCCE
-off_15C0:       dc.l byte_2DBCFC
-off_15C4:       dc.l byte_2DBD36
-off_15C8:       dc.l byte_2DBD70
-off_15CC:       dc.l byte_2DBDAA
-off_15D0:       dc.l byte_2DBDE4
-off_15D4:       dc.l byte_2DBE06
-off_15D8:       dc.l byte_2DBE28
-off_15DC:       dc.l byte_2DBE4A
+frame_jim_on_rocket:       dc.l spr_jim_on_rocket
+frame_jim_rocket_0_1:       dc.l spr_jim_rocket_0_1
+frame_jim_rocket_0_2:       dc.l spr_jim_rocket_0_2
+frame_jim_rocket_0_3:       dc.l spr_jim_rocket_0_3
+frame_jim_rocket_1_0:       dc.l spr_jim_rocket_1_0
+frame_jim_rocket_1_1:       dc.l spr_jim_rocket_1_1
+frame_jim_rocket_1_2:       dc.l spr_jim_rocket_1_2
+frame_jim_rocket_1_3:       dc.l spr_jim_rocket_1_3
+frame_jim_rocket_2_0:       dc.l spr_jim_rocket_2_0
+frame_jim_rocket_2_1:       dc.l spr_jim_rocket_2_1
+frame_jim_rocket_2_2:       dc.l spr_jim_rocket_2_2
+frame_jim_rocket_2_3:       dc.l spr_jim_rocket_2_3
+frame_jim_rocket_3_0:       dc.l spr_jim_rocket_3_0
+frame_jim_rocket_3_1:       dc.l spr_jim_rocket_3_1
+frame_jim_rocket_3_2:       dc.l spr_jim_rocket_3_2
+frame_jim_rocket_3_3:       dc.l spr_jim_rocket_3_3
+frame_jim_rocket_4_0:       dc.l spr_jim_rocket_4_0
+frame_jim_rocket_4_1:       dc.l spr_jim_rocket_4_1
+frame_jim_rocket_4_2:       dc.l spr_jim_rocket_4_2
+frame_jim_rocket_4_3:       dc.l spr_jim_rocket_4_3
+frame_jim_rocket_5_0:       dc.l spr_jim_rocket_5_0
+frame_jim_rocket_5_1:       dc.l spr_jim_rocket_5_1
+frame_jim_rocket_5_2:       dc.l spr_jim_rocket_5_2
+frame_jim_rocket_5_3:       dc.l spr_jim_rocket_5_3
+frame_jim_rocket_6_0:       dc.l spr_jim_rocket_6_0
+frame_jim_rocket_6_1:       dc.l spr_jim_rocket_6_1
+frame_jim_rocket_6_2:       dc.l spr_jim_rocket_6_2
+frame_jim_rocket_6_3:       dc.l spr_jim_rocket_6_3
 groovy_frame_1: dc.l groovy_spr_1       ; DATA XREF: ROM:anim_groovy   o
 
 groovy_frame_6: dc.l groovy_spr_6       ; DATA XREF: ROM:001B543E   o
@@ -3788,143 +3788,143 @@ off_27E8:       dc.l byte_2F3A3C
 
 off_27EC:       dc.l byte_2F3A82
 
-off_27F0:       dc.l byte_2F3AD4
-off_27F4:       dc.l byte_2F3AEA
-off_27F8:       dc.l byte_2F3B00
-off_27FC:       dc.l byte_2F3B16
-off_2800:       dc.l byte_2F3B2C
-off_2804:       dc.l byte_2F3B42
-off_2808:       dc.l byte_2F3B58
-off_280C:       dc.l byte_2F3B6E
-off_2810:       dc.l byte_2F3B84
-off_2814:       dc.l byte_2F3B9A
-off_2818:       dc.l byte_2F3BB0
-off_281C:       dc.l byte_2F3BC6
-off_2820:       dc.l byte_2F3BDC
-off_2824:       dc.l byte_2F3BF2
-off_2828:       dc.l byte_2F3C08
-off_282C:       dc.l byte_2F3C1E
-off_2830:       dc.l byte_2F3C34
-off_2834:       dc.l byte_2F3C4A
-off_2838:       dc.l byte_2F3C60
-off_283C:       dc.l byte_2F3C76
-off_2840:       dc.l byte_2F3C8C
-off_2844:       dc.l byte_2F3CA2
-off_2848:       dc.l byte_2F3CB8
-off_284C:       dc.l byte_2F3CCE
-off_2850:       dc.l byte_2F3CE4
-off_2854:       dc.l byte_2F3CFA
-off_2858:       dc.l byte_2F3D10
-off_285C:       dc.l byte_2F3D26
-off_2860:       dc.l byte_2F3D3C
-off_2864:       dc.l byte_2F3D52
-off_2868:       dc.l byte_2F3D68
-off_286C:       dc.l byte_2F3D7E
-off_2870:       dc.l byte_2F3D94
-off_2874:       dc.l byte_2F3DAA
-off_2878:       dc.l byte_2F3DC0
-off_287C:       dc.l byte_2F3DD6
-off_2880:       dc.l byte_2F3DF8
-off_2884:       dc.l byte_2F3E0E
-off_2888:       dc.l byte_2F3E24
-off_288C:       dc.l byte_2F3E3A
-off_2890:       dc.l byte_2F3E50
-off_2894:       dc.l byte_2F3E66
-off_2898:       dc.l byte_2F3E7C
-off_289C:       dc.l byte_2F3E92
-off_28A0:       dc.l byte_2F3EA8
-off_28A4:       dc.l byte_2F3EBE
-off_28A8:       dc.l byte_2F3ED4
-off_28AC:       dc.l byte_2F3EEA
-off_28B0:       dc.l byte_2F3F00
-off_28B4:       dc.l byte_2F3F16
-off_28B8:       dc.l byte_2F3F2C
-off_28BC:       dc.l byte_2F3F42
+frame_psycrow_flame_side_32:       dc.l spr_psycrow_flame_side_32
+frame_psycrow_flame_side_31:       dc.l spr_psycrow_flame_side_31
+frame_psycrow_flame_side_30:       dc.l spr_psycrow_flame_side_30
+frame_psycrow_flame_side_29:       dc.l spr_psycrow_flame_side_29
+frame_psycrow_flame_side_28:       dc.l spr_psycrow_flame_side_28
+frame_psycrow_flame_side_27:       dc.l spr_psycrow_flame_side_27
+frame_psycrow_flame_side_26:       dc.l spr_psycrow_flame_side_26
+frame_psycrow_flame_side_25:       dc.l spr_psycrow_flame_side_25
+frame_psycrow_flame_side_24:       dc.l spr_psycrow_flame_side_24
+frame_psycrow_flame_side_23:       dc.l spr_psycrow_flame_side_23
+frame_psycrow_flame_side_22:       dc.l spr_psycrow_flame_side_22
+frame_psycrow_flame_side_21:       dc.l spr_psycrow_flame_side_21
+frame_psycrow_flame_side_20:       dc.l spr_psycrow_flame_side_20
+frame_psycrow_flame_side_19:       dc.l spr_psycrow_flame_side_19
+frame_psycrow_flame_side_18:       dc.l spr_psycrow_flame_side_18
+frame_psycrow_flame_side_17:       dc.l spr_psycrow_flame_side_17
+frame_psycrow_flame_side_16:       dc.l spr_psycrow_flame_side_16
+frame_psycrow_flame_side_15:       dc.l spr_psycrow_flame_side_15
+frame_psycrow_flame_side_14:       dc.l spr_psycrow_flame_side_14
+frame_psycrow_flame_side_13:       dc.l spr_psycrow_flame_side_13
+frame_psycrow_flame_side_12:       dc.l spr_psycrow_flame_side_12
+frame_psycrow_flame_side_11:       dc.l spr_psycrow_flame_side_11
+frame_psycrow_flame_side_10:       dc.l spr_psycrow_flame_side_10
+frame_psycrow_flame_09:       dc.l spr_psycrow_flame_09
+frame_psycrow_flame_08:       dc.l spr_psycrow_flame_08
+frame_psycrow_flame_07:       dc.l spr_psycrow_flame_07
+frame_psycrow_flame_06:       dc.l spr_psycrow_flame_06
+frame_psycrow_flame_05:       dc.l spr_psycrow_flame_05
+frame_psycrow_flame_04:       dc.l spr_psycrow_flame_04
+frame_psycrow_flame_03:       dc.l spr_psycrow_flame_03
+frame_psycrow_flame_02:       dc.l spr_psycrow_flame_02
+frame_psycrow_flame_01:       dc.l spr_psycrow_flame_01
+frame_psycrow_flame_00:       dc.l spr_psycrow_flame_00
+frame_psycrow_flame_front_28:       dc.l spr_psycrow_flame_front_28
+frame_psycrow_flame_front_27:       dc.l spr_psycrow_flame_front_27
+frame_psycrow_flame_front_26:       dc.l spr_psycrow_flame_front_26
+frame_psycrow_flame_front_25:       dc.l spr_psycrow_flame_front_25
+frame_psycrow_flame_front_24:       dc.l spr_psycrow_flame_front_24
+frame_psycrow_flame_front_23:       dc.l spr_psycrow_flame_front_23
+frame_psycrow_flame_front_22:       dc.l spr_psycrow_flame_front_22
+frame_psycrow_flame_front_21:       dc.l spr_psycrow_flame_front_21
+frame_psycrow_flame_front_20:       dc.l spr_psycrow_flame_front_20
+frame_psycrow_flame_front_19:       dc.l spr_psycrow_flame_front_19
+frame_psycrow_flame_front_18:       dc.l spr_psycrow_flame_front_18
+frame_psycrow_flame_front_17:       dc.l spr_psycrow_flame_front_17
+frame_psycrow_flame_front_16:       dc.l spr_psycrow_flame_front_16
+frame_psycrow_flame_front_15:       dc.l spr_psycrow_flame_front_15
+frame_psycrow_flame_front_14:       dc.l spr_psycrow_flame_front_14
+frame_psycrow_flame_front_13:       dc.l spr_psycrow_flame_front_13
+frame_psycrow_flame_front_12:       dc.l spr_psycrow_flame_front_12
+frame_psycrow_flame_front_11:       dc.l spr_psycrow_flame_front_11
+frame_psycrow_flame_front_10:       dc.l spr_psycrow_flame_front_10
 off_28C0:       dc.l byte_2F3F58
 
-off_28C4:       dc.l byte_2F3FCE
+frame_psycrow_side_41:       dc.l spr_psycrow_side_41
 
-off_28C8:       dc.l byte_2F4014
+frame_psycrow_side_40:       dc.l spr_psycrow_side_40
 
-off_28CC:       dc.l byte_2F405A
+frame_psycrow_side_39:       dc.l spr_psycrow_side_39
 
-off_28D0:       dc.l byte_2F4094
+frame_psycrow_side_38:       dc.l spr_psycrow_side_38
 
-off_28D4:       dc.l byte_2F40C2
+frame_psycrow_side_37:       dc.l spr_psycrow_side_37
 
-off_28D8:       dc.l byte_2F40FC
+frame_psycrow_side_36:       dc.l spr_psycrow_side_36
 
-off_28DC:       dc.l byte_2F411E
+frame_psycrow_side_35:       dc.l spr_psycrow_side_35
 
-off_28E0:       dc.l byte_2F414C
+frame_psycrow_side_34:       dc.l spr_psycrow_side_34
 
-off_28E4:       dc.l byte_2F417A
+frame_psycrow_side_33:       dc.l spr_psycrow_side_33
 
-off_28E8:       dc.l byte_2F41A8
+frame_psycrow_side_32:       dc.l spr_psycrow_side_32
 
-off_28EC:       dc.l byte_2F41CA
+frame_psycrow_side_31:       dc.l spr_psycrow_side_31
 
-off_28F0:       dc.l byte_2F41EC
+frame_psycrow_side_30:       dc.l spr_psycrow_side_30
 
-off_28F4:       dc.l byte_2F4202
+frame_psycrow_side_29:       dc.l spr_psycrow_side_29
 
-off_28F8:       dc.l byte_2F4218
+frame_psycrow_side_28:       dc.l spr_psycrow_side_28
 
-off_28FC:       dc.l byte_2F423A
+frame_psycrow_side_27:       dc.l spr_psycrow_side_27
 
-off_2900:       dc.l byte_2F425C
+frame_psycrow_side_26:       dc.l spr_psycrow_side_26
 
-off_2904:       dc.l byte_2F4272
+frame_psycrow_side_25:       dc.l spr_psycrow_side_25
 
-off_2908:       dc.l byte_2F4294
+frame_psycrow_side_24:       dc.l spr_psycrow_side_24
 
-off_290C:       dc.l byte_2F42B6
+frame_psycrow_side_23:       dc.l spr_psycrow_side_23
 
-off_2910:       dc.l byte_2F42D8
+frame_psycrow_side_22:       dc.l spr_psycrow_side_22
 
-off_2914:       dc.l byte_2F42FA
+frame_psycrow_side_21:       dc.l spr_psycrow_side_21
 
-off_2918:       dc.l byte_2F4310
+frame_psycrow_side_20:       dc.l spr_psycrow_side_20
 
-off_291C:       dc.l byte_2F4326
+frame_psycrow_side_19:       dc.l spr_psycrow_side_19
 
-off_2920:       dc.l byte_2F433C
+frame_psycrow_side_18:       dc.l spr_psycrow_side_18
 
-off_2924:       dc.l byte_2F4352
+frame_psycrow_17:       dc.l spr_psycrow_17
 
-off_2928:       dc.l byte_2F4368
+frame_psycrow_16:       dc.l spr_psycrow_16
 
-off_292C:       dc.l byte_2F437E
+frame_psycrow_15:       dc.l spr_psycrow_15
 
-off_2930:       dc.l byte_2F4394
+frame_psycrow_14:       dc.l spr_psycrow_14
 
-off_2934:       dc.l byte_2F43AA
+frame_psycrow_13:       dc.l spr_psycrow_13
 
-off_2938:       dc.l byte_2F43C0
+frame_psycrow_12:       dc.l spr_psycrow_12
 
-off_293C:       dc.l byte_2F43D6
+frame_psycrow_11:       dc.l spr_psycrow_11
 
-off_2940:       dc.l byte_2F43EC
+frame_psycrow_10:       dc.l spr_psycrow_10
 
-off_2944:       dc.l byte_2F4402
+frame_psycrow_09:       dc.l spr_psycrow_09
 
-off_2948:       dc.l byte_2F4418
+frame_psycrow_08:       dc.l spr_psycrow_08
 
-off_294C:       dc.l byte_2F442E
+frame_psycrow_07:       dc.l spr_psycrow_07
 
-off_2950:       dc.l byte_2F4444
+frame_psycrow_06:       dc.l spr_psycrow_06
 
-off_2954:       dc.l byte_2F445A
+frame_psycrow_05:       dc.l spr_psycrow_05
 
-off_2958:       dc.l byte_2F4470
+frame_psycrow_04:       dc.l spr_psycrow_04
 
-off_295C:       dc.l byte_2F4486
+frame_psycrow_03:       dc.l spr_psycrow_03
 
-off_2960:       dc.l byte_2F449C
+frame_psycrow_02:       dc.l spr_psycrow_02
 
-off_2964:       dc.l byte_2F44B2
+frame_psycrow_01:       dc.l spr_psycrow_01
 
-off_2968:       dc.l byte_2F44C8
+frame_psycrow_00:       dc.l spr_psycrow_00
 
 off_296C:       dc.l byte_2F44DE
 
@@ -3940,31 +3940,31 @@ off_2980:       dc.l byte_2F454C
 
 off_2984:       dc.l byte_2F4562
 
-off_2988:       dc.l byte_2F4578
-off_298C:       dc.l byte_2F459A
-off_2990:       dc.l byte_2F45C8
-off_2994:       dc.l byte_2F45F6
-off_2998:       dc.l byte_2F4624
-off_299C:       dc.l byte_2F4646
-off_29A0:       dc.l byte_2F4668
-off_29A4:       dc.l byte_2F468A
-off_29A8:       dc.l byte_2F46AC
-off_29AC:       dc.l byte_2F46C2
-off_29B0:       dc.l byte_2F46D8
-off_29B4:       dc.l byte_2F46EE
-off_29B8:       dc.l byte_2F4710
-off_29BC:       dc.l byte_2F4732
-off_29C0:       dc.l byte_2F4748
-off_29C4:       dc.l byte_2F475E
-off_29C8:       dc.l byte_2F4774
-off_29CC:       dc.l byte_2F478A
-off_29D0:       dc.l byte_2F47A0
-off_29D4:       dc.l byte_2F47B6
-off_29D8:       dc.l byte_2F47CC
-off_29DC:       dc.l byte_2F47E2
-off_29E0:       dc.l byte_2F47F8
-off_29E4:       dc.l byte_2F480E
-off_29E8:       dc.l byte_2F4824
+frame_psycrow_front_42:       dc.l spr_psycrow_front_42
+frame_psycrow_front_41:       dc.l spr_psycrow_front_41
+frame_psycrow_front_40:       dc.l spr_psycrow_front_40
+frame_psycrow_front_39:       dc.l spr_psycrow_front_39
+frame_psycrow_front_38:       dc.l spr_psycrow_front_38
+frame_psycrow_front_37:       dc.l spr_psycrow_front_37
+frame_psycrow_front_36:       dc.l spr_psycrow_front_36
+frame_psycrow_front_35:       dc.l spr_psycrow_front_35
+frame_psycrow_front_34:       dc.l spr_psycrow_front_34
+frame_psycrow_front_33:       dc.l spr_psycrow_front_33
+frame_psycrow_front_32:       dc.l spr_psycrow_front_32
+frame_psycrow_front_31:       dc.l spr_psycrow_front_31
+frame_psycrow_front_30:       dc.l spr_psycrow_front_30
+frame_psycrow_front_29:       dc.l spr_psycrow_front_29
+frame_psycrow_front_28:       dc.l spr_psycrow_front_28
+frame_psycrow_front_27:       dc.l spr_psycrow_front_27
+frame_psycrow_front_26:       dc.l spr_psycrow_front_26
+frame_psycrow_front_25:       dc.l spr_psycrow_front_25
+frame_psycrow_front_24:       dc.l spr_psycrow_front_24
+frame_psycrow_front_23:       dc.l spr_psycrow_front_23
+frame_psycrow_front_22:       dc.l spr_psycrow_front_22
+frame_psycrow_front_21:       dc.l spr_psycrow_front_21
+frame_psycrow_front_20:       dc.l spr_psycrow_front_20
+frame_psycrow_front_19:       dc.l spr_psycrow_front_19
+frame_psycrow_front_18:       dc.l spr_psycrow_front_18
 off_29EC:       dc.l byte_2F483A
 
 off_29F0:       dc.l byte_2F4868
@@ -4445,107 +4445,107 @@ off_2E38:       dc.l byte_2FAB54
 
 off_2E3C:       dc.l byte_2FABBE
 
-off_2E40:       dc.l byte_2FAC40
+frame_andy_bubble_46:       dc.l spr_andy_bubble_46
 
-off_2E44:       dc.l byte_2FAC6E
+frame_andy_bubble_44:       dc.l spr_andy_bubble_44
 
-off_2E48:       dc.l byte_2FAC90
+frame_andy_bubble_42:       dc.l spr_andy_bubble_42
 
-off_2E4C:       dc.l byte_2FACA6
+frame_andy_bubble_40:       dc.l spr_andy_bubble_40
 
-off_2E50:       dc.l byte_2FACBC
+frame_andy_bubble_38:       dc.l spr_andy_bubble_38
 
-off_2E54:       dc.l byte_2FACDE
+frame_andy_bubble_36:       dc.l spr_andy_bubble_36
 
-off_2E58:       dc.l byte_2FACF4
+frame_andy_bubble_34:       dc.l spr_andy_bubble_34
 
-off_2E5C:       dc.l byte_2FAD0A
+frame_andy_bubble_32:       dc.l spr_andy_bubble_32
 
-off_2E60:       dc.l byte_2FAD20
+frame_andy_bubble_30:       dc.l spr_andy_bubble_30
 
-off_2E64:       dc.l byte_2FAD36
+frame_andy_bubble_28:       dc.l spr_andy_bubble_28
 
-off_2E68:       dc.l byte_2FAD4C
+frame_andy_bubble_26:       dc.l spr_andy_bubble_26
 
-off_2E6C:       dc.l byte_2FAD6E
+frame_andy_bubble_24:       dc.l spr_andy_bubble_24
 
-off_2E70:       dc.l byte_2FAD90
+frame_andy_bubble_22:       dc.l spr_andy_bubble_22
 
-off_2E74:       dc.l byte_2FADA6
+frame_andy_bubble_20:       dc.l spr_andy_bubble_20
 
-off_2E78:       dc.l byte_2FADBC
+frame_andy_bubble_18:       dc.l spr_andy_bubble_18
 
-off_2E7C:       dc.l byte_2FADD2
+frame_andy_bubble_16:       dc.l spr_andy_bubble_16
 
-off_2E80:       dc.l byte_2FADE8
+frame_andy_bubble_14:       dc.l spr_andy_bubble_14
 
-off_2E84:       dc.l byte_2FADFE
+frame_andy_bubble_12:       dc.l spr_andy_bubble_12
 
-off_2E88:       dc.l byte_2FAE14
+frame_andy_bubble_10:       dc.l spr_andy_bubble_10
 
-off_2E8C:       dc.l byte_2FAE2A
+frame_andy_bubble_08:       dc.l spr_andy_bubble_08
 
-off_2E90:       dc.l byte_2FAE40
+frame_andy_bubble_06:       dc.l spr_andy_bubble_06
 
-off_2E94:       dc.l byte_2FAE56
+frame_andy_bubble_04:       dc.l spr_andy_bubble_04
 
-off_2E98:       dc.l byte_2FAE6C
+frame_andy_bubble_02:       dc.l spr_andy_bubble_02
 
-off_2E9C:       dc.l byte_2FAE82
+frame_andy_bubble_00:       dc.l spr_andy_bubble_00
 
-off_2EA0:       dc.l byte_2FAE98
+frame_andy_asteroid_00:       dc.l spr_andy_asteroid_00
 
-off_2EA4:       dc.l byte_2FAEAE
-off_2EA8:       dc.l byte_2FAEC4
-off_2EAC:       dc.l byte_2FAEDA
-off_2EB0:       dc.l byte_2FAEF0
-off_2EB4:       dc.l byte_2FAF06
-off_2EB8:       dc.l byte_2FAF1C
-off_2EBC:       dc.l byte_2FAF32
-off_2EC0:       dc.l byte_2FAF48
-off_2EC4:       dc.l byte_2FAF5E
-off_2EC8:       dc.l byte_2FAF74
-off_2ECC:       dc.l byte_2FAF8A
-off_2ED0:       dc.l byte_2FAFA0
-off_2ED4:       dc.l byte_2FAFB6
-off_2ED8:       dc.l byte_2FAFCC
-off_2EDC:       dc.l byte_2FAFE2
-off_2EE0:       dc.l byte_2FAFF8
-off_2EE4:       dc.l byte_2FB00E
-off_2EE8:       dc.l byte_2FB024
+frame_andy_asteroid_01:       dc.l spr_andy_asteroid_01
+frame_andy_asteroid_02:       dc.l spr_andy_asteroid_02
+frame_andy_asteroid_03:       dc.l spr_andy_asteroid_03
+frame_andy_asteroid_04:       dc.l spr_andy_asteroid_04
+frame_andy_asteroid_05:       dc.l spr_andy_asteroid_05
+frame_andy_asteroid_06:       dc.l spr_andy_asteroid_06
+frame_andy_asteroid_07:       dc.l spr_andy_asteroid_07
+frame_andy_asteroid_08:       dc.l spr_andy_asteroid_08
+frame_andy_asteroid_09:       dc.l spr_andy_asteroid_09
+frame_andy_asteroid_10:       dc.l spr_andy_asteroid_10
+frame_andy_asteroid_11:       dc.l spr_andy_asteroid_11
+frame_andy_asteroid_12:       dc.l spr_andy_asteroid_12
+frame_andy_asteroid_13:       dc.l spr_andy_asteroid_13
+frame_andy_asteroid_14:       dc.l spr_andy_asteroid_14
+frame_andy_asteroid_15:       dc.l spr_andy_asteroid_15
+frame_andy_asteroid_16:       dc.l spr_andy_asteroid_16
+frame_andy_asteroid_17:       dc.l spr_andy_asteroid_17
+frame_andy_asteroid_18:       dc.l spr_andy_asteroid_18
 
-off_2EEC:       dc.l byte_2FB03A
-off_2EF0:       dc.l byte_2FB050
-off_2EF4:       dc.l byte_2FB066
-off_2EF8:       dc.l byte_2FB07C
-off_2EFC:       dc.l byte_2FB092
-off_2F00:       dc.l byte_2FB0A8
-off_2F04:       dc.l byte_2FB0BE
-off_2F08:       dc.l byte_2FB0D4
-off_2F0C:       dc.l byte_2FB0EA
-off_2F10:       dc.l byte_2FB100
-off_2F14:       dc.l byte_2FB116
-off_2F18:       dc.l byte_2FB12C
-off_2F1C:       dc.l byte_2FB142
-off_2F20:       dc.l byte_2FB158
-off_2F24:       dc.l byte_2FB17A
-off_2F28:       dc.l byte_2FB19C
-off_2F2C:       dc.l byte_2FB1BE
-off_2F30:       dc.l byte_2FB1E0
+frame_andy_asteroid_19:       dc.l spr_andy_asteroid_19
+frame_andy_asteroid_20:       dc.l spr_andy_asteroid_20
+frame_andy_asteroid_21:       dc.l spr_andy_asteroid_21
+frame_andy_asteroid_22:       dc.l spr_andy_asteroid_22
+frame_andy_asteroid_23:       dc.l spr_andy_asteroid_23
+frame_andy_asteroid_24:       dc.l spr_andy_asteroid_24
+frame_andy_asteroid_25:       dc.l spr_andy_asteroid_25
+frame_andy_asteroid_26:       dc.l spr_andy_asteroid_26
+frame_andy_asteroid_27:       dc.l spr_andy_asteroid_27
+frame_andy_asteroid_28:       dc.l spr_andy_asteroid_28
+frame_andy_asteroid_29:       dc.l spr_andy_asteroid_29
+frame_andy_asteroid_30:       dc.l spr_andy_asteroid_30
+frame_andy_asteroid_31:       dc.l spr_andy_asteroid_31
+frame_andy_asteroid_32:       dc.l spr_andy_asteroid_32
+frame_andy_asteroid_33:       dc.l spr_andy_asteroid_33
+frame_andy_asteroid_34:       dc.l spr_andy_asteroid_34
+frame_andy_asteroid_35:       dc.l spr_andy_asteroid_35
+frame_andy_asteroid_36:       dc.l spr_andy_asteroid_36
 
-off_2F34:       dc.l byte_2FB1F6
-off_2F38:       dc.l byte_2FB20C
+frame_andy_asteroid_37:       dc.l spr_andy_asteroid_37
+frame_andy_asteroid_38:       dc.l spr_andy_asteroid_38
 
-off_2F3C:       dc.l byte_2FB222
-off_2F40:       dc.l byte_2FB238
-off_2F44:       dc.l byte_2FB24E
+frame_andy_asteroid_39:       dc.l spr_andy_asteroid_39
+frame_andy_asteroid_40:       dc.l spr_andy_asteroid_40
+frame_andy_asteroid_41:       dc.l spr_andy_asteroid_41
 
-off_2F48:       dc.l byte_2FB270
-off_2F4C:       dc.l byte_2FB292
-off_2F50:       dc.l byte_2FB2C0
-off_2F54:       dc.l byte_2FB2E2
-off_2F58:       dc.l byte_2FB310
-off_2F5C:       dc.l byte_2FB356
+frame_andy_asteroid_42:       dc.l spr_andy_asteroid_42
+frame_andy_asteroid_43:       dc.l spr_andy_asteroid_43
+frame_andy_asteroid_44:       dc.l spr_andy_asteroid_44
+frame_andy_asteroid_45:       dc.l spr_andy_asteroid_45
+frame_andy_asteroid_46:       dc.l spr_andy_asteroid_46
+frame_andy_asteroid_47:       dc.l spr_andy_asteroid_47
 off_2F60:       dc.l byte_2FB39C
 
 off_2F64:       dc.l byte_2FB406
@@ -4595,54 +4595,54 @@ off_2FC8:       dc.l byte_2FBB30
 
 off_2FCC:       dc.l byte_2FBB82
 
-off_2FD0:       dc.l byte_2FBBC8
-off_2FD4:       dc.l byte_2FBBDE
-off_2FD8:       dc.l byte_2FBC00
-off_2FDC:       dc.l byte_2FBC22
-off_2FE0:       dc.l byte_2FBC44
-off_2FE4:       dc.l byte_2FBC5A
-off_2FE8:       dc.l byte_2FBC70
-off_2FEC:       dc.l byte_2FBC86
-off_2FF0:       dc.l byte_2FBCB4
-off_2FF4:       dc.l byte_2FBCCA
-off_2FF8:       dc.l byte_2FBCE0
-off_2FFC:       dc.l byte_2FBCF6
-off_3000:       dc.l byte_2FBD0C
-off_3004:       dc.l byte_2FBD22
-off_3008:       dc.l byte_2FBD38
-off_300C:       dc.l byte_2FBD4E
-off_3010:       dc.l byte_2FBD64
-off_3014:       dc.l byte_2FBD7A
-off_3018:       dc.l byte_2FBD90
-off_301C:       dc.l byte_2FBDB2
-off_3020:       dc.l byte_2FBDC8
-off_3024:       dc.l byte_2FBDDE
-off_3028:       dc.l byte_2FBDF4
-off_302C:       dc.l byte_2FBE0A
-off_3030:       dc.l byte_2FBE20
-off_3034:       dc.l byte_2FBE66
-off_3038:       dc.l byte_2FBE88
-off_303C:       dc.l byte_2FBEAA
-off_3040:       dc.l byte_2FBECC
-off_3044:       dc.l byte_2FBEE2
-off_3048:       dc.l byte_2FBF04
-off_304C:       dc.l byte_2FBF1A
-off_3050:       dc.l byte_2FBF30
-off_3054:       dc.l byte_2FBF46
-off_3058:       dc.l byte_2FBF5C
-off_305C:       dc.l byte_2FBF72
-off_3060:       dc.l byte_2FBF94
-off_3064:       dc.l byte_2FBFAA
-off_3068:       dc.l byte_2FBFC0
-off_306C:       dc.l byte_2FBFD6
-off_3070:       dc.l byte_2FBFEC
-off_3074:       dc.l byte_2FC002
-off_3078:       dc.l byte_2FC024
-off_307C:       dc.l byte_2FC03A
-off_3080:       dc.l byte_2FC050
-off_3084:       dc.l byte_2FC066
-off_3088:       dc.l byte_2FC07C
-off_308C:       dc.l byte_2FC092
+frame_andy_super_bubble_23:       dc.l spr_andy_super_bubble_23
+frame_andy_super_bubble_22:       dc.l spr_andy_super_bubble_22
+frame_andy_super_bubble_21:       dc.l spr_andy_super_bubble_21
+frame_andy_super_bubble_20:       dc.l spr_andy_super_bubble_20
+frame_andy_super_bubble_19:       dc.l spr_andy_super_bubble_19
+frame_andy_super_bubble_18:       dc.l spr_andy_super_bubble_18
+frame_andy_super_bubble_17:       dc.l spr_andy_super_bubble_17
+frame_andy_super_bubble_16:       dc.l spr_andy_super_bubble_16
+frame_andy_super_bubble_15:       dc.l spr_andy_super_bubble_15
+frame_andy_super_bubble_14:       dc.l spr_andy_super_bubble_14
+frame_andy_super_bubble_13:       dc.l spr_andy_super_bubble_13
+frame_andy_super_bubble_12:       dc.l spr_andy_super_bubble_12
+frame_andy_super_bubble_11:       dc.l spr_andy_super_bubble_11
+frame_andy_super_bubble_10:       dc.l spr_andy_super_bubble_10
+frame_andy_super_bubble_09:       dc.l spr_andy_super_bubble_09
+frame_andy_super_bubble_08:       dc.l spr_andy_super_bubble_08
+frame_andy_super_bubble_07:       dc.l spr_andy_super_bubble_07
+frame_andy_super_bubble_06:       dc.l spr_andy_super_bubble_06
+frame_andy_super_bubble_05:       dc.l spr_andy_super_bubble_05
+frame_andy_super_bubble_04:       dc.l spr_andy_super_bubble_04
+frame_andy_super_bubble_03:       dc.l spr_andy_super_bubble_03
+frame_andy_super_bubble_02:       dc.l spr_andy_super_bubble_02
+frame_andy_super_bubble_01:       dc.l spr_andy_super_bubble_01
+frame_andy_super_bubble_00:       dc.l spr_andy_super_bubble_00
+frame_andy_speed_bubble_23:       dc.l spr_andy_speed_bubble_23
+frame_andy_speed_bubble_22:       dc.l spr_andy_speed_bubble_22
+frame_andy_speed_bubble_21:       dc.l spr_andy_speed_bubble_21
+frame_andy_speed_bubble_20:       dc.l spr_andy_speed_bubble_20
+frame_andy_speed_bubble_19:       dc.l spr_andy_speed_bubble_19
+frame_andy_speed_bubble_18:       dc.l spr_andy_speed_bubble_18
+frame_andy_speed_bubble_17:       dc.l spr_andy_speed_bubble_17
+frame_andy_speed_bubble_16:       dc.l spr_andy_speed_bubble_16
+frame_andy_speed_bubble_15:       dc.l spr_andy_speed_bubble_15
+frame_andy_speed_bubble_14:       dc.l spr_andy_speed_bubble_14
+frame_andy_speed_bubble_13:       dc.l spr_andy_speed_bubble_13
+frame_andy_speed_bubble_12:       dc.l spr_andy_speed_bubble_12
+frame_andy_speed_bubble_11:       dc.l spr_andy_speed_bubble_11
+frame_andy_speed_bubble_10:       dc.l spr_andy_speed_bubble_10
+frame_andy_speed_bubble_09:       dc.l spr_andy_speed_bubble_09
+frame_andy_speed_bubble_08:       dc.l spr_andy_speed_bubble_08
+frame_andy_speed_bubble_07:       dc.l spr_andy_speed_bubble_07
+frame_andy_speed_bubble_06:       dc.l spr_andy_speed_bubble_06
+frame_andy_speed_bubble_05:       dc.l spr_andy_speed_bubble_05
+frame_andy_speed_bubble_04:       dc.l spr_andy_speed_bubble_04
+frame_andy_speed_bubble_03:       dc.l spr_andy_speed_bubble_03
+frame_andy_speed_bubble_02:       dc.l spr_andy_speed_bubble_02
+frame_andy_speed_bubble_01:       dc.l spr_andy_speed_bubble_01
+frame_andy_speed_bubble_00:       dc.l spr_andy_speed_bubble_00
 off_3090:       dc.l byte_2FC0A8
 
 off_3094:       dc.l byte_2FC0CA

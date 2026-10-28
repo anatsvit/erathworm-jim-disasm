@@ -1,5 +1,5 @@
-byte_2CE23C:    dc.b   0,  1,$7D,$8B,$83,$94,$80,$8F,$81,$8F
-                                        ; DATA XREF: ROM:off_A18   o
+spr_rocket_flame_0_2:    dc.b   0,  1,$7D,$8B,$83,$94,$80,$8F,$81,$8F
+                                        ; DATA XREF: ROM:frame_rocket_flame_0_2   o
                 dc.w sprite_16_8
                 dc.w $7B89
                 dc.w $9500 ! ((grp_C7540 / 2) & $00FF)

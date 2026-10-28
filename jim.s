@@ -2366,676 +2366,22 @@ off_643A:       dc.l off_1B0530         ; DATA XREF: funicular_end_falling+E   o
                 dc.l off_1B0534
                 dc.l off_1B0534
                 dc.l off_1B0538
-off_645A:       dc.l anim_jim_on_rocket         ; DATA XREF: sub_247022+1C8   o
-                dc.l off_1AEF4E
-                dc.l off_1AEF52
-                dc.l off_1AEF56
-                dc.l off_1AEF5A
-                dc.l off_1AEF5E
-                dc.l off_1AEF62
-                dc.l off_1AEF66
-                dc.l off_1AEF6A
-                dc.l off_1AEF6E
-                dc.l off_1AEF72
-                dc.l off_1AEF76
-                dc.l off_1AEF7A
-                dc.l off_1AEF7E
-                dc.l off_1AEF82
-                dc.l off_1AEF86
-                dc.l off_1AEF8A
-                dc.l off_1AEF8E
-                dc.l off_1AEF92
-                dc.l off_1AEF96
-                dc.l off_1AEF9A
-                dc.l off_1AEF9E
-                dc.l off_1AEFA2
-                dc.l off_1AEFA6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEF9A
-                dc.l off_1AEF9E
-                dc.l off_1AEFA2
-                dc.l off_1AEFA6
-                dc.l off_1AEF8A
-                dc.l off_1AEF8E
-                dc.l off_1AEF92
-                dc.l off_1AEF96
-                dc.l off_1AEF7A
-                dc.l off_1AEF7E
-                dc.l off_1AEF82
-                dc.l off_1AEF86
-                dc.l off_1AEF6A
-                dc.l off_1AEF6E
-                dc.l off_1AEF72
-                dc.l off_1AEF76
-                dc.l off_1AEF5A
-                dc.l off_1AEF5E
-                dc.l off_1AEF62
-                dc.l off_1AEF66
-                dc.l anim_jim_on_rocket
-                dc.l off_1AEF4E
-                dc.l off_1AEF52
-                dc.l off_1AEF56
-                dc.l anim_jim_on_rocket
-                dc.l off_1AEF4E
-                dc.l off_1AEF52
-                dc.l off_1AEF56
-                dc.l off_1AEF5A
-                dc.l off_1AEF5E
-                dc.l off_1AEF62
-                dc.l off_1AEF66
-                dc.l off_1AEF6A
-                dc.l off_1AEF6E
-                dc.l off_1AEF72
-                dc.l off_1AEF76
-                dc.l off_1AEF7A
-                dc.l off_1AEF7E
-                dc.l off_1AEF82
-                dc.l off_1AEF86
-                dc.l off_1AEF8A
-                dc.l off_1AEF8E
-                dc.l off_1AEF92
-                dc.l off_1AEF96
-                dc.l off_1AEF9A
-                dc.l off_1AEF9E
-                dc.l off_1AEFA2
-                dc.l off_1AEFA6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEFAA
-                dc.l off_1AEFAE
-                dc.l off_1AEFB2
-                dc.l off_1AEFB6
-                dc.l off_1AEF9A
-                dc.l off_1AEF9E
-                dc.l off_1AEFA2
-                dc.l off_1AEFA6
-                dc.l off_1AEF8A
-                dc.l off_1AEF8E
-                dc.l off_1AEF92
-                dc.l off_1AEF96
-                dc.l off_1AEF7A
-                dc.l off_1AEF7E
-                dc.l off_1AEF82
-                dc.l off_1AEF86
-                dc.l off_1AEF6A
-                dc.l off_1AEF6E
-                dc.l off_1AEF72
-                dc.l off_1AEF76
-                dc.l off_1AEF5A
-                dc.l off_1AEF5E
-                dc.l off_1AEF62
-                dc.l off_1AEF66
-                dc.l anim_jim_on_rocket
-                dc.l off_1AEF4E
-                dc.l off_1AEF52
-                dc.l off_1AEF56
-off_665A:       dc.l off_1B25D8         ; DATA XREF: sub_258C50+58   o
-                dc.l off_1B25DC
-                dc.l off_1B25E0
-                dc.l off_1B25DC
-                dc.l off_1B25E4
-                dc.l off_1B25E8
-                dc.l off_1B25EC
-                dc.l off_1B25E8
-                dc.l off_1B25F0
-                dc.l off_1B25F4
-                dc.l off_1B25F8
-                dc.l off_1B25F4
-                dc.l off_1B25FC
-                dc.l off_1B2600
-                dc.l off_1B2604
-                dc.l off_1B2600
-                dc.l off_1B260C
-                dc.l off_1B260C
-                dc.l off_1B2610
-                dc.l off_1B260C
-                dc.l off_1B2614
-                dc.l off_1B2618
-                dc.l off_1B261C
-                dc.l off_1B2618
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2614
-                dc.l off_1B2618
-                dc.l off_1B261C
-                dc.l off_1B2618
-                dc.l off_1B2608
-                dc.l off_1B260C
-                dc.l off_1B2610
-                dc.l off_1B260C
-                dc.l off_1B25FC
-                dc.l off_1B2600
-                dc.l off_1B2604
-                dc.l off_1B2600
-                dc.l off_1B25F0
-                dc.l off_1B25F4
-                dc.l off_1B25F8
-                dc.l off_1B25F4
-                dc.l off_1B25E4
-                dc.l off_1B25E8
-                dc.l off_1B25EC
-                dc.l off_1B25E8
-                dc.l off_1B25D8
-                dc.l off_1B25DC
-                dc.l off_1B25E0
-                dc.l off_1B25DC
-                dc.l off_1B25D8
-                dc.l off_1B25DC
-                dc.l off_1B25E0
-                dc.l off_1B25DC
-                dc.l off_1B25E4
-                dc.l off_1B25E8
-                dc.l off_1B25EC
-                dc.l off_1B25E8
-                dc.l off_1B25F0
-                dc.l off_1B25F4
-                dc.l off_1B25F8
-                dc.l off_1B25F4
-                dc.l off_1B25FC
-                dc.l off_1B2600
-                dc.l off_1B2604
-                dc.l off_1B2600
-                dc.l off_1B2608
-                dc.l off_1B260C
-                dc.l off_1B2610
-                dc.l off_1B260C
-                dc.l off_1B2614
-                dc.l off_1B2618
-                dc.l off_1B261C
-                dc.l off_1B2618
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2620
-                dc.l off_1B2624
-                dc.l off_1B2628
-                dc.l off_1B2624
-                dc.l off_1B2614
-                dc.l off_1B2618
-                dc.l off_1B261C
-                dc.l off_1B2618
-                dc.l off_1B2608
-                dc.l off_1B260C
-                dc.l off_1B2610
-                dc.l off_1B260C
-                dc.l off_1B25FC
-                dc.l off_1B2600
-                dc.l off_1B2604
-                dc.l off_1B2600
-                dc.l off_1B25F0
-                dc.l off_1B25F4
-                dc.l off_1B25F8
-                dc.l off_1B25F4
-                dc.l off_1B25E4
-                dc.l off_1B25E8
-                dc.l off_1B25EC
-                dc.l off_1B25E8
-                dc.l off_1B25D8
-                dc.l off_1B25DC
-                dc.l off_1B25E0
-                dc.l off_1B25DC
-off_685A:       dc.l off_1B2A02         ; DATA XREF: update_andy_asteroid+16   o
-                dc.l off_1B2A02
-                dc.l off_1B2A06
-                dc.l off_1B2A0A
-                dc.l off_1B2A0E
-                dc.l off_1B2A12
-                dc.l off_1B2A16
-                dc.l off_1B2A1A
-                dc.l off_1B2A1E
-                dc.l off_1B2A22
-                dc.l off_1B2A26
-                dc.l off_1B2A2A
-                dc.l off_1B2A2E
-                dc.l off_1B2A32
-                dc.l off_1B2A36
-                dc.l off_1B2A3A
-                dc.l off_1B2A3E
-                dc.l off_1B2A42
-                dc.l off_1B2A46
-                dc.l off_1B2A4A
-                dc.l off_1B2A4E
-                dc.l off_1B2A52
-                dc.l off_1B2A56
-                dc.l off_1B2A5A
-                dc.l off_1B2A5E
-                dc.l off_1B2A62
-                dc.l off_1B2A66
-                dc.l off_1B2A6A
-                dc.l off_1B2A6E
-                dc.l off_1B2A72
-                dc.l off_1B2A76
-                dc.l off_1B2A7A
-                dc.l off_1B2A7E
-                dc.l off_1B2A82
-                dc.l off_1B2A86
-                dc.l off_1B2A8A
-                dc.l off_1B2A8E
-                dc.l off_1B2A92
-                dc.l off_1B2A96
-                dc.l off_1B2A9A
-                dc.l off_1B2A9E
-                dc.l off_1B2AA2
-                dc.l off_1B2AA6
-                dc.l off_1B2AAA
-                dc.l off_1B2AAE
-                dc.l off_1B2AB2
-                dc.l off_1B2AB6
-                dc.l off_1B2ABA
-                dc.l off_1B2ABA
-                dc.l off_1B2ABE
-                dc.l off_1B2ABE
+    include "jiminc/jim_rocket_angle_anims.inc"
+    include "jiminc/rocket_flame_angle_anims.inc"
+    include "jiminc/andy_asteroid_scale_anims.inc"
 word_6926:
     binclude "binaries/byte_6926.bin"
     align 2,0
 word_6A6C:
     binclude "binaries/byte_6A6C.bin"
     align 2,0
-off_6B2C:       dc.l off_1B2710         ; DATA XREF: sub_2585CA+19A   o
-                dc.l off_1B270C
-                dc.l off_1B2708
-                dc.l off_1B2704
-                dc.l off_1B2700
-                dc.l off_1B26FC
-                dc.l off_1B26F8
-                dc.l off_1B26F4
-                dc.l off_1B26F0
-                dc.l off_1B26EC
-                dc.l off_1B26E8
-                dc.l off_1B26E4
-                dc.l off_1B26E0
-                dc.l off_1B26DC
-                dc.l off_1B26D8
-                dc.l off_1B26D4
-                dc.l off_1B26D0
-                dc.l off_1B26CC
-                dc.l off_1B26C8
-                dc.l off_1B26C4
-                dc.l off_1B26C0
-                dc.l off_1B26BC
-                dc.l off_1B26B8
-                dc.l off_1B26B4
-                dc.l off_1B26B0
-                dc.l off_1B26AC
-                dc.l off_1B26A8
-                dc.l off_1B26A4
-                dc.l off_1B26A0
-                dc.l off_1B269C
-                dc.l off_1B2698
-                dc.l off_1B2694
-                dc.l off_1B2690
-                dc.l off_1B268C
-                dc.l off_1B2688
-                dc.l off_1B2684
-                dc.l off_1B2680
-                dc.l off_1B267C
-                dc.l off_1B2678
-                dc.l off_1B2674
-                dc.l off_1B2670
-                dc.l off_1B266C
-                dc.l anim_psyq
-                dc.l anim_psyq
-                dc.l anim_psyq
-                dc.l anim_psyq
-                dc.l anim_psyq
-                dc.l anim_psyq
-off_6BEC:       dc.l off_1B2710         ; DATA XREF: sub_2585CA+1B2   o
-                dc.l off_1B270C
-                dc.l off_1B2708
-                dc.l off_1B2704
-                dc.l off_1B2700
-                dc.l off_1B26FC
-                dc.l off_1B26F8
-                dc.l off_1B26F4
-                dc.l off_1B26F0
-                dc.l off_1B26EC
-                dc.l off_1B26E8
-                dc.l off_1B26E4
-                dc.l off_1B26E0
-                dc.l off_1B26DC
-                dc.l off_1B26D8
-                dc.l off_1B26D4
-                dc.l off_1B26D0
-                dc.l off_1B26CC
-                dc.l off_1B2790
-                dc.l off_1B278C
-                dc.l off_1B2788
-                dc.l off_1B2784
-                dc.l off_1B2780
-                dc.l off_1B277C
-                dc.l off_1B2778
-                dc.l off_1B2774
-                dc.l off_1B2770
-                dc.l off_1B276C
-                dc.l off_1B2768
-                dc.l off_1B2764
-                dc.l off_1B2760
-                dc.l off_1B275C
-                dc.l off_1B2758
-                dc.l off_1B2754
-                dc.l off_1B2750
-                dc.l off_1B274C
-                dc.l off_1B2748
-                dc.l off_1B2744
-                dc.l off_1B2740
-                dc.l off_1B273C
-                dc.l off_1B2738
-                dc.l off_1B2734
-                dc.l off_1B2730
-                dc.l off_1B2730
-                dc.l off_1B2730
-                dc.l off_1B2730
-                dc.l off_1B2730
-                dc.l off_1B2730
-off_6CAC:       dc.l off_1B2920         ; DATA XREF: update_andy_bubble+16   o
-                dc.l off_1B291C
-                dc.l off_1B2918
-                dc.l off_1B2914
-                dc.l off_1B2910
-                dc.l off_1B290C
-                dc.l off_1B2908
-                dc.l off_1B2904
-                dc.l off_1B2900
-                dc.l off_1B28FC
-                dc.l off_1B28F8
-                dc.l off_1B28F4
-                dc.l off_1B28F0
-                dc.l off_1B28EC
-                dc.l off_1B28E8
-                dc.l off_1B28E4
-                dc.l off_1B28E0
-                dc.l off_1B28DC
-                dc.l off_1B28D8
-                dc.l off_1B28D4
-                dc.l off_1B28D0
-                dc.l off_1B28CC
-                dc.l off_1B28C8
-                dc.l off_1B28C4
-                dc.l off_1B28C0
-                dc.l off_1B28BC
-                dc.l off_1B28B8
-                dc.l off_1B28B4
-                dc.l off_1B28B0
-                dc.l off_1B28AC
-                dc.l off_1B28A8
-                dc.l off_1B28A4
-                dc.l off_1B28A0
-                dc.l off_1B289C
-                dc.l off_1B2898
-                dc.l off_1B2894
-                dc.l off_1B2890
-                dc.l off_1B288C
-                dc.l off_1B2888
-                dc.l off_1B2884
-                dc.l off_1B2880
-                dc.l off_1B287C
-                dc.l off_1B2878
-                dc.l off_1B2874
-                dc.l off_1B2870
-                dc.l off_1B286C
-                dc.l off_1B2868
-                dc.l off_1B2864
-                dc.l off_1B2864
-                dc.l off_1B2864
-                dc.l off_1B2864
-off_6D78:       dc.l off_1B29E0         ; DATA XREF: update_andy_super_bubble+16   o
-                dc.l off_1B29DC
-                dc.l off_1B29D8
-                dc.l off_1B29D8
-                dc.l off_1B29D4
-                dc.l off_1B29D4
-                dc.l off_1B29D0
-                dc.l off_1B29D0
-                dc.l off_1B29CC
-                dc.l off_1B29CC
-                dc.l off_1B29C8
-                dc.l off_1B29C8
-                dc.l off_1B29C4
-                dc.l off_1B29C4
-                dc.l off_1B29C0
-                dc.l off_1B29C0
-                dc.l off_1B29BC
-                dc.l off_1B29BC
-                dc.l off_1B29B8
-                dc.l off_1B29B8
-                dc.l off_1B29B4
-                dc.l off_1B29B4
-                dc.l off_1B29B0
-                dc.l off_1B29B0
-                dc.l off_1B29AC
-                dc.l off_1B29AC
-                dc.l off_1B29A8
-                dc.l off_1B29A8
-                dc.l off_1B29A4
-                dc.l off_1B29A4
-                dc.l off_1B29A0
-                dc.l off_1B29A0
-                dc.l off_1B299C
-                dc.l off_1B299C
-                dc.l off_1B2998
-                dc.l off_1B2998
-                dc.l off_1B2994
-                dc.l off_1B2994
-                dc.l off_1B2990
-                dc.l off_1B2990
-                dc.l off_1B298C
-                dc.l off_1B298C
-                dc.l off_1B2988
-                dc.l off_1B2988
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-                dc.l off_1B2984
-off_6E58:       dc.l off_1B2980         ; DATA XREF: update_andy_speed_bubble+16   o
-                dc.l off_1B297C
-                dc.l off_1B2978
-                dc.l off_1B2978
-                dc.l off_1B2974
-                dc.l off_1B2974
-                dc.l off_1B2970
-                dc.l off_1B2970
-                dc.l off_1B296C
-                dc.l off_1B296C
-                dc.l off_1B2968
-                dc.l off_1B2968
-                dc.l off_1B2964
-                dc.l off_1B2964
-                dc.l off_1B2960
-                dc.l off_1B2960
-                dc.l off_1B295C
-                dc.l off_1B295C
-                dc.l off_1B2958
-                dc.l off_1B2958
-                dc.l off_1B2954
-                dc.l off_1B2954
-                dc.l off_1B2950
-                dc.l off_1B2950
-                dc.l off_1B294C
-                dc.l off_1B294C
-                dc.l off_1B2948
-                dc.l off_1B2948
-                dc.l off_1B2944
-                dc.l off_1B2944
-                dc.l off_1B2940
-                dc.l off_1B2940
-                dc.l off_1B293C
-                dc.l off_1B293C
-                dc.l off_1B2938
-                dc.l off_1B2938
-                dc.l off_1B2934
-                dc.l off_1B2934
-                dc.l off_1B2930
-                dc.l off_1B2930
-                dc.l off_1B292C
-                dc.l off_1B292C
-                dc.l off_1B2928
-                dc.l off_1B2928
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-                dc.l off_1B2924
-off_6F38:       dc.l off_1B2814         ; DATA XREF: sub_258518+68   o
-                                        ; sub_258518+7A   o
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2810
-                dc.l off_1B280C
-                dc.l off_1B2808
-                dc.l off_1B2804
-                dc.l off_1B2800
-                dc.l off_1B27FC
-                dc.l off_1B27F8
-                dc.l off_1B27F4
-                dc.l off_1B27F0
-                dc.l off_1B27EC
-                dc.l off_1B27E8
-                dc.l off_1B27E4
-                dc.l off_1B27E0
-                dc.l off_1B27DC
-                dc.l off_1B27D8
-                dc.l off_1B27D4
-                dc.l off_1B27D0
-                dc.l off_1B27CC
-                dc.l off_1B27C8
-                dc.l off_1B27C4
-                dc.l off_1B27C0
-                dc.l off_1B27BC
-                dc.l off_1B27B8
-                dc.l off_1B27B4
-                dc.l off_1B27B0
-                dc.l off_1B27AC
-                dc.l off_1B27A8
-                dc.l off_1B27A4
-                dc.l off_1B27A0
-                dc.l off_1B279C
-                dc.l off_1B2798
-                dc.l off_1B2798
-                dc.l off_1B2794
-                dc.l off_1B2794
-                dc.l off_1B2794
-                dc.l off_1B2794
-                dc.l off_1B2794
-                dc.l off_1B2794
-                dc.l off_1B2794
-off_6FF8:       dc.l off_1B2814         ; DATA XREF: sub_258518:loc_258598   o
-                                        ; sub_258518+92   o
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2814
-                dc.l off_1B2810
-                dc.l off_1B280C
-                dc.l off_1B2808
-                dc.l off_1B2804
-                dc.l off_1B2800
-                dc.l off_1B27FC
-                dc.l off_1B27F8
-                dc.l off_1B27F4
-                dc.l off_1B27F0
-                dc.l off_1B2860
-                dc.l off_1B2860
-                dc.l off_1B2860
-                dc.l off_1B2860
-                dc.l off_1B2860
-                dc.l off_1B285C
-                dc.l off_1B2858
-                dc.l off_1B2854
-                dc.l off_1B2850
-                dc.l off_1B284C
-                dc.l off_1B2848
-                dc.l off_1B2844
-                dc.l off_1B2840
-                dc.l off_1B283C
-                dc.l off_1B2838
-                dc.l off_1B2834
-                dc.l off_1B2830
-                dc.l off_1B282C
-                dc.l off_1B2828
-                dc.l off_1B2824
-                dc.l off_1B2820
-                dc.l off_1B281C
-                dc.l off_1B281C
-                dc.l off_1B2818
-                dc.l off_1B2818
-                dc.l off_1B2818
-                dc.l off_1B2818
-                dc.l off_1B2818
-                dc.l off_1B2818
-                dc.l off_1B2818
+    include "jiminc/psycrow_scale_anims_side.inc"
+    include "jiminc/psycrow_scale_anims_front.inc"
+    include "jiminc/andy_bubble_scale_anims.inc"
+    include "jiminc/andy_super_bubble_scale_anims.inc"
+    include "jiminc/andy_speed_bubble_scale_anims.inc"
+    include "jiminc/psycrow_flame_scale_anims_side.inc"
+    include "jiminc/psycrow_flame_scale_anims_front.inc"
 word_70B8:      dc.w 0, 1, 2, 3, 4, 5, 6, 7, 8
                                         ; DATA XREF: sub_2587B0:loc_2587C0   o
                 dc.w 9, $A, $B, $C, $D, $E, $F, $10
@@ -10119,90 +9465,7 @@ off_1AEEB2:     dc.w off_1D14           ; DATA XREF: oksub_2464C8+156   o
                 dc.w off_1D44
                 fa_if_b FM_NE, is_chicken_boss_fight, $0, anim_jim_chicken_boss_start
                 fa_goto off_1AE610
-anim_jim_on_rocket:     dc.w off_1570           ; DATA XREF: ROM:off_645A   o
-                                        ; ROM:0000654A   o ...
-                fa_goto anim_jim_on_rocket
-off_1AEF4E:     dc.w off_1574           ; DATA XREF: ROM:0000645E   o
-                                        ; ROM:0000654E   o ...
-                fa_end
-off_1AEF52:     dc.w off_1578           ; DATA XREF: ROM:00006462   o
-                                        ; ROM:00006552   o ...
-                fa_end
-off_1AEF56:     dc.w off_157C           ; DATA XREF: ROM:00006466   o
-                                        ; ROM:00006556   o ...
-                fa_end
-off_1AEF5A:     dc.w off_1580           ; DATA XREF: ROM:0000646A   o
-                                        ; ROM:0000653A   o ...
-                fa_end
-off_1AEF5E:     dc.w off_1584           ; DATA XREF: ROM:0000646E   o
-                                        ; ROM:0000653E   o ...
-                fa_end
-off_1AEF62:     dc.w off_1588           ; DATA XREF: ROM:00006472   o
-                                        ; ROM:00006542   o ...
-                fa_end
-off_1AEF66:     dc.w off_158C           ; DATA XREF: ROM:00006476   o
-                                        ; ROM:00006546   o ...
-                fa_end
-off_1AEF6A:     dc.w off_1590           ; DATA XREF: ROM:0000647A   o
-                                        ; ROM:0000652A   o ...
-                fa_end
-off_1AEF6E:     dc.w off_1594           ; DATA XREF: ROM:0000647E   o
-                                        ; ROM:0000652E   o ...
-                fa_end
-off_1AEF72:     dc.w off_1598           ; DATA XREF: ROM:00006482   o
-                                        ; ROM:00006532   o ...
-                fa_end
-off_1AEF76:     dc.w off_159C           ; DATA XREF: ROM:00006486   o
-                                        ; ROM:00006536   o ...
-                fa_end
-off_1AEF7A:     dc.w off_15A0           ; DATA XREF: ROM:0000648A   o
-                                        ; ROM:0000651A   o ...
-                fa_end
-off_1AEF7E:     dc.w off_15A4           ; DATA XREF: ROM:0000648E   o
-                                        ; ROM:0000651E   o ...
-                fa_end
-off_1AEF82:     dc.w off_15A8           ; DATA XREF: ROM:00006492   o
-                                        ; ROM:00006522   o ...
-                fa_end
-off_1AEF86:     dc.w off_15AC           ; DATA XREF: ROM:00006496   o
-                                        ; ROM:00006526   o ...
-                fa_end
-off_1AEF8A:     dc.w off_15B0           ; DATA XREF: ROM:0000649A   o
-                                        ; ROM:0000650A   o ...
-                fa_end
-off_1AEF8E:     dc.w off_15B4           ; DATA XREF: ROM:0000649E   o
-                                        ; ROM:0000650E   o ...
-                fa_end
-off_1AEF92:     dc.w off_15B8           ; DATA XREF: ROM:000064A2   o
-                                        ; ROM:00006512   o ...
-                fa_end
-off_1AEF96:     dc.w off_15BC           ; DATA XREF: ROM:000064A6   o
-                                        ; ROM:00006516   o ...
-                fa_end
-off_1AEF9A:     dc.w off_15C0           ; DATA XREF: ROM:000064AA   o
-                                        ; ROM:000064FA   o ...
-                fa_end
-off_1AEF9E:     dc.w off_15C4           ; DATA XREF: ROM:000064AE   o
-                                        ; ROM:000064FE   o ...
-                fa_end
-off_1AEFA2:     dc.w off_15C8           ; DATA XREF: ROM:000064B2   o
-                                        ; ROM:00006502   o ...
-                fa_end
-off_1AEFA6:     dc.w off_15CC           ; DATA XREF: ROM:000064B6   o
-                                        ; ROM:00006506   o ...
-                fa_end
-off_1AEFAA:     dc.w off_15D0           ; DATA XREF: ROM:000064BA   o
-                                        ; ROM:000064CA   o ...
-                fa_end
-off_1AEFAE:     dc.w off_15D4           ; DATA XREF: ROM:000064BE   o
-                                        ; ROM:000064CE   o ...
-                fa_end
-off_1AEFB2:     dc.w off_15D8           ; DATA XREF: ROM:000064C2   o
-                                        ; ROM:000064D2   o ...
-                fa_end
-off_1AEFB6:     dc.w off_15DC           ; DATA XREF: ROM:000064C6   o
-                                        ; ROM:000064D6   o ...
-                fa_end
+    include "jiminc/jim_rocket_anims.inc"
 off_1AEFBA:     dc.w off_1354           ; DATA XREF: collision_with_funicular+C8   o
                                         ; collision_with_funicular+D8   o
                 fa_set_b jim_state, $21
@@ -15060,69 +14323,7 @@ off_1B25BE:     dc.w off_DAC            ; DATA XREF: fire_to_bob_cat+40   o
                 fa_goto anim_bob_cat
 anim_planet:     dc.w off_2FA8           ; DATA XREF: ROM:object_planet   o
                 fa_end
-off_1B25D8:     dc.w off_A10            ; DATA XREF: ROM:off_665A   o
-                                        ; ROM:0000674A   o ...
-                fa_end
-off_1B25DC:     dc.w off_A14            ; DATA XREF: ROM:0000665E   o
-                                        ; ROM:00006666   o ...
-                fa_end
-off_1B25E0:     dc.w off_A18            ; DATA XREF: ROM:00006662   o
-                                        ; ROM:00006752   o ...
-                fa_end
-off_1B25E4:     dc.w off_A1C            ; DATA XREF: ROM:0000666A   o
-                                        ; ROM:0000673A   o ...
-                fa_end
-off_1B25E8:     dc.w off_A20            ; DATA XREF: ROM:0000666E   o
-                                        ; ROM:00006676   o ...
-                fa_end
-off_1B25EC:     dc.w off_A24            ; DATA XREF: ROM:00006672   o
-                                        ; ROM:00006742   o ...
-                fa_end
-off_1B25F0:     dc.w off_A28            ; DATA XREF: ROM:0000667A   o
-                                        ; ROM:0000672A   o ...
-                fa_end
-off_1B25F4:     dc.w off_A2C            ; DATA XREF: ROM:0000667E   o
-                                        ; ROM:00006686   o ...
-                fa_end
-off_1B25F8:     dc.w off_A30            ; DATA XREF: ROM:00006682   o
-                                        ; ROM:00006732   o ...
-                fa_end
-off_1B25FC:     dc.w off_A34            ; DATA XREF: ROM:0000668A   o
-                                        ; ROM:0000671A   o ...
-                fa_end
-off_1B2600:     dc.w off_A38            ; DATA XREF: ROM:0000668E   o
-                                        ; ROM:00006696   o ...
-                fa_end
-off_1B2604:     dc.w off_A3C            ; DATA XREF: ROM:00006692   o
-                                        ; ROM:00006722   o ...
-                fa_end
-off_1B2608:     dc.w off_A40            ; DATA XREF: ROM:0000670A   o
-                                        ; ROM:0000679A   o ...
-                fa_end
-off_1B260C:     dc.w off_A44            ; DATA XREF: ROM:0000669A   o
-                                        ; ROM:0000669E   o ...
-                fa_end
-off_1B2610:     dc.w off_A48            ; DATA XREF: ROM:000066A2   o
-                                        ; ROM:00006712   o ...
-                fa_end
-off_1B2614:     dc.w off_A4C            ; DATA XREF: ROM:000066AA   o
-                                        ; ROM:000066FA   o ...
-                fa_end
-off_1B2618:     dc.w off_A50            ; DATA XREF: ROM:000066AE   o
-                                        ; ROM:000066B6   o ...
-                fa_end
-off_1B261C:     dc.w off_A54            ; DATA XREF: ROM:000066B2   o
-                                        ; ROM:00006702   o ...
-                fa_end
-off_1B2620:     dc.w off_A58            ; DATA XREF: ROM:000066BA   o
-                                        ; ROM:000066CA   o ...
-                fa_end
-off_1B2624:     dc.w off_A5C            ; DATA XREF: ROM:000066BE   o
-                                        ; ROM:000066C6   o ...
-                fa_end
-off_1B2628:     dc.w off_A60            ; DATA XREF: ROM:000066C2   o
-                                        ; ROM:000066D2   o ...
-                fa_end
+    include "jiminc/rocket_flame_anims.inc"
 anim_sphere_energy_3:     dc.w off_2FAC           ; DATA XREF: ROM:object_protective_sphere   o
                 dc.w off_2FAC
 off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
@@ -15146,534 +14347,11 @@ off_1B2630:     dc.w off_2FB0           ; DATA XREF: ROM:001B2660   o
                 dc.w off_2FAC
 word_1B2666:                            ; DATA XREF: ROM:001B2656   o
                 fa_delete
-anim_psyq:     dc.w off_28C0           ; DATA XREF: ROM:00006BD4   o
-                                        ; ROM:00006BD8   o ...
-                fa_end
-off_1B266C:     dc.w off_28C4           ; DATA XREF: ROM:00006BD0   o
-                fa_end
-off_1B2670:     dc.w off_28C8           ; DATA XREF: ROM:00006BCC   o
-                fa_end
-off_1B2674:     dc.w off_28CC           ; DATA XREF: ROM:00006BC8   o
-                fa_end
-off_1B2678:     dc.w off_28D0           ; DATA XREF: ROM:00006BC4   o
-                fa_end
-off_1B267C:     dc.w off_28D4           ; DATA XREF: ROM:00006BC0   o
-                fa_end
-off_1B2680:     dc.w off_28D8           ; DATA XREF: ROM:00006BBC   o
-                fa_end
-off_1B2684:     dc.w off_28DC           ; DATA XREF: ROM:00006BB8   o
-                fa_end
-off_1B2688:     dc.w off_28E0           ; DATA XREF: ROM:00006BB4   o
-                fa_end
-off_1B268C:     dc.w off_28E4           ; DATA XREF: ROM:00006BB0   o
-                fa_end
-off_1B2690:     dc.w off_28E8           ; DATA XREF: ROM:00006BAC   o
-                fa_end
-off_1B2694:     dc.w off_28EC           ; DATA XREF: ROM:00006BA8   o
-                fa_end
-off_1B2698:     dc.w off_28F0           ; DATA XREF: ROM:00006BA4   o
-                fa_end
-off_1B269C:     dc.w off_28F4           ; DATA XREF: ROM:00006BA0   o
-                fa_end
-off_1B26A0:     dc.w off_28F8           ; DATA XREF: ROM:00006B9C   o
-                fa_end
-off_1B26A4:     dc.w off_28FC           ; DATA XREF: ROM:00006B98   o
-                fa_end
-off_1B26A8:     dc.w off_2900           ; DATA XREF: ROM:00006B94   o
-                fa_end
-off_1B26AC:     dc.w off_2904           ; DATA XREF: ROM:00006B90   o
-                fa_end
-off_1B26B0:     dc.w off_2908           ; DATA XREF: ROM:00006B8C   o
-                fa_end
-off_1B26B4:     dc.w off_290C           ; DATA XREF: ROM:00006B88   o
-                fa_end
-off_1B26B8:     dc.w off_2910           ; DATA XREF: ROM:00006B84   o
-                fa_end
-off_1B26BC:     dc.w off_2914           ; DATA XREF: ROM:00006B80   o
-                fa_end
-off_1B26C0:     dc.w off_2918           ; DATA XREF: ROM:00006B7C   o
-                fa_end
-off_1B26C4:     dc.w off_291C           ; DATA XREF: ROM:00006B78   o
-                fa_end
-off_1B26C8:     dc.w off_2920           ; DATA XREF: ROM:00006B74   o
-                fa_end
-off_1B26CC:     dc.w off_2924           ; DATA XREF: ROM:00006B70   o
-                                        ; ROM:00006C30   o
-                fa_end
-off_1B26D0:     dc.w off_2928           ; DATA XREF: ROM:00006B6C   o
-                                        ; ROM:00006C2C   o
-                fa_end
-off_1B26D4:     dc.w off_292C           ; DATA XREF: ROM:00006B68   o
-                                        ; ROM:00006C28   o
-                fa_end
-off_1B26D8:     dc.w off_2930           ; DATA XREF: ROM:00006B64   o
-                                        ; ROM:00006C24   o
-                fa_end
-off_1B26DC:     dc.w off_2934           ; DATA XREF: ROM:00006B60   o
-                                        ; ROM:00006C20   o
-                fa_end
-off_1B26E0:     dc.w off_2938           ; DATA XREF: ROM:00006B5C   o
-                                        ; ROM:00006C1C   o
-                fa_end
-off_1B26E4:     dc.w off_293C           ; DATA XREF: ROM:00006B58   o
-                                        ; ROM:00006C18   o
-                fa_end
-off_1B26E8:     dc.w off_2940           ; DATA XREF: ROM:00006B54   o
-                                        ; ROM:00006C14   o
-                fa_end
-off_1B26EC:     dc.w off_2944           ; DATA XREF: ROM:00006B50   o
-                                        ; ROM:00006C10   o
-                fa_end
-off_1B26F0:     dc.w off_2948           ; DATA XREF: ROM:00006B4C   o
-                                        ; ROM:00006C0C   o
-                fa_end
-off_1B26F4:     dc.w off_294C           ; DATA XREF: ROM:00006B48   o
-                                        ; ROM:00006C08   o
-                fa_end
-off_1B26F8:     dc.w off_2950           ; DATA XREF: ROM:00006B44   o
-                                        ; ROM:00006C04   o
-                fa_end
-off_1B26FC:     dc.w off_2954           ; DATA XREF: ROM:00006B40   o
-                                        ; ROM:00006C00   o
-                fa_end
-off_1B2700:     dc.w off_2958           ; DATA XREF: ROM:00006B3C   o
-                                        ; ROM:00006BFC   o
-                fa_end
-off_1B2704:     dc.w off_295C           ; DATA XREF: ROM:00006B38   o
-                                        ; ROM:00006BF8   o
-                fa_end
-off_1B2708:     dc.w off_2960           ; DATA XREF: ROM:00006B34   o
-                                        ; ROM:00006BF4   o
-                fa_end
-off_1B270C:     dc.w off_2964           ; DATA XREF: ROM:00006B30   o
-                                        ; ROM:00006BF0   o
-                fa_end
-off_1B2710:     dc.w off_2968           ; DATA XREF: ROM:off_6B2C   o
-                                        ; ROM:off_6BEC   o
-                fa_end
-                dc.w off_296C
-                fa_end
-                dc.w off_2970
-                fa_end
-                dc.w off_2974
-                fa_end
-                dc.w off_2978
-                fa_end
-                dc.w off_297C
-                fa_end
-                dc.w off_2980
-                fa_end
-                dc.w off_2984
-                fa_end
-off_1B2730:     dc.w off_2988           ; DATA XREF: ROM:00006C94   o
-                                        ; ROM:00006C98   o ...
-                fa_end
-off_1B2734:     dc.w off_298C           ; DATA XREF: ROM:00006C90   o
-                fa_end
-off_1B2738:     dc.w off_2990           ; DATA XREF: ROM:00006C8C   o
-                fa_end
-off_1B273C:     dc.w off_2994           ; DATA XREF: ROM:00006C88   o
-                fa_end
-off_1B2740:     dc.w off_2998           ; DATA XREF: ROM:00006C84   o
-                fa_end
-off_1B2744:     dc.w off_299C           ; DATA XREF: ROM:00006C80   o
-                fa_end
-off_1B2748:     dc.w off_29A0           ; DATA XREF: ROM:00006C7C   o
-                fa_end
-off_1B274C:     dc.w off_29A4           ; DATA XREF: ROM:00006C78   o
-                fa_end
-off_1B2750:     dc.w off_29A8           ; DATA XREF: ROM:00006C74   o
-                fa_end
-off_1B2754:     dc.w off_29AC           ; DATA XREF: ROM:00006C70   o
-                fa_end
-off_1B2758:     dc.w off_29B0           ; DATA XREF: ROM:00006C6C   o
-                fa_end
-off_1B275C:     dc.w off_29B4           ; DATA XREF: ROM:00006C68   o
-                fa_end
-off_1B2760:     dc.w off_29B8           ; DATA XREF: ROM:00006C64   o
-                fa_end
-off_1B2764:     dc.w off_29BC           ; DATA XREF: ROM:00006C60   o
-                fa_end
-off_1B2768:     dc.w off_29C0           ; DATA XREF: ROM:00006C5C   o
-                fa_end
-off_1B276C:     dc.w off_29C4           ; DATA XREF: ROM:00006C58   o
-                fa_end
-off_1B2770:     dc.w off_29C8           ; DATA XREF: ROM:00006C54   o
-                fa_end
-off_1B2774:     dc.w off_29CC           ; DATA XREF: ROM:00006C50   o
-                fa_end
-off_1B2778:     dc.w off_29D0           ; DATA XREF: ROM:00006C4C   o
-                fa_end
-off_1B277C:     dc.w off_29D4           ; DATA XREF: ROM:00006C48   o
-                fa_end
-off_1B2780:     dc.w off_29D8           ; DATA XREF: ROM:00006C44   o
-                fa_end
-off_1B2784:     dc.w off_29DC           ; DATA XREF: ROM:00006C40   o
-                fa_end
-off_1B2788:     dc.w off_29E0           ; DATA XREF: ROM:00006C3C   o
-                fa_end
-off_1B278C:     dc.w off_29E4           ; DATA XREF: ROM:00006C38   o
-                fa_end
-off_1B2790:     dc.w off_29E8           ; DATA XREF: ROM:00006C34   o
-                fa_end
-off_1B2794:     dc.w off_27F0           ; DATA XREF: ROM:00006FDC   o
-                                        ; ROM:00006FE0   o ...
-                fa_end
-off_1B2798:     dc.w off_27F4           ; DATA XREF: ROM:00006FD4   o
-                                        ; ROM:00006FD8   o
-                fa_end
-off_1B279C:     dc.w off_27F8           ; DATA XREF: ROM:00006FD0   o
-                fa_end
-off_1B27A0:     dc.w off_27FC           ; DATA XREF: ROM:00006FCC   o
-                fa_end
-off_1B27A4:     dc.w off_2800           ; DATA XREF: ROM:00006FC8   o
-                fa_end
-off_1B27A8:     dc.w off_2804           ; DATA XREF: ROM:00006FC4   o
-                fa_end
-off_1B27AC:     dc.w off_2808           ; DATA XREF: ROM:00006FC0   o
-                fa_end
-off_1B27B0:     dc.w off_280C           ; DATA XREF: ROM:00006FBC   o
-                fa_end
-off_1B27B4:     dc.w off_2810           ; DATA XREF: ROM:00006FB8   o
-                fa_end
-off_1B27B8:     dc.w off_2814           ; DATA XREF: ROM:00006FB4   o
-                fa_end
-off_1B27BC:     dc.w off_2818           ; DATA XREF: ROM:00006FB0   o
-                fa_end
-off_1B27C0:     dc.w off_281C           ; DATA XREF: ROM:00006FAC   o
-                fa_end
-off_1B27C4:     dc.w off_2820           ; DATA XREF: ROM:00006FA8   o
-                fa_end
-off_1B27C8:     dc.w off_2824           ; DATA XREF: ROM:00006FA4   o
-                fa_end
-off_1B27CC:     dc.w off_2828           ; DATA XREF: ROM:00006FA0   o
-                fa_end
-off_1B27D0:     dc.w off_282C           ; DATA XREF: ROM:00006F9C   o
-                fa_end
-off_1B27D4:     dc.w off_2830           ; DATA XREF: ROM:00006F98   o
-                fa_end
-off_1B27D8:     dc.w off_2834           ; DATA XREF: ROM:00006F94   o
-                fa_end
-off_1B27DC:     dc.w off_2838           ; DATA XREF: ROM:00006F90   o
-                fa_end
-off_1B27E0:     dc.w off_283C           ; DATA XREF: ROM:00006F8C   o
-                fa_end
-off_1B27E4:     dc.w off_2840           ; DATA XREF: ROM:00006F88   o
-                fa_end
-off_1B27E8:     dc.w off_2844           ; DATA XREF: ROM:00006F84   o
-                fa_end
-off_1B27EC:     dc.w off_2848           ; DATA XREF: ROM:00006F80   o
-                fa_end
-off_1B27F0:     dc.w off_284C           ; DATA XREF: ROM:00006F7C   o
-                                        ; ROM:0000703C   o
-                fa_end
-off_1B27F4:     dc.w off_2850           ; DATA XREF: ROM:00006F78   o
-                                        ; ROM:00007038   o
-                fa_end
-off_1B27F8:     dc.w off_2854           ; DATA XREF: ROM:00006F74   o
-                                        ; ROM:00007034   o
-                fa_end
-off_1B27FC:     dc.w off_2858           ; DATA XREF: ROM:00006F70   o
-                                        ; ROM:00007030   o
-                fa_end
-off_1B2800:     dc.w off_285C           ; DATA XREF: ROM:00006F6C   o
-                                        ; ROM:0000702C   o
-                fa_end
-off_1B2804:     dc.w off_2860           ; DATA XREF: ROM:00006F68   o
-                                        ; ROM:00007028   o
-                fa_end
-off_1B2808:     dc.w off_2864           ; DATA XREF: ROM:00006F64   o
-                                        ; ROM:00007024   o
-                fa_end
-off_1B280C:     dc.w off_2868           ; DATA XREF: ROM:00006F60   o
-                                        ; ROM:00007020   o
-                fa_end
-off_1B2810:     dc.w off_286C           ; DATA XREF: ROM:00006F5C   o
-                                        ; ROM:0000701C   o
-                fa_end
-off_1B2814:     dc.w off_2870           ; DATA XREF: ROM:off_6F38   o
-                                        ; ROM:00006F3C   o ...
-                fa_end
-off_1B2818:     dc.w off_2874           ; DATA XREF: ROM:0000709C   o
-                                        ; ROM:000070A0   o ...
-                fa_end
-off_1B281C:     dc.w off_2878           ; DATA XREF: ROM:00007094   o
-                                        ; ROM:00007098   o
-                fa_end
-off_1B2820:     dc.w off_287C           ; DATA XREF: ROM:00007090   o
-                fa_end
-off_1B2824:     dc.w off_2880           ; DATA XREF: ROM:0000708C   o
-                fa_end
-off_1B2828:     dc.w off_2884           ; DATA XREF: ROM:00007088   o
-                fa_end
-off_1B282C:     dc.w off_2888           ; DATA XREF: ROM:00007084   o
-                fa_end
-off_1B2830:     dc.w off_288C           ; DATA XREF: ROM:00007080   o
-                fa_end
-off_1B2834:     dc.w off_2890           ; DATA XREF: ROM:0000707C   o
-                fa_end
-off_1B2838:     dc.w off_2894           ; DATA XREF: ROM:00007078   o
-                fa_end
-off_1B283C:     dc.w off_2898           ; DATA XREF: ROM:00007074   o
-                fa_end
-off_1B2840:     dc.w off_289C           ; DATA XREF: ROM:00007070   o
-                fa_end
-off_1B2844:     dc.w off_28A0           ; DATA XREF: ROM:0000706C   o
-                fa_end
-off_1B2848:     dc.w off_28A4           ; DATA XREF: ROM:00007068   o
-                fa_end
-off_1B284C:     dc.w off_28A8           ; DATA XREF: ROM:00007064   o
-                fa_end
-off_1B2850:     dc.w off_28AC           ; DATA XREF: ROM:00007060   o
-                fa_end
-off_1B2854:     dc.w off_28B0           ; DATA XREF: ROM:0000705C   o
-                fa_end
-off_1B2858:     dc.w off_28B4           ; DATA XREF: ROM:00007058   o
-                fa_end
-off_1B285C:     dc.w off_28B8           ; DATA XREF: ROM:00007054   o
-                fa_end
-off_1B2860:     dc.w off_28BC           ; DATA XREF: ROM:00007040   o
-                                        ; ROM:00007044   o ...
-                fa_end
-off_1B2864:     dc.w off_2E40           ; DATA XREF: ROM:00006D68   o
-                                        ; ROM:00006D6C   o ...
-                fa_end
-off_1B2868:     dc.w off_2E40           ; DATA XREF: ROM:00006D64   o
-                fa_end
-off_1B286C:     dc.w off_2E44           ; DATA XREF: ROM:00006D60   o
-                fa_end
-off_1B2870:     dc.w off_2E44           ; DATA XREF: ROM:00006D5C   o
-                fa_end
-off_1B2874:     dc.w off_2E48           ; DATA XREF: ROM:00006D58   o
-                fa_end
-off_1B2878:     dc.w off_2E48           ; DATA XREF: ROM:00006D54   o
-                fa_end
-off_1B287C:     dc.w off_2E4C           ; DATA XREF: ROM:00006D50   o
-                fa_end
-off_1B2880:     dc.w off_2E4C           ; DATA XREF: ROM:00006D4C   o
-                fa_end
-off_1B2884:     dc.w off_2E50           ; DATA XREF: ROM:00006D48   o
-                fa_end
-off_1B2888:     dc.w off_2E50           ; DATA XREF: ROM:00006D44   o
-                fa_end
-off_1B288C:     dc.w off_2E54           ; DATA XREF: ROM:00006D40   o
-                fa_end
-off_1B2890:     dc.w off_2E54           ; DATA XREF: ROM:00006D3C   o
-                fa_end
-off_1B2894:     dc.w off_2E58           ; DATA XREF: ROM:00006D38   o
-                fa_end
-off_1B2898:     dc.w off_2E58           ; DATA XREF: ROM:00006D34   o
-                fa_end
-off_1B289C:     dc.w off_2E5C           ; DATA XREF: ROM:00006D30   o
-                fa_end
-off_1B28A0:     dc.w off_2E5C           ; DATA XREF: ROM:00006D2C   o
-                fa_end
-off_1B28A4:     dc.w off_2E60           ; DATA XREF: ROM:00006D28   o
-                fa_end
-off_1B28A8:     dc.w off_2E60           ; DATA XREF: ROM:00006D24   o
-                fa_end
-off_1B28AC:     dc.w off_2E64           ; DATA XREF: ROM:00006D20   o
-                fa_end
-off_1B28B0:     dc.w off_2E64           ; DATA XREF: ROM:00006D1C   o
-                fa_end
-off_1B28B4:     dc.w off_2E68           ; DATA XREF: ROM:00006D18   o
-                fa_end
-off_1B28B8:     dc.w off_2E68           ; DATA XREF: ROM:00006D14   o
-                fa_end
-off_1B28BC:     dc.w off_2E6C           ; DATA XREF: ROM:00006D10   o
-                fa_end
-off_1B28C0:     dc.w off_2E6C           ; DATA XREF: ROM:00006D0C   o
-                fa_end
-off_1B28C4:     dc.w off_2E70           ; DATA XREF: ROM:00006D08   o
-                fa_end
-off_1B28C8:     dc.w off_2E70           ; DATA XREF: ROM:00006D04   o
-                fa_end
-off_1B28CC:     dc.w off_2E74           ; DATA XREF: ROM:00006D00   o
-                fa_end
-off_1B28D0:     dc.w off_2E74           ; DATA XREF: ROM:00006CFC   o
-                fa_end
-off_1B28D4:     dc.w off_2E78           ; DATA XREF: ROM:00006CF8   o
-                fa_end
-off_1B28D8:     dc.w off_2E78           ; DATA XREF: ROM:00006CF4   o
-                fa_end
-off_1B28DC:     dc.w off_2E7C           ; DATA XREF: ROM:00006CF0   o
-                fa_end
-off_1B28E0:     dc.w off_2E7C           ; DATA XREF: ROM:00006CEC   o
-                fa_end
-off_1B28E4:     dc.w off_2E80           ; DATA XREF: ROM:00006CE8   o
-                fa_end
-off_1B28E8:     dc.w off_2E80           ; DATA XREF: ROM:00006CE4   o
-                fa_end
-off_1B28EC:     dc.w off_2E84           ; DATA XREF: ROM:00006CE0   o
-                fa_end
-off_1B28F0:     dc.w off_2E84           ; DATA XREF: ROM:00006CDC   o
-                fa_end
-off_1B28F4:     dc.w off_2E88           ; DATA XREF: ROM:00006CD8   o
-                fa_end
-off_1B28F8:     dc.w off_2E88           ; DATA XREF: ROM:00006CD4   o
-                fa_end
-off_1B28FC:     dc.w off_2E8C           ; DATA XREF: ROM:00006CD0   o
-                fa_end
-off_1B2900:     dc.w off_2E8C           ; DATA XREF: ROM:00006CCC   o
-                fa_end
-off_1B2904:     dc.w off_2E90           ; DATA XREF: ROM:00006CC8   o
-                fa_end
-off_1B2908:     dc.w off_2E90           ; DATA XREF: ROM:00006CC4   o
-                fa_end
-off_1B290C:     dc.w off_2E94           ; DATA XREF: ROM:00006CC0   o
-                fa_end
-off_1B2910:     dc.w off_2E94           ; DATA XREF: ROM:00006CBC   o
-                fa_end
-off_1B2914:     dc.w off_2E98           ; DATA XREF: ROM:00006CB8   o
-                fa_end
-off_1B2918:     dc.w off_2E98           ; DATA XREF: ROM:00006CB4   o
-                fa_end
-off_1B291C:     dc.w off_2E9C           ; DATA XREF: ROM:00006CB0   o
-                fa_end
-off_1B2920:     dc.w off_2E9C           ; DATA XREF: ROM:off_6CAC   o
-                fa_end
-off_1B2924:     dc.w off_3030           ; DATA XREF: ROM:00006F08   o
-                                        ; ROM:00006F0C   o ...
-                fa_end
-off_1B2928:     dc.w off_3034           ; DATA XREF: ROM:00006F00   o
-                                        ; ROM:00006F04   o
-                fa_end
-off_1B292C:     dc.w off_3038           ; DATA XREF: ROM:00006EF8   o
-                                        ; ROM:00006EFC   o
-                fa_end
-off_1B2930:     dc.w off_303C           ; DATA XREF: ROM:00006EF0   o
-                                        ; ROM:00006EF4   o
-                fa_end
-off_1B2934:     dc.w off_3040           ; DATA XREF: ROM:00006EE8   o
-                                        ; ROM:00006EEC   o
-                fa_end
-off_1B2938:     dc.w off_3044           ; DATA XREF: ROM:00006EE0   o
-                                        ; ROM:00006EE4   o
-                fa_end
-off_1B293C:     dc.w off_3048           ; DATA XREF: ROM:00006ED8   o
-                                        ; ROM:00006EDC   o
-                fa_end
-off_1B2940:     dc.w off_304C           ; DATA XREF: ROM:00006ED0   o
-                                        ; ROM:00006ED4   o
-                fa_end
-off_1B2944:     dc.w off_3050           ; DATA XREF: ROM:00006EC8   o
-                                        ; ROM:00006ECC   o
-                fa_end
-off_1B2948:     dc.w off_3054           ; DATA XREF: ROM:00006EC0   o
-                                        ; ROM:00006EC4   o
-                fa_end
-off_1B294C:     dc.w off_3058           ; DATA XREF: ROM:00006EB8   o
-                                        ; ROM:00006EBC   o
-                fa_end
-off_1B2950:     dc.w off_305C           ; DATA XREF: ROM:00006EB0   o
-                                        ; ROM:00006EB4   o
-                fa_end
-off_1B2954:     dc.w off_3060           ; DATA XREF: ROM:00006EA8   o
-                                        ; ROM:00006EAC   o
-                fa_end
-off_1B2958:     dc.w off_3064           ; DATA XREF: ROM:00006EA0   o
-                                        ; ROM:00006EA4   o
-                fa_end
-off_1B295C:     dc.w off_3068           ; DATA XREF: ROM:00006E98   o
-                                        ; ROM:00006E9C   o
-                fa_end
-off_1B2960:     dc.w off_306C           ; DATA XREF: ROM:00006E90   o
-                                        ; ROM:00006E94   o
-                fa_end
-off_1B2964:     dc.w off_3070           ; DATA XREF: ROM:00006E88   o
-                                        ; ROM:00006E8C   o
-                fa_end
-off_1B2968:     dc.w off_3074           ; DATA XREF: ROM:00006E80   o
-                                        ; ROM:00006E84   o
-                fa_end
-off_1B296C:     dc.w off_3078           ; DATA XREF: ROM:00006E78   o
-                                        ; ROM:00006E7C   o
-                fa_end
-off_1B2970:     dc.w off_307C           ; DATA XREF: ROM:00006E70   o
-                                        ; ROM:00006E74   o
-                fa_end
-off_1B2974:     dc.w off_3080           ; DATA XREF: ROM:00006E68   o
-                                        ; ROM:00006E6C   o
-                fa_end
-off_1B2978:     dc.w off_3084           ; DATA XREF: ROM:00006E60   o
-                                        ; ROM:00006E64   o
-                fa_end
-off_1B297C:     dc.w off_3088           ; DATA XREF: ROM:00006E5C   o
-                fa_end
-off_1B2980:     dc.w off_308C           ; DATA XREF: ROM:off_6E58   o
-                                        ; ROM:object_andy_speed_bubble   o
-                fa_end
-off_1B2984:     dc.w off_2FD0           ; DATA XREF: ROM:00006E28   o
-                                        ; ROM:00006E2C   o ...
-                fa_end
-off_1B2988:     dc.w off_2FD4           ; DATA XREF: ROM:00006E20   o
-                                        ; ROM:00006E24   o
-                fa_end
-off_1B298C:     dc.w off_2FD8           ; DATA XREF: ROM:00006E18   o
-                                        ; ROM:00006E1C   o
-                fa_end
-off_1B2990:     dc.w off_2FDC           ; DATA XREF: ROM:00006E10   o
-                                        ; ROM:00006E14   o
-                fa_end
-off_1B2994:     dc.w off_2FE0           ; DATA XREF: ROM:00006E08   o
-                                        ; ROM:00006E0C   o
-                fa_end
-off_1B2998:     dc.w off_2FE4           ; DATA XREF: ROM:00006E00   o
-                                        ; ROM:00006E04   o
-                fa_end
-off_1B299C:     dc.w off_2FE8           ; DATA XREF: ROM:00006DF8   o
-                                        ; ROM:00006DFC   o
-                fa_end
-off_1B29A0:     dc.w off_2FEC           ; DATA XREF: ROM:00006DF0   o
-                                        ; ROM:00006DF4   o
-                fa_end
-off_1B29A4:     dc.w off_2FF0           ; DATA XREF: ROM:00006DE8   o
-                                        ; ROM:00006DEC   o
-                fa_end
-off_1B29A8:     dc.w off_2FF4           ; DATA XREF: ROM:00006DE0   o
-                                        ; ROM:00006DE4   o
-                fa_end
-off_1B29AC:     dc.w off_2FF8           ; DATA XREF: ROM:00006DD8   o
-                                        ; ROM:00006DDC   o
-                fa_end
-off_1B29B0:     dc.w off_2FFC           ; DATA XREF: ROM:00006DD0   o
-                                        ; ROM:00006DD4   o
-                fa_end
-off_1B29B4:     dc.w off_3000           ; DATA XREF: ROM:00006DC8   o
-                                        ; ROM:00006DCC   o
-                fa_end
-off_1B29B8:     dc.w off_3004           ; DATA XREF: ROM:00006DC0   o
-                                        ; ROM:00006DC4   o
-                fa_end
-off_1B29BC:     dc.w off_3008           ; DATA XREF: ROM:00006DB8   o
-                                        ; ROM:00006DBC   o
-                fa_end
-off_1B29C0:     dc.w off_300C           ; DATA XREF: ROM:00006DB0   o
-                                        ; ROM:00006DB4   o
-                fa_end
-off_1B29C4:     dc.w off_3010           ; DATA XREF: ROM:00006DA8   o
-                                        ; ROM:00006DAC   o
-                fa_end
-off_1B29C8:     dc.w off_3014           ; DATA XREF: ROM:00006DA0   o
-                                        ; ROM:00006DA4   o
-                fa_end
-off_1B29CC:     dc.w off_3018           ; DATA XREF: ROM:00006D98   o
-                                        ; ROM:00006D9C   o
-                fa_end
-off_1B29D0:     dc.w off_301C           ; DATA XREF: ROM:00006D90   o
-                                        ; ROM:00006D94   o
-                fa_end
-off_1B29D4:     dc.w off_3020           ; DATA XREF: ROM:00006D88   o
-                                        ; ROM:00006D8C   o
-                fa_end
-off_1B29D8:     dc.w off_3024           ; DATA XREF: ROM:00006D80   o
-                                        ; ROM:00006D84   o
-                fa_end
-off_1B29DC:     dc.w off_3028           ; DATA XREF: ROM:00006D7C   o
-                fa_end
-off_1B29E0:     dc.w off_302C           ; DATA XREF: ROM:off_6D78   o
-                                        ; ROM:object_andy_super_bubble   o
-                fa_end
+    include "jiminc/psycrow_anims.inc"
+    include "jiminc/psycrow_flame_anims.inc"
+    include "jiminc/andy_bubble_anims.inc"
+    include "jiminc/andy_speed_bubble_anims.inc"
+    include "jiminc/andy_super_bubble_anims.inc"
 off_1B29E4:     dc.w off_29EC           ; DATA XREF: sub_24BEDC+1B6   o
                 dc.w off_29EC
 off_1B29E8:     dc.w off_29F0           ; DATA XREF: ROM:001B29FE   o
@@ -15687,105 +14365,7 @@ off_1B29E8:     dc.w off_29F0           ; DATA XREF: ROM:001B29FE   o
                 dc.w off_2A00
                 dc.w off_2A00
                 fa_goto off_1B29E8
-off_1B2A02:     dc.w off_2EA0           ; DATA XREF: ROM:off_685A   o
-                                        ; ROM:0000685E   o ...
-                fa_end
-off_1B2A06:     dc.w off_2EA4           ; DATA XREF: ROM:00006862   o
-                fa_end
-off_1B2A0A:     dc.w off_2EA8           ; DATA XREF: ROM:00006866   o
-                fa_end
-off_1B2A0E:     dc.w off_2EAC           ; DATA XREF: ROM:0000686A   o
-                fa_end
-off_1B2A12:     dc.w off_2EB0           ; DATA XREF: ROM:0000686E   o
-                fa_end
-off_1B2A16:     dc.w off_2EB4           ; DATA XREF: ROM:00006872   o
-                fa_end
-off_1B2A1A:     dc.w off_2EB8           ; DATA XREF: ROM:00006876   o
-                fa_end
-off_1B2A1E:     dc.w off_2EBC           ; DATA XREF: ROM:0000687A   o
-                fa_end
-off_1B2A22:     dc.w off_2EC0           ; DATA XREF: ROM:0000687E   o
-                fa_end
-off_1B2A26:     dc.w off_2EC4           ; DATA XREF: ROM:00006882   o
-                fa_end
-off_1B2A2A:     dc.w off_2EC8           ; DATA XREF: ROM:00006886   o
-                fa_end
-off_1B2A2E:     dc.w off_2ECC           ; DATA XREF: ROM:0000688A   o
-                fa_end
-off_1B2A32:     dc.w off_2ED0           ; DATA XREF: ROM:0000688E   o
-                fa_end
-off_1B2A36:     dc.w off_2ED4           ; DATA XREF: ROM:00006892   o
-                fa_end
-off_1B2A3A:     dc.w off_2ED8           ; DATA XREF: ROM:00006896   o
-                fa_end
-off_1B2A3E:     dc.w off_2EDC           ; DATA XREF: ROM:0000689A   o
-                fa_end
-off_1B2A42:     dc.w off_2EE0           ; DATA XREF: ROM:0000689E   o
-                fa_end
-off_1B2A46:     dc.w off_2EE4           ; DATA XREF: ROM:000068A2   o
-                fa_end
-off_1B2A4A:     dc.w off_2EE8           ; DATA XREF: ROM:000068A6   o
-                fa_end
-off_1B2A4E:     dc.w off_2EEC           ; DATA XREF: ROM:000068AA   o
-                fa_end
-off_1B2A52:     dc.w off_2EF0           ; DATA XREF: ROM:000068AE   o
-                fa_end
-off_1B2A56:     dc.w off_2EF4           ; DATA XREF: ROM:000068B2   o
-                fa_end
-off_1B2A5A:     dc.w off_2EF8           ; DATA XREF: ROM:000068B6   o
-                fa_end
-off_1B2A5E:     dc.w off_2EFC           ; DATA XREF: ROM:000068BA   o
-                fa_end
-off_1B2A62:     dc.w off_2F00           ; DATA XREF: ROM:000068BE   o
-                fa_end
-off_1B2A66:     dc.w off_2F04           ; DATA XREF: ROM:000068C2   o
-                fa_end
-off_1B2A6A:     dc.w off_2F08           ; DATA XREF: ROM:000068C6   o
-                fa_end
-off_1B2A6E:     dc.w off_2F0C           ; DATA XREF: ROM:000068CA   o
-                fa_end
-off_1B2A72:     dc.w off_2F10           ; DATA XREF: ROM:000068CE   o
-                fa_end
-off_1B2A76:     dc.w off_2F14           ; DATA XREF: ROM:000068D2   o
-                fa_end
-off_1B2A7A:     dc.w off_2F18           ; DATA XREF: ROM:000068D6   o
-                fa_end
-off_1B2A7E:     dc.w off_2F1C           ; DATA XREF: ROM:000068DA   o
-                fa_end
-off_1B2A82:     dc.w off_2F20           ; DATA XREF: ROM:000068DE   o
-                fa_end
-off_1B2A86:     dc.w off_2F24           ; DATA XREF: ROM:000068E2   o
-                fa_end
-off_1B2A8A:     dc.w off_2F28           ; DATA XREF: ROM:000068E6   o
-                fa_end
-off_1B2A8E:     dc.w off_2F2C           ; DATA XREF: ROM:000068EA   o
-                fa_end
-off_1B2A92:     dc.w off_2F30           ; DATA XREF: ROM:000068EE   o
-                fa_end
-off_1B2A96:     dc.w off_2F34           ; DATA XREF: ROM:000068F2   o
-                fa_end
-off_1B2A9A:     dc.w off_2F38           ; DATA XREF: ROM:000068F6   o
-                fa_end
-off_1B2A9E:     dc.w off_2F3C           ; DATA XREF: ROM:000068FA   o
-                fa_end
-off_1B2AA2:     dc.w off_2F40           ; DATA XREF: ROM:000068FE   o
-                fa_end
-off_1B2AA6:     dc.w off_2F44           ; DATA XREF: ROM:00006902   o
-                fa_end
-off_1B2AAA:     dc.w off_2F48           ; DATA XREF: ROM:00006906   o
-                fa_end
-off_1B2AAE:     dc.w off_2F4C           ; DATA XREF: ROM:0000690A   o
-                fa_end
-off_1B2AB2:     dc.w off_2F50           ; DATA XREF: ROM:0000690E   o
-                fa_end
-off_1B2AB6:     dc.w off_2F54           ; DATA XREF: ROM:00006912   o
-                fa_end
-off_1B2ABA:     dc.w off_2F58           ; DATA XREF: ROM:00006916   o
-                                        ; ROM:0000691A   o
-                fa_end
-off_1B2ABE:     dc.w off_2F5C           ; DATA XREF: ROM:0000691E   o
-                                        ; ROM:00006922   o
-                fa_end
+    include "jiminc/andy_asteroid_anims.inc"
 anim_unknown_5: dc.w off_6C4            ; DATA XREF: ROM:stru_25B054   o
                 fa_end
 anim_rock_2:    dc.w off_6C8            ; DATA XREF: ROM:stru_25B06C   o
@@ -18590,48 +17170,48 @@ word_1B4824:                            ; DATA XREF: ROM:001B480E   o
                 fa_set_obj_l $A, byte_1AC59A
                 fa_sound $62
                 dc.w off_28C0
-                dc.w off_28C4
-                dc.w off_28C8
-                dc.w off_28CC
-                dc.w off_28D0
-                dc.w off_28D4
-                dc.w off_28D8
-                dc.w off_28DC
-                dc.w off_28E0
-                dc.w off_28E4
-                dc.w off_28E8
-                dc.w off_28EC
-                dc.w off_28F0
-                dc.w off_28F4
-                dc.w off_28F8
-                dc.w off_28FC
-                dc.w off_2900
-                dc.w off_2904
-                dc.w off_2908
-                dc.w off_290C
-                dc.w off_2910
-                dc.w off_2914
-                dc.w off_2918
-                dc.w off_291C
-                dc.w off_2920
-                dc.w off_2924
-                dc.w off_2928
-                dc.w off_292C
-                dc.w off_2930
-                dc.w off_2934
-                dc.w off_2938
-                dc.w off_293C
-                dc.w off_2940
-                dc.w off_2944
-                dc.w off_2948
-                dc.w off_294C
-                dc.w off_2950
-                dc.w off_2954
-                dc.w off_2958
-                dc.w off_295C
-                dc.w off_2960
-                dc.w off_2964
-                dc.w off_2968
+                dc.w frame_psycrow_side_41
+                dc.w frame_psycrow_side_40
+                dc.w frame_psycrow_side_39
+                dc.w frame_psycrow_side_38
+                dc.w frame_psycrow_side_37
+                dc.w frame_psycrow_side_36
+                dc.w frame_psycrow_side_35
+                dc.w frame_psycrow_side_34
+                dc.w frame_psycrow_side_33
+                dc.w frame_psycrow_side_32
+                dc.w frame_psycrow_side_31
+                dc.w frame_psycrow_side_30
+                dc.w frame_psycrow_side_29
+                dc.w frame_psycrow_side_28
+                dc.w frame_psycrow_side_27
+                dc.w frame_psycrow_side_26
+                dc.w frame_psycrow_side_25
+                dc.w frame_psycrow_side_24
+                dc.w frame_psycrow_side_23
+                dc.w frame_psycrow_side_22
+                dc.w frame_psycrow_side_21
+                dc.w frame_psycrow_side_20
+                dc.w frame_psycrow_side_19
+                dc.w frame_psycrow_side_18
+                dc.w frame_psycrow_17
+                dc.w frame_psycrow_16
+                dc.w frame_psycrow_15
+                dc.w frame_psycrow_14
+                dc.w frame_psycrow_13
+                dc.w frame_psycrow_12
+                dc.w frame_psycrow_11
+                dc.w frame_psycrow_10
+                dc.w frame_psycrow_09
+                dc.w frame_psycrow_08
+                dc.w frame_psycrow_07
+                dc.w frame_psycrow_06
+                dc.w frame_psycrow_05
+                dc.w frame_psycrow_04
+                dc.w frame_psycrow_03
+                dc.w frame_psycrow_02
+                dc.w frame_psycrow_01
+                dc.w frame_psycrow_00
                 dc.w off_296C
                 dc.w off_2970
                 dc.w off_2974
@@ -20645,7 +19225,7 @@ word_1B5FFA:                            ; DATA XREF: ROM:001B6010   o
                 fa_hold 2
                 dc.w off_D20
                 fa_goto word_1B5FFA
-anim_lever:     dc.w off_864            ; DATA XREF: ROM:stru_25B2DC   o
+anim_lever:     dc.w off_864            ; DATA XREF: ROM:object_lever_chicken_boss   o
 off_1B6016:     dc.w off_864            ; DATA XREF: whip_to_chicken_boss_lever:loc_254EB6   o
                 dc.w off_868
                 dc.w off_86C
@@ -20846,14 +19426,14 @@ anim_moving_platform:     dc.w off_2C4C           ; DATA XREF: ROM:001B61BC   o
                 fa_goto anim_moving_platform
 off_1B61C0:     dc.w off_2CF8           ; DATA XREF: ROM:object_platform_queen_butt   o
                 fa_end
-off_1B61C4:     dc.w off_2EA0           ; DATA XREF: ROM:object_asteroid_shard   o
+off_1B61C4:     dc.w frame_andy_asteroid_00           ; DATA XREF: ROM:object_asteroid_shard   o
                 fa_rand_goto 114, off_1B61D6
                 fa_rand_goto 154, off_1B61DA
-                dc.w off_2F44
+                dc.w frame_andy_asteroid_41
                 fa_end
-off_1B61D6:     dc.w off_2F30           ; DATA XREF: ROM:001B61C8   o
+off_1B61D6:     dc.w frame_andy_asteroid_36           ; DATA XREF: ROM:001B61C8   o
                 fa_end
-off_1B61DA:     dc.w off_2F38           ; DATA XREF: ROM:001B61CE   o
+off_1B61DA:     dc.w frame_andy_asteroid_38           ; DATA XREF: ROM:001B61CE   o
                 fa_end
 anim_advanced_home:     dc.w off_974            ; DATA XREF: ROM:object_advanced_home   o
                 fa_end
@@ -23513,7 +22093,7 @@ loc_247190:                             ; CODE XREF: sub_247022:loc_247042   j
                 andi.b  #3,d1
                 add.b   d1,d0
                 lsl.w   #2,d0
-                lea     (off_645A).w,a0
+                lea     (jim_rocket_angle_anims).w,a0
                 move.l  (a0,d0.w),(jim_anim_offset).l
                 clr.b   (is_jim_left_direction).l
                 move.w  (jim_tunnel_angle).l,d0
@@ -32987,7 +31567,7 @@ loc_24DD58:                             ; CODE XREF: sub_24DD18+24   j
                 st      (chicken_boss_started).l
                 bsr.w   destroy_objects_except_jim
                 lea     (obj_pool_ad4e).l,a5
-                lea     (stru_25B2DC).l,a6
+                lea     (object_lever_chicken_boss).l,a6
                 jsr     load_sprite_struct(pc) ; При отключении нет спрайтов и объектов на уровнях
                 move.w  #$1052,2(a5)
                 move.w  #$3F0,4(a5)
@@ -39368,7 +37948,7 @@ update_andy_super_bubble:                             ; DATA XREF: ROM:object_an
                 move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (project_tunnel_obj).l
-                lea     (off_6D78).w,a0
+                lea     (andy_super_bubble_scale_anims).w,a0
                 jsr     (set_scale_anim_by_dist).l
                 move.w  $52(a1),d0
                 cmpi.w  #$6A0,d0
@@ -39387,7 +37967,7 @@ update_andy_speed_bubble:                             ; DATA XREF: ROM:object_an
                 move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (project_tunnel_obj).l
-                lea     (off_6E58).w,a0
+                lea     (andy_speed_bubble_scale_anims).w,a0
                 jsr     (set_scale_anim_by_dist).l
                 move.w  $52(a1),d0
                 cmpi.w  #$6A0,d0
@@ -46689,21 +45269,21 @@ loc_258572:                             ; CODE XREF: sub_258518+50   j
                 bclr    #5,7(a1)
                 tst.b   (psycrow_facing_front).l
                 bne.s   loc_258598
-                lea     (off_6F38).w,a0
+                lea     (psycrow_flame_scale_anims_side).w,a0
                 move.b  (frame_mod6_counter).l,d0
                 lsr.b   #1,d0
                 andi.b  #1,d0
                 bne.s   loc_2585AE
-                lea     (off_6F38).w,a0
+                lea     (psycrow_flame_scale_anims_side).w,a0
                 bra.s   loc_2585AE
 ; ---------------------------------------------------------------------------
 loc_258598:                             ; CODE XREF: sub_258518+66   j
-                lea     (off_6FF8).w,a0
+                lea     (psycrow_flame_scale_anims_front).w,a0
                 move.b  (frame_mod6_counter).l,d0
                 lsr.b   #1,d0
                 andi.b  #1,d0
                 bne.s   loc_2585AE
-                lea     (off_6FF8).w,a0
+                lea     (psycrow_flame_scale_anims_front).w,a0
 loc_2585AE:                             ; CODE XREF: sub_258518+78   j
                                         ; sub_258518+7E   j ...
                 clr.w   d0
@@ -46847,13 +45427,13 @@ loc_258754:                             ; CODE XREF: sub_2585CA+150   j
                 tst.w   (word_FFFEA6).l
                 bne.w   loc_258792
                 clr.b   (psycrow_facing_front).l
-                lea     (off_6B2C).w,a0
+                lea     (psycrow_scale_anims_side).w,a0
                 move.w  (jim_tunnel_angle).l,d0
                 sub.w   $50(a1),d0
                 addi.w  #$800,d0
                 cmpi.w  #$1000,d0
                 bcc.s   loc_258786
-                lea     (off_6BEC).w,a0
+                lea     (psycrow_scale_anims_front).w,a0
                 st      (psycrow_facing_front).l
 loc_258786:                             ; CODE XREF: sub_2585CA+1B0   j
                 jsr     (set_scale_anim_by_dist).l
@@ -46980,7 +45560,7 @@ update_andy_asteroid:                             ; DATA XREF: ROM:object_andy_a
                 move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (project_tunnel_obj).l
-                lea     (off_685A).w,a0
+                lea     (andy_asteroid_scale_anims).w,a0
                 jsr     set_scale_anim_by_dist(pc)
                 move.w  $52(a1),d0
                 cmpi.w  #$6A0,d0
@@ -47093,7 +45673,7 @@ update_andy_bubble:                             ; DATA XREF: ROM:object_andy_bub
                 move.b  (andy_flight_speed).l,d0
                 add.w   d0,$52(a1)
                 jsr     (project_tunnel_obj).l
-                lea     (off_6CAC).w,a0
+                lea     (andy_bubble_scale_anims).w,a0
                 jsr     set_scale_anim_by_dist(pc)
                 move.w  $52(a1),d0
                 cmpi.w  #$6A0,d0
@@ -47324,7 +45904,7 @@ loc_258C9A:                             ; CODE XREF: sub_258C50+40   j
                 lsr.w   #1,d1
                 add.w   d1,d0
                 lsl.w   #2,d0
-                lea     (off_665A).w,a0
+                lea     (rocket_flame_angle_anims).w,a0
                 move.l  (a0,d0.w),d7
                 move.l  d7,$20(a1)
                 move.b  (is_jim_left_direction).l,9(a1)

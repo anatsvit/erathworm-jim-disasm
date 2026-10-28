@@ -1,5 +1,5 @@
-byte_2FBC22:    dc.b   0,  1,$75,$78,$89,$8A,$7F,$81,$80,$81
-                                        ; DATA XREF: ROM:off_2FDC   o
+spr_andy_super_bubble_20:    dc.b   0,  1,$75,$78,$89,$8A,$7F,$81,$80,$81
+                                        ; DATA XREF: ROM:frame_andy_super_bubble_20   o
                 dc.w sprite_24_24
                 dc.w $7776
                 dc.w $9500 ! ((grp_153E80 / 2) & $00FF)

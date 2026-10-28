@@ -1,5 +1,5 @@
-byte_2F3C34:    dc.b   0,  0,$8F,$81,$8E,$80,$8E,$80,$8F,$80
-                                        ; DATA XREF: ROM:off_2830   o
+spr_psycrow_flame_side_16:    dc.b   0,  0,$8F,$81,$8E,$80,$8E,$80,$8F,$80
+                                        ; DATA XREF: ROM:frame_psycrow_flame_side_16   o
                 dc.w sprite_8_8
                 dc.w $7A7F
                 dc.w $9500 ! ((grp_F3DA0 / 2) & $00FF)

@@ -1,5 +1,5 @@
-byte_2DBC38:    dc.b   0,  3,$6C,$69,$86,$8C,$79,$7A,$70,$6A
-                                        ; DATA XREF: ROM:off_15B0   o
+spr_jim_rocket_4_0:    dc.b   0,  3,$6C,$69,$86,$8C,$79,$7A,$70,$6A
+                                        ; DATA XREF: ROM:frame_jim_rocket_4_0   o
                 dc.w sprite_32_16
                 dc.w $6E7B
                 dc.w $9500 ! ((grp_4A000 / 2) & $00FF)

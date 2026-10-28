@@ -450,11 +450,11 @@ ropejump_anim_locked equ $FFFFFF5E ; Snot a Problem: особая анимаци
 andy_boost_active equ $FFFFFF5F ; Andy Asteroids: ускорение по кнопке огня (sub_247022, раз в 8 кадров), целевая andy_flight_speed $10 вместо 4; по нему sub_258C50 показывает пламя ракеты
 andy_flight_speed equ $FFFFFF60
 super_bubble_count equ $FFFFFF61
-psycrow_scale_index equ $FFFFFF62 ; индекс масштаба Psy-Crow по расстоянию (set_scale_anim_by_dist в sub_2585CA), sub_258518 берёт по нему кадр из off_6F38/off_6FF8
-psycrow_facing_front equ $FFFFFF63 ; Psy-Crow в угловой секции Джима (abs(jim_tunnel_angle-$50(a1))<$800): таблицы off_6BEC/off_6FF8 вместо off_6B2C/off_6F38
+psycrow_scale_index equ $FFFFFF62 ; индекс масштаба Psy-Crow по расстоянию (set_scale_anim_by_dist в sub_2585CA), sub_258518 берёт по нему кадр из psycrow_flame_scale_anims_side/psycrow_flame_scale_anims_front
+psycrow_facing_front equ $FFFFFF63 ; Psy-Crow в угловой секции Джима (abs(jim_tunnel_angle-$50(a1))<$800): таблицы psycrow_scale_anims_front/psycrow_flame_scale_anims_front вместо psycrow_scale_anims_side/psycrow_flame_scale_anims_side
 bubble_count equ $FFFFFF64
 tunnel_pal_fade_timer equ $FFFFFF65 ; смена палитры туннеля: команда 6 трека (andy_level_update) ставит $1F, пока >0 andy_tunnel_pal_fade_step смешивает andy_tunnel_palettes+andy_tunnel_pal_target в andy_tunnel_pal_src
-rocket_flame_anim_frame equ $FFFFFF66 ; кадр пламени ракеты 5..0 по кругу (sub_258C50), /2 -> off_665A
+rocket_flame_anim_frame equ $FFFFFF66 ; кадр пламени ракеты 5..0 по кругу (sub_258C50), /2 -> rocket_flame_angle_anims
 frame_mod6_counter equ $FFFFFF67 ; счётчик 5..0 по кругу каждый кадр в главном цикле oksub_2456C8; sub_258518 по нему мигает пламенем Psy-Crow
 level_flag_bit1_off equ $FFFFFF68 ; инвертированный бит 1 байта $3D описателя уровня (load_level); в коде не читается
 level_flag_bit2_off equ $FFFFFF69 ; инвертированный бит 2 байта $3D описателя уровня (load_level); в коде не читается
